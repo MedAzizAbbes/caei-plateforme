@@ -11,16 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+      Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('phone')->nullable();
+            $table->string('institution')->nullable();
+            $table->string('password')->nullable(); // nullable : un participant peut se connecter via lien sécurisé/QR sans mot de passe
+            $table->enum('role', ['admin', 'formateur', 'participant'])->default('participant');
+            $table->string('participant_code')->nullable()->unique(); // ex : CAEI-2026-0341
             $table->rememberToken();
+            $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
         });
-
         Schema::create('password_reset_tokens', function (Blueprint $table) {
             $table->string('email')->primary();
             $table->string('token');
@@ -35,7 +39,11 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+
     }
+
+
 
     /**
      * Reverse the migrations.
