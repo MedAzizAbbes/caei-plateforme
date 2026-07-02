@@ -1,7 +1,23 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\ParticipantController;
+use App\Http\Controllers\Admin\SeminarController;
+use App\Http\Controllers\Admin\StatisticsController;
+use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\Participant\DashboardController;
+use App\Http\Controllers\Participant\FormationController;
+use App\Http\Controllers\PortalController;
+use App\Http\Controllers\RegistrationController;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\ProfileController;
+
+
+
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -15,6 +31,76 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+/*
+|--------------------------------------------------------------------------
+| A — Accès public & inscription (écrans 01-02)
+|--------------------------------------------------------------------------
+*/
+Route::get('/inscription', [RegistrationController::class, 'create'])->name('registration.create');
+Route::post('/inscription', [RegistrationController::class, 'store'])->name('registration.store');
+Route::get('/inscription/{registration}/confirmation', [RegistrationController::class, 'confirmation'])
+    ->name('registration.confirmation');
+
+// Lien sécurisé du QR code -> connexion automatique + redirection tableau de bord
+Route::get('/p/{token}', [PortalController::class, 'show'])->name('portal.show');
+
+/*
+|--------------------------------------------------------------------------
+| B — Espace participant (écrans 03-05) — nécessite une connexion
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:participant'])->prefix('espace')->name('participant.')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/seminaires/{seminar}/formation', [FormationController::class, 'index'])->name('formation');
+    Route::get('/seminaires/{seminar}/formation/{documentId}/telecharger', [FormationController::class, 'download'])
+        ->name('formation.download');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Espace échange — partagé participants + formateurs (écran 05)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:participant,formateur,admin'])->group(function () {
+    Route::get('/seminaires/{seminar}/echange', [MessageController::class, 'index'])->name('echange.index');
+    Route::post('/seminaires/{seminar}/echange', [MessageController::class, 'store'])->name('echange.store');
+});
+
+/*
+|--------------------------------------------------------------------------
+| C — Contrôle de présence — formateurs + admin (écran 06)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:formateur,admin'])->prefix('checkin')->name('checkin.')->group(function () {
+    Route::get('/', [AttendanceController::class, 'index'])->name('index');
+    Route::post('/scan', [AttendanceController::class, 'scan'])->name('scan');
+});
+
+/*
+|--------------------------------------------------------------------------
+| D — Back-office CAEI — admin uniquement (écrans 07-10)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    
+    Route::resource('seminaires', SeminarController::class)
+        ->parameters(['seminaires' => 'seminar'])
+        ->names('seminars')
+        ->except(['show']);
+
+    Route::get('/participants', [ParticipantController::class, 'index'])->name('participants.index');
+    Route::get('/participants/export/excel', [ParticipantController::class, 'exportExcel'])->name('participants.export.excel');
+    Route::get('/participants/export/pdf', [ParticipantController::class, 'exportPdf'])->name('participants.export.pdf');
+
+    Route::get('/seminaires/{seminar}/contenus', [DocumentController::class, 'index'])->name('documents.index');
+    Route::post('/seminaires/{seminar}/contenus', [DocumentController::class, 'store'])->name('documents.store');
+    Route::delete('/seminaires/{seminar}/contenus/{documentId}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+
+    Route::get('/statistiques', [StatisticsController::class, 'index'])->name('statistics.index');
 });
 
 require __DIR__.'/auth.php';
