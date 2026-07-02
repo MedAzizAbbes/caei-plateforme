@@ -2,31 +2,74 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
-use Illuminate\Database\Eloquent\Attributes\Fillable;
-use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password'])]
-#[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
-    /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable;
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected $fillable = [
+        'first_name', 'last_name', 'email', 'phone', 'institution',
+        'password', 'role', 'participant_code',
+    ];
+
+    protected $hidden = ['password', 'remember_token'];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    // ------- Relations -------
+
+    /** Séminaires auxquels ce participant est inscrit. */
+    public function registrations()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Registration::class);
+    }
+
+    /** Séminaires où cet utilisateur intervient comme formateur. */
+    public function seminarsAsTrainer()
+    {
+        return $this->belongsToMany(Seminar::class, 'seminar_trainer');
+    }
+
+    /** Séminaires créés par cet admin. */
+    public function seminarsCreated()
+    {
+        return $this->hasMany(Seminar::class, 'created_by');
+    }
+
+    public function documentsUploaded()
+    {
+        return $this->hasMany(Document::class, 'uploaded_by');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    // ------- Helpers de rôle -------
+
+    public function isAdmin(): bool
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isFormateur(): bool
+    {
+        return $this->role === 'formateur';
+    }
+
+    public function isParticipant(): bool
+    {
+        return $this->role === 'participant';
+    }
+
+    public function fullName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
     }
 }
