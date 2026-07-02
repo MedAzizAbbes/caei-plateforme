@@ -70,6 +70,19 @@ class User extends Authenticatable
 
     public function fullName(): string
     {
-        return "{$this->first_name} {$this->last_name}";
+        return trim("{$this->first_name} {$this->last_name}");
+    }
+
+    public function getNameAttribute($value): string
+    {
+        return $this->fullName() ?: (string) $value;
+    }
+
+    public function setNameAttribute($value): void
+    {
+        $parts = preg_split('/\s+/', trim((string) $value), 2) ?: [];
+
+        $this->attributes['first_name'] = $parts[0] ?? '';
+        $this->attributes['last_name'] = $parts[1] ?? '';
     }
 }

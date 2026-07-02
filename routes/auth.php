@@ -13,16 +13,14 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Création de compte formateur/admin — réservée à l'admin CAEI connecté
+| Création de compte utilisateur
 |--------------------------------------------------------------------------
-| Retiré du groupe "guest" par défaut de Breeze : ici c'est l'admin qui
-| crée des comptes pour d'autres personnes, pas un visiteur qui s'inscrit
-| lui-même (les participants passent par /inscription, sans mot de passe).
+| La page et l'inscription publique sont accessibles aux visiteurs, tandis
+| que la création d'un compte formateur/admin reste possible depuis la vue
+| si l'utilisateur connecté possède le rôle admin.
 */
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-    Route::post('register', [RegisteredUserController::class, 'store']);
-});
+Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
+Route::post('register', [RegisteredUserController::class, 'store']);
 
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
