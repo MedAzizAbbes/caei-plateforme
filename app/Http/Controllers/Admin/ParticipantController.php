@@ -37,8 +37,16 @@ class ParticipantController extends Controller
             ->get();
 
         $html = view('admin.participants.export-pdf', compact('registrations'))->render();
-        $pdf = \PDF::loadHTML($html);
-        
-        return $pdf->download('participants_caei_' . now()->format('Y-m-d') . '.pdf');
+
+        $pdfFacade = '\Barryvdh\\DomPDF\\Facade\\Pdf';
+        if (class_exists($pdfFacade)) {
+            $pdf = $pdfFacade::loadHTML($html);
+
+            return $pdf->download('participants_caei_' . now()->format('Y-m-d') . '.pdf');
+        }
+
+        return response($html, 200)
+            ->header('Content-Type', 'text/html; charset=utf-8')
+            ->header('Content-Disposition', 'attachment; filename="participants_caei_' . now()->format('Y-m-d') . '.html"');
     }
 }

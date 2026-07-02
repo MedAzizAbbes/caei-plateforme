@@ -7,40 +7,58 @@ use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    /** Formulaire de création de compte — accessible uniquement à l'admin CAEI. */
+    /** Formulaire de création de compte. */
     public function create(): View
     {
         return view('auth.register');
     }
 
-    /** Crée un compte formateur ou admin. L'admin connecté reste connecté. */
+    /** Crée un compte utilisateur, en mode inscription publique ou en création par admin. */
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'first_name' => ['required', 'string', 'max:100'],
-            'last_name' => ['required', 'string', 'max:100'],
+            'name' => ['nullable', 'string', 'max:100'],
+            'first_name' => ['nullable', 'string', 'max:100'],
+            'last_name' => ['nullable', 'string', 'max:100'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
-            'role' => ['required', 'in:formateur,admin'],
-            'password' => ['required', Rules\Password::defaults()],
+            'role' => ['nullable', 'in:participant,formateur,admin'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
+        $name = trim((string) $request->input('name', ''));
+        $firstName = $request->input('first_name') ?? (explode(' ', $name, 2)[0] ?? 'Utilisateur');
+        $lastName = $request->input('last_name') ?? (explode(' ', $name, 2)[1] ?? '');
+
+        $currentUser = Auth::user();
+        $isAdminCreation = Auth::check() && $currentUser && $currentUser->role === 'admin';
+        $role = $isAdminCreation ? ($request->input('role') ?? 'formateur') : 'participant';
+
         $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'first_name' => $firstName,
+            'last_name' => $lastName,
             'email' => $request->email,
-            'role' => $request->role,
+            'role' => $role,
             'password' => Hash::make($request->password),
         ]);
 
+        if (! $isAdminCreation) {
+            Auth::login($user);
+        }
+
         event(new Registered($user));
 
-        return redirect()->route('register')
-            ->with('success', "Compte {$request->role} créé pour {$user->fullName()}.");
+        if ($isAdminCreation) {
+            return redirect()->route('register')
+                ->with('success', "Compte {$role} créé pour {$user->fullName()}.");
+        }
+
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 }
