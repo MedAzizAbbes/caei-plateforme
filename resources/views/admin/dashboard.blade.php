@@ -113,19 +113,19 @@
         <div class="mt-12 grid grid-cols-1 md:grid-cols-4 gap-4">
             <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-6 text-white">
                 <p class="text-blue-100 text-sm">Participants</p>
-                <p class="text-3xl font-bold mt-2">-</p>
+                <p class="text-3xl font-bold mt-2">{{ \App\Models\User::where('role', 'participant')->count() }}</p>
             </div>
             <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-6 text-white">
                 <p class="text-green-100 text-sm">Inscriptions</p>
-                <p class="text-3xl font-bold mt-2">-</p>
+                <p class="text-3xl font-bold mt-2">{{ \App\Models\Registration::count() }}</p>
             </div>
             <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-6 text-white">
                 <p class="text-purple-100 text-sm">Séminaires</p>
-                <p class="text-3xl font-bold mt-2">-</p>
+                <p class="text-3xl font-bold mt-2">{{ \App\Models\Seminar::count() }}</p>
             </div>
             <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg p-6 text-white">
                 <p class="text-orange-100 text-sm">Taux présence</p>
-                <p class="text-3xl font-bold mt-2">-</p>
+                <p class="text-3xl font-bold mt-2">{{ \App\Models\Registration::count() > 0 ? round(\App\Models\Registration::where('status', 'present')->count() / \App\Models\Registration::count() * 100, 1) : 0 }}%</p>
             </div>
         </div>
     </div>

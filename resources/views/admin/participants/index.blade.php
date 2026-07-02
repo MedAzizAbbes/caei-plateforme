@@ -17,6 +17,30 @@
                     </div>
                 </div>
 
+                <form method="GET" class="mb-6 grid gap-4 md:grid-cols-2">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Séminaire</label>
+                        <select name="seminar_id" class="w-full rounded-md border-gray-300 shadow-sm">
+                            <option value="">Tous les séminaires</option>
+                            @foreach($seminars as $seminar)
+                                <option value="{{ $seminar->id }}" {{ request('seminar_id') == $seminar->id ? 'selected' : '' }}>{{ $seminar->theme }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Statut</label>
+                        <select name="status" class="w-full rounded-md border-gray-300 shadow-sm">
+                            <option value="">Tous les statuts</option>
+                            <option value="inscrit" {{ request('status') == 'inscrit' ? 'selected' : '' }}>Inscrit</option>
+                            <option value="present" {{ request('status') == 'present' ? 'selected' : '' }}>Présent</option>
+                            <option value="absent" {{ request('status') == 'absent' ? 'selected' : '' }}>Absent</option>
+                        </select>
+                    </div>
+                    <div class="md:col-span-2 flex justify-end">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md">Filtrer</button>
+                    </div>
+                </form>
+
                 @if($registrations->isEmpty())
                     <p class="text-gray-600">Aucun participant pour le moment.</p>
                 @else
