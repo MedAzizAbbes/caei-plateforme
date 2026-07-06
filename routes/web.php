@@ -51,12 +51,21 @@ Route::get('/p/{token}', [PortalController::class, 'show'])->name('portal.show')
 | B — Espace participant (écrans 03-05) — nécessite une connexion
 |--------------------------------------------------------------------------
 */
-Route::middleware(['auth', 'role:participant'])->prefix('espace')->name('participant.')->group(function () {
+Route::middleware(['auth', 'role:participant,admin'])->prefix('espace')->name('participant.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/seminaires/{seminar}/formation', [FormationController::class, 'index'])->name('formation');
     Route::get('/seminaires/{seminar}/formation/{documentId}/telecharger', [FormationController::class, 'download'])
         ->name('formation.download');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Formateur — tableau de bord (écran Formateur)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'role:formateur'])->prefix('espace')->name('formateur.')->group(function () {
+    Route::get('/formateur', [\App\Http\Controllers\Formateur\DashboardController::class, 'index'])->name('dashboard');
 });
 
 /*
