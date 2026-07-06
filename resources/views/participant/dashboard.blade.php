@@ -40,8 +40,8 @@
                                     </div>
 
                                     <!-- Description -->
-                                    @if($seminar->description)
-                                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ $seminar->description }}</p>
+                                    @if($registration->seminar?->description)
+                                        <p class="text-sm text-gray-600 mb-4 line-clamp-2">{{ $registration->seminar->description }}</p>
                                     @endif
 
                                     <!-- Infos rapides -->
@@ -58,14 +58,14 @@
                                         </div>
                                         <div>
                                             <p class="text-xs text-gray-600">Supports</p>
-                                            <p class="text-sm font-semibold text-purple-600">{{ $documentCount }} document(s)</p>
+                                            <p class="text-sm font-semibold text-purple-600">{{ $registration->seminar?->documents_count ?? 0 }} document(s)</p>
                                         </div>
                                     </div>
 
                                     <!-- Boutons d'action -->
                                     <div class="flex gap-3">
-                                        @if($documentCount > 0)
-                                            <a href="{{ route('participant.formation', $seminar) }}" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                                        @if(($registration->seminar?->documents_count ?? 0) > 0)
+                                            <a href="{{ route('participant.formation', $registration->seminar) }}" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
                                                 <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                                     <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
                                                     <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2H6a6 6 0 016 6v3a1 1 0 11-2 0v-3a4 4 0 00-4-4H6a1 1 0 000 2H4a2 2 0 01-2-2V5zm12 4a1 1 0 100 2h1.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 00-1.414 1.414L17.586 9H16z" clip-rule="evenodd"></path>
@@ -73,7 +73,7 @@
                                                 Supports
                                             </a>
                                         @endif
-                                        <a href="{{ route('echange.index', $seminar) }}" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-blue-300 rounded-lg text-sm font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors">
+                                        <a href="{{ route('echange.index', $registration->seminar) }}" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-blue-300 rounded-lg text-sm font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors">
                                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                                 <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z"></path>
                                                 <path d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"></path>
