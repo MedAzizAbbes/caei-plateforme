@@ -53,7 +53,9 @@ Route::get('/p/{token}', [PortalController::class, 'show'])->name('portal.show')
 */
 Route::middleware(['auth', 'role:participant,admin'])->prefix('espace')->name('participant.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+});
 
+Route::middleware(['auth', 'role:participant,formateur,admin'])->prefix('espace')->name('participant.')->group(function () {
     Route::get('/seminaires/{seminar}/formation', [FormationController::class, 'index'])->name('formation');
     Route::get('/seminaires/{seminar}/formation/{documentId}/telecharger', [FormationController::class, 'download'])
         ->name('formation.download');
@@ -66,6 +68,9 @@ Route::middleware(['auth', 'role:participant,admin'])->prefix('espace')->name('p
 */
 Route::middleware(['auth', 'role:formateur'])->prefix('espace')->name('formateur.')->group(function () {
     Route::get('/formateur', [\App\Http\Controllers\Formateur\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/formateur/seminaires/{seminar}/contenus', [DocumentController::class, 'index'])->name('documents.index');
+    Route::post('/formateur/seminaires/{seminar}/contenus', [DocumentController::class, 'store'])->name('documents.store');
+    Route::delete('/formateur/seminaires/{seminar}/contenus/{documentId}', [DocumentController::class, 'destroy'])->name('documents.destroy');
 });
 
 /*

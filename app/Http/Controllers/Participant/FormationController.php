@@ -29,14 +29,36 @@ class FormationController extends Controller
 
         $document = $seminar->documents()->findOrFail($documentId);
 
-        return response()->streamDownload(function () use ($document) {
-            echo file_get_contents(storage_path('app/' . $document->file_path));
+        if (!$document->file_path) {
+            abort(404, 'Le fichier du document n\'existe pas.');
+        }
+
+        $filePath = storage_path('app/' . $document->file_path);
+        if (!file_exists($filePath)) {
+            abort(404, 'Le fichier n\'a pas été trouvé sur le serveur.');
+        }
+
+        return response()->streamDownload(function () use ($filePath) {
+            echo file_get_contents($filePath);
         }, $document->title);
     }
 
     private function authorizeAccess(Request $request, Seminar $seminar): void
     {
-        $isRegistered = $request->user()
+        $user = $request->user();
+
+        if ($user?->isAdmin()) {
+            return;
+        }
+
+        $isAssignedTrainer = $user?->isFormateur()
+            && $seminar->trainers()->whereKey($user->id)->exists();
+
+        if ($isAssignedTrainer) {
+            return;
+        }
+
+        $isRegistered = $user
             ->registrations()
             ->where('seminar_id', $seminar->id)
             ->exists();

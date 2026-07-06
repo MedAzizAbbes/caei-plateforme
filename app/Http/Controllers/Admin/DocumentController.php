@@ -10,6 +10,8 @@ class DocumentController extends Controller
 {
     public function index(Seminar $seminar)
     {
+        $this->authorizeSeminarAccess($seminar);
+
         $documentsByDay = $seminar->documents()->orderBy('day_number')->get()->groupBy('day_number');
 
         return view('admin.documents.index', compact('seminar', 'documentsByDay'));
@@ -17,6 +19,8 @@ class DocumentController extends Controller
 
     public function store(Request $request, Seminar $seminar)
     {
+        $this->authorizeSeminarAccess($seminar);
+
         $data = $request->validate([
             'title'      => ['required', 'string', 'max:150'],
             'day_number' => ['required', 'integer', 'min:1', 'max:30'],
@@ -48,12 +52,28 @@ class DocumentController extends Controller
 
     public function destroy(Request $request, Seminar $seminar, int $documentId)
     {
+        $this->authorizeSeminarAccess($seminar);
+
         if ($request->isMethod('GET')) {
-            return redirect()->route('admin.documents.index', $seminar);
+            return redirect()->route($request->user()->isFormateur() ? 'formateur.documents.index' : 'admin.documents.index', $seminar);
         }
 
         $seminar->documents()->findOrFail($documentId)->delete();
 
         return back()->with('success', 'Support retiré.');
+    }
+
+    private function authorizeSeminarAccess(Seminar $seminar): void
+    {
+        $user = request()->user();
+
+        if ($user?->isAdmin()) {
+            return;
+        }
+
+        $isAssignedTrainer = $user?->isFormateur()
+            && $seminar->trainers()->whereKey($user->id)->exists();
+
+        abort_unless($isAssignedTrainer, 403, 'Acces reserve au formateur assigne a ce seminaire.');
     }
 }
