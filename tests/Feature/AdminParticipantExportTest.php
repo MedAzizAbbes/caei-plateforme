@@ -9,6 +9,23 @@ beforeEach(function () {
     $this->actingAs($admin);
 });
 
+test('admin participants page loads successfully', function () {
+    Seminar::create([
+        'theme' => 'Séminaire participants',
+        'country' => 'Tunisie',
+        'description' => 'Test participants page',
+        'start_date' => now()->addDay(),
+        'end_date' => now()->addDays(2),
+        'status' => 'published',
+        'created_by' => 1,
+    ]);
+
+    $response = $this->get('/admin/participants');
+
+    $response->assertOk();
+    $response->assertSee('Participants');
+});
+
 test('admin export pdf route returns a downloadable response', function () {
     $seminar = Seminar::create([
         'theme' => 'Séminaire export',

@@ -39,7 +39,14 @@
                             <tbody class="divide-y divide-gray-200 bg-white">
                                 @foreach($seminars as $seminar)
                                     <tr>
-                                        <td class="px-4 py-3 text-sm text-gray-900">{{ $seminar->theme }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900">
+                                            <div class="font-medium">{{ $seminar->theme }}</div>
+                                            @if($seminar->trainers->isNotEmpty())
+                                                <div class="text-xs text-gray-500">Formateurs : {{ $seminar->trainers->pluck('first_name')->join(', ') }}</div>
+                                            @else
+                                                <div class="text-xs text-gray-500">Aucun formateur assigné</div>
+                                            @endif
+                                        </td>
                                         <td class="px-4 py-3 text-sm text-gray-600">{{ $seminar->country }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">{{ $seminar->start_date->format('d/m/Y') }} - {{ $seminar->end_date->format('d/m/Y') }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">{{ ucfirst($seminar->status) }}</td>

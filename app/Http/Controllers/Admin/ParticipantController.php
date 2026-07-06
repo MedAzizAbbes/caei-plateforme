@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Exports\ParticipantsExport;
 use App\Http\Controllers\Controller;
 use App\Models\Registration;
+use App\Models\Seminar;
 use Illuminate\Http\Request;
 
 class ParticipantController extends Controller
@@ -18,7 +19,9 @@ class ParticipantController extends Controller
             ->latest('registered_at')
             ->paginate(30);
 
-        return view('admin.participants.index', compact('registrations'));
+        $seminars = Seminar::orderBy('start_date')->get(['id', 'theme']);
+
+        return view('admin.participants.index', compact('registrations', 'seminars'));
     }
 
     /** Export Excel (CSV) */

@@ -46,8 +46,12 @@ class DocumentController extends Controller
         return back()->with('success', 'Support ajouté.');
     }
 
-    public function destroy(Seminar $seminar, int $documentId)
+    public function destroy(Request $request, Seminar $seminar, int $documentId)
     {
+        if ($request->isMethod('GET')) {
+            return redirect()->route('admin.documents.index', $seminar);
+        }
+
         $seminar->documents()->findOrFail($documentId)->delete();
 
         return back()->with('success', 'Support retiré.');
