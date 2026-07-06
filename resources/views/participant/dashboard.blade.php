@@ -64,15 +64,13 @@
 
                                     <!-- Boutons d'action -->
                                     <div class="flex gap-3">
-                                        @if(($registration->seminar?->documents_count ?? 0) > 0)
-                                            <a href="{{ route('participant.formation', $registration->seminar) }}" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
-                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                                                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2H6a6 6 0 016 6v3a1 1 0 11-2 0v-3a4 4 0 00-4-4H6a1 1 0 000 2H4a2 2 0 01-2-2V5zm12 4a1 1 0 100 2h1.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 00-1.414 1.414L17.586 9H16z" clip-rule="evenodd"></path>
-                                                </svg>
-                                                Supports
-                                            </a>
-                                        @endif
+                                        <a href="{{ route('participant.formation', $registration->seminar) }}" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
+                                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 1 1 0 000 2H6a6 6 0 016 6v3a1 1 0 11-2 0v-3a4 4 0 00-4-4H6a1 1 0 000 2H4a2 2 0 01-2-2V5zm12 4a1 1 0 100 2h1.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 00-1.414 1.414L17.586 9H16z" clip-rule="evenodd"></path>
+                                            </svg>
+                                            Formation
+                                        </a>
                                         <a href="{{ route('echange.index', $registration->seminar) }}" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-blue-300 rounded-lg text-sm font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 transition-colors">
                                             <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                                                 <path d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5z"></path>

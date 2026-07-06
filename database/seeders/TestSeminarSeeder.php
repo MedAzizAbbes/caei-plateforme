@@ -16,9 +16,10 @@ class TestSeminarSeeder extends Seeder
     {
         DB::transaction(function () {
             $participant = User::where('email', 'participant@caei.org')->first();
+            $participant2 = User::where('email', 'participant2@caei.org')->first();
             $formateur = User::where('email', 'formateur@caei.org')->first();
 
-            if (! $participant || ! $formateur) {
+            if (! $participant || ! $participant2 || ! $formateur) {
                 $this->command->error('Les utilisateurs tests sont manquants. Lancez TestUsersSeeder d\'abord.');
                 return;
             }
@@ -52,6 +53,11 @@ class TestSeminarSeeder extends Seeder
             // Inscrire le participant si nécessaire (statut conforme à la migration: 'inscrit')
             Registration::updateOrCreate(
                 ['user_id' => $participant->id, 'seminar_id' => $seminar->id],
+                ['status' => 'inscrit', 'registered_at' => Carbon::now()]
+            );
+
+            Registration::updateOrCreate(
+                ['user_id' => $participant2->id, 'seminar_id' => $seminar->id],
                 ['status' => 'inscrit', 'registered_at' => Carbon::now()]
             );
 
