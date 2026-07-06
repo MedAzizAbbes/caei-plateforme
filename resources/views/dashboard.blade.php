@@ -22,7 +22,9 @@
                             @if(Auth::user()->isParticipant())
                                 <a href="{{ route('participant.dashboard') }}" class="caei-btn caei-btn-gold">Espace participant</a>
                             @endif
-                            <a href="{{ route('registration.create') }}" class="inline-flex items-center rounded-md border border-[#061743]/15 px-5 py-3 text-sm font-black uppercase text-[#061743] hover:bg-slate-50">Nouvelle inscription</a>
+                            @if(Auth::user()->isFormateur())
+                                <a href="{{ route('formateur.dashboard') }}" class="caei-btn caei-btn-gold">Espace formateur</a>
+                            @endif
                         </div>
                     </div>
                     <div class="rounded-lg bg-[#061743] p-6 text-white">

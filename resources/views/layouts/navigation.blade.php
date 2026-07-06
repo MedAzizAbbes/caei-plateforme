@@ -30,6 +30,11 @@
                                 Espace participant
                             </x-nav-link>
                         @endif
+                        @if(Auth::user()->role === 'formateur')
+                            <x-nav-link :href="route('formateur.dashboard')" :active="request()->routeIs('formateur.*')">
+                                Espace formateur
+                            </x-nav-link>
+                        @endif
                     @endauth
                 </div>
             </div>
@@ -91,6 +96,23 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+            @auth
+                @if(Auth::user()->role === 'admin')
+                    <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">
+                        Administration
+                    </x-responsive-nav-link>
+                @endif
+                @if(Auth::user()->role === 'participant')
+                    <x-responsive-nav-link :href="route('participant.dashboard')" :active="request()->routeIs('participant.*')">
+                        Espace participant
+                    </x-responsive-nav-link>
+                @endif
+                @if(Auth::user()->role === 'formateur')
+                    <x-responsive-nav-link :href="route('formateur.dashboard')" :active="request()->routeIs('formateur.*')">
+                        Espace formateur
+                    </x-responsive-nav-link>
+                @endif
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->

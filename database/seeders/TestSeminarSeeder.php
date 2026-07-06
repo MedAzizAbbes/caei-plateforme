@@ -35,6 +35,8 @@ class TestSeminarSeeder extends Seeder
                 ]
             );
 
+            $seminar->trainers()->syncWithoutDetaching([$formateur->id]);
+
             // Document de test (Jour 1)
             Document::updateOrCreate([
                 'seminar_id' => $seminar->id,
