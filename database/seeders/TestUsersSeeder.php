@@ -29,6 +29,21 @@ class TestUsersSeeder extends Seeder
                 ]
             );
 
+            User::updateOrCreate(
+                ['email' => 'participant2@caei.org'],
+                [
+                    'first_name' => 'Participant',
+                    'last_name' => 'Deux',
+                    'email' => 'participant2@caei.org',
+                    'phone' => null,
+                    'institution' => null,
+                    'password' => Hash::make('secret123'),
+                    'role' => 'participant',
+                    'participant_code' => 'P002',
+                    'email_verified_at' => Carbon::now(),
+                ]
+            );
+
             // Formateur
             User::updateOrCreate(
                 ['email' => 'formateur@caei.org'],
@@ -46,6 +61,6 @@ class TestUsersSeeder extends Seeder
             );
         });
 
-        $this->command->info('Test users created: participant@caei.org (participant), formateur@caei.org (formateur)');
+        $this->command->info('Test users created: participant@caei.org, participant2@caei.org, formateur@caei.org');
     }
 }

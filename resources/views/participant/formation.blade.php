@@ -150,7 +150,7 @@
 
                                             <!-- Bouton Aperçu/Lecture (pour PDF et vidéos) -->
                                             @if(in_array($fileExt, ['pdf', 'mp4', 'mov', 'avi']))
-                                                <button onclick="openPreview('{{ route('participant.formation.download', [$seminar, $document->id]) }}', '{{ $fileExt }}')"
+                                                <button onclick="openPreview('{{ route('participant.formation.download', [$seminar, $document->id, 'preview' => 1]) }}', '{{ $fileExt }}')"
                                                         class="inline-flex items-center px-3 py-2 rounded-lg border border-gray-300 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors"
                                                         title="Aperçu">
                                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
