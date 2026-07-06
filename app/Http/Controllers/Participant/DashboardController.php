@@ -12,7 +12,11 @@ class DashboardController extends Controller
     {
         $registrations = $request->user()
             ->registrations()
-            ->with('seminar', 'qrCode')
+            ->with([
+                'seminar' => fn($q) => $q->withCount('documents'),
+                'qrCode',
+                'attendances',
+            ])
             ->latest('registered_at')
             ->get();
 

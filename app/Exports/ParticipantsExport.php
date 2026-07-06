@@ -30,7 +30,7 @@ class ParticipantsExport
             $file = fopen('php://output', 'w');
             
             // En-têtes
-            fputcsv($file, ['Nom', 'Email', 'Téléphone', 'Institution', 'Séminaire', 'Statut', 'Inscrit le'], ';');
+            fputcsv($file, ['Nom', 'Email', 'Telephone', 'Institution', 'Seminaire', 'Statut', 'Inscrit le'], ';');
             
             // Données
             foreach ($registrations as $registration) {
