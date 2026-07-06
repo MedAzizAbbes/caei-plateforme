@@ -1,3 +1,141 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --caei-navy: #061743;
+        --caei-navy-deep: #041136;
+        --caei-gold: #ffbd45;
+        --caei-gold-dark: #f2a90f;
+        --caei-ink: #06101f;
+        --caei-muted: #5f6673;
+    }
+
+    body {
+        background: #f5f6f8;
+    }
+}
+
+@layer utilities {
+    .bg-caei-navy {
+        background-color: var(--caei-navy);
+    }
+
+    .text-caei-gold {
+        color: var(--caei-gold);
+    }
+}
+
+@layer components {
+    .caei-topbar {
+        @apply mx-auto flex w-full max-w-7xl flex-wrap items-center gap-x-6 gap-y-2 px-4 py-3 text-xs font-semibold text-white/95 sm:px-6 lg:px-8;
+    }
+
+    .caei-topbar span::before {
+        color: var(--caei-gold);
+        margin-right: .45rem;
+    }
+
+    .caei-topbar span:nth-child(1)::before { content: "TEL"; }
+    .caei-topbar span:nth-child(2)::before { content: "MAIL"; }
+    .caei-topbar span:nth-child(3)::before { content: "PIN"; }
+    .caei-topbar span:nth-child(4)::before { content: "PDF"; }
+
+    .caei-public-nav {
+        @apply mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-5 sm:px-6 lg:px-8;
+    }
+
+    .caei-brand {
+        @apply flex items-center gap-3 text-white;
+    }
+
+    .caei-brand-mark {
+        @apply grid h-16 w-16 place-items-center rounded-full border-2 border-white text-sm font-black;
+        box-shadow: inset 0 0 0 4px rgba(255,255,255,.16);
+    }
+
+    .caei-brand-text {
+        @apply flex flex-col text-2xl font-black uppercase leading-none;
+    }
+
+    .caei-brand-text strong {
+        @apply mt-1 bg-white px-1 text-2xl leading-none;
+        color: var(--caei-navy);
+    }
+
+    .caei-public-links {
+        @apply hidden items-center gap-8 text-lg font-semibold text-white/90 lg:flex;
+    }
+
+    .caei-public-links a {
+        @apply transition hover:text-[#ffbd45];
+    }
+
+    .caei-public-links .active {
+        color: var(--caei-gold);
+    }
+
+    .caei-hero {
+        @apply relative overflow-hidden;
+        background: radial-gradient(circle at 50% 35%, rgba(255,189,69,.08), transparent 22rem), var(--caei-navy);
+        min-height: 100vh;
+    }
+
+    .caei-hero-content {
+        @apply mx-auto flex max-w-6xl flex-col items-center px-4 pb-28 pt-24 text-center sm:px-6 lg:px-8;
+    }
+
+    .caei-eyebrow {
+        @apply mb-4 text-sm font-bold uppercase text-white/70;
+    }
+
+    .caei-hero h1 {
+        @apply text-4xl font-black uppercase leading-tight sm:text-6xl lg:text-7xl;
+        color: var(--caei-gold);
+        letter-spacing: 0;
+    }
+
+    .caei-hero h1 span {
+        @apply block text-white;
+    }
+
+    .caei-hero-copy {
+        @apply mt-6 max-w-3xl text-base font-medium leading-8 text-white/80 sm:text-lg;
+    }
+
+    .caei-actions {
+        @apply mt-8 flex flex-wrap justify-center gap-4;
+    }
+
+    .caei-btn {
+        @apply inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-black uppercase transition;
+        letter-spacing: 0;
+    }
+
+    .caei-btn-gold {
+        background: var(--caei-gold);
+        color: var(--caei-navy);
+    }
+
+    .caei-btn-gold:hover {
+        background: #ffd071;
+    }
+
+    .caei-btn-outline {
+        @apply border border-white/40 text-white hover:border-white hover:bg-white/10;
+    }
+
+    .caei-chat-button {
+        @apply fixed bottom-7 right-7 z-20 grid h-16 w-16 place-items-center rounded-full text-2xl font-black text-white shadow-2xl;
+        background: var(--caei-gold-dark);
+    }
+
+    .caei-card {
+        @apply overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm;
+    }
+
+    .caei-card-dark {
+        @apply overflow-hidden rounded-lg border border-white/15 bg-white/5 shadow-xl shadow-black/10;
+    }
+}
