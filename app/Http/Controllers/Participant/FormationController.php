@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Participant;
 use App\Http\Controllers\Controller;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Response;
 
 class FormationController extends Controller
 {
@@ -23,7 +24,7 @@ class FormationController extends Controller
     }
 
     /** Téléchargement / lecture en ligne d'un support (accès restreint aux inscrits). */
-    public function download(Request $request, Seminar $seminar, int $documentId): StreamedResponse
+    public function download(Request $request, Seminar $seminar, int $documentId): Response
     {
         $this->authorizeAccess($request, $seminar);
 
@@ -33,14 +34,17 @@ class FormationController extends Controller
             abort(404, 'Le fichier du document n\'existe pas.');
         }
 
-        $filePath = storage_path('app/' . $document->file_path);
-        if (!file_exists($filePath)) {
+        if (!Storage::exists($document->file_path)) {
             abort(404, 'Le fichier n\'a pas été trouvé sur le serveur.');
         }
 
-        return response()->streamDownload(function () use ($filePath) {
-            echo file_get_contents($filePath);
-        }, $document->title);
+        $fileName = $this->downloadFileName($document->title, $document->file_path);
+
+        if ($request->boolean('preview')) {
+            return Storage::response($document->file_path, $fileName);
+        }
+
+        return Storage::download($document->file_path, $fileName);
     }
 
     private function authorizeAccess(Request $request, Seminar $seminar): void
@@ -64,5 +68,16 @@ class FormationController extends Controller
             ->exists();
 
         abort_unless($isRegistered, 403, "Vous n'êtes pas inscrit à ce séminaire.");
+    }
+
+    private function downloadFileName(string $title, string $filePath): string
+    {
+        $extension = pathinfo($filePath, PATHINFO_EXTENSION);
+
+        if ($extension && pathinfo($title, PATHINFO_EXTENSION) === '') {
+            return $title . '.' . $extension;
+        }
+
+        return $title;
     }
 }
