@@ -5,9 +5,20 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Illuminate\Validation\ValidationException;
 
 class DocumentController extends Controller
 {
+    private const ALLOWED_EXTENSIONS = [
+        'pdf',
+        'ppt', 'pptx', 'pps', 'ppsx',
+        'xls', 'xlsx', 'csv',
+        'doc', 'docx',
+        'mp4', 'mov', 'avi', 'webm',
+        'zip', 'rar',
+    ];
+
     public function index(Seminar $seminar)
     {
         $this->authorizeSeminarAccess($seminar);
@@ -24,19 +35,29 @@ class DocumentController extends Controller
         $data = $request->validate([
             'title'      => ['required', 'string', 'max:150'],
             'day_number' => ['required', 'integer', 'min:1', 'max:30'],
-            'file'       => ['required', 'file', 'mimes:pdf,pptx,ppt,mp4,mov', 'max:512000'], // 500 Mo
+            'file'       => ['required', 'file', 'max:512000'], // 500 Mo
         ]);
 
         $file = $request->file('file');
         $extension = strtolower($file->getClientOriginalExtension());
+
+        if (! in_array($extension, self::ALLOWED_EXTENSIONS, true)) {
+            throw ValidationException::withMessages([
+                'file' => 'Le fichier doit etre de type : ' . implode(', ', self::ALLOWED_EXTENSIONS) . '.',
+            ]);
+        }
+
         $type = match (true) {
             $extension === 'pdf' => 'pdf',
-            in_array($extension, ['ppt', 'pptx']) => 'pptx',
-            in_array($extension, ['mp4', 'mov']) => 'video',
+            in_array($extension, ['ppt', 'pptx', 'pps', 'ppsx']) => 'pptx',
+            in_array($extension, ['mp4', 'mov', 'avi', 'webm']) => 'video',
             default => 'autre',
         };
 
-        $path = $file->store("documents/seminar_{$seminar->id}");
+        $path = $file->storeAs(
+            "documents/seminar_{$seminar->id}",
+            Str::uuid() . '.' . $extension
+        );
 
         $seminar->documents()->create([
             'uploaded_by' => $request->user()->id,
