@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 
 @section('content')
 <div class="py-10">
@@ -61,9 +61,21 @@
                 <p class="mb-4 text-sm text-slate-600">Revenir au tableau de bord utilisateur.</p>
                 <a href="{{ route('dashboard') }}" class="block text-sm font-bold text-[#061743] hover:text-[#f2a90f]">Tableau de bord utilisateur</a>
             </div>
+
+            <div class="caei-card p-6 transition hover:shadow-lg">
+                <div class="mb-4 flex items-center justify-between">
+                    <h3 class="text-lg font-black text-[#061743]">Formateurs</h3>
+                    <span class="text-3xl text-[#ffbd45]">06</span>
+                </div>
+                <p class="mb-4 text-sm text-slate-600">Gérer les comptes formateurs et leur affectation aux séminaires.</p>
+                <div class="space-y-2 text-sm font-bold">
+                    <a href="{{ route('admin.formateurs.index') }}" class="block text-[#061743] hover:text-[#f2a90f]">Voir tous les formateurs</a>
+                    <a href="{{ route('admin.formateurs.create') }}" class="block text-[#061743] hover:text-[#f2a90f]">Ajouter un formateur</a>
+                </div>
+            </div>
         </div>
 
-        <div class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-4">
+        <div class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-5">
             <div class="rounded-lg bg-[#061743] p-6 text-white">
                 <p class="text-sm text-white/65">Participants</p>
                 <p class="mt-2 text-3xl font-black text-[#ffbd45]">{{ \App\Models\User::where('role', 'participant')->count() }}</p>
@@ -79,6 +91,10 @@
             <div class="rounded-lg bg-[#061743] p-6 text-white">
                 <p class="text-sm text-white/65">Taux presence</p>
                 <p class="mt-2 text-3xl font-black text-[#ffbd45]">{{ \App\Models\Registration::count() > 0 ? round(\App\Models\Registration::where('status', 'present')->count() / \App\Models\Registration::count() * 100, 1) : 0 }}%</p>
+            </div>
+            <div class="rounded-lg bg-[#061743] p-6 text-white">
+                <p class="text-sm text-white/65">Formateurs</p>
+                <p class="mt-2 text-3xl font-black text-[#ffbd45]">{{ \App\Models\User::where('role', 'formateur')->count() }}</p>
             </div>
         </div>
     </div>

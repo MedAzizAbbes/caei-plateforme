@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\FormateurController;
 use App\Http\Controllers\Admin\ParticipantController;
 use App\Http\Controllers\Admin\SeminarController;
 use App\Http\Controllers\Admin\StatisticsController;
@@ -117,6 +118,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::delete('/seminaires/{seminar}/contenus/{documentId}', [DocumentController::class, 'destroy'])->name('documents.destroy');
 
     Route::get('/statistiques', [StatisticsController::class, 'index'])->name('statistics.index');
+
+    Route::resource('formateurs', FormateurController::class)
+        ->parameters(['formateurs' => 'formateur']);
 });
 
 require __DIR__.'/auth.php';
