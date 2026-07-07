@@ -91,8 +91,12 @@
                             <div class="divide-y divide-slate-200">
                                 @foreach($documents as $document)
                                     @php
-                                        $filePath = $document->file_path ?? '';
-                                        $fileExt = strtolower(pathinfo($filePath ?: '', PATHINFO_EXTENSION) ?: '');
+                                        $fileExt = $document->getFileExtension();
+                                        $downloadUrl = route('participant.formation.download', [$seminar, $document->id]);
+                                        $previewUrl = route('participant.formation.preview', [
+                                            'seminar' => $seminar,
+                                            'documentId' => $document->id,
+                                        ]);
                                         $fileTypes = [
                                             'pdf' => ['icon' => 'PDF', 'label' => 'PDF', 'bgClass' => 'bg-red-50 text-red-700 border border-red-100'],
                                             'doc' => ['icon' => 'DOC', 'label' => 'Document', 'bgClass' => 'bg-[#061743]/5 text-[#061743] border border-[#061743]/10'],
@@ -144,7 +148,7 @@
                                         <!-- Actions -->
                                         <div class="flex flex-shrink-0 flex-wrap gap-2 sm:ml-4">
                                             <!-- Bouton Télécharger -->
-                                            <a href="{{ route('participant.formation.download', [$seminar, $document->id]) }}" 
+                                            <a href="{{ $downloadUrl }}" 
                                                class="inline-flex items-center justify-center rounded-md bg-[#ffbd45] px-3 py-2 text-sm font-black text-[#061743] transition hover:bg-[#ffd071]"
                                                title="Télécharger">
                                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -153,9 +157,8 @@
                                                 Télécharger
                                             </a>
 
-                                            <!-- Bouton Aperçu/Lecture (pour PDF et vidéos) -->
-                                            @if(in_array($fileExt, ['pdf', 'mp4', 'mov', 'avi']))
-                                                <button onclick="openPreview('{{ route('participant.formation.download', [$seminar, $document->id]) }}', '{{ $fileExt }}')"
+                                            <!-- Bouton Apercu -->
+                                                <button onclick="openPreview({{ Illuminate\Support\Js::from($previewUrl) }})"
                                                         class="inline-flex items-center justify-center rounded-md border border-[#061743]/15 bg-white px-3 py-2 text-sm font-bold text-[#061743] transition hover:bg-[#061743]/5"
                                                         title="Aperçu">
                                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -164,7 +167,6 @@
                                                     </svg>
                                                     Aperçu
                                                 </button>
-                                            @endif
                                         </div>
                                     </div>
                                 @endforeach
@@ -178,7 +180,7 @@
 
     <!-- Modal de prévisualisation -->
     <div id="previewModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/60 p-4">
-        <div class="flex max-h-[90vh] w-full max-w-4xl flex-col rounded-lg bg-white shadow-xl">
+        <div class="flex max-h-[90vh] w-full max-w-6xl flex-col rounded-lg bg-white shadow-xl">
             <!-- Header -->
             <div class="flex items-center justify-between border-b border-slate-200 p-4">
                 <h3 class="text-lg font-black text-[#061743]">Aperçu du document</h3>
@@ -198,24 +200,35 @@
     </div>
 
     <script>
-        function openPreview(url, fileType) {
+        async function openPreview(url) {
             const modal = document.getElementById('previewModal');
             const content = document.getElementById('previewContent');
-            
-            if (fileType === 'pdf') {
-                content.innerHTML = `<iframe src="${url}" class="h-[72vh] w-full rounded" frameborder="0"></iframe>`;
-            } else if (['mp4', 'mov', 'avi'].includes(fileType)) {
-                content.innerHTML = `<video controls class="max-h-[72vh] max-w-full rounded"><source src="${url}" type="video/${fileType === 'mov' ? 'quicktime' : fileType}">Votre navigateur ne supporte pas la lecture vidéo.</video>`;
-            }
-            
+            content.innerHTML = '<p class="text-slate-600">Chargement...</p>';
             modal.classList.remove('hidden');
             modal.classList.add('flex');
+
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                    },
+                });
+
+                if (!response.ok) {
+                    throw new Error('Preview failed');
+                }
+
+                content.innerHTML = await response.text();
+            } catch (error) {
+                content.innerHTML = "<div class=\"rounded-md border border-red-100 bg-red-50 p-4 text-sm text-red-700\">Impossible de charger l'apercu du document.</div>";
+            }
         }
 
         function closePreview() {
             const modal = document.getElementById('previewModal');
             modal.classList.add('hidden');
             modal.classList.remove('flex');
+            document.getElementById('previewContent').innerHTML = '<p class="text-slate-600">Chargement...</p>';
         }
 
         // Fermer le modal en cliquant sur le fond

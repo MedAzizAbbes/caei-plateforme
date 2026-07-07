@@ -26,6 +26,17 @@
                     </div>
                 @endif
 
+                @if($errors->any())
+                    <div class="mb-4 rounded-md bg-red-100 p-3 text-sm text-red-700">
+                        <p class="font-semibold">Le document n'a pas pu etre ajoute.</p>
+                        <ul class="mt-2 list-disc pl-5">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
                 <div class="mb-8 bg-gray-50 p-4 rounded-lg border border-gray-200">
                     <h2 class="font-semibold text-gray-900 mb-4">Ajouter un document</h2>
                     <form method="POST" action="{{ route($documentsRoutePrefix . '.documents.store', $seminar) }}" enctype="multipart/form-data" class="space-y-4">
@@ -41,8 +52,8 @@
                                 <input type="number" name="day_number" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" min="1" max="30" required>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700">Fichier (PDF, PPT, MP4)</label>
-                                <input type="file" name="file" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required>
+                                <label class="block text-sm font-medium text-gray-700">Fichier (PDF, PPT, Excel, Word, video)</label>
+                                <input type="file" name="file" accept=".pdf,.ppt,.pptx,.pps,.ppsx,.xls,.xlsx,.csv,.doc,.docx,.mp4,.mov,.avi,.webm,.zip,.rar" class="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2" required>
                             </div>
                         </div>
                         <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 border border-transparent rounded-md font-semibold text-white hover:bg-indigo-700">

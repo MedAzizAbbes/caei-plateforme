@@ -57,6 +57,8 @@ Route::middleware(['auth', 'role:participant,admin'])->prefix('espace')->name('p
 
 Route::middleware(['auth', 'role:participant,formateur,admin'])->prefix('espace')->name('participant.')->group(function () {
     Route::get('/seminaires/{seminar}/formation', [FormationController::class, 'index'])->name('formation');
+    Route::get('/seminaires/{seminar}/formation/{documentId}/apercu', [FormationController::class, 'preview'])
+        ->name('formation.preview');
     Route::get('/seminaires/{seminar}/formation/{documentId}/telecharger', [FormationController::class, 'download'])
         ->name('formation.download');
 });
