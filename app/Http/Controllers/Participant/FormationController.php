@@ -41,7 +41,7 @@ class FormationController extends Controller
         $fileName = $this->downloadFileName($document->title, $document->file_path);
 
         if ($request->boolean('preview')) {
-            return Storage::response($document->file_path, $fileName);
+            return Storage::response($document->file_path, $fileName, [], 'inline');
         }
 
         return Storage::download($document->file_path, $fileName);

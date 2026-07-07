@@ -93,6 +93,12 @@
                                     @php
                                         $filePath = $document->file_path ?? '';
                                         $fileExt = strtolower(pathinfo($filePath ?: '', PATHINFO_EXTENSION) ?: '');
+                                        $downloadUrl = route('participant.formation.download', [$seminar, $document->id]);
+                                        $previewUrl = route('participant.formation.download', [
+                                            'seminar' => $seminar,
+                                            'documentId' => $document->id,
+                                            'preview' => 1,
+                                        ]);
                                         $fileTypes = [
                                             'pdf' => ['icon' => 'PDF', 'label' => 'PDF', 'bgClass' => 'bg-red-50 text-red-700 border border-red-100'],
                                             'doc' => ['icon' => 'DOC', 'label' => 'Document', 'bgClass' => 'bg-[#061743]/5 text-[#061743] border border-[#061743]/10'],
@@ -144,7 +150,7 @@
                                         <!-- Actions -->
                                         <div class="flex flex-shrink-0 flex-wrap gap-2 sm:ml-4">
                                             <!-- Bouton Télécharger -->
-                                            <a href="{{ route('participant.formation.download', [$seminar, $document->id]) }}" 
+                                            <a href="{{ $downloadUrl }}" 
                                                class="inline-flex items-center justify-center rounded-md bg-[#ffbd45] px-3 py-2 text-sm font-black text-[#061743] transition hover:bg-[#ffd071]"
                                                title="Télécharger">
                                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -155,7 +161,7 @@
 
                                             <!-- Bouton Aperçu/Lecture (pour PDF et vidéos) -->
                                             @if(in_array($fileExt, ['pdf', 'mp4', 'mov', 'avi']))
-                                                <button onclick="openPreview('{{ route('participant.formation.download', [$seminar, $document->id]) }}', '{{ $fileExt }}')"
+                                                <button onclick="openPreview({{ Illuminate\Support\Js::from($previewUrl) }}, {{ Illuminate\Support\Js::from($fileExt) }})"
                                                         class="inline-flex items-center justify-center rounded-md border border-[#061743]/15 bg-white px-3 py-2 text-sm font-bold text-[#061743] transition hover:bg-[#061743]/5"
                                                         title="Aperçu">
                                                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
