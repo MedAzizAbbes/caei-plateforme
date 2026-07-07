@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\QrCode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AttendanceController extends Controller
 {
@@ -24,10 +25,25 @@ class AttendanceController extends Controller
             'code' => ['required', 'string'],
         ]);
 
-        $qrCode = QrCode::where('code', $data['code'])->first();
+        $value = trim($data['code']);
+        $token = null;
+
+        if (Str::contains($value, '/p/')) {
+            $token = Str::afterLast($value, '/p/');
+            $token = Str::before($token, '?');
+            $token = Str::before($token, '#');
+        }
+
+        $qrCode = QrCode::where('code', $value)
+            ->orWhere('secure_token', $value)
+            ->when($token, fn ($query) => $query->orWhere('secure_token', $token))
+            ->first();
 
         if (! $qrCode) {
-            return response()->json(['status' => 'not_found'], 404);
+            return response()->json([
+                'status' => 'not_found',
+                'message' => 'Code QR introuvable.',
+            ], 404);
         }
 
         $registration = $qrCode->registration;

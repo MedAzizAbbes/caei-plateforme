@@ -19,6 +19,10 @@
                     @else
                         <div class="space-y-4">
                             @foreach($registrations as $registration)
+                                @php
+                                    $portalUrl = $registration->qrCode?->portalUrl();
+                                    $qrSvg = $portalUrl ? \App\Support\QrCodeSvg::render($portalUrl, 5) : null;
+                                @endphp
                                 <div class="rounded-lg border border-slate-200 p-4">
                                     <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
                                         <div>
@@ -30,9 +34,12 @@
                                                 Statut : <span class="font-medium">{{ $registration->status }}</span>
                                             </p>
                                         </div>
-                                        <div class="rounded-md bg-[#061743]/5 px-3 py-2 text-sm text-slate-600">
-                                            @if($registration->qrCode)
-                                                <p>Code QR : {{ $registration->qrCode->code }}</p>
+                                        <div class="w-full rounded-md bg-[#061743]/5 px-3 py-3 text-sm text-slate-600 sm:w-40">
+                                            @if($registration->qrCode && $qrSvg)
+                                                <div class="mx-auto w-28">
+                                                    {!! $qrSvg !!}
+                                                </div>
+                                                <p class="mt-2 text-center font-mono text-xs font-semibold">{{ $registration->qrCode->code }}</p>
                                             @else
                                                 <p>Code QR en preparation</p>
                                             @endif

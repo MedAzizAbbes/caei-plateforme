@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\RegistrationQrCodeMail;
 use App\Models\QrCode;
 use App\Models\Registration;
 use App\Models\Seminar;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class RegistrationController extends Controller
 {
@@ -62,6 +65,19 @@ class RegistrationController extends Controller
 
             return $registration;
         });
+
+        $registration->load('user', 'seminar', 'qrCode');
+
+        try {
+            Mail::to($registration->user->email)
+                ->send(new RegistrationQrCodeMail($registration));
+        } catch (\Throwable $exception) {
+            Log::warning('Unable to send registration QR code email.', [
+                'registration_id' => $registration->id,
+                'email' => $registration->user?->email,
+                'message' => $exception->getMessage(),
+            ]);
+        }
 
         return redirect()->route('registration.confirmation', $registration);
     }
