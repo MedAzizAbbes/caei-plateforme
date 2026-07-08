@@ -43,7 +43,7 @@ class ParticipantController extends Controller
 
         $pdfFacade = '\Barryvdh\\DomPDF\\Facade\\Pdf';
         if (class_exists($pdfFacade)) {
-            $pdf = $pdfFacade::loadHTML($html);
+            $pdf = $pdfFacade::loadHTML($html)->setPaper('a4', 'landscape');
 
             return $pdf->download('participants_caei_' . now()->format('Y-m-d') . '.pdf');
         }
