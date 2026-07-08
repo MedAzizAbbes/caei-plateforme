@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\FormateurCredentialsMail;
 use App\Models\Seminar;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\Rules\Password;
 
 class FormateurController extends Controller
@@ -32,7 +34,7 @@ class FormateurController extends Controller
         return view('admin.formateurs.index', compact('formateurs'));
     }
 
-    /** Formulaire de création. */
+    /** Formulaire de creation. */
     public function create()
     {
         $seminars = Seminar::orderByDesc('start_date')->get(['id', 'theme', 'country', 'start_date']);
@@ -44,15 +46,18 @@ class FormateurController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'first_name'  => ['required', 'string', 'max:100'],
-            'last_name'   => ['required', 'string', 'max:100'],
-            'email'       => ['required', 'email', 'max:255', 'unique:users,email'],
-            'phone'       => ['nullable', 'string', 'max:30'],
-            'institution' => ['nullable', 'string', 'max:255'],
-            'password'    => ['required', 'confirmed', Password::min(8)],
-            'seminar_ids' => ['nullable', 'array'],
+            'first_name'    => ['required', 'string', 'max:100'],
+            'last_name'     => ['required', 'string', 'max:100'],
+            'email'         => ['required', 'email', 'max:255', 'unique:users,email'],
+            'phone'         => ['nullable', 'string', 'max:30'],
+            'institution'   => ['nullable', 'string', 'max:255'],
+            'password'      => ['required', 'confirmed', Password::min(8)],
+            'seminar_ids'   => ['nullable', 'array'],
             'seminar_ids.*' => ['integer', 'exists:seminars,id'],
         ]);
+
+        // Conserver le mot de passe en clair avant hachage pour l'envoyer par mail
+        $plainPassword = $data['password'];
 
         $formateur = User::create([
             'first_name'  => $data['first_name'],
@@ -60,7 +65,7 @@ class FormateurController extends Controller
             'email'       => $data['email'],
             'phone'       => $data['phone'] ?? null,
             'institution' => $data['institution'] ?? null,
-            'password'    => Hash::make($data['password']),
+            'password'    => Hash::make($plainPassword),
             'role'        => 'formateur',
         ]);
 
@@ -68,12 +73,20 @@ class FormateurController extends Controller
             $formateur->seminarsAsTrainer()->sync($data['seminar_ids']);
         }
 
+        // Envoi de l'e-mail avec les identifiants de connexion
+        try {
+            Mail::to($formateur->email)->send(new FormateurCredentialsMail($formateur, $plainPassword));
+        } catch (\Throwable $e) {
+            // Ne pas bloquer la creation si l'envoi echoue
+            logger()->error('Envoi mail formateur echoue : ' . $e->getMessage());
+        }
+
         return redirect()
             ->route('admin.formateurs.index')
-            ->with('success', "Le formateur {$formateur->fullName()} a été créé avec succès.");
+            ->with('success', "Le formateur {$formateur->fullName()} a ete cree avec succes. Un e-mail avec ses identifiants lui a ete envoye.");
     }
 
-    /** Fiche détail d'un formateur. */
+    /** Fiche detail d'un formateur. */
     public function show(User $formateur)
     {
         abort_if($formateur->role !== 'formateur', 404);
@@ -83,7 +96,7 @@ class FormateurController extends Controller
         return view('admin.formateurs.show', compact('formateur'));
     }
 
-    /** Formulaire d'édition. */
+    /** Formulaire d'edition. */
     public function edit(User $formateur)
     {
         abort_if($formateur->role !== 'formateur', 404);
@@ -94,18 +107,18 @@ class FormateurController extends Controller
         return view('admin.formateurs.edit', compact('formateur', 'seminars', 'assignedIds'));
     }
 
-    /** Mise à jour d'un formateur. */
+    /** Mise a jour d'un formateur. */
     public function update(Request $request, User $formateur)
     {
         abort_if($formateur->role !== 'formateur', 404);
 
         $rules = [
-            'first_name'  => ['required', 'string', 'max:100'],
-            'last_name'   => ['required', 'string', 'max:100'],
-            'email'       => ['required', 'email', 'max:255', "unique:users,email,{$formateur->id}"],
-            'phone'       => ['nullable', 'string', 'max:30'],
-            'institution' => ['nullable', 'string', 'max:255'],
-            'seminar_ids' => ['nullable', 'array'],
+            'first_name'    => ['required', 'string', 'max:100'],
+            'last_name'     => ['required', 'string', 'max:100'],
+            'email'         => ['required', 'email', 'max:255', "unique:users,email,{$formateur->id}"],
+            'phone'         => ['nullable', 'string', 'max:30'],
+            'institution'   => ['nullable', 'string', 'max:255'],
+            'seminar_ids'   => ['nullable', 'array'],
             'seminar_ids.*' => ['integer', 'exists:seminars,id'],
         ];
 
@@ -131,7 +144,7 @@ class FormateurController extends Controller
 
         return redirect()
             ->route('admin.formateurs.index')
-            ->with('success', "Le formateur {$formateur->fullName()} a été mis à jour.");
+            ->with('success', "Le formateur {$formateur->fullName()} a ete mis a jour.");
     }
 
     /** Suppression d'un formateur. */
@@ -145,6 +158,6 @@ class FormateurController extends Controller
 
         return redirect()
             ->route('admin.formateurs.index')
-            ->with('success', "Le formateur {$name} a été supprimé.");
+            ->with('success', "Le formateur {$name} a ete supprime.");
     }
 }
