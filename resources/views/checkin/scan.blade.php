@@ -31,6 +31,10 @@
                             <button type="button" id="camera-button" class="inline-flex items-center rounded-md border border-slate-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-slate-700 shadow-sm transition hover:bg-slate-50">
                                 Scanner avec camera
                             </button>
+                            <label for="qr-file-input" class="inline-flex items-center rounded-md border border-slate-300 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-widest text-slate-700 shadow-sm transition cursor-pointer hover:bg-slate-50">
+                                Importer photo / QR
+                            </label>
+                            <input type="file" id="qr-file-input" accept="image/*" class="hidden">
                         </div>
 
                         <div id="checkin-result" class="hidden rounded-lg border p-4 text-sm"></div>
@@ -55,6 +59,7 @@
         const input = document.getElementById('code');
         const result = document.getElementById('checkin-result');
         const cameraButton = document.getElementById('camera-button');
+        const fileInput = document.getElementById('qr-file-input');
         const reader = document.getElementById('reader');
         const cameraHelp = document.getElementById('camera-help');
         let html5QrCode = null;
@@ -134,6 +139,32 @@
             } catch (err) {
                 showResult(false, 'Erreur d accès à la caméra : ' + err.message);
                 await stopScanning();
+            }
+        });
+
+        fileInput.addEventListener('change', async (e) => {
+            if (e.target.files.length === 0) {
+                return;
+            }
+
+            const imageFile = e.target.files[0];
+            
+            if (scanning) {
+                await stopScanning();
+            }
+
+            showResult(true, "Analyse de l'image...");
+            
+            try {
+                if (!html5QrCode) {
+                    html5QrCode = new Html5Qrcode("reader");
+                }
+                const decodedText = await html5QrCode.scanFile(imageFile, true);
+                input.value = decodedText;
+                showResult(true, "QR Code détecté ! Validation...");
+                await submitCode();
+            } catch (err) {
+                showResult(false, "Aucun code QR détecté. Assurez-vous que l'image est nette, bien éclairée et bien centrée.");
             }
         });
 
