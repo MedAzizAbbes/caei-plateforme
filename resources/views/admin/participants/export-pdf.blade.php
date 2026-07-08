@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title>Participants CAEI</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1 { text-align: center; margin-bottom: 30px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #333; padding: 10px; text-align: left; }
+        body { font-family: Arial, sans-serif; margin: 20px; font-size: 12px; }
+        h1 { text-align: center; margin-bottom: 30px; font-size: 20px; }
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+        th, td { border: 1px solid #333; padding: 8px; text-align: left; word-wrap: break-word; overflow-wrap: break-word; }
         th { background-color: #f0f0f0; font-weight: bold; }
         tr:nth-child(even) { background-color: #f9f9f9; }
     </style>
