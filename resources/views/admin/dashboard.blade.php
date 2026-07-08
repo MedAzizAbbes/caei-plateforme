@@ -46,17 +46,8 @@
 
             <div class="caei-card p-6 transition hover:shadow-lg">
                 <div class="mb-4 flex items-center justify-between">
-                    <h3 class="text-lg font-black text-[#061743]">Contenus</h3>
-                    <span class="text-3xl text-[#ffbd45]">04</span>
-                </div>
-                <p class="mb-4 text-sm text-slate-600">Gerer les documents et contenus des seminaires.</p>
-                <p class="text-xs font-semibold text-slate-500">Selectionnez un seminaire pour gerer ses contenus.</p>
-            </div>
-
-            <div class="caei-card p-6 transition hover:shadow-lg">
-                <div class="mb-4 flex items-center justify-between">
                     <h3 class="text-lg font-black text-[#061743]">Accueil</h3>
-                    <span class="text-3xl text-[#ffbd45]">05</span>
+                    <span class="text-3xl text-[#ffbd45]">04</span>
                 </div>
                 <p class="mb-4 text-sm text-slate-600">Revenir au tableau de bord utilisateur.</p>
                 <a href="{{ route('dashboard') }}" class="block text-sm font-bold text-[#061743] hover:text-[#f2a90f]">Tableau de bord utilisateur</a>
@@ -65,7 +56,7 @@
             <div class="caei-card p-6 transition hover:shadow-lg">
                 <div class="mb-4 flex items-center justify-between">
                     <h3 class="text-lg font-black text-[#061743]">Formateurs</h3>
-                    <span class="text-3xl text-[#ffbd45]">06</span>
+                    <span class="text-3xl text-[#ffbd45]">05</span>
                 </div>
                 <p class="mb-4 text-sm text-slate-600">Gérer les comptes formateurs et leur affectation aux séminaires.</p>
                 <div class="space-y-2 text-sm font-bold">
