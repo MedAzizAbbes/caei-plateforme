@@ -14,19 +14,25 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-slate-900 antialiased">
-        <div class="min-h-screen flex flex-col justify-center items-center px-4 py-8 bg-caei-navy">
-            <div class="mb-6">
-                <a href="/" class="caei-brand">
+    <body class="font-sans text-slate-900 antialiased selection:bg-caei-gold selection:text-caei-navy">
+        <div class="min-h-screen flex flex-col justify-center items-center px-4 py-8 relative overflow-hidden bg-caei-navy">
+            <!-- Arrière-plan décoratif subtil -->
+            <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+                <div class="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-caei-gold/10 blur-[150px]"></div>
+                <div class="absolute top-[40%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[150px]"></div>
+            </div>
+
+            <div class="mb-8 relative z-10 animate-slide-up">
+                <a href="/" class="caei-brand hover:scale-110 transition-transform duration-300">
                     <span class="caei-brand-mark">CAEI</span>
-                    <span class="caei-brand-text">
+                    <span class="caei-brand-text text-white">
                         <span>Company</span>
-                        <strong>Group</strong>
+                        <strong class="bg-gradient-to-r from-caei-gold to-yellow-300 bg-clip-text text-transparent">Group</strong>
                     </span>
                 </a>
             </div>
 
-            <div class="w-full sm:max-w-md rounded-lg border border-white/15 bg-white px-6 py-6 shadow-2xl shadow-black/25">
+            <div class="w-full sm:max-w-lg rounded-2xl border border-white/20 bg-white/95 backdrop-blur-md px-8 py-8 shadow-2xl relative z-10 animate-slide-up animate-delay-100">
                 {{ $slot }}
             </div>
         </div>

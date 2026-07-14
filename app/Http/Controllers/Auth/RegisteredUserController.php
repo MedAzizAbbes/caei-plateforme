@@ -27,6 +27,10 @@ class RegisteredUserController extends Controller
             'first_name' => ['required', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'phone' => ['nullable', 'string', 'max:255'],
+            'pays' => ['nullable', 'string', 'max:255'],
+            'poste' => ['nullable', 'string', 'max:255'],
+            'institution' => ['nullable', 'string', 'max:255'],
             'role' => ['nullable', 'in:participant,formateur,admin'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
@@ -42,6 +46,10 @@ class RegisteredUserController extends Controller
             'first_name' => $firstName,
             'last_name' => $lastName,
             'email' => $request->email,
+            'phone' => $request->phone,
+            'pays' => $request->pays,
+            'poste' => $request->poste,
+            'institution' => $request->institution,
             'role' => $role,
             'password' => Hash::make($request->password),
         ]);

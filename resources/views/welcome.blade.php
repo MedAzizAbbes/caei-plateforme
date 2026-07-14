@@ -122,29 +122,38 @@
                     @else
                         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                             @foreach($seminars as $seminar)
-                                <article class="seminar-card caei-card flex flex-col">
+                                <article class="seminar-card caei-card flex flex-col group relative overflow-hidden">
+                                    {{-- Arrière-plan décoratif subtil au survol --}}
+                                    <div class="absolute inset-0 bg-gradient-to-br from-caei-navy/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0 pointer-events-none"></div>
 
                                     {{-- Bannière colorée du séminaire --}}
-                                    <div class="relative h-44 bg-gradient-to-br from-[#061743] to-[#0d2a6e] flex items-end p-5 overflow-hidden">
-                                        {{-- Motif de fond --}}
-                                        <div class="absolute inset-0 opacity-10">
+                                    <div class="relative h-48 bg-gradient-to-br from-caei-navy via-[#0d2a6e] to-caei-navy-deep flex items-end p-6 overflow-hidden z-10">
+                                        {{-- Motif de fond animé --}}
+                                        <div class="absolute inset-0 opacity-20 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3 pointer-events-none">
                                             <svg viewBox="0 0 200 200" class="w-full h-full" fill="none">
-                                                <circle cx="160" cy="40" r="80" stroke="white" stroke-width="1"/>
-                                                <circle cx="40" cy="160" r="60" stroke="white" stroke-width="1"/>
+                                                <circle cx="160" cy="40" r="80" stroke="white" stroke-width="1.5" class="opacity-50"/>
+                                                <circle cx="40" cy="160" r="60" stroke="white" stroke-width="1.5" class="opacity-50"/>
+                                                <path d="M 0 100 Q 50 50 100 100 T 200 100" stroke="url(#gold-grad)" stroke-width="2" fill="none" class="opacity-30"/>
+                                                <defs>
+                                                    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                                        <stop offset="0%" stop-color="#ffbd45" />
+                                                        <stop offset="100%" stop-color="#f2a90f" />
+                                                    </linearGradient>
+                                                </defs>
                                             </svg>
                                         </div>
                                         {{-- Badge statut --}}
-                                        <span class="absolute top-4 right-4 badge-published text-xs font-bold px-3 py-1 rounded-full">
+                                        <span class="absolute top-4 right-4 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg">
                                             Ouvert
                                         </span>
                                         {{-- Numéro / icône --}}
-                                        <div class="relative">
-                                            <div class="w-10 h-10 rounded-lg bg-[#ffbd45] flex items-center justify-center mb-3">
-                                                <svg class="w-5 h-5 text-[#061743]" fill="currentColor" viewBox="0 0 20 20">
+                                        <div class="relative transform transition-transform duration-300 group-hover:-translate-y-2">
+                                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-caei-gold to-yellow-400 flex items-center justify-center mb-3 shadow-lg shadow-caei-gold/30">
+                                                <svg class="w-6 h-6 text-caei-navy" fill="currentColor" viewBox="0 0 20 20">
                                                     <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.763 1.183 1.547.632 1.776-.762a1 1 0 01.788 0l4 1.714A1 1 0 0017 12v-4.84l-6.606-5.08zM17 14.2l-5.5 2.357L6 14.2V12.5l5.5 2.357L17 12.5v1.7z"/>
                                                 </svg>
                                             </div>
-                                            <p class="text-[#ffbd45] text-xs font-bold uppercase tracking-widest">Séminaire</p>
+                                            <p class="text-caei-gold text-xs font-bold uppercase tracking-widest text-shadow">Séminaire</p>
                                         </div>
                                     </div>
 

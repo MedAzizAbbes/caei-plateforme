@@ -7,15 +7,16 @@
 
     <div class="py-10">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="caei-card">
-                <div class="grid gap-8 p-8 lg:grid-cols-[1fr_.7fr] lg:items-center">
-                    <div>
-                        <p class="text-sm font-black uppercase text-[#ffbd45]">Bienvenue</p>
-                        <h3 class="mt-2 text-3xl font-black text-[#061743]">Votre espace CAEI est pret.</h3>
-                        <p class="mt-4 max-w-2xl text-slate-600">
-                            Accedez aux outils de gestion des seminaires, au suivi des participants et aux espaces des seminaires selon votre role.
+            <div class="caei-card overflow-hidden">
+                <div class="grid gap-8 p-8 lg:grid-cols-[1fr_.7fr] lg:items-center bg-white relative">
+                    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-caei-gold/5 via-transparent to-transparent opacity-50 pointer-events-none"></div>
+                    <div class="relative z-10">
+                        <p class="text-sm font-black uppercase text-caei-gold tracking-widest">Bienvenue</p>
+                        <h3 class="mt-2 text-3xl font-black text-caei-navy">Votre espace CAEI est prêt.</h3>
+                        <p class="mt-4 max-w-2xl text-slate-600 leading-relaxed">
+                            Accédez aux outils de gestion des séminaires, au suivi des participants et aux espaces des séminaires selon votre rôle.
                         </p>
-                        <div class="mt-6 flex flex-wrap gap-3">
+                        <div class="mt-8 flex flex-wrap gap-4">
                             @if(Auth::user()->isAdmin())
                                 <a href="{{ route('admin.dashboard') }}" class="caei-btn caei-btn-gold">Administration</a>
                             @endif
@@ -27,47 +28,66 @@
                             @endif
                         </div>
                     </div>
-                    <div class="rounded-lg bg-[#061743] p-6 text-white">
-                        <p class="text-sm font-bold uppercase text-white/60">CAEI Company Group</p>
-                        <p class="mt-5 text-5xl font-black text-[#ffbd45]">{{ Auth::user()->role }}</p>
-                        <p class="mt-3 text-white/75">{{ Auth::user()->fullName() ?: Auth::user()->email }}</p>
+                    <div class="rounded-2xl bg-gradient-to-br from-caei-navy to-caei-navy-deep p-8 text-white shadow-2xl relative overflow-hidden transform transition-all duration-300 hover:scale-105 hover:shadow-caei-navy/30">
+                        <div class="absolute -right-10 -top-10 w-40 h-40 bg-caei-gold/10 rounded-full blur-3xl"></div>
+                        <p class="text-sm font-bold uppercase tracking-widest text-white/50">CAEI Company Group</p>
+                        <p class="mt-6 text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-caei-gold to-yellow-300">{{ Auth::user()->role }}</p>
+                        <p class="mt-4 text-white/90 font-medium text-lg">{{ Auth::user()->fullName() ?: Auth::user()->email }}</p>
                     </div>
                 </div>
             </div>
         </div>
 
         @if(Auth::user()->isAdmin())
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-10">
             <!-- Premium Charts Grid (Statistiques) -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8 animate-slide-up animate-delay-100">
                 <!-- Global Attendance Status (Doughnut Chart) -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 lg:col-span-1">
-                    <h3 class="font-bold text-slate-900 text-sm uppercase tracking-wider mb-4">Statut global des présences</h3>
-                    <div class="relative h-64">
-                        <canvas id="globalAttendanceChart"></canvas>
+                <div class="caei-card bg-white p-6 lg:col-span-1 border-0 shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-b from-slate-50 to-white opacity-50 z-0"></div>
+                    <div class="relative z-10">
+                        <h3 class="font-black text-caei-navy text-sm uppercase tracking-widest mb-6 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-caei-gold"></span>
+                            Statut global des présences
+                        </h3>
+                        <div class="relative h-64">
+                            <canvas id="globalAttendanceChart"></canvas>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Inscriptions vs Presences per Seminar (Bar Chart) -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 lg:col-span-2">
-                    <h3 class="font-bold text-slate-900 text-sm uppercase tracking-wider mb-4">Présences par séminaire</h3>
-                    <div class="relative h-64">
-                        <canvas id="seminarAttendanceChart"></canvas>
+                <div class="caei-card bg-white p-6 lg:col-span-2 border-0 shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-b from-slate-50 to-white opacity-50 z-0"></div>
+                    <div class="relative z-10">
+                        <h3 class="font-black text-caei-navy text-sm uppercase tracking-widest mb-6 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                            Présences par séminaire
+                        </h3>
+                        <div class="relative h-64">
+                            <canvas id="seminarAttendanceChart"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-slide-up animate-delay-200">
                 <!-- Top Institutions (Horizontal Bar Chart) -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 lg:col-span-1">
-                    <h3 class="font-bold text-slate-900 text-sm uppercase tracking-wider mb-4">Top 5 Institutions</h3>
-                    <div class="relative h-64">
-                        <canvas id="topInstitutionsChart"></canvas>
+                <div class="caei-card bg-white p-6 lg:col-span-1 border-0 shadow-lg relative overflow-hidden group">
+                    <div class="absolute inset-0 bg-gradient-to-b from-slate-50 to-white opacity-50 z-0"></div>
+                    <div class="relative z-10">
+                        <h3 class="font-black text-caei-navy text-sm uppercase tracking-widest mb-6 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                            Top 5 Institutions
+                        </h3>
+                        <div class="relative h-64">
+                            <canvas id="topInstitutionsChart"></canvas>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Detailed Table List -->
-                <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 lg:col-span-2 overflow-hidden flex flex-col justify-between">
+                <div class="caei-card bg-white p-0 lg:col-span-2 border-0 shadow-lg overflow-hidden flex flex-col justify-between">
                     <div>
                         <h3 class="font-bold text-slate-900 text-sm uppercase tracking-wider mb-4">Détails des séminaires</h3>
                         

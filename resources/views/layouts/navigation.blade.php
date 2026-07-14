@@ -1,4 +1,4 @@
-<nav x-data="{ open: false }" class="border-b border-white/10 bg-caei-navy text-white">
+<nav x-data="{ open: false }" class="sticky top-0 z-50 glass-panel-dark text-white border-b-0">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-20">
@@ -9,7 +9,7 @@
                         <span class="caei-brand-mark !h-12 !w-12 !text-xs">CAEI</span>
                         <span class="caei-brand-text !text-lg">
                             <span>Company</span>
-                            <strong class="!text-lg">Group</strong>
+                            <strong class="!text-lg bg-gradient-to-r from-caei-gold to-yellow-300 bg-clip-text text-transparent">Group</strong>
                         </span>
                     </a>
                 </div>
