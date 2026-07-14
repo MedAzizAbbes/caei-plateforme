@@ -52,7 +52,15 @@
                         <p class="text-xs font-black uppercase text-slate-400">Téléphone</p>
                         <p class="mt-1 font-semibold text-slate-800">{{ $formateur->phone ?: '—' }}</p>
                     </div>
-                    <div class="col-span-2">
+                    <div>
+                        <p class="text-xs font-black uppercase text-slate-400">Pays</p>
+                        <p class="mt-1 font-semibold text-slate-800">{{ $formateur->pays ?: '—' }}</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-black uppercase text-slate-400">Poste</p>
+                        <p class="mt-1 font-semibold text-slate-800">{{ $formateur->poste ?: '—' }}</p>
+                    </div>
+                    <div>
                         <p class="text-xs font-black uppercase text-slate-400">Institution</p>
                         <p class="mt-1 font-semibold text-slate-800">{{ $formateur->institution ?: '—' }}</p>
                     </div>

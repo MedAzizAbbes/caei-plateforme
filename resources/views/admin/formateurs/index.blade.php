@@ -96,6 +96,9 @@
                                             @if($formateur->phone)
                                                 <p class="text-xs text-slate-500">{{ $formateur->phone }}</p>
                                             @endif
+                                            @if($formateur->pays || $formateur->poste)
+                                                <p class="text-xs text-slate-400">{{ implode(' - ', array_filter([$formateur->poste, $formateur->pays])) }}</p>
+                                            @endif
                                         </div>
                                     </div>
                                 </td>
