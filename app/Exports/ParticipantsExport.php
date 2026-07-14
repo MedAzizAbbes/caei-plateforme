@@ -19,6 +19,17 @@ class ParticipantsExport
         $registrations = Registration::with('user', 'seminar')
             ->when(!empty($this->filters['seminar_id']), fn ($q) => $q->where('seminar_id', $this->filters['seminar_id']))
             ->when(!empty($this->filters['status']), fn ($q) => $q->where('status', $this->filters['status']))
+            ->when(!empty($this->filters['name']), function ($q) {
+                $q->whereHas('user', function ($u) {
+                    $u->where('first_name', 'like', '%' . $this->filters['name'] . '%')
+                      ->orWhere('last_name', 'like', '%' . $this->filters['name'] . '%');
+                });
+            })
+            ->when(!empty($this->filters['email']), function ($q) {
+                $q->whereHas('user', function ($u) {
+                    $u->where('email', 'like', '%' . $this->filters['email'] . '%');
+                });
+            })
             ->get();
 
         $headers = [
