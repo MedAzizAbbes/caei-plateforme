@@ -62,16 +62,25 @@
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Statut</label>
-                        <select name="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border px-3 py-2" required>
-                            <option value="draft" {{ old('status', $seminar->status) == 'draft' ? 'selected' : '' }}>Brouillon</option>
-                            <option value="published" {{ old('status', $seminar->status) == 'published' ? 'selected' : '' }}>Publié</option>
-                            <option value="closed" {{ old('status', $seminar->status) == 'closed' ? 'selected' : '' }}>Fermé</option>
-                        </select>
-                        @error('status')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Nombre d'heures</label>
+                            <input type="number" name="hours" value="{{ old('hours', $seminar->hours) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border px-3 py-2" min="1" placeholder="Ex: 35">
+                            @error('hours')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Statut</label>
+                            <select name="status" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border px-3 py-2" required>
+                                <option value="draft" {{ old('status', $seminar->status) == 'draft' ? 'selected' : '' }}>Brouillon</option>
+                                <option value="published" {{ old('status', $seminar->status) == 'published' ? 'selected' : '' }}>Publié</option>
+                                <option value="closed" {{ old('status', $seminar->status) == 'closed' ? 'selected' : '' }}>Fermé</option>
+                            </select>
+                            @error('status')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="flex items-center gap-3">

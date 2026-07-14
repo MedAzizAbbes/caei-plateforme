@@ -38,6 +38,7 @@ class SeminarController extends Controller
             'start_date'  => ['required', 'date'],
             'end_date'    => ['required', 'date', 'after_or_equal:start_date'],
             'status'      => ['required', 'in:draft,published,closed'],
+            'hours'       => ['nullable', 'integer', 'min:1'],
             'trainers'    => ['nullable', 'array'],
             'trainers.*'  => ['exists:users,id'],
         ]);
@@ -64,6 +65,7 @@ class SeminarController extends Controller
             'start_date'  => ['required', 'date'],
             'end_date'    => ['required', 'date', 'after_or_equal:start_date'],
             'status'      => ['required', 'in:draft,published,closed'],
+            'hours'       => ['nullable', 'integer', 'min:1'],
             'trainers'    => ['nullable', 'array'],
             'trainers.*'  => ['exists:users,id'],
         ]);
