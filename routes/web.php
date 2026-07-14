@@ -131,6 +131,13 @@ Route::middleware(['auth', 'role:formateur'])->prefix('espace')->name('formateur
     Route::get('/formateur/seminaires/{seminar}/contenus', [DocumentController::class, 'index'])->name('documents.index');
     Route::post('/formateur/seminaires/{seminar}/contenus', [DocumentController::class, 'store'])->name('documents.store');
     Route::delete('/formateur/seminaires/{seminar}/contenus/{documentId}', [DocumentController::class, 'destroy'])->name('documents.destroy');
+    
+    // Gestion des présences par jour
+    Route::get('/formateur/seminaires/{seminar}/presences', [\App\Http\Controllers\Formateur\AttendanceController::class, 'index'])->name('presences.index');
+    Route::get('/formateur/seminaires/{seminar}/presences/scan', [\App\Http\Controllers\Formateur\AttendanceController::class, 'scan'])->name('presences.scan');
+    Route::post('/formateur/seminaires/{seminar}/presences/scan', [\App\Http\Controllers\Formateur\AttendanceController::class, 'storeScan'])->name('presences.storeScan');
+    Route::get('/formateur/seminaires/{seminar}/presences/export/pdf', [\App\Http\Controllers\Formateur\AttendanceController::class, 'exportPdf'])->name('presences.export.pdf');
+    Route::get('/formateur/seminaires/{seminar}/presences/export/excel', [\App\Http\Controllers\Formateur\AttendanceController::class, 'exportExcel'])->name('presences.export.excel');
 });
 
 /*

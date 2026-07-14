@@ -11,7 +11,7 @@ class Attendance extends Model
 
     protected $table = 'attendance';
 
-    protected $fillable = ['registration_id', 'seminar_id', 'scanned_by', 'method', 'scanned_at'];
+    protected $fillable = ['registration_id', 'seminar_id', 'day_number', 'scanned_by', 'method', 'scanned_at'];
 
     protected $casts = [
         'scanned_at' => 'datetime',
