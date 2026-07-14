@@ -13,7 +13,7 @@
                         <p class="text-sm font-black uppercase text-[#ffbd45]">Bienvenue</p>
                         <h3 class="mt-2 text-3xl font-black text-[#061743]">Votre espace CAEI est pret.</h3>
                         <p class="mt-4 max-w-2xl text-slate-600">
-                            Accedez aux outils de gestion des seminaires, au suivi des participants et aux espaces de formation selon votre role.
+                            Accedez aux outils de gestion des seminaires, au suivi des participants et aux espaces des seminaires selon votre role.
                         </p>
                         <div class="mt-6 flex flex-wrap gap-3">
                             @if(Auth::user()->isAdmin())
