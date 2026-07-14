@@ -51,22 +51,20 @@
                         <span class="caei-brand-mark">CAEI</span>
                         <span class="caei-brand-text"><span>Company</span><strong>Group</strong></span>
                     </a>
+                    
+                    {{-- Desktop Links --}}
                     <div class="caei-public-links">
                         <a class="active" href="{{ route('home') }}">Accueil</a>
                         <a href="#seminaires">Séminaires</a>
-                        @auth
-                            <a href="{{ route('dashboard') }}">Mon espace</a>
-                        @else
-                            <a href="{{ route('login') }}">Connexion</a>
-                            <a href="{{ route('register') }}">Créer un compte</a>
-                        @endauth
                     </div>
-                    {{-- Menu mobile --}}
-                    <div class="flex items-center gap-3 lg:hidden">
+
+                    {{-- Actions (Right Aligned) --}}
+                    <div class="flex items-center gap-4">
                         @auth
-                            <a href="{{ route('dashboard') }}" class="caei-btn caei-btn-gold text-xs py-2 px-4">Mon espace</a>
+                            <a href="{{ route('dashboard') }}" class="caei-btn caei-btn-gold text-xs py-2.5 px-5">Mon espace</a>
                         @else
-                            <a href="{{ route('login') }}" class="caei-btn caei-btn-outline text-xs py-2 px-4">Connexion</a>
+                            <a href="{{ route('login') }}" class="text-sm font-semibold text-white/95 hover:text-[#ffbd45] transition-colors">Connexion</a>
+                            <a href="{{ route('register') }}" class="caei-btn caei-btn-gold text-xs py-2.5 px-5">Créer un compte</a>
                         @endauth
                     </div>
                 </nav>

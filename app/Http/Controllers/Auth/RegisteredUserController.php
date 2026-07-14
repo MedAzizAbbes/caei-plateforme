@@ -24,17 +24,15 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['nullable', 'string', 'max:100'],
-            'first_name' => ['nullable', 'string', 'max:100'],
-            'last_name' => ['nullable', 'string', 'max:100'],
+            'first_name' => ['required', 'string', 'max:100'],
+            'last_name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'role' => ['nullable', 'in:participant,formateur,admin'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $name = trim((string) $request->input('name', ''));
-        $firstName = $request->input('first_name') ?? (explode(' ', $name, 2)[0] ?? 'Utilisateur');
-        $lastName = $request->input('last_name') ?? (explode(' ', $name, 2)[1] ?? '');
+        $firstName = $request->input('first_name');
+        $lastName = $request->input('last_name');
 
         $currentUser = Auth::user();
         $isAdminCreation = Auth::check() && $currentUser && $currentUser->role === 'admin';
