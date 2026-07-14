@@ -56,7 +56,17 @@
                         <input type="text" id="phone" name="phone" value="{{ old('phone') }}"
                                class="w-full rounded-md border border-slate-200 px-3 py-2 text-sm text-slate-800 focus:border-[#061743] focus:outline-none focus:ring-1 focus:ring-[#061743]">
                     </div>
-                    <div class="sm:col-span-2">
+                    <div>
+                        <label class="mb-1 block text-sm font-bold text-slate-700" for="pays">Pays</label>
+                        <input type="text" id="pays" name="pays" value="{{ old('pays') }}"
+                               class="w-full rounded-md border border-slate-200 px-3 py-2 text-sm text-slate-800 focus:border-[#061743] focus:outline-none focus:ring-1 focus:ring-[#061743]">
+                    </div>
+                    <div>
+                        <label class="mb-1 block text-sm font-bold text-slate-700" for="poste">Poste</label>
+                        <input type="text" id="poste" name="poste" value="{{ old('poste') }}"
+                               class="w-full rounded-md border border-slate-200 px-3 py-2 text-sm text-slate-800 focus:border-[#061743] focus:outline-none focus:ring-1 focus:ring-[#061743]">
+                    </div>
+                    <div>
                         <label class="mb-1 block text-sm font-bold text-slate-700" for="institution">Institution / Organisation</label>
                         <input type="text" id="institution" name="institution" value="{{ old('institution') }}"
                                class="w-full rounded-md border border-slate-200 px-3 py-2 text-sm text-slate-800 focus:border-[#061743] focus:outline-none focus:ring-1 focus:ring-[#061743]">
