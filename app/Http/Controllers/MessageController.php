@@ -12,13 +12,34 @@ class MessageController extends Controller
     {
         $this->authorizeSeminarAccess($request, $seminar);
 
-        $threads = $seminar->messages()
-            ->with('author')
-            ->orderBy('created_at')
-            ->get()
-            ->groupBy('thread_label');
+        $activeThread = $request->query('thread', 'General');
 
-        return view('shared.echange', compact('seminar', 'threads'));
+        $messages = $seminar->messages()
+            ->with('author')
+            ->where('thread_label', $activeThread)
+            ->orderBy('created_at')
+            ->get();
+
+        if ($request->ajax()) {
+            return view('shared.echange-feed', compact('seminar', 'messages', 'activeThread'));
+        }
+
+        // Available threads in this seminar
+        $threadOptions = [
+            'General',
+            'Questions aux formateurs',
+            'Discussion participants',
+            'Jour 1',
+            'Jour 2',
+        ];
+
+        // Gather counts for each thread label to show in the sidebar
+        $threadCounts = $seminar->messages()
+            ->select('thread_label', \DB::raw('count(*) as count'))
+            ->groupBy('thread_label')
+            ->pluck('count', 'thread_label');
+
+        return view('shared.echange', compact('seminar', 'messages', 'activeThread', 'threadOptions', 'threadCounts'));
     }
 
     /** Envoi d'un message dans un fil de discussion du séminaire. */
@@ -31,11 +52,21 @@ class MessageController extends Controller
             'content'      => ['required', 'string', 'max:2000'],
         ]);
 
-        $seminar->messages()->create([
+        $message = $seminar->messages()->create([
             'user_id'      => $request->user()->id,
-            'thread_label' => $data['thread_label'] ?? 'Général',
+            'thread_label' => $data['thread_label'] ?? 'General',
             'content'      => $data['content'],
         ]);
+
+        if ($request->ajax()) {
+            $activeThread = $message->thread_label;
+            $messages = $seminar->messages()
+                ->with('author')
+                ->where('thread_label', $activeThread)
+                ->orderBy('created_at')
+                ->get();
+            return view('shared.echange-feed', compact('seminar', 'messages', 'activeThread'));
+        }
 
         return back();
     }
