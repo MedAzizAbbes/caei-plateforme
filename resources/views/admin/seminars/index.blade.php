@@ -53,6 +53,9 @@
                                         <td class="px-4 py-3 text-sm text-gray-600">{{ $seminar->registrations_count }}</td>
                                         <td class="px-4 py-3 text-sm">
                                             <div class="flex gap-2">
+                                                <a href="{{ route('echange.index', $seminar) }}" class="inline-flex items-center px-3 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200 text-xs font-medium">
+                                                    Discussions
+                                                </a>
                                                 <a href="{{ route('admin.documents.index', $seminar) }}" class="inline-flex items-center px-3 py-1 bg-indigo-100 text-indigo-700 rounded hover:bg-indigo-200 text-xs font-medium">
                                                     Contenus
                                                 </a>

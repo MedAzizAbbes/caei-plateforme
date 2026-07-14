@@ -12,7 +12,27 @@ class MessageController extends Controller
     {
         $this->authorizeSeminarAccess($request, $seminar);
 
-        $activeThread = $request->query('thread', 'General');
+        $user = $request->user();
+        $isAdmin = $user?->isAdmin();
+
+        $baseThreads = [
+            'Questions aux formateurs',
+            'Discussion participants',
+        ];
+
+        if ($isAdmin) {
+            $existingThreads = $seminar->messages()->select('thread_label')->distinct()->pluck('thread_label')->toArray();
+            $threadOptions = array_values(array_unique(array_merge($baseThreads, $existingThreads)));
+        } else {
+            $threadOptions = $baseThreads;
+            $privateThread = 'Privé avec admin - ' . $user->fullName();
+            $threadOptions[] = $privateThread;
+        }
+
+        $activeThread = $request->query('thread');
+        if (!$activeThread || !in_array($activeThread, $threadOptions)) {
+            $activeThread = $threadOptions[0] ?? 'Questions aux formateurs';
+        }
 
         $messages = $seminar->messages()
             ->with('author')
@@ -24,17 +44,9 @@ class MessageController extends Controller
             return view('shared.echange-feed', compact('seminar', 'messages', 'activeThread'));
         }
 
-        // Available threads in this seminar
-        $threadOptions = [
-            'General',
-            'Questions aux formateurs',
-            'Discussion participants',
-            'Jour 1',
-            'Jour 2',
-        ];
-
         // Gather counts for each thread label to show in the sidebar
         $threadCounts = $seminar->messages()
+            ->whereIn('thread_label', $threadOptions)
             ->select('thread_label', \DB::raw('count(*) as count'))
             ->groupBy('thread_label')
             ->pluck('count', 'thread_label');
@@ -52,9 +64,26 @@ class MessageController extends Controller
             'content'      => ['required', 'string', 'max:2000'],
         ]);
 
+        $user = $request->user();
+        $isAdmin = $user?->isAdmin();
+
+        $threadLabel = $data['thread_label'] ?? 'Questions aux formateurs';
+
+        if (!$isAdmin) {
+            $baseThreads = [
+                'Questions aux formateurs',
+                'Discussion participants',
+            ];
+            $privateThread = 'Privé avec admin - ' . $user->fullName();
+            
+            if (!in_array($threadLabel, $baseThreads) && $threadLabel !== $privateThread) {
+                abort(403, 'Action non autorisée.');
+            }
+        }
+
         $message = $seminar->messages()->create([
-            'user_id'      => $request->user()->id,
-            'thread_label' => $data['thread_label'] ?? 'General',
+            'user_id'      => $user->id,
+            'thread_label' => $threadLabel,
             'content'      => $data['content'],
         ]);
 
