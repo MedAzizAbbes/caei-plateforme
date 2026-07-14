@@ -14,7 +14,7 @@
                 Retour
             </a>
             <div>
-                <p class="text-xs font-black uppercase text-[#f2a90f]">Supports de formation</p>
+                <p class="text-xs font-black uppercase text-[#f2a90f]">Supports du séminaire</p>
                 <h2 class="text-xl font-black uppercase leading-tight text-slate-900">
                     {{ $seminar->theme }}
                 </h2>
@@ -28,7 +28,7 @@
             <!-- Résumé du séminaire -->
             <div class="mb-8 rounded-lg bg-[#061743] p-6 text-white shadow-sm">
                 <p class="text-sm font-black uppercase text-[#ffbd45]">CAEI Company Group</p>
-                <h3 class="mt-2 text-2xl font-black">Espace formation</h3>
+                <h3 class="mt-2 text-2xl font-black">Espace séminaire</h3>
                 <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
                     <div class="rounded-lg border border-white/10 bg-white/10 p-4">
                         <p class="text-sm font-medium text-white/65">Dates</p>
@@ -71,7 +71,7 @@
                         </svg>
                     </div>
                     <h3 class="mt-4 text-lg font-black text-[#061743]">Aucun document</h3>
-                    <p class="mt-2 text-sm text-slate-600">Les supports de formation seront bientot disponibles.</p>
+                    <p class="mt-2 text-sm text-slate-600">Les supports du séminaire seront bientot disponibles.</p>
                 </div>
             @else
                 <div class="space-y-6">

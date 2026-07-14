@@ -118,7 +118,7 @@
                                     <svg class="w-4 h-4 mr-2 text-[#061743]" fill="currentColor" viewBox="0 0 20 20">
                                         <path d="M4 3a2 2 0 012-2h6a1 1 0 01.707.293l6 6a1 1 0 01.293.707v8a2 2 0 01-2 2H4a2 2 0 01-2-2V3z" clip-rule="evenodd" fill-rule="evenodd"></path>
                                     </svg>
-                                    Contenus et supports de formation
+                                    Contenus et supports du séminaire
                                 </h4>
                                 @if($seminar->documents->isEmpty())
                                     <p class="text-sm text-slate-500 italic mb-3">Aucun document pour le moment.</p>
