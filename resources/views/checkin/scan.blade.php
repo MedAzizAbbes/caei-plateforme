@@ -17,6 +17,16 @@
                     <form id="checkin-form" class="space-y-4">
                         @csrf
 
+                        <!-- Alerte de synchronisation hors-ligne -->
+                        <div id="sync-queue-alert" class="hidden rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 flex justify-between items-center mb-4">
+                            <div>
+                                <span class="font-bold" id="sync-queue-count">0</span> scan(s) en attente de synchronisation (hors-ligne).
+                            </div>
+                            <button type="button" onclick="syncPendingScans()" id="sync-button" class="ml-2 rounded bg-amber-600 px-3 py-1 text-xs font-black text-white hover:bg-amber-700 transition">
+                                Synchroniser
+                            </button>
+                        </div>
+
                         <div>
                             <x-input-label for="code" :value="__('Code QR ou lien securise')" />
                             <x-text-input id="code" class="mt-1 block w-full font-mono" type="text" name="code" required autofocus
@@ -73,27 +83,114 @@
             result.classList.remove('hidden');
         }
 
-        async function submitCode() {
-            const response = await fetch('{{ route('checkin.scan') }}', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                },
-                body: JSON.stringify({ code: input.value.trim() }),
-            });
+        function getPendingScans() {
+            return JSON.parse(localStorage.getItem('pending_scans') || '[]');
+        }
 
-            const data = await response.json().catch(() => ({}));
+        function savePendingScans(scans) {
+            localStorage.setItem('pending_scans', JSON.stringify(scans));
+            updateSyncQueueUI();
+        }
 
-            if (response.ok) {
-                showResult(true, `${data.participant} - ${data.seminar} - ${data.scanned_at}`);
-                input.value = '';
-                input.focus();
-                return;
+        function queueScan(code) {
+            const scans = getPendingScans();
+            if (!scans.includes(code)) {
+                scans.push(code);
+                savePendingScans(scans);
+            }
+        }
+
+        function updateSyncQueueUI() {
+            const scans = getPendingScans();
+            const alertDiv = document.getElementById('sync-queue-alert');
+            const countSpan = document.getElementById('sync-queue-count');
+            
+            if (scans.length > 0) {
+                countSpan.textContent = scans.length;
+                alertDiv.classList.remove('hidden');
+            } else {
+                alertDiv.classList.add('hidden');
+            }
+        }
+
+        let isSyncing = false;
+        async function syncPendingScans() {
+            if (isSyncing) return;
+            const scans = getPendingScans();
+            if (scans.length === 0) return;
+
+            isSyncing = true;
+            const syncButton = document.getElementById('sync-button');
+            syncButton.disabled = true;
+            syncButton.textContent = "Synchro...";
+
+            let successCount = 0;
+            let remainingScans = [...scans];
+
+            for (const code of scans) {
+                try {
+                    const response = await fetch('{{ route('checkin.scan') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        },
+                        body: JSON.stringify({ code: code }),
+                    });
+
+                    if (response.ok) {
+                        successCount++;
+                        remainingScans = remainingScans.filter(c => c !== code);
+                        savePendingScans(remainingScans);
+                    }
+                } catch (err) {
+                    console.error("Échec de synchronisation hors-ligne pour :", code, err);
+                    break;
+                }
             }
 
-            showResult(false, data.message || 'Code QR introuvable.');
+            isSyncing = false;
+            syncButton.disabled = false;
+            syncButton.textContent = "Synchroniser";
+
+            if (successCount > 0) {
+                showResult(true, `${successCount} présence(s) synchronisée(s) avec succès.`);
+            }
+            updateSyncQueueUI();
+        }
+
+        async function submitCode() {
+            const codeValue = input.value.trim();
+            if (!codeValue) return;
+
+            try {
+                const response = await fetch('{{ route('checkin.scan') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    body: JSON.stringify({ code: codeValue }),
+                });
+
+                const data = await response.json().catch(() => ({}));
+
+                if (response.ok) {
+                    showResult(true, `${data.participant} - ${data.seminar} - ${data.scanned_at}`);
+                    input.value = '';
+                    input.focus();
+                    return;
+                }
+
+                showResult(false, data.message || 'Code QR introuvable.');
+            } catch (err) {
+                queueScan(codeValue);
+                showResult(true, `⚠️ Mode hors-ligne : Scan enregistré localement (${codeValue}). Il sera synchronisé dès le retour de la connexion.`);
+                input.value = '';
+                input.focus();
+            }
         }
 
         form.addEventListener('submit', async (event) => {
@@ -181,5 +278,22 @@
             cameraHelp.classList.remove('hidden');
             cameraButton.textContent = 'Scanner avec camera';
         }
+
+        // Initialisation de la file hors-ligne au chargement
+        window.addEventListener('DOMContentLoaded', () => {
+            updateSyncQueueUI();
+            
+            // Tente de synchroniser si en ligne toutes les 10 secondes
+            setInterval(() => {
+                if (navigator.onLine && getPendingScans().length > 0) {
+                    syncPendingScans();
+                }
+            }, 10000);
+        });
+
+        // Tente de synchroniser dès que la connexion revient
+        window.addEventListener('online', () => {
+            syncPendingScans();
+        });
     </script>
 </x-app-layout>
