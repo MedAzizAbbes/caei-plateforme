@@ -86,9 +86,7 @@
                             </svg>
                             Voir les séminaires
                         </a>
-                        @guest
-                            <a href="{{ route('register') }}" class="caei-btn caei-btn-outline">Créer un compte</a>
-                        @endguest
+                        
                         @auth
                             <a href="{{ route('dashboard') }}" class="caei-btn caei-btn-outline">Mon espace</a>
                         @endauth
@@ -231,21 +229,7 @@
                     @endif
 
                     {{-- CTA bas de page --}}
-                    <div class="mt-16 text-center">
-                        @guest
-                            <div class="inline-block rounded-2xl bg-[#061743] px-10 py-8 text-white shadow-xl">
-                                <p class="text-sm font-bold uppercase text-[#ffbd45] tracking-widest">Pas encore de compte ?</p>
-                                <h3 class="mt-2 text-2xl font-black">Créez votre espace participant</h3>
-                                <p class="mt-2 text-white/70 text-sm">Inscrivez-vous en quelques secondes pour accéder aux séminaires.</p>
-                                <div class="mt-5 flex flex-wrap gap-3 justify-center">
-                                    <a href="{{ route('register') }}" class="caei-btn caei-btn-gold">Créer un compte</a>
-                                    <a href="{{ route('login') }}" class="caei-btn caei-btn-outline">Se connecter</a>
-                                </div>
-                            </div>
-                        @endguest
-                    </div>
-
-                </div>
+                    
             </section>
 
             {{-- Footer --}}
