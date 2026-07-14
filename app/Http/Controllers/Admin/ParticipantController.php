@@ -16,8 +16,20 @@ class ParticipantController extends Controller
         $registrations = Registration::with('user', 'seminar')
             ->when($request->filled('seminar_id'), fn ($q) => $q->where('seminar_id', $request->seminar_id))
             ->when($request->filled('status'), fn ($q) => $q->where('status', $request->status))
+            ->when($request->filled('name'), function ($q) use ($request) {
+                $q->whereHas('user', function ($u) use ($request) {
+                    $u->where('first_name', 'like', '%' . $request->name . '%')
+                      ->orWhere('last_name', 'like', '%' . $request->name . '%');
+                });
+            })
+            ->when($request->filled('email'), function ($q) use ($request) {
+                $q->whereHas('user', function ($u) use ($request) {
+                    $u->where('email', 'like', '%' . $request->email . '%');
+                });
+            })
             ->latest('registered_at')
-            ->paginate(30);
+            ->paginate(30)
+            ->withQueryString();
 
         $seminars = Seminar::orderBy('start_date')->get(['id', 'theme']);
 
@@ -27,7 +39,7 @@ class ParticipantController extends Controller
     /** Export Excel (CSV) */
     public function exportExcel(Request $request)
     {
-        return (new ParticipantsExport($request->only(['seminar_id', 'status'])))
+        return (new ParticipantsExport($request->only(['seminar_id', 'status', 'name', 'email'])))
             ->download('participants_caei_' . now()->format('Y-m-d') . '.csv');
     }
 
@@ -37,6 +49,17 @@ class ParticipantController extends Controller
         $registrations = Registration::with('user', 'seminar')
             ->when($request->filled('seminar_id'), fn ($q) => $q->where('seminar_id', $request->seminar_id))
             ->when($request->filled('status'), fn ($q) => $q->where('status', $request->status))
+            ->when($request->filled('name'), function ($q) use ($request) {
+                $q->whereHas('user', function ($u) use ($request) {
+                    $u->where('first_name', 'like', '%' . $request->name . '%')
+                      ->orWhere('last_name', 'like', '%' . $request->name . '%');
+                });
+            })
+            ->when($request->filled('email'), function ($q) use ($request) {
+                $q->whereHas('user', function ($u) use ($request) {
+                    $u->where('email', 'like', '%' . $request->email . '%');
+                });
+            })
             ->get();
 
         $html = view('admin.participants.export-pdf', compact('registrations'))->render();

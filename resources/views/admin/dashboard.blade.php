@@ -64,6 +64,17 @@
                     <a href="{{ route('admin.formateurs.create') }}" class="block text-[#061743] hover:text-[#f2a90f]">Ajouter un formateur</a>
                 </div>
             </div>
+
+            <div class="caei-card p-6 transition hover:shadow-lg">
+                <div class="mb-4 flex items-center justify-between">
+                    <h3 class="text-lg font-black text-[#061743]">Discussions</h3>
+                    <span class="text-3xl text-[#ffbd45]">06</span>
+                </div>
+                <p class="mb-4 text-sm text-slate-600">Accéder aux chats et aux discussions avec les participants.</p>
+                <div class="space-y-2 text-sm font-bold">
+                    <a href="{{ route('admin.seminars.index') }}" class="block text-[#061743] hover:text-[#f2a90f]">Voir les discussions</a>
+                </div>
+            </div>
         </div>
 
         <div class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-5">

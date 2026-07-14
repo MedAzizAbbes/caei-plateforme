@@ -8,16 +8,24 @@
                 <div class="flex items-center justify-between mb-6">
                     <h1 class="text-2xl font-semibold">Participants et Inscriptions</h1>
                     <div class="flex gap-2">
-                        <a href="{{ route('admin.participants.export.excel') }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-white hover:bg-green-700">
+                        <a href="{{ route('admin.participants.export.excel', request()->query()) }}" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-white hover:bg-green-700">
                             📊 Excel
                         </a>
-                        <a href="{{ route('admin.participants.export.pdf') }}" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-white hover:bg-red-700">
+                        <a href="{{ route('admin.participants.export.pdf', request()->query()) }}" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-white hover:bg-red-700">
                             📄 PDF
                         </a>
                     </div>
                 </div>
 
-                <form method="GET" class="mb-6 grid gap-4 md:grid-cols-2">
+                <form method="GET" class="mb-6 grid gap-4 md:grid-cols-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nom</label>
+                        <input type="text" name="name" value="{{ request('name') }}" class="w-full rounded-md border-gray-300 shadow-sm" placeholder="Ex: Jean">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="text" name="email" value="{{ request('email') }}" class="w-full rounded-md border-gray-300 shadow-sm" placeholder="Ex: jean@">
+                    </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Séminaire</label>
                         <select name="seminar_id" class="w-full rounded-md border-gray-300 shadow-sm">
@@ -36,8 +44,8 @@
                             <option value="absent" {{ request('status') == 'absent' ? 'selected' : '' }}>Absent</option>
                         </select>
                     </div>
-                    <div class="md:col-span-2 flex justify-end">
-                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md">Filtrer</button>
+                    <div class="md:col-span-4 flex justify-end">
+                        <button type="submit" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition">Filtrer</button>
                     </div>
                 </form>
 
