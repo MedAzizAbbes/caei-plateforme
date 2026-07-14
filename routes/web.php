@@ -169,6 +169,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/participants', [ParticipantController::class, 'index'])->name('participants.index');
     Route::get('/participants/export/excel', [ParticipantController::class, 'exportExcel'])->name('participants.export.excel');
     Route::get('/participants/export/pdf', [ParticipantController::class, 'exportPdf'])->name('participants.export.pdf');
+    Route::get('/participants/{participant}', [ParticipantController::class, 'show'])->name('participants.show');
+    Route::get('/participants/{participant}/edit', [ParticipantController::class, 'edit'])->name('participants.edit');
+    Route::put('/participants/{participant}', [ParticipantController::class, 'update'])->name('participants.update');
+    Route::delete('/participants/{participant}', [ParticipantController::class, 'destroy'])->name('participants.destroy');
 
     Route::get('/seminaires/{seminar}/contenus', [DocumentController::class, 'index'])->name('documents.index');
     Route::post('/seminaires/{seminar}/contenus', [DocumentController::class, 'store'])->name('documents.store');

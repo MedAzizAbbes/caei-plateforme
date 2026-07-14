@@ -75,4 +75,51 @@ class ParticipantController extends Controller
             ->header('Content-Type', 'text/html; charset=utf-8')
             ->header('Content-Disposition', 'attachment; filename="participants_caei_' . now()->format('Y-m-d') . '.html"');
     }
+
+    /** View Participant Details */
+    public function show(\App\Models\User $participant)
+    {
+        // Fetch all registrations for this participant
+        $registrations = Registration::with('seminar')
+            ->where('user_id', $participant->id)
+            ->latest('registered_at')
+            ->get();
+
+        return view('admin.participants.show', compact('participant', 'registrations'));
+    }
+
+    /** Edit Participant */
+    public function edit(\App\Models\User $participant)
+    {
+        return view('admin.participants.edit', compact('participant'));
+    }
+
+    /** Update Participant */
+    public function update(Request $request, \App\Models\User $participant)
+    {
+        $validated = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email,' . $participant->id,
+            'phone' => 'nullable|string|max:255',
+            'pays' => 'nullable|string|max:255',
+            'poste' => 'nullable|string|max:255',
+            'institution' => 'nullable|string|max:255',
+        ]);
+
+        $participant->update($validated);
+
+        return redirect()->route('admin.participants.show', $participant)->with('success', 'Participant mis à jour avec succès.');
+    }
+
+    /** Delete Participant */
+    public function destroy(\App\Models\User $participant)
+    {
+        // Supprimer toutes les inscriptions de ce participant
+        Registration::where('user_id', $participant->id)->delete();
+        
+        $participant->delete();
+
+        return redirect()->route('admin.participants.index')->with('success', 'Participant supprimé avec succès.');
+    }
 }
