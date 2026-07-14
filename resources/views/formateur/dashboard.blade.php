@@ -158,12 +158,12 @@
                                     </svg>
                                     Ajouter contenu
                                 </a>
-                                <a href="{{ route('checkin.index') }}" 
+                                <a href="{{ route('formateur.presences.index', $seminar) }}" 
                                    class="inline-flex items-center px-4 py-2 border border-[#061743]/15 rounded-lg text-sm font-bold text-white bg-[#061743] hover:bg-[#0b245f] transition shadow-sm">
                                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                     </svg>
-                                    Contrôle de présence
+                                    Gestion des présences
                                 </a>
                                 <a href="{{ route('participant.formation', $seminar) }}" 
                                    class="inline-flex items-center px-4 py-2 border border-[#ffbd45]/30 rounded-lg text-sm font-black text-[#061743] bg-[#ffbd45] hover:bg-[#ffd071] transition shadow-sm uppercase">
