@@ -32,6 +32,7 @@
                                     <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Pays</th>
                                     <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Dates</th>
                                     <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Statut</th>
+                                    <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Prix</th>
                                     <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Inscriptions</th>
                                     <th class="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wider text-gray-500">Actions</th>
                                 </tr>
@@ -50,6 +51,7 @@
                                         <td class="px-4 py-3 text-sm text-gray-600">{{ $seminar->country }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">{{ $seminar->start_date->format('d/m/Y') }} - {{ $seminar->end_date->format('d/m/Y') }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">{{ ucfirst($seminar->status) }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-600">{{ $seminar->price ? $seminar->price . ' €' : 'Non défini' }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-600">{{ $seminar->registrations_count }}</td>
                                         <td class="px-4 py-3 text-sm">
                                             <div class="flex gap-2">

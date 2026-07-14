@@ -147,6 +147,12 @@
                                     <dt class="text-xs font-bold text-slate-500 uppercase tracking-wide">Participants inscrits</dt>
                                     <dd class="mt-1 font-semibold text-[#061743]">{{ $seminar->registrations_count }}</dd>
                                 </div>
+                                @if($seminar->price)
+                                <div>
+                                    <dt class="text-xs font-bold text-slate-500 uppercase tracking-wide">Prix</dt>
+                                    <dd class="mt-1 font-bold text-[#061743]">{{ number_format($seminar->price, 2, ',', ' ') }} €</dd>
+                                </div>
+                                @endif
                                 <div>
                                     <dt class="text-xs font-bold text-slate-500 uppercase tracking-wide">Durée</dt>
                                     <dd class="mt-1 font-semibold text-slate-900">

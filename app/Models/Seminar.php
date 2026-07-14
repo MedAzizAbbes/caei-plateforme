@@ -10,7 +10,7 @@ class Seminar extends Model
     use HasFactory;
 
     protected $fillable = [
-        'theme', 'country', 'description', 'start_date', 'end_date', 'status', 'created_by', 'hours',
+        'theme', 'country', 'description', 'start_date', 'end_date', 'status', 'created_by', 'hours', 'price',
     ];
 
     protected $casts = [

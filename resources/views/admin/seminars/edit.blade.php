@@ -62,11 +62,18 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700">Nombre d'heures</label>
                             <input type="number" name="hours" value="{{ old('hours', $seminar->hours) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border px-3 py-2" min="1" placeholder="Ex: 35">
                             @error('hours')
+                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Prix (€)</label>
+                            <input type="number" step="0.01" name="price" value="{{ old('price', $seminar->price) }}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border px-3 py-2" min="0" placeholder="Ex: 150.00">
+                            @error('price')
                                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                             @enderror
                         </div>
