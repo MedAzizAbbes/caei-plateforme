@@ -12,6 +12,7 @@ use App\Http\Controllers\Participant\DashboardController;
 use App\Http\Controllers\Participant\FormationController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\SeminarPublicController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
@@ -19,11 +20,34 @@ use App\Http\Controllers\ProfileController;
 
 
 
+/*
+|--------------------------------------------------------------------------
+| A — Accès public : page d'accueil + détails séminaire
+|--------------------------------------------------------------------------
+*/
+Route::get('/', [SeminarPublicController::class, 'index'])->name('home');
+Route::get('/seminaires/{seminar}', [SeminarPublicController::class, 'show'])->name('seminaires.show');
 
-Route::get('/', function () {
-    return view('welcome');
+// Lien sécurisé du QR code -> connexion automatique + redirection tableau de bord
+Route::get('/p/{token}', [PortalController::class, 'show'])->name('portal.show');
+
+/*
+|--------------------------------------------------------------------------
+| Inscription à un séminaire — réservé aux utilisateurs connectés
+|--------------------------------------------------------------------------
+*/
+Route::middleware('auth')->group(function () {
+    Route::get('/inscription', [RegistrationController::class, 'create'])->name('registration.create');
+    Route::post('/inscription', [RegistrationController::class, 'store'])->name('registration.store');
+    Route::get('/inscription/{registration}/confirmation', [RegistrationController::class, 'confirmation'])
+        ->name('registration.confirmation');
 });
 
+/*
+|--------------------------------------------------------------------------
+| Dashboard général (Breeze)
+|--------------------------------------------------------------------------
+*/
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -33,19 +57,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-/*
-|--------------------------------------------------------------------------
-| A — Accès public & inscription (écrans 01-02)
-|--------------------------------------------------------------------------
-*/
-Route::get('/inscription', [RegistrationController::class, 'create'])->name('registration.create');
-Route::post('/inscription', [RegistrationController::class, 'store'])->name('registration.store');
-Route::get('/inscription/{registration}/confirmation', [RegistrationController::class, 'confirmation'])
-    ->name('registration.confirmation');
-
-// Lien sécurisé du QR code -> connexion automatique + redirection tableau de bord
-Route::get('/p/{token}', [PortalController::class, 'show'])->name('portal.show');
 
 /*
 |--------------------------------------------------------------------------
