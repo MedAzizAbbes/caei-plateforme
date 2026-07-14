@@ -113,7 +113,7 @@
                                                 Disponible
                                             </span>
                                             <span class="text-xs text-slate-500 font-medium">
-                                                {{ $seminar->start_date->diffInDays($seminar->end_date) + 1 }} jour(s)
+                                                {{ $seminar->start_date->diffInDays($seminar->end_date) + 1 }} jour(s) @if($seminar->hours) ({{ $seminar->hours }} h) @endif
                                             </span>
                                         </div>
                                         <h4 class="font-bold text-[#061743] text-lg mb-2 leading-snug">{{ $seminar->theme }}</h4>

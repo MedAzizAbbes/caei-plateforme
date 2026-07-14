@@ -29,7 +29,7 @@
             <div class="mb-8 rounded-lg bg-[#061743] p-6 text-white shadow-sm">
                 <p class="text-sm font-black uppercase text-[#ffbd45]">CAEI Company Group</p>
                 <h3 class="mt-2 text-2xl font-black">Espace séminaire</h3>
-                <div class="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
                     <div class="rounded-lg border border-white/10 bg-white/10 p-4">
                         <p class="text-sm font-medium text-white/65">Dates</p>
                         <p class="mt-1 font-semibold text-white">
@@ -47,6 +47,12 @@
                                 $dayCount = $documentsByDay->keys()->max() ?? 1;
                             @endphp
                             {{ $dayCount }} jour(s)
+                        </p>
+                    </div>
+                    <div class="rounded-lg border border-white/10 bg-white/10 p-4">
+                        <p class="text-sm font-medium text-white/65">Nombre d'heures</p>
+                        <p class="mt-1 font-semibold text-white">
+                            {{ $seminar->hours ?? '-' }} heure(s)
                         </p>
                     </div>
                     <div class="rounded-lg border border-white/10 bg-white/10 p-4">

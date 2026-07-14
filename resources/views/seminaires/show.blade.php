@@ -153,6 +153,14 @@
                                         {{ $seminar->start_date->diffInDays($seminar->end_date) + 1 }} jour(s)
                                     </dd>
                                 </div>
+                                @if($seminar->hours)
+                                    <div>
+                                        <dt class="text-xs font-bold text-slate-500 uppercase tracking-wide">Nombre d'heures</dt>
+                                        <dd class="mt-1 font-semibold text-slate-900">
+                                            {{ $seminar->hours }} heure(s)
+                                        </dd>
+                                    </div>
+                                @endif
                             </dl>
                         </div>
 
