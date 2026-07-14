@@ -21,6 +21,7 @@ class AuthenticatedSessionController extends Controller
 
     /**
      * Handle an incoming authentication request.
+     * Redirige vers l'espace correspondant au rôle de l'utilisateur.
      */
     public function store(LoginRequest $request): RedirectResponse
     {
@@ -28,7 +29,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $user = $request->user();
+
+        $destination = match ($user->role) {
+            'admin'      => route('admin.dashboard'),
+            'formateur'  => route('formateur.dashboard'),
+            'participant' => route('participant.dashboard'),
+            default       => route('dashboard'),
+        };
+
+        return redirect()->intended($destination);
     }
 
     /**
