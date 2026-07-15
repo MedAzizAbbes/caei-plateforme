@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AdminNotification;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -56,6 +57,9 @@ class RegisteredUserController extends Controller
 
         if (! $isAdminCreation) {
             Auth::login($user);
+
+            // Notify admin(s) about the new participant registration
+            AdminNotification::notifyNewParticipant($user);
         }
 
         event(new Registered($user));
