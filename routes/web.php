@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ArrangementController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\FormateurController;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\ParticipantController;
 use App\Http\Controllers\Admin\SeminarController;
 use App\Http\Controllers\Admin\StatisticsController;
@@ -198,6 +199,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     Route::resource('formateurs', FormateurController::class)
         ->parameters(['formateurs' => 'formateur']);
+
+    // Notifications
+    Route::get('/notifications', [NotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{notification}/read', [NotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/notifications/read-all', [NotificationController::class, 'markAllAsRead'])->name('notifications.readAll');
 
     // --- Arrangements / Paiements ---
     Route::get('/arrangements', [ArrangementController::class, 'index'])->name('arrangements.index');

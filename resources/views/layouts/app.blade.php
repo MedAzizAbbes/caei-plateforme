@@ -13,6 +13,95 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        @auth
+        @if(Auth::user()->role === 'admin')
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.data('notificationBell', () => ({
+                    open: false,
+                    notifications: [],
+                    unreadCount: 0,
+                    pollingInterval: null,
+
+                    toggle() {
+                        this.open = !this.open;
+                        if (this.open) this.fetchNotifications();
+                    },
+
+                    async fetchNotifications() {
+                        try {
+                            const res = await fetch('{{ route("admin.notifications.index") }}', {
+                                headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+                            });
+                            const data = await res.json();
+                            this.notifications = data.notifications;
+                            this.unreadCount = data.unread_count;
+                        } catch (e) {
+                            console.error('Failed to fetch notifications', e);
+                        }
+                    },
+
+                    async markRead(notif) {
+                        if (notif.is_read) return;
+                        try {
+                            await fetch(`/admin/notifications/${notif.id}/read`, {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                                    'Accept': 'application/json',
+                                }
+                            });
+                            notif.is_read = true;
+                            this.unreadCount = Math.max(0, this.unreadCount - 1);
+                        } catch (e) {
+                            console.error('Failed to mark notification as read', e);
+                        }
+                    },
+
+                    async markAllRead() {
+                        try {
+                            await fetch('{{ route("admin.notifications.readAll") }}', {
+                                method: 'POST',
+                                headers: {
+                                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                                    'Accept': 'application/json',
+                                }
+                            });
+                            this.notifications.forEach(n => n.is_read = true);
+                            this.unreadCount = 0;
+                        } catch (e) {
+                            console.error('Failed to mark all as read', e);
+                        }
+                    },
+
+                    startPolling() {
+                        this.pollingInterval = setInterval(() => this.fetchNotifications(), 30000);
+                    },
+
+                    timeAgo(dateStr) {
+                        const now = new Date();
+                        const date = new Date(dateStr);
+                        const seconds = Math.floor((now - date) / 1000);
+
+                        if (seconds < 60) return "À l'instant";
+                        const minutes = Math.floor(seconds / 60);
+                        if (minutes < 60) return `Il y a ${minutes} min`;
+                        const hours = Math.floor(minutes / 60);
+                        if (hours < 24) return `Il y a ${hours}h`;
+                        const days = Math.floor(hours / 24);
+                        if (days < 7) return `Il y a ${days}j`;
+                        return date.toLocaleDateString('fr-FR');
+                    },
+
+                    destroy() {
+                        if (this.pollingInterval) clearInterval(this.pollingInterval);
+                    }
+                }));
+            });
+        </script>
+        @endif
+        @endauth
     </head>
     <body class="font-sans antialiased text-slate-900 bg-slate-50 selection:bg-caei-gold selection:text-caei-navy">
         <div class="min-h-screen relative flex flex-col">
