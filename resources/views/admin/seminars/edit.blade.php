@@ -17,7 +17,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('admin.seminars.update', $seminar) }}" class="space-y-4">
+                <form method="POST" action="{{ route('admin.seminars.update', $seminar) }}" enctype="multipart/form-data" class="space-y-4">
                     @csrf
                     @method('PUT')
 
@@ -41,6 +41,21 @@
                         <label class="block text-sm font-medium text-gray-700">Description</label>
                         <textarea name="description" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border px-3 py-2">{{ old('description', $seminar->description) }}</textarea>
                         @error('description')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Affiche (image)</label>
+                        @if($seminar->image)
+                            <div class="mt-2 mb-3">
+                                <img src="{{ Storage::url($seminar->image) }}" alt="Affiche actuelle" class="h-32 w-auto rounded-md border border-gray-200 object-cover">
+                                <p class="mt-1 text-xs text-gray-500">Affiche actuelle</p>
+                            </div>
+                        @endif
+                        <input type="file" name="image" accept="image/jpeg,image/jpg,image/png,image/webp" class="mt-1 block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                        <p class="mt-1 text-xs text-gray-500">JPG, JPEG, PNG ou WebP — max. 2 Mo. Laissez vide pour conserver l'image actuelle.</p>
+                        @error('image')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>
