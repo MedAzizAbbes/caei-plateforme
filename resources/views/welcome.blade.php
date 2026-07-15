@@ -186,9 +186,8 @@
 
                 {{-- Navigation --}}
                 <nav class="caei-public-nav">
-                    <a href="{{ route('home') }}" class="caei-brand" aria-label="CAEI Company Group">
-                        <span class="caei-brand-mark">CAEI</span>
-                        <span class="caei-brand-text"><span>Company</span><strong>Group</strong></span>
+                    <a href="{{ route('home') }}" class="flex items-center hover:scale-105 transition-transform duration-300" aria-label="CAEI Company Group">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo CAEI" class="h-16 w-16 md:h-20 md:w-20 rounded-full object-cover shadow-md border-2 border-white/10">
                     </a>
                     
                     {{-- Desktop Links --}}
