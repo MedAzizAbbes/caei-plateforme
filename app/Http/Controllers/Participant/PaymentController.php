@@ -28,7 +28,7 @@ class PaymentController extends Controller
         $this->authorizeRegistration($registration);
 
         // Vérifier qu'il n'y a pas déjà un paiement actif
-        if ($registration->payment && in_array($registration->payment->status, ['paid', 'arrangement_pending', 'pending'], true)) {
+        if ($registration->payment && in_array($registration->payment->status, ['paid', 'approved', 'arrangement_pending', 'pending'], true)) {
             return back()->with('error', 'Un paiement est déjà en cours pour ce séminaire.');
         }
 
@@ -65,9 +65,7 @@ class PaymentController extends Controller
         // Créer ou mettre à jour le paiement dans une transaction
         DB::transaction(function () use ($registration, $validated, $documentPath) {
             $payment = $registration->payment ?? new Payment();
-            $year = $registration->created_at->format('Y');
-            $refId = str_pad($registration->id, 6, '0', STR_PAD_LEFT);
-            $generatedRef = "CAEI-{$year}-{$registration->seminar_id}-{$registration->user_id}-{$refId}";
+            $generatedRef = Payment::generateReference($registration->seminar_id, $registration->user_id);
 
             $payment->fill([
                 'registration_id'      => $registration->id,
@@ -78,13 +76,14 @@ class PaymentController extends Controller
                 'country'              => $validated['country'],
                 'payment_method'       => 'arrangement',
                 'status'               => 'arrangement_pending',
+                'reference'              => $generatedRef,
                 'arrangement_type'     => $validated['arrangement_type'],
                 'organization_name'    => $validated['organization_name'],
                 'contact_person'       => $validated['contact_person'],
                 'contact_email'        => $validated['contact_email'],
                 'contact_phone'        => $validated['contact_phone'],
                 'arrangement_reason'   => $validated['arrangement_reason'],
-                'participant_note'     => "Ref Interne: {$generatedRef}",
+                'participant_note'     => $request->input('participant_note'),
             ]);
 
             if ($documentPath) {
@@ -104,7 +103,7 @@ class PaymentController extends Controller
     {
         $this->authorizeRegistration($registration);
 
-        if ($registration->payment && in_array($registration->payment->status, ['paid', 'arrangement_pending', 'pending'], true)) {
+        if ($registration->payment && in_array($registration->payment->status, ['paid', 'approved', 'arrangement_pending', 'pending'], true)) {
             return back()->with('error', 'Un paiement est déjà en cours pour ce séminaire.');
         }
 
@@ -134,10 +133,7 @@ class PaymentController extends Controller
         DB::transaction(function () use ($registration, $request, $receiptPath) {
             $payment = $registration->payment ?? new Payment();
             
-            // Format reference: CAEI-{ANNEE}-{SEMINAIRE}-{USER}-{REG_ID}
-            $year = $registration->created_at->format('Y');
-            $refId = str_pad($registration->id, 6, '0', STR_PAD_LEFT);
-            $generatedRef = "CAEI-{$year}-{$registration->seminar_id}-{$registration->user_id}-{$refId}";
+            $generatedRef = Payment::generateReference($registration->seminar_id, $registration->user_id);
 
             $payment->fill([
                 'registration_id'       => $registration->id,
@@ -150,9 +146,10 @@ class PaymentController extends Controller
                 'transfer_date'         => $request->transfer_date,
                 'payment_method'        => 'bank_transfer',
                 'status'                => 'pending',
+                'reference'             => $generatedRef,
                 'transfer_receipt_path' => $receiptPath,
-                'transaction_reference' => $request->transaction_reference, // participant input
-                'participant_note'      => "Ref Interne: {$generatedRef}\n" . $request->participant_note,
+                'transaction_reference' => $request->transaction_reference,
+                'participant_note'      => $request->participant_note,
             ]);
             $payment->save();
         });
@@ -162,49 +159,12 @@ class PaymentController extends Controller
             ->with('success', 'Votre déclaration de virement a été enregistrée. L\'administration va vérifier la réception du paiement.');
     }
 
-    /** Déclarer un paiement Visa (simulé). */
+    /** Paiement carte — réservé à une future intégration passerelle. */
     public function storeVisa(Request $request, Registration $registration)
     {
         $this->authorizeRegistration($registration);
 
-        if ($registration->payment && in_array($registration->payment->status, ['paid', 'arrangement_pending', 'pending'], true)) {
-            return back()->with('error', 'Un paiement est déjà en cours pour ce séminaire.');
-        }
-
-        $request->validate([
-            'country'     => 'required|string|max:255',
-            'card_name'   => 'required|string|max:100',
-            'card_number' => ['required', 'string', 'regex:/^\d{4}\s?\d{4}\s?\d{4}\s?\d{4}$/'],
-            'card_expiry' => ['required', 'string', 'regex:/^\d{2}\/\d{2}$/'],
-            'card_cvv'    => ['required', 'string', 'regex:/^\d{3,4}$/'],
-        ], [
-            'country.required'     => 'Le pays de résidence est obligatoire.',
-            'card_name.required'   => 'Le nom du titulaire est requis.',
-            'card_number.required' => 'Le numéro de carte est requis.',
-            'card_number.regex'    => 'Le numéro de carte est invalide (16 chiffres attendus).',
-            'card_expiry.regex'    => 'La date d\'expiration est invalide (MM/AA).',
-            'card_cvv.regex'       => 'Le CVV est invalide.',
-        ]);
-
-        // Simulation — pas de stockage des numéros de carte en BDD
-        DB::transaction(function () use ($registration, $request) {
-            $payment = $registration->payment ?? new Payment();
-            $payment->fill([
-                'registration_id' => $registration->id,
-                'user_id'         => $registration->user_id,
-                'seminar_id'      => $registration->seminar_id,
-                'amount'          => $registration->seminar->price,
-                'currency'        => 'EUR',
-                'country'         => $request->country,
-                'payment_method'  => 'visa',
-                'status'          => 'pending',
-            ]);
-            $payment->save();
-        });
-
-        return redirect()
-            ->route('participant.dashboard')
-            ->with('success', 'Votre paiement par carte a été soumis et est en cours de validation.');
+        return back()->with('error', 'Le paiement par carte Visa/Mastercard sera disponible prochainement.');
     }
 
     /** Télécharger un document généré (attestation ou invitation). */

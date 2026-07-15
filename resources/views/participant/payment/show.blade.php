@@ -7,9 +7,7 @@
 
     @php
         $payment = $registration->payment;
-        $year = $registration->created_at->format('Y');
-        $refId = str_pad($registration->id, 6, '0', STR_PAD_LEFT);
-        $generatedRef = "CAEI-{$year}-{$registration->seminar_id}-{$registration->user_id}-{$refId}";
+        $generatedRef = \App\Models\Payment::generateReference($registration->seminar_id, $registration->user_id);
         $seminarPrice = $registration->seminar->price;
         $defaultTab = old('payment_method', request('method', 'virement'));
     @endphp
@@ -116,8 +114,8 @@
                             <p class="text-sm text-slate-600">
                                 @if($payment->payment_method === 'bank_transfer')
                                     Nous vérifions la réception de votre virement sur le compte CAEI. Vous serez notifié par email une fois validé.
-                                @elseif($payment->payment_method === 'visa')
-                                    Votre paiement par carte Visa est en cours de vérification.
+                                @elseif(in_array($payment->payment_method, ['visa', 'card'], true))
+                                    Votre paiement par carte sera traité dès l'activation de la passerelle.
                                 @else
                                     Votre demande d'arrangement a été soumise. L'administration vous contactera pour finaliser le transfert.
                                 @endif
@@ -141,10 +139,10 @@
                                 class="rounded-xl px-4 py-2.5 text-xs font-black uppercase transition hover:opacity-90">
                             🏦 Virement bancaire
                         </button>
-                        <button type="button" @click="activeTab = 'visa'"
-                                :class="activeTab === 'visa' ? 'bg-[#061743] text-white' : 'bg-white text-slate-600 border border-slate-200'"
+                        <button type="button" @click="activeTab = 'card'"
+                                :class="activeTab === 'card' ? 'bg-[#061743] text-white' : 'bg-white text-slate-600 border border-slate-200'"
                                 class="rounded-xl px-4 py-2.5 text-xs font-black uppercase transition hover:opacity-90">
-                            💳 Carte Visa
+                            💳 Carte Visa/Mastercard
                         </button>
                         <button type="button" @click="activeTab = 'arrangement'"
                                 :class="activeTab === 'arrangement' ? 'bg-[#061743] text-white' : 'bg-white text-slate-600 border border-slate-200'"
@@ -199,7 +197,7 @@
                                             <div>
                                                 <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Devise *</label>
                                                 <select name="currency" required class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
-                                                    <option value="TND" {{ old('currency', $bankSetting->currency ?? 'TND') == 'TND' ? 'selected' : '' }}>TND</option>
+                                                    <option value="TND" {{ old('currency', $bankSetting?->currency ?? 'TND') == 'TND' ? 'selected' : '' }}>TND</option>
                                                     <option value="EUR" {{ old('currency') == 'EUR' ? 'selected' : '' }}>EUR</option>
                                                     <option value="USD" {{ old('currency') == 'USD' ? 'selected' : '' }}>USD</option>
                                                 </select>
@@ -260,68 +258,30 @@
                         </div>
                     </div>
 
-                    {{-- ===== VISA ===== --}}
-                    <div x-show="activeTab === 'visa'" x-cloak>
+                    {{-- ===== CARTE (future intégration) ===== --}}
+                    <div x-show="activeTab === 'card'" x-cloak>
                         <div class="overflow-hidden rounded-2xl bg-white shadow-sm border border-slate-200">
                             <div class="bg-[#061743] px-6 py-5">
                                 <p class="text-xs font-black uppercase text-[#f2a90f]">Méthode 2</p>
-                                <h3 class="mt-1 text-xl font-black text-white">Paiement par carte Visa</h3>
-                                <p class="mt-1 text-sm text-white/70">Pour les participants internationaux en Afrique — paiement en euros (EUR).</p>
+                                <h3 class="mt-1 text-xl font-black text-white">Paiement par carte Visa/Mastercard</h3>
+                                <p class="mt-1 text-sm text-white/70">Passerelle de paiement en cours de préparation.</p>
                             </div>
-                            <div class="p-6 md:p-8 space-y-8">
-                                <div class="rounded-xl border border-blue-100 bg-blue-50 p-5">
-                                    <p class="text-sm text-blue-800">
-                                        <strong>Montant à payer :</strong> {{ number_format($seminarPrice, 2, ',', ' ') }} EUR
+                            <div class="p-6 md:p-8 space-y-6">
+                                <div class="rounded-xl border border-blue-100 bg-blue-50 p-6 text-center">
+                                    <p class="text-4xl mb-4">💳</p>
+                                    <p class="text-lg font-black text-[#061743]">Bientôt disponible</p>
+                                    <p class="mt-2 text-sm text-slate-600">
+                                        Le paiement par carte Visa/Mastercard sera activé prochainement.
+                                        En attendant, utilisez le virement bancaire.
                                     </p>
-                                    <p class="mt-2 text-xs text-blue-600">Paiement sécurisé par carte Visa. Idéal pour les participants étrangers basés en Afrique.</p>
+                                    <p class="mt-4 text-sm text-blue-800">
+                                        <strong>Montant prévu :</strong> {{ number_format($seminarPrice, 2, ',', ' ') }} EUR
+                                    </p>
                                 </div>
-
-                                <form method="POST" action="{{ route('participant.payment.visa.store', $registration) }}" class="space-y-6">
-                                    @csrf
-                                    <input type="hidden" name="payment_method" value="visa">
-
-                                    <div>
-                                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Pays de résidence *</label>
-                                        <input type="text" name="country" value="{{ old('country') }}" required placeholder="Ex: Sénégal, Côte d'Ivoire, Cameroun..."
-                                               class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
-                                        @error('country')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
-                                    </div>
-
-                                    <div>
-                                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Nom sur la carte *</label>
-                                        <input type="text" name="card_name" value="{{ old('card_name') }}" required placeholder="Comme inscrit sur la carte"
-                                               class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
-                                        @error('card_name')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
-                                    </div>
-
-                                    <div>
-                                        <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Numéro de carte Visa *</label>
-                                        <input type="text" name="card_number" value="{{ old('card_number') }}" required placeholder="1234 5678 9012 3456" maxlength="19"
-                                               class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-mono text-slate-800 focus:border-[#061743]">
-                                        @error('card_number')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
-                                    </div>
-
-                                    <div class="grid grid-cols-2 gap-6">
-                                        <div>
-                                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Expiration *</label>
-                                            <input type="text" name="card_expiry" value="{{ old('card_expiry') }}" required placeholder="MM/AA" maxlength="5"
-                                                   class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-mono text-slate-800 focus:border-[#061743]">
-                                            @error('card_expiry')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
-                                        </div>
-                                        <div>
-                                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">CVV *</label>
-                                            <input type="text" name="card_cvv" value="{{ old('card_cvv') }}" required placeholder="123" maxlength="4"
-                                                   class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-mono text-slate-800 focus:border-[#061743]">
-                                            @error('card_cvv')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
-                                        </div>
-                                    </div>
-
-                                    <p class="text-xs text-slate-500">🔒 Vos données bancaires ne sont pas stockées. Le paiement sera validé par l'administration CAEI.</p>
-
-                                    <button type="submit" class="w-full rounded-xl bg-[#061743] py-4 text-sm font-black uppercase tracking-wide text-white transition hover:bg-[#0a2060]">
-                                        Payer {{ number_format($seminarPrice, 2, ',', ' ') }} EUR par Visa
-                                    </button>
-                                </form>
+                                <button type="button" @click="activeTab = 'virement'"
+                                        class="w-full rounded-xl border border-[#061743] py-4 text-sm font-black uppercase tracking-wide text-[#061743] transition hover:bg-slate-50">
+                                    Utiliser le virement bancaire
+                                </button>
                             </div>
                         </div>
                     </div>

@@ -21,8 +21,10 @@ class Payment extends Model
         'payment_method',
         'transfer_receipt_path',
         'transaction_reference',
+        'transaction_id',
         'participant_note',
         'status',
+        'reference',
         'arrangement_type',
         'organization_name',
         'contact_person',
@@ -123,10 +125,27 @@ class Payment extends Model
     {
         return match ($this->payment_method) {
             'bank_transfer' => 'Virement bancaire',
-            'visa'          => 'Carte Visa',
+            'card', 'visa'  => 'Carte Visa/Mastercard',
             'arrangement'   => 'Arrangement',
             default         => '—',
         };
+    }
+
+    /** Référence unique CAEI pour le virement : CAEI-SEM-{seminar_id}-USER-{user_id} */
+    public static function generateReference(int $seminarId, int $userId): string
+    {
+        return "CAEI-SEM-{$seminarId}-USER-{$userId}";
+    }
+
+    /** Alias spec : proof_file → transfer_receipt_path */
+    public function getProofFileAttribute(): ?string
+    {
+        return $this->transfer_receipt_path;
+    }
+
+    public function setProofFileAttribute(?string $value): void
+    {
+        $this->attributes['transfer_receipt_path'] = $value;
     }
 
     public function arrangementTypeLabel(): string
