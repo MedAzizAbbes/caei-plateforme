@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ArrangementController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\FormateurController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Participant\DashboardController;
 use App\Http\Controllers\Participant\FormationController;
+use App\Http\Controllers\Participant\PaymentController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SeminarPublicController;
@@ -111,6 +113,13 @@ Route::middleware('auth')->group(function () {
 */
 Route::middleware(['auth', 'role:participant,admin'])->prefix('espace')->name('participant.')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    // --- Paiement ---
+    Route::get('/inscriptions/{registration}/paiement', [PaymentController::class, 'show'])->name('payment.show');
+    Route::post('/inscriptions/{registration}/paiement/arrangement', [PaymentController::class, 'storeArrangement'])->name('payment.arrangement.store');
+    Route::post('/inscriptions/{registration}/paiement/virement', [PaymentController::class, 'storeTransfer'])->name('payment.transfer.store');
+    Route::post('/inscriptions/{registration}/paiement/visa', [PaymentController::class, 'storeVisa'])->name('payment.visa.store');
+    Route::get('/inscriptions/{registration}/paiement/document/{type}', [PaymentController::class, 'downloadDocument'])->name('payment.document.download');
 });
 
 Route::middleware(['auth', 'role:participant,formateur,admin'])->prefix('espace')->name('participant.')->group(function () {
@@ -189,6 +198,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     Route::resource('formateurs', FormateurController::class)
         ->parameters(['formateurs' => 'formateur']);
+
+    // --- Arrangements / Paiements ---
+    Route::get('/arrangements', [ArrangementController::class, 'index'])->name('arrangements.index');
+    Route::post('/arrangements/{payment}/approve', [ArrangementController::class, 'approve'])->name('arrangements.approve');
+    Route::post('/arrangements/{payment}/reject', [ArrangementController::class, 'reject'])->name('arrangements.reject');
+    Route::post('/arrangements/{payment}/note', [ArrangementController::class, 'addNote'])->name('arrangements.note');
+    Route::get('/arrangements/{payment}/document/{type}', [ArrangementController::class, 'downloadDocument'])->name('arrangements.document');
+    Route::get('/arrangements/{payment}/justificatif', [ArrangementController::class, 'downloadJustificatif'])->name('arrangements.justificatif');
 });
 
 require __DIR__.'/auth.php';

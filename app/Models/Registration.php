@@ -35,6 +35,11 @@ class Registration extends Model
         return $this->hasMany(Attendance::class);
     }
 
+    public function payment()
+    {
+        return $this->hasOne(Payment::class);
+    }
+
     public function markPresent(): void
     {
         $this->update(['status' => 'present']);
