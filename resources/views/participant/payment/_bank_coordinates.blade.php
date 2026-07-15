@@ -1,30 +1,48 @@
-@if($bankSetting)
-    <div class="rounded-xl border border-slate-100 bg-slate-50 p-6 space-y-3 font-mono text-sm">
-        <div class="flex flex-col sm:flex-row sm:justify-between border-b border-slate-200 pb-2">
-            <span class="font-sans font-bold text-xs uppercase text-slate-500">Bénéficiaire</span>
-            <span class="font-semibold text-slate-800">{{ $bankSetting->account_holder }}</span>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:justify-between border-b border-slate-200 pb-2">
-            <span class="font-sans font-bold text-xs uppercase text-slate-500">Banque & Pays</span>
-            <span class="font-semibold text-slate-800">{{ $bankSetting->bank_name }}, {{ $bankSetting->country }}</span>
-        </div>
-        <div class="flex flex-col sm:flex-row sm:justify-between border-b border-slate-200 pb-2">
-            <span class="font-sans font-bold text-xs uppercase text-slate-500">IBAN</span>
-            <span class="font-semibold text-slate-800 tracking-wider">{{ $bankSetting->iban }}</span>
-        </div>
-        @if($bankSetting->rib)
-        <div class="flex flex-col sm:flex-row sm:justify-between border-b border-slate-200 pb-2">
-            <span class="font-sans font-bold text-xs uppercase text-slate-500">RIB</span>
-            <span class="font-semibold text-slate-800 tracking-wider">{{ $bankSetting->rib }}</span>
-        </div>
-        @endif
-        <div class="flex flex-col sm:flex-row sm:justify-between pb-2">
-            <span class="font-sans font-bold text-xs uppercase text-slate-500">BIC / SWIFT</span>
-            <span class="font-semibold text-slate-800">{{ $bankSetting->swift_code }}</span>
-        </div>
-    </div>
-@else
-    <div class="p-4 bg-yellow-50 text-yellow-800 text-sm font-semibold rounded-lg">
-        Les coordonnées bancaires ne sont pas encore configurées par l'administration.
-    </div>
-@endif
+@php
+    $bank = $bankSetting ?? null;
+@endphp
+
+<div class="rounded-xl border border-slate-200 bg-slate-50 p-6">
+    <h4 class="text-sm font-black uppercase text-slate-800 mb-4">Coordonnées bancaires CAEI</h4>
+
+    @if($bank && ($bank->bank_name || $bank->iban || $bank->rib))
+        <dl class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
+            <div>
+                <dt class="text-xs font-bold uppercase text-slate-400">Banque</dt>
+                <dd class="mt-1 font-semibold text-slate-800">{{ $bank->bank_name ?? '—' }}</dd>
+            </div>
+            <div>
+                <dt class="text-xs font-bold uppercase text-slate-400">Titulaire du compte</dt>
+                <dd class="mt-1 font-semibold text-slate-800">{{ $bank->account_holder ?? '—' }}</dd>
+            </div>
+            @if($bank->rib)
+                <div>
+                    <dt class="text-xs font-bold uppercase text-slate-400">RIB</dt>
+                    <dd class="mt-1 font-mono font-semibold text-slate-800">{{ $bank->rib }}</dd>
+                </div>
+            @endif
+            @if($bank->iban)
+                <div>
+                    <dt class="text-xs font-bold uppercase text-slate-400">IBAN</dt>
+                    <dd class="mt-1 font-mono font-semibold text-slate-800">{{ $bank->iban }}</dd>
+                </div>
+            @endif
+            @if($bank->swift_code)
+                <div>
+                    <dt class="text-xs font-bold uppercase text-slate-400">SWIFT / BIC</dt>
+                    <dd class="mt-1 font-mono font-semibold uppercase text-slate-800">{{ $bank->swift_code }}</dd>
+                </div>
+            @endif
+            @if($bank->country)
+                <div>
+                    <dt class="text-xs font-bold uppercase text-slate-400">Pays</dt>
+                    <dd class="mt-1 font-semibold text-slate-800">{{ $bank->country }}</dd>
+                </div>
+            @endif
+        </dl>
+    @else
+        <p class="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-lg p-4">
+            Les coordonnées bancaires CAEI ne sont pas encore configurées. L'administration les ajoutera prochainement.
+        </p>
+    @endif
+</div>

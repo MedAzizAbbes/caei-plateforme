@@ -39,7 +39,8 @@
                     <select name="payment_method" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 focus:border-[#061743] focus:outline-none">
                         <option value="">Toutes les méthodes</option>
                         <option value="bank_transfer" {{ request('payment_method') == 'bank_transfer' ? 'selected' : '' }}>🏦 Virement bancaire</option>
-                        <option value="visa" {{ request('payment_method') == 'visa' ? 'selected' : '' }}>💳 Carte Visa</option>
+                        <option value="card" {{ request('payment_method') == 'card' ? 'selected' : '' }}>💳 Carte Visa/Mastercard</option>
+                        <option value="visa" {{ request('payment_method') == 'visa' ? 'selected' : '' }}>💳 Carte (legacy)</option>
                         <option value="arrangement" {{ request('payment_method') == 'arrangement' ? 'selected' : '' }}>🤝 Arrangement</option>
                     </select>
                 </div>
@@ -49,7 +50,8 @@
                         <option value="">Tous les statuts</option>
                         <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>🟡 En attente (virement/visa)</option>
                         <option value="arrangement_pending" {{ request('status') == 'arrangement_pending' ? 'selected' : '' }}>🟠 En attente (arrangement)</option>
-                        <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>🟢 Validé</option>
+                        <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>🟢 Validé (paid)</option>
+                        <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>🟢 Validé (approved)</option>
                         <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>❌ Refusé</option>
                     </select>
                 </div>
@@ -131,6 +133,10 @@
                                     @if($payment->payment_method === 'bank_transfer')
                                         <div class="grid grid-cols-1 gap-2 rounded-lg bg-slate-50 p-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
                                             <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Réf. CAEI</p>
+                                                <p class="font-mono font-semibold text-slate-700">{{ $payment->reference ?? '—' }}</p>
+                                            </div>
+                                            <div>
                                                 <p class="text-xs text-slate-400 uppercase font-bold">Montant</p>
                                                 <p class="font-semibold text-slate-700">{{ number_format($payment->amount, 2, ',', ' ') }} {{ $payment->currency }}</p>
                                             </div>
@@ -162,7 +168,7 @@
                                             </div>
                                         @endif
 
-                                    @elseif($payment->payment_method === 'visa')
+                                    @elseif(in_array($payment->payment_method, ['visa', 'card'], true))
                                         <div class="grid grid-cols-1 gap-2 rounded-lg bg-blue-50 p-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
                                             <div>
                                                 <p class="text-xs text-blue-400 uppercase font-bold">Montant</p>
@@ -235,7 +241,7 @@
                                     @endif
 
                                     {{-- Docs générés (si validé) --}}
-                                    @if($payment->status === 'paid')
+                                    @if($payment->isPaid())
                                         @if($payment->attestation_path)
                                             <a href="{{ route('admin.arrangements.document', [$payment, 'attestation']) }}"
                                                class="inline-flex items-center justify-center gap-2 rounded-lg bg-[#061743] px-3 py-2 text-xs font-bold text-white transition hover:bg-[#0a2060]">

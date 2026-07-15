@@ -55,7 +55,7 @@ class ArrangementController extends Controller
         ], 'invitation_' . $payment->id . '.pdf');
 
         $payment->update([
-            'status'           => 'paid',
+            'status'           => 'approved',
             'paid_at'          => now(),
             'validated_by'     => auth()->id(),
             'validated_at'     => now(),
