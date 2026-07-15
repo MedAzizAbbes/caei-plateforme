@@ -21,8 +21,15 @@ class MessageController extends Controller
         ];
 
         if ($isAdmin) {
+            $threadOptions = $baseThreads;
+            foreach ($seminar->trainers as $trainer) {
+                $threadOptions[] = 'Privé avec admin - ' . $trainer->fullName();
+            }
+            foreach ($seminar->participants as $participant) {
+                $threadOptions[] = 'Privé avec admin - ' . $participant->fullName();
+            }
             $existingThreads = $seminar->messages()->select('thread_label')->distinct()->pluck('thread_label')->toArray();
-            $threadOptions = array_values(array_unique(array_merge($baseThreads, $existingThreads)));
+            $threadOptions = array_values(array_unique(array_merge($threadOptions, $existingThreads)));
         } else {
             $threadOptions = $baseThreads;
             $privateThread = 'Privé avec admin - ' . $user->fullName();
