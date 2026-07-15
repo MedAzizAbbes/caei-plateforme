@@ -8,11 +8,15 @@
         <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
                 <p class="text-sm font-black uppercase text-[#f2a90f]">Back-office CAEI</p>
-                <h1 class="mt-1 text-3xl font-black uppercase text-[#061743]">Demandes d'arrangement</h1>
+                <h1 class="mt-1 text-3xl font-black uppercase text-[#061743]">Gestion des paiements</h1>
                 <p class="mt-2 text-sm text-slate-600">
-                    Gérez les demandes de prise en charge soumises par les participants.
+                    Validez les virements, paiements Visa et demandes d'arrangement soumis par les participants.
                 </p>
             </div>
+            <a href="{{ route('admin.bank-settings.edit') }}"
+               class="inline-flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-[#061743] hover:bg-slate-50">
+                🏦 Coordonnées bancaires CAEI
+            </a>
         </div>
 
         {{-- Flash messages --}}
@@ -29,13 +33,23 @@
 
         {{-- Filters --}}
         <form method="GET" class="mb-6 rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
-            <div class="grid gap-4 md:grid-cols-3">
+            <div class="grid gap-4 md:grid-cols-4">
+                <div>
+                    <label class="mb-1 block text-xs font-bold uppercase tracking-wider text-slate-500">Méthode</label>
+                    <select name="payment_method" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 focus:border-[#061743] focus:outline-none">
+                        <option value="">Toutes les méthodes</option>
+                        <option value="bank_transfer" {{ request('payment_method') == 'bank_transfer' ? 'selected' : '' }}>🏦 Virement bancaire</option>
+                        <option value="visa" {{ request('payment_method') == 'visa' ? 'selected' : '' }}>💳 Carte Visa</option>
+                        <option value="arrangement" {{ request('payment_method') == 'arrangement' ? 'selected' : '' }}>🤝 Arrangement</option>
+                    </select>
+                </div>
                 <div>
                     <label class="mb-1 block text-xs font-bold uppercase tracking-wider text-slate-500">Statut</label>
                     <select name="status" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 focus:border-[#061743] focus:outline-none">
                         <option value="">Tous les statuts</option>
-                        <option value="arrangement_pending" {{ request('status') == 'arrangement_pending' ? 'selected' : '' }}>🟠 En attente</option>
-                        <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>🟢 Accepté</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>🟡 En attente (virement/visa)</option>
+                        <option value="arrangement_pending" {{ request('status') == 'arrangement_pending' ? 'selected' : '' }}>🟠 En attente (arrangement)</option>
+                        <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>🟢 Validé</option>
                         <option value="rejected" {{ request('status') == 'rejected' ? 'selected' : '' }}>❌ Refusé</option>
                     </select>
                 </div>
@@ -52,7 +66,7 @@
                     <button type="submit" class="rounded-md bg-[#f2a90f] px-4 py-2 text-sm font-bold text-[#061743] hover:bg-[#ffd071]">
                         Filtrer
                     </button>
-                    @if(request()->hasAny(['status','seminar_id']))
+                    @if(request()->hasAny(['status', 'seminar_id', 'payment_method']))
                         <a href="{{ route('admin.arrangements.index') }}" class="rounded-md border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-600 hover:bg-slate-50">
                             Réinitialiser
                         </a>
@@ -63,51 +77,43 @@
 
         {{-- Table --}}
         <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
-            @if($arrangements->isEmpty())
+            @if($payments->isEmpty())
                 <div class="p-12 text-center">
                     <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-orange-50">
                         <svg class="h-7 w-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                         </svg>
                     </div>
-                    <p class="font-bold text-slate-700">Aucune demande d'arrangement trouvée</p>
-                    <p class="mt-1 text-sm text-slate-500">Les demandes soumises par les participants apparaîtront ici.</p>
+                    <p class="font-bold text-slate-700">Aucun paiement trouvé</p>
+                    <p class="mt-1 text-sm text-slate-500">Les paiements soumis par les participants apparaîtront ici.</p>
                 </div>
             @else
                 <div class="divide-y divide-slate-100">
-                    @foreach($arrangements as $arrangement)
+                    @foreach($payments as $payment)
                         @php
-                            $badgeClass = match($arrangement->status) {
-                                'paid'                => 'bg-emerald-100 text-emerald-700 border-emerald-200',
-                                'arrangement_pending' => 'bg-orange-100 text-orange-700 border-orange-200',
-                                'rejected'            => 'bg-red-100 text-red-700 border-red-200',
-                                default               => 'bg-slate-100 text-slate-600 border-slate-200',
-                            };
-                            $emoji = match($arrangement->status) {
-                                'paid'                => '🟢',
-                                'arrangement_pending' => '🟠',
-                                'rejected'            => '❌',
-                                default               => '⚪',
-                            };
+                            $isPending = in_array($payment->status, ['pending', 'arrangement_pending'], true);
                         @endphp
                         <div class="p-6 hover:bg-slate-50 transition-colors" x-data="{ showNote: false, showReject: false }">
                             <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
 
                                 {{-- Left: Info --}}
                                 <div class="flex-1 space-y-3">
-                                    {{-- Participant + status --}}
+                                    {{-- Participant + status + method --}}
                                     <div class="flex items-center gap-3 flex-wrap">
                                         <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#061743] text-xs font-black text-white">
-                                            {{ strtoupper(substr($arrangement->user->first_name, 0, 1) . substr($arrangement->user->last_name, 0, 1)) }}
+                                            {{ strtoupper(substr($payment->user->first_name, 0, 1) . substr($payment->user->last_name, 0, 1)) }}
                                         </div>
                                         <div>
                                             <p class="font-bold text-[#061743]">
-                                                {{ $arrangement->user->first_name }} {{ $arrangement->user->last_name }}
+                                                {{ $payment->user->first_name }} {{ $payment->user->last_name }}
                                             </p>
-                                            <p class="text-xs text-slate-500">{{ $arrangement->user->email }}</p>
+                                            <p class="text-xs text-slate-500">{{ $payment->user->email }}</p>
                                         </div>
-                                        <span class="inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-bold {{ $badgeClass }}">
-                                            {{ $emoji }} {{ $arrangement->statusLabel() }}
+                                        <span class="inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-bold {{ $payment->statusBadgeClasses() }}">
+                                            {{ $payment->statusEmoji() }} {{ $payment->statusLabel() }}
+                                        </span>
+                                        <span class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2.5 py-0.5 text-xs font-bold text-slate-600">
+                                            {{ $payment->methodLabel() }}
                                         </span>
                                     </div>
 
@@ -116,111 +122,151 @@
                                         <svg class="h-4 w-4 text-[#f2a90f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
-                                        <span class="font-semibold text-slate-700">{{ $arrangement->seminar->theme }}</span>
+                                        <span class="font-semibold text-slate-700">{{ $payment->seminar->theme }}</span>
                                         <span class="text-slate-400">·</span>
-                                        <span class="text-slate-500">{{ $arrangement->seminar->country }}</span>
+                                        <span class="text-slate-500">{{ $payment->seminar->country }}</span>
                                     </div>
 
-                                    {{-- Arrangement details --}}
-                                    <div class="grid grid-cols-1 gap-2 rounded-lg bg-slate-50 p-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
-                                        <div>
-                                            <p class="text-xs text-slate-400 uppercase font-bold">Type</p>
-                                            <p class="font-semibold text-slate-700">{{ $arrangement->arrangementTypeLabel() }}</p>
+                                    {{-- Détails selon la méthode --}}
+                                    @if($payment->payment_method === 'bank_transfer')
+                                        <div class="grid grid-cols-1 gap-2 rounded-lg bg-slate-50 p-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Montant</p>
+                                                <p class="font-semibold text-slate-700">{{ number_format($payment->amount, 2, ',', ' ') }} {{ $payment->currency }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Date virement</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->transfer_date?->format('d/m/Y') ?? '—' }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Réf. bancaire</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->transaction_reference ?? '—' }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Banque émettrice</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->bank_name ?? '—' }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Pays</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->country ?? '—' }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Soumis le</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->created_at->format('d/m/Y H:i') }}</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p class="text-xs text-slate-400 uppercase font-bold">Organisme</p>
-                                            <p class="font-semibold text-slate-700">{{ $arrangement->organization_name }}</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-xs text-slate-400 uppercase font-bold">Responsable</p>
-                                            <p class="font-semibold text-slate-700">{{ $arrangement->contact_person }}</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-xs text-slate-400 uppercase font-bold">Email</p>
-                                            <p class="font-semibold text-slate-700">{{ $arrangement->contact_email }}</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-xs text-slate-400 uppercase font-bold">Téléphone</p>
-                                            <p class="font-semibold text-slate-700">{{ $arrangement->contact_phone }}</p>
-                                        </div>
-                                        <div>
-                                            <p class="text-xs text-slate-400 uppercase font-bold">Date de demande</p>
-                                            <p class="font-semibold text-slate-700">{{ $arrangement->created_at->format('d/m/Y H:i') }}</p>
-                                        </div>
-                                    </div>
+                                        @if($payment->participant_note)
+                                            <div class="rounded-lg border border-slate-200 p-3">
+                                                <p class="text-xs font-bold uppercase text-slate-400 mb-1">Note participant</p>
+                                                <p class="text-sm text-slate-700 whitespace-pre-line">{{ $payment->participant_note }}</p>
+                                            </div>
+                                        @endif
 
-                                    {{-- Reason --}}
-                                    @if($arrangement->arrangement_reason)
-                                        <div class="rounded-lg border border-slate-200 p-3">
-                                            <p class="text-xs font-bold uppercase text-slate-400 mb-1">Motif</p>
-                                            <p class="text-sm text-slate-700 leading-relaxed">{{ $arrangement->arrangement_reason }}</p>
+                                    @elseif($payment->payment_method === 'visa')
+                                        <div class="grid grid-cols-1 gap-2 rounded-lg bg-blue-50 p-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
+                                            <div>
+                                                <p class="text-xs text-blue-400 uppercase font-bold">Montant</p>
+                                                <p class="font-semibold text-slate-700">{{ number_format($payment->amount, 2, ',', ' ') }} {{ $payment->currency ?? 'EUR' }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-blue-400 uppercase font-bold">Pays</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->country ?? '—' }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-blue-400 uppercase font-bold">Soumis le</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->created_at->format('d/m/Y H:i') }}</p>
+                                            </div>
                                         </div>
+                                        <p class="text-xs text-slate-500 italic">Paiement Visa simulé — vérifiez la réception des fonds avant validation.</p>
+
+                                    @elseif($payment->payment_method === 'arrangement')
+                                        <div class="grid grid-cols-1 gap-2 rounded-lg bg-slate-50 p-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Type</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->arrangementTypeLabel() }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Organisme</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->organization_name }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Pays</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->country ?? '—' }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Responsable</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->contact_person }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Email</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->contact_email }}</p>
+                                            </div>
+                                            <div>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">Téléphone</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->contact_phone }}</p>
+                                            </div>
+                                        </div>
+                                        @if($payment->arrangement_reason)
+                                            <div class="rounded-lg border border-slate-200 p-3">
+                                                <p class="text-xs font-bold uppercase text-slate-400 mb-1">Motif</p>
+                                                <p class="text-sm text-slate-700 leading-relaxed">{{ $payment->arrangement_reason }}</p>
+                                            </div>
+                                        @endif
                                     @endif
 
                                     {{-- Admin note --}}
-                                    @if($arrangement->admin_note)
+                                    @if($payment->admin_note)
                                         <div class="rounded-lg border border-amber-200 bg-amber-50 p-3">
                                             <p class="text-xs font-bold uppercase text-amber-600 mb-1">Note admin</p>
-                                            <p class="text-sm text-amber-900">{{ $arrangement->admin_note }}</p>
+                                            <p class="text-sm text-amber-900">{{ $payment->admin_note }}</p>
                                         </div>
                                     @endif
                                 </div>
 
                                 {{-- Right: Actions --}}
-                                <div class="flex flex-col gap-2 min-w-[160px]">
+                                <div class="flex flex-col gap-2 min-w-[180px]">
 
-                                    {{-- Document justificatif --}}
-                                    @if($arrangement->arrangement_document)
-                                        <a href="{{ route('admin.arrangements.justificatif', $arrangement) }}"
+                                    {{-- Justificatif --}}
+                                    @if($payment->transfer_receipt_path || $payment->arrangement_document)
+                                        <a href="{{ route('admin.arrangements.justificatif', $payment) }}"
                                            class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700 transition hover:bg-slate-50">
-                                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"/>
-                                            </svg>
-                                            Justificatif
+                                            📎 Justificatif
                                         </a>
                                     @endif
 
-                                    {{-- Docs générés (si approuvé) --}}
-                                    @if($arrangement->status === 'paid')
-                                        @if($arrangement->attestation_path)
-                                            <a href="{{ route('admin.arrangements.document', [$arrangement, 'attestation']) }}"
+                                    {{-- Docs générés (si validé) --}}
+                                    @if($payment->status === 'paid')
+                                        @if($payment->attestation_path)
+                                            <a href="{{ route('admin.arrangements.document', [$payment, 'attestation']) }}"
                                                class="inline-flex items-center justify-center gap-2 rounded-lg bg-[#061743] px-3 py-2 text-xs font-bold text-white transition hover:bg-[#0a2060]">
                                                 📄 Attestation
                                             </a>
                                         @endif
-                                        @if($arrangement->invitation_path)
-                                            <a href="{{ route('admin.arrangements.document', [$arrangement, 'invitation']) }}"
+                                        @if($payment->invitation_path)
+                                            <a href="{{ route('admin.arrangements.document', [$payment, 'invitation']) }}"
                                                class="inline-flex items-center justify-center gap-2 rounded-lg border border-[#061743] bg-white px-3 py-2 text-xs font-bold text-[#061743] transition hover:bg-slate-50">
                                                 ✉️ Invitation
                                             </a>
                                         @endif
                                     @endif
 
-                                    {{-- Accept (only if pending) --}}
-                                    @if($arrangement->status === 'arrangement_pending')
-                                        <form method="POST" action="{{ route('admin.arrangements.approve', $arrangement) }}">
+                                    {{-- Valider (si en attente) --}}
+                                    @if($isPending)
+                                        <form method="POST" action="{{ route('admin.arrangements.approve', $payment) }}">
                                             @csrf
                                             <button type="submit"
-                                                    onclick="return confirm('Accepter cet arrangement et générer les documents ?')"
+                                                    onclick="return confirm('Valider ce paiement et confirmer l\'inscription ?')"
                                                     class="w-full inline-flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-3 py-2 text-xs font-bold text-white transition hover:bg-emerald-700">
-                                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                                                </svg>
-                                                Accepter
+                                                ✅ Valider le paiement
                                             </button>
                                         </form>
 
-                                        {{-- Reject button --}}
                                         <button @click="showReject = !showReject"
                                                 class="inline-flex items-center justify-center gap-2 rounded-lg bg-red-50 px-3 py-2 text-xs font-bold text-red-600 transition hover:bg-red-100">
-                                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                                            </svg>
-                                            Refuser
+                                            ❌ Refuser
                                         </button>
                                     @endif
 
-                                    {{-- Note button --}}
                                     <button @click="showNote = !showNote"
                                             class="inline-flex items-center justify-center gap-2 rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-600 transition hover:bg-slate-50">
                                         📝 Note
@@ -230,7 +276,7 @@
 
                             {{-- Reject form --}}
                             <div x-show="showReject" x-cloak class="mt-4 rounded-xl border border-red-200 bg-red-50 p-4">
-                                <form method="POST" action="{{ route('admin.arrangements.reject', $arrangement) }}">
+                                <form method="POST" action="{{ route('admin.arrangements.reject', $payment) }}">
                                     @csrf
                                     <label class="block text-xs font-bold uppercase text-red-600 mb-2">Motif du refus (optionnel)</label>
                                     <textarea name="admin_note" rows="2"
@@ -251,13 +297,12 @@
 
                             {{-- Note form --}}
                             <div x-show="showNote" x-cloak class="mt-4 rounded-xl border border-amber-200 bg-amber-50 p-4">
-                                <form method="POST" action="{{ route('admin.arrangements.note', $arrangement) }}">
+                                <form method="POST" action="{{ route('admin.arrangements.note', $payment) }}">
                                     @csrf
-                                    @method('PATCH')
                                     <label class="block text-xs font-bold uppercase text-amber-700 mb-2">Note administrative</label>
                                     <textarea name="admin_note" rows="2"
                                               placeholder="Ajoutez une note visible par le participant..."
-                                              class="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-400 resize-none">{{ $arrangement->admin_note }}</textarea>
+                                              class="w-full rounded-lg border border-amber-200 bg-white px-3 py-2 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-amber-400 resize-none">{{ $payment->admin_note }}</textarea>
                                     <div class="mt-3 flex gap-2">
                                         <button type="submit"
                                                 class="rounded-lg bg-amber-600 px-4 py-2 text-xs font-bold text-white hover:bg-amber-700">
@@ -275,10 +320,9 @@
                     @endforeach
                 </div>
 
-                {{-- Pagination --}}
-                @if($arrangements->hasPages())
+                @if($payments->hasPages())
                     <div class="border-t border-slate-200 px-5 py-3 bg-white">
-                        {{ $arrangements->links() }}
+                        {{ $payments->links() }}
                     </div>
                 @endif
             @endif

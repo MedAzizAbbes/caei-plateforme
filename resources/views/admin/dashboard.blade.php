@@ -81,9 +81,10 @@
                     <h3 class="text-lg font-black text-[#061743]">Paiements</h3>
                     <span class="text-3xl text-[#ffbd45]">07</span>
                 </div>
-                <p class="mb-4 text-sm text-slate-600">Gérer les demandes d'arrangement et valider les paiements.</p>
+                <p class="mb-4 text-sm text-slate-600">Valider les virements, Visa et arrangements. Configurer le RIB/IBAN CAEI.</p>
                 <div class="space-y-2 text-sm font-bold">
-                    <a href="{{ route('admin.arrangements.index') }}" class="block text-[#061743] hover:text-[#f2a90f]">Voir les arrangements</a>
+                    <a href="{{ route('admin.arrangements.index') }}" class="block text-[#061743] hover:text-[#f2a90f]">Gérer les paiements</a>
+                    <a href="{{ route('admin.bank-settings.edit') }}" class="block text-[#061743] hover:text-[#f2a90f]">Coordonnées bancaires CAEI</a>
                 </div>
             </div>
         </div>
