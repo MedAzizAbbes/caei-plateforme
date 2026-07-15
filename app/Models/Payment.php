@@ -13,7 +13,15 @@ class Payment extends Model
         'registration_id',
         'user_id',
         'seminar_id',
+        'amount',
+        'currency',
+        'bank_name',
+        'country',
+        'transfer_date',
         'payment_method',
+        'transfer_receipt_path',
+        'transaction_reference',
+        'participant_note',
         'status',
         'arrangement_type',
         'organization_name',
@@ -26,10 +34,15 @@ class Payment extends Model
         'attestation_path',
         'invitation_path',
         'paid_at',
+        'validated_by',
+        'validated_at',
+        'rejection_reason',
     ];
 
     protected $casts = [
         'paid_at' => 'datetime',
+        'transfer_date' => 'date',
+        'validated_at' => 'datetime',
     ];
 
     // ------- Relations -------
@@ -49,21 +62,21 @@ class Payment extends Model
         return $this->belongsTo(Seminar::class);
     }
 
+    public function validatedBy()
+    {
+        return $this->belongsTo(User::class, 'validated_by');
+    }
+
     // ------- Helpers de statut -------
 
     public function isPaid(): bool
     {
-        return $this->status === 'paid';
+        return $this->status === 'paid' || $this->status === 'approved';
     }
 
     public function isPending(): bool
     {
-        return $this->status === 'pending';
-    }
-
-    public function isArrangementPending(): bool
-    {
-        return $this->status === 'arrangement_pending';
+        return $this->status === 'pending' || $this->status === 'arrangement_pending';
     }
 
     public function isRejected(): bool
@@ -79,9 +92,8 @@ class Payment extends Model
     public function statusLabel(): string
     {
         return match ($this->status) {
-            'paid'                => 'Payé',
-            'pending'             => 'En attente',
-            'arrangement_pending' => 'Arrangement demandé',
+            'paid', 'approved'    => 'Validé',
+            'pending', 'arrangement_pending' => 'En attente',
             'rejected'            => 'Refusé',
             default               => 'Non payé',
         };
@@ -90,9 +102,8 @@ class Payment extends Model
     public function statusEmoji(): string
     {
         return match ($this->status) {
-            'paid'                => '🟢',
-            'pending'             => '🟡',
-            'arrangement_pending' => '🟠',
+            'paid', 'approved'    => '🟢',
+            'pending', 'arrangement_pending' => '🟡',
             'rejected'            => '❌',
             default               => '🔴',
         };
@@ -101,9 +112,8 @@ class Payment extends Model
     public function statusBadgeClasses(): string
     {
         return match ($this->status) {
-            'paid'                => 'bg-emerald-100 text-emerald-700 border-emerald-200',
-            'pending'             => 'bg-yellow-100 text-yellow-700 border-yellow-200',
-            'arrangement_pending' => 'bg-orange-100 text-orange-700 border-orange-200',
+            'paid', 'approved'    => 'bg-emerald-100 text-emerald-700 border-emerald-200',
+            'pending', 'arrangement_pending' => 'bg-yellow-100 text-yellow-700 border-yellow-200',
             'rejected'            => 'bg-red-100 text-red-700 border-red-200',
             default               => 'bg-slate-100 text-slate-600 border-slate-200',
         };

@@ -212,6 +212,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/arrangements/{payment}/note', [ArrangementController::class, 'addNote'])->name('arrangements.note');
     Route::get('/arrangements/{payment}/document/{type}', [ArrangementController::class, 'downloadDocument'])->name('arrangements.document');
     Route::get('/arrangements/{payment}/justificatif', [ArrangementController::class, 'downloadJustificatif'])->name('arrangements.justificatif');
+
+    // --- Paramètres bancaires ---
+    Route::get('/bank-settings', [\App\Http\Controllers\Admin\BankSettingController::class, 'edit'])->name('bank-settings.edit');
+    Route::put('/bank-settings', [\App\Http\Controllers\Admin\BankSettingController::class, 'update'])->name('bank-settings.update');
 });
 
 require __DIR__.'/auth.php';

@@ -40,6 +40,16 @@ class Registration extends Model
         return $this->hasOne(Payment::class);
     }
 
+    public function markConfirmed(): void
+    {
+        $this->update(['status' => 'confirmed']);
+    }
+
+    public function markCancelled(): void
+    {
+        $this->update(['status' => 'cancelled']);
+    }
+
     public function markPresent(): void
     {
         $this->update(['status' => 'present']);
