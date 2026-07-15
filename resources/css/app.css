@@ -87,11 +87,15 @@
     .caei-hero {
         @apply relative overflow-hidden bg-caei-navy;
         min-height: 100vh;
+        background-image: url('/images/hero/hero_bg.png');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
     }
 
     .caei-hero::before {
         content: '';
-        @apply absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-caei-gold/20 via-caei-navy to-caei-navy opacity-70 pointer-events-none;
+        @apply absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-caei-gold/30 via-caei-navy/70 to-caei-navy/90 pointer-events-none;
     }
 
     .caei-hero-content {

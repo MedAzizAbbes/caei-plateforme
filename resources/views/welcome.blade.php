@@ -175,7 +175,7 @@
         <main class="min-h-screen bg-caei-navy">
 
             {{-- ══════════ SECTION HERO ══════════ --}}
-            <section class="caei-hero">
+            <section class="caei-hero" style="background-image: url('{{ asset('images/hero/hero_bg.png') }}'); background-size: cover; background-position: center; background-attachment: fixed;">
                 {{-- Topbar --}}
                 <div class="caei-topbar">
                     <span>+216 55 335 286</span>
