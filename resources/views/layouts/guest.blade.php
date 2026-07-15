@@ -23,12 +23,8 @@
             </div>
 
             <div class="mb-8 relative z-10 animate-slide-up">
-                <a href="/" class="caei-brand hover:scale-110 transition-transform duration-300">
-                    <span class="caei-brand-mark">CAEI</span>
-                    <span class="caei-brand-text text-white">
-                        <span>Company</span>
-                        <strong class="bg-gradient-to-r from-caei-gold to-yellow-300 bg-clip-text text-transparent">Group</strong>
-                    </span>
+                <a href="/" class="flex items-center justify-center hover:scale-105 transition-transform duration-300">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo CAEI" class="h-24 w-24 rounded-full object-cover shadow-lg border-4 border-white/10">
                 </a>
             </div>
 

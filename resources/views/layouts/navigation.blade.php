@@ -5,12 +5,8 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}" class="caei-brand">
-                        <span class="caei-brand-mark !h-12 !w-12 !text-xs">CAEI</span>
-                        <span class="caei-brand-text !text-lg">
-                            <span>Company</span>
-                            <strong class="!text-lg bg-gradient-to-r from-caei-gold to-yellow-300 bg-clip-text text-transparent">Group</strong>
-                        </span>
+                    <a href="{{ route('dashboard') }}" class="flex items-center hover:scale-105 transition-transform duration-300">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo CAEI" class="h-14 w-14 rounded-full object-cover shadow-sm">
                     </a>
                 </div>
 
