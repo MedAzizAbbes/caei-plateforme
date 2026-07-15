@@ -9,27 +9,166 @@
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <style>
-            .seminar-card {
-                transition: transform .22s ease, box-shadow .22s ease;
-            }
-            .seminar-card:hover {
-                transform: translateY(-4px);
-                box-shadow: 0 16px 40px rgba(6,23,67,.18);
-            }
-            .badge-published {
-                background: rgba(34,197,94,.12);
-                color: #15803d;
-                border: 1px solid rgba(34,197,94,.25);
-            }
             .section-divider {
                 border: none;
                 height: 2px;
-                background: linear-gradient(90deg, transparent, rgba(255,189,69,.5), transparent);
+                background: linear-gradient(90deg, transparent, rgba(248, 180, 0, .55), transparent);
                 margin: 0 auto;
                 max-width: 200px;
             }
-            /* Scroll suave vers la section */
             html { scroll-behavior: smooth; }
+
+            .seminar-card {
+                background: #ffffff;
+                border-radius: 20px;
+                border: 1px solid rgba(11, 42, 102, 0.08);
+                box-shadow: 0 8px 24px rgba(11, 42, 102, 0.08);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                overflow: hidden;
+            }
+            .seminar-card:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 20px 48px rgba(11, 42, 102, 0.16);
+            }
+
+            .seminar-card__cover {
+                position: relative;
+                width: 100%;
+                aspect-ratio: 16 / 9;
+                overflow: hidden;
+                background: #0B2A66;
+            }
+            .seminar-card__image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+            .seminar-card:hover .seminar-card__image {
+                transform: scale(1.05);
+            }
+            .seminar-card__cover::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(180deg, rgba(11, 42, 102, 0) 40%, rgba(11, 42, 102, 0.35) 100%);
+                pointer-events: none;
+            }
+
+            .seminar-card__badge {
+                position: absolute;
+                top: 14px;
+                right: 14px;
+                z-index: 2;
+                background: rgba(255, 255, 255, 0.95);
+                color: #15803d;
+                border: 1px solid rgba(34, 197, 94, 0.35);
+                font-size: 0.72rem;
+                font-weight: 800;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                padding: 0.45rem 0.85rem;
+                border-radius: 999px;
+                box-shadow: 0 4px 14px rgba(11, 42, 102, 0.12);
+                backdrop-filter: blur(6px);
+            }
+
+            .seminar-card__body {
+                display: flex;
+                flex-direction: column;
+                flex: 1;
+                padding: 1.5rem;
+            }
+            .seminar-card__title {
+                font-size: 1.2rem;
+                font-weight: 800;
+                color: #0B2A66;
+                line-height: 1.35;
+            }
+            .seminar-card__description {
+                margin-top: 0.5rem;
+                font-size: 0.875rem;
+                color: #64748b;
+                line-height: 1.6;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .seminar-card__meta {
+                margin-top: 1rem;
+                display: flex;
+                flex-direction: column;
+                gap: 0.55rem;
+            }
+            .seminar-card__meta-item {
+                display: flex;
+                align-items: center;
+                gap: 0.55rem;
+                font-size: 0.875rem;
+                color: #475569;
+            }
+            .seminar-card__meta-item svg {
+                width: 1rem;
+                height: 1rem;
+                color: #F8B400;
+                flex-shrink: 0;
+            }
+
+            .seminar-card__actions {
+                margin-top: auto;
+                padding-top: 1.25rem;
+                border-top: 1px solid #f1f5f9;
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            .seminar-card__btn-details {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                padding: 0.65rem 1rem;
+                border-radius: 12px;
+                border: 2px solid #0B2A66;
+                background: #ffffff;
+                color: #0B2A66;
+                font-size: 0.875rem;
+                font-weight: 700;
+                transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+            }
+            .seminar-card__btn-details:hover {
+                background: #0B2A66;
+                color: #ffffff;
+                transform: translateY(-1px);
+            }
+            .seminar-card__btn-register {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                padding: 0.65rem 1rem;
+                border-radius: 12px;
+                border: none;
+                background: linear-gradient(135deg, #F8B400 0%, #ffd45c 100%);
+                color: #0B2A66;
+                font-size: 0.875rem;
+                font-weight: 900;
+                text-transform: uppercase;
+                letter-spacing: 0.03em;
+                transition: filter 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .seminar-card__btn-register:hover {
+                filter: brightness(1.05);
+                transform: translateY(-1px);
+                box-shadow: 0 8px 20px rgba(248, 180, 0, 0.35);
+            }
+
+            @media (max-width: 639px) {
+                .seminar-card__title { font-size: 1.1rem; }
+                .seminar-card__body { padding: 1.15rem; }
+            }
         </style>
     </head>
     <body class="font-sans antialiased text-white">
@@ -122,58 +261,30 @@
                     @else
                         <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
                             @foreach($seminars as $seminar)
-                                <article class="seminar-card caei-card flex flex-col group relative overflow-hidden">
-                                    {{-- Arrière-plan décoratif subtil au survol --}}
-                                    <div class="absolute inset-0 bg-gradient-to-br from-caei-navy/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 z-0 pointer-events-none"></div>
-
-                                    {{-- Bannière colorée du séminaire --}}
-                                    <div class="relative h-48 bg-gradient-to-br from-caei-navy via-[#0d2a6e] to-caei-navy-deep flex items-end p-6 overflow-hidden z-10">
-                                        {{-- Motif de fond animé --}}
-                                        <div class="absolute inset-0 opacity-20 transition-transform duration-700 group-hover:scale-110 group-hover:rotate-3 pointer-events-none">
-                                            <svg viewBox="0 0 200 200" class="w-full h-full" fill="none">
-                                                <circle cx="160" cy="40" r="80" stroke="white" stroke-width="1.5" class="opacity-50"/>
-                                                <circle cx="40" cy="160" r="60" stroke="white" stroke-width="1.5" class="opacity-50"/>
-                                                <path d="M 0 100 Q 50 50 100 100 T 200 100" stroke="url(#gold-grad)" stroke-width="2" fill="none" class="opacity-30"/>
-                                                <defs>
-                                                    <linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                                        <stop offset="0%" stop-color="#ffbd45" />
-                                                        <stop offset="100%" stop-color="#f2a90f" />
-                                                    </linearGradient>
-                                                </defs>
-                                            </svg>
-                                        </div>
-                                        {{-- Badge statut --}}
-                                        <span class="absolute top-4 right-4 bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-bold px-4 py-1.5 rounded-full backdrop-blur-md shadow-lg">
-                                            Ouvert
-                                        </span>
-                                        {{-- Numéro / icône --}}
-                                        <div class="relative transform transition-transform duration-300 group-hover:-translate-y-2">
-                                            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-caei-gold to-yellow-400 flex items-center justify-center mb-3 shadow-lg shadow-caei-gold/30">
-                                                <svg class="w-6 h-6 text-caei-navy" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838l-2.763 1.183 1.547.632 1.776-.762a1 1 0 01.788 0l4 1.714A1 1 0 0017 12v-4.84l-6.606-5.08zM17 14.2l-5.5 2.357L6 14.2V12.5l5.5 2.357L17 12.5v1.7z"/>
-                                                </svg>
-                                            </div>
-                                            <p class="text-caei-gold text-xs font-bold uppercase tracking-widest text-shadow">Séminaire</p>
-                                        </div>
+                                <article class="seminar-card flex flex-col">
+                                    <div class="seminar-card__cover">
+                                        <img
+                                            src="{{ $seminar->image ? Storage::url($seminar->image) : asset('images/seminars/default.svg') }}"
+                                            alt="Affiche — {{ $seminar->theme }}"
+                                            class="seminar-card__image"
+                                        >
+                                        <span class="seminar-card__badge">Ouvert</span>
                                     </div>
 
-                                    {{-- Contenu --}}
-                                    <div class="flex flex-col flex-1 p-6">
-                                        <h3 class="text-lg font-black text-[#061743] leading-snug">
+                                    <div class="seminar-card__body">
+                                        <h3 class="seminar-card__title">
                                             {{ $seminar->theme }}
                                         </h3>
 
                                         @if($seminar->description)
-                                            <p class="mt-2 text-sm text-slate-600 line-clamp-2 leading-relaxed">
+                                            <p class="seminar-card__description">
                                                 {{ $seminar->description }}
                                             </p>
                                         @endif
 
-                                        {{-- Métadonnées --}}
-                                        <div class="mt-4 space-y-2">
-                                            {{-- Dates --}}
-                                            <div class="flex items-center gap-2 text-sm text-slate-600">
-                                                <svg class="w-4 h-4 text-[#f2a90f] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <div class="seminar-card__meta">
+                                            <div class="seminar-card__meta-item">
+                                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                                 </svg>
                                                 <span>
@@ -184,37 +295,33 @@
                                                 </span>
                                             </div>
 
-                                            {{-- Lieu / Pays --}}
-                                            <div class="flex items-center gap-2 text-sm text-slate-600">
-                                                <svg class="w-4 h-4 text-[#f2a90f] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <div class="seminar-card__meta-item">
+                                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
                                                 </svg>
                                                 <span>{{ $seminar->country }}</span>
                                             </div>
 
-                                            {{-- Prix --}}
                                             @if($seminar->price)
-                                                <div class="flex items-center gap-2 text-sm text-slate-600">
-                                                    <svg class="w-4 h-4 text-[#f2a90f] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <div class="seminar-card__meta-item">
+                                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg>
-                                                    <span class="font-bold text-caei-navy">{{ number_format($seminar->price, 2, ',', ' ') }} €</span>
+                                                    <span class="font-bold text-[#0B2A66]">{{ number_format($seminar->price, 2, ',', ' ') }} €</span>
                                                 </div>
                                             @endif
 
-                                            {{-- Inscriptions --}}
-                                            <div class="flex items-center gap-2 text-sm text-slate-600">
-                                                <svg class="w-4 h-4 text-[#f2a90f] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <div class="seminar-card__meta-item">
+                                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
                                                 </svg>
                                                 <span>{{ $seminar->registrations_count }} participant(s) inscrit(s)</span>
                                             </div>
 
-                                            {{-- Formateurs --}}
                                             @if($seminar->trainers->isNotEmpty())
-                                                <div class="flex items-center gap-2 text-sm text-slate-600">
-                                                    <svg class="w-4 h-4 text-[#f2a90f] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <div class="seminar-card__meta-item">
+                                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                                     </svg>
                                                     <span>{{ $seminar->trainers->map->fullName()->join(', ') }}</span>
@@ -222,21 +329,17 @@
                                             @endif
                                         </div>
 
-                                        {{-- Actions --}}
-                                        <div class="mt-6 flex flex-col gap-2 mt-auto pt-4 border-t border-slate-100">
-                                            <a href="{{ route('seminaires.show', $seminar) }}"
-                                               class="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-lg border border-[#061743] text-[#061743] text-sm font-bold hover:bg-[#061743] hover:text-white transition-colors">
+                                        <div class="seminar-card__actions">
+                                            <a href="{{ route('seminaires.show', $seminar) }}" class="seminar-card__btn-details">
                                                 Voir les détails
                                             </a>
 
                                             @auth
-                                                <a href="{{ route('registration.create', ['seminar_id' => $seminar->id]) }}"
-                                                   class="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-[#ffbd45] text-[#061743] text-sm font-black uppercase hover:bg-[#ffd071] transition-colors">
+                                                <a href="{{ route('registration.create', ['seminar_id' => $seminar->id]) }}" class="seminar-card__btn-register">
                                                     S'inscrire
                                                 </a>
                                             @else
-                                                <a href="{{ route('login') }}"
-                                                   class="inline-flex items-center justify-center w-full px-4 py-2.5 rounded-lg bg-[#ffbd45] text-[#061743] text-sm font-black uppercase hover:bg-[#ffd071] transition-colors">
+                                                <a href="{{ route('login') }}" class="seminar-card__btn-register">
                                                     S'inscrire
                                                 </a>
                                             @endauth

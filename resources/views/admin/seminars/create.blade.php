@@ -7,7 +7,7 @@
             <div class="p-6 text-gray-900">
                 <h1 class="text-2xl font-semibold mb-4">Créer un séminaire</h1>
 
-                <form method="POST" action="{{ route('admin.seminars.store') }}" class="space-y-4">
+                <form method="POST" action="{{ route('admin.seminars.store') }}" enctype="multipart/form-data" class="space-y-4">
                     @csrf
 
                     <div>
@@ -23,6 +23,15 @@
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Description</label>
                         <textarea name="description" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm border px-3 py-2"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Affiche (image)</label>
+                        <input type="file" name="image" accept="image/jpeg,image/jpg,image/png,image/webp" class="mt-1 block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                        <p class="mt-1 text-xs text-gray-500">JPG, JPEG, PNG ou WebP — max. 2 Mo.</p>
+                        @error('image')
+                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">

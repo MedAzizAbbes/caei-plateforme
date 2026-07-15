@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SeminarController extends Controller
 {
@@ -35,6 +36,7 @@ class SeminarController extends Controller
             'theme'       => ['required', 'string', 'max:150'],
             'country'     => ['required', 'string', 'max:100'],
             'description' => ['nullable', 'string'],
+            'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'start_date'  => ['required', 'date'],
             'end_date'    => ['required', 'date', 'after_or_equal:start_date'],
             'status'      => ['required', 'in:draft,published,closed'],
@@ -44,8 +46,14 @@ class SeminarController extends Controller
             'trainers.*'  => ['exists:users,id'],
         ]);
 
+        $seminarData = collect($data)->except(['trainers', 'image'])->all();
+
+        if ($request->hasFile('image')) {
+            $seminarData['image'] = $request->file('image')->store('seminars', 'public');
+        }
+
         $seminar = Seminar::create([
-            ...collect($data)->except('trainers')->all(),
+            ...$seminarData,
             'created_by' => $request->user()->id,
         ]);
 
@@ -63,6 +71,7 @@ class SeminarController extends Controller
             'theme'       => ['required', 'string', 'max:150'],
             'country'     => ['required', 'string', 'max:100'],
             'description' => ['nullable', 'string'],
+            'image'       => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
             'start_date'  => ['required', 'date'],
             'end_date'    => ['required', 'date', 'after_or_equal:start_date'],
             'status'      => ['required', 'in:draft,published,closed'],
@@ -72,7 +81,17 @@ class SeminarController extends Controller
             'trainers.*'  => ['exists:users,id'],
         ]);
 
-        $seminar->update(collect($data)->except('trainers')->all());
+        $seminarData = collect($data)->except(['trainers', 'image'])->all();
+
+        if ($request->hasFile('image')) {
+            if ($seminar->image) {
+                Storage::disk('public')->delete($seminar->image);
+            }
+
+            $seminarData['image'] = $request->file('image')->store('seminars', 'public');
+        }
+
+        $seminar->update($seminarData);
         $seminar->trainers()->sync($data['trainers'] ?? []);
 
         return redirect()->route('admin.seminars.index')
@@ -81,6 +100,10 @@ class SeminarController extends Controller
 
     public function destroy(Seminar $seminar)
     {
+        if ($seminar->image) {
+            Storage::disk('public')->delete($seminar->image);
+        }
+
         $seminar->delete();
 
         return back()->with('success', 'Séminaire supprimé.');
