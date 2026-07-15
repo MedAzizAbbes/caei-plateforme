@@ -86,6 +86,7 @@
                             <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Institution</th>
                             <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Séminaire</th>
                             <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Statut</th>
+                            <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Paiement</th>
                             <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70 text-right">Inscrit le</th>
                             <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70 text-right">Actions</th>
                         </tr>
@@ -117,6 +118,18 @@
                                         {{ $registration->status == 'present' ? 'bg-[#10b981]/15 text-[#059669]' : 'bg-[#f2a90f]/15 text-[#b47a00]' }}">
                                         {{ ucfirst($registration->status) }}
                                     </span>
+                                </td>
+                                <td class="px-5 py-3">
+                                    @php $pay = $registration->payment; @endphp
+                                    @if($pay)
+                                        <span class="inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-bold {{ $pay->statusBadgeClasses() }}">
+                                            {{ $pay->statusEmoji() }} {{ $pay->statusLabel() }}
+                                        </span>
+                                    @else
+                                        <span class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-500">
+                                            🔴 Non payé
+                                        </span>
+                                    @endif
                                 </td>
                                 <td class="px-5 py-3 text-right text-slate-500">{{ $registration->registered_at->format('d/m/Y H:i') }}</td>
                                 <td class="px-5 py-3">

@@ -16,6 +16,7 @@ class DashboardController extends Controller
                 'seminar' => fn($q) => $q->withCount('documents'),
                 'qrCode',
                 'attendances',
+                'payment',
             ])
             ->latest('registered_at')
             ->get();

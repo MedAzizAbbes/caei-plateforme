@@ -22,6 +22,7 @@
                                 @php
                                     $portalUrl = $registration->qrCode?->portalUrl();
                                     $qrSvg = $portalUrl ? \App\Support\QrCodeSvg::render($portalUrl, 5) : null;
+                                    $payment = $registration->payment;
                                 @endphp
                                 <div class="rounded-lg border border-slate-200 p-4">
                                     <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
@@ -69,6 +70,56 @@
                                         </div>
                                     </div>
 
+                                    {{-- Section Paiement --}}
+                                    <div class="mb-4 rounded-lg border border-slate-200 bg-slate-50 px-4 py-3">
+                                        <div class="flex items-center justify-between flex-wrap gap-2">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-xs font-bold uppercase text-slate-400">Paiement</span>
+                                                @if($payment)
+                                                    <span class="inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-bold {{ $payment->statusBadgeClasses() }}">
+                                                        {{ $payment->statusEmoji() }} {{ $payment->statusLabel() }}
+                                                    </span>
+                                                    @if($payment->payment_method)
+                                                        <span class="text-xs text-slate-500">· {{ $payment->methodLabel() }}</span>
+                                                    @endif
+                                                @else
+                                                    <span class="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-100 px-2.5 py-0.5 text-xs font-bold text-slate-600">
+                                                        🔴 Non payé
+                                                    </span>
+                                                @endif
+                                            </div>
+
+                                            {{-- Bouton payer ou télécharger --}}
+                                            @if(!$payment || $payment->isUnpaid() || $payment->isRejected())
+                                                <a href="{{ route('participant.payment.show', $registration) }}"
+                                                   class="inline-flex items-center gap-1.5 rounded-lg bg-[#f2a90f] px-3 py-1.5 text-xs font-black text-[#061743] transition hover:bg-[#ffd071]">
+                                                    💳 Payer maintenant
+                                                </a>
+                                            @elseif($payment->isPaid())
+                                                <a href="{{ route('participant.payment.show', $registration) }}"
+                                                   class="inline-flex items-center gap-1.5 rounded-lg bg-emerald-600 px-3 py-1.5 text-xs font-bold text-white transition hover:bg-emerald-700">
+                                                    📄 Mes documents
+                                                </a>
+                                            @else
+                                                <span class="text-xs text-slate-400 italic">En attente de traitement</span>
+                                            @endif
+                                        </div>
+
+                                        {{-- Infos arrangement si applicable --}}
+                                        @if($payment && $payment->payment_method === 'arrangement' && $payment->organization_name)
+                                            <p class="mt-1.5 text-xs text-slate-500">
+                                                Organisme : <span class="font-semibold text-slate-700">{{ $payment->organization_name }}</span>
+                                            </p>
+                                        @endif
+
+                                        {{-- Note admin --}}
+                                        @if($payment && $payment->admin_note)
+                                            <p class="mt-1.5 text-xs text-amber-700 bg-amber-50 rounded px-2 py-1">
+                                                📝 {{ $payment->admin_note }}
+                                            </p>
+                                        @endif
+                                    </div>
+
                                     <!-- Boutons d'action -->
                                     <div class="flex gap-3">
                                         <a href="{{ route('participant.formation', $registration->seminar) }}" class="flex-1 inline-flex items-center justify-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors">
@@ -88,6 +139,7 @@
                                     </div>
                                 </div>
                             @endforeach
+
                         </div>
                     @endif
                 </div>
