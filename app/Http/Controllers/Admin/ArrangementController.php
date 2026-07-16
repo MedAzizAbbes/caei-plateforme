@@ -141,12 +141,14 @@ class ArrangementController extends Controller
     /** Télécharger le justificatif soumis par le participant. */
     public function downloadJustificatif(Payment $payment)
     {
-        if ($payment->payment_method === 'bank_transfer') {
+        if (in_array($payment->payment_method, ['bank_transfer', 'orange_money'], true)) {
             if (! $payment->transfer_receipt_path || ! Storage::exists($payment->transfer_receipt_path)) {
-                abort(404, 'Reçu de virement non disponible.');
+                abort(404, 'Reçu de paiement non disponible.');
             }
 
-            return Storage::download($payment->transfer_receipt_path, 'recu_virement_' . $payment->id);
+            $prefix = $payment->payment_method === 'orange_money' ? 'recu_orange_money_' : 'recu_virement_';
+
+            return Storage::download($payment->transfer_receipt_path, $prefix . $payment->id);
         }
 
         if (! $payment->arrangement_document || ! Storage::exists($payment->arrangement_document)) {

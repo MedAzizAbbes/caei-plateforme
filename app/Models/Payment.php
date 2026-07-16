@@ -126,6 +126,7 @@ class Payment extends Model
         return match ($this->payment_method) {
             'bank_transfer' => 'Virement bancaire',
             'card', 'visa'  => 'Carte Visa/Mastercard',
+            'orange_money'  => 'Orange Money',
             'arrangement'   => 'Arrangement',
             default         => '—',
         };

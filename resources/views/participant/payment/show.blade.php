@@ -115,7 +115,9 @@
                                 @if($payment->payment_method === 'bank_transfer')
                                     Nous vérifions la réception de votre virement sur le compte CAEI. Vous serez notifié par email une fois validé.
                                 @elseif(in_array($payment->payment_method, ['visa', 'card'], true))
-                                    Votre paiement par carte sera traité dès l'activation de la passerelle.
+                                    Votre paiement par carte est en attente de configuration.
+                                @elseif($payment->payment_method === 'orange_money')
+                                    Votre paiement Orange Money a été soumis. L'administration vérifie la transaction.
                                 @else
                                     Votre demande d'arrangement a été soumise. L'administration vous contactera pour finaliser le transfert.
                                 @endif
@@ -144,10 +146,10 @@
                                 class="rounded-xl px-4 py-2.5 text-xs font-black uppercase transition hover:opacity-90">
                             💳 Carte Visa/Mastercard
                         </button>
-                        <button type="button" @click="activeTab = 'arrangement'"
-                                :class="activeTab === 'arrangement' ? 'bg-[#061743] text-white' : 'bg-white text-slate-600 border border-slate-200'"
+                        <button type="button" @click="activeTab = 'orange_money'"
+                                :class="activeTab === 'orange_money' ? 'bg-[#061743] text-white' : 'bg-white text-slate-600 border border-slate-200'"
                                 class="rounded-xl px-4 py-2.5 text-xs font-black uppercase transition hover:opacity-90">
-                            🤝 Arrangement
+                            Orange Money
                         </button>
                     </div>
 
@@ -258,54 +260,62 @@
                         </div>
                     </div>
 
-                    {{-- ===== CARTE (future intégration) ===== --}}
+                    {{-- ===== CARTE VISA/MASTERCARD ===== --}}
                     <div x-show="activeTab === 'card'" x-cloak>
                         <div class="overflow-hidden rounded-2xl bg-white shadow-sm border border-slate-200">
                             <div class="bg-[#061743] px-6 py-5">
                                 <p class="text-xs font-black uppercase text-[#f2a90f]">Méthode 2</p>
                                 <h3 class="mt-1 text-xl font-black text-white">Paiement par carte Visa/Mastercard</h3>
-                                <p class="mt-1 text-sm text-white/70">Passerelle de paiement en cours de préparation.</p>
+                                <p class="mt-1 text-sm text-white/70">Interface de paiement non configurée pour le moment.</p>
                             </div>
                             <div class="p-6 md:p-8 space-y-6">
                                 <div class="rounded-xl border border-blue-100 bg-blue-50 p-6 text-center">
                                     <p class="text-4xl mb-4">💳</p>
                                     <p class="text-lg font-black text-[#061743]">Bientôt disponible</p>
                                     <p class="mt-2 text-sm text-slate-600">
-                                        Le paiement par carte Visa/Mastercard sera activé prochainement.
-                                        En attendant, utilisez le virement bancaire.
+                                        Le paiement Visa/Mastercard n'est pas encore configuré.
+                                        Utilisez le virement bancaire ou Orange Money pour finaliser votre inscription.
                                     </p>
                                     <p class="mt-4 text-sm text-blue-800">
-                                        <strong>Montant prévu :</strong> {{ number_format($seminarPrice, 2, ',', ' ') }} EUR
+                                        <strong>Montant :</strong> {{ number_format($seminarPrice, 2, ',', ' ') }} EUR
                                     </p>
                                 </div>
-                                <button type="button" @click="activeTab = 'virement'"
-                                        class="w-full rounded-xl border border-[#061743] py-4 text-sm font-black uppercase tracking-wide text-[#061743] transition hover:bg-slate-50">
-                                    Utiliser le virement bancaire
+                                <button type="button" disabled
+                                        class="w-full cursor-not-allowed rounded-xl bg-slate-300 py-4 text-sm font-black uppercase tracking-wide text-white">
+                                    Visa/Mastercard non disponible maintenant
                                 </button>
+                                <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                    <button type="button" @click="activeTab = 'virement'"
+                                            class="rounded-xl border border-[#061743] py-3 text-sm font-black uppercase tracking-wide text-[#061743] transition hover:bg-slate-50">
+                                        Utiliser le virement
+                                    </button>
+                                    <button type="button" @click="activeTab = 'orange_money'"
+                                            class="rounded-xl border border-orange-300 py-3 text-sm font-black uppercase tracking-wide text-orange-700 transition hover:bg-orange-50">
+                                        Utiliser Orange Money
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    {{-- ===== ARRANGEMENT ===== --}}
-                    <div x-show="activeTab === 'arrangement'" x-cloak>
+                    {{-- ===== ORANGE MONEY ===== --}}
+                    <div x-show="activeTab === 'orange_money'" x-cloak>
                         <div class="overflow-hidden rounded-2xl bg-white shadow-sm border border-slate-200">
                             <div class="bg-[#061743] px-6 py-5">
                                 <p class="text-xs font-black uppercase text-[#f2a90f]">Méthode 3</p>
-                                <h3 class="mt-1 text-xl font-black text-white">Arrangement / Transfert institutionnel</h3>
-                                <p class="mt-1 text-sm text-white/70">Votre organisme effectue un transfert depuis son pays vers le compte CAEI.</p>
+                                <h3 class="mt-1 text-xl font-black text-white">Paiement Orange Money</h3>
+                                <p class="mt-1 text-sm text-white/70">Effectuez le paiement Orange Money, puis envoyez la preuve.</p>
                             </div>
                             <div class="p-6 md:p-8 space-y-8">
                                 <div class="rounded-xl border border-orange-100 bg-orange-50 p-5 text-sm text-orange-800">
-                                    <p class="font-bold mb-2">Procédure arrangement :</p>
+                                    <p class="font-bold mb-2">Procédure Orange Money :</p>
                                     <ol class="list-decimal list-inside space-y-1">
-                                        <li>Remplissez les informations de votre organisme</li>
-                                        <li>Utilisez les coordonnées bancaires CAEI ci-dessous</li>
-                                        <li>Votre institution effectue le transfert depuis son pays</li>
-                                        <li>Joignez l'engagement ou la preuve de transfert</li>
+                                        <li>Envoyez le montant avec Orange Money au numéro CAEI communiqué par l'administration</li>
+                                        <li>Conservez la référence de transaction Orange Money</li>
+                                        <li>Joignez une capture ou un reçu de paiement</li>
+                                        <li>L'administration vérifie et valide votre inscription</li>
                                     </ol>
                                 </div>
-
-                                @include('participant.payment._bank_coordinates')
 
                                 <div class="rounded-xl border border-emerald-100 bg-emerald-50 p-6">
                                     <h4 class="text-sm font-black uppercase text-emerald-800 mb-2">Référence obligatoire</h4>
@@ -315,77 +325,68 @@
                                 </div>
 
                                 <div class="pt-6 border-t border-slate-100">
-                                    <h3 class="text-lg font-black text-slate-800 mb-6">Demande d'arrangement</h3>
-                                    <form method="POST" action="{{ route('participant.payment.arrangement.store', $registration) }}" enctype="multipart/form-data" class="space-y-6">
+                                    <h3 class="text-lg font-black text-slate-800 mb-6">Confirmez votre paiement Orange Money</h3>
+                                    <form method="POST" action="{{ route('participant.payment.orange-money.store', $registration) }}" enctype="multipart/form-data" class="space-y-6">
                                         @csrf
-                                        <input type="hidden" name="payment_method" value="arrangement">
+                                        <input type="hidden" name="payment_method" value="orange_money">
 
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div>
-                                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Type d'organisme *</label>
-                                                <select name="arrangement_type" required class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
-                                                    <option value="">— Sélectionner —</option>
-                                                    <option value="entreprise" {{ old('arrangement_type') == 'entreprise' ? 'selected' : '' }}>Entreprise</option>
-                                                    <option value="universite" {{ old('arrangement_type') == 'universite' ? 'selected' : '' }}>Université</option>
-                                                    <option value="administration" {{ old('arrangement_type') == 'administration' ? 'selected' : '' }}>Administration</option>
-                                                    <option value="autre" {{ old('arrangement_type') == 'autre' ? 'selected' : '' }}>Autre</option>
-                                                </select>
-                                                @error('arrangement_type')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Numéro Orange Money *</label>
+                                                <input type="text" name="orange_phone" value="{{ old('orange_phone') }}" required placeholder="Ex: +221 77 000 00 00"
+                                                       class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
+                                                @error('orange_phone')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                                             </div>
                                             <div>
-                                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Pays de l'organisme *</label>
-                                                <input type="text" name="country" value="{{ old('country') }}" required placeholder="Ex: Maroc, Algérie, France..."
+                                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Pays *</label>
+                                                <input type="text" name="country" value="{{ old('country') }}" required placeholder="Ex: Sénégal, Côte d'Ivoire..."
                                                        class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
                                                 @error('country')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                                             </div>
                                         </div>
 
-                                        <div>
-                                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Nom de l'organisme *</label>
-                                            <input type="text" name="organization_name" value="{{ old('organization_name') }}" required
-                                                   class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
-                                            @error('organization_name')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
-                                        </div>
-
                                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                                             <div>
-                                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Responsable *</label>
-                                                <input type="text" name="contact_person" value="{{ old('contact_person') }}" required
+                                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Montant envoyé *</label>
+                                                <input type="number" step="0.01" name="amount" value="{{ old('amount', $seminarPrice) }}" required
                                                        class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
-                                                @error('contact_person')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                                                @error('amount')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                                             </div>
                                             <div>
-                                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Téléphone *</label>
-                                                <input type="text" name="contact_phone" value="{{ old('contact_phone') }}" required
-                                                       class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
-                                                @error('contact_phone')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Devise *</label>
+                                                <select name="currency" required class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
+                                                    <option value="EUR" {{ old('currency', 'EUR') == 'EUR' ? 'selected' : '' }}>EUR</option>
+                                                    <option value="XOF" {{ old('currency') == 'XOF' ? 'selected' : '' }}>XOF</option>
+                                                    <option value="TND" {{ old('currency') == 'TND' ? 'selected' : '' }}>TND</option>
+                                                    <option value="USD" {{ old('currency') == 'USD' ? 'selected' : '' }}>USD</option>
+                                                </select>
+                                                @error('currency')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                                             </div>
                                         </div>
 
                                         <div>
-                                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email du responsable *</label>
-                                            <input type="email" name="contact_email" value="{{ old('contact_email') }}" required
+                                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Référence Orange Money *</label>
+                                            <input type="text" name="transaction_reference" value="{{ old('transaction_reference') }}" required placeholder="Ex: OM-123456789"
                                                    class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
-                                            @error('contact_email')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                                            @error('transaction_reference')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                                         </div>
 
                                         <div>
-                                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Motif de la demande *</label>
-                                            <textarea name="arrangement_reason" rows="3" required placeholder="Décrivez la prise en charge prévue par votre organisme..."
-                                                      class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743] resize-none">{{ old('arrangement_reason') }}</textarea>
-                                            @error('arrangement_reason')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
-                                        </div>
-
-                                        <div>
-                                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Document justificatif</label>
-                                            <p class="text-xs text-slate-500 mb-2">Lettre d'engagement, ordre de virement ou preuve de transfert (PDF, JPG, PNG — max 5 Mo)</p>
-                                            <input type="file" name="arrangement_document" accept=".pdf,.jpg,.jpeg,.png"
+                                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Preuve Orange Money *</label>
+                                            <p class="text-xs text-slate-500 mb-2">Capture, reçu PDF, JPG ou PNG (max 5 Mo)</p>
+                                            <input type="file" name="transfer_receipt" accept=".pdf,.jpg,.jpeg,.png" required
                                                    class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-2 text-sm text-slate-800">
-                                            @error('arrangement_document')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                                            @error('transfer_receipt')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
+                                        </div>
+
+                                        <div>
+                                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Commentaire</label>
+                                            <textarea name="participant_note" rows="2" placeholder="Informations complémentaires..."
+                                                      class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743] resize-none">{{ old('participant_note') }}</textarea>
                                         </div>
 
                                         <button type="submit" class="w-full rounded-xl bg-[#061743] py-4 text-sm font-black uppercase tracking-wide text-white transition hover:bg-[#0a2060]">
-                                            Soumettre ma demande d'arrangement
+                                            Envoyer ma confirmation Orange Money
                                         </button>
                                     </form>
                                 </div>
