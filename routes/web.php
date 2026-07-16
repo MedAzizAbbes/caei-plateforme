@@ -118,6 +118,7 @@ Route::middleware(['auth', 'role:participant,admin'])->prefix('espace')->name('p
     // --- Paiement ---
     Route::get('/inscriptions/{registration}/paiement', [PaymentController::class, 'show'])->name('payment.show');
     Route::post('/inscriptions/{registration}/paiement/arrangement', [PaymentController::class, 'storeArrangement'])->name('payment.arrangement.store');
+    Route::post('/inscriptions/{registration}/paiement/orange-money', [PaymentController::class, 'storeOrangeMoney'])->name('payment.orange-money.store');
     Route::post('/inscriptions/{registration}/paiement/virement', [PaymentController::class, 'storeTransfer'])->name('payment.transfer.store');
     Route::post('/inscriptions/{registration}/paiement/visa', [PaymentController::class, 'storeVisa'])->name('payment.visa.store');
     Route::get('/inscriptions/{registration}/paiement/document/{type}', [PaymentController::class, 'downloadDocument'])->name('payment.document.download');

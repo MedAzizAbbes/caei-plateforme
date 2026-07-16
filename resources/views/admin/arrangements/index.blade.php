@@ -10,7 +10,7 @@
                 <p class="text-sm font-black uppercase text-[#f2a90f]">Back-office CAEI</p>
                 <h1 class="mt-1 text-3xl font-black uppercase text-[#061743]">Gestion des paiements</h1>
                 <p class="mt-2 text-sm text-slate-600">
-                    Validez les virements, paiements Visa et demandes d'arrangement soumis par les participants.
+                    Validez les virements, paiements Orange Money, paiements Visa et demandes d'arrangement soumis par les participants.
                 </p>
             </div>
             <a href="{{ route('admin.bank-settings.edit') }}"
@@ -39,6 +39,7 @@
                     <select name="payment_method" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 focus:border-[#061743] focus:outline-none">
                         <option value="">Toutes les méthodes</option>
                         <option value="bank_transfer" {{ request('payment_method') == 'bank_transfer' ? 'selected' : '' }}>🏦 Virement bancaire</option>
+                        <option value="orange_money" {{ request('payment_method') == 'orange_money' ? 'selected' : '' }}>Orange Money</option>
                         <option value="card" {{ request('payment_method') == 'card' ? 'selected' : '' }}>💳 Carte Visa/Mastercard</option>
                         <option value="visa" {{ request('payment_method') == 'visa' ? 'selected' : '' }}>💳 Carte (legacy)</option>
                         <option value="arrangement" {{ request('payment_method') == 'arrangement' ? 'selected' : '' }}>🤝 Arrangement</option>
@@ -48,7 +49,7 @@
                     <label class="mb-1 block text-xs font-bold uppercase tracking-wider text-slate-500">Statut</label>
                     <select name="status" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 focus:border-[#061743] focus:outline-none">
                         <option value="">Tous les statuts</option>
-                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>🟡 En attente (virement/visa)</option>
+                        <option value="pending" {{ request('status') == 'pending' ? 'selected' : '' }}>🟡 En attente (virement/orange/visa)</option>
                         <option value="arrangement_pending" {{ request('status') == 'arrangement_pending' ? 'selected' : '' }}>🟠 En attente (arrangement)</option>
                         <option value="paid" {{ request('status') == 'paid' ? 'selected' : '' }}>🟢 Validé (paid)</option>
                         <option value="approved" {{ request('status') == 'approved' ? 'selected' : '' }}>🟢 Validé (approved)</option>
@@ -130,7 +131,7 @@
                                     </div>
 
                                     {{-- Détails selon la méthode --}}
-                                    @if($payment->payment_method === 'bank_transfer')
+                                    @if(in_array($payment->payment_method, ['bank_transfer', 'orange_money'], true))
                                         <div class="grid grid-cols-1 gap-2 rounded-lg bg-slate-50 p-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
                                             <div>
                                                 <p class="text-xs text-slate-400 uppercase font-bold">Réf. CAEI</p>
@@ -141,15 +142,15 @@
                                                 <p class="font-semibold text-slate-700">{{ number_format($payment->amount, 2, ',', ' ') }} {{ $payment->currency }}</p>
                                             </div>
                                             <div>
-                                                <p class="text-xs text-slate-400 uppercase font-bold">Date virement</p>
-                                                <p class="font-semibold text-slate-700">{{ $payment->transfer_date?->format('d/m/Y') ?? '—' }}</p>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">{{ $payment->payment_method === 'orange_money' ? 'Téléphone' : 'Date virement' }}</p>
+                                                <p class="font-semibold text-slate-700">{{ $payment->payment_method === 'orange_money' ? ($payment->contact_phone ?? '—') : ($payment->transfer_date?->format('d/m/Y') ?? '—') }}</p>
                                             </div>
                                             <div>
-                                                <p class="text-xs text-slate-400 uppercase font-bold">Réf. bancaire</p>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">{{ $payment->payment_method === 'orange_money' ? 'Réf. Orange Money' : 'Réf. bancaire' }}</p>
                                                 <p class="font-semibold text-slate-700">{{ $payment->transaction_reference ?? '—' }}</p>
                                             </div>
                                             <div>
-                                                <p class="text-xs text-slate-400 uppercase font-bold">Banque émettrice</p>
+                                                <p class="text-xs text-slate-400 uppercase font-bold">{{ $payment->payment_method === 'orange_money' ? 'Canal' : 'Banque émettrice' }}</p>
                                                 <p class="font-semibold text-slate-700">{{ $payment->bank_name ?? '—' }}</p>
                                             </div>
                                             <div>
