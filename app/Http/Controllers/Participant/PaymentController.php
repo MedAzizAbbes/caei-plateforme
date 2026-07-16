@@ -184,11 +184,58 @@ class PaymentController extends Controller
             ->with('success', 'Votre paiement Orange Money a ete enregistre. L\'administration va verifier la transaction.');
     }
 
-    public function storeVisa(Request $request, Registration $registration)
+    public function storeVisa(Request $request, Registration $registration, \App\Services\StripeService $stripeService)
     {
         $this->authorizeRegistration($registration);
 
-        return back()->with('error', 'Le paiement par carte Visa/Mastercard n\'est pas disponible pour le moment. Veuillez utiliser le virement bancaire ou Orange Money.');
+        if ($this->hasActivePayment($registration)) {
+            return back()->with('error', 'Un paiement est deja en cours pour ce seminaire.');
+        }
+
+        try {
+            DB::transaction(function () use ($registration, &$payment) {
+                $payment = $registration->payment ?? new Payment();
+                $generatedRef = Payment::generateReference($registration->seminar_id, $registration->user_id);
+
+                $payment->fill([
+                    'registration_id' => $registration->id,
+                    'user_id' => $registration->user_id,
+                    'seminar_id' => $registration->seminar_id,
+                    'amount' => $registration->seminar->price,
+                    'currency' => config('services.stripe.currency', 'EUR'),
+                    'payment_method' => 'visa',
+                    'status' => 'pending',
+                    'reference' => $generatedRef,
+                ]);
+
+                $payment->save();
+            });
+
+            $session = $stripeService->createCheckoutSession($registration, $payment);
+            return redirect($session->url);
+
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Stripe error', ['error' => $e->getMessage()]);
+            return back()->with('error', 'Une erreur est survenue lors de l\'initialisation du paiement: ' . $e->getMessage());
+        }
+    }
+
+    public function stripeSuccess(Request $request, Registration $registration)
+    {
+        $this->authorizeRegistration($registration);
+        return view('participant.payment.stripe-success', compact('registration'));
+    }
+
+    public function stripeCancel(Request $request, Registration $registration)
+    {
+        $this->authorizeRegistration($registration);
+
+        $payment = $registration->payment;
+        if ($payment && $payment->status === 'pending' && $payment->payment_method === 'visa') {
+            $payment->update(['status' => 'unpaid']);
+        }
+
+        return view('participant.payment.stripe-cancel', compact('registration'));
     }
 
     public function downloadDocument(Registration $registration, string $type)

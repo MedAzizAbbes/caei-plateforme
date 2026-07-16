@@ -266,24 +266,26 @@
                             <div class="bg-[#061743] px-6 py-5">
                                 <p class="text-xs font-black uppercase text-[#f2a90f]">Méthode 2</p>
                                 <h3 class="mt-1 text-xl font-black text-white">Paiement par carte Visa/Mastercard</h3>
-                                <p class="mt-1 text-sm text-white/70">Interface de paiement non configurée pour le moment.</p>
+                                <p class="mt-1 text-sm text-white/70">Payez en toute sécurité via Stripe.</p>
                             </div>
                             <div class="p-6 md:p-8 space-y-6">
                                 <div class="rounded-xl border border-blue-100 bg-blue-50 p-6 text-center">
                                     <p class="text-4xl mb-4">💳</p>
-                                    <p class="text-lg font-black text-[#061743]">Bientôt disponible</p>
+                                    <p class="text-lg font-black text-[#061743]">Paiement sécurisé</p>
                                     <p class="mt-2 text-sm text-slate-600">
-                                        Le paiement Visa/Mastercard n'est pas encore configuré.
-                                        Utilisez le virement bancaire ou Orange Money pour finaliser votre inscription.
+                                        Vous serez redirigé vers la page de paiement sécurisée de Stripe pour finaliser votre transaction.
                                     </p>
                                     <p class="mt-4 text-sm text-blue-800">
                                         <strong>Montant :</strong> {{ number_format($seminarPrice, 2, ',', ' ') }} EUR
                                     </p>
                                 </div>
-                                <button type="button" disabled
-                                        class="w-full cursor-not-allowed rounded-xl bg-slate-300 py-4 text-sm font-black uppercase tracking-wide text-white">
-                                    Visa/Mastercard non disponible maintenant
-                                </button>
+                                <form method="POST" action="{{ route('participant.payment.visa.store', $registration) }}">
+                                    @csrf
+                                    <button type="submit"
+                                            class="w-full rounded-xl bg-[#061743] py-4 text-sm font-black uppercase tracking-wide text-white transition hover:bg-[#0a2060]">
+                                        Payer par Visa/Mastercard
+                                    </button>
+                                </form>
                                 <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                     <button type="button" @click="activeTab = 'virement'"
                                             class="rounded-xl border border-[#061743] py-3 text-sm font-black uppercase tracking-wide text-[#061743] transition hover:bg-slate-50">

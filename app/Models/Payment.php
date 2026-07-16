@@ -22,6 +22,8 @@ class Payment extends Model
         'transfer_receipt_path',
         'transaction_reference',
         'transaction_id',
+        'stripe_session_id',
+        'stripe_payment_intent_id',
         'participant_note',
         'status',
         'reference',
