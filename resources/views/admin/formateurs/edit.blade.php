@@ -137,15 +137,11 @@
 
             {{-- Actions --}}
             <div class="flex items-center justify-between">
-                <form method="POST" action="{{ route('admin.formateurs.destroy', $formateur) }}"
-                      onsubmit="return confirm('Supprimer définitivement ce formateur ?')">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit"
-                            class="rounded-md bg-red-50 px-4 py-2 text-sm font-bold text-red-600 transition hover:bg-red-100">
-                        Supprimer ce formateur
-                    </button>
-                </form>
+                <button type="submit"
+                        form="delete-formateur-form"
+                        class="rounded-md bg-red-50 px-4 py-2 text-sm font-bold text-red-600 transition hover:bg-red-100">
+                    Supprimer ce formateur
+                </button>
 
                 <div class="flex items-center gap-3">
                     <a href="{{ route('admin.formateurs.index') }}"
@@ -158,6 +154,13 @@
                     </button>
                 </div>
             </div>
+        </form>
+
+        {{-- Formulaire de suppression séparé pour éviter les formulaires imbriqués --}}
+        <form id="delete-formateur-form" method="POST" action="{{ route('admin.formateurs.destroy', $formateur) }}"
+              onsubmit="return confirm('Supprimer définitivement ce formateur ?')" class="hidden">
+            @csrf
+            @method('DELETE')
         </form>
     </div>
 </div>
