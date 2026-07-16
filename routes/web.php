@@ -121,6 +121,8 @@ Route::middleware(['auth', 'role:participant,admin'])->prefix('espace')->name('p
     Route::post('/inscriptions/{registration}/paiement/orange-money', [PaymentController::class, 'storeOrangeMoney'])->name('payment.orange-money.store');
     Route::post('/inscriptions/{registration}/paiement/virement', [PaymentController::class, 'storeTransfer'])->name('payment.transfer.store');
     Route::post('/inscriptions/{registration}/paiement/visa', [PaymentController::class, 'storeVisa'])->name('payment.visa.store');
+    Route::get('/inscriptions/{registration}/paiement/visa/succes', [PaymentController::class, 'stripeSuccess'])->name('payment.stripe.success');
+    Route::get('/inscriptions/{registration}/paiement/visa/annulation', [PaymentController::class, 'stripeCancel'])->name('payment.stripe.cancel');
     Route::get('/inscriptions/{registration}/paiement/document/{type}', [PaymentController::class, 'downloadDocument'])->name('payment.document.download');
 });
 
@@ -220,3 +222,5 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 });
 
 require __DIR__.'/auth.php';
+
+Route::post('/stripe/webhook', [\App\Http\Controllers\StripePaymentController::class, 'handleWebhook'])->name('stripe.webhook');

@@ -35,4 +35,16 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Stripe — Paiement par carte bancaire (Visa / Mastercard)
+    |--------------------------------------------------------------------------
+    */
+    'stripe' => [
+        'key'            => env('STRIPE_KEY'),
+        'secret'         => env('STRIPE_SECRET'),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
+        'currency'       => env('STRIPE_CURRENCY', 'eur'),
+    ],
+
 ];
