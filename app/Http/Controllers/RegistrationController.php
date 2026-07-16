@@ -51,12 +51,22 @@ class RegistrationController extends Controller
                 'registered_at' => now(),
             ]);
 
+            // Générer le QR Code immédiatement à l'inscription
+            if (! $registration->qrCode) {
+                QrCode::generateFor($registration);
+            }
+
             return $registration;
         });
 
         $registration->load('user', 'seminar', 'qrCode');
 
-        // Le QR Code et l'email seront générés/envoyés après validation du paiement par l'administrateur.
+        // Envoyer l'email avec le QR Code
+        try {
+            Mail::to($user->email)->send(new RegistrationQrCodeMail($registration));
+        } catch (\Exception $e) {
+            Log::error('Erreur envoi email QR Code inscription: ' . $e->getMessage());
+        }
 
         return redirect()->route('registration.confirmation', $registration);
     }
