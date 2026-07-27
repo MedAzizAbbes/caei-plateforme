@@ -6,6 +6,7 @@ use App\Models\User;
 
 test('participant can register for a seminar and access their space', function () {
     $admin = User::factory()->create(['role' => 'admin']);
+    $user = User::factory()->create(['role' => 'participant']);
 
     $seminar = Seminar::create([
         'theme' => 'Formation CAEI 2026',
@@ -17,17 +18,11 @@ test('participant can register for a seminar and access their space', function (
         'created_by' => $admin->id,
     ]);
 
-    $response = $this->post('/inscription', [
-        'first_name' => 'Alice',
-        'last_name' => 'Durand',
-        'institution' => 'CAEI',
-        'email' => 'alice@example.com',
-        'phone' => '0123456789',
+    $response = $this->actingAs($user)->post('/inscription', [
         'seminar_id' => $seminar->id,
     ]);
 
-    $user = User::where('email', 'alice@example.com')->first();
-    $registration = Registration::where('user_id', $user?->id)
+    $registration = Registration::where('user_id', $user->id)
         ->where('seminar_id', $seminar->id)
         ->first();
 

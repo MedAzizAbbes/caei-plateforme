@@ -11,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::getConnection()->getDriverName() === 'sqlite') {
+            return;
+        }
+
         // 1. Add temporary column
         Schema::table('seminars', function (Blueprint $table) {
             $table->unsignedBigInteger('created_by_tmp')->nullable();
@@ -44,6 +48,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (Schema::getConnection()->getDriverName() === 'sqlite') {
+            return;
+        }
+
         Schema::table('seminars', function (Blueprint $table) {
             $table->unsignedBigInteger('created_by_tmp')->nullable();
         });
