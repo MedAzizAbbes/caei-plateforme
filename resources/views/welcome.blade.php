@@ -18,156 +18,218 @@
             }
             html { scroll-behavior: smooth; }
 
-            .seminar-card {
-                background: #ffffff;
-                border-radius: 20px;
-                border: 1px solid rgba(11, 42, 102, 0.08);
-                box-shadow: 0 8px 24px rgba(11, 42, 102, 0.08);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                overflow: hidden;
-            }
-            .seminar-card:hover {
-                transform: translateY(-6px);
-                box-shadow: 0 20px 48px rgba(11, 42, 102, 0.16);
-            }
-
-            .seminar-card__cover {
+            .seminar-card-modern {
                 position: relative;
                 width: 100%;
-                aspect-ratio: 16 / 9;
+                aspect-ratio: 40 / 60; /* Ratio 40x60 (2:3) */
+                border-radius: 20px;
                 overflow: hidden;
-                background: #0B2A66;
+                background-color: #061743;
+                box-shadow: 0 8px 24px rgba(6, 23, 67, 0.05);
+                transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             }
-            .seminar-card__image {
+            .seminar-card-modern:hover {
+                transform: translateY(-6px);
+                box-shadow: 0 16px 32px rgba(6, 23, 67, 0.15);
+            }
+
+            /* Image et Zoom */
+            .seminar-card-image-wrap {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                position: relative;
+            }
+            .seminar-card-image {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
-                transition: transform 0.3s ease;
+                transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
             }
-            .seminar-card:hover .seminar-card__image {
-                transform: scale(1.05);
+            .seminar-card-modern:hover .seminar-card-image {
+                transform: scale(1.1);
             }
-            .seminar-card__cover::after {
+
+            /* Overlay dégradé subtil au repos pour un rendu élégant */
+            .seminar-card-image-wrap::after {
                 content: '';
                 position: absolute;
                 inset: 0;
-                background: linear-gradient(180deg, rgba(11, 42, 102, 0) 40%, rgba(11, 42, 102, 0.35) 100%);
+                background: linear-gradient(to top, rgba(6, 23, 67, 0.45) 0%, transparent 60%);
                 pointer-events: none;
             }
 
-            .seminar-card__badge {
+            /* Badge de Statut */
+            .seminar-card-status-badge {
                 position: absolute;
                 top: 14px;
                 right: 14px;
-                z-index: 2;
-                background: rgba(255, 255, 255, 0.95);
-                color: #15803d;
-                border: 1px solid rgba(34, 197, 94, 0.35);
-                font-size: 0.72rem;
+                z-index: 5;
+                background: rgba(22, 163, 74, 0.9);
+                color: #ffffff;
+                font-size: 0.68rem;
                 font-weight: 800;
-                letter-spacing: 0.04em;
+                letter-spacing: 0.06em;
                 text-transform: uppercase;
-                padding: 0.45rem 0.85rem;
-                border-radius: 999px;
-                box-shadow: 0 4px 14px rgba(11, 42, 102, 0.12);
-                backdrop-filter: blur(6px);
+                padding: 0.4rem 0.8rem;
+                border-radius: 99px;
+                box-shadow: 0 4px 12px rgba(6, 23, 67, 0.15);
+                backdrop-filter: blur(4px);
+                border: 1px solid rgba(255, 255, 255, 0.2);
             }
 
-            .seminar-card__body {
+            /* Zone de détails en overlay glissant */
+            .seminar-card-overlay {
+                position: absolute;
+                inset: 0;
+                z-index: 10;
+                background: linear-gradient(to top, 
+                    rgba(6, 23, 67, 0.98) 0%, 
+                    rgba(6, 23, 67, 0.93) 60%, 
+                    rgba(6, 23, 67, 0.6) 100%);
+                backdrop-filter: blur(8px);
+                -webkit-backdrop-filter: blur(8px);
+                padding: 1.5rem 1.25rem;
                 display: flex;
                 flex-direction: column;
-                flex: 1;
-                padding: 1.5rem;
+                justify-content: space-between;
+                transform: translateY(100%);
+                transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             }
-            .seminar-card__title {
-                font-size: 1.2rem;
-                font-weight: 800;
-                color: #0B2A66;
-                line-height: 1.35;
+            .seminar-card-modern:hover .seminar-card-overlay {
+                transform: translateY(0);
             }
-            .seminar-card__description {
+
+            /* Titre et description dans l'overlay */
+            .seminar-card-title-overlay {
+                font-size: 1.15rem;
+                font-weight: 900;
+                color: #ffffff;
+                line-height: 1.3;
+                text-transform: uppercase;
+                letter-spacing: -0.01em;
+            }
+            .seminar-card-desc-overlay {
                 margin-top: 0.5rem;
-                font-size: 0.875rem;
-                color: #64748b;
-                line-height: 1.6;
+                font-size: 0.78rem;
+                color: #cbd5e1;
+                line-height: 1.45;
                 display: -webkit-box;
-                -webkit-line-clamp: 2;
+                -webkit-line-clamp: 3;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
             }
-
-            .seminar-card__meta {
-                margin-top: 1rem;
+            
+            /* Métadonnées */
+            .seminar-card-meta-list {
                 display: flex;
                 flex-direction: column;
-                gap: 0.55rem;
+                gap: 0.45rem;
+                margin-top: 0.85rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding-top: 0.65rem;
             }
-            .seminar-card__meta-item {
+            .seminar-card-meta-row {
                 display: flex;
                 align-items: center;
                 gap: 0.55rem;
-                font-size: 0.875rem;
-                color: #475569;
+                font-size: 0.8rem;
+                color: #e2e8f0;
             }
-            .seminar-card__meta-item svg {
-                width: 1rem;
-                height: 1rem;
-                color: #F8B400;
+            .seminar-card-meta-row svg {
+                width: 0.9rem;
+                height: 0.9rem;
+                color: #f2a90f;
                 flex-shrink: 0;
             }
 
-            .seminar-card__actions {
-                margin-top: auto;
-                padding-top: 1.25rem;
-                border-top: 1px solid #f1f5f9;
+            /* Boutons d'action */
+            .seminar-card-buttons {
                 display: flex;
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: 0.45rem;
+                margin-top: 1rem;
             }
-            .seminar-card__btn-details {
+            .seminar-card-btn-view {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
                 width: 100%;
-                padding: 0.65rem 1rem;
-                border-radius: 12px;
-                border: 2px solid #0B2A66;
-                background: #ffffff;
-                color: #0B2A66;
-                font-size: 0.875rem;
-                font-weight: 700;
-                transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-            }
-            .seminar-card__btn-details:hover {
-                background: #0B2A66;
+                padding: 0.55rem 1rem;
+                border-radius: 10px;
+                border: 2px solid #ffffff;
+                background: transparent;
                 color: #ffffff;
-                transform: translateY(-1px);
+                font-size: 0.72rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                transition: all 0.3s ease;
             }
-            .seminar-card__btn-register {
+            .seminar-card-btn-view:hover {
+                background: #ffffff;
+                color: #061743;
+            }
+            .seminar-card-btn-sub {
                 display: inline-flex;
                 align-items: center;
                 justify-content: center;
                 width: 100%;
-                padding: 0.65rem 1rem;
-                border-radius: 12px;
+                padding: 0.55rem 1rem;
+                border-radius: 10px;
                 border: none;
-                background: linear-gradient(135deg, #F8B400 0%, #ffd45c 100%);
-                color: #0B2A66;
-                font-size: 0.875rem;
+                background: #f2a90f;
+                color: #061743;
+                font-size: 0.72rem;
                 font-weight: 900;
                 text-transform: uppercase;
-                letter-spacing: 0.03em;
-                transition: filter 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+                letter-spacing: 0.05em;
+                box-shadow: 0 4px 12px rgba(242, 169, 15, 0.2);
+                transition: all 0.3s ease;
             }
-            .seminar-card__btn-register:hover {
-                filter: brightness(1.05);
+            .seminar-card-btn-sub:hover {
+                background: #ffd071;
                 transform: translateY(-1px);
-                box-shadow: 0 8px 20px rgba(248, 180, 0, 0.35);
+                box-shadow: 0 6px 16px rgba(242, 169, 15, 0.35);
+            }
+            
+            /* Fallback d'affiche si l'image est absente */
+            .seminar-card-image-fallback {
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle at top left, #0b2a66 0%, #061743 100%);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                padding: 2rem;
+                text-align: center;
+                position: relative;
+                transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            }
+            .seminar-card-image-fallback::before {
+                content: '';
+                position: absolute;
+                inset: 12px;
+                border: 2px dashed rgba(242, 169, 15, 0.2);
+                border-radius: 12px;
+                pointer-events: none;
+            }
+            .seminar-card-modern:hover .seminar-card-image-fallback {
+                transform: scale(1.08);
+            }
+
+
+            @keyframes bounceSlow {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-12px); }
+            }
+            .animate-bounce-slow {
+                animation: bounceSlow 4s ease-in-out infinite;
             }
 
             @media (max-width: 639px) {
-                .seminar-card__title { font-size: 1.1rem; }
-                .seminar-card__body { padding: 1.15rem; }
+                .seminar-card-title-overlay { font-size: 1.15rem; }
             }
         </style>
     </head>
@@ -227,13 +289,15 @@
                         
                         @auth
                             <a href="{{ route('dashboard') }}" class="caei-btn caei-btn-outline">Mon espace</a>
+                        @else
+                            <a href="{{ route('login') }}" class="caei-btn caei-btn-outline">Se connecter</a>
                         @endauth
                     </div>
                 </div>
             </section>
 
             {{-- ══════════ SECTION SÉMINAIRES ══════════ --}}
-            <section id="seminaires" class="py-20 bg-slate-50">
+            <section id="seminaires" class="pt-20 pb-32 bg-slate-50">
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
                     {{-- En-tête section --}}
@@ -258,87 +322,113 @@
                             <p class="mt-2 text-slate-500">De nouveaux séminaires seront publiés prochainement.</p>
                         </div>
                     @else
-                        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 mb-12">
                             @foreach($seminars as $seminar)
-                                <article class="seminar-card flex flex-col">
-                                    <div class="seminar-card__cover">
-                                        <img
-                                            src="{{ $seminar->image ? Storage::url($seminar->image) : asset('images/seminars/default.svg') }}"
-                                            alt="Affiche — {{ $seminar->theme }}"
-                                            class="seminar-card__image"
-                                        >
-                                        <span class="seminar-card__badge">Ouvert</span>
-                                    </div>
-
-                                    <div class="seminar-card__body">
-                                        <h3 class="seminar-card__title">
-                                            {{ $seminar->theme }}
-                                        </h3>
-
-                                        @if($seminar->description)
-                                            <p class="seminar-card__description">
-                                                {{ $seminar->description }}
-                                            </p>
+                                <article class="seminar-card-modern">
+                                    <!-- Affiche / Image du séminaire -->
+                                    <div class="seminar-card-image-wrap">
+                                        @if($seminar->image)
+                                            <img
+                                                src="{{ Storage::url($seminar->image) }}"
+                                                alt="Affiche — {{ $seminar->theme }}"
+                                                class="seminar-card-image"
+                                            >
+                                        @else
+                                            <div class="seminar-card-image-fallback">
+                                                <div class="h-16 w-16 rounded-full bg-[#f2a90f]/10 flex items-center justify-center mb-4">
+                                                    <svg class="w-8 h-8 text-[#f2a90f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                                    </svg>
+                                                </div>
+                                                <h4 class="text-white font-black text-sm uppercase px-4 line-clamp-3 leading-tight">{{ $seminar->theme }}</h4>
+                                                <p class="text-[9px] text-[#f2a90f] mt-3 uppercase tracking-widest font-black">CAEI Company Group</p>
+                                            </div>
                                         @endif
 
-                                        <div class="seminar-card__meta">
-                                            <div class="seminar-card__meta-item">
-                                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-                                                </svg>
-                                                <span>
-                                                    {{ $seminar->start_date->format('d/m/Y') }}
-                                                    @if($seminar->start_date != $seminar->end_date)
-                                                        — {{ $seminar->end_date->format('d/m/Y') }}
-                                                    @endif
-                                                </span>
-                                            </div>
+                                        <!-- Badge de Statut (Visible par défaut) -->
+                                        <span class="seminar-card-status-badge">Ouvert</span>
+                                    </div>
 
-                                            <div class="seminar-card__meta-item">
-                                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                                </svg>
-                                                <span>{{ $seminar->country }}</span>
-                                            </div>
+                                    <!-- Zone de détails en overlay (Affichée au hover) -->
+                                    <div class="seminar-card-overlay">
+                                        <div>
+                                            <h3 class="seminar-card-title-overlay">
+                                                {{ $seminar->theme }}
+                                            </h3>
 
-                                            @if($seminar->price)
-                                                <div class="seminar-card__meta-item">
-                                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                                    </svg>
-                                                    <span class="font-bold text-[#0B2A66]">{{ number_format($seminar->price, 2, ',', ' ') }} €</span>
-                                                </div>
+                                            @if($seminar->description)
+                                                <p class="seminar-card-desc-overlay">
+                                                    {{ $seminar->description }}
+                                                </p>
                                             @endif
 
-                                            <div class="seminar-card__meta-item">
-                                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                                </svg>
-                                                <span>{{ $seminar->registrations_count }} participant(s) inscrit(s)</span>
-                                            </div>
-
-                                            @if($seminar->trainers->isNotEmpty())
-                                                <div class="seminar-card__meta-item">
+                                            <div class="seminar-card-meta-list">
+                                                <!-- Date -->
+                                                <div class="seminar-card-meta-row">
                                                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                                     </svg>
-                                                    <span>{{ $seminar->trainers->map->fullName()->join(', ') }}</span>
+                                                    <span class="font-medium">
+                                                        Du {{ $seminar->start_date->format('d/m/Y') }}
+                                                        @if($seminar->start_date != $seminar->end_date)
+                                                            au {{ $seminar->end_date->format('d/m/Y') }}
+                                                        @endif
+                                                    </span>
                                                 </div>
-                                            @endif
+
+                                                <!-- Lieu -->
+                                                <div class="seminar-card-meta-row">
+                                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                    </svg>
+                                                    <span class="font-medium">{{ $seminar->country }}</span>
+                                                </div>
+
+                                                <!-- Prix -->
+                                                @if($seminar->price)
+                                                    <div class="seminar-card-meta-row">
+                                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                        </svg>
+                                                        <span class="font-bold text-[#f2a90f]">{{ number_format($seminar->price, 2, ',', ' ') }} €</span>
+                                                    </div>
+                                                @endif
+
+                                                <!-- Places disponibles -->
+                                                <div class="seminar-card-meta-row">
+                                                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                    </svg>
+                                                    <span class="font-medium">{{ max(0, 30 - $seminar->registrations_count) }} places disponibles</span>
+                                                </div>
+
+                                                <!-- Formateurs -->
+                                                @if($seminar->trainers->isNotEmpty())
+                                                    <div class="seminar-card-meta-row">
+                                                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                                        </svg>
+                                                        <span class="truncate font-medium" title="{{ $seminar->trainers->map->fullName()->join(', ') }}">
+                                                            {{ $seminar->trainers->map->fullName()->join(', ') }}
+                                                        </span>
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
 
-                                        <div class="seminar-card__actions">
-                                            <a href="{{ route('seminaires.show', $seminar) }}" class="seminar-card__btn-details">
+                                        <!-- Actions -->
+                                        <div class="seminar-card-buttons">
+                                            <a href="{{ route('seminaires.show', $seminar) }}" class="seminar-card-btn-view">
                                                 Voir les détails
                                             </a>
 
                                             @auth
-                                                <a href="{{ route('registration.create', ['seminar_id' => $seminar->id]) }}" class="seminar-card__btn-register">
+                                                <a href="{{ route('registration.create', ['seminar_id' => $seminar->id]) }}" class="seminar-card-btn-sub">
                                                     S'inscrire
                                                 </a>
                                             @else
-                                                <a href="{{ route('login') }}" class="seminar-card__btn-register">
+                                                <a href="{{ route('login') }}" class="seminar-card-btn-sub">
                                                     S'inscrire
                                                 </a>
                                             @endauth
@@ -354,11 +444,11 @@
             </section>
 
             {{-- Footer --}}
-            <footer class="bg-[#041136] py-10 text-center text-white/50 text-sm">
+            <footer class="bg-[#041136] py-6 text-center text-white/50 text-[13px]">
                 <p class="font-black text-white/80 text-base mb-1">CAEI Company Group</p>
                 <p>SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis, Tunisie</p>
                 <p class="mt-1">contact@caei-afri.com — +216 55 335 286</p>
-                <p class="mt-4">&copy; {{ date('Y') }} CAEI Company Group. Tous droits réservés.</p>
+                <p class="mt-2 text-xs">&copy; {{ date('Y') }} CAEI Company Group. Tous droits réservés.</p>
             </footer>
 
         </main>
