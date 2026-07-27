@@ -68,6 +68,17 @@
                     {{-- Colonne principale --}}
                     <div class="lg:col-span-2 space-y-6">
 
+                        {{-- Affiche --}}
+                        @if($seminar->image)
+                            <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden max-w-sm shadow-md">
+                                <img
+                                    src="{{ Storage::url($seminar->image) }}"
+                                    alt="Affiche — {{ $seminar->theme }}"
+                                    class="w-full h-auto object-cover"
+                                >
+                            </div>
+                        @endif
+
                         {{-- En-tête séminaire --}}
                         <div class="bg-gradient-to-br from-[#061743] to-[#0d2a6e] rounded-xl p-8 text-white shadow-lg">
                             <div class="flex items-start gap-4">
