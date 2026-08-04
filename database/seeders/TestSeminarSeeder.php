@@ -32,6 +32,7 @@ class TestSeminarSeeder extends Seeder
                     'start_date' => Carbon::today(),
                     'end_date' => Carbon::today()->addDays(1),
                     'status' => 'published',
+                    'image' => 'seminars/fete_du_travail_caei.png',
                     'created_by' => $formateur->id,
                 ]
             );

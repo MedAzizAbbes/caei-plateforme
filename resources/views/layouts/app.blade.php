@@ -124,7 +124,7 @@
                 @endisset
 
                 <!-- Page Content -->
-                <main class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
+                <main class="flex-grow w-full max-w-[98%] xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
                     @hasSection('content')
                         @yield('content')
                     @else
