@@ -50,7 +50,7 @@
         </form>
 
         {{-- Table --}}
-        <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div class="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm">
             @if($formateurs->isEmpty())
                 <div class="p-12 text-center">
                     <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#061743]/5">

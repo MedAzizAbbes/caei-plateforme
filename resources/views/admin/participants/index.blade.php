@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="py-10">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+<div class="py-6">
+    <div class="w-full">
         
         {{-- Header Section --}}
         <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
@@ -66,7 +66,7 @@
         </form>
 
         {{-- Table --}}
-        <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+        <div class="rounded-xl border border-slate-200 bg-white shadow-sm overflow-hidden">
             @if($registrations->isEmpty())
                 <div class="p-12 text-center">
                     <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#061743]/5">
@@ -78,48 +78,48 @@
                     <p class="mt-1 text-sm text-slate-500">Essayez de modifier vos critères de recherche.</p>
                 </div>
             @else
-                <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
+                <table class="w-full divide-y divide-slate-200 text-left text-xs sm:text-sm">
                     <thead class="bg-[#061743]">
                         <tr>
-                            <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Nom & Infos</th>
-                            <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Email</th>
-                            <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Institution</th>
-                            <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Séminaire</th>
-                            <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Statut</th>
-                            <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Paiement</th>
-                            <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70 text-right">Inscrit le</th>
-                            <th class="px-5 py-3 text-xs font-black uppercase tracking-wider text-white/70 text-right">Actions</th>
+                            <th class="px-3.5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Nom & Infos</th>
+                            <th class="px-3.5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Email</th>
+                            <th class="px-3.5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Institution</th>
+                            <th class="px-3.5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Séminaire</th>
+                            <th class="px-3.5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Statut</th>
+                            <th class="px-3.5 py-3 text-xs font-black uppercase tracking-wider text-white/70">Paiement</th>
+                            <th class="px-3.5 py-3 text-xs font-black uppercase tracking-wider text-white/70 text-right whitespace-nowrap">Inscrit le</th>
+                            <th class="px-3.5 py-3 text-xs font-black uppercase tracking-wider text-white/70 text-right whitespace-nowrap">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-slate-100">
                         @foreach($registrations as $registration)
                             <tr class="transition hover:bg-slate-50">
-                                <td class="px-5 py-3">
-                                    <div class="flex items-center gap-3">
-                                        <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#061743] text-xs font-black text-white">
+                                <td class="px-3.5 py-3">
+                                    <div class="flex items-center gap-2.5">
+                                        <div class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#061743] text-xs font-black text-white">
                                             {{ strtoupper(substr($registration->user->first_name, 0, 1) . substr($registration->user->last_name, 0, 1)) }}
                                         </div>
                                         <div>
-                                            <p class="font-bold text-[#061743]">{{ $registration->user->first_name }} {{ $registration->user->last_name }}</p>
+                                            <p class="font-bold text-[#061743] whitespace-nowrap">{{ $registration->user->first_name }} {{ $registration->user->last_name }}</p>
                                             @if($registration->user->phone)
-                                                <p class="text-xs text-slate-500">{{ $registration->user->phone }}</p>
+                                                <p class="text-xs text-slate-500 whitespace-nowrap">{{ $registration->user->phone }}</p>
                                             @endif
                                             @if($registration->user->pays || $registration->user->poste)
-                                                <p class="text-xs text-slate-400">{{ implode(' - ', array_filter([$registration->user->poste, $registration->user->pays])) }}</p>
+                                                <p class="text-xs text-slate-400 whitespace-nowrap">{{ implode(' - ', array_filter([$registration->user->poste, $registration->user->pays])) }}</p>
                                             @endif
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-5 py-3 text-slate-700">{{ $registration->user->email }}</td>
-                                <td class="px-5 py-3 text-slate-600">{{ $registration->user->institution ?: '-' }}</td>
-                                <td class="px-5 py-3 text-slate-600 font-semibold">{{ $registration->seminar->theme }}</td>
-                                <td class="px-5 py-3">
+                                <td class="px-3.5 py-3 text-slate-700 font-medium">{{ $registration->user->email }}</td>
+                                <td class="px-3.5 py-3 text-slate-600">{{ $registration->user->institution ?: '-' }}</td>
+                                <td class="px-3.5 py-3 text-slate-600 font-semibold">{{ $registration->seminar->theme }}</td>
+                                <td class="px-3.5 py-3 whitespace-nowrap">
                                     <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-black 
                                         {{ $registration->status == 'present' ? 'bg-[#10b981]/15 text-[#059669]' : 'bg-[#f2a90f]/15 text-[#b47a00]' }}">
                                         {{ ucfirst($registration->status) }}
                                     </span>
                                 </td>
-                                <td class="px-5 py-3">
+                                <td class="px-3.5 py-3 whitespace-nowrap">
                                     @php $pay = $registration->payment; @endphp
                                     @if($pay)
                                         <span class="inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-bold {{ $pay->statusBadgeClasses() }}">
@@ -131,25 +131,25 @@
                                         </span>
                                     @endif
                                 </td>
-                                <td class="px-5 py-3 text-right text-slate-500">{{ $registration->registered_at->format('d/m/Y H:i') }}</td>
-                                <td class="px-5 py-3">
-                                    <div class="flex items-center justify-end gap-2">
+                                <td class="px-3.5 py-3 text-right text-slate-500 whitespace-nowrap">{{ $registration->registered_at->format('d/m/Y H:i') }}</td>
+                                <td class="px-3.5 py-3 whitespace-nowrap">
+                                    <div class="flex items-center justify-end gap-1">
                                         <a href="{{ route('admin.participants.show', $registration->user) }}"
-                                           class="rounded-md border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-600 transition hover:bg-slate-50"
+                                           class="rounded-md border border-slate-200 bg-white px-2.5 py-1 text-xs font-bold text-slate-600 transition hover:bg-slate-50"
                                            title="Voir">
                                             Voir
                                         </a>
                                         <a href="{{ route('admin.participants.edit', $registration->user) }}"
-                                           class="rounded-md bg-[#061743] px-3 py-1.5 text-xs font-bold text-white transition hover:bg-[#0a2060]"
+                                           class="rounded-md bg-[#061743] px-2.5 py-1 text-xs font-bold text-white transition hover:bg-[#0a2060]"
                                            title="Modifier">
                                             Modifier
                                         </a>
                                         <form method="POST" action="{{ route('admin.participants.destroy', $registration->user) }}"
-                                              onsubmit="return confirm('Supprimer ce participant et toutes ses inscriptions ? Cette action est irréversible.')">
+                                              onsubmit="return confirm('Supprimer ce participant et toutes ses inscriptions ? Cette action est irréversible.')" class="inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                    class="rounded-md bg-red-50 px-3 py-1.5 text-xs font-bold text-red-600 transition hover:bg-red-100">
+                                                    class="rounded-md bg-red-50 px-2.5 py-1 text-xs font-bold text-red-600 transition hover:bg-red-100">
                                                 Supprimer
                                             </button>
                                         </form>

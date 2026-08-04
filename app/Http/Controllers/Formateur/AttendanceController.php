@@ -56,25 +56,39 @@ class AttendanceController extends Controller
             'day_number' => ['required', 'integer', 'min:1'],
         ]);
 
-        $value = trim($data['code']);
-        $dayNumber = $data['day_number'];
-        $token = null;
+        $raw = trim($data['code']);
+        $dayNumber = (int) $data['day_number'];
 
-        if (Str::contains($value, '/p/')) {
-            $token = Str::afterLast($value, '/p/');
+        // Extract token if a full URL was scanned
+        $token = $raw;
+        if (Str::contains($raw, '/p/')) {
+            $token = Str::afterLast($raw, '/p/');
             $token = Str::before($token, '?');
+            $token = Str::before($token, '#');
+            $token = trim($token, '/');
+        } elseif (Str::contains($raw, 'token=')) {
+            $token = Str::afterLast($raw, 'token=');
+            $token = Str::before($token, '&');
             $token = Str::before($token, '#');
         }
 
-        $qrCode = QrCode::where('code', $value)
-            ->orWhere('secure_token', $value)
-            ->when($token, fn ($query) => $query->orWhere('secure_token', $token))
+        $codeUpper = strtoupper($raw);
+
+        $qrCode = QrCode::where('code', $raw)
+            ->orWhere('code', $codeUpper)
+            ->orWhere('secure_token', $raw)
+            ->orWhere('secure_token', $token)
             ->first();
 
-        if (! $qrCode) {
+        // Fallback: extract CAEI-YYYY-NNNN regex if embedded in text
+        if (! $qrCode && preg_match('/CAEI-\d{4}-\d+/i', $raw, $matches)) {
+            $qrCode = QrCode::where('code', strtoupper($matches[0]))->first();
+        }
+
+        if (! $qrCode || ! $qrCode->registration) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Code QR introuvable.',
+                'message' => 'Code QR introuvable (' . e($raw) . '). Veuillez vérifier le code ou utiliser la saisie manuelle.',
             ], 404);
         }
 
