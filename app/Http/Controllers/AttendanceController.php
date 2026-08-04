@@ -25,24 +25,36 @@ class AttendanceController extends Controller
             'code' => ['required', 'string'],
         ]);
 
-        $value = trim($data['code']);
-        $token = null;
+        $raw = trim($data['code']);
+        $token = $raw;
 
-        if (Str::contains($value, '/p/')) {
-            $token = Str::afterLast($value, '/p/');
+        if (Str::contains($raw, '/p/')) {
+            $token = Str::afterLast($raw, '/p/');
             $token = Str::before($token, '?');
+            $token = Str::before($token, '#');
+            $token = trim($token, '/');
+        } elseif (Str::contains($raw, 'token=')) {
+            $token = Str::afterLast($raw, 'token=');
+            $token = Str::before($token, '&');
             $token = Str::before($token, '#');
         }
 
-        $qrCode = QrCode::where('code', $value)
-            ->orWhere('secure_token', $value)
-            ->when($token, fn ($query) => $query->orWhere('secure_token', $token))
+        $codeUpper = strtoupper($raw);
+
+        $qrCode = QrCode::where('code', $raw)
+            ->orWhere('code', $codeUpper)
+            ->orWhere('secure_token', $raw)
+            ->orWhere('secure_token', $token)
             ->first();
 
-        if (! $qrCode) {
+        if (! $qrCode && preg_match('/CAEI-\d{4}-\d+/i', $raw, $matches)) {
+            $qrCode = QrCode::where('code', strtoupper($matches[0]))->first();
+        }
+
+        if (! $qrCode || ! $qrCode->registration) {
             return response()->json([
                 'status' => 'not_found',
-                'message' => 'Code QR introuvable.',
+                'message' => 'Code QR introuvable (' . e($raw) . ').',
             ], 404);
         }
 
