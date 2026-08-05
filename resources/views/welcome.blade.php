@@ -465,7 +465,7 @@
               <li><a href="https://caei-afri.com/Medicalservices/" target="_blank">CAEI MEDICAL SERVICES</a></li>
               <li><a href="#seminaires">CAEI ELITE TRAINING</a></li>             
               <li><a href="{{ route('medical.services') }}">CAEI MEDICAL SERVICES</a></li>
-              <li><a href="https://caei-afri.com/Digitalmoov/" target="_blank">CAEI DIGITAL MOOV</a></li>
+              <li><a href="{{ route('digitalmoov') }}">CAEI DIGITAL MOOV</a></li>
               <li><a href="https://caei-afri.com/Callcenter/" target="_blank">CAEI CALL CENTER</a></li>
             </ul>
           </li>
@@ -550,7 +550,7 @@
             </a>
           </div>
           <div class="col-6 col-xl-2 col-md-4">
-            <a href="https://caei-afri.com/Digitalmoov/" target="_blank" style="display: block; text-decoration: none;">
+            <a href="{{ route('digitalmoov') }}" style="display: block; text-decoration: none;">
               <div style="width: 140px; height: 140px; margin: 0 auto; padding: 5px; background: rgba(0, 15, 60, 0.5); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(5px);" onmouseover="this.style.borderColor='rgba(255, 196, 81, 0.6)'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.3)'; this.style.transform='scale(1)';">
                 <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov" style="width: 120px; height: 120px; object-fit: contain; margin: auto;">
               </div>
@@ -705,7 +705,7 @@
                 <p class="text-muted small mb-4">Solutions numériques et transformation</p>
               </div>
               <div>
-                <a href="https://caei-afri.com/Digitalmoov/" target="_blank" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #cc8800; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#b37700'" onmouseout="this.style.backgroundColor='#cc8800'">Découvrir</a>
+                <a href="{{ route('digitalmoov') }}" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #cc8800; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#b37700'" onmouseout="this.style.backgroundColor='#cc8800'">Découvrir</a>
               </div>
             </div>
           </div>
@@ -768,7 +768,7 @@
               <p style="font-size: 15px; line-height: 1.8;">
                 Chez Digital Moov, nous sommes bien plus qu'une agence de marketing digital. Nous sommes des visionnaires, des créateurs et des stratèges déterminés à transformer votre présence en ligne en une expérience captivante et profitable. Avec notre expertise, notre passion et notre engagement envers votre succès, nous sommes là pour vous aider à atteindre de nouveaux sommets dans le monde numérique.
               </p>
-              <a href="https://caei-afri.com/Digitalmoov/" target="_blank" class="btn btn-light rounded-pill mt-3 px-4 fw-bold" style="color: #b37700;">Visiter le site</a>
+              <a href="{{ route('digitalmoov') }}" class="btn btn-light rounded-pill mt-3 px-4 fw-bold" style="color: #b37700;">Visiter le site</a>
             </div>
           </div>
         </div>
@@ -1109,7 +1109,7 @@
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Medicalservices/" target="_blank" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="#seminaires" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('medical.services') }}" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
-            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Digitalmoov/" target="_blank" class="text-decoration-none text-white-50">CAEI DIGITAL MOOV</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('digitalmoov') }}" class="text-decoration-none text-white-50">CAEI DIGITAL MOOV</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Callcenter/" target="_blank" class="text-decoration-none text-white-50">CAEI CALL CENTER</a></li>
           </ul>
         </div>
@@ -1134,7 +1134,7 @@
       <div class="container">
         <p class="mb-1">&copy; Copyright <strong class="text-white">CAEI Company Group</strong>. All Rights Reserved</p>
         <div class="credits text-white-50" style="font-size: 12px;">
-          Designed by <a href="https://caei-afri.com/Digitalmoov/" target="_blank" class="text-decoration-none text-warning fw-bold">CAEI DIGITAL MOOV</a>
+          Designed by <a href="{{ route('digitalmoov') }}" class="text-decoration-none text-warning fw-bold">CAEI DIGITAL MOOV</a>
         </div>
       </div>
     </div>
