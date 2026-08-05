@@ -61,13 +61,13 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{{ route('home') }}" class="active">Agence</a></li>
-          <li><a href="https://caei-afri.com/Digitalmoov/about.html">A propos </a></li>
-          <li><a href="https://caei-afri.com/Digitalmoov/services.html">Expertises</a></li>
-          <li><a href="https://caei-afri.com/Digitalmoov/projects.html">Projects</a></li>
-          <li><a href="https://caei-afri.com/Digitalmoov/reference.html">References</a></li>
+          <li><a href="{{ route('digitalmoov') }}" class="active">Agence</a></li>
+          <li><a href="{{ route('digitalmoov.about') }}">A propos </a></li>
+          <li><a href="{{ route('digitalmoov.services') }}">Expertises</a></li>
+          <li><a href="{{ route('digitalmoov.projects') }}">Projects</a></li>
+          <li><a href="{{ route('digitalmoov.reference') }}">References</a></li>
           <li><a href="{{ asset('digitalmoov/pdf/CAEI DIGITAL MOOV CATALOGUE.pdf') }}" target="_blank">Catalogue</a></li>
-          <li><a href="https://caei-afri.com/Digitalmoov/contact.html">Contact</a></li>
+          <li><a href="{{ route('digitalmoov.contact') }}">Contact</a></li>
           <li><a href="{{ route('login') }}">Connexion</a></li>
 
         </ul>
@@ -87,7 +87,7 @@
            
            
             <p data-aos="fade-up"> Votre partenaire de confiance pour une transformation numérique réussie.</p>
-            <a data-aos="fade-up" data-aos-delay="200" href="https://caei-afri.com/Digitalmoov/contact.html" class="btn-get-started">Contactez-nous</a>
+            <a data-aos="fade-up" data-aos-delay="200" href="{{ route('digitalmoov.contact') }}" class="btn-get-started">Contactez-nous</a>
           </div>
         </div>
       </div>
@@ -123,7 +123,7 @@
           </div>
 
           <div class="col-lg-5" data-aos="fade">
-            <form action="{{ route('contact.send') }}" method="post" id="quoteForm"> @csrf
+            <form action="{{ route('contact.send') }}" method="post" id="quoteForm" class="php-email-form"> @csrf
               <h3>Contactez-nous!</h3>
               <div class="row gy-3">
 
@@ -179,7 +179,7 @@
               </div>
               <h3>Creation ou refonte des sites web</h3>
               <p>Créez ou modernisez votre présence en ligne avec notre expertise en création et refonte de sites web.</p>
-              <a href="service-details.html" class="readmore stretched-link">Savoir plus <i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus <i class="bi bi-arrow-right"></i></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -190,7 +190,7 @@
               </div>
               <h3>Editorial de contenue web</h3>
               <p>Optimisez votre contenu en ligne avec notre service éditorial professionnel.</p>
-              <a href="service-details.html" class="readmore stretched-link">Savoir plus <i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus <i class="bi bi-arrow-right"></i></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -201,7 +201,7 @@
               </div>
               <h3>Creation des stratégies numériques personalisés</h3>
               <p>Concevez une stratégie numérique sur mesure pour propulser votre entreprise vers le succès en ligne.</p>
-              <a href="service-details.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -212,7 +212,7 @@
               </div>
               <h3>Gestion des medias sociaux</h3>
               <p>Maximisez votre impact sur les réseaux sociaux avec notre gestion professionnelle des médias sociaux.</p>
-              <a href="service-details.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -223,7 +223,7 @@
               </div>
               <h3>Prospection commerciale</h3>
               <p>Booster vos ventes avec notre expertise en prospection commerciale.</p>
-              <a href="service-details.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -234,7 +234,7 @@
               </div>
               <h3>Compagnes E-mailing</h3>
               <p>Engagez votre audience avec des campagnes d'e-mailing percutantes.</p>
-              <a href="service-details.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
             </div>
           </div><!-- End Service Item -->
 
@@ -795,7 +795,7 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+      <footer id="footer" class="footer">
 
     <div class="footer-content position-relative">
       <div class="container">
@@ -803,8 +803,8 @@
 
           <div class="col-lg-4 col-md-6">
             <div class="footer-info">
-              <div class="logo">
-                <img src="{{ asset('digitalmoov/assets/img/caei dm cov.png') }}" alt="" style="scale: 0.8 ; margin-left: 80px;">
+              <div class="logo mb-3">
+                <img src="{{ asset('digitalmoov/assets/img/caei dm cov.png') }}" alt="CAEI Digital Moov" style="max-height: 60px; width: auto;">
               </div>
               
               <p>
@@ -825,45 +825,41 @@
           <div class="col-lg-2 col-md-3 footer-links">
             <h4>Liens utiles</h4>
             <ul>
-              <li><a href="#">Accueil</a></li>
-              <li><a href="#">Présentation</a></li>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Terms of service</a></li>
-              <li><a href="#">Privacy policy</a></li>
+              <li><a href="{{ route('digitalmoov') }}">Accueil</a></li>
+              <li><a href="{{ route('digitalmoov.about') }}">Présentation</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Services</a></li>
+              <li><a href="{{ route('digitalmoov.terms') }}">Terms of service</a></li>
+              <li><a href="{{ route('digitalmoov.privacy') }}">Privacy policy</a></li>
             </ul>
           </div><!-- End footer links column-->
 
           <div class="col-lg-2 col-md-3 footer-links">
             <h4>Nos Services</h4>
             <ul>
-              <li><a href="#">Web Design</a></li>
-              <li><a href="#">Web Development</a></li>
-              <li><a href="#">Product Management</a></li>
-              <li><a href="#">Marketing</a></li>
-              <li><a href="#">Graphic Design</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Web Design</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Web Development</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Product Management</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Marketing</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Graphic Design</a></li>
             </ul>
           </div><!-- End footer links column-->
 
           <div class="col-lg-2 col-md-3 footer-links">
             <h4>Explorez</h4>
             <ul>
-              <li><a href="#">Services</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="#">FAQ</a></li>
-              <li><a href="#">Partenaires
-              </a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Services</a></li>
+              <li><a href="{{ route('digitalmoov.blog') }}">Blog</a></li>
+              <li><a href="{{ route('digitalmoov') }}#get-started">FAQ</a></li>
+              <li><a href="{{ route('digitalmoov.about') }}">Partenaires</a></li>
             </ul>
           </div><!-- End footer links column-->
 
           <div class="col-lg-2 col-md-3 footer-links">
             <h4>Ressources</h4>
             <ul>
-              <li><a href="#">Politique de Confidentialité</a></li>
-              <li><a href="#">Carte du Site
-              </a></li>
-              <li><a href="#">Mentions Légales
-              </a></li>
-              
+              <li><a href="{{ route('digitalmoov.privacy') }}">Politique de Confidentialité</a></li>
+              <li><a href="{{ route('digitalmoov.sitemap') }}">Carte du Site</a></li>
+              <li><a href="{{ route('digitalmoov.terms') }}">Mentions Légales</a></li>
             </ul>
           </div><!-- End footer links column-->
 
@@ -877,11 +873,7 @@
           &copy; Copyright <strong><span>CAEI Digital-MOOV</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-          <!-- All the links in the footer should remain intact. -->
-          <!-- You can delete the links only if you purchased the pro version. -->
-          <!-- Licensing information: https://bootstrapmade.com/license/ -->
-          <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/upconstruction-bootstrap-construction-website-template/ -->
-          Designed by <a href="https://bootstrapmade.com/">Digital.MOOV</a>
+          Designed by <a href="{{ route('digitalmoov') }}">Digital.MOOV</a>
         </div>
       </div>
     </div>
@@ -900,57 +892,63 @@
   <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.10/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs@1.5.0/dist/purecounter_vanilla.js"></script>
-  <script src="{{ asset('digitalmoov/assets/vendor/php-email-form/validate.js') }}"></script>
+  <!-- <script src="{{ asset('digitalmoov/assets/vendor/php-email-form/validate.js') }}"></script> -->
 
   <!-- Template Main JS File -->
   <script src="{{ asset('digitalmoov/assets/js/main.js') }}"></script>
 
 
-  <script>
-    const quoteForm = document.getElementById("quoteForm");
-    if (quoteForm) {
-      quoteForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        const loading = quoteForm.querySelector(".loading");
-        const errorMsg = quoteForm.querySelector(".error-message");
-        const sentMsg = quoteForm.querySelector(".sent-message");
+      <script>
+        const quoteForm = document.getElementById("quoteForm");
+        const contactForm = document.getElementById("contactForm");
+        
+        function handleFormSubmit(form) {
+          if (!form) return;
+          form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const loading = form.querySelector(".loading");
+            const errorMsg = form.querySelector(".error-message");
+            const sentMsg = form.querySelector(".sent-message");
 
-        if(loading) loading.style.display = "block";
-        if(errorMsg) errorMsg.style.display = "none";
-        if(sentMsg) sentMsg.style.display = "none";
+            if(loading) loading.style.display = "block";
+            if(errorMsg) errorMsg.style.display = "none";
+            if(sentMsg) sentMsg.style.display = "none";
 
-        const formData = new FormData(quoteForm);
+            const formData = new FormData(form);
 
-        fetch(quoteForm.getAttribute("action"), {
-          method: "POST",
-          headers: {
-            "X-Requested-With": "XMLHttpRequest"
-          },
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          if(loading) loading.style.display = "none";
-          if (data.status === "success") {
-            if(sentMsg) sentMsg.style.display = "block";
-            quoteForm.reset();
-          } else {
-            if(errorMsg) {
-              errorMsg.textContent = data.message || "Une erreur est survenue.";
-              errorMsg.style.display = "block";
-            }
-          }
-        })
-        .catch(err => {
-          if(loading) loading.style.display = "none";
-          if(errorMsg) {
-            errorMsg.textContent = "Impossible de se connecter au serveur.";
-            errorMsg.style.display = "block";
-          }
-        });
-      });
-    }
-  </script>
-</body>
+            fetch(form.getAttribute("action"), {
+              method: "POST",
+              headers: {
+                "X-Requested-With": "XMLHttpRequest"
+              },
+              body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+              if(loading) loading.style.display = "none";
+              if (data.status === "success") {
+                if(sentMsg) sentMsg.style.display = "block";
+                form.reset();
+              } else {
+                if(errorMsg) {
+                  errorMsg.textContent = data.message || "Une erreur est survenue.";
+                  errorMsg.style.display = "block";
+                }
+              }
+            })
+            .catch(err => {
+              if(loading) loading.style.display = "none";
+              if(errorMsg) {
+                errorMsg.textContent = "Impossible de se connecter au serveur.";
+                errorMsg.style.display = "block";
+              }
+            });
+          });
+        }
+        
+        handleFormSubmit(quoteForm);
+        handleFormSubmit(contactForm);
+      </script>
+    </body>
 
 </html>
