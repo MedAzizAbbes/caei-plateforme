@@ -117,7 +117,12 @@
         <div class="row gy-4 mt-1">
 
           <div class="col-lg-6 ">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3192.5!2d10.183053!3d36.822484!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd34b3e4d7c8a7%3A0xd5fdd5d20b2f6486!2z!5e0!3m2!1sfr!2stn!4v1700000000000" frameborder="0" style="border:0; width: 100%; height: 384px; border-radius: 16px;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div style="position: relative; width: 100%; height: 384px;">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3192.5!2d10.183053!3d36.822484!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd34b3e4d7c8a7%3A0xd5fdd5d20b2f6486!2z!5e0!3m2!1sfr!2stn!4v1700000000000" frameborder="0" style="border:0; width: 100%; height: 100%; border-radius: 16px;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <a href="https://maps.app.goo.gl/iU7yMTUZuDXzu5VH9" target="_blank" style="position: absolute; top: 12px; left: 12px; background-color: white; color: #1a73e8; padding: 8px 14px; border-radius: 2px; font-family: Roboto, Arial, sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; display: flex; align-items: center; gap: 8px; transition: background-color 0.2s;">
+                Ouvrir dans Maps <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+            </div>
           </div><!-- End Google Maps -->
 
           <div class="col-lg-6">
