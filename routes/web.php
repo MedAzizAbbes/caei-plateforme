@@ -235,6 +235,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // --- Paramètres bancaires ---
     Route::get('/bank-settings', [\App\Http\Controllers\Admin\BankSettingController::class, 'edit'])->name('bank-settings.edit');
     Route::put('/bank-settings', [\App\Http\Controllers\Admin\BankSettingController::class, 'update'])->name('bank-settings.update');
+
+    // --- Devis Médicaux CAEI Medical Center ---
+    Route::get('/devis-medicaux', [\App\Http\Controllers\Admin\MedicalRequestController::class, 'index'])->name('medical-requests.index');
+    Route::put('/devis-medicaux/{medicalRequest}', [\App\Http\Controllers\Admin\MedicalRequestController::class, 'updateStatus'])->name('medical-requests.update-status');
+    Route::delete('/devis-medicaux/{medicalRequest}', [\App\Http\Controllers\Admin\MedicalRequestController::class, 'destroy'])->name('medical-requests.destroy');
 });
 
 require __DIR__.'/auth.php';
