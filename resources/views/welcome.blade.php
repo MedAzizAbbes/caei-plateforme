@@ -458,10 +458,10 @@
           <li><a href="#acceuil" class="active">Accueil<br></a></li>
           <li><a href="#presentation">Présentation</a></li>
           <li><a href="#agencies">Nos Agences</a></li>
-          <li><a href="#seminaires">Séminaires</a></li>
+          <li><a href="{{ route('home.old') }}">Séminaires</a></li>
           <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="#seminaires">CAEI ELITE TRAINING</a></li>             
+              <li><a href="{{ route('home.old') }}">CAEI ELITE TRAINING</a></li>             
               <li><a href="https://caei-afri.com/Medicalservices/" target="_blank">CAEI MEDICAL SERVICES</a></li>
               <li><a href="https://caei-afri.com/Digitalmoov/" target="_blank">CAEI DIGITAL MOOV</a></li>
               <li><a href="https://caei-afri.com/Callcenter/" target="_blank">CAEI CALL CENTER</a></li>
@@ -534,7 +534,7 @@
         
         <div class="row gy-4 mt-5 justify-content-center" data-aos="none" style="animation: none !important; transform: none !important;">
           <div class="col-6 col-xl-2 col-md-4">
-            <a href="#seminaires" style="display: block; text-decoration: none;">
+            <a href="{{ route('home.old') }}" style="display: block; text-decoration: none;">
               <div style="width: 140px; height: 140px; margin: 0 auto; padding: 5px; background: rgba(0, 15, 60, 0.5); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(5px);" onmouseover="this.style.borderColor='rgba(255, 196, 81, 0.6)'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.3)'; this.style.transform='scale(1)';">
                 <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training" style="width: 110px; height: 110px; object-fit: contain; margin: auto;">
               </div>
@@ -671,7 +671,7 @@
                 <p class="text-muted small mb-4">Formation professionnelle d'excellence</p>
               </div>
               <div>
-                <a href="#seminaires" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #001f3f; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#003d7a'" onmouseout="this.style.backgroundColor='#001f3f'">Découvrir</a>
+                <a href="{{ route('home.old') }}" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #001f3f; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#003d7a'" onmouseout="this.style.backgroundColor='#001f3f'">Découvrir</a>
               </div>
             </div>
           </div>
@@ -749,7 +749,7 @@
               <p style="font-size: 15px; line-height: 1.8;">
                 Le CAEI a pour mission de former les cadres et élites africaines pour les aider à relever les défis de développement auxquels le continent est confronté. Les formations sont dispensées par des experts de renommée internationale, africains, dans des institutions partenaires à travers le continent. Le CAEI joue également un rôle important dans la promotion de la coopération entre les pays africains et entre l'Afrique et d'autres régions du monde.
               </p>
-              <a href="#seminaires" class="btn btn-warning rounded-pill mt-3 px-4 fw-bold" style="background-color: #ffc451; color: #000f3c;">Voir les Séminaires</a>
+              <a href="{{ route('home.old') }}" class="btn btn-warning rounded-pill mt-3 px-4 fw-bold" style="background-color: #ffc451; color: #000f3c;">Voir les Séminaires</a>
             </div>
           </div>
         </div>
@@ -807,119 +807,7 @@
       </div>
     </section><!-- /About Agencies Section -->
 
-    <!-- ══════════ SECTION SÉMINAIRES (DYNAMIQUE LARAVEL) ══════════ -->
-    <section id="seminaires" class="py-5" style="background-color: #f9f9f9;">
-      <div class="container py-4">
-
-        <div class="text-center mb-5" data-aos="fade-up">
-          <p class="text-uppercase tracking-wider fw-bold" style="color: #ffc451; font-size: 14px; letter-spacing: 2px;">CAEI Company Group</p>
-          <h2 class="fw-bold text-uppercase" style="color: #000f3c; font-size: 36px;">Nos Séminaires Actifs</h2>
-          <hr class="section-divider mt-3 mx-auto" style="border: none; height: 3px; background: linear-gradient(90deg, transparent, #ffc451, transparent); max-width: 150px;">
-          <p class="text-muted mt-4 max-w-2xl mx-auto">
-            Consultez nos séminaires disponibles ci-dessous. Cliquez sur "Voir les détails" pour en savoir plus ou sur "S'inscrire" pour rejoindre un séminaire.
-          </p>
-        </div>
-
-        @if($seminars->isEmpty())
-          <div class="text-center py-5" data-aos="fade-up">
-            <div class="mx-auto rounded-circle d-flex align-items-center justify-content-center mb-4 shadow-sm" style="width: 80px; height: 80px; background-color: rgba(0, 15, 60, 0.08); margin: 0 auto;">
-              <i class="bi bi-calendar-x text-muted" style="font-size: 32px;"></i>
-            </div>
-            <h3 class="fw-bold" style="color: #000f3c;">Aucun séminaire disponible</h3>
-            <p class="text-muted">De nouveaux séminaires seront publiés prochainement.</p>
-          </div>
-        @else
-          <div class="row g-4 justify-content-center" data-aos="fade-up">
-            @foreach($seminars as $seminar)
-              <div class="col-lg-4 col-md-6 col-sm-12">
-                <article class="seminar-card-modern">
-                  <!-- Affiche / Image du séminaire -->
-                  <div class="seminar-card-image-wrap">
-                    @if($seminar->image)
-                      <img src="{{ Storage::url($seminar->image) }}" alt="Affiche — {{ $seminar->theme }}" class="seminar-card-image">
-                    @else
-                      <div class="seminar-card-image-fallback">
-                        <div class="rounded-circle bg-warning bg-opacity-10 d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px; margin: 0 auto;">
-                          <i class="bi bi-journal-text text-warning" style="font-size: 28px;"></i>
-                        </div>
-                        <h4 class="text-white fw-bold px-3 text-center" style="font-size: 15px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">{{ $seminar->theme }}</h4>
-                        <p class="text-warning mt-2 text-uppercase fw-bold" style="font-size: 9px; letter-spacing: 1px;">CAEI Company Group</p>
-                      </div>
-                    @endif
-
-                    <span class="seminar-card-status-badge">Ouvert</span>
-                  </div>
-
-                  <!-- Zone de détails en overlay (Affichée au hover) -->
-                  <div class="seminar-card-overlay">
-                    <div style="flex-grow: 1;">
-                      <h3 class="seminar-card-title-overlay text-uppercase">{{ $seminar->theme }}</h3>
-                      @if($seminar->description)
-                        <p class="seminar-card-desc-overlay">{{ $seminar->description }}</p>
-                      @endif
-
-                      <div class="seminar-card-meta-list">
-                        <!-- Date -->
-                        <div class="seminar-card-meta-row">
-                          <i class="bi bi-calendar3"></i>
-                          <span>
-                            Du {{ $seminar->start_date->format('d/m/Y') }}
-                            @if($seminar->start_date != $seminar->end_date)
-                              au {{ $seminar->end_date->format('d/m/Y') }}
-                            @endif
-                          </span>
-                        </div>
-
-                        <!-- Lieu -->
-                        <div class="seminar-card-meta-row">
-                          <i class="bi bi-geo-alt"></i>
-                          <span>{{ $seminar->country }}</span>
-                        </div>
-
-                        <!-- Prix -->
-                        @if($seminar->price)
-                          <div class="seminar-card-meta-row">
-                            <i class="bi bi-currency-euro text-warning"></i>
-                            <span class="fw-bold text-warning">{{ number_format($seminar->price, 2, ',', ' ') }} €</span>
-                          </div>
-                        @endif
-
-                        <!-- Places disponibles -->
-                        <div class="seminar-card-meta-row">
-                          <i class="bi bi-people"></i>
-                          <span>{{ max(0, 30 - $seminar->registrations_count) }} places disponibles</span>
-                        </div>
-
-                        <!-- Formateurs -->
-                        @if($seminar->trainers->isNotEmpty())
-                          <div class="seminar-card-meta-row">
-                            <i class="bi bi-person-badge"></i>
-                            <span class="text-truncate" title="{{ $seminar->trainers->map->fullName()->join(', ') }}">
-                              {{ $seminar->trainers->map->fullName()->join(', ') }}
-                            </span>
-                          </div>
-                        @endif
-                      </div>
-                    </div>
-
-                    <!-- Actions -->
-                    <div class="seminar-card-buttons">
-                      <a href="{{ route('seminaires.show', $seminar) }}" class="seminar-card-btn-view">Voir les détails</a>
-                      @auth
-                        <a href="{{ route('registration.create', ['seminar_id' => $seminar->id]) }}" class="seminar-card-btn-sub">S'inscrire</a>
-                      @else
-                        <a href="{{ route('login') }}" class="seminar-card-btn-sub">S'inscrire</a>
-                      @endauth
-                    </div>
-                  </div>
-                </article>
-              </div>
-            @endforeach
-          </div>
-        @endif
-
-      </div>
-    </section>
+    <!-- Section Séminaires déplacée vers /ancien-accueil -->
 
     <!-- Services Section -->
     <section id="services" class="services section py-5">
@@ -1215,7 +1103,7 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4 class="text-white fw-bold mb-3" style="font-size: 16px;">Nos Agences</h4>
           <ul class="list-unstyled">
-            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="#seminaires" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('home.old') }}" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Medicalservices/" target="_blank" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Digitalmoov/" target="_blank" class="text-decoration-none text-white-50">CAEI DIGITAL MOOV</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Callcenter/" target="_blank" class="text-decoration-none text-white-50">CAEI CALL CENTER</a></li>

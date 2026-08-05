@@ -29,6 +29,14 @@ use App\Http\Controllers\ProfileController;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [SeminarPublicController::class, 'index'])->name('home');
+Route::get('/ancien-accueil', function () {
+    $seminars = \App\Models\Seminar::where('status', 'published')
+        ->withCount('registrations')
+        ->with('trainers')
+        ->orderBy('start_date')
+        ->get();
+    return view('welcome_old', compact('seminars'));
+})->name('home.old');
 Route::get('/seminaires/{seminar}', [SeminarPublicController::class, 'show'])->name('seminaires.show');
 
 // Lien sécurisé du QR code -> connexion automatique + redirection tableau de bord
