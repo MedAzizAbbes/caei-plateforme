@@ -463,6 +463,8 @@
             <ul>
               <li><a href="{{ route('home.old') }}">CAEI ELITE TRAINING</a></li>             
               <li><a href="https://caei-afri.com/Medicalservices/" target="_blank">CAEI MEDICAL SERVICES</a></li>
+              <li><a href="#seminaires">CAEI ELITE TRAINING</a></li>             
+              <li><a href="{{ route('medical.services') }}">CAEI MEDICAL SERVICES</a></li>
               <li><a href="https://caei-afri.com/Digitalmoov/" target="_blank">CAEI DIGITAL MOOV</a></li>
               <li><a href="https://caei-afri.com/Callcenter/" target="_blank">CAEI CALL CENTER</a></li>
             </ul>
@@ -541,7 +543,7 @@
             </a>
           </div>
           <div class="col-6 col-xl-2 col-md-4">
-            <a href="https://caei-afri.com/Medicalservices/" target="_blank" style="display: block; text-decoration: none;">
+            <a href="{{ route('medical.services') }}" style="display: block; text-decoration: none;">
               <div style="width: 140px; height: 140px; margin: 0 auto; padding: 5px; background: rgba(0, 15, 60, 0.5); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(5px);" onmouseover="this.style.borderColor='rgba(255, 196, 81, 0.6)'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.3)'; this.style.transform='scale(1)';">
                 <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services" style="width: 110px; height: 110px; object-fit: contain; margin: auto;">
               </div>
@@ -687,7 +689,7 @@
                 <p class="text-muted small mb-4">Services médicaux et solutions de santé</p>
               </div>
               <div>
-                <a href="https://caei-afri.com/Medicalservices/" target="_blank" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #17a2b8; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#138496'" onmouseout="this.style.backgroundColor='#17a2b8'">Découvrir</a>
+                <a href="{{ route('medical.services') }}" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #17a2b8; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#138496'" onmouseout="this.style.backgroundColor='#17a2b8'">Découvrir</a>
               </div>
             </div>
           </div>
@@ -783,7 +785,7 @@
               <p style="font-size: 15px; line-height: 1.8;">
                 CAEI MEDICAL SERVICES est une agence internationale de services médicaux. Nous prenons en charge les patients étrangers désirant se soigner ou se faire opérer en Tunisie. Grâce à notre logistique, notre personnel et notre approche relationnelle, nous visons à devenir la référence dans le domaine des services médicaux en Afrique, en vous assurant l'accès aux meilleures conditions de soins.
               </p>
-              <a href="https://caei-afri.com/Medicalservices/" target="_blank" class="btn btn-info text-white rounded-pill mt-3 px-4 fw-bold">Visiter le site</a>
+              <a href="{{ route('medical.services') }}" class="btn btn-info text-white rounded-pill mt-3 px-4 fw-bold">Visiter la page</a>
             </div>
           </div>
         </div>
@@ -1105,6 +1107,8 @@
           <ul class="list-unstyled">
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('home.old') }}" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Medicalservices/" target="_blank" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="#seminaires" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('medical.services') }}" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Digitalmoov/" target="_blank" class="text-decoration-none text-white-50">CAEI DIGITAL MOOV</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Callcenter/" target="_blank" class="text-decoration-none text-white-50">CAEI CALL CENTER</a></li>
           </ul>

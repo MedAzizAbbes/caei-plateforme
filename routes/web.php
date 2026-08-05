@@ -37,6 +37,10 @@ Route::get('/ancien-accueil', function () {
         ->get();
     return view('welcome_old', compact('seminars'));
 })->name('home.old');
+Route::get('/', [SeminarPublicController::class, 'main'])->name('home');
+Route::get('/plateforme', [SeminarPublicController::class, 'index'])->name('plateforme');
+Route::get('/medical-services', [\App\Http\Controllers\MedicalServiceController::class, 'index'])->name('medical.services');
+Route::post('/medical-services/devis', [\App\Http\Controllers\MedicalServiceController::class, 'storeRequest'])->name('medical.services.request');
 Route::get('/seminaires/{seminar}', [SeminarPublicController::class, 'show'])->name('seminaires.show');
 
 // Lien sécurisé du QR code -> connexion automatique + redirection tableau de bord
