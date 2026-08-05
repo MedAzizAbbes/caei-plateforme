@@ -174,68 +174,110 @@
         <div class="row gy-4">
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item  position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-mountain-city"></i>
+            <div class="service-item position-relative h-100 shadow-sm border-0 rounded-4 overflow-hidden bg-white d-flex flex-column transition-all hover-lift">
+              <div class="service-img position-relative overflow-hidden" style="height: 200px;">
+                <img src="{{ asset('digitalmoov/assets/img/dm_service_webdev.jpg') }}" alt="Création de sites web" class="img-fluid w-100 h-100 object-fit-cover">
+                <div class="icon position-absolute top-0 end-0 m-3 bg-dark bg-opacity-75 text-orange-500 rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; backdrop-filter: blur(8px);">
+                  <i class="fa-solid fa-laptop text-orange-500 fs-5"></i>
+                </div>
               </div>
-              <h3>Creation ou refonte des sites web</h3>
-              <p>Créez ou modernisez votre présence en ligne avec notre expertise en création et refonte de sites web.</p>
-              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus <i class="bi bi-arrow-right"></i></a>
+              <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                <div>
+                  <h3 class="h5 fw-bold text-dark mb-2">Création ou refonte des sites web</h3>
+                  <p class="text-muted small leading-relaxed">Créez ou modernisez votre présence en ligne avec notre expertise sur-mesure en développement et design web.</p>
+                </div>
+                <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link text-orange-600 fw-bold text-decoration-none d-inline-flex align-items-center gap-1 mt-3">Savoir plus <i class="bi bi-arrow-right"></i></a>
+              </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+            <div class="service-item position-relative h-100 shadow-sm border-0 rounded-4 overflow-hidden bg-white d-flex flex-column transition-all hover-lift">
+              <div class="service-img position-relative overflow-hidden" style="height: 200px;">
+                <img src="{{ asset('digitalmoov/assets/img/dm_service_editorial.jpg') }}" alt="Éditorial de contenu web" class="img-fluid w-100 h-100 object-fit-cover">
+                <div class="icon position-absolute top-0 end-0 m-3 bg-dark bg-opacity-75 text-orange-500 rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; backdrop-filter: blur(8px);">
+                  <i class="fa-solid fa-pen-nib text-orange-500 fs-5"></i>
+                </div>
               </div>
-              <h3>Editorial de contenue web</h3>
-              <p>Optimisez votre contenu en ligne avec notre service éditorial professionnel.</p>
-              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus <i class="bi bi-arrow-right"></i></a>
+              <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                <div>
+                  <h3 class="h5 fw-bold text-dark mb-2">Éditorial de contenu web</h3>
+                  <p class="text-muted small leading-relaxed">Optimisez votre contenu en ligne avec notre service éditorial professionnel et rédaction SEO haut de gamme.</p>
+                </div>
+                <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link text-orange-600 fw-bold text-decoration-none d-inline-flex align-items-center gap-1 mt-3">Savoir plus <i class="bi bi-arrow-right"></i></a>
+              </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-compass-drafting"></i>
+            <div class="service-item position-relative h-100 shadow-sm border-0 rounded-4 overflow-hidden bg-white d-flex flex-column transition-all hover-lift">
+              <div class="service-img position-relative overflow-hidden" style="height: 200px;">
+                <img src="{{ asset('digitalmoov/assets/img/dm_service_strategy.jpg') }}" alt="Stratégies numériques" class="img-fluid w-100 h-100 object-fit-cover">
+                <div class="icon position-absolute top-0 end-0 m-3 bg-dark bg-opacity-75 text-orange-500 rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; backdrop-filter: blur(8px);">
+                  <i class="fa-solid fa-chart-line text-orange-500 fs-5"></i>
+                </div>
               </div>
-              <h3>Creation des stratégies numériques personalisés</h3>
-              <p>Concevez une stratégie numérique sur mesure pour propulser votre entreprise vers le succès en ligne.</p>
-              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+              <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                <div>
+                  <h3 class="h5 fw-bold text-dark mb-2">Création de stratégies numériques</h3>
+                  <p class="text-muted small leading-relaxed">Concevez une stratégie numérique sur mesure pour propulser votre entreprise vers le succès et maximiser votre ROI.</p>
+                </div>
+                <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link text-orange-600 fw-bold text-decoration-none d-inline-flex align-items-center gap-1 mt-3">Savoir plus <i class="bi bi-arrow-right"></i></a>
+              </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-trowel-bricks"></i>
+            <div class="service-item position-relative h-100 shadow-sm border-0 rounded-4 overflow-hidden bg-white d-flex flex-column transition-all hover-lift">
+              <div class="service-img position-relative overflow-hidden" style="height: 200px;">
+                <img src="{{ asset('digitalmoov/assets/img/dm_service_social.jpg') }}" alt="Gestion des médias sociaux" class="img-fluid w-100 h-100 object-fit-cover">
+                <div class="icon position-absolute top-0 end-0 m-3 bg-dark bg-opacity-75 text-orange-500 rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; backdrop-filter: blur(8px);">
+                  <i class="fa-solid fa-share-nodes text-orange-500 fs-5"></i>
+                </div>
               </div>
-              <h3>Gestion des medias sociaux</h3>
-              <p>Maximisez votre impact sur les réseaux sociaux avec notre gestion professionnelle des médias sociaux.</p>
-              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+              <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                <div>
+                  <h3 class="h5 fw-bold text-dark mb-2">Gestion des médias sociaux</h3>
+                  <p class="text-muted small leading-relaxed">Maximisez votre impact et votre notoriété sur les réseaux sociaux grâce à notre gestion stratégique de communauté.</p>
+                </div>
+                <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link text-orange-600 fw-bold text-decoration-none d-inline-flex align-items-center gap-1 mt-3">Savoir plus <i class="bi bi-arrow-right"></i></a>
+              </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-helmet-safety"></i>
+            <div class="service-item position-relative h-100 shadow-sm border-0 rounded-4 overflow-hidden bg-white d-flex flex-column transition-all hover-lift">
+              <div class="service-img position-relative overflow-hidden" style="height: 200px;">
+                <img src="{{ asset('digitalmoov/assets/img/people-working-as-team-company.jpg') }}" alt="Prospection commerciale" class="img-fluid w-100 h-100 object-fit-cover">
+                <div class="icon position-absolute top-0 end-0 m-3 bg-dark bg-opacity-75 text-orange-500 rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; backdrop-filter: blur(8px);">
+                  <i class="fa-solid fa-bullseye text-orange-500 fs-5"></i>
+                </div>
               </div>
-              <h3>Prospection commerciale</h3>
-              <p>Booster vos ventes avec notre expertise en prospection commerciale.</p>
-              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+              <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                <div>
+                  <h3 class="h5 fw-bold text-dark mb-2">Prospection commerciale B2B</h3>
+                  <p class="text-muted small leading-relaxed">Boostez vos ventes et générez des opportunités commerciales qualifiées grâce à nos techniques d'acquisition ciblées.</p>
+                </div>
+                <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link text-orange-600 fw-bold text-decoration-none d-inline-flex align-items-center gap-1 mt-3">Savoir plus <i class="bi bi-arrow-right"></i></a>
+              </div>
             </div>
           </div><!-- End Service Item -->
 
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item position-relative">
-              <div class="icon">
-                <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+            <div class="service-item position-relative h-100 shadow-sm border-0 rounded-4 overflow-hidden bg-white d-flex flex-column transition-all hover-lift">
+              <div class="service-img position-relative overflow-hidden" style="height: 200px;">
+                <img src="{{ asset('digitalmoov/assets/img/la_strategie_marketing_digitale.jpg') }}" alt="Campagnes E-mailing" class="img-fluid w-100 h-100 object-fit-cover">
+                <div class="icon position-absolute top-0 end-0 m-3 bg-dark bg-opacity-75 text-orange-500 rounded-3 p-2 d-flex align-items-center justify-content-center" style="width: 44px; height: 44px; backdrop-filter: blur(8px);">
+                  <i class="fa-solid fa-envelope-open-text text-orange-500 fs-5"></i>
+                </div>
               </div>
-              <h3>Compagnes E-mailing</h3>
-              <p>Engagez votre audience avec des campagnes d'e-mailing percutantes.</p>
-              <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+              <div class="p-4 d-flex flex-column flex-grow-1 justify-content-between">
+                <div>
+                  <h3 class="h5 fw-bold text-dark mb-2">Campagnes E-mailing</h3>
+                  <p class="text-muted small leading-relaxed">Engagez et fidélisez votre audience avec des campagnes e-mailing percutantes, personnalisées et à fort taux de conversion.</p>
+                </div>
+                <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link text-orange-600 fw-bold text-decoration-none d-inline-flex align-items-center gap-1 mt-3">Savoir plus <i class="bi bi-arrow-right"></i></a>
+              </div>
             </div>
           </div><!-- End Service Item -->
 
