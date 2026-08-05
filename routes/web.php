@@ -170,6 +170,14 @@ Route::get('/digital-moov/connexion.html', function () {
     return redirect()->route('digitalmoov.connexion');
 });
 
+Route::get('/digital-moov/project-details', function () {
+    return view('digitalmoov.project-details');
+})->name('digitalmoov.project-details');
+
+Route::get('/digital-moov/project-details.html', function () {
+    return redirect()->route('digitalmoov.project-details');
+});
+
 Route::get('/plateforme', [SeminarPublicController::class, 'index'])->name('plateforme');
 Route::get('/medical-services', [\App\Http\Controllers\MedicalServiceController::class, 'index'])->name('medical.services');
 Route::post('/medical-services/devis', [\App\Http\Controllers\MedicalServiceController::class, 'storeRequest'])->name('medical.services.request');

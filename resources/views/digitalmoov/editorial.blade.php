@@ -27,7 +27,7 @@
   <link href="https://cdn.jsdelivr.net/npm/swiper@11.1.10/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="{{ asset('digitalmoov/assets/css/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('digitalmoov/assets/css/main.css') }}?v=2.0" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: UpConstruction

@@ -11,7 +11,7 @@
 
   <!-- Favicons -->
   <link rel="icon" href="{{ asset('digitalmoov/assets/img/caei dm 01.png') }}" type="image/x-icon">
-<link rel="apple-touch-icon" href="{{ asset('digitalmoov/assets/img/caei dm 01.png') }}">
+  <link rel="apple-touch-icon" href="{{ asset('digitalmoov/assets/img/caei dm 01.png') }}">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -39,164 +39,137 @@
 </head>
 
 <body>
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header d-flex align-items-center">
+      <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
   
-  <!-- ======= Header ======= -->
-  <header id="header" class="header d-flex align-items-center">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-
-      <div class="logo">
-        <img src="{{ asset('digitalmoov/assets/img/caei dm cov.png') }}" alt="" >
+        <div class="logo">
+          <img src="{{ asset('digitalmoov/assets/img/caei dm cov.png') }}" alt="" >
+        </div>
+  
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+        <nav id="navbar" class="navbar">
+          <ul>
+            <li><a href="{{ route('digitalmoov') }}" class="active">Agence</a></li>
+            <li><a href="{{ route('digitalmoov.about') }}">A propos </a></li>
+            <li><a href="{{ route('digitalmoov.services') }}">Expertises</a></li>
+            <li><a href="{{ route('digitalmoov.projects') }}">Projects</a></li>
+            <li><a href="{{ route('digitalmoov.reference') }}">References</a></li>
+            <li><a href="{{ asset('digitalmoov/pdf/CAEI DIGITAL MOOV CATALOGUE.pdf') }}" target="_blank">Catalogue</a></li>
+            <li><a href="{{ route('digitalmoov.contact') }}">Contact</a></li>
+            <li><a href="{{ route('digitalmoov.contact') }}">Connexion</a></li>
+          </ul>
+        </nav><!-- .navbar -->
+  
       </div>
-
-      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="{{ route('digitalmoov') }}" >Agence</a></li>
-          <li><a href="{{ route('digitalmoov.about') }}">A propos </a></li>
-          <li><a href="{{ route('digitalmoov.services') }}">Expertises</a></li>
-          <li><a href="{{ route('digitalmoov.projects') }}">Projects</a></li>
-          <li><a href="{{ route('digitalmoov.reference') }}">References</a></li>
-          <li><a href="{{ asset('digitalmoov/pdf/CAEI DIGITAL MOOV CATALOGUE.pdf') }}" target="_blank">Catalogue</a></li>
-          <li><a href="{{ route('digitalmoov.contact') }}">Contact</a></li>
-          <li><a href="{{ route('digitalmoov.contact') }}">Connexion</a></li>
-        </ul>
-      </nav><!-- .navbar -->
-
-    </div>
-  </header><!-- End Header -->
+    </header><!-- End Header -->
 
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('digitalmoov/assets/img/teamwork-making-online-blog.jpg') }}');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('digitalmoov/assets/img/breadcrumbs-bg.jpg') }}');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
-        <h2>Blog</h2>
+        <h2>Project Details</h2>
         <ol>
-          <li><a href="{{ route('digitalmoov') }}">Agence</a></li>
-          <li>Ressources</li>
-          <li>Blog</li>
+          <li><a href="{{ route('digitalmoov') }}">Home</a></li>
+          <li>Project Details</li>
         </ol>
 
       </div>
     </div><!-- End Breadcrumbs -->
 
-    <!-- ======= Recent Blog Posts Section ======= -->
-    <section id="recent-blog-posts" class="recent-blog-posts">
-      <div class="container" data-aos="fade-up"">
+    <!-- ======= Projet Details Section ======= -->
+    <section id="project-details" class="project-details">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-    
-    
-  <div class=" section-header">
-        <h2>Recent Blog Posts</h2>
-      </div>
+        <div class="position-relative h-100">
+          <div class="slides-1 portfolio-details-slider swiper">
+            <div class="swiper-wrapper align-items-center">
 
-      <div class="row gy-5">
+              <div class="swiper-slide">
+                <img src="{{ asset('digitalmoov/assets/img/projects/remodeling-1.jpg') }}" alt="">
+              </div>
 
-        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="post-item position-relative h-100">
+              <div class="swiper-slide">
+                <img src="{{ asset('digitalmoov/assets/img/projects/construction-1.jpg') }}" alt="">
+              </div>
 
-            <div class="post-img position-relative overflow-hidden">
-              <img src="{{ asset('digitalmoov/assets/img/blog/blog-1.jpg') }}" class="img-fluid" alt="">
-              <span class="post-date">December 12</span>
+              <div class="swiper-slide">
+                <img src="{{ asset('digitalmoov/assets/img/projects/design-1.jpg') }}" alt="">
+              </div>
+
+              <div class="swiper-slide">
+                <img src="{{ asset('digitalmoov/assets/img/projects/repairs-1.jpg') }}" alt="">
+              </div>
+
             </div>
+            <div class="swiper-pagination"></div>
+          </div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-button-next"></div>
 
-            <div class="post-content d-flex flex-column">
+        </div>
 
-              <h3 class="post-title">Les 10 meilleures stratégies de marketing de contenu pour 2024</h3>
+        <div class="row justify-content-between gy-4 mt-4">
 
-              <div class="meta d-flex align-items-center">
-                <div class="d-flex align-items-center">
-                  <i class="bi bi-person"></i> <span class="ps-2">Julia Parker</span>
-                </div>
-                <span class="px-3 text-black-50">/</span>
-                <div class="d-flex align-items-center">
-                  <i class="bi bi-folder2"></i> <span class="ps-2">Politics</span>
+          <div class="col-lg-8">
+            <div class="portfolio-description">
+              <h2>This is an example of portfolio detail</h2>
+              <p>
+                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+              </p>
+              <p>
+                Amet consequatur qui dolore veniam voluptatem voluptatem sit. Non aspernatur atque natus ut cum nam et. Praesentium error dolores rerum minus sequi quia veritatis eum. Eos et doloribus doloremque nesciunt molestiae laboriosam.
+              </p>
+
+              <div class="testimonial-item">
+                <p>
+                  <i class="bi bi-quote quote-icon-left"></i>
+                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                  <i class="bi bi-quote quote-icon-right"></i>
+                </p>
+                <div>
+                  <img src="{{ asset('digitalmoov/assets/img/testimonials/testimonials-2.jpg') }}" class="testimonial-img" alt="">
+                  <h3>Sara Wilsson</h3>
+                  <h4>Designer</h4>
                 </div>
               </div>
 
-              <hr>
+              <p>
+                Impedit ipsum quae et aliquid doloribus et voluptatem quasi. Perspiciatis occaecati earum et magnam animi. Quibusdam non qui ea vitae suscipit vitae sunt. Repudiandae incidunt cumque minus deserunt assumenda tempore. Delectus voluptas necessitatibus est.
 
-              <a href="blog-details.html" class="readmore stretched-link"><span>Explorer</span><i class="bi bi-arrow-right"></i></a>
+              <p>
+                Sunt voluptatum sapiente facilis quo odio aut ipsum repellat debitis. Molestiae et autem libero. Explicabo et quod necessitatibus similique quis dolor eum. Numquam eaque praesentium rem et qui nesciunt.
+              </p>
 
             </div>
-
           </div>
-        </div><!-- End post item -->
 
-        <div class="col-xl-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="post-item position-relative h-100">
-
-            <div class="post-img position-relative overflow-hidden">
-              <img src="{{ asset('digitalmoov/assets/img/blog/blog-2.jpg') }}" class="img-fluid" alt="">
-              <span class="post-date">July 17</span>
+          <div class="col-lg-3">
+            <div class="portfolio-info">
+              <h3>Project information</h3>
+              <ul>
+                <li><strong>Category</strong> <span>Web design</span></li>
+                <li><strong>Client</strong> <span>ASU Company</span></li>
+                <li><strong>Project date</strong> <span>01 March, 2020</span></li>
+                <li><strong>Project URL</strong> <a href="#">www.example.com</a></li>
+                <li><a href="#" class="btn-visit align-self-start">Visit Website</a></li>
+              </ul>
             </div>
-
-            <div class="post-content d-flex flex-column">
-
-              <h3 class="post-title">Comment optimiser votre site web pour un meilleur référencement</h3>
-
-              <div class="meta d-flex align-items-center">
-                <div class="d-flex align-items-center">
-                  <i class="bi bi-person"></i> <span class="ps-2">Mario Douglas</span>
-                </div>
-                <span class="px-3 text-black-50">/</span>
-                <div class="d-flex align-items-center">
-                  <i class="bi bi-folder2"></i> <span class="ps-2">Sports</span>
-                </div>
-              </div>
-
-              <hr>
-
-              <a href="blog-details.html" class="readmore stretched-link"><span>Explorer</span><i class="bi bi-arrow-right"></i></a>
-
-            </div>
-
           </div>
-        </div><!-- End post item -->
 
-        <div class="col-xl-4 col-md-6">
-          <div class="post-item position-relative h-100" data-aos="fade-up" data-aos-delay="300">
-
-            <div class="post-img position-relative overflow-hidden">
-              <img src="{{ asset('digitalmoov/assets/img/blog/blog-3.jpg') }}" class="img-fluid" alt="">
-              <span class="post-date">Avril 30</span>
-            </div>
-
-            <div class="post-content d-flex flex-column">
-
-              <h3 class="post-title">Les tendances incontournables en médias sociaux pour cette année</h3>
-
-              <div class="meta d-flex align-items-center">
-                <div class="d-flex align-items-center">
-                  <i class="bi bi-person"></i> <span class="ps-2">Lisa Hunter</span>
-                </div>
-                <span class="px-3 text-black-50">/</span>
-                <div class="d-flex align-items-center">
-                  <i class="bi bi-folder2"></i> <span class="ps-2">Economics</span>
-                </div>
-              </div>
-
-              <hr>
-
-              <a href="blog-details.html" class="readmore stretched-link"><span>Explorer</span><i class="bi bi-arrow-right"></i></a>
-
-            </div>
-
-          </div>
-        </div><!-- End post item -->
+        </div>
 
       </div>
-
-      </div>
-    </section>
-    <!-- End Recent Blog Posts Section -->
+    </section><!-- End Projet Details Section -->
 
   </main><!-- End #main -->
 
- <!-- ======= Footer ======= -->
-   <footer id="footer" class="footer">
+<!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
 
     <div class="footer-content position-relative">
       <div class="container">
@@ -229,8 +202,8 @@
               <li><a href="{{ route('digitalmoov') }}">Accueil</a></li>
               <li><a href="{{ route('digitalmoov.about') }}">Présentation</a></li>
               <li><a href="{{ route('digitalmoov.services') }}">Services</a></li>
-              <li><a href="{{ route('digitalmoov.terms') }}">Terms of service</a></li>
-              <li><a href="{{ route('digitalmoov.privacy') }}">Privacy policy</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Privacy policy</a></li>
             </ul>
           </div><!-- End footer links column-->
 
@@ -293,7 +266,7 @@
   <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.10/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs@1.5.0/dist/purecounter_vanilla.js"></script>
-  <!-- <script src="{{ asset('digitalmoov/assets/vendor/php-email-form/validate.js') }}"></script> -->
+  <script src="{{ asset('digitalmoov/assets/vendor/php-email-form/validate.js') }}"></script>
 
   <!-- Template Main JS File -->
   <script src="{{ asset('digitalmoov/assets/js/main.js') }}"></script>
