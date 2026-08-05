@@ -138,6 +138,26 @@ Route::get('/digital-moov/emailing', function () {
     return view('digitalmoov.emailing');
 })->name('digitalmoov.emailing');
 
+Route::get('/digital-moov/blog-details', function () {
+    return view('digitalmoov.blog-details');
+})->name('digitalmoov.blog-details');
+
+Route::get('/digital-moov/blog-details-2', function () {
+    return view('digitalmoov.blog-details-2');
+})->name('digitalmoov.blog-details-2');
+
+Route::get('/digital-moov/blog-details-3', function () {
+    return view('digitalmoov.blog-details-3');
+})->name('digitalmoov.blog-details-3');
+
+Route::get('/digital-moov/blog-details.html', function () {
+    return redirect()->route('digitalmoov.blog-details');
+});
+
+Route::get('/blog-details.html', function () {
+    return redirect()->route('digitalmoov.blog-details');
+});
+
 Route::get('/digital-moov/Compagnes E-mailing.html', function () {
     return redirect()->route('digitalmoov.emailing');
 });

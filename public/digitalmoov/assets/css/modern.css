@@ -1038,3 +1038,21 @@ section {
     padding: 60px 0 !important;
   }
 }
+/* ---------------------------------------------------------------
+   FIX: BLOG POST CARDS ALIGNMENT
+   --------------------------------------------------------------- */
+.recent-blog-posts .post-item, .blog .post-item {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+}
+
+.recent-blog-posts .post-content, .blog .post-content {
+  flex-grow: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.recent-blog-posts .post-content hr, .blog .post-content hr {
+  margin-top: auto !important;
+}
