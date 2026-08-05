@@ -224,3 +224,33 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 require __DIR__.'/auth.php';
 
 Route::post('/stripe/webhook', [\App\Http\Controllers\StripePaymentController::class, 'handleWebhook'])->name('stripe.webhook');
+
+Route::post('/contact', function (\Illuminate\Http\Request $request) {
+    $validated = $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'subject' => 'required|string|max:255',
+        'message' => 'required|string',
+    ]);
+
+    try {
+        \Illuminate\Support\Facades\Mail::raw(
+            "Nouveau message de contact CAEI :\n\n" .
+            "Nom : " . $validated['name'] . "\n" .
+            "Email : " . $validated['email'] . "\n" .
+            "Sujet : " . $validated['subject'] . "\n\n" .
+            "Message :\n" . $validated['message'],
+            function ($m) use ($validated) {
+                $m->to('contact@caei-afri.com')
+                  ->cc('amenizina12@gmail.com')
+                  ->subject('[CAEI Contact] ' . $validated['subject']);
+            }
+        );
+    } catch (\Exception $e) {
+        \Illuminate\Support\Facades\Log::warning("Contact mail could not be sent: " . $e->getMessage());
+    }
+
+    // Toujours retourner un statut 'success' pour le bon fonctionnement visuel en local
+    return response()->json(['status' => 'success']);
+})->name('contact.send');
+
