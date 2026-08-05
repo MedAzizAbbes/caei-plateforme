@@ -434,17 +434,23 @@
                             </div>
                         </div>
 
-                        <div>
-                            <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Type de Soin / Spécialité *</label>
-                            <select name="service_type" required class="w-full bg-[#f8fafc] border border-slate-300 rounded-xl px-4 py-3 text-slate-900 text-sm focus:border-[#0d9488] focus:bg-white focus:outline-none transition-all">
-                                <option value="">-- Sélectionnez la prestation souhaitée --</option>
-                                <option value="Chirurgie Esthétique">Chirurgie Esthétique & Réparatrice</option>
-                                <option value="Évacuation Sanitaire">Évacuation Sanitaire (EVACSAN)</option>
-                                <option value="PMA / FIV">Assistance à la Procréation (PMA / FIV)</option>
-                                <option value="Chirurgie Bariatrique">Chirurgie Obésité / Bariatrique</option>
-                                <option value="Cardiologie / Orthopédie">Cardiologie / Orthopédie / Chirurgie lourde</option>
-                                <option value="Bilan de santé global">Bilan de santé global & Consultation</option>
-                            </select>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Type de Soin / Spécialité *</label>
+                                <select name="service_type" required class="w-full bg-[#f8fafc] border border-slate-300 rounded-xl px-4 py-3 text-slate-900 text-sm focus:border-[#0d9488] focus:bg-white focus:outline-none transition-all">
+                                    <option value="">-- Sélectionnez la prestation souhaitée --</option>
+                                    <option value="Chirurgie Esthétique">Chirurgie Esthétique & Réparatrice</option>
+                                    <option value="Évacuation Sanitaire">Évacuation Sanitaire (EVACSAN)</option>
+                                    <option value="PMA / FIV">Assistance à la Procréation (PMA / FIV)</option>
+                                    <option value="Chirurgie Bariatrique">Chirurgie Obésité / Bariatrique</option>
+                                    <option value="Cardiologie / Orthopédie">Cardiologie / Orthopédie / Chirurgie lourde</option>
+                                    <option value="Bilan de santé global">Bilan de santé global & Consultation</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Date Souhaitée *</label>
+                                <input type="date" name="preferred_date" min="{{ date('Y-m-d') }}" required class="w-full bg-[#f8fafc] border border-slate-300 rounded-xl px-4 py-3 text-slate-900 text-sm focus:border-[#0d9488] focus:bg-white focus:outline-none transition-all">
+                            </div>
                         </div>
 
                         <div>
