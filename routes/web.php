@@ -62,6 +62,114 @@ Route::get('/digital-moov/contact', function () {
     return view('digitalmoov.contact');
 })->name('digitalmoov.contact');
 
+Route::get('/digital-moov/privacy-policy', function () {
+    return view('digitalmoov.privacy');
+})->name('digitalmoov.privacy');
+
+Route::get('/digital-moov/sitemap', function () {
+    return view('digitalmoov.sitemap');
+})->name('digitalmoov.sitemap');
+
+Route::get('/digital-moov/terms', function () {
+    return view('digitalmoov.terms');
+})->name('digitalmoov.terms');
+
+Route::get('/digital-moov/blog', function () {
+    return view('digitalmoov.blog');
+})->name('digitalmoov.blog');
+
+Route::get('/digital-moov/blog.html', function () {
+    return redirect()->route('digitalmoov.blog');
+});
+
+Route::get('/digital-moov/service-details', function () {
+    return view('digitalmoov.service-details');
+})->name('digitalmoov.service-details');
+
+Route::get('/digital-moov/service-details.html', function () {
+    return redirect()->route('digitalmoov.service-details');
+});
+
+Route::get('/digital-moov/editorial', function () {
+    return view('digitalmoov.editorial');
+})->name('digitalmoov.editorial');
+
+Route::get('/digital-moov/editorial.html', function () {
+    return redirect()->route('digitalmoov.editorial');
+});
+
+Route::get('/digital-moov/strategie', function () {
+    return view('digitalmoov.strategie');
+})->name('digitalmoov.strategie');
+
+Route::get('/digital-moov/stratégie.html', function () {
+    return redirect()->route('digitalmoov.strategie');
+});
+
+Route::get('/digital-moov/strat%C3%A9gie.html', function () {
+    return redirect()->route('digitalmoov.strategie');
+});
+
+Route::get('/digital-moov/media', function () {
+    return view('digitalmoov.media');
+})->name('digitalmoov.media');
+
+Route::get('/digital-moov/media.html', function () {
+    return redirect()->route('digitalmoov.media');
+});
+
+Route::get('/digital-moov/audio', function () {
+    return view('digitalmoov.audio');
+})->name('digitalmoov.audio');
+
+Route::get('/digital-moov/Audio.html', function () {
+    return redirect()->route('digitalmoov.audio');
+});
+
+Route::get('/digital-moov/prospection', function () {
+    return view('digitalmoov.prospection');
+})->name('digitalmoov.prospection');
+
+Route::get('/digital-moov/prospection.html', function () {
+    return redirect()->route('digitalmoov.prospection');
+});
+
+Route::get('/digital-moov/emailing', function () {
+    return view('digitalmoov.emailing');
+})->name('digitalmoov.emailing');
+
+Route::get('/digital-moov/Compagnes E-mailing.html', function () {
+    return redirect()->route('digitalmoov.emailing');
+});
+
+Route::get('/digital-moov/Compagnes%20E-mailing.html', function () {
+    return redirect()->route('digitalmoov.emailing');
+});
+
+Route::get('/digital-moov/sponsor', function () {
+    return view('digitalmoov.sponsor');
+})->name('digitalmoov.sponsor');
+
+Route::get('/digital-moov/sponsor.html', function () {
+    return redirect()->route('digitalmoov.sponsor');
+});
+
+Route::get('/digital-moov/sea', function () {
+    return view('digitalmoov.sea');
+})->name('digitalmoov.sea');
+
+Route::get('/digital-moov/SEA.html', function () {
+    return redirect()->route('digitalmoov.sea');
+});
+
+Route::get('/digital-moov/connexion', function () {
+    return view('digitalmoov.connexion');
+})->name('digitalmoov.connexion');
+
+Route::get('/digital-moov/connexion.html', function () {
+    return redirect()->route('digitalmoov.connexion');
+});
+
 Route::get('/plateforme', [SeminarPublicController::class, 'index'])->name('plateforme');
 Route::get('/medical-services', [\App\Http\Controllers\MedicalServiceController::class, 'index'])->name('medical.services');
 Route::post('/medical-services/devis', [\App\Http\Controllers\MedicalServiceController::class, 'storeRequest'])->name('medical.services.request');

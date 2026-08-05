@@ -11,7 +11,7 @@
 
   <!-- Favicons -->
   <link rel="icon" href="{{ asset('digitalmoov/assets/img/caei dm 01.png') }}" type="image/x-icon">
-  <link rel="apple-touch-icon" href="{{ asset('digitalmoov/assets/img/caei dm 01.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('digitalmoov/assets/img/caei dm 01.png') }}">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,8 +40,8 @@
 
 <body>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="header d-flex align-items-center">
+   <!-- ======= Header ======= -->
+   <header id="header" class="header d-flex align-items-center">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <div class="logo">
@@ -52,13 +52,13 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{{ route('digitalmoov') }}" >Agence</a></li>
+          <li><a href="{{ route('digitalmoov') }}">Agence</a></li>
           <li><a href="{{ route('digitalmoov.about') }}">A propos </a></li>
-          <li><a href="{{ route('digitalmoov.services') }}">Expertises</a></li>
+          <li><a href="{{ route('digitalmoov.services') }}"  class="active">Expertises</a></li>
           <li><a href="{{ route('digitalmoov.projects') }}">Projects</a></li>
           <li><a href="{{ route('digitalmoov.reference') }}">References</a></li>
-          <li><a href="{{ asset('digitalmoov/pdf/CAEI DIGITAL MOOV CATALOGUE.pdf') }}" target="_blank">Catalogue</a></li>
-          <li><a href="{{ route('digitalmoov.contact') }}" class="active">Contact</a></li>
+         <li><a href="{{ asset('digitalmoov/pdf/CAEI DIGITAL MOOV CATALOGUE.pdf') }}" target="_blank">Catalogue</a></li>
+          <li><a href="{{ route('digitalmoov.contact') }}">Contact</a></li>
           <li><a href="{{ route('digitalmoov.contact') }}">Connexion</a></li>
         </ul>
       </nav><!-- .navbar -->
@@ -69,90 +69,84 @@
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('digitalmoov/assets/img/56.jpg') }}');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('digitalmoov/assets/img/cheerful-businesspeople-reaching-agreement.jpg') }}');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
-        <h2>Contact</h2>
+        <h2>Prospection commerciale
+        </h2>
+        
         <ol>
           <li><a href="{{ route('digitalmoov') }}">Agence</a></li>
-          <li>Contact</li>
+          <li>Expertises</li>
         </ol>
 
       </div>
     </div><!-- End Breadcrumbs -->
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    <!-- ======= Service Details Section ======= -->
+    <section id="service-details" class="service-details">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row gy-4">
-          <div class="col-lg-6">
-            <div class="info-item  d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-map"></i>
-              <h3>Adresse de l'entreprise :</h3>
-              <p> Immeuble Medina Palace au 53-55 <br>
-                Avenue de Paris Tunis-Tunisie, 1001</p>
+
+          <div class="col-lg-4">
+            <div class="services-list">
+                <h4>Nos Besoins : </h4>
+
+              <a href="#" class="active">1. Identification des Prospects</a>
+              <a href="#" class="active">2. Développement de Stratégies</a>
+              <a href="#" class="active">3. Communication Convaincante </a>
+              <a href="#" class="active">4. Suivi et Relance</a>
             </div>
-          </div><!-- End Info Item -->
 
-          <div class="col-lg-3 col-md-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-envelope"></i>
-              <h3>Email :</h3>
-              <p>contact@caei-afri.com</p>
-            </div>
-          </div><!-- End Info Item -->
+            
+<a href="{{ route('digitalmoov.connexion') }}" class="button">Réserver</a>
+                <style>
+                  /* Style pour le bouton */
+                  .button {
+                      display: inline-block;
+                      padding: 10px 20px;
+                      background-color: #B86409;
+                      color: #fff;
+                      text-decoration: none; /* Supprime le soulignement du lien */
+                      border-radius: 5px;
+                  }
+          
+                  /* Style pour le survol du bouton */
+                  .button:hover {
+                      background-color: #B86409;
+                  }
+              </style>
+          </div>
 
-          <div class="col-lg-3 col-md-6">
-            <div class="info-item  d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-telephone"></i>
-              <h3>Numér de télephone :</h3>
-              <p>+216 55 335 286</p>
-            </div>
-          </div><!-- End Info Item -->
+          
 
-        </div>
+          <div class="col-lg-8">
+            <img src="{{ asset('digitalmoov/assets/img/applicant-greeting-hr-manager-job-interview.jpg') }}" alt="" class="img-fluid services-img">
+            <h3>Prospection Commerciale avec Digital Moov : Élargissez vos Horizons !</h3>
+            <p>
+                La prospection commerciale est le cœur battant de toute entreprise cherchant à développer son activité et à conquérir de nouveaux marchés. Chez Digital Moov, notre approche de la prospection commerciale est guidée par des valeurs solides et une compréhension profonde des besoins de nos clients.            </p>
+            <ul>
+              <li><i class="bi bi-check-circle"></i> <span> Persévérance : Nous croyons en la persévérance et la détermination dans la prospection commerciale. Notre équipe est prête à relever les défis et à explorer de nouvelles opportunités pour vous aider à développer votre activité.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span> Relationnel : Nous accordons une grande importance aux relations humaines dans nos activités de prospection. Nous cherchons à établir des liens solides et durables avec vos prospects, basés sur la confiance et le respect mutuel.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span> Créativité : L'innovation et la créativité sont au cœur de notre approche de la prospection commerciale. Nous sommes constamment à la recherche de nouvelles idées et de nouvelles stratégies pour attirer l'attention de vos prospects et les convertir en clients.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span> Résultats : Nous sommes orientés vers les résultats. Notre objectif ultime est de générer des leads qualifiés et des opportunités d'affaires tangibles qui contribuent à la croissance et à la rentabilité de votre entreprise.</span></li>
 
-        <div class="row gy-4 mt-1">
+            </ul>
 
-          <div class="col-lg-6 ">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
-          </div><!-- End Google Maps -->
-
-          <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row gy-4">
-                <div class="col-lg-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Nom et prénom" required>
-                </div>
-                <div class="col-lg-6 form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Envoyer</button></div>
-            </form>
-          </div><!-- End Contact Form -->
+           
+            
+          </div>
 
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section><!-- End Service Details Section -->
 
   </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
+  <footer id="footer" class="footer">
 
     <div class="footer-content position-relative">
       <div class="container">
@@ -185,8 +179,8 @@
               <li><a href="{{ route('digitalmoov') }}">Accueil</a></li>
               <li><a href="{{ route('digitalmoov.about') }}">Présentation</a></li>
               <li><a href="{{ route('digitalmoov.services') }}">Services</a></li>
-              <li><a href="{{ route('digitalmoov.terms') }}">Terms of service</a></li>
-              <li><a href="{{ route('digitalmoov.privacy') }}">Privacy policy</a></li>
+              <li><a href="#">Terms of service</a></li>
+              <li><a href="#">Privacy policy</a></li>
             </ul>
           </div><!-- End footer links column-->
 
@@ -254,58 +248,6 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('digitalmoov/assets/js/main.js') }}"></script>
 
-
-      <script>
-        const quoteForm = document.getElementById("quoteForm");
-        const contactForm = document.getElementById("contactForm");
-        
-        function handleFormSubmit(form) {
-          if (!form) return;
-          form.addEventListener("submit", function(e) {
-            e.preventDefault();
-            const loading = form.querySelector(".loading");
-            const errorMsg = form.querySelector(".error-message");
-            const sentMsg = form.querySelector(".sent-message");
-
-            if(loading) loading.style.display = "block";
-            if(errorMsg) errorMsg.style.display = "none";
-            if(sentMsg) sentMsg.style.display = "none";
-
-            const formData = new FormData(form);
-
-            fetch(form.getAttribute("action"), {
-              method: "POST",
-              headers: {
-                "X-Requested-With": "XMLHttpRequest"
-              },
-              body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-              if(loading) loading.style.display = "none";
-              if (data.status === "success") {
-                if(sentMsg) sentMsg.style.display = "block";
-                form.reset();
-              } else {
-                if(errorMsg) {
-                  errorMsg.textContent = data.message || "Une erreur est survenue.";
-                  errorMsg.style.display = "block";
-                }
-              }
-            })
-            .catch(err => {
-              if(loading) loading.style.display = "none";
-              if(errorMsg) {
-                errorMsg.textContent = "Impossible de se connecter au serveur.";
-                errorMsg.style.display = "block";
-              }
-            });
-          });
-        }
-        
-        handleFormSubmit(quoteForm);
-        handleFormSubmit(contactForm);
-      </script>
-    </body>
+</body>
 
 </html>

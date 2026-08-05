@@ -11,7 +11,7 @@
 
   <!-- Favicons -->
   <link rel="icon" href="{{ asset('digitalmoov/assets/img/caei dm 01.png') }}" type="image/x-icon">
-  <link rel="apple-touch-icon" href="{{ asset('digitalmoov/assets/img/caei dm 01.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('digitalmoov/assets/img/caei dm 01.png') }}">
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -54,11 +54,18 @@
         <ul>
           <li><a href="{{ route('digitalmoov') }}" >Agence</a></li>
           <li><a href="{{ route('digitalmoov.about') }}">A propos </a></li>
-          <li><a href="{{ route('digitalmoov.services') }}">Expertises</a></li>
+          <li><a href="{{ route('digitalmoov.services') }}" class="active">Expertises</a></li>
           <li><a href="{{ route('digitalmoov.projects') }}">Projects</a></li>
           <li><a href="{{ route('digitalmoov.reference') }}">References</a></li>
-          <li><a href="{{ asset('digitalmoov/pdf/CAEI DIGITAL MOOV CATALOGUE.pdf') }}" target="_blank">Catalogue</a></li>
-          <li><a href="{{ route('digitalmoov.contact') }}" class="active">Contact</a></li>
+          <li class="dropdown"><a href="#"><span>Ressources</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="{{ route('digitalmoov.blog') }}">Blog</a></li>
+              
+              <li><a href="#">Partenaires</a></li>
+              <li><a href="#">Outils</a></li>
+            </ul>
+          </li>
+          <li><a href="{{ route('digitalmoov.contact') }}">Contact</a></li>
           <li><a href="{{ route('digitalmoov.contact') }}">Connexion</a></li>
         </ul>
       </nav><!-- .navbar -->
@@ -69,90 +76,85 @@
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('digitalmoov/assets/img/56.jpg') }}');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('digitalmoov/assets/img/developpeur-web.webp') }}');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
 
-        <h2>Contact</h2>
+        <h2>Création et refonte des sites web </h2>
+        
         <ol>
           <li><a href="{{ route('digitalmoov') }}">Agence</a></li>
-          <li>Contact</li>
+          <li>Expertises</li>
         </ol>
 
       </div>
     </div><!-- End Breadcrumbs -->
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
+    <!-- ======= Service Details Section ======= -->
+    <section id="service-details" class="service-details">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row gy-4">
-          <div class="col-lg-6">
-            <div class="info-item  d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-map"></i>
-              <h3>Adresse de l'entreprise :</h3>
-              <p> Immeuble Medina Palace au 53-55 <br>
-                Avenue de Paris Tunis-Tunisie, 1001</p>
+
+          <div class="col-lg-4">
+            <div class="services-list">
+              <a href="#" class="active">1. Audit & Cahier des charges</a>
+              <a href="#" class="active">2. Design UX/UI</a>
+              <a href="#" class="active">3. Développement Web</a>
+              <a href="#" class="active">4. Formation</a>
+              <a href="#" class="active">4. Maintenance</a>
             </div>
-          </div><!-- End Info Item -->
 
-          <div class="col-lg-3 col-md-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-envelope"></i>
-              <h3>Email :</h3>
-              <p>contact@caei-afri.com</p>
-            </div>
-          </div><!-- End Info Item -->
+            <h4>Notre process de création !</h4>
+            <p>De la compréhension initiale de vos besoins à la mise en ligne finale, notre processus de création de sites web est conçu pour vous offrir une expérience fluide et un site web exceptionnel qui reflète parfaitement votre vision et atteint vos objectifs commerciaux.</p>
+<a href="{{ route('digitalmoov.connexion') }}" class="button">Réserver</a>
+                <style>
+                  /* Style pour le bouton */
+                  .button {
+                      display: inline-block;
+                      padding: 10px 20px;
+                      background-color: #B86409;
+                      color: #fff;
+                      text-decoration: none; /* Supprime le soulignement du lien */
+                      border-radius: 5px;
+                  }
+          
+                  /* Style pour le survol du bouton */
+                  .button:hover {
+                      background-color: #B86409;
+                  }
+              </style>
+          </div>
 
-          <div class="col-lg-3 col-md-6">
-            <div class="info-item  d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-telephone"></i>
-              <h3>Numér de télephone :</h3>
-              <p>+216 55 335 286</p>
-            </div>
-          </div><!-- End Info Item -->
+          
 
-        </div>
+          <div class="col-lg-8">
+            <img src="{{ asset('digitalmoov/assets/img/refonte-site-internet (2).jpg') }}" alt="" class="img-fluid services-img">
+            <h3>Développement et refonte de votre site sur-mesure !</h3>
+            <p>
+              Votre site web constitue le socle de votre stratégie webmarketing, souvent le premier générateur d’opportunités commerciales et le premier vecteur de votre image de marque. Sur la base de vos attentes et de vos objectifs, notre agence web crée un site unique et sur-mesure qui saura répondre aux besoins des internautes. Webdesign, intégration et développement web, création de contenu, maintenance, référencement… nous maîtrisons l’ensemble des expertises pour créer votre prochain site vitrine ou votre site e-commerce !
+            </p>
+            <ul>
+              <li><i class="bi bi-check-circle"></i> <span> Nous sommes guidés par la créativité pour concevoir des sites web uniques et innovants qui captivent l'attention des visiteurs.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span> Nous nous engageons à fournir des sites web de haute qualité, avec une attention particulière portée aux détails et à l'esthétique.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span> Nous croyons en une collaboration étroite avec nos clients tout au long du processus de création, en les impliquant activement dans chaque étape pour garantir leur satisfaction.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>  Nous sommes flexibles et adaptables, capables de répondre aux besoins et aux exigences changeants de nos clients tout au long du projet.</span></li>
 
-        <div class="row gy-4 mt-1">
+            </ul>
 
-          <div class="col-lg-6 ">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" style="border:0; width: 100%; height: 384px;" allowfullscreen></iframe>
-          </div><!-- End Google Maps -->
-
-          <div class="col-lg-6">
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
-              <div class="row gy-4">
-                <div class="col-lg-6 form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Nom et prénom" required>
-                </div>
-                <div class="col-lg-6 form-group">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Email" required>
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-              </div>
-              <div class="my-3">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
-              </div>
-              <div class="text-center"><button type="submit">Envoyer</button></div>
-            </form>
-          </div><!-- End Contact Form -->
+            <p>
+              Que vous cherchiez à établir une présence en ligne percutante ou à moderniser votre site existant, notre service de Conception et Rénovation de Sites Web est là pour répondre à vos besoins. Nous travaillons en étroite collaboration avec vous pour comprendre vos objectifs commerciaux, votre vision et votre identité de marque afin de créer un site web sur mesure qui reflète parfaitement votre entreprise.             </p>
+            
+          </div>
 
         </div>
 
       </div>
-    </section><!-- End Contact Section -->
+    </section><!-- End Service Details Section -->
 
   </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
+  <footer id="footer" class="footer">
 
     <div class="footer-content position-relative">
       <div class="container">
@@ -254,58 +256,6 @@
   <!-- Template Main JS File -->
   <script src="{{ asset('digitalmoov/assets/js/main.js') }}"></script>
 
-
-      <script>
-        const quoteForm = document.getElementById("quoteForm");
-        const contactForm = document.getElementById("contactForm");
-        
-        function handleFormSubmit(form) {
-          if (!form) return;
-          form.addEventListener("submit", function(e) {
-            e.preventDefault();
-            const loading = form.querySelector(".loading");
-            const errorMsg = form.querySelector(".error-message");
-            const sentMsg = form.querySelector(".sent-message");
-
-            if(loading) loading.style.display = "block";
-            if(errorMsg) errorMsg.style.display = "none";
-            if(sentMsg) sentMsg.style.display = "none";
-
-            const formData = new FormData(form);
-
-            fetch(form.getAttribute("action"), {
-              method: "POST",
-              headers: {
-                "X-Requested-With": "XMLHttpRequest"
-              },
-              body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-              if(loading) loading.style.display = "none";
-              if (data.status === "success") {
-                if(sentMsg) sentMsg.style.display = "block";
-                form.reset();
-              } else {
-                if(errorMsg) {
-                  errorMsg.textContent = data.message || "Une erreur est survenue.";
-                  errorMsg.style.display = "block";
-                }
-              }
-            })
-            .catch(err => {
-              if(loading) loading.style.display = "none";
-              if(errorMsg) {
-                errorMsg.textContent = "Impossible de se connecter au serveur.";
-                errorMsg.style.display = "block";
-              }
-            });
-          });
-        }
-        
-        handleFormSubmit(quoteForm);
-        handleFormSubmit(contactForm);
-      </script>
-    </body>
+</body>
 
 </html>

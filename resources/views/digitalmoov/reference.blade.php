@@ -69,7 +69,7 @@
   <main id="main">
 
     <!-- ======= Breadcrumbs ======= -->
-    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('assets/img/shutterstock_251280265-700x467-1\ \(1\).jpg');">
+    <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('digitalmoov/assets/img/people-working-as-team-company.jpg') }}');">
      
     </div><!-- End Breadcrumbs -->
 
@@ -157,98 +157,90 @@
   </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
+    <footer id="footer" class="footer">
 
-  <div class="footer-content position-relative">
-    <div class="container">
-      <div class="row">
+    <div class="footer-content position-relative">
+      <div class="container">
+        <div class="row">
 
-        <div class="col-lg-4 col-md-6">
-          <div class="footer-info">
-            <div class="logo">
-              <img src="{{ asset('digitalmoov/assets/img/caei dm cov.png') }}" alt="" style="scale: 0.8 ; margin-left: 80px;">
+          <div class="col-lg-4 col-md-6">
+            <div class="footer-info">
+              <div class="logo mb-3">
+                <img src="{{ asset('digitalmoov/assets/img/caei dm cov.png') }}" alt="CAEI Digital Moov" style="max-height: 60px; width: auto;">
+              </div>
+              
+              <p>
+                Immeuble Medina Palace au 53-55 <br>
+                Avenue de Paris Tunis-Tunisie, 1001<br><br>
+                <strong>Phone:</strong> +216 55 335 286<br>
+                <strong>Email:</strong> contact@caei-afri.com<br>
+              </p>
+              <div class="social-links d-flex mt-3">
+                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a>
+              </div>
             </div>
-            
-            <p>
-              Immeuble Medina Palace au 53-55 <br>
-              Avenue de Paris Tunis-Tunisie, 1001<br><br>
-              <strong>Phone:</strong> +216 55 335 286<br>
-              <strong>Email:</strong> contact@caei-afri.com<br>
-            </p>
-            <div class="social-links d-flex mt-3">
-              <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="d-flex align-items-center justify-content-center"><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-        </div><!-- End footer info column-->
+          </div><!-- End footer info column-->
 
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Liens utiles</h4>
-          <ul>
-            <li><a href="#">Accueil</a></li>
-            <li><a href="#">Présentation</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Terms of service</a></li>
-            <li><a href="#">Privacy policy</a></li>
-          </ul>
-        </div><!-- End footer links column-->
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Liens utiles</h4>
+            <ul>
+              <li><a href="{{ route('digitalmoov') }}">Accueil</a></li>
+              <li><a href="{{ route('digitalmoov.about') }}">Présentation</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Services</a></li>
+              <li><a href="{{ route('digitalmoov.terms') }}">Terms of service</a></li>
+              <li><a href="{{ route('digitalmoov.privacy') }}">Privacy policy</a></li>
+            </ul>
+          </div><!-- End footer links column-->
 
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Nos Services</h4>
-          <ul>
-            <li><a href="#">Web Design</a></li>
-            <li><a href="#">Web Development</a></li>
-            <li><a href="#">Product Management</a></li>
-            <li><a href="#">Marketing</a></li>
-            <li><a href="#">Graphic Design</a></li>
-          </ul>
-        </div><!-- End footer links column-->
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Nos Services</h4>
+            <ul>
+              <li><a href="{{ route('digitalmoov.services') }}">Web Design</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Web Development</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Product Management</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Marketing</a></li>
+              <li><a href="{{ route('digitalmoov.services') }}">Graphic Design</a></li>
+            </ul>
+          </div><!-- End footer links column-->
 
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Explorez</h4>
-          <ul>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Partenaires
-            </a></li>
-          </ul>
-        </div><!-- End footer links column-->
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Explorez</h4>
+            <ul>
+              <li><a href="{{ route('digitalmoov.services') }}">Services</a></li>
+              <li><a href="{{ route('digitalmoov.blog') }}">Blog</a></li>
+              <li><a href="{{ route('digitalmoov') }}#get-started">FAQ</a></li>
+              <li><a href="{{ route('digitalmoov.about') }}">Partenaires</a></li>
+            </ul>
+          </div><!-- End footer links column-->
 
-        <div class="col-lg-2 col-md-3 footer-links">
-          <h4>Ressources</h4>
-          <ul>
-            <li><a href="#">Politique de Confidentialité</a></li>
-            <li><a href="#">Carte du Site
-            </a></li>
-            <li><a href="#">Mentions Légales
-            </a></li>
-            
-          </ul>
-        </div><!-- End footer links column-->
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Ressources</h4>
+            <ul>
+              <li><a href="{{ route('digitalmoov.privacy') }}">Politique de Confidentialité</a></li>
+              <li><a href="{{ route('digitalmoov.sitemap') }}">Carte du Site</a></li>
+              <li><a href="{{ route('digitalmoov.terms') }}">Mentions Légales</a></li>
+            </ul>
+          </div><!-- End footer links column-->
 
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="footer-legal text-center position-relative">
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>CAEI Digital-MOOV</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/upconstruction-bootstrap-construction-website-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">Digital.MOOV</a>
+    <div class="footer-legal text-center position-relative">
+      <div class="container">
+        <div class="copyright">
+          &copy; Copyright <strong><span>CAEI Digital-MOOV</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+          Designed by <a href="{{ route('digitalmoov') }}">Digital.MOOV</a>
+        </div>
       </div>
     </div>
-  </div>
 
-</footer>
+  </footer>
 <!-- End Footer -->
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -262,7 +254,7 @@
   <script src="https://cdn.jsdelivr.net/npm/isotope-layout@3.0.6/dist/isotope.pkgd.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11.1.10/swiper-bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs@1.5.0/dist/purecounter_vanilla.js"></script>
-  <script src="{{ asset('digitalmoov/assets/vendor/php-email-form/validate.js') }}"></script>
+  <!-- <script src="{{ asset('digitalmoov/assets/vendor/php-email-form/validate.js') }}"></script> -->
 
   <!-- Template Main JS File -->
   <script src="{{ asset('digitalmoov/assets/js/main.js') }}"></script>
