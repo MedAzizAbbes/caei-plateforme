@@ -28,6 +28,15 @@ use App\Http\Controllers\ProfileController;
 | A — Accès public : page d'accueil + détails séminaire
 |--------------------------------------------------------------------------
 */
+Route::get('/', [SeminarPublicController::class, 'index'])->name('home');
+Route::get('/ancien-accueil', function () {
+    $seminars = \App\Models\Seminar::where('status', 'published')
+        ->withCount('registrations')
+        ->with('trainers')
+        ->orderBy('start_date')
+        ->get();
+    return view('welcome_old', compact('seminars'));
+})->name('home.old');
 Route::get('/', [SeminarPublicController::class, 'main'])->name('home');
 Route::get('/plateforme', [SeminarPublicController::class, 'index'])->name('plateforme');
 Route::get('/medical-services', [\App\Http\Controllers\MedicalServiceController::class, 'index'])->name('medical.services');
