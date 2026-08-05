@@ -22,6 +22,14 @@ class SeminarPublicController extends Controller
     }
 
     /**
+     * Page d'accueil principale / Alias pour la route home.
+     */
+    public function main()
+    {
+        return $this->index();
+    }
+
+    /**
      * Page de détail publique d'un séminaire.
      */
     public function show(Seminar $seminar)
