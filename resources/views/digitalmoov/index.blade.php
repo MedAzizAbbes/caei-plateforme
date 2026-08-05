@@ -61,13 +61,13 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="{{ route('home') }}" class="active">Agence</a></li>
-          <li><a href="https://caei-afri.com/Digitalmoov/about.html">A propos </a></li>
-          <li><a href="https://caei-afri.com/Digitalmoov/services.html">Expertises</a></li>
-          <li><a href="https://caei-afri.com/Digitalmoov/projects.html">Projects</a></li>
-          <li><a href="https://caei-afri.com/Digitalmoov/reference.html">References</a></li>
+          <li><a href="{{ route('digitalmoov') }}" class="active">Agence</a></li>
+          <li><a href="{{ route('digitalmoov.about') }}">A propos </a></li>
+          <li><a href="{{ route('digitalmoov.services') }}">Expertises</a></li>
+          <li><a href="{{ route('digitalmoov.projects') }}">Projects</a></li>
+          <li><a href="{{ route('digitalmoov.reference') }}">References</a></li>
           <li><a href="{{ asset('digitalmoov/pdf/CAEI DIGITAL MOOV CATALOGUE.pdf') }}" target="_blank">Catalogue</a></li>
-          <li><a href="https://caei-afri.com/Digitalmoov/contact.html">Contact</a></li>
+          <li><a href="{{ route('digitalmoov.contact') }}">Contact</a></li>
           <li><a href="{{ route('login') }}">Connexion</a></li>
 
         </ul>
@@ -87,7 +87,7 @@
            
            
             <p data-aos="fade-up"> Votre partenaire de confiance pour une transformation numérique réussie.</p>
-            <a data-aos="fade-up" data-aos-delay="200" href="https://caei-afri.com/Digitalmoov/contact.html" class="btn-get-started">Contactez-nous</a>
+            <a data-aos="fade-up" data-aos-delay="200" href="{{ route('digitalmoov.contact') }}" class="btn-get-started">Contactez-nous</a>
           </div>
         </div>
       </div>
@@ -906,51 +906,57 @@
   <script src="{{ asset('digitalmoov/assets/js/main.js') }}"></script>
 
 
-  <script>
-    const quoteForm = document.getElementById("quoteForm");
-    if (quoteForm) {
-      quoteForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        const loading = quoteForm.querySelector(".loading");
-        const errorMsg = quoteForm.querySelector(".error-message");
-        const sentMsg = quoteForm.querySelector(".sent-message");
+      <script>
+        const quoteForm = document.getElementById("quoteForm");
+        const contactForm = document.getElementById("contactForm");
+        
+        function handleFormSubmit(form) {
+          if (!form) return;
+          form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            const loading = form.querySelector(".loading");
+            const errorMsg = form.querySelector(".error-message");
+            const sentMsg = form.querySelector(".sent-message");
 
-        if(loading) loading.style.display = "block";
-        if(errorMsg) errorMsg.style.display = "none";
-        if(sentMsg) sentMsg.style.display = "none";
+            if(loading) loading.style.display = "block";
+            if(errorMsg) errorMsg.style.display = "none";
+            if(sentMsg) sentMsg.style.display = "none";
 
-        const formData = new FormData(quoteForm);
+            const formData = new FormData(form);
 
-        fetch(quoteForm.getAttribute("action"), {
-          method: "POST",
-          headers: {
-            "X-Requested-With": "XMLHttpRequest"
-          },
-          body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-          if(loading) loading.style.display = "none";
-          if (data.status === "success") {
-            if(sentMsg) sentMsg.style.display = "block";
-            quoteForm.reset();
-          } else {
-            if(errorMsg) {
-              errorMsg.textContent = data.message || "Une erreur est survenue.";
-              errorMsg.style.display = "block";
-            }
-          }
-        })
-        .catch(err => {
-          if(loading) loading.style.display = "none";
-          if(errorMsg) {
-            errorMsg.textContent = "Impossible de se connecter au serveur.";
-            errorMsg.style.display = "block";
-          }
-        });
-      });
-    }
-  </script>
-</body>
+            fetch(form.getAttribute("action"), {
+              method: "POST",
+              headers: {
+                "X-Requested-With": "XMLHttpRequest"
+              },
+              body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+              if(loading) loading.style.display = "none";
+              if (data.status === "success") {
+                if(sentMsg) sentMsg.style.display = "block";
+                form.reset();
+              } else {
+                if(errorMsg) {
+                  errorMsg.textContent = data.message || "Une erreur est survenue.";
+                  errorMsg.style.display = "block";
+                }
+              }
+            })
+            .catch(err => {
+              if(loading) loading.style.display = "none";
+              if(errorMsg) {
+                errorMsg.textContent = "Impossible de se connecter au serveur.";
+                errorMsg.style.display = "block";
+              }
+            });
+          });
+        }
+        
+        handleFormSubmit(quoteForm);
+        handleFormSubmit(contactForm);
+      </script>
+    </body>
 
 </html>

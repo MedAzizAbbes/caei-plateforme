@@ -39,8 +39,28 @@ Route::get('/ancien-accueil', function () {
 })->name('home.old');
 
 Route::get('/digital-moov', function () {
-    return view('digitalmoov');
+    return view('digitalmoov.index');
 })->name('digitalmoov');
+
+Route::get('/digital-moov/about', function () {
+    return view('digitalmoov.about');
+})->name('digitalmoov.about');
+
+Route::get('/digital-moov/services', function () {
+    return view('digitalmoov.services');
+})->name('digitalmoov.services');
+
+Route::get('/digital-moov/projects', function () {
+    return view('digitalmoov.projects');
+})->name('digitalmoov.projects');
+
+Route::get('/digital-moov/reference', function () {
+    return view('digitalmoov.reference');
+})->name('digitalmoov.reference');
+
+Route::get('/digital-moov/contact', function () {
+    return view('digitalmoov.contact');
+})->name('digitalmoov.contact');
 
 Route::get('/plateforme', [SeminarPublicController::class, 'index'])->name('plateforme');
 Route::get('/medical-services', [\App\Http\Controllers\MedicalServiceController::class, 'index'])->name('medical.services');
