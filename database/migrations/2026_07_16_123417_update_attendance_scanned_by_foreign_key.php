@@ -11,6 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
+        if (Schema::getConnection()->getDriverName() === 'sqlite') {
+            return;
+        }
+
         Schema::table('attendance', function (Blueprint $table) {
             $table->dropForeign('attendance_scanned_by_foreign');
             $table->foreign('scanned_by')
@@ -25,6 +29,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        if (Schema::getConnection()->getDriverName() === 'sqlite') {
+            return;
+        }
+
         Schema::table('attendance', function (Blueprint $table) {
             $table->dropForeign(['scanned_by']);
             $table->foreign('scanned_by')
