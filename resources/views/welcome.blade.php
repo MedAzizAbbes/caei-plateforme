@@ -26,6 +26,7 @@
 
   <!-- Main CSS File -->
   <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
+  <link href="{{ asset('assets/css/welcome-modern.css') }}?v=1.0" rel="stylesheet">
   
   <style>
     #topbar {
