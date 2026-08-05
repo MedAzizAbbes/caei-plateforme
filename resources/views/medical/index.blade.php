@@ -100,7 +100,7 @@
                 {{-- Desktop Links --}}
                 <div class="hidden lg:flex items-center gap-8 text-sm font-semibold">
                     <a href="#accueil" class="text-[#0d9488] font-bold hover:text-teal-700 transition-colors">Accueil</a>
-                    <a href="#about" class="text-slate-600 hover:text-[#0d9488] transition-colors">À Propos</a>
+                    <a href="#pourquoi-tunisie" class="text-slate-600 hover:text-[#0d9488] transition-colors">À Propos</a>
                     <a href="#services" class="text-slate-600 hover:text-[#0d9488] transition-colors">Nos Services</a>
                     <a href="#pourquoi-tunisie" class="text-slate-600 hover:text-[#0d9488] transition-colors">Pourquoi la Tunisie ?</a>
                     <a href="#evacsan" class="text-rose-600 hover:text-rose-700 font-bold transition-colors">EVACSAN 24/7</a>
@@ -223,7 +223,7 @@
         @endif
 
         {{-- ══════════ SECTION PRESENTATION & WHY TUNISIA (AVEC PHOTO CLINIQUE EN FOND) ══════════ --}}
-        <section id="about" class="py-20 bg-about-pattern text-slate-800 border-b border-slate-200/60">
+        <section id="pourquoi-tunisie" class="py-20 bg-about-pattern text-slate-800 border-b border-slate-200/60">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
                     <p class="text-xs font-black uppercase text-[#0d9488] tracking-widest">Excellence Médicale Internationale</p>
@@ -240,17 +240,17 @@
                             Les médecins et chirurgiens tunisiens, d'une sélectivité universitaire extrême (souvent issus des 1000 premiers bacheliers au niveau national), sont formés dans les plus prestigieuses facultés de médecine en Tunisie et en France. Ils maîtrisent parfaitement les dernières innovations et interventions de pointe.
                         </p>
                         <div class="space-y-4 pt-2">
-                            <div class="flex items-start gap-4 bg-[#f8fafc] p-4 rounded-2xl border border-slate-200">
-                                <span class="text-3xl">🥇</span>
+                            <div class="flex items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm overflow-hidden group">
+                                <img src="{{ asset('images/frames/plateau_technique.jpg') }}" alt="Plateaux Techniques" class="w-20 h-20 rounded-xl object-cover shrink-0 shadow-xs group-hover:scale-105 transition-transform duration-300">
                                 <div>
-                                    <h4 class="font-bold text-slate-900 text-base">Plateaux Techniques Sophistiqués</h4>
+                                    <h4 class="font-black text-slate-900 text-base">Plateaux Techniques Sophistiqués</h4>
                                     <p class="text-xs text-slate-500 mt-1">Cliniques privées dotées de blocs opératoires ultramodernes, de scanners 3D et d'unités de réanimation certifiées.</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-4 bg-[#f8fafc] p-4 rounded-2xl border border-slate-200">
-                                <span class="text-3xl">🤝</span>
+                            <div class="flex items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-sm overflow-hidden group">
+                                <img src="{{ asset('images/frames/agence_independante.jpg') }}" alt="Agence Indépendante" class="w-20 h-20 rounded-xl object-cover shrink-0 shadow-xs group-hover:scale-105 transition-transform duration-300">
                                 <div>
-                                    <h4 class="font-bold text-slate-900 text-base">Agence 100% Indépendante</h4>
+                                    <h4 class="font-black text-slate-900 text-base">Agence 100% Indépendante</h4>
                                     <p class="text-xs text-slate-500 mt-1">Nous sélectionnons pour vous les meilleurs spécialistes en toute neutralité, sans compromis sur la qualité des soins.</p>
                                 </div>
                             </div>
@@ -258,25 +258,52 @@
                     </div>
 
                     <div class="grid grid-cols-2 gap-6">
-                        <div class="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-teal-100 shadow-sm text-center space-y-3 card-hover-light">
-                            <div class="text-4xl">🏥</div>
-                            <div class="text-lg font-black text-slate-900">Cliniques VIP</div>
-                            <p class="text-xs text-slate-500">Structures médicales homologuées aux normes internationales ISO.</p>
+                        {{-- Cadre 1: Cliniques VIP --}}
+                        <div class="bg-white rounded-2xl border border-teal-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
+                            <div class="h-28 w-full relative overflow-hidden">
+                                <img src="{{ asset('images/frames/clinique_vip.jpg') }}" alt="Cliniques VIP" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
+                            </div>
+                            <div class="p-5 pt-1 text-center">
+                                <div class="text-base font-black text-slate-900">Cliniques VIP</div>
+                                <p class="text-xs text-slate-500 mt-1">Structures médicales homologuées aux normes internationales ISO.</p>
+                            </div>
                         </div>
-                        <div class="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-teal-100 shadow-sm text-center space-y-3 card-hover-light">
-                            <div class="text-4xl">✈️</div>
-                            <div class="text-lg font-black text-slate-900">Prise en Charge 360°</div>
-                            <p class="text-xs text-slate-500">Vol, accueil aéroport, clinique, hôtel & suivi post-opératoire.</p>
+
+                        {{-- Cadre 2: Prise en Charge 360° --}}
+                        <div class="bg-white rounded-2xl border border-teal-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
+                            <div class="h-28 w-full relative overflow-hidden">
+                                <img src="{{ asset('images/frames/prise_en_charge.jpg') }}" alt="Prise en Charge 360°" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
+                            </div>
+                            <div class="p-5 pt-1 text-center">
+                                <div class="text-base font-black text-slate-900">Prise en Charge 360°</div>
+                                <p class="text-xs text-slate-500 mt-1">Vol, accueil aéroport, clinique, hôtel & suivi post-opératoire.</p>
+                            </div>
                         </div>
-                        <div class="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-teal-100 shadow-sm text-center space-y-3 card-hover-light">
-                            <div class="text-4xl">💉</div>
-                            <div class="text-lg font-black text-slate-900">Spécialistes de Renom</div>
-                            <p class="text-xs text-slate-500">Chirurgiens inscrits au Conseil de l'Ordre avec diplômes français & tunisiens.</p>
+
+                        {{-- Cadre 3: Spécialistes de Renom --}}
+                        <div class="bg-white rounded-2xl border border-teal-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
+                            <div class="h-28 w-full relative overflow-hidden">
+                                <img src="{{ asset('images/frames/specialistes.jpg') }}" alt="Spécialistes de Renom" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
+                            </div>
+                            <div class="p-5 pt-1 text-center">
+                                <div class="text-base font-black text-slate-900">Spécialistes de Renom</div>
+                                <p class="text-xs text-slate-500 mt-1">Chirurgiens inscrits au Conseil de l'Ordre avec diplômes français & tunisiens.</p>
+                            </div>
                         </div>
-                        <div class="bg-white/90 backdrop-blur-md p-6 rounded-2xl border border-teal-100 shadow-sm text-center space-y-3 card-hover-light">
-                            <div class="text-4xl">🌴</div>
-                            <div class="text-lg font-black text-slate-900">Convalescence Douce</div>
-                            <p class="text-xs text-slate-500">Cadre méditerranéen idéal pour se reposer en toute quiétude.</p>
+
+                        {{-- Cadre 4: Convalescence Douce --}}
+                        <div class="bg-white rounded-2xl border border-teal-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
+                            <div class="h-28 w-full relative overflow-hidden">
+                                <img src="{{ asset('images/frames/convalescence.jpg') }}" alt="Convalescence Douce" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
+                            </div>
+                            <div class="p-5 pt-1 text-center">
+                                <div class="text-base font-black text-slate-900">Convalescence Douce</div>
+                                <p class="text-xs text-slate-500 mt-1">Cadre méditerranéen idéal pour se reposer en toute quiétude.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
