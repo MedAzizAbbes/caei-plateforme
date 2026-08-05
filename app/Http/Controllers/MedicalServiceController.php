@@ -77,12 +77,13 @@ class MedicalServiceController extends Controller
     public function storeRequest(Request $request)
     {
         $validated = $request->validate([
-            'fullname'     => 'required|string|max:255',
-            'email'        => 'required|email|max:255',
-            'phone'        => 'required|string|max:50',
-            'country'      => 'required|string|max:100',
-            'service_type' => 'required|string',
-            'message'      => 'nullable|string|max:2000',
+            'fullname'       => 'required|string|max:255',
+            'email'          => 'required|email|max:255',
+            'phone'          => 'required|string|max:50',
+            'country'        => 'required|string|max:100',
+            'service_type'   => 'required|string',
+            'preferred_date' => 'nullable|date',
+            'message'        => 'nullable|string|max:2000',
         ]);
 
         // Succès simulé pour le devis médical
