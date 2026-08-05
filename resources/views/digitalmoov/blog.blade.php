@@ -28,6 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('digitalmoov/assets/css/main.css') }}?v=2.0" rel="stylesheet">
+  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=1.0" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: UpConstruction
@@ -82,14 +83,14 @@
       </div>
     </div><!-- End Breadcrumbs -->
 
-    <!-- ======= Recent Blog Posts Section ======= -->
+    <!-- ======= Derniers Articles Section ======= -->
     <section id="recent-blog-posts" class="recent-blog-posts">
       <div class="container" data-aos="fade-up"">
 
     
     
   <div class=" section-header">
-        <h2>Recent Blog Posts</h2>
+        <h2>Derniers Articles</h2>
       </div>
 
       <div class="row gy-5">
@@ -99,7 +100,7 @@
 
             <div class="post-img position-relative overflow-hidden">
               <img src="{{ asset('digitalmoov/assets/img/blog/blog-1.jpg') }}" class="img-fluid" alt="">
-              <span class="post-date">December 12</span>
+              <span class="post-date">12 Décembre</span>
             </div>
 
             <div class="post-content d-flex flex-column">
@@ -112,13 +113,13 @@
                 </div>
                 <span class="px-3 text-black-50">/</span>
                 <div class="d-flex align-items-center">
-                  <i class="bi bi-folder2"></i> <span class="ps-2">Politics</span>
+                  <i class="bi bi-folder2"></i> <span class="ps-2">Stratégie</span>
                 </div>
               </div>
 
               <hr>
 
-              <a href="blog-details.html" class="readmore stretched-link"><span>Explorer</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('digitalmoov.blog-details') }}" class="readmore stretched-link"><span>Explorer</span><i class="bi bi-arrow-right"></i></a>
 
             </div>
 
@@ -130,7 +131,7 @@
 
             <div class="post-img position-relative overflow-hidden">
               <img src="{{ asset('digitalmoov/assets/img/blog/blog-2.jpg') }}" class="img-fluid" alt="">
-              <span class="post-date">July 17</span>
+              <span class="post-date">17 Juillet</span>
             </div>
 
             <div class="post-content d-flex flex-column">
@@ -143,13 +144,13 @@
                 </div>
                 <span class="px-3 text-black-50">/</span>
                 <div class="d-flex align-items-center">
-                  <i class="bi bi-folder2"></i> <span class="ps-2">Sports</span>
+                  <i class="bi bi-folder2"></i> <span class="ps-2">Référencement</span>
                 </div>
               </div>
 
               <hr>
 
-              <a href="blog-details.html" class="readmore stretched-link"><span>Explorer</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('digitalmoov.blog-details-2') }}" class="readmore stretched-link"><span>Explorer</span><i class="bi bi-arrow-right"></i></a>
 
             </div>
 
@@ -161,7 +162,7 @@
 
             <div class="post-img position-relative overflow-hidden">
               <img src="{{ asset('digitalmoov/assets/img/blog/blog-3.jpg') }}" class="img-fluid" alt="">
-              <span class="post-date">Avril 30</span>
+              <span class="post-date">30 Avril</span>
             </div>
 
             <div class="post-content d-flex flex-column">
@@ -174,13 +175,13 @@
                 </div>
                 <span class="px-3 text-black-50">/</span>
                 <div class="d-flex align-items-center">
-                  <i class="bi bi-folder2"></i> <span class="ps-2">Economics</span>
+                  <i class="bi bi-folder2"></i> <span class="ps-2">Social Media</span>
                 </div>
               </div>
 
               <hr>
 
-              <a href="blog-details.html" class="readmore stretched-link"><span>Explorer</span><i class="bi bi-arrow-right"></i></a>
+              <a href="{{ route('digitalmoov.blog-details-3') }}" class="readmore stretched-link"><span>Explorer</span><i class="bi bi-arrow-right"></i></a>
 
             </div>
 
@@ -191,7 +192,7 @@
 
       </div>
     </section>
-    <!-- End Recent Blog Posts Section -->
+    <!-- End Derniers Articles Section -->
 
   </main><!-- End #main -->
 
