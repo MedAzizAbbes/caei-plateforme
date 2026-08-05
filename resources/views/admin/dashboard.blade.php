@@ -1,8 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="py-10">
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+<div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8 bg-slate-100">
+    
+    {{-- Sidebar avec liens Séminaires et Medical Center --}}
+    <x-admin-sidebar />
+
+    {{-- Contenu principal original conservé à 100% --}}
+    <div class="flex-1 p-6 md:p-8 overflow-y-auto">
         <div class="mb-8 rounded-lg bg-[#061743] p-8 text-white">
             <p class="text-sm font-black uppercase text-[#ffbd45]">Back-office CAEI</p>
             <h1 class="mt-2 text-3xl font-black uppercase">Tableau de bord administrateur</h1>

@@ -86,7 +86,22 @@ class MedicalServiceController extends Controller
             'message'        => 'nullable|string|max:2000',
         ]);
 
-        // Succès simulé pour le devis médical
-        return back()->with('success', 'Votre demande de devis médical a été transmise avec succès à notre équipe d\'experts. Vous serez contacté dans un délai maximum de 24h.');
+        $medicalRequest = \App\Models\MedicalRequest::create($validated);
+
+        // Notifier les administrateurs
+        if (class_exists('\App\Models\AdminNotification')) {
+            try {
+                \App\Models\AdminNotification::create([
+                    'title'   => 'Nouvelle Demande de Devis Médical',
+                    'message' => 'Demande reçue de ' . $medicalRequest->fullname . ' (' . $medicalRequest->country . ') pour ' . $medicalRequest->service_type,
+                    'type'    => 'medical_request',
+                    'link'    => route('admin.medical-requests.index'),
+                ]);
+            } catch (\Exception $e) {
+                // Ignore si la table de notif a un autre schéma
+            }
+        }
+
+        return back()->with('success', 'Votre demande de devis médical a été transmise avec succès à notre équipe d\'experts (Réf. #' . $medicalRequest->id . '). Vous serez contacté sous 24h.');
     }
 }
