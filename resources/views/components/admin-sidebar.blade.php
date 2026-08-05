@@ -41,14 +41,21 @@
 
             {{-- Emplacement Extensible pour futurs ajouts --}}
             <div class="pt-4 border-t border-white/10">
-                <div class="px-3 text-[10px] uppercase font-black tracking-widest text-slate-400 mb-2">Futurs Modules</div>
-                <div class="space-y-1 text-slate-400 font-normal">
-                    <div class="px-3 py-2 rounded-lg bg-white/5 flex items-center justify-between">
-                        <span>📱 Digital Moov</span>
-                        <span class="text-[9px] text-slate-500">Bientôt</span>
-                    </div>
-                    <div class="px-3 py-2 rounded-lg bg-white/5 flex items-center justify-between">
-                        <span>📞 Call Center</span>
+                <div class="px-3 text-[10px] uppercase font-black tracking-widest text-slate-400 mb-2">Autres Modules</div>
+                <div class="space-y-1.5">
+                    <a href="{{ route('admin.digitalmoov.index') }}"
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.digitalmoov.*') ? 'bg-orange-500 text-white' : 'text-slate-300 hover:bg-white/10' }}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">📱</span>
+                            <span class="font-bold text-xs">Digital Moov</span>
+                        </div>
+                        @php $dmNew = \App\Models\DigitalMoovContact::where('status','new')->count(); @endphp
+                        @if($dmNew > 0)
+                            <span class="bg-orange-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $dmNew }}</span>
+                        @endif
+                    </a>
+                    <div class="px-3 py-2 rounded-lg bg-white/5 flex items-center justify-between text-slate-400">
+                        <span class="flex items-center gap-2 text-xs">📞 Call Center</span>
                         <span class="text-[9px] text-slate-500">Bientôt</span>
                     </div>
                 </div>

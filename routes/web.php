@@ -376,6 +376,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/devis-medicaux', [\App\Http\Controllers\Admin\MedicalRequestController::class, 'index'])->name('medical-requests.index');
     Route::put('/devis-medicaux/{medicalRequest}', [\App\Http\Controllers\Admin\MedicalRequestController::class, 'updateStatus'])->name('medical-requests.update-status');
     Route::delete('/devis-medicaux/{medicalRequest}', [\App\Http\Controllers\Admin\MedicalRequestController::class, 'destroy'])->name('medical-requests.destroy');
+
+    // --- Contacts Digital Moov ---
+    Route::get('/digital-moov', [\App\Http\Controllers\Admin\DigitalMoovController::class, 'index'])->name('digitalmoov.index');
+    Route::put('/digital-moov/{contact}', [\App\Http\Controllers\Admin\DigitalMoovController::class, 'updateStatus'])->name('digitalmoov.update-status');
+    Route::delete('/digital-moov/{contact}', [\App\Http\Controllers\Admin\DigitalMoovController::class, 'destroy'])->name('digitalmoov.destroy');
 });
 
 require __DIR__.'/auth.php';
@@ -384,10 +389,21 @@ Route::post('/stripe/webhook', [\App\Http\Controllers\StripePaymentController::c
 
 Route::post('/contact', function (\Illuminate\Http\Request $request) {
     $validated = $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'subject' => 'required|string|max:255',
+        'name'    => 'required|string|max:255',
+        'email'   => 'required|email|max:255',
+        'subject' => 'nullable|string|max:255',
+        'phone'   => 'nullable|string|max:50',
         'message' => 'required|string',
+    ]);
+
+    // Sauvegarder en base de données
+    \App\Models\DigitalMoovContact::create([
+        'name'    => $validated['name'],
+        'email'   => $validated['email'],
+        'phone'   => $request->input('phone'),
+        'subject' => $request->input('subject', 'Contact Digital Moov'),
+        'message' => $validated['message'],
+        'source'  => $request->input('source', 'digital_moov'),
     ]);
 
     try {
@@ -395,19 +411,18 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
             "Nouveau message de contact CAEI :\n\n" .
             "Nom : " . $validated['name'] . "\n" .
             "Email : " . $validated['email'] . "\n" .
-            "Sujet : " . $validated['subject'] . "\n\n" .
+            "Sujet : " . ($request->input('subject', 'Contact') ) . "\n\n" .
             "Message :\n" . $validated['message'],
-            function ($m) use ($validated) {
+            function ($m) use ($validated, $request) {
                 $m->to('contact@caei-afri.com')
                   ->cc('amenizina12@gmail.com')
-                  ->subject('[CAEI Contact] ' . $validated['subject']);
+                  ->subject('[CAEI Contact] ' . $request->input('subject', 'Nouveau contact'));
             }
         );
     } catch (\Exception $e) {
         \Illuminate\Support\Facades\Log::warning("Contact mail could not be sent: " . $e->getMessage());
     }
 
-    // Toujours retourner un statut 'success' pour le bon fonctionnement visuel en local
     return response()->json(['status' => 'success']);
 })->name('contact.send');
 
