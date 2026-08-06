@@ -99,9 +99,15 @@ class EliteTrainingController extends Controller
      */
     public function index()
     {
-        $certifiantes = Formation::certifiante()->active()->get();
-        $diplomantes = Formation::diplomante()->active()->get();
-        $allFormations = Formation::active()->get();
+        if (\Illuminate\Support\Facades\Schema::hasTable('formations')) {
+            $certifiantes = Formation::certifiante()->active()->get();
+            $diplomantes = Formation::diplomante()->active()->get();
+            $allFormations = Formation::active()->get();
+        } else {
+            $certifiantes = collect();
+            $diplomantes = collect();
+            $allFormations = collect();
+        }
         $domainsConfig = $this->domainsMap;
 
         return view('elite-training.index', compact('certifiantes', 'diplomantes', 'allFormations', 'domainsConfig'));
@@ -140,24 +146,28 @@ class EliteTrainingController extends Controller
 
         $domainName = $domainInfo['name'];
 
-        // Requête des formations du domaine
-        $query = Formation::active()->where(function($q) use ($domainName, $domainInfo) {
-            $q->where('domain', 'like', "%{$domainName}%");
-            if (!empty($domainInfo['code_prefix'])) {
-                $q->orWhere('code', 'like', $domainInfo['code_prefix'] . '-%');
-            }
-        });
-
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('code', 'like', "%{$search}%")
-                  ->orWhere('description', 'like', "%{$search}%");
+        // Requête des formations du domaine si la table existe
+        if (\Illuminate\Support\Facades\Schema::hasTable('formations')) {
+            $query = Formation::active()->where(function($q) use ($domainName, $domainInfo) {
+                $q->where('domain', 'like', "%{$domainName}%");
+                if (!empty($domainInfo['code_prefix'])) {
+                    $q->orWhere('code', 'like', $domainInfo['code_prefix'] . '-%');
+                }
             });
-        }
 
-        $formations = $query->orderBy('code')->get();
+            if ($request->filled('search')) {
+                $search = $request->search;
+                $query->where(function($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                      ->orWhere('code', 'like', "%{$search}%")
+                      ->orWhere('description', 'like', "%{$search}%");
+                });
+            }
+
+            $formations = $query->orderBy('code')->get();
+        } else {
+            $formations = collect();
+        }
 
         // Récupérer toutes les catégories pour le menu latéral
         $allDomains = $this->domainsMap;
