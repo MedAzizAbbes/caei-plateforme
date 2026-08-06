@@ -1674,7 +1674,7 @@
               </div>
             </div>
             <div class="diploma-card-footer">
-              <a href="{{ route('home') }}" class="btn-discover">
+              <a href="{{ route('elite.training.diploma.mini-mba') }}" class="btn-discover">
                 En savoir plus <i class="bi bi-arrow-right"></i>
               </a>
             </div>
@@ -1704,7 +1704,7 @@
               </div>
             </div>
             <div class="diploma-card-footer">
-              <a href="{{ route('home') }}" class="btn-discover">
+              <a href="{{ route('elite.training.diploma.executive-mba') }}" class="btn-discover">
                 En savoir plus <i class="bi bi-arrow-right"></i>
               </a>
             </div>
@@ -1734,7 +1734,7 @@
               </div>
             </div>
             <div class="diploma-card-footer">
-              <a href="{{ route('home') }}" class="btn-discover">
+              <a href="{{ route('elite.training.diploma.doctorat') }}" class="btn-discover">
                 En savoir plus <i class="bi bi-arrow-right"></i>
               </a>
             </div>
@@ -1814,7 +1814,7 @@
       <div class="swiper scheduleSwiper" data-aos="fade-up" data-aos-delay="200">
         <div class="swiper-wrapper">
 
-          @forelse($allFormations as $formation)
+          @forelse($allFormations ?? [] as $formation)
           <div class="swiper-slide" style="width: 300px;">
             <div class="schedule-card">
               <div class="schedule-card-img">
@@ -1947,6 +1947,7 @@
 
             <form action="{{ route('elite.appointment.store') }}" method="POST" id="contactForm">
               @csrf
+              <input type="hidden" name="type" value="appointment">
               <div class="row g-4">
                 <div class="col-md-6">
                   <div class="et-form-group">
@@ -2058,7 +2059,7 @@
 
   <script>
     // Toutes les formations chargées depuis la base de données
-    window.allFormationsData = @json($allFormations);
+    window.allFormationsData = @json($allFormations ?? []);
 
     // Fonction pour ouvrir la modale d'une catégorie
     function openCategoryModal(domainName, categoryTitle) {
