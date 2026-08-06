@@ -26,7 +26,7 @@
 
   <!-- Main CSS File -->
   <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/css/welcome-modern.css') }}?v=1.0" rel="stylesheet">
+  <link href="{{ asset('assets/css/welcome-modern.css') }}?v=7.0" rel="stylesheet">
   
   <style>
     #topbar {
@@ -491,77 +491,62 @@
   <main class="main">
 
     <!-- Hero Section -->
-    <section id="acceuil" class="hero section dark-background">
+    <section id="acceuil" class="hero section">
 
-      <video autoplay muted loop playsinline preload="auto" data-aos="fade-in" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; image-rendering: high-quality; -webkit-backface-visibility: hidden; backface-visibility: hidden; transform: translateZ(0); filter: brightness(0.6) contrast(1.1);">
+      <video autoplay muted loop playsinline preload="auto" data-aos="fade-in" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; image-rendering: high-quality; transform: translateZ(0);">
         <source src="{{ asset('assets/img/nv200.mp4') }}" type="video/mp4">
       </video>
 
-      <div class="container" style="position: relative; z-index: 2;">
+      <div class="hero-overlay-gradient"></div>
 
-        <div class="row justify-content-center text-center" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-xl-6 col-lg-8">
-            <h2><span id="welcome-text-1" class="animated-text">BIENVENUE!</span><br><span id="welcome-text-2" class="animated-text">CAEI COMPANY GROUP</span></h2>
+      <div class="container text-center" style="position: relative; z-index: 2;">
+
+        <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-xl-9 col-lg-10">
+            <div class="hero-badge-pill">
+              <i class="bi bi-patch-check-fill"></i> Organisme Panafricain d'Excellence
+            </div>
+            <h2>
+              BIENVENUE chez<br>
+              <span class="gradient-gold">CAEI COMPANY GROUP</span>
+            </h2>
+            <p class="hero-subtitle">
+              Formation d'Élite • Services Médicaux • Transformation Digitale • Centre d'Appels
+            </p>
           </div>
         </div>
 
-        <style>
-          .service-box {
-            width: 160px;
-            height: 160px;
-            margin: 0 auto;
-            padding: 10px;
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-          }
-        
-          .service-box img {
-            max-width: 130px;
-            max-height: 130px;
-            object-fit: contain;
-          }
-        
-          .service-box:hover {
-            border-color: rgba(255, 196, 81, 0.6) !important;
-          }
-          .logo-callcenter {
-            margin-top: 0;
-            transform: translateY(-6px);
-          }
-        </style>
-        
-        <div class="row gy-4 mt-5 justify-content-center" data-aos="none" style="animation: none !important; transform: none !important;">
-          <div class="col-6 col-xl-2 col-md-4">
-            <a href="{{ route('home.old') }}" style="display: block; text-decoration: none;">
-              <div style="width: 140px; height: 140px; margin: 0 auto; padding: 5px; background: rgba(0, 15, 60, 0.5); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(5px);" onmouseover="this.style.borderColor='rgba(255, 196, 81, 0.6)'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.3)'; this.style.transform='scale(1)';">
-                <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training" style="width: 110px; height: 110px; object-fit: contain; margin: auto;">
+        <div class="row gy-4 mt-3 justify-content-center">
+          <div class="col-6 col-xl-2 col-md-3">
+            <a href="{{ route('home.old') }}" class="hero-service-card-wrapper">
+              <div class="hero-service-card">
+                <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training">
               </div>
+              <span class="agency-label-tag">Elite Training</span>
             </a>
           </div>
-          <div class="col-6 col-xl-2 col-md-4">
-            <a href="{{ route('medical.services') }}" style="display: block; text-decoration: none;">
-              <div style="width: 140px; height: 140px; margin: 0 auto; padding: 5px; background: rgba(0, 15, 60, 0.5); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(5px);" onmouseover="this.style.borderColor='rgba(255, 196, 81, 0.6)'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.3)'; this.style.transform='scale(1)';">
-                <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services" style="width: 110px; height: 110px; object-fit: contain; margin: auto;">
+          <div class="col-6 col-xl-2 col-md-3">
+            <a href="{{ route('medical.services') }}" class="hero-service-card-wrapper">
+              <div class="hero-service-card">
+                <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services">
               </div>
+              <span class="agency-label-tag">Medical Services</span>
             </a>
           </div>
-          <div class="col-6 col-xl-2 col-md-4">
-            <a href="{{ route('digitalmoov') }}" style="display: block; text-decoration: none;">
-              <div style="width: 140px; height: 140px; margin: 0 auto; padding: 5px; background: rgba(0, 15, 60, 0.5); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(5px);" onmouseover="this.style.borderColor='rgba(255, 196, 81, 0.6)'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.3)'; this.style.transform='scale(1)';">
-                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov" style="width: 120px; height: 120px; object-fit: contain; margin: auto;">
+          <div class="col-6 col-xl-2 col-md-3">
+            <a href="{{ route('digitalmoov') }}" class="hero-service-card-wrapper">
+              <div class="hero-service-card">
+                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov">
               </div>
+              <span class="agency-label-tag">Digital Moov</span>
             </a>
           </div>
-          <div class="col-6 col-xl-2 col-md-4">
-            <a href="https://caei-afri.com/Callcenter/" target="_blank" style="display: block; text-decoration: none;">
-              <div style="width: 140px; height: 140px; margin: 0 auto; padding: 5px; background: rgba(0, 15, 60, 0.5); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; backdrop-filter: blur(5px);" onmouseover="this.style.borderColor='rgba(255, 196, 81, 0.6)'; this.style.transform='scale(1.05)';" onmouseout="this.style.borderColor='rgba(255, 255, 255, 0.3)'; this.style.transform='scale(1)';">
-                <img src="{{ asset('assets/img/CAEICALL.png') }}" class="logo-callcenter" alt="CAEI Call Center" style="width: 130px; height: 130px; object-fit: contain; margin: auto;">
+          <div class="col-6 col-xl-2 col-md-3">
+            <a href="https://caei-afri.com/Callcenter/" target="_blank" class="hero-service-card-wrapper">
+              <div class="hero-service-card">
+                <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center">
               </div>
+              <span class="agency-label-tag">Call Center</span>
             </a>
           </div>
         </div>
@@ -1003,6 +988,76 @@
         </div>
       </div>
     </section><!-- /Testimonials Section -->
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq section">
+      <div class="container section-title text-center mb-5" data-aos="fade-up">
+        <h2>Foire Aux Questions</h2>
+        <p>Retrouvez toutes les réponses aux questions les plus fréquentes sur CAEI Company Group.</p>
+      </div>
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="accordion faq-accordion" id="faqAccordion">
+              
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeading1">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse1" aria-expanded="true" aria-controls="faqCollapse1">
+                    <i class="bi bi-question-circle text-warning me-2"></i> Quels sont les domaines d'intervention de CAEI Company Group ?
+                  </button>
+                </h2>
+                <div id="faqCollapse1" class="accordion-collapse collapse show" aria-labelledby="faqHeading1" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    CAEI Company Group est structuré autour de 4 filiales stratégiques : <strong>CAEI Elite Training</strong> (formation professionnelle et séminaires d'élite), <strong>CAEI Medical Services</strong> (evacuation et accompagnement médical international), <strong>CAEI Digital Moov</strong> (transformation digitale & marketing web), et <strong>CAEI Call Center</strong> (centre de relation client et support international).
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeading2">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse2" aria-expanded="false" aria-controls="faqCollapse2">
+                    <i class="bi bi-question-circle text-warning me-2"></i> Comment s'inscrire à un séminaire ou une formation CAEI Elite Training ?
+                  </button>
+                </h2>
+                <div id="faqCollapse2" class="accordion-collapse collapse" aria-labelledby="faqHeading2" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Vous pouvez consulter le catalogue complet de nos formations et séminaires directement sur notre plateforme ou en téléchargeant notre catalogue officiel. Pour réserver votre place, il vous suffit de créer un compte dans votre espace participant ou de nous contacter directement par téléphone ou email.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeading3">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse3" aria-expanded="false" aria-controls="faqCollapse3">
+                    <i class="bi bi-question-circle text-warning me-2"></i> Quel est le périmètre géographique des services du groupe ?
+                  </button>
+                </h2>
+                <div id="faqCollapse3" class="accordion-collapse collapse" aria-labelledby="faqHeading3" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Présent à l'échelle panafricaine avec son siège à Tunis, le CAEI collabore avec des experts, institutions et entreprises à travers toute l'Afrique, l'Europe et le Moyen-Orient.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="faqHeading4">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqCollapse4" aria-expanded="false" aria-controls="faqCollapse4">
+                    <i class="bi bi-question-circle text-warning me-2"></i> Comment bénéficier d'un devis sur-mesure pour votre entreprise ?
+                  </button>
+                </h2>
+                <div id="faqCollapse4" class="accordion-collapse collapse" aria-labelledby="faqHeading4" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Remplissez notre formulaire de contact ci-dessous ou contactez nos équipes par email à <a href="mailto:contact@caei-afri.com">contact@caei-afri.com</a>. Un conseiller dédié étudiera votre besoin et vous fournira une proposition détaillée sous 24 à 48 heures.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /FAQ Section -->
 
     <!-- Contact Section -->
     <section id="contact" class="contact section py-5">
