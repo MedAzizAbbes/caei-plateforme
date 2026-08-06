@@ -19,12 +19,18 @@ class EliteAppointmentController extends Controller
             'message' => 'required|string',
         ]);
 
+        $type = $request->input('type');
+        if (!in_array($type, ['appointment', 'inscription'])) {
+            $type = 'appointment';
+        }
+
         $appointment = EliteTrainingAppointment::create([
             'fullname' => $validated['nom'],
             'email'    => $validated['email'],
             'phone'    => $validated['mobile'] ?? null,
             'subject'  => $validated['objet'] ?? 'Rendez-vous Elite Training',
             'message'  => $validated['message'],
+            'type'     => $type,
             'status'   => 'pending',
         ]);
 

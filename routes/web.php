@@ -43,6 +43,10 @@ Route::get('/ancien-accueil', function () {
 Route::get('/elite-training', [EliteTrainingController::class, 'index'])->name('elite.training');
 Route::get('/elite-training/domaine/{slug}', [EliteTrainingController::class, 'domain'])->name('elite.training.domain');
 
+Route::get('/elite-training/diplome/mini-mba', [EliteTrainingController::class, 'diplomaMiniMBA'])->name('elite.training.diploma.mini-mba');
+Route::get('/elite-training/diplome/executive-mba', [EliteTrainingController::class, 'diplomaExecutiveMBA'])->name('elite.training.diploma.executive-mba');
+Route::get('/elite-training/diplome/doctorat', [EliteTrainingController::class, 'diplomaDoctorat'])->name('elite.training.diploma.doctorat');
+
 Route::post('/elite-training/appointment', [\App\Http\Controllers\EliteAppointmentController::class, 'store'])->name('elite.appointment.store');
 
 Route::get('/digital-moov', function () {
