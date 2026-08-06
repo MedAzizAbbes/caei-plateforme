@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\ArrangementController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\FormateurController;
+use App\Http\Controllers\Admin\FormationController as AdminFormationController;
 use App\Http\Controllers\Admin\NotificationController;
 use App\Http\Controllers\Admin\ParticipantController;
 use App\Http\Controllers\Admin\SeminarController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Participant\DashboardController;
 use App\Http\Controllers\Participant\FormationController;
 use App\Http\Controllers\Participant\PaymentController;
+use App\Http\Controllers\EliteTrainingController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\SeminarPublicController;
@@ -38,9 +40,8 @@ Route::get('/ancien-accueil', function () {
     return view('welcome_old', compact('seminars'));
 })->name('home.old');
 
-Route::get('/elite-training', function () {
-    return view('elite-training.index');
-})->name('elite.training');
+Route::get('/elite-training', [EliteTrainingController::class, 'index'])->name('elite.training');
+Route::get('/elite-training/domaine/{slug}', [EliteTrainingController::class, 'domain'])->name('elite.training.domain');
 
 Route::get('/digital-moov', function () {
     return view('digitalmoov.index');
@@ -361,6 +362,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         ->parameters(['seminaires' => 'seminar'])
         ->names('seminars')
         ->except(['show']);
+
+    Route::resource('formations', AdminFormationController::class);
 
     Route::get('/participants', [ParticipantController::class, 'index'])->name('participants.index');
     Route::get('/participants/export/excel', [ParticipantController::class, 'exportExcel'])->name('participants.export.excel');
