@@ -1758,31 +1758,33 @@
       <div class="row g-4">
         @php
           $certifications = [
-            ['img' => 'img3.jpg',         'title' => 'Contrôle de Gestion',                    'desc' => 'Pilotez la performance financière de votre entreprise avec efficacité et précision.'],
-            ['img' => 'company.jpg',       'title' => 'Informatique & NTIC',                    'desc' => 'Compétences en digital, réseaux, cybersécurité et systèmes d\'information.'],
-            ['img' => 'im1.jpg',           'title' => 'Droit des Affaires (OHADA)',             'desc' => 'Comprenez les règles juridiques pour sécuriser vos opérations commerciales en Afrique.'],
-            ['img' => 'img3.jpg',          'title' => 'Audit, Comptabilité & Finance',          'desc' => 'Maîtrisez les outils comptables et les analyses financières essentielles.'],
-            ['img' => 'professionel.jpg',  'title' => 'Développement Personnel & Soft Skills', 'desc' => 'Renforcez vos aptitudes en communication, gestion du stress et leadership.'],
-            ['img' => 'img2.jpg',          'title' => 'Marketing, Communication & Distribution','desc' => 'Maîtrisez les stratégies modernes pour promouvoir et distribuer vos produits.'],
-            ['img' => 'cta-bg.jpg',        'title' => 'Secrétariat & Archivage',               'desc' => 'Optimisez la gestion administrative et la circulation des documents.'],
-            ['img' => 'services.jpg',      'title' => 'E-Commerce & Fintech',                  'desc' => 'Lancez des activités en ligne et intégrez les solutions financières numériques.'],
+            ['slug' => 'audit-comptabilite-finance', 'domain' => 'Audit, Comptabilité & Finance', 'img' => 'img3.jpg', 'title' => 'Audit, Comptabilité & Finance', 'desc' => 'Maîtrisez les outils comptables, le reporting IFRS et les analyses financières essentielles.'],
+            ['slug' => 'controle-de-gestion', 'domain' => 'Contrôle de Gestion', 'img' => 'img3.jpg', 'title' => 'Contrôle de Gestion', 'desc' => 'Pilotez la performance financière et la trésorerie de votre entreprise avec efficacité.'],
+            ['slug' => 'informatique-ntic', 'domain' => 'Informatique & NTIC', 'img' => 'company.jpg', 'title' => 'Informatique & NTIC', 'desc' => 'Cybersécurité, audit de sécurité, réseaux et systèmes d\'information.'],
+            ['slug' => 'soft-skills', 'domain' => 'Soft Skills & Développement Personnel', 'img' => 'professionel.jpg', 'title' => 'Développement Personnel & Soft Skills', 'desc' => 'Gestion du temps, intelligence émotionnelle, négociation et leadership.'],
+            ['slug' => 'projets-developpement', 'domain' => 'Projets & Programmes de Développement', 'img' => 'cta-bg.jpg', 'title' => 'Projets & Programmes de Développement', 'desc' => 'Planification, exécution, suivi-évaluation et audit des projets en Afrique.'],
+            ['slug' => 'projet-educatif', 'domain' => 'Projet Éducatif en Afrique', 'img' => 'services.jpg', 'title' => 'Projet Éducatif en Afrique', 'desc' => 'Gouvernance, pilotage et amélioration de la qualité du secteur éducatif.'],
+            ['slug' => 'ecommerce-fintech', 'domain' => 'E-Commerce, Fintech & Développement Durable', 'img' => 'services.jpg', 'title' => 'E-Commerce & Fintech', 'desc' => 'Intelligence Artificielle, transformation numérique et solutions financières.'],
+            ['slug' => 'marches-publics', 'domain' => 'Marchés Publics', 'img' => 'im1.jpg', 'title' => 'Marchés Publics', 'desc' => 'Passation, exécution et suivi des contrats de marchés publics.'],
           ];
         @endphp
 
         @foreach($certifications as $i => $cert)
         <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="{{ ($i % 4 + 1) * 100 }}">
-          <div class="cert-card">
-            <div class="cert-card-img">
-              <img src="{{ asset('assets/img/' . $cert['img']) }}" alt="{{ $cert['title'] }}" loading="lazy">
+          <a href="{{ route('elite.training.domain', $cert['slug']) }}" class="text-decoration-none text-dark">
+            <div class="cert-card cursor-pointer">
+              <div class="cert-card-img">
+                <img src="{{ asset('assets/img/' . $cert['img']) }}" alt="{{ $cert['title'] }}" loading="lazy">
+              </div>
+              <div class="cert-card-body">
+                <h6>{{ $cert['title'] }}</h6>
+                <p>{{ $cert['desc'] }}</p>
+                <span class="cert-card-link">
+                  Voir les formations <i class="bi bi-arrow-right"></i>
+                </span>
+              </div>
             </div>
-            <div class="cert-card-body">
-              <h6>{{ $cert['title'] }}</h6>
-              <p>{{ $cert['desc'] }}</p>
-              <a href="{{ route('home') }}" class="cert-card-link">
-                En savoir plus <i class="bi bi-arrow-right"></i>
-              </a>
-            </div>
-          </div>
+          </a>
         </div>
         @endforeach
       </div>
@@ -1812,52 +1814,44 @@
       <div class="swiper scheduleSwiper" data-aos="fade-up" data-aos-delay="200">
         <div class="swiper-wrapper">
 
-          <!-- JANVIER -->
-          @php
-          $janvier = [
-            ['code'=>'PEA-001','img'=>'img3.jpg','title'=>'Gouvernance et Pilotage du Secteur Éducatif Africain','duree'=>'2 Semaines','prix'=>'3 300 €'],
-            ['code'=>'PEA-002','img'=>'professionel.jpg','title'=>'Mise en œuvre d\'une stratégie africaine nationale de l\'éducation','duree'=>'2 Semaines','prix'=>'3 300 €'],
-            ['code'=>'PEA-003','img'=>'company.jpg','title'=>'Pratiques pour une Amélioration de la qualité de l\'éducation en Afrique','duree'=>'2 Semaines','prix'=>'3 300 €'],
-            ['code'=>'PPD-007','img'=>'img2.jpg','title'=>'Planification, Exécution et Suivi des Projets et Programmes en Afrique','duree'=>'2 Semaines','prix'=>'3 300 €'],
-            ['code'=>'PPD-013','img'=>'im1.jpg','title'=>'Devenir spécialiste en communication de projet de développement','duree'=>'2 Semaines','prix'=>'3 300 €'],
-            ['code'=>'DPS-010','img'=>'cta-bg.jpg','title'=>'Techniques de Communication','duree'=>'1 Semaine','prix'=>'1 900 €'],
-            ['code'=>'EF-014','img'=>'img3.jpg','title'=>'L\'Intelligence Artificielle (IA)','duree'=>'1 Semaine','prix'=>'1 900 €'],
-            ['code'=>'INT-001','img'=>'professionel.jpg','title'=>'Audit & consulting en cyber security','duree'=>'1 Semaine','prix'=>'1 900 €'],
-            ['code'=>'ACF-010','img'=>'company.jpg','title'=>'Comptabilité Financière & analyse des états financiers','duree'=>'2 Semaines','prix'=>'3 300 €'],
-            ['code'=>'GC-001','img'=>'img2.jpg','title'=>'Gestion de la trésorerie : aspect organisationnel, comptable & fiscal','duree'=>'1 Semaine','prix'=>'1 900 €'],
-            ['code'=>'MP-001','img'=>'im1.jpg','title'=>'Exécution des marchés publics : suivi des contrats','duree'=>'2 Semaines','prix'=>'3 300 €'],
-            ['code'=>'QSE-008','img'=>'services.jpg','title'=>'Lean management','duree'=>'1 Semaine','prix'=>'1 900 €'],
-          ];
-          @endphp
-
-          @foreach($janvier as $formation)
+          @forelse($allFormations as $formation)
           <div class="swiper-slide" style="width: 300px;">
             <div class="schedule-card">
               <div class="schedule-card-img">
-                <img src="{{ asset('assets/img/' . $formation['img']) }}" alt="{{ $formation['title'] }}" loading="lazy">
+                <img src="{{ $formation->image ? asset('storage/' . $formation->image) : asset('assets/img/img3.jpg') }}" alt="{{ $formation->title }}" loading="lazy">
               </div>
               <div class="schedule-card-body">
-                <span class="schedule-code">{{ $formation['code'] }}</span>
-                <h6>{{ $formation['title'] }}</h6>
+                <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
+                <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
                 <div class="schedule-meta">
                   <div class="schedule-meta-item">
-                    <i class="bi bi-calendar3"></i>
-                    <span>Janvier 2025</span>
+                    <i class="bi bi-geo-alt"></i>
+                    <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
                   </div>
                   <div class="schedule-meta-item">
                     <i class="bi bi-clock"></i>
-                    <span>{{ $formation['duree'] }}</span>
+                    <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
                   </div>
                 </div>
                 <div class="d-flex align-items-center justify-content-between mb-3">
-                  <span class="schedule-price">{{ $formation['prix'] }}</span>
-                  <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">Disponible</span>
+                  <span class="schedule-price">
+                    @if($formation->price)
+                      {{ number_format($formation->price, 0, ',', ' ') }} €
+                    @else
+                      Sur devis
+                    @endif
+                  </span>
+                  <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
                 </div>
-                <a href="{{ route('home') }}" class="btn-register">S'inscrire</a>
+                <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire / Devis</a>
               </div>
             </div>
           </div>
-          @endforeach
+          @empty
+          <div class="text-center py-5 text-muted">
+            <p>Aucune formation disponible pour le moment.</p>
+          </div>
+          @endforelse
 
         </div>
 
@@ -2006,12 +2000,169 @@
   </footer>
 
 
+  <!-- ===== MODALE DE LISTE DES FORMATIONS PAR CATÉGORIE ===== -->
+  <div class="modal fade" id="categoryFormationsModal" tabindex="-1" aria-labelledby="categoryModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content" style="border-radius: 24px; overflow: hidden; border: none; box-shadow: 0 25px 60px rgba(0,0,0,0.35);">
+        {{-- Modal Header --}}
+        <div class="modal-header px-4 py-3" style="background: linear-gradient(135deg, #001f3f 0%, #002f5e 100%); color: #ffffff;">
+          <div class="d-flex align-items-center gap-3">
+            <span class="d-inline-flex align-items-center justify-content-center" style="width: 44px; height: 44px; background: rgba(206,146,51,0.2); border-radius: 12px; color: #f0b75a; font-size: 20px;">
+              <i class="bi bi-journal-bookmark-fill"></i>
+            </span>
+            <div>
+              <span class="text-uppercase tracking-wider font-bold" style="font-size: 11px; color: #f0b75a; letter-spacing: 1px;">Catalogue CAEI Elite</span>
+              <h4 class="modal-title font-black mb-0 text-white" id="categoryModalTitle" style="font-family: 'Outfit', sans-serif;">Formations</h4>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+
+        {{-- Modal Sub-header / Search --}}
+        <div class="px-4 py-3 border-bottom d-flex flex-column flex-sm-row align-items-sm-center justify-content-between gap-3" style="background: #f8f9fc;">
+          <div style="font-size: 14px; font-weight: 600; color: #4a5568;" id="categoryModalSubtitle">
+            Formations disponibles
+          </div>
+          <div style="min-width: 250px;">
+            <input type="text" id="categoryModalSearch" onkeyup="filterCategoryModalCourses()" placeholder="🔍 Rechercher dans ce domaine..." class="form-control form-control-sm rounded-pill" style="padding: 8px 16px; border-color: #cbd5e1;">
+          </div>
+        </div>
+
+        {{-- Modal Body --}}
+        <div class="modal-body p-4" style="background: #f1f5f9;">
+          <div class="row g-4" id="categoryModalGrid">
+            {{-- Injection dynamique par JavaScript --}}
+          </div>
+        </div>
+
+        {{-- Modal Footer --}}
+        <div class="modal-footer px-4 py-3" style="background: #ffffff; border-top: 1px solid #e2e8f0;">
+          <button type="button" class="btn btn-secondary rounded-pill px-4" data-bs-dismiss="modal" style="font-size: 14px; font-weight: 600;">Fermer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /MODALE -->
+
+
   <!-- ===== SCRIPTS ===== -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script>
+    // Toutes les formations chargées depuis la base de données
+    window.allFormationsData = @json($allFormations);
+
+    // Fonction pour ouvrir la modale d'une catégorie
+    function openCategoryModal(domainName, categoryTitle) {
+      document.getElementById('categoryModalTitle').textContent = categoryTitle;
+      document.getElementById('categoryModalSearch').value = '';
+      
+      const grid = document.getElementById('categoryModalGrid');
+      grid.innerHTML = '';
+
+      // Filtrer les formations correspondant au domaine (comparaison souple)
+      const matchingFormations = window.allFormationsData.filter(f => {
+        if (!f.domain) return false;
+        const d1 = f.domain.toLowerCase().trim();
+        const d2 = domainName.toLowerCase().trim();
+        return d1.includes(d2) || d2.includes(d1);
+      });
+
+      document.getElementById('categoryModalSubtitle').innerHTML = `
+        <span class="badge bg-warning text-dark px-3 py-1 rounded-pill">${matchingFormations.length} Formations</span> disponibles en <strong>${categoryTitle}</strong>
+      `;
+
+      if (matchingFormations.length === 0) {
+        grid.innerHTML = `
+          <div class="col-12 text-center py-5">
+            <div class="fs-1 text-muted mb-2">📁</div>
+            <h6 class="text-muted">Aucune formation répertoriée dans cette catégorie pour le moment.</h6>
+          </div>
+        `;
+      } else {
+        matchingFormations.forEach(f => {
+          const col = document.createElement('div');
+          col.className = 'col-md-6 col-lg-6 category-course-item';
+          col.setAttribute('data-search', `${f.code || ''} ${f.title || ''} ${f.description || ''}`.toLowerCase());
+
+          const formattedPrice = f.price ? Number(f.price).toLocaleString('fr-FR') + ' €' : 'Sur devis';
+          const courseCode = f.code ? `<span class="badge bg-primary text-white font-mono px-2 py-1">${f.code}</span>` : '';
+
+          col.innerHTML = `
+            <div class="card h-100 border-0 shadow-sm rounded-4 p-4 transition" style="background: #ffffff; border-left: 4px solid #ce9233 !important;">
+              <div class="d-flex align-items-center justify-content-between mb-2">
+                ${courseCode}
+                <span class="badge bg-light text-dark border px-2.5 py-1" style="font-size: 12px; font-weight: 600;">
+                  ⏱️ ${f.duration || '2 Semaines'}
+                </span>
+              </div>
+              <h6 class="font-bold text-navy mb-2" style="font-family: 'Outfit', sans-serif; font-size: 16px; color: #001f3f; line-height: 1.4;">
+                ${f.title}
+              </h6>
+              <p class="text-muted mb-3" style="font-size: 13px; line-height: 1.5; flex-grow: 1;">
+                ${f.description || 'Formation de haut niveau pour renforcer les compétences professionnelles.'}
+              </p>
+              <div class="d-flex align-items-center justify-content-between pt-3 mt-auto border-top">
+                <div>
+                  <span class="text-muted d-block" style="font-size: 11px;">Tarif indicatif</span>
+                  <span class="font-black" style="font-size: 18px; color: #ce9233;">${formattedPrice}</span>
+                </div>
+                <button type="button" onclick="selectCourseAndContact('${escapeHtml(f.code ? '['+f.code+'] '+f.title : f.title)}')" class="btn btn-sm btn-gold font-bold px-3 py-2 rounded-pill" style="font-size: 13px;">
+                  S'inscrire / Devis →
+                </button>
+              </div>
+            </div>
+          `;
+          grid.appendChild(col);
+        });
+      }
+
+      // Afficher la modale Bootstrap
+      const modalEl = document.getElementById('categoryFormationsModal');
+      const bsModal = new bootstrap.Modal(modalEl);
+      bsModal.show();
+    }
+
+    // Helper pour échapper le HTML dans les attributs JS
+    function escapeHtml(str) {
+      return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    // Filtrer les cours dans la modale via le champ de recherche
+    function filterCategoryModalCourses() {
+      const q = document.getElementById('categoryModalSearch').value.toLowerCase().trim();
+      const items = document.querySelectorAll('.category-course-item');
+      items.forEach(item => {
+        const text = item.getAttribute('data-search') || '';
+        item.style.display = text.includes(q) ? 'block' : 'none';
+      });
+    }
+
+    // Sélectionner une formation et défiler vers le formulaire de contact
+    function selectCourseAndContact(courseTitle) {
+      // Fermer la modale
+      const modalEl = document.getElementById('categoryFormationsModal');
+      const bsModal = bootstrap.Modal.getInstance(modalEl);
+      if (bsModal) bsModal.hide();
+
+      // Remplir l'objet du formulaire de contact
+      const objetInput = document.querySelector('input[name=objet]');
+      if (objetInput) {
+        objetInput.value = courseTitle;
+        objetInput.focus();
+      }
+
+      // Défiler en douceur vers le formulaire de contact
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        const offset = 80;
+        const top = contactSection.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    }
+
     // ===== AOS INIT =====
     AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
 
