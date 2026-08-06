@@ -23,17 +23,6 @@
                         </div>
                     </a>
 
-                    {{-- Lien Formations (Elite Training) --}}
-                    <a href="{{ route('admin.formations.index') }}" 
-                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.formations.*') ? 'bg-[#ce9233] text-white font-bold' : 'text-slate-200 hover:bg-white/10' }}">
-                        <div class="flex items-center gap-3">
-                            <span class="text-base">📜</span>
-                            <span>Formations Elite</span>
-                        </div>
-                        <span class="bg-amber-400/20 text-[#f2a90f] text-[10px] font-black px-2 py-0.5 rounded-full border border-amber-400/30">
-                            {{ \App\Models\Formation::count() }}
-                        </span>
-                    </a>
 
                     {{-- Lien Medical Center --}}
                     <a href="{{ route('admin.medical-requests.index') }}" 
@@ -45,6 +34,20 @@
                         @if(\App\Models\MedicalRequest::where('status', 'pending')->count() > 0)
                             <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
                                 {{ \App\Models\MedicalRequest::where('status', 'pending')->count() }}
+                            </span>
+                        @endif
+                    </a>
+
+                    {{-- Lien Elite Training --}}
+                    <a href="{{ route('admin.elite-training.index') }}" 
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.elite-training.*') ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-200 hover:bg-white/10' }}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">🏆</span>
+                            <span>Elite Training</span>
+                        </div>
+                        @if(\App\Models\EliteTrainingAppointment::where('status', 'pending')->count() > 0)
+                            <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
+                                {{ \App\Models\EliteTrainingAppointment::where('status', 'pending')->count() }}
                             </span>
                         @endif
                     </a>

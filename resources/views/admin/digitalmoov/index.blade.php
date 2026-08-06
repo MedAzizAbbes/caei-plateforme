@@ -56,7 +56,7 @@
 
         {{-- Filtres --}}
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm mb-8">
-            <form method="GET" action="{{ route('admin.digitalmoov.index') }}" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <form method="GET" action="{{ route('admin.digitalmoov.index') }}" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Rechercher</label>
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Nom, email, sujet..."
@@ -70,6 +70,13 @@
                         <option value="read"     {{ request('status') === 'read'     ? 'selected' : '' }}>Lu</option>
                         <option value="replied"  {{ request('status') === 'replied'  ? 'selected' : '' }}>Répondu</option>
                         <option value="archived" {{ request('status') === 'archived' ? 'selected' : '' }}>Archivé</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Trier par Date & Heure</label>
+                    <select name="sort" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:border-orange-500 focus:outline-none">
+                        <option value="desc" {{ request('sort', 'desc') === 'desc' ? 'selected' : '' }}>📅 Plus récents d'abord (Décroissant)</option>
+                        <option value="asc" {{ request('sort') === 'asc' ? 'selected' : '' }}>📅 Plus anciens d'abord (Croissant)</option>
                     </select>
                 </div>
                 <div class="flex items-end gap-2">
@@ -86,7 +93,16 @@
                     <table class="w-full text-left text-sm text-slate-700">
                         <thead class="bg-slate-50 text-xs font-black uppercase tracking-wider text-slate-600 border-b border-slate-200">
                             <tr>
-                                <th class="p-4">Réf / Date</th>
+                                <th class="p-4">
+                                    <a href="{{ route('admin.digitalmoov.index', array_merge(request()->query(), ['sort' => request('sort') === 'asc' ? 'desc' : 'asc'])) }}" class="inline-flex items-center gap-1.5 hover:text-orange-500 transition-colors" title="Cliquer pour basculer le tri par date et heure">
+                                        <span>Réf / Date</span>
+                                        @if(request('sort') === 'asc')
+                                            <span class="text-orange-600 font-black">↑ (Anciens)</span>
+                                        @else
+                                            <span class="text-orange-600 font-black">↓ (Récents)</span>
+                                        @endif
+                                    </a>
+                                </th>
                                 <th class="p-4">Expéditeur</th>
                                 <th class="p-4">Sujet</th>
                                 <th class="p-4">Message</th>
@@ -97,8 +113,8 @@
                         <tbody class="divide-y divide-slate-100">
                             @foreach($contacts as $contact)
                                 <tr class="hover:bg-slate-50/80 transition-colors {{ $contact->status === 'new' ? 'bg-orange-50/30' : '' }}">
-                                    <td class="p-4 font-mono font-bold text-orange-700">
-                                        #{{ $contact->id }}
+                                    <td class="p-4 font-mono font-bold text-[#061743]">
+                                        #{{ ($contacts->currentPage() - 1) * $contacts->perPage() + $loop->iteration }}
                                         <span class="block text-[11px] font-normal text-slate-400 mt-0.5">
                                             {{ $contact->created_at->format('d/m/Y H:i') }}
                                         </span>
@@ -140,7 +156,7 @@
                                     <div class="bg-white rounded-3xl max-w-xl w-full p-8 shadow-2xl space-y-5 relative text-left">
                                         <div class="flex items-center justify-between border-b border-slate-100 pb-4">
                                             <div>
-                                                <span class="text-xs font-bold text-orange-600 uppercase">Digital Moov #{{ $contact->id }}</span>
+                                                <span class="text-xs font-bold text-orange-600 uppercase">Digital Moov #{{ ($contacts->currentPage() - 1) * $contacts->perPage() + $loop->iteration }}</span>
                                                 <h3 class="text-xl font-black text-slate-900">{{ $contact->name }}</h3>
                                             </div>
                                             <button onclick="closeModal('dm-modal-{{ $contact->id }}')" class="text-slate-400 hover:text-slate-700 text-xl font-bold p-2">✕</button>

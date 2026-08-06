@@ -1939,7 +1939,13 @@
               Prendre Rendez-vous en Ligne
             </h4>
 
-            <form action="{{ url('/') }}" method="POST" id="contactForm">
+            @if(session('success'))
+              <div class="alert alert-success border-0 rounded-4 mb-4 p-3 text-white font-bold" style="background: rgba(40, 167, 69, 0.25); border: 1px solid #28a745 !important;">
+                <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+              </div>
+            @endif
+
+            <form action="{{ route('elite.appointment.store') }}" method="POST" id="contactForm">
               @csrf
               <div class="row g-4">
                 <div class="col-md-6">
@@ -1969,12 +1975,12 @@
                 <div class="col-12">
                   <div class="et-form-group">
                     <label>Message</label>
-                    <textarea name="message" class="et-form-control" placeholder="Décrivez votre besoin..."></textarea>
+                    <textarea name="message" class="et-form-control" placeholder="Décrivez votre besoin..." required></textarea>
                   </div>
                 </div>
                 <div class="col-12">
-                  <button type="button" onclick="alert('Merci ! Nous vous contacterons bientôt.')" class="btn-gold w-100 justify-content-center" style="border: none; font-size: 16px;">
-                    <i class="bi bi-send-fill"></i>
+                  <button type="submit" class="btn-gold w-100 justify-content-center" style="border: none; font-size: 16px;">
+                    <i class="bi bi-send-fill me-2"></i>
                     Envoyer ma demande
                   </button>
                 </div>
