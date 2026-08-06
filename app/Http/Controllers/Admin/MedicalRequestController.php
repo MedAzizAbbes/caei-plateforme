@@ -13,7 +13,12 @@ class MedicalRequestController extends Controller
      */
     public function index(Request $request)
     {
-        $query = MedicalRequest::orderBy('created_at', 'desc');
+        $sort = $request->input('sort', 'desc');
+        if (!in_array($sort, ['asc', 'desc'])) {
+            $sort = 'desc';
+        }
+
+        $query = MedicalRequest::orderBy('created_at', $sort);
 
         // Filtre par statut
         if ($request->filled('status')) {

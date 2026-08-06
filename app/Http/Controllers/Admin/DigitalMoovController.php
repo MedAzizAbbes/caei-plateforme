@@ -10,7 +10,12 @@ class DigitalMoovController extends Controller
 {
     public function index(Request $request)
     {
-        $query = DigitalMoovContact::orderBy('created_at', 'desc');
+        $sort = $request->input('sort', 'desc');
+        if (!in_array($sort, ['asc', 'desc'])) {
+            $sort = 'desc';
+        }
+
+        $query = DigitalMoovContact::orderBy('created_at', $sort);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);

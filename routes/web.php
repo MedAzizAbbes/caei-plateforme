@@ -42,6 +42,8 @@ Route::get('/elite-training', function () {
     return view('elite-training.index');
 })->name('elite.training');
 
+Route::post('/elite-training/appointment', [\App\Http\Controllers\EliteAppointmentController::class, 'store'])->name('elite.appointment.store');
+
 Route::get('/digital-moov', function () {
     return view('digitalmoov.index');
 })->name('digitalmoov');
@@ -405,6 +407,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/digital-moov', [\App\Http\Controllers\Admin\DigitalMoovController::class, 'index'])->name('digitalmoov.index');
     Route::put('/digital-moov/{contact}', [\App\Http\Controllers\Admin\DigitalMoovController::class, 'updateStatus'])->name('digitalmoov.update-status');
     Route::delete('/digital-moov/{contact}', [\App\Http\Controllers\Admin\DigitalMoovController::class, 'destroy'])->name('digitalmoov.destroy');
+
+    // --- Rendez-vous Elite Training ---
+    Route::get('/elite-training', [\App\Http\Controllers\Admin\EliteTrainingController::class, 'index'])->name('elite-training.index');
+    Route::put('/elite-training/{appointment}', [\App\Http\Controllers\Admin\EliteTrainingController::class, 'updateStatus'])->name('elite-training.update-status');
+    Route::delete('/elite-training/{appointment}', [\App\Http\Controllers\Admin\EliteTrainingController::class, 'destroy'])->name('elite-training.destroy');
 });
 
 require __DIR__.'/auth.php';
