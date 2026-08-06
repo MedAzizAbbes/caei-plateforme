@@ -15,12 +15,24 @@
                 <div class="px-3 text-[10px] uppercase font-black tracking-widest text-slate-400 mb-2">Navigation</div>
                 <div class="space-y-1.5">
                     {{-- Lien Séminaires --}}
-                    <a href="{{ route('admin.dashboard') }}" 
-                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.dashboard') || request()->routeIs('admin.seminars.*') ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-200 hover:bg-white/10' }}">
+                    <a href="{{ route('admin.seminars.index') }}" 
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.seminars.*') ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-200 hover:bg-white/10' }}">
                         <div class="flex items-center gap-3">
                             <span class="text-base">🎓</span>
                             <span>Séminaires</span>
                         </div>
+                    </a>
+
+                    {{-- Lien Formations (Elite Training) --}}
+                    <a href="{{ route('admin.formations.index') }}" 
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.formations.*') ? 'bg-[#ce9233] text-white font-bold' : 'text-slate-200 hover:bg-white/10' }}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">📜</span>
+                            <span>Formations Elite</span>
+                        </div>
+                        <span class="bg-amber-400/20 text-[#f2a90f] text-[10px] font-black px-2 py-0.5 rounded-full border border-amber-400/30">
+                            {{ \App\Models\Formation::count() }}
+                        </span>
                     </a>
 
                     {{-- Lien Medical Center --}}
