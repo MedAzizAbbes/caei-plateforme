@@ -28,7 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('digitalmoov/assets/css/main.css') }}?v=2.0" rel="stylesheet">
-  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=1.0" rel="stylesheet">
+  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=2.0" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: UpConstruction
@@ -86,161 +86,171 @@
     <section id="projects" class="projects">
       <div class="container" data-aos="fade-up">
 
+        <div class="section-header text-center mb-5">
+          <span class="section-tag-pill">
+            <i class="bi bi-grid-fill text-warning"></i> Notre Portfolio
+          </span>
+          <h2 style="font-weight: 800; color: #0f172a; font-size: 2.2rem;" class="mt-2 mb-3">Découvrez Nos Projets & Réalisations</h2>
+          <p class="mx-auto" style="max-width: 750px; color: #64748b; font-size: 1.05rem;">
+            Exploitez tout le potentiel de votre marque avec nos solutions digitales sur-mesure en développement web, design graphique, campagnes emailing et création de contenu.
+          </p>
+        </div>
+
         <div class="portfolio-isotope" data-portfolio-filter="*" data-portfolio-layout="masonry" data-portfolio-sort="original-order">
 
           <ul class="portfolio-flters" data-aos="fade-up" data-aos-delay="100">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-remodeling">Développement web</li>
-            <li data-filter=".filter-construction">Design graphique</li>
-            <li data-filter=".filter-repairs">Création des emails Pro</li>
-            <li data-filter=".filter-design">Création de contenu</li>
+            <li data-filter="*" class="filter-active">Tous</li>
+            <li data-filter=".filter-web">Développement Web</li>
+            <li data-filter=".filter-design">Design Graphique</li>
+            <li data-filter=".filter-email">Emails Pro</li>
+            <li data-filter=".filter-content">Création de Contenu</li>
           </ul><!-- End Projects Filters -->
 
           <div class="row gy-4 portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-remodeling">
+            <!-- Item 1: Web -->
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
               <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/remodeling-1.jpg') }}" class="img-fluid" alt="">
+                <span class="project-card-badge"><i class="bi bi-code-slash"></i> Web Dev</span>
+                <img src="{{ asset('digitalmoov/assets/img/dm_service_webdev.jpg') }}" class="img-fluid" alt="Plateforme E-Commerce Mode">
                 <div class="portfolio-info">
-                  <h4>Remodeling 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/remodeling-1.jpg') }}" title="Remodeling 1" data-gallery="portfolio-gallery-remodeling" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <h4>Plateforme E-Commerce Mode</h4>
+                  <p>Refonte complète UI/UX, plateforme Laravel sur-mesure & paiement sécurisé.</p>
+                  <div class="action-links">
+                    <a href="{{ asset('digitalmoov/assets/img/dm_service_webdev.jpg') }}" title="Plateforme E-Commerce Mode" data-gallery="portfolio-gallery-web" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="{{ route('digitalmoov.project-details') }}" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
                 </div>
               </div>
-            </div><!-- End Projects Item -->
+            </div><!-- End Projects Item 1 -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-construction">
-              <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/construction-1.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Construction 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/construction-1.jpg') }}" title="Construction 1" data-gallery="portfolio-gallery-construction" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Projects Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-repairs">
-              <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/repairs-1.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Repairs 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/repairs-1.jpg') }}" title="Repairs 1" data-gallery="portfolio-gallery-repairs" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Projects Item -->
-
+            <!-- Item 2: Design -->
             <div class="col-lg-4 col-md-6 portfolio-item filter-design">
               <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/design-1.jpg') }}" class="img-fluid" alt="">
+                <span class="project-card-badge"><i class="bi bi-palette"></i> Design Graphique</span>
+                <img src="{{ asset('digitalmoov/assets/img/projects/design-1.jpg') }}" class="img-fluid" alt="Identité Visuelle & Branding">
                 <div class="portfolio-info">
-                  <h4>Design 1</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/design-1.jpg') }}" title="Repairs 1" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <h4>Identité Visuelle & Branding</h4>
+                  <p>Charte graphique corporate, création de logotype & déclinaisons visuelles.</p>
+                  <div class="action-links">
+                    <a href="{{ asset('digitalmoov/assets/img/projects/design-1.jpg') }}" title="Identité Visuelle & Branding" data-gallery="portfolio-gallery-design" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="{{ route('digitalmoov.project-details') }}" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
                 </div>
               </div>
-            </div><!-- End Projects Item -->
+            </div><!-- End Projects Item 2 -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-remodeling">
+            <!-- Item 3: Email -->
+            <div class="col-lg-4 col-md-6 portfolio-item filter-email">
               <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/remodeling-2.jpg') }}" class="img-fluid" alt="">
+                <span class="project-card-badge"><i class="bi bi-envelope-paper"></i> Emailing Pro</span>
+                <img src="{{ asset('digitalmoov/assets/img/dm_service_editorial.jpg') }}" class="img-fluid" alt="Campagne Emailing Automation">
                 <div class="portfolio-info">
-                  <h4>Remodeling 2</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/remodeling-2.jpg') }}" title="Remodeling 2" data-gallery="portfolio-gallery-remodeling" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <h4>Campagne Emailing Automation</h4>
+                  <p>Templates HTML interactifs, ciblage comportemental & séquences de conversion.</p>
+                  <div class="action-links">
+                    <a href="{{ asset('digitalmoov/assets/img/dm_service_editorial.jpg') }}" title="Campagne Emailing Automation" data-gallery="portfolio-gallery-email" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="{{ route('digitalmoov.project-details') }}" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
                 </div>
               </div>
-            </div><!-- End Projects Item -->
+            </div><!-- End Projects Item 3 -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-construction">
+            <!-- Item 4: Content -->
+            <div class="col-lg-4 col-md-6 portfolio-item filter-content">
               <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/construction-2.jpg') }}" class="img-fluid" alt="">
+                <span class="project-card-badge"><i class="bi bi-camera-reels"></i> Contenu</span>
+                <img src="{{ asset('digitalmoov/assets/img/dm_service_social.jpg') }}" class="img-fluid" alt="Stratégie Social Media & Vidéo">
                 <div class="portfolio-info">
-                  <h4>Construction 2</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/construction-2.jpg') }}" title="Construction 2" data-gallery="portfolio-gallery-construction" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <h4>Stratégie Social Media & Vidéo</h4>
+                  <p>Production de contenus animés, Reels & visuels haute définition engageants.</p>
+                  <div class="action-links">
+                    <a href="{{ asset('digitalmoov/assets/img/dm_service_social.jpg') }}" title="Stratégie Social Media & Vidéo" data-gallery="portfolio-gallery-content" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="{{ route('digitalmoov.project-details') }}" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
                 </div>
               </div>
-            </div><!-- End Projects Item -->
+            </div><!-- End Projects Item 4 -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-repairs">
+            <!-- Item 5: Web -->
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
               <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/repairs-2.jpg') }}" class="img-fluid" alt="">
+                <span class="project-card-badge"><i class="bi bi-laptop"></i> Web Dev</span>
+                <img src="{{ asset('digitalmoov/assets/img/front-view-online-shopping-concept.jpg') }}" class="img-fluid" alt="Portail Client Interactif">
                 <div class="portfolio-info">
-                  <h4>Repairs 2</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/repairs-2.jpg') }}" title="Repairs 2" data-gallery="portfolio-gallery-repairs" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <h4>Portail Client & SaaS</h4>
+                  <p>Dashboard sur-mesure avec intégration d'outils métiers & API interactives.</p>
+                  <div class="action-links">
+                    <a href="{{ asset('digitalmoov/assets/img/front-view-online-shopping-concept.jpg') }}" title="Portail Client & SaaS" data-gallery="portfolio-gallery-web" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="{{ route('digitalmoov.project-details') }}" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
                 </div>
               </div>
-            </div><!-- End Projects Item -->
+            </div><!-- End Projects Item 5 -->
 
+            <!-- Item 6: Design -->
             <div class="col-lg-4 col-md-6 portfolio-item filter-design">
               <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/design-2.jpg') }}" class="img-fluid" alt="">
+                <span class="project-card-badge"><i class="bi bi-brush"></i> UI/UX Design</span>
+                <img src="{{ asset('digitalmoov/assets/img/projects/design-2.jpg') }}" class="img-fluid" alt="Design d'Interface Mobile App">
                 <div class="portfolio-info">
-                  <h4>Design 2</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/design-2.jpg') }}" title="Repairs 2" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <h4>Design Mobile App UX/UI</h4>
+                  <p>Prototypage Figma, maquettage interactif et design de parcours utilisateur intuitifs.</p>
+                  <div class="action-links">
+                    <a href="{{ asset('digitalmoov/assets/img/projects/design-2.jpg') }}" title="Design Mobile App UX/UI" data-gallery="portfolio-gallery-design" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="{{ route('digitalmoov.project-details') }}" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
                 </div>
               </div>
-            </div><!-- End Projects Item -->
+            </div><!-- End Projects Item 6 -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-remodeling">
+            <!-- Item 7: Email -->
+            <div class="col-lg-4 col-md-6 portfolio-item filter-email">
               <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/remodeling-3.jpg') }}" class="img-fluid" alt="">
+                <span class="project-card-badge"><i class="bi bi-send-check"></i> Emailing Pro</span>
+                <img src="{{ asset('digitalmoov/assets/img/relation-client-digital.png') }}" class="img-fluid" alt="Série de Newsletters B2B">
                 <div class="portfolio-info">
-                  <h4>Remodeling 3</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/remodeling-3.jpg') }}" title="Remodeling 3" data-gallery="portfolio-gallery-remodeling" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <h4>Série de Newsletters B2B</h4>
+                  <p>Conception de newsletters hebdomadaires à fort engagement & segmentation d'audience.</p>
+                  <div class="action-links">
+                    <a href="{{ asset('digitalmoov/assets/img/relation-client-digital.png') }}" title="Série de Newsletters B2B" data-gallery="portfolio-gallery-email" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="{{ route('digitalmoov.project-details') }}" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
                 </div>
               </div>
-            </div><!-- End Projects Item -->
+            </div><!-- End Projects Item 7 -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-construction">
+            <!-- Item 8: Content -->
+            <div class="col-lg-4 col-md-6 portfolio-item filter-content">
               <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/construction-3.jpg') }}" class="img-fluid" alt="">
+                <span class="project-card-badge"><i class="bi bi-journal-text"></i> Brand Content</span>
+                <img src="{{ asset('digitalmoov/assets/img/social-media-marketing-concept-marketing-with-applications.jpg') }}" class="img-fluid" alt="Campagne d'Influence & Content">
                 <div class="portfolio-info">
-                  <h4>Construction 3</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/construction-3.jpg') }}" title="Construction 3" data-gallery="portfolio-gallery-construction" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <h4>Campagne Multi-Canal & Storytelling</h4>
+                  <p>Déploiement de campagnes éditoriales à forte notoriété sur les réseaux sociaux.</p>
+                  <div class="action-links">
+                    <a href="{{ asset('digitalmoov/assets/img/social-media-marketing-concept-marketing-with-applications.jpg') }}" title="Campagne Multi-Canal & Storytelling" data-gallery="portfolio-gallery-content" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="{{ route('digitalmoov.project-details') }}" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
                 </div>
               </div>
-            </div><!-- End Projects Item -->
+            </div><!-- End Projects Item 8 -->
 
-            <div class="col-lg-4 col-md-6 portfolio-item filter-repairs">
+            <!-- Item 9: Web -->
+            <div class="col-lg-4 col-md-6 portfolio-item filter-web">
               <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/repairs-3.jpg') }}" class="img-fluid" alt="">
+                <span class="project-card-badge"><i class="bi bi-globe"></i> Web Dev</span>
+                <img src="{{ asset('digitalmoov/assets/img/dm_service_strategy.jpg') }}" class="img-fluid" alt="Site Corporate SEO-First">
                 <div class="portfolio-info">
-                  <h4>Repairs 3</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/repairs-3.jpg') }}" title="Repairs 2" data-gallery="portfolio-gallery-repairs" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  <h4>Site Corporate SEO-First</h4>
+                  <p>Site d'entreprise responsive ultra-rapide optimisé pour le référencement naturel.</p>
+                  <div class="action-links">
+                    <a href="{{ asset('digitalmoov/assets/img/dm_service_strategy.jpg') }}" title="Site Corporate SEO-First" data-gallery="portfolio-gallery-web" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
+                    <a href="{{ route('digitalmoov.project-details') }}" title="Plus de détails" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                  </div>
                 </div>
               </div>
-            </div><!-- End Projects Item -->
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-design">
-              <div class="portfolio-content h-100">
-                <img src="{{ asset('digitalmoov/assets/img/projects/design-3.jpg') }}" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4>Design 3</h4>
-                  <p>Lorem ipsum, dolor sit amet consectetur</p>
-                  <a href="{{ asset('digitalmoov/assets/img/projects/design-3.jpg') }}" title="Repairs 3" data-gallery="portfolio-gallery-book" class="glightbox preview-link"><i class="bi bi-zoom-in"></i></a>
-                  <a href="{{ route('digitalmoov.project-details') }}" title="More Details" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                </div>
-              </div>
-            </div><!-- End Projects Item -->
+            </div><!-- End Projects Item 9 -->
 
           </div><!-- End Projects Container -->
 
@@ -248,6 +258,21 @@
 
       </div>
     </section><!-- End Our Projects Section -->
+
+    <!-- ======= CTA Section ======= -->
+    <section class="ref-cta-section">
+      <div class="container" data-aos="zoom-in">
+        <div class="ref-cta-banner text-center">
+          <h2 style="font-weight: 800; font-size: 2.2rem;" class="mb-3">Vous avez un projet digital en tête ?</h2>
+          <p class="mx-auto mb-4" style="max-width: 650px; color: #cbd5e1; font-size: 1.1rem;">
+            Transformez vos idées en réalités performantes. Nos experts sont prêts à concevoir votre prochaine réussite.
+          </p>
+          <a href="{{ route('digitalmoov.contact') }}" class="ref-cta-btn">
+            Lancer mon projet <i class="bi bi-rocket-takeoff-fill"></i>
+          </a>
+        </div>
+      </div>
+    </section><!-- End CTA Section -->
 
   </main><!-- End #main -->
 

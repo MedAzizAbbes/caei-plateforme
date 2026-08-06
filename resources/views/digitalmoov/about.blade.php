@@ -73,9 +73,11 @@
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('digitalmoov/assets/img/la_strategie_marketing_digitale.jpg') }}');">
       <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
-
-       
-
+        <h2>À Propos de Digital-MOOV</h2>
+        <ol>
+          <li><a href="{{ route('digitalmoov') }}">Agence</a></li>
+          <li>À Propos</li>
+        </ol>
       </div>
     </div><!-- End Breadcrumbs -->
 
@@ -83,23 +85,28 @@
     <section id="about" class="about">
       <div class="container" data-aos="fade-up">
 
-        <div class="row position-relative">
+        <div class="row position-relative g-4">
 
           <div class="col-lg-7 about-img" style="background-image: url({{ asset('digitalmoov/assets/img/66.avif') }});"></div>
 
           <div class="col-lg-7">
-            <h2>CAEI  Digital-MOOV</h2>
+            <span class="section-tag-pill mb-3">
+              <i class="bi bi-building-gear text-warning"></i> Notre Histoire & Vision
+            </span>
+            <h2 style="font-weight: 800; color: #0f172a;" class="mb-3">CAEI Digital-MOOV</h2>
             <div class="our-story">
-              <h4>Est 2012
-              </h4>
-              <h3>Présentation</h3>
-              <p>CAEI DIGITAL MOOV est une agence de marketing digital basée en Tunisie depuis 2012 et opérationnelle en France depuis 2022. Elle opére dans le domaine de l'assistance et de l'accompagnement digital aux entreprises.
-                Crée il y a 10 ans, notre agence a développé une forte expertise et gagné la confiance de clients nationaux et internationaux. Dans ce monde en constante évolution, le numérique a pris une place considérable dans notre quotidien et notre vie professionnelle.</p>
+              <h4>Depuis 2012</h4>
+              <h3>Pionniers de l'Accompagnement Digital</h3>
+              <p>
+                CAEI Digital-MOOV est une agence de marketing digital fondée en Tunisie en 2012 et implantée en France depuis 2022. Forts de plus de 10 ans d'expertise transfrontalière, nous accompagnons les entreprises, PME et grands comptes dans la réussite de leur transformation numérique.
+              </p>
+              <p>
+                Dans un univers en constante évolution, notre mission est de concrétiser vos ambitions en déployant des stratégies créatives, des technologies web robustes et des leviers marketing à fort impact ROI.
+              </p>
               
-
-              <div class="watch-video d-flex align-items-center position-relative">
-                <i class="bi bi-play-circle"></i>
-                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox stretched-link">Watch Video</a>
+              <div class="watch-video d-flex align-items-center position-relative mt-4">
+                <i class="bi bi-play-circle-fill text-warning fs-2 me-2"></i>
+                <a href="https://www.youtube.com/watch?v=LXb3EKWsInQ" class="glightbox stretched-link fw-bold text-dark">Découvrir notre présentation vidéo</a>
               </div>
             </div>
           </div>
@@ -111,61 +118,123 @@
     <!-- End About Section -->
 
     <!-- ======= Stats Counter Section ======= -->
-    <section id="stats-counter" class="stats-counter section-bg">
-      <div class="container">
+    <section id="stats-counter" class="ref-stats-banner">
+      <div class="container" data-aos="fade-up">
+        <div class="row g-4">
 
-        <div class="row gy-4">
-
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item d-flex align-items-center w-100 h-100">
-              <i class="bi bi-emoji-smile color-blue flex-shrink-0"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="+232" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Clients satisfaits</p>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="ref-stat-box">
+              <div class="ref-stat-icon">
+                <i class="bi bi-emoji-smile-fill"></i>
               </div>
+              <div class="ref-stat-number">+250</div>
+              <div class="ref-stat-label">Clients Satisfaits</div>
             </div>
           </div><!-- End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item d-flex align-items-center w-100 h-100">
-              <i class="bi bi-journal-richtext color-orange flex-shrink-0"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Projects</p>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="ref-stat-box">
+              <div class="ref-stat-icon">
+                <i class="bi bi-journal-check"></i>
               </div>
+              <div class="ref-stat-number">500+</div>
+              <div class="ref-stat-label">Projets Réalisés</div>
             </div>
           </div><!-- End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item d-flex align-items-center w-100 h-100">
-              <i class="bi bi-headset color-green flex-shrink-0"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Heures de Support</p>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="ref-stat-box">
+              <div class="ref-stat-icon">
+                <i class="bi bi-calendar3"></i>
               </div>
+              <div class="ref-stat-number">12+</div>
+              <div class="ref-stat-label">Années d'Expérience</div>
             </div>
           </div><!-- End Stats Item -->
 
-          <div class="col-lg-3 col-md-6">
-            <div class="stats-item d-flex align-items-center w-100 h-100">
-              <i class="bi bi-people color-pink flex-shrink-0"></i>
-              <div>
-                <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1" class="purecounter"></span>
-                <p>Travailleurs assidus</p>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="ref-stat-box">
+              <div class="ref-stat-icon">
+                <i class="bi bi-people-fill"></i>
               </div>
+              <div class="ref-stat-number">20+</div>
+              <div class="ref-stat-label">Experts Passionnés</div>
             </div>
           </div><!-- End Stats Item -->
 
         </div>
-
       </div>
     </section><!-- End Stats Counter Section -->
 
-   
+    <!-- ======= Values Section ======= -->
+    <section class="ref-process-section">
+      <div class="container" data-aos="fade-up">
+        <div class="section-header text-center mb-5">
+          <span class="section-tag-pill">
+            <i class="bi bi-shield-check text-warning"></i> Nos Piliers
+          </span>
+          <h2 style="font-weight: 800; color: #0f172a; font-size: 2.2rem;" class="mt-2 mb-3">Nos Valeurs Fondamentales</h2>
+          <p class="mx-auto" style="max-width: 700px; color: #64748b; font-size: 1.05rem;">
+            Ce qui anime notre équipe au quotidien pour vous délivrer une valeur inégalée.
+          </p>
+        </div>
 
-   
+        <div class="row g-4">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="about-value-card">
+              <div class="about-value-icon">
+                <i class="bi bi-lightbulb-fill"></i>
+              </div>
+              <h3 style="font-weight: 700; color: #0f172a;" class="mb-3">Innovation & Créativité</h3>
+              <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6;">
+                Nous anticipons les tendances digitales et concevons des solutions novatrices qui font sortir votre marque du lot.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="about-value-card">
+              <div class="about-value-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <h3 style="font-weight: 700; color: #0f172a;" class="mb-3">Culture du ROI</h3>
+              <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6;">
+                Chaque euro investi doit générer de la valeur. Nous mesurons et optimisons continuellement les performances de vos campagnes.
+              </p>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="about-value-card">
+              <div class="about-value-icon">
+                <i class="bi bi-hand-thumbs-up-fill"></i>
+              </div>
+              <h3 style="font-weight: 700; color: #0f172a;" class="mb-3">Transparence & Proximité</h3>
+              <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6;">
+                Une collaboration basée sur la confiance, une communication fluide et des reporting transparents à chaque étape.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Values Section -->
 
 
+
+    <!-- ======= CTA Section ======= -->
+    <section class="ref-cta-section">
+      <div class="container" data-aos="zoom-in">
+        <div class="ref-cta-banner text-center">
+          <h2 style="font-weight: 800; font-size: 2.2rem;" class="mb-3">Prêt à collaborer avec notre équipe ?</h2>
+          <p class="mx-auto mb-4" style="max-width: 650px; color: #cbd5e1; font-size: 1.1rem;">
+            Découvrez comment notre savoir-faire peut transformer votre présence sur le web.
+          </p>
+          <a href="{{ route('digitalmoov.contact') }}" class="ref-cta-btn">
+            Contactez notre équipe <i class="bi bi-arrow-right-circle-fill"></i>
+          </a>
+        </div>
+      </div>
+    </section><!-- End CTA Section -->
 
   </main><!-- End #main -->
 
