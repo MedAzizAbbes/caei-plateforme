@@ -1,0 +1,2193 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>CAEI Elite Training — Formation Professionnelle d'Excellence en Afrique</title>
+  <meta name="description" content="Le Comité Africain d'Expertise Internationale (CAEI) propose des formations certifiantes, diplômantes et sur mesure pour les professionnels africains. Mini MBA, Executive MBA, Doctorat et plus de 150 formations disponibles.">
+  <meta name="keywords" content="CAEI, Elite Training, formation professionnelle, MBA, Afrique, Tunisie, séminaire, certification">
+  <meta property="og:title" content="CAEI Elite Training — Formation d'Excellence">
+  <meta property="og:description" content="Formations certifiantes, diplômantes et sur mesure pour les professionnels africains.">
+
+  <!-- Favicon -->
+  <link href="{{ asset('assets/img/logoh.ico') }}" rel="icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- AOS Animations -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <!-- Swiper -->
+  <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet">
+
+  <style>
+    /* ===== ROOT VARIABLES ===== */
+    :root {
+      --gold: #ce9233;
+      --gold-light: #f0b75a;
+      --gold-dark: #a87228;
+      --navy: #001f3f;
+      --navy-mid: #002f5e;
+      --navy-light: #003d7a;
+      --white: #ffffff;
+      --off-white: #f8f9fc;
+      --gray: #6c757d;
+      --font-main: 'Inter', sans-serif;
+      --font-display: 'Outfit', sans-serif;
+      --shadow-sm: 0 4px 15px rgba(0,0,0,0.08);
+      --shadow-md: 0 8px 30px rgba(0,0,0,0.12);
+      --shadow-lg: 0 20px 60px rgba(0,0,0,0.18);
+      --shadow-gold: 0 8px 30px rgba(206, 146, 51, 0.3);
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 32px;
+      --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-main);
+      background: var(--white);
+      color: #1a1a2e;
+      overflow-x: hidden;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+    /* ===== NAVBAR ===== */
+    .et-navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 18px 0;
+      transition: var(--transition);
+      background: transparent;
+    }
+
+    .et-navbar.scrolled {
+      background: rgba(0, 31, 63, 0.97);
+      backdrop-filter: blur(20px);
+      padding: 12px 0;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+    }
+
+    .et-navbar .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .et-navbar .nav-brand img {
+      height: 44px;
+      filter: brightness(0) invert(1);
+      transition: var(--transition);
+    }
+
+    .et-navbar .nav-brand span {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--white);
+      letter-spacing: 0.5px;
+    }
+
+    .et-navbar .nav-brand span em {
+      color: var(--gold-light);
+      font-style: normal;
+    }
+
+    .et-navbar .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .et-navbar .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: var(--transition);
+    }
+
+    .et-navbar .nav-links a:hover {
+      color: var(--gold-light);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .et-navbar .nav-cta {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy) !important;
+      font-weight: 700 !important;
+      border-radius: 50px !important;
+      padding: 10px 22px !important;
+      box-shadow: var(--shadow-gold);
+      transition: var(--transition) !important;
+    }
+
+    .et-navbar .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(206,146,51,0.45) !important;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: var(--transition);
+    }
+
+    .btn-back-home:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ===== HERO ===== */
+    .et-hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    .et-hero-bg {
+      position: absolute;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(206, 146, 51, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0, 100, 200, 0.12) 0%, transparent 60%),
+        linear-gradient(135deg, #000f3c 0%, #001f3f 40%, #002a5c 70%, #001030 100%);
+    }
+
+    /* Animated particles canvas */
+    #particles-canvas {
+      position: absolute;
+      inset: 0;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* Animated geometric shapes */
+    .hero-shapes {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .hero-shapes .shape {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: floatShape 8s ease-in-out infinite;
+    }
+
+    .hero-shapes .shape-1 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(206,146,51,0.2) 0%, transparent 70%);
+      top: -100px; right: 10%;
+      animation-delay: 0s;
+    }
+
+    .hero-shapes .shape-2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(0,120,255,0.15) 0%, transparent 70%);
+      bottom: -50px; left: 5%;
+      animation-delay: 2s;
+    }
+
+    .hero-shapes .shape-3 {
+      width: 200px; height: 200px;
+      background: radial-gradient(circle, rgba(206,146,51,0.12) 0%, transparent 70%);
+      top: 40%; left: 40%;
+      animation-delay: 4s;
+    }
+
+    @keyframes floatShape {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.05); }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(206, 146, 51, 0.15);
+      border: 1px solid rgba(206, 146, 51, 0.4);
+      color: var(--gold-light);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(38px, 5vw, 72px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), #fff3cd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      font-size: 18px;
+      color: rgba(255,255,255,0.75);
+      line-height: 1.7;
+      max-width: 580px;
+      margin-bottom: 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 16px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .btn-gold:hover {
+      color: var(--navy);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(206,146,51,0.5);
+    }
+
+    .btn-outline-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 16px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.3);
+      cursor: pointer;
+      transition: var(--transition);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-outline-white:hover {
+      color: var(--white);
+      border-color: rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.08);
+      transform: translateY(-3px);
+    }
+
+    /* Hero floating cards */
+    .hero-visual {
+      position: relative;
+      height: 520px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-logo-card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 220px;
+      height: 220px;
+      background: rgba(255,255,255,0.08);
+      border: 2px solid rgba(206,146,51,0.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(20px);
+      animation: rotateSlow 20s linear infinite;
+    }
+
+    .hero-logo-card img {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      animation: rotateSlow 20s linear infinite reverse;
+    }
+
+    @keyframes rotateSlow {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .hero-stat-card {
+      position: absolute;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(206,146,51,0.25);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius-sm);
+      padding: 16px 20px;
+      text-align: center;
+      animation: floatCard 4s ease-in-out infinite;
+    }
+
+    .hero-stat-card:nth-child(1) { top: 8%; right: 10%; animation-delay: 0s; }
+    .hero-stat-card:nth-child(2) { bottom: 15%; right: 0%; animation-delay: 1.5s; }
+    .hero-stat-card:nth-child(3) { top: 35%; left: 0%; animation-delay: 3s; }
+    .hero-stat-card:nth-child(4) { bottom: 8%; left: 10%; animation-delay: 2s; }
+
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-12px); }
+    }
+
+    .hero-stat-card .stat-num {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--gold-light);
+      display: block;
+    }
+
+    .hero-stat-card .stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+      font-weight: 500;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.5);
+      font-size: 12px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(10px); }
+    }
+
+    /* ===== SECTION TITLES ===== */
+    .section-label {
+      display: inline-block;
+      background: rgba(206, 146, 51, 0.1);
+      border: 1px solid rgba(206, 146, 51, 0.3);
+      color: var(--gold);
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 800;
+      color: var(--navy);
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+
+    .section-title .accent { color: var(--gold); }
+
+    .section-subtitle {
+      font-size: 17px;
+      color: var(--gray);
+      line-height: 1.7;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    .et-about {
+      padding: 100px 0;
+      background: var(--off-white);
+      overflow: hidden;
+    }
+
+    .about-visual {
+      position: relative;
+      height: 480px;
+    }
+
+    .about-img-main {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 80%;
+      height: 400px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .about-img-secondary {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 55%;
+      height: 260px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      box-shadow: var(--shadow-md);
+      border: 5px solid var(--white);
+    }
+
+    .about-badge {
+      position: absolute;
+      top: 40%;
+      left: -20px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      padding: 20px;
+      border-radius: var(--radius-sm);
+      text-align: center;
+      box-shadow: var(--shadow-gold);
+      z-index: 2;
+      min-width: 120px;
+    }
+
+    .about-badge .number {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 900;
+      display: block;
+      line-height: 1;
+    }
+
+    .about-badge .text {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .about-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px;
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border-left: 4px solid transparent;
+    }
+
+    .about-feature:hover {
+      transform: translateX(6px);
+      border-left-color: var(--gold);
+      box-shadow: var(--shadow-md);
+    }
+
+    .about-feature-icon {
+      width: 50px;
+      height: 50px;
+      min-width: 50px;
+      background: linear-gradient(135deg, rgba(206,146,51,0.1), rgba(206,146,51,0.2));
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 22px;
+    }
+
+    .about-feature h6 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .about-feature p {
+      font-size: 13px;
+      color: var(--gray);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    /* ===== FEATURES CARDS ===== */
+    .et-features {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .feature-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      padding: 40px 30px;
+      text-align: center;
+      border: 2px solid #eef0f5;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: var(--transition);
+    }
+
+    .feature-card:hover {
+      border-color: rgba(206,146,51,0.3);
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-10px);
+    }
+
+    .feature-card:hover::before { transform: scaleX(1); }
+
+    .feature-card:hover .feature-icon {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--white);
+      transform: rotateY(360deg);
+      box-shadow: var(--shadow-gold);
+    }
+
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      background: rgba(206,146,51,0.1);
+      color: var(--gold);
+      font-size: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .feature-card h5 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .feature-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: var(--transition);
+    }
+
+    .feature-link:hover {
+      color: var(--gold-dark);
+      gap: 10px;
+    }
+
+    /* ===== STATS SECTION ===== */
+    .et-stats {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--navy) 0%, #002f5e 50%, var(--navy-light) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .et-stats::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ce9233' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+    }
+
+    .stat-item::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: rgba(206,146,51,0.2);
+    }
+
+    .stat-item:last-child::after { display: none; }
+
+    .stat-number {
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-weight: 900;
+      color: var(--gold-light);
+      display: block;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+
+    .stat-icon {
+      font-size: 36px;
+      color: rgba(206,146,51,0.3);
+      margin-bottom: 16px;
+    }
+
+    /* Progress bars */
+    .progress-section {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(206,146,51,0.15);
+      border-radius: var(--radius-md);
+      padding: 40px;
+      backdrop-filter: blur(10px);
+    }
+
+    .progress-item {
+      margin-bottom: 28px;
+    }
+
+    .progress-item:last-child { margin-bottom: 0; }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .progress-label {
+      color: rgba(255,255,255,0.85);
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .progress-value {
+      color: var(--gold-light);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .et-progress {
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50px;
+      overflow: hidden;
+    }
+
+    .et-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      border-radius: 50px;
+      width: 0%;
+      transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    /* ===== DIPLOMAS SECTION ===== */
+    .et-diplomas {
+      padding: 100px 0;
+      background: var(--off-white);
+    }
+
+    .diploma-card {
+      background: var(--white);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .diploma-card:hover {
+      box-shadow: var(--shadow-lg);
+      transform: translateY(-8px);
+    }
+
+    .diploma-card-img {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .diploma-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .diploma-card:hover .diploma-card-img img {
+      transform: scale(1.08);
+    }
+
+    .diploma-card-img .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,31,63,0.7) 0%, transparent 60%);
+    }
+
+    .diploma-badge {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 50px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .diploma-card-body {
+      padding: 28px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .diploma-card-body h5 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
+
+    .diploma-card-body p {
+      color: var(--gray);
+      font-size: 14px;
+      line-height: 1.6;
+      flex-grow: 1;
+    }
+
+    .diploma-card-footer {
+      padding: 20px 28px;
+      border-top: 1px solid #eef0f5;
+    }
+
+    .btn-discover {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--navy);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 12px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .btn-discover:hover {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      transform: translateX(4px);
+    }
+
+    /* ===== CERTIFICATIONS SECTION ===== */
+    .et-certifications {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .cert-card {
+      background: var(--white);
+      border: 2px solid #eef0f5;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cert-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 12px 40px rgba(206,146,51,0.15);
+      transform: translateY(-6px);
+    }
+
+    .cert-card-img {
+      height: 160px;
+      overflow: hidden;
+    }
+
+    .cert-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .cert-card:hover .cert-card-img img {
+      transform: scale(1.1);
+    }
+
+    .cert-card-body {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .cert-card-body h6 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .cert-card-body p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .cert-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--gold);
+      font-weight: 600;
+      font-size: 13px;
+      text-decoration: none;
+      margin-top: 12px;
+      transition: var(--transition);
+    }
+
+    .cert-card-link:hover {
+      color: var(--gold-dark);
+      gap: 10px;
+    }
+
+    /* ===== CAROUSEL SECTION ===== */
+    .et-schedule {
+      padding: 100px 0;
+      background: var(--off-white);
+    }
+
+    .month-filter {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 50px;
+    }
+
+    .month-btn {
+      padding: 10px 22px;
+      border: 2px solid #dee2e6;
+      background: transparent;
+      color: var(--gray);
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .month-btn.active,
+    .month-btn:hover {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+    }
+
+    .schedule-card {
+      background: var(--white);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .schedule-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-5px);
+    }
+
+    .schedule-card-img {
+      height: 170px;
+      overflow: hidden;
+    }
+
+    .schedule-card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .schedule-card:hover .schedule-card-img img {
+      transform: scale(1.08);
+    }
+
+    .schedule-card-body {
+      padding: 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .schedule-code {
+      display: inline-block;
+      background: rgba(206,146,51,0.1);
+      color: var(--gold-dark);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .schedule-card-body h6 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--navy);
+      margin-bottom: 12px;
+      flex-grow: 1;
+      line-height: 1.4;
+    }
+
+    .schedule-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .schedule-meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .schedule-meta-item i {
+      color: var(--gold);
+      font-size: 14px;
+    }
+
+    .schedule-price {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--gold);
+    }
+
+    .btn-register {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      color: var(--white);
+      font-weight: 700;
+      font-size: 14px;
+      padding: 12px;
+      border-radius: 10px;
+      text-align: center;
+      text-decoration: none;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-register:hover {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
+    }
+
+    /* Swiper customization */
+    .swiper-pagination-bullet {
+      width: 10px;
+      height: 10px;
+      background: #dee2e6;
+      opacity: 1;
+    }
+
+    .swiper-pagination-bullet-active {
+      background: var(--gold);
+      transform: scale(1.3);
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: var(--gold) !important;
+      background: var(--white);
+      width: 46px !important;
+      height: 46px !important;
+      border-radius: 50%;
+      box-shadow: var(--shadow-md);
+    }
+
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+      font-size: 16px !important;
+      font-weight: 900;
+    }
+
+    /* ===== CONTACT SECTION ===== */
+    .et-contact {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--navy) 0%, #002050 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .et-contact::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(206,146,51,0.12) 0%, transparent 70%);
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .contact-icon {
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      background: rgba(206,146,51,0.15);
+      border: 1px solid rgba(206,146,51,0.3);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-light);
+      font-size: 20px;
+    }
+
+    .contact-info-item h6 {
+      color: var(--gold-light);
+      font-weight: 700;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .contact-info-item p {
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+    }
+
+    .social-link {
+      width: 44px;
+      height: 44px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.7);
+      font-size: 18px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+      transform: translateY(-3px);
+    }
+
+    .contact-form-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-md);
+      padding: 50px 40px;
+      backdrop-filter: blur(20px);
+    }
+
+    .et-form-group {
+      margin-bottom: 20px;
+    }
+
+    .et-form-group label {
+      color: rgba(255,255,255,0.7);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .et-form-control {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: var(--white);
+      font-size: 14px;
+      font-family: var(--font-main);
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .et-form-control::placeholder { color: rgba(255,255,255,0.3); }
+
+    .et-form-control:focus {
+      border-color: var(--gold);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 0 3px rgba(206,146,51,0.15);
+    }
+
+    textarea.et-form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* ===== FOOTER ===== */
+    .et-footer {
+      background: #00142b;
+      padding: 30px 0;
+      text-align: center;
+    }
+
+    .et-footer p {
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .et-footer a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    /* ===== UTILITIES ===== */
+    .text-gold { color: var(--gold) !important; }
+    .bg-navy { background: var(--navy) !important; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 991px) {
+      .et-navbar .nav-links { display: none; }
+      .hero-visual { display: none; }
+      .about-visual { height: 300px; margin-bottom: 40px; }
+      .stat-item::after { display: none; }
+      .contact-form-card { padding: 30px 20px; }
+    }
+
+    @media (max-width: 767px) {
+      .hero-title { font-size: 36px; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions a { text-align: center; justify-content: center; }
+      .et-stats .row > div { border-bottom: 1px solid rgba(206,146,51,0.1); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="et-navbar" id="etNavbar">
+    <div class="container d-flex align-items-center justify-content-between">
+      <a href="{{ route('home') }}" class="nav-brand">
+        <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training">
+        <span>CAEI <em>ELITE TRAINING</em></span>
+      </a>
+
+      <ul class="nav-links mb-0 ps-0">
+        <li><a href="#about">À Propos</a></li>
+        <li><a href="#formations">Formations</a></li>
+        <li><a href="#diplomes">Diplômes</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#programme">Programme</a></li>
+        <li><a href="#contact" class="nav-cta">S'inscrire</a></li>
+      </ul>
+
+      <a href="{{ route('home') }}" class="btn-back-home d-none d-lg-flex">
+        <i class="bi bi-arrow-left"></i> Accueil
+      </a>
+    </div>
+  </nav>
+  <!-- /NAVBAR -->
+
+
+  <!-- ===== HERO ===== -->
+  <section class="et-hero" id="home">
+    <div class="et-hero-bg"></div>
+    <canvas id="particles-canvas"></canvas>
+    <div class="hero-shapes">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+
+    <div class="container">
+      <div class="row align-items-center">
+
+        <!-- Left content -->
+        <div class="col-lg-6 hero-content" data-aos="fade-right" data-aos-duration="800">
+          <div class="hero-badge">
+            <i class="bi bi-stars"></i>
+            Formation Professionnelle d'Excellence
+          </div>
+
+          <h1 class="hero-title">
+            Formez les Élites<br>
+            <span class="highlight">Africaines de Demain</span>
+          </h1>
+
+          <p class="hero-subtitle">
+            Le CAEI regroupe des experts africains de renommée internationale pour contribuer à la bonne gouvernance intellectuelle des cadres et élites du continent.
+          </p>
+
+          <div class="hero-actions">
+            <a href="#programme" class="btn-gold">
+              <i class="bi bi-calendar3"></i>
+              Voir le Programme
+            </a>
+            <a href="#about" class="btn-outline-white">
+              <i class="bi bi-play-circle"></i>
+              En savoir plus
+            </a>
+          </div>
+        </div>
+
+        <!-- Right visual -->
+        <div class="col-lg-6 d-none d-lg-block" data-aos="fade-left" data-aos-duration="800" data-aos-delay="200">
+          <div class="hero-visual">
+            <!-- Floating stat cards -->
+            <div class="hero-stat-card">
+              <span class="stat-num" data-target="150">0</span>
+              <span class="stat-label">Formations</span>
+            </div>
+            <div class="hero-stat-card">
+              <span class="stat-num" data-target="95">0</span>
+              <span class="stat-label">% Satisfaction</span>
+            </div>
+            <div class="hero-stat-card">
+              <span class="stat-num" data-target="8888">0</span>
+              <span class="stat-label">Professionnels</span>
+            </div>
+            <div class="hero-stat-card">
+              <span class="stat-num">15+</span>
+              <span class="stat-label">Pays Africains</span>
+            </div>
+
+            <!-- Center logo -->
+            <div class="hero-logo-card">
+              <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <span>Défiler</span>
+      <i class="bi bi-chevron-double-down" style="font-size:20px; color: rgba(255,255,255,0.4);"></i>
+    </div>
+  </section>
+  <!-- /HERO -->
+
+
+  <!-- ===== ABOUT ===== -->
+  <section class="et-about" id="about">
+    <div class="container">
+      <div class="row align-items-center g-5">
+
+        <!-- Visual -->
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="about-visual">
+            <img src="{{ asset('assets/img/img3.jpg') }}" alt="Formation CAEI" class="about-img-main" loading="lazy">
+            <img src="{{ asset('assets/img/professionel.jpg') }}" alt="Professionnels CAEI" class="about-img-secondary" loading="lazy">
+            <div class="about-badge">
+              <span class="number">10+</span>
+              <span class="text">Ans d'Expérience</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="col-lg-7" data-aos="fade-left" data-aos-delay="100">
+          <span class="section-label">Qui Sommes-Nous</span>
+          <h2 class="section-title mb-4">
+            Un Organisme <span class="accent">Panafricain</span><br>de Formation Continue
+          </h2>
+          <p class="text-muted mb-5" style="font-size:16px; line-height:1.8;">
+            Le Comité Africain d'Expertise Internationale (CAEI) a été créé dans le but de contribuer au développement du continent africain. Nous regroupons des experts africains de renommée internationale, tous chevronnés dans leurs domaines respectifs.
+          </p>
+
+          <div class="d-flex flex-column gap-3">
+            <div class="about-feature" data-aos="fade-up" data-aos-delay="150">
+              <div class="about-feature-icon">
+                <i class="bi bi-award"></i>
+              </div>
+              <div>
+                <h6>Experts Certifiés & Reconnus</h6>
+                <p>Des formateurs de renommée internationale, sélectionnés pour leur expertise et leur engagement envers l'excellence africaine.</p>
+              </div>
+            </div>
+
+            <div class="about-feature" data-aos="fade-up" data-aos-delay="200">
+              <div class="about-feature-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <div>
+                <h6>Renforcement des Capacités</h6>
+                <p>Des formations conçues pour développer les compétences individuelles et collectives des professionnels africains.</p>
+              </div>
+            </div>
+
+            <div class="about-feature" data-aos="fade-up" data-aos-delay="250">
+              <div class="about-feature-icon">
+                <i class="bi bi-globe-africa"></i>
+              </div>
+              <div>
+                <h6>Réseau Panafricain</h6>
+                <p>Une présence dans plus de 15 pays africains avec des partenariats institutionnels solides et reconnus.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5">
+            <div class="d-inline-flex align-items-center gap-3 p-4 rounded-3" style="background: linear-gradient(135deg, rgba(206,146,51,0.08), rgba(206,146,51,0.15)); border: 1px solid rgba(206,146,51,0.2);">
+              <i class="bi bi-quote" style="font-size: 32px; color: var(--gold);"></i>
+              <p class="mb-0" style="font-size: 15px; font-style: italic; color: var(--navy); font-weight: 500;">
+                "Vous Construisez un rêve. Nous le construisons à la réalité."
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /ABOUT -->
+
+
+  <!-- ===== FEATURES ===== -->
+  <section class="et-features" id="formations">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Nos Types de Formation</span>
+        <h2 class="section-title mb-3">Quatre Voies <span class="accent">Vers l'Excellence</span></h2>
+        <p class="section-subtitle">Des parcours variés pour répondre à tous les besoins professionnels</p>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-mortarboard-fill"></i>
+            </div>
+            <h5>Formation Diplômante</h5>
+            <p>Obtenez un diplôme reconnu internationalement pour faire évoluer votre parcours professionnel vers les sommets.</p>
+            <a href="#diplomes" class="feature-link">
+              Découvrir <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-patch-check-fill"></i>
+            </div>
+            <h5>Formation Certifiante</h5>
+            <p>Acquérez des compétences concrètes et valorisez-les grâce à une certification reconnue à l'échelle internationale.</p>
+            <a href="#certifications" class="feature-link">
+              Découvrir <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-sliders"></i>
+            </div>
+            <h5>Formation Sur Mesure</h5>
+            <p>Des parcours personnalisés adaptés à vos besoins spécifiques et à votre secteur d'activité particulier.</p>
+            <a href="#contact" class="feature-link">
+              Nous contacter <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="bi bi-laptop-fill"></i>
+            </div>
+            <h5>Formation en Ligne</h5>
+            <p>Suivez vos cours à distance avec flexibilité grâce à notre plateforme numérique interactive et moderne.</p>
+            <a href="#contact" class="feature-link">
+              S'inscrire <i class="bi bi-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /FEATURES -->
+
+
+  <!-- ===== STATS ===== -->
+  <section class="et-stats">
+    <div class="container position-relative">
+      <div class="row">
+        <!-- Stat counters -->
+        <div class="col-lg-7">
+          <div class="text-center text-lg-start mb-5 mb-lg-0" data-aos="fade-right">
+            <span class="section-label" style="background: rgba(206,146,51,0.2);">Nos Résultats</span>
+            <h2 class="mt-3 mb-5" style="font-family: var(--font-display); font-size: clamp(28px,4vw,46px); font-weight:800; color: white; line-height:1.2;">
+              Des chiffres qui<br><span style="color: var(--gold-light);">parlent d'eux-mêmes</span>
+            </h2>
+
+            <div class="row g-0">
+              <div class="col-6 col-md-3">
+                <div class="stat-item">
+                  <i class="bi bi-book stat-icon"></i>
+                  <span class="stat-number counter-animate" data-target="150">0</span>
+                  <span class="stat-label">Formations</span>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="stat-item">
+                  <i class="bi bi-people stat-icon"></i>
+                  <span class="stat-number counter-animate" data-target="8888">0</span>
+                  <span class="stat-label">Professionnels</span>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="stat-item">
+                  <i class="bi bi-globe stat-icon"></i>
+                  <span class="stat-number counter-animate" data-target="15">0</span>
+                  <span class="stat-label">Pays</span>
+                </div>
+              </div>
+              <div class="col-6 col-md-3">
+                <div class="stat-item">
+                  <i class="bi bi-star stat-icon"></i>
+                  <span class="stat-number">95<span style="font-size:30px">%</span></span>
+                  <span class="stat-label">Satisfaction</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Progress bars -->
+        <div class="col-lg-5" data-aos="fade-left" data-aos-delay="200">
+          <div class="progress-section">
+            <h5 style="color: white; font-family: var(--font-display); font-weight: 700; margin-bottom: 30px;">
+              Nos Indicateurs Clés
+            </h5>
+
+            <div class="progress-item">
+              <div class="progress-header">
+                <span class="progress-label">Taux de satisfaction</span>
+                <span class="progress-value">95%</span>
+              </div>
+              <div class="et-progress">
+                <div class="et-progress-bar" data-width="95"></div>
+              </div>
+            </div>
+
+            <div class="progress-item">
+              <div class="progress-header">
+                <span class="progress-label">Formations personnalisées</span>
+                <span class="progress-value">85%</span>
+              </div>
+              <div class="et-progress">
+                <div class="et-progress-bar" data-width="85"></div>
+              </div>
+            </div>
+
+            <div class="progress-item">
+              <div class="progress-header">
+                <span class="progress-label">Taux d'insertion professionnelle</span>
+                <span class="progress-value">92%</span>
+              </div>
+              <div class="et-progress">
+                <div class="et-progress-bar" data-width="92"></div>
+              </div>
+            </div>
+
+            <div class="progress-item">
+              <div class="progress-header">
+                <span class="progress-label">Formations accessibles en ligne</span>
+                <span class="progress-value">70%</span>
+              </div>
+              <div class="et-progress">
+                <div class="et-progress-bar" data-width="70"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /STATS -->
+
+
+  <!-- ===== DIPLOMAS ===== -->
+  <section class="et-diplomas" id="diplomes">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Diplômes</span>
+        <h2 class="section-title mb-3">Mini MBA, MBA & <span class="accent">Executive MBA</span></h2>
+        <p class="section-subtitle">Des programmes d'excellence reconnus pour propulser votre carrière vers les plus hauts niveaux</p>
+      </div>
+
+      <div class="row g-4">
+        <!-- Mini MBA -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="diploma-card">
+            <div class="diploma-card-img">
+              <img src="{{ asset('assets/img/professionel.jpg') }}" alt="Mini MBA" loading="lazy">
+              <div class="card-overlay"></div>
+              <span class="diploma-badge">Mini MBA</span>
+            </div>
+            <div class="diploma-card-body">
+              <h5>Mini MBA</h5>
+              <p>Un programme condensé et intensif pour acquérir l'essentiel du management en peu de temps. Idéal pour les cadres en activité souhaitant une mise à niveau rapide.</p>
+              <div class="d-flex align-items-center gap-3 mt-3 pt-3" style="border-top: 1px solid #eef0f5;">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-clock text-gold"></i>
+                  <span class="text-muted" style="font-size:13px;">3 à 6 mois</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-geo-alt text-gold"></i>
+                  <span class="text-muted" style="font-size:13px;">Présentiel / En ligne</span>
+                </div>
+              </div>
+            </div>
+            <div class="diploma-card-footer">
+              <a href="{{ route('home') }}" class="btn-discover">
+                En savoir plus <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Executive MBA -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="diploma-card">
+            <div class="diploma-card-img">
+              <img src="{{ asset('assets/img/img3.jpg') }}" alt="Executive MBA" loading="lazy">
+              <div class="card-overlay"></div>
+              <span class="diploma-badge">Executive MBA</span>
+            </div>
+            <div class="diploma-card-body">
+              <h5>Executive MBA</h5>
+              <p>Formez-vous au leadership stratégique tout en conciliant formation et carrière. Un programme conçu pour les managers expérimentés visant les postes dirigeants.</p>
+              <div class="d-flex align-items-center gap-3 mt-3 pt-3" style="border-top: 1px solid #eef0f5;">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-clock text-gold"></i>
+                  <span class="text-muted" style="font-size:13px;">12 à 18 mois</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-geo-alt text-gold"></i>
+                  <span class="text-muted" style="font-size:13px;">Présentiel / En ligne</span>
+                </div>
+              </div>
+            </div>
+            <div class="diploma-card-footer">
+              <a href="{{ route('home') }}" class="btn-discover">
+                En savoir plus <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Doctorat -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="diploma-card">
+            <div class="diploma-card-img">
+              <img src="{{ asset('assets/img/img2.jpg') }}" alt="Doctorat" loading="lazy">
+              <div class="card-overlay"></div>
+              <span class="diploma-badge">Doctorat</span>
+            </div>
+            <div class="diploma-card-body">
+              <h5>Doctorat</h5>
+              <p>Le summum de l'excellence académique et professionnelle. Un programme doctoral rigoureux orienté vers la recherche appliquée et l'innovation managériale.</p>
+              <div class="d-flex align-items-center gap-3 mt-3 pt-3" style="border-top: 1px solid #eef0f5;">
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-clock text-gold"></i>
+                  <span class="text-muted" style="font-size:13px;">3 à 4 ans</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                  <i class="bi bi-geo-alt text-gold"></i>
+                  <span class="text-muted" style="font-size:13px;">Recherche hybride</span>
+                </div>
+              </div>
+            </div>
+            <div class="diploma-card-footer">
+              <a href="{{ route('home') }}" class="btn-discover">
+                En savoir plus <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /DIPLOMAS -->
+
+
+  <!-- ===== CERTIFICATIONS ===== -->
+  <section class="et-certifications" id="certifications">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Certifications</span>
+        <h2 class="section-title mb-3">Nos Certifications <span class="accent">Professionnelles</span></h2>
+        <p class="section-subtitle">8 domaines d'expertise pour propulser votre carrière vers l'excellence</p>
+      </div>
+
+      <div class="row g-4">
+        @php
+          $certifications = [
+            ['img' => 'img3.jpg',         'title' => 'Contrôle de Gestion',                    'desc' => 'Pilotez la performance financière de votre entreprise avec efficacité et précision.'],
+            ['img' => 'company.jpg',       'title' => 'Informatique & NTIC',                    'desc' => 'Compétences en digital, réseaux, cybersécurité et systèmes d\'information.'],
+            ['img' => 'im1.jpg',           'title' => 'Droit des Affaires (OHADA)',             'desc' => 'Comprenez les règles juridiques pour sécuriser vos opérations commerciales en Afrique.'],
+            ['img' => 'img3.jpg',          'title' => 'Audit, Comptabilité & Finance',          'desc' => 'Maîtrisez les outils comptables et les analyses financières essentielles.'],
+            ['img' => 'professionel.jpg',  'title' => 'Développement Personnel & Soft Skills', 'desc' => 'Renforcez vos aptitudes en communication, gestion du stress et leadership.'],
+            ['img' => 'img2.jpg',          'title' => 'Marketing, Communication & Distribution','desc' => 'Maîtrisez les stratégies modernes pour promouvoir et distribuer vos produits.'],
+            ['img' => 'cta-bg.jpg',        'title' => 'Secrétariat & Archivage',               'desc' => 'Optimisez la gestion administrative et la circulation des documents.'],
+            ['img' => 'services.jpg',      'title' => 'E-Commerce & Fintech',                  'desc' => 'Lancez des activités en ligne et intégrez les solutions financières numériques.'],
+          ];
+        @endphp
+
+        @foreach($certifications as $i => $cert)
+        <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="{{ ($i % 4 + 1) * 100 }}">
+          <div class="cert-card">
+            <div class="cert-card-img">
+              <img src="{{ asset('assets/img/' . $cert['img']) }}" alt="{{ $cert['title'] }}" loading="lazy">
+            </div>
+            <div class="cert-card-body">
+              <h6>{{ $cert['title'] }}</h6>
+              <p>{{ $cert['desc'] }}</p>
+              <a href="{{ route('home') }}" class="cert-card-link">
+                En savoir plus <i class="bi bi-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        @endforeach
+      </div>
+    </div>
+  </section>
+  <!-- /CERTIFICATIONS -->
+
+
+  <!-- ===== PROGRAMME / CALENDAR ===== -->
+  <section class="et-schedule" id="programme">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-label">Calendrier</span>
+        <h2 class="section-title mb-3">Formez-vous Dès Maintenant</h2>
+        <p class="section-subtitle">Sessions à venir — Inscrivez-vous avant la date limite</p>
+      </div>
+
+      <!-- Month filter tabs -->
+      <div class="month-filter" data-aos="fade-up" data-aos-delay="100">
+        <button class="month-btn active" data-month="janvier">Janvier</button>
+        <button class="month-btn" data-month="fevrier">Février</button>
+        <button class="month-btn" data-month="mars">Mars</button>
+        <button class="month-btn" data-month="tous">Voir Tout</button>
+      </div>
+
+      <!-- Swiper Carousel -->
+      <div class="swiper scheduleSwiper" data-aos="fade-up" data-aos-delay="200">
+        <div class="swiper-wrapper">
+
+          <!-- JANVIER -->
+          @php
+          $janvier = [
+            ['code'=>'PEA-001','img'=>'img3.jpg','title'=>'Gouvernance et Pilotage du Secteur Éducatif Africain','duree'=>'2 Semaines','prix'=>'3 300 €'],
+            ['code'=>'PEA-002','img'=>'professionel.jpg','title'=>'Mise en œuvre d\'une stratégie africaine nationale de l\'éducation','duree'=>'2 Semaines','prix'=>'3 300 €'],
+            ['code'=>'PEA-003','img'=>'company.jpg','title'=>'Pratiques pour une Amélioration de la qualité de l\'éducation en Afrique','duree'=>'2 Semaines','prix'=>'3 300 €'],
+            ['code'=>'PPD-007','img'=>'img2.jpg','title'=>'Planification, Exécution et Suivi des Projets et Programmes en Afrique','duree'=>'2 Semaines','prix'=>'3 300 €'],
+            ['code'=>'PPD-013','img'=>'im1.jpg','title'=>'Devenir spécialiste en communication de projet de développement','duree'=>'2 Semaines','prix'=>'3 300 €'],
+            ['code'=>'DPS-010','img'=>'cta-bg.jpg','title'=>'Techniques de Communication','duree'=>'1 Semaine','prix'=>'1 900 €'],
+            ['code'=>'EF-014','img'=>'img3.jpg','title'=>'L\'Intelligence Artificielle (IA)','duree'=>'1 Semaine','prix'=>'1 900 €'],
+            ['code'=>'INT-001','img'=>'professionel.jpg','title'=>'Audit & consulting en cyber security','duree'=>'1 Semaine','prix'=>'1 900 €'],
+            ['code'=>'ACF-010','img'=>'company.jpg','title'=>'Comptabilité Financière & analyse des états financiers','duree'=>'2 Semaines','prix'=>'3 300 €'],
+            ['code'=>'GC-001','img'=>'img2.jpg','title'=>'Gestion de la trésorerie : aspect organisationnel, comptable & fiscal','duree'=>'1 Semaine','prix'=>'1 900 €'],
+            ['code'=>'MP-001','img'=>'im1.jpg','title'=>'Exécution des marchés publics : suivi des contrats','duree'=>'2 Semaines','prix'=>'3 300 €'],
+            ['code'=>'QSE-008','img'=>'services.jpg','title'=>'Lean management','duree'=>'1 Semaine','prix'=>'1 900 €'],
+          ];
+          @endphp
+
+          @foreach($janvier as $formation)
+          <div class="swiper-slide" style="width: 300px;">
+            <div class="schedule-card">
+              <div class="schedule-card-img">
+                <img src="{{ asset('assets/img/' . $formation['img']) }}" alt="{{ $formation['title'] }}" loading="lazy">
+              </div>
+              <div class="schedule-card-body">
+                <span class="schedule-code">{{ $formation['code'] }}</span>
+                <h6>{{ $formation['title'] }}</h6>
+                <div class="schedule-meta">
+                  <div class="schedule-meta-item">
+                    <i class="bi bi-calendar3"></i>
+                    <span>Janvier 2025</span>
+                  </div>
+                  <div class="schedule-meta-item">
+                    <i class="bi bi-clock"></i>
+                    <span>{{ $formation['duree'] }}</span>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <span class="schedule-price">{{ $formation['prix'] }}</span>
+                  <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">Disponible</span>
+                </div>
+                <a href="{{ route('home') }}" class="btn-register">S'inscrire</a>
+              </div>
+            </div>
+          </div>
+          @endforeach
+
+        </div>
+
+        <div class="swiper-pagination mt-5" style="position: relative; margin-top: 30px;"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+
+      <div class="text-center mt-5">
+        <a href="{{ route('home') }}" class="btn-gold">
+          <i class="bi bi-calendar4-week"></i>
+          Voir tout le programme 2025
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- /PROGRAMME -->
+
+
+  <!-- ===== CONTACT ===== -->
+  <section class="et-contact" id="contact">
+    <div class="container position-relative">
+      <div class="row g-5">
+
+        <!-- Info -->
+        <div class="col-lg-5" data-aos="fade-right">
+          <span class="section-label" style="background: rgba(206,146,51,0.15); color: var(--gold-light);">Contact</span>
+          <h2 class="mt-3 mb-4" style="font-family: var(--font-display); font-size: clamp(28px,4vw,44px); font-weight:800; color: white; line-height:1.2;">
+            Restons <span style="color: var(--gold-light);">Connectés !</span>
+          </h2>
+          <p class="mb-5" style="color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.8;">
+            Votre opinion compte vraiment pour nous. Contactez-nous pour toute question concernant nos formations, nos programmes ou pour prendre rendez-vous.
+          </p>
+
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <i class="bi bi-geo-alt-fill"></i>
+            </div>
+            <div>
+              <h6>Adresse</h6>
+              <p>SIS 8 Rue Claude Bernard 1002 Belvédère-Tunis, Tunisie</p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <i class="bi bi-telephone-fill"></i>
+            </div>
+            <div>
+              <h6>Téléphone</h6>
+              <p>+216 55 332 885</p>
+            </div>
+          </div>
+
+          <div class="contact-info-item">
+            <div class="contact-icon">
+              <i class="bi bi-clock-fill"></i>
+            </div>
+            <div>
+              <h6>Horaires</h6>
+              <p>Lundi – Vendredi : 09h00 – 18h00</p>
+            </div>
+          </div>
+
+          <div class="mt-4">
+            <p class="mb-3" style="color: rgba(255,255,255,0.5); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Suivez-nous</p>
+            <div class="social-links">
+              <a href="https://www.facebook.com/CAEIAfrique/" target="_blank" class="social-link">
+                <i class="bi bi-facebook"></i>
+              </a>
+              <a href="https://www.instagram.com/caei_afri/" target="_blank" class="social-link">
+                <i class="bi bi-instagram"></i>
+              </a>
+              <a href="https://www.linkedin.com/company/comit%C3%A9-africain-d-expertise-internationale-caei/" target="_blank" class="social-link">
+                <i class="bi bi-linkedin"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="col-lg-7" data-aos="fade-left" data-aos-delay="200">
+          <div class="contact-form-card">
+            <h4 style="font-family: var(--font-display); color: white; font-weight: 700; margin-bottom: 30px;">
+              Prendre Rendez-vous en Ligne
+            </h4>
+
+            <form action="{{ url('/') }}" method="POST" id="contactForm">
+              @csrf
+              <div class="row g-4">
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Nom & Prénom</label>
+                    <input type="text" name="nom" class="et-form-control" placeholder="Votre nom complet" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" class="et-form-control" placeholder="votre@email.com" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Téléphone</label>
+                    <input type="text" name="mobile" class="et-form-control" placeholder="+216 XX XXX XXX">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Objet</label>
+                    <input type="text" name="objet" class="et-form-control" placeholder="Formation, Renseignement...">
+                  </div>
+                </div>
+                <div class="col-12">
+                  <div class="et-form-group">
+                    <label>Message</label>
+                    <textarea name="message" class="et-form-control" placeholder="Décrivez votre besoin..."></textarea>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="button" onclick="alert('Merci ! Nous vous contacterons bientôt.')" class="btn-gold w-100 justify-content-center" style="border: none; font-size: 16px;">
+                    <i class="bi bi-send-fill"></i>
+                    Envoyer ma demande
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- /CONTACT -->
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="et-footer">
+    <div class="container">
+      <p>
+        © {{ date('Y') }} <a href="{{ route('elite.training') }}">CAEI Elite Training</a>. 
+        Tous droits réservés. | 
+        <a href="{{ route('home') }}" style="color: rgba(255,255,255,0.4);">← Retour au portail</a>
+      </p>
+    </div>
+  </footer>
+
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <script>
+    // ===== AOS INIT =====
+    AOS.init({ duration: 700, once: true, easing: 'ease-out-cubic' });
+
+    // ===== NAVBAR SCROLL =====
+    const navbar = document.getElementById('etNavbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ===== PARTICLE CANVAS =====
+    const canvas = document.getElementById('particles-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+      constructor() { this.reset(); }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.5 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.6;
+        this.speedY = (Math.random() - 0.5) * 0.6;
+        this.opacity = Math.random() * 0.5 + 0.1;
+        this.color = Math.random() > 0.5 ? 'rgba(206,146,51,' : 'rgba(255,255,255,';
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color + this.opacity + ')';
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      particles = [];
+      for (let i = 0; i < 120; i++) particles.push(new Particle());
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx*dx + dy*dy);
+          if (dist < 120) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(206,146,51,${0.06 * (1 - dist/120)})`;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animateParticles);
+    }
+
+    resizeCanvas();
+    initParticles();
+    animateParticles();
+    window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
+
+    // ===== COUNTER ANIMATION =====
+    function animateCounters() {
+      document.querySelectorAll('.counter-animate').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const duration = 2000;
+        const start = performance.now();
+
+        function update(currentTime) {
+          const elapsed = currentTime - start;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.floor(eased * target).toLocaleString();
+          if (progress < 1) requestAnimationFrame(update);
+          else el.textContent = target.toLocaleString();
+        }
+        requestAnimationFrame(update);
+      });
+
+      // Hero floating cards counters
+      document.querySelectorAll('.hero-stat-card .stat-num[data-target]').forEach(el => {
+        const target = parseInt(el.dataset.target);
+        const duration = 1500;
+        const start = performance.now();
+        function update(t) {
+          const progress = Math.min((t - start) / duration, 1);
+          el.textContent = Math.floor((1 - Math.pow(1 - progress, 3)) * target).toLocaleString();
+          if (progress < 1) requestAnimationFrame(update);
+          else el.textContent = target.toLocaleString();
+        }
+        requestAnimationFrame(update);
+      });
+    }
+
+    // ===== PROGRESS BARS ANIMATION =====
+    function animateProgressBars() {
+      document.querySelectorAll('.et-progress-bar').forEach(bar => {
+        bar.style.width = bar.dataset.width + '%';
+      });
+    }
+
+    // Intersection Observer for counters and progress bars
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains('et-stats')) animateCounters();
+          if (entry.target.classList.contains('progress-section')) animateProgressBars();
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    document.querySelector('.et-stats') && observer.observe(document.querySelector('.et-stats'));
+    document.querySelector('.progress-section') && observer.observe(document.querySelector('.progress-section'));
+
+    // ===== SWIPER INIT =====
+    const scheduleSwiper = new Swiper('.scheduleSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      breakpoints: {
+        576: { slidesPerView: 2 },
+        768: { slidesPerView: 2 },
+        992: { slidesPerView: 3 },
+        1200: { slidesPerView: 4 },
+      }
+    });
+
+    // ===== MONTH FILTER BUTTONS =====
+    document.querySelectorAll('.month-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        // Could filter slides by month attribute if data-month was set on slides
+      });
+    });
+
+    // ===== SMOOTH SCROLL for nav links =====
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

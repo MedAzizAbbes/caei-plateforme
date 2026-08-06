@@ -38,6 +38,10 @@ Route::get('/ancien-accueil', function () {
     return view('welcome_old', compact('seminars'));
 })->name('home.old');
 
+Route::get('/elite-training', function () {
+    return view('elite-training.index');
+})->name('elite.training');
+
 Route::get('/digital-moov', function () {
     return view('digitalmoov.index');
 })->name('digitalmoov');
