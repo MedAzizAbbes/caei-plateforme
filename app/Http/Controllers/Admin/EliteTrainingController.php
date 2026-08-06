@@ -15,7 +15,12 @@ class EliteTrainingController extends Controller
             $sort = 'desc';
         }
 
-        $query = EliteTrainingAppointment::orderBy('created_at', $sort);
+        $activeType = $request->input('type', 'appointment');
+        if (!in_array($activeType, ['appointment', 'inscription'])) {
+            $activeType = 'appointment';
+        }
+
+        $query = EliteTrainingAppointment::where('type', $activeType)->orderBy('created_at', $sort);
 
         if ($request->filled('status')) {
             $query->where('status', $request->status);
@@ -35,14 +40,28 @@ class EliteTrainingController extends Controller
         $appointments = $query->paginate(15)->withQueryString();
 
         $stats = [
-            'total'       => EliteTrainingAppointment::count(),
-            'pending'     => EliteTrainingAppointment::where('status', 'pending')->count(),
-            'in_progress' => EliteTrainingAppointment::where('status', 'in_progress')->count(),
-            'completed'   => EliteTrainingAppointment::where('status', 'completed')->count(),
-            'cancelled'   => EliteTrainingAppointment::where('status', 'cancelled')->count(),
+            'total'       => EliteTrainingAppointment::where('type', $activeType)->count(),
+            'pending'     => EliteTrainingAppointment::where('type', $activeType)->where('status', 'pending')->count(),
+            'in_progress' => EliteTrainingAppointment::where('type', $activeType)->where('status', 'in_progress')->count(),
+            'completed'   => EliteTrainingAppointment::where('type', $activeType)->where('status', 'completed')->count(),
+            'cancelled'   => EliteTrainingAppointment::where('type', $activeType)->where('status', 'cancelled')->count(),
         ];
 
-        return view('admin.elite-training.index', compact('appointments', 'stats'));
+        $countAppointmentsTotal = EliteTrainingAppointment::where('type', 'appointment')->count();
+        $countAppointmentsPending = EliteTrainingAppointment::where('type', 'appointment')->where('status', 'pending')->count();
+
+        $countInscriptionsTotal = EliteTrainingAppointment::where('type', 'inscription')->count();
+        $countInscriptionsPending = EliteTrainingAppointment::where('type', 'inscription')->where('status', 'pending')->count();
+
+        return view('admin.elite-training.index', compact(
+            'appointments',
+            'stats',
+            'activeType',
+            'countAppointmentsTotal',
+            'countAppointmentsPending',
+            'countInscriptionsTotal',
+            'countInscriptionsPending'
+        ));
     }
 
     public function updateStatus(Request $request, EliteTrainingAppointment $appointment)

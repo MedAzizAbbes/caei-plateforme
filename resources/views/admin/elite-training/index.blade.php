@@ -32,25 +32,56 @@
             </div>
         @endif
 
+        {{-- Sub-Navigation Tabs (Rendez-vous vs Inscriptions aux Formations) --}}
+        <div class="flex flex-col sm:flex-row items-center gap-3 mb-6 bg-white p-2 rounded-2xl border border-slate-200 shadow-sm">
+            <a href="{{ route('admin.elite-training.index', ['type' => 'appointment']) }}" 
+               class="w-full sm:w-auto flex-1 text-center py-3 px-5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2.5 {{ $activeType === 'appointment' ? 'bg-[#061743] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100' }}">
+                <span class="text-base">📅</span>
+                <span>Rendez-vous & Demandes en Ligne</span>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-black {{ $activeType === 'appointment' ? 'bg-[#f2a90f] text-[#061743]' : 'bg-slate-200 text-slate-700' }}">
+                    {{ $countAppointmentsTotal }}
+                </span>
+                @if($countAppointmentsPending > 0)
+                    <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-pulse">
+                        {{ $countAppointmentsPending }} nouveaux
+                    </span>
+                @endif
+            </a>
+
+            <a href="{{ route('admin.elite-training.index', ['type' => 'inscription']) }}" 
+               class="w-full sm:w-auto flex-1 text-center py-3 px-5 rounded-xl font-bold text-sm transition-all flex items-center justify-center gap-2.5 {{ $activeType === 'inscription' ? 'bg-[#061743] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100' }}">
+                <span class="text-base">📜</span>
+                <span>Inscriptions aux Formations (Diplômes)</span>
+                <span class="px-2.5 py-0.5 rounded-full text-xs font-black {{ $activeType === 'inscription' ? 'bg-[#f2a90f] text-[#061743]' : 'bg-slate-200 text-slate-700' }}">
+                    {{ $countInscriptionsTotal }}
+                </span>
+                @if($countInscriptionsPending > 0)
+                    <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-pulse">
+                        {{ $countInscriptionsPending }} nouveaux
+                    </span>
+                @endif
+            </a>
+        </div>
+
         {{-- Statistiques clés --}}
         <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
-            <a href="{{ route('admin.elite-training.index') }}" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all text-center">
-                <div class="text-xs uppercase font-bold text-slate-500">Total Demandes</div>
+            <a href="{{ route('admin.elite-training.index', ['type' => $activeType]) }}" class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all text-center">
+                <div class="text-xs uppercase font-bold text-slate-500">Total {{ $activeType === 'inscription' ? 'Inscriptions' : 'Rendez-vous' }}</div>
                 <div class="text-2xl font-black text-slate-900 mt-1">{{ $stats['total'] }}</div>
             </a>
-            <a href="{{ route('admin.elite-training.index', ['status' => 'pending']) }}" class="bg-amber-50 p-5 rounded-2xl border border-amber-200 shadow-sm hover:shadow-md transition-all text-center">
+            <a href="{{ route('admin.elite-training.index', ['type' => $activeType, 'status' => 'pending']) }}" class="bg-amber-50 p-5 rounded-2xl border border-amber-200 shadow-sm hover:shadow-md transition-all text-center">
                 <div class="text-xs uppercase font-bold text-amber-700">En Attente</div>
                 <div class="text-2xl font-black text-amber-700 mt-1">{{ $stats['pending'] }}</div>
             </a>
-            <a href="{{ route('admin.elite-training.index', ['status' => 'in_progress']) }}" class="bg-blue-50 p-5 rounded-2xl border border-blue-200 shadow-sm hover:shadow-md transition-all text-center">
+            <a href="{{ route('admin.elite-training.index', ['type' => $activeType, 'status' => 'in_progress']) }}" class="bg-blue-50 p-5 rounded-2xl border border-blue-200 shadow-sm hover:shadow-md transition-all text-center">
                 <div class="text-xs uppercase font-bold text-blue-700">En Cours</div>
                 <div class="text-2xl font-black text-blue-700 mt-1">{{ $stats['in_progress'] }}</div>
             </a>
-            <a href="{{ route('admin.elite-training.index', ['status' => 'completed']) }}" class="bg-emerald-50 p-5 rounded-2xl border border-emerald-200 shadow-sm hover:shadow-md transition-all text-center">
+            <a href="{{ route('admin.elite-training.index', ['type' => $activeType, 'status' => 'completed']) }}" class="bg-emerald-50 p-5 rounded-2xl border border-emerald-200 shadow-sm hover:shadow-md transition-all text-center">
                 <div class="text-xs uppercase font-bold text-emerald-700">Traités</div>
                 <div class="text-2xl font-black text-emerald-700 mt-1">{{ $stats['completed'] }}</div>
             </a>
-            <a href="{{ route('admin.elite-training.index', ['status' => 'cancelled']) }}" class="bg-rose-50 p-5 rounded-2xl border border-rose-200 shadow-sm hover:shadow-md transition-all text-center">
+            <a href="{{ route('admin.elite-training.index', ['type' => $activeType, 'status' => 'cancelled']) }}" class="bg-rose-50 p-5 rounded-2xl border border-rose-200 shadow-sm hover:shadow-md transition-all text-center">
                 <div class="text-xs uppercase font-bold text-rose-700">Annulés</div>
                 <div class="text-2xl font-black text-rose-700 mt-1">{{ $stats['cancelled'] }}</div>
             </a>
@@ -59,6 +90,7 @@
         {{-- Filtres & Recherche --}}
         <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm mb-8">
             <form method="GET" action="{{ route('admin.elite-training.index') }}" class="grid grid-cols-1 sm:grid-cols-4 gap-4">
+                <input type="hidden" name="type" value="{{ $activeType }}">
                 <div>
                     <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Rechercher</label>
                     <input type="text" name="search" value="{{ request('search') }}" placeholder="Nom, email, téléphone, objet..." class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:border-[#061743] focus:outline-none">
@@ -84,7 +116,7 @@
                     <button type="submit" class="w-full bg-[#061743] hover:bg-[#0a2569] text-white font-bold text-sm py-2.5 px-5 rounded-xl shadow transition-all">
                         Filtrer
                     </button>
-                    <a href="{{ route('admin.elite-training.index') }}" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm py-2.5 px-4 rounded-xl transition-all">
+                    <a href="{{ route('admin.elite-training.index', ['type' => $activeType]) }}" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-sm py-2.5 px-4 rounded-xl transition-all">
                         Effacer
                     </a>
                 </div>
@@ -232,7 +264,7 @@
                 </div>
             @else
                 <div class="p-12 text-center text-slate-500">
-                    <p class="text-base font-semibold">Aucune demande de rendez-vous Elite Training trouvée.</p>
+                    <p class="text-base font-semibold">Aucune {{ $activeType === 'inscription' ? 'inscription aux formations' : 'demande de rendez-vous' }} trouvée.</p>
                 </div>
             @endif
         </div>

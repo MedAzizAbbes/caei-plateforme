@@ -174,4 +174,19 @@ class EliteTrainingController extends Controller
 
         return view('elite-training.domain', compact('domainInfo', 'formations', 'allDomains', 'slug'));
     }
+
+    public function diplomaMiniMBA()
+    {
+        return view('elite-training.diploma-mini-mba');
+    }
+
+    public function diplomaExecutiveMBA()
+    {
+        return view('elite-training.diploma-executive-mba');
+    }
+
+    public function diplomaDoctorat()
+    {
+        return view('elite-training.diploma-doctorat');
+    }
 }

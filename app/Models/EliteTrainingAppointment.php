@@ -15,6 +15,7 @@ class EliteTrainingAppointment extends Model
         'phone',
         'subject',
         'message',
+        'type',
         'status',
         'admin_notes',
     ];
