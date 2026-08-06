@@ -674,7 +674,7 @@
                 <p class="text-muted small mb-4">Formation professionnelle d'excellence</p>
               </div>
               <div>
-                <a href="{{ route('home.old') }}" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #001f3f; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#003d7a'" onmouseout="this.style.backgroundColor='#001f3f'">Découvrir</a>
+                <a href="{{ route('elite.training') }}" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #001f3f; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#003d7a'" onmouseout="this.style.backgroundColor='#001f3f'">Découvrir</a>
               </div>
             </div>
           </div>
@@ -752,7 +752,7 @@
               <p style="font-size: 15px; line-height: 1.8;">
                 Le CAEI a pour mission de former les cadres et élites africaines pour les aider à relever les défis de développement auxquels le continent est confronté. Les formations sont dispensées par des experts de renommée internationale, africains, dans des institutions partenaires à travers le continent. Le CAEI joue également un rôle important dans la promotion de la coopération entre les pays africains et entre l'Afrique et d'autres régions du monde.
               </p>
-              <a href="{{ route('home.old') }}" class="btn btn-warning rounded-pill mt-3 px-4 fw-bold" style="background-color: #ffc451; color: #000f3c;">Voir les Séminaires</a>
+              <a href="{{ route('elite.training') }}" class="btn btn-warning rounded-pill mt-3 px-4 fw-bold" style="background-color: #ffc451; color: #000f3c;">Voir les Séminaires</a>
             </div>
           </div>
         </div>
