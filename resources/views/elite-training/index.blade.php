@@ -1381,7 +1381,7 @@
 
       <ul class="nav-links mb-0 ps-0">
         <li><a href="#about">À Propos</a></li>
-        <li><a href="#formations">Services</a></li>
+        <li><a href="{{ route('elite.services') }}">Services</a></li>
         <li class="nav-dropdown">
           <a href="#formations" class="nav-dropdown-toggle">
             Formations <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>

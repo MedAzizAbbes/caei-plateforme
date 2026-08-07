@@ -235,4 +235,9 @@ class EliteTrainingController extends Controller
     {
         return view('elite-training.diploma-doctorat');
     }
+
+    public function services()
+    {
+        return view('elite-training.services');
+    }
 }

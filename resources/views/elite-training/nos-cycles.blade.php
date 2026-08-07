@@ -316,36 +316,37 @@
   </section>
 
   <!-- FOOTER -->
-  <footer>
+  <footer class="et-footer" style="background: #000c1a; color: rgba(255,255,255,0.7); padding: 60px 0 30px; font-size: 14px; border-top: 1px solid rgba(255,255,255,0.08);">
     <div class="container">
-      <div class="row g-4 mb-5">
+      <div class="row g-4 mb-5 text-start">
         <div class="col-lg-5">
           <div class="d-flex align-items-center gap-2 mb-3">
-            <img src="{{ asset('assets/img/training1.png') }}" alt="Logo" style="height:36px; filter:brightness(0) invert(1);">
-            <span style="font-family: var(--font-display); font-weight: 800; color: white; font-size: 18px;">CAEI <span style="color: var(--gold-light);">ELITE TRAINING</span></span>
+            <img src="{{ asset('assets/img/training1.png') }}" alt="Logo" style="height:38px; filter:brightness(0) invert(1);">
+            <span style="font-family: 'Outfit', sans-serif; font-weight: 800; color: white; font-size: 19px;">CAEI <span style="color: #f0b75a;">ELITE TRAINING</span></span>
           </div>
-          <p style="font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.7; max-width: 380px;">
-            Plateforme d'excellence pour le renforcement des capacités des professionnels et cadres en Afrique.
+          <p style="font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 400px;">
+            Comité Africain d'Expertise Internationale — Organisme d'excellence pour le renforcement des capacités et la gouvernance intellectuelle des cadres en Afrique.
           </p>
         </div>
         <div class="col-lg-3">
-          <h5>Liens Rapides</h5>
+          <h5 style="color: white; font-family: 'Outfit', sans-serif; font-weight: 700; margin-bottom: 20px;">Navigation</h5>
           <ul class="list-unstyled d-flex flex-column gap-2" style="font-size: 13px;">
-            <li><a href="{{ route('elite.training') }}"><i class="bi bi-chevron-right me-1" style="color: var(--gold);"></i> Accueil Elite Training</a></li>
-            <li><a href="{{ route('elite.nos-cycles') }}"><i class="bi bi-chevron-right me-1" style="color: var(--gold);"></i> Nos Cycles</a></li>
-            <li><a href="{{ route('home.old') }}"><i class="bi bi-chevron-right me-1" style="color: var(--gold);"></i> Nos Séminaires</a></li>
-            <li><a href="{{ route('elite.training') }}#contact"><i class="bi bi-chevron-right me-1" style="color: var(--gold);"></i> Contact & Inscription</a></li>
+            <li><a href="{{ route('elite.training') }}" style="color: rgba(255,255,255,0.7); text-decoration: none;"><i class="bi bi-chevron-right me-1 text-warning"></i> Accueil Elite Training</a></li>
+            <li><a href="{{ route('elite.services') }}" style="color: rgba(255,255,255,0.7); text-decoration: none;"><i class="bi bi-chevron-right me-1 text-warning"></i> Services & Offres</a></li>
+            <li><a href="{{ route('elite.nos-cycles') }}" style="color: rgba(255,255,255,0.7); text-decoration: none;"><i class="bi bi-chevron-right me-1 text-warning"></i> Nos Cycles</a></li>
+            <li><a href="{{ route('home.old') }}" style="color: rgba(255,255,255,0.7); text-decoration: none;"><i class="bi bi-chevron-right me-1 text-warning"></i> Nos Séminaires</a></li>
+            <li><a href="{{ route('elite.training') }}#contact" style="color: rgba(255,255,255,0.7); text-decoration: none;"><i class="bi bi-chevron-right me-1 text-warning"></i> Contact & Inscription</a></li>
           </ul>
         </div>
         <div class="col-lg-4">
-          <h5>Contact</h5>
-          <p style="font-size: 13px; margin-bottom: 6px;"><i class="bi bi-geo-alt-fill text-warning me-2"></i> SIS 8 Rue Claude Bernard 1002 Belvédère-Tunis, Tunisie</p>
-          <p style="font-size: 13px; margin-bottom: 6px;"><i class="bi bi-telephone-fill text-warning me-2"></i> +216 55 332 885</p>
+          <h5 style="color: white; font-family: 'Outfit', sans-serif; font-weight: 700; margin-bottom: 20px;">Coordonnées</h5>
+          <p style="font-size: 13px; margin-bottom: 8px;"><i class="bi bi-geo-alt-fill text-warning me-2"></i> SIS 8 Rue Claude Bernard 1002 Belvédère-Tunis, Tunisie</p>
+          <p style="font-size: 13px; margin-bottom: 8px;"><i class="bi bi-telephone-fill text-warning me-2"></i> +216 55 332 885</p>
           <p style="font-size: 13px; margin-bottom: 0;"><i class="bi bi-envelope-fill text-warning me-2"></i> contact@caei-afri.com</p>
         </div>
       </div>
-      <div class="border-top border-secondary pt-3 text-center" style="font-size: 12px; color: rgba(255,255,255,0.4);">
-        &copy; {{ date('Y') }} CAEI Elite Training — Tous droits réservés.
+      <div class="border-top border-secondary pt-3 text-center" style="font-size: 12px; color: rgba(255,255,255,0.45);">
+        &copy; {{ date('Y') }} <a href="{{ route('elite.training') }}" style="color: #ce9233; text-decoration: none;">CAEI Elite Training</a>. Tous droits réservés. | <a href="{{ route('home') }}" style="color: rgba(255,255,255,0.4); text-decoration: none;">← Retour au portail</a>
       </div>
     </div>
   </footer>
