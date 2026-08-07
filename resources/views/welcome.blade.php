@@ -258,6 +258,185 @@
       color: #ffc451 !important;
       text-shadow: 0 0 15px rgba(255, 196, 81, 0.7) !important;
     }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION BACKGROUND IMAGES (OVERRIDING WELCOME-MODERN.CSS)
+       ═══════════════════════════════════════════════════════════════ */
+    section#presentation.about.section,
+    section#presentation {
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat fixed !important;
+      position: relative !important;
+    }
+
+    section#features.features.section,
+    section#features {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/services.jpg") }}') center/cover no-repeat fixed !important;
+      position: relative !important;
+    }
+
+    section#agencies.agencies.section,
+    section#agencies {
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat fixed !important;
+      position: relative !important;
+    }
+
+    section#services.services.section,
+    section#services {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/img3.jpg") }}') center/cover no-repeat fixed !important;
+      position: relative !important;
+    }
+
+    section#stats.stats.section,
+    section#stats {
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/im1.jpg") }}') center/cover no-repeat fixed !important;
+      position: relative !important;
+    }
+
+    section#faq.faq.section,
+    section#faq {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat fixed !important;
+      position: relative !important;
+    }
+
+    section#contact.contact.section,
+    section#contact {
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/testimonials-bg.jpg") }}') center/cover no-repeat fixed !important;
+      position: relative !important;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       VISIBLE PHOTO BACKGROUND UNDER EACH BOX WITH ANIMATION
+       ═══════════════════════════════════════════════════════════════ */
+    @keyframes agencyCardFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    section#about-agencies,
+    #about-agencies {
+      background: #f8fafc !important;
+      position: relative !important;
+      padding: 90px 0 !important;
+      overflow: hidden !important;
+    }
+
+    .about-agency-photo-card {
+      position: relative !important;
+      border-radius: 24px !important;
+      overflow: hidden !important;
+      min-height: 390px !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15) !important;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+      display: flex !important;
+      flex-direction: column !important;
+      animation: agencyCardFloat 5s ease-in-out infinite;
+    }
+
+    .col-lg-6:nth-child(1) .about-agency-photo-card { animation-delay: 0s; }
+    .col-lg-6:nth-child(2) .about-agency-photo-card { animation-delay: 1.2s; }
+    .col-lg-6:nth-child(3) .about-agency-photo-card { animation-delay: 2.4s; }
+    .col-lg-6:nth-child(4) .about-agency-photo-card { animation-delay: 3.6s; }
+
+    .about-agency-photo-card::before {
+      content: '' !important;
+      position: absolute !important;
+      inset: 0 !important;
+      background-size: cover !important;
+      background-position: center !important;
+      transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.6s ease !important;
+      z-index: 1 !important;
+      opacity: 1 !important;
+      filter: brightness(0.85) contrast(1.08) !important;
+    }
+
+    .about-agency-photo-card.card-elite::before {
+      background-image: url('{{ asset("assets/img/img3.jpg") }}') !important;
+    }
+
+    .about-agency-photo-card.card-digital::before {
+      background-image: url('{{ asset("assets/img/img2.jpg") }}') !important;
+    }
+
+    .about-agency-photo-card.card-medical::before {
+      background-image: url('{{ asset("assets/img/im1.jpg") }}') !important;
+    }
+
+    .about-agency-photo-card.card-call::before {
+      background-image: url('{{ asset("assets/img/services.jpg") }}') !important;
+    }
+
+    .about-agency-photo-card .card-overlay {
+      position: absolute !important;
+      inset: 0 !important;
+      background: linear-gradient(135deg, rgba(0, 10, 45, 0.88) 0%, rgba(0, 20, 55, 0.80) 100%) !important;
+      z-index: 2 !important;
+      transition: background 0.4s ease !important;
+    }
+
+    .about-agency-photo-card:hover {
+      transform: translateY(-10px) scale(1.02) !important;
+      border-color: rgba(255, 196, 81, 0.75) !important;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 196, 81, 0.25) !important;
+      animation-play-state: paused !important;
+    }
+
+    .about-agency-photo-card:hover::before {
+      transform: scale(1.1) rotate(1deg) !important;
+      filter: brightness(1.05) contrast(1.15) !important;
+    }
+
+    .about-agency-photo-card:hover .card-overlay {
+      background: linear-gradient(135deg, rgba(0, 10, 45, 0.78) 0%, rgba(0, 20, 55, 0.68) 100%) !important;
+    }
+
+    .about-agency-photo-card .agency-logo-wrapper {
+      transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease !important;
+    }
+
+    .about-agency-photo-card:hover .agency-logo-wrapper {
+      transform: scale(1.1) rotate(-3deg) !important;
+      box-shadow: 0 12px 28px rgba(255, 196, 81, 0.35) !important;
+    }
+
+    .about-agency-photo-card:hover .bi-check-circle-fill {
+      transform: scale(1.2) !important;
+      color: #ffc451 !important;
+      transition: transform 0.3s ease !important;
+    }
+
+    .about-agency-photo-card h3 {
+      color: #ffffff !important;
+      font-weight: 800 !important;
+      font-size: 24px !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9) !important;
+    }
+
+    .about-agency-photo-card .card-body-content {
+      position: relative !important;
+      z-index: 3 !important;
+      padding: 2.2rem !important;
+    }
+
+    .agency-logo-wrapper {
+      width: 70px;
+      height: 70px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      flex-shrink: 0;
+    }
+
+    .agency-logo-wrapper img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
     
     /* Chat Widget Styles */
     .chat-widget {
@@ -715,7 +894,7 @@
     </section><!-- /Hero Section -->
 
     <!-- About Section -->
-    <section id="presentation" class="about section py-5">
+    <section id="presentation" class="about section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/features-bg.jpg') }}') center/cover no-repeat fixed;">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -744,7 +923,7 @@
     </section><!-- /About Section -->
 
     <!-- Why Choose Us Section -->
-    <section id="features" class="features section py-5 bg-light">
+    <section id="features" class="features section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/services.jpg') }}') center/cover no-repeat fixed;">
 
       <div class="container">
 
@@ -799,7 +978,7 @@
     </section><!-- /Why Choose Us Section -->
 
     <!-- Agences Section -->
-    <section id="agencies" class="agencies section py-5">
+    <section id="agencies" class="agencies section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/company.jpg') }}') center/cover no-repeat fixed;">
       <div class="container" data-aos="fade-up">
         <div class="section-title text-center mb-5" data-aos="fade-up">
           <h2 class="fw-bold" style="color: #000f3c;">Nos Agences</h2>
@@ -875,89 +1054,182 @@
     </section><!-- /Agencies Section -->
 
     <!-- About Agencies Section -->
-    <section id="about-agencies" class="about-agencies section py-0">
-      <div class="bg-light py-5">
-        <div class="container" data-aos="fade-up">
-          <div class="section-title text-center" data-aos="fade-up">
-            <h2 class="fw-bold" style="color: #000f3c;">À PROPOS DE NOS AGENCES</h2>
-            <p class="text-muted">Découvrez qui nous sommes et ce que nous faisons avec passion.</p>
-          </div>
+    <section id="about-agencies" class="about-agencies section py-5">
+      <div class="container" data-aos="fade-up">
+        
+        <div class="section-title text-center mb-5" data-aos="fade-up">
+          <span class="badge rounded-pill px-3 py-2 mb-2" style="background: rgba(255, 196, 81, 0.18); color: #ffc451; border: 1px solid rgba(255, 196, 81, 0.4); font-size: 13px; letter-spacing: 1px;">FILIALES DU GROUPE</span>
+          <h2 class="fw-bold mt-2" style="color: #000f3c; font-size: 36px;">À PROPOS DE NOS AGENCES</h2>
+          <p class="text-muted" style="font-size: 16px;">Une synergie d'expertises au service de l'excellence et du développement panafricain.</p>
         </div>
-      </div>
 
-      <!-- CAEI Elite Training -->
-      <div class="agency-item position-relative d-flex align-items-center" style="background: url('{{ asset('assets/img/img3.jpg') }}') center/cover; height: 420px;" data-aos="fade-up">
-        <div class="position-absolute w-100 h-100" style="top: 0; left: 0; background: linear-gradient(90deg, rgba(0, 15, 60, 0.9) 0%, rgba(0, 15, 60, 0.6) 50%, transparent 100%);"></div>
-        <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training Logo" class="position-absolute d-none d-md-block" style="top: 30px; right: 40px; width: 180px; height: 180px; object-fit: contain; z-index: 3; background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 20px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-        <div class="container position-relative" style="z-index: 2;">
-          <div class="row">
-            <div class="col-lg-7 text-white">
-              <h3 class="fw-bold mb-3" style="font-size: 38px; color: #ffc451;">CAEI ELITE TRAINING</h3>
-              <p style="font-size: 15px; line-height: 1.8;">
-                Le CAEI a pour mission de former les cadres et élites africaines pour les aider à relever les défis de développement auxquels le continent est confronté. Les formations sont dispensées par des experts de renommée internationale, africains, dans des institutions partenaires à travers le continent. Le CAEI joue également un rôle important dans la promotion de la coopération entre les pays africains et entre l'Afrique et d'autres régions du monde.
-              </p>
-              <a href="{{ route('elite.training') }}" class="btn btn-warning rounded-pill mt-3 px-4 fw-bold" style="background-color: #ffc451; color: #000f3c;">Voir les Séminaires</a>
+        <div class="row gy-4">
+
+          <!-- Agence 1 - Elite Training -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="about-agency-photo-card card-elite">
+              <div class="card-overlay"></div>
+              <div class="card-body-content d-flex flex-column justify-content-between h-100">
+                <div>
+                  <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="agency-logo-wrapper" style="background: linear-gradient(135deg, rgba(255, 196, 81, 0.3) 0%, rgba(0, 31, 63, 0.8) 100%);">
+                      <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training Logo">
+                    </div>
+                    <div>
+                      <span class="badge mb-1 px-3 py-1" style="background: rgba(255, 196, 81, 0.25); color: #ffc451; border: 1px solid rgba(255, 196, 81, 0.5); font-size: 11px;">Formation & Cadres</span>
+                      <h3 class="fw-bold text-white mb-0" style="color: #ffffff !important; font-size: 24px; text-shadow: 0 2px 10px rgba(0,0,0,0.9);">CAEI ELITE TRAINING</h3>
+                    </div>
+                  </div>
+
+                  <p class="text-white mb-4" style="font-size: 15px; line-height: 1.7; opacity: 0.95; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
+                    Le CAEI a pour mission de former les cadres et élites africaines pour les aider à relever les défis de développement auxquels le continent est confronté.
+                  </p>
+
+                  <ul class="list-unstyled text-white mb-0" style="font-size: 14px; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
+                    <li class="mb-2 d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Formations dispensées par des experts de renommée internationale et africains.</span>
+                    </li>
+                    <li class="mb-2 d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Réseau d'institutions partenaires à travers tout le continent africain.</span>
+                    </li>
+                    <li class="d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Promotion active de la coopération entre les pays africains et l'international.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- CAEI Digital Moov -->
-      <div class="agency-item position-relative d-flex align-items-center" style="background: url('{{ asset('assets/img/img2.jpg') }}') center/cover; height: 420px;" data-aos="fade-up">
-        <div class="position-absolute w-100 h-100" style="top: 0; left: 0; background: linear-gradient(90deg, transparent 0%, rgba(204, 136, 0, 0.6) 50%, rgba(204, 136, 0, 0.9) 100%);"></div>
-        <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov Logo" class="position-absolute d-none d-md-block" style="top: 30px; left: 40px; width: 180px; height: 180px; object-fit: contain; z-index: 3; background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 20px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-        <div class="container position-relative" style="z-index: 2;">
-          <div class="row">
-            <div class="col-lg-7 offset-lg-5 text-white text-md-end">
-              <h3 class="fw-bold mb-3" style="font-size: 38px; color: #ffffff;">CAEI DIGITAL MOOV</h3>
-              <p style="font-size: 15px; line-height: 1.8;">
-                Chez Digital Moov, nous sommes bien plus qu'une agence de marketing digital. Nous sommes des visionnaires, des créateurs et des stratèges déterminés à transformer votre présence en ligne en une expérience captivante et profitable. Avec notre expertise, notre passion et notre engagement envers votre succès, nous sommes là pour vous aider à atteindre de nouveaux sommets dans le monde numérique.
-              </p>
-              <a href="{{ route('digitalmoov') }}" class="btn btn-light rounded-pill mt-3 px-4 fw-bold" style="color: #b37700;">Visiter le site</a>
+          <!-- Agence 2 - Digital Moov -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="about-agency-photo-card card-digital">
+              <div class="card-overlay"></div>
+              <div class="card-body-content d-flex flex-column justify-content-between h-100">
+                <div>
+                  <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="agency-logo-wrapper" style="background: linear-gradient(135deg, rgba(204, 136, 0, 0.35) 0%, rgba(0, 31, 63, 0.8) 100%);">
+                      <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov Logo" style="transform: scale(1.2);">
+                    </div>
+                    <div>
+                      <span class="badge mb-1 px-3 py-1" style="background: rgba(204, 136, 0, 0.3); color: #ffca66; border: 1px solid rgba(204, 136, 0, 0.6); font-size: 11px;">Transformation Digitale</span>
+                      <h3 class="fw-bold text-white mb-0" style="color: #ffffff !important; font-size: 24px; text-shadow: 0 2px 10px rgba(0,0,0,0.9);">CAEI DIGITAL MOOV</h3>
+                    </div>
+                  </div>
+
+                  <p class="text-white mb-4" style="font-size: 15px; line-height: 1.7; opacity: 0.95; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
+                    Chez Digital Moov, nous sommes bien plus qu'une agence de marketing digital. Nous sommes des visionnaires et stratèges déterminés à transformer votre présence en ligne.
+                  </p>
+
+                  <ul class="list-unstyled text-white mb-0" style="font-size: 14px; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
+                    <li class="mb-2 d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Création de stratégies digitales sur-mesure et expérience de marque captivante.</span>
+                    </li>
+                    <li class="mb-2 d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Développement d'outils numériques performants et orientés rentabilité.</span>
+                    </li>
+                    <li class="d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Accompagnement continu pour atteindre de nouveaux sommets dans le monde numérique.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- CAEI Medical Services -->
-      <div class="agency-item position-relative d-flex align-items-center" style="background: url('{{ asset('assets/img/im1.jpg') }}') center/cover; height: 420px;" data-aos="fade-up">
-        <div class="position-absolute w-100 h-100" style="top: 0; left: 0; background: linear-gradient(90deg, rgba(23, 162, 184, 0.9) 0%, rgba(23, 162, 184, 0.6) 50%, transparent 100%);"></div>
-        <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services Logo" class="position-absolute d-none d-md-block" style="top: 30px; right: 40px; width: 180px; height: 180px; object-fit: contain; z-index: 3; background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 20px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-        <div class="container position-relative" style="z-index: 2;">
-          <div class="row">
-            <div class="col-lg-7 text-white">
-              <h3 class="fw-bold mb-3" style="font-size: 38px; color: #ffffff;">CAEI MEDICAL SERVICES</h3>
-              <p style="font-size: 15px; line-height: 1.8;">
-                CAEI MEDICAL SERVICES est une agence internationale de services médicaux. Nous prenons en charge les patients étrangers désirant se soigner ou se faire opérer en Tunisie. Grâce à notre logistique, notre personnel et notre approche relationnelle, nous visons à devenir la référence dans le domaine des services médicaux en Afrique, en vous assurant l'accès aux meilleures conditions de soins.
-              </p>
-              <a href="{{ route('medical.services') }}" class="btn btn-info text-white rounded-pill mt-3 px-4 fw-bold">Visiter la page</a>
+          <!-- Agence 3 - Medical Services -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="about-agency-photo-card card-medical">
+              <div class="card-overlay"></div>
+              <div class="card-body-content d-flex flex-column justify-content-between h-100">
+                <div>
+                  <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="agency-logo-wrapper" style="background: linear-gradient(135deg, rgba(23, 162, 184, 0.35) 0%, rgba(0, 31, 63, 0.8) 100%);">
+                      <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services Logo">
+                    </div>
+                    <div>
+                      <span class="badge mb-1 px-3 py-1" style="background: rgba(23, 162, 184, 0.3); color: #7ddbf0; border: 1px solid rgba(23, 162, 184, 0.6); font-size: 11px;">Santé & Accompagnement</span>
+                      <h3 class="fw-bold text-white mb-0" style="color: #ffffff !important; font-size: 24px; text-shadow: 0 2px 10px rgba(0,0,0,0.9);">CAEI MEDICAL SERVICES</h3>
+                    </div>
+                  </div>
+
+                  <p class="text-white mb-4" style="font-size: 15px; line-height: 1.7; opacity: 0.95; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
+                    CAEI MEDICAL SERVICES est une agence internationale de services médicaux assurant la prise en charge complète des patients étrangers désirant se soigner en Tunisie.
+                  </p>
+
+                  <ul class="list-unstyled text-white mb-0" style="font-size: 14px; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
+                    <li class="mb-2 d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Prise en charge personnalisée des séjours de soins et interventions chirurgicales.</span>
+                    </li>
+                    <li class="mb-2 d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Logistique médicale rigoureuse, personnel dédié et accompagnement relationnel.</span>
+                    </li>
+                    <li class="d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Référence en Afrique pour l'accès aux meilleures conditions de soins et de confort.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- CAEI Call Center -->
-      <div class="agency-item position-relative d-flex align-items-center" style="background: url('{{ asset('assets/img/services.jpg') }}') center/cover; height: 420px;" data-aos="fade-up">
-        <div class="position-absolute w-100 h-100" style="top: 0; left: 0; background: linear-gradient(90deg, transparent 0%, rgba(139, 21, 56, 0.6) 50%, rgba(139, 21, 56, 0.9) 100%);"></div>
-        <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center Logo" class="position-absolute d-none d-md-block" style="top: 30px; left: 40px; width: 180px; height: 180px; object-fit: contain; z-index: 3; background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 20px; backdrop-filter: blur(10px); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-        <div class="container position-relative" style="z-index: 2;">
-          <div class="row">
-            <div class="col-lg-7 offset-lg-5 text-white text-md-end">
-              <h3 class="fw-bold mb-3" style="font-size: 38px; color: #ffffff;">CAEI CALL CENTER</h3>
-              <p style="font-size: 15px; line-height: 1.8;">
-                Le CAEI est une agence de télécommunication centralisée qui permet de traiter les besoins des entreprises et de répondre aux attentes de leurs prospects et clients. Le centre d'appels international du CAEI est équipé de solutions professionnelles. Les différents services offerts par notre centre d'appels sont : Service d'assistance, Service clients, Gestion de l'attention du gouvernement envers la population, Support technique, Télévente e-commerce, Services après-vente, Prise de rendez-vous par appel. Fondé il y a plus de 14 ans, le groupe a développé une vaste expertise et a gagné la confiance de clients nationaux et internationaux.
-              </p>
-              <a href="{{ route('callcenter.index') }}" target="_blank" class="btn rounded-pill mt-3 px-4 fw-bold text-white" style="background-color: #8b1538;">Visiter le site</a>
+          <!-- Agence 4 - Call Center -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="about-agency-photo-card card-call">
+              <div class="card-overlay"></div>
+              <div class="card-body-content d-flex flex-column justify-content-between h-100">
+                <div>
+                  <div class="d-flex align-items-center gap-3 mb-4">
+                    <div class="agency-logo-wrapper" style="background: linear-gradient(135deg, rgba(139, 21, 56, 0.4) 0%, rgba(0, 31, 63, 0.8) 100%);">
+                      <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center Logo" style="transform: scale(1.2);">
+                    </div>
+                    <div>
+                      <span class="badge mb-1 px-3 py-1" style="background: rgba(139, 21, 56, 0.35); color: #ff99b3; border: 1px solid rgba(139, 21, 56, 0.6); font-size: 11px;">Relation Client & Télécom</span>
+                      <h3 class="fw-bold text-white mb-0" style="color: #ffffff !important; font-size: 24px; text-shadow: 0 2px 10px rgba(0,0,0,0.9);">CAEI CALL CENTER</h3>
+                    </div>
+                  </div>
+
+                  <p class="text-white mb-4" style="font-size: 15px; line-height: 1.7; opacity: 0.95; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
+                    Centre de télécommunication centralisé et international offrant des solutions professionnelles sur-mesure pour traiter les besoins des entreprises et de leurs clients.
+                  </p>
+
+                  <ul class="list-unstyled text-white mb-0" style="font-size: 14px; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">
+                    <li class="mb-2 d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Services d'assistance, support technique, télévente e-commerce et SAV.</span>
+                    </li>
+                    <li class="mb-2 d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Plus de 14 ans d'expertise dans la gestion de la relation client internationale.</span>
+                    </li>
+                    <li class="d-flex align-items-start gap-2">
+                      <i class="bi bi-check-circle-fill text-warning fs-6 mt-0.5"></i>
+                      <span class="text-white fw-medium">Prise de rendez-vous et gestion centralisée des requêtes à haute valeur ajoutée.</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
+
       </div>
     </section><!-- /About Agencies Section -->
 
     <!-- Section Séminaires déplacée vers /ancien-accueil -->
 
     <!-- Services Section -->
-    <section id="services" class="services section py-5">
+    <section id="services" class="services section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/img3.jpg') }}') center/cover no-repeat fixed;">
       <div class="container section-title text-center mb-5" data-aos="fade-up">
         <h2 class="fw-bold" style="color: #000f3c;">Services</h2>
         <p class="text-muted">Découvrez notre gamme complète de services conçus pour répondre à vos besoins</p>
@@ -1034,7 +1306,7 @@
     </section><!-- /Call To Action Section -->
 
     <!-- Stats Section -->
-    <section id="stats" class="stats section py-5 bg-light">
+    <section id="stats" class="stats section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/im1.jpg') }}') center/cover no-repeat fixed;">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4 align-items-center justify-content-between">
           <div class="col-lg-5">
@@ -1149,7 +1421,7 @@
     </section><!-- /Testimonials Section -->
 
     <!-- FAQ Section -->
-    <section id="faq" class="faq section">
+    <section id="faq" class="faq section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/features-bg.jpg') }}') center/cover no-repeat fixed;">
       <div class="container section-title text-center mb-5" data-aos="fade-up">
         <h2>Foire Aux Questions</h2>
         <p>Retrouvez toutes les réponses aux questions les plus fréquentes sur CAEI Company Group.</p>
@@ -1219,7 +1491,7 @@
     </section><!-- /FAQ Section -->
 
     <!-- Contact Section -->
-    <section id="contact" class="contact section py-5">
+    <section id="contact" class="contact section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/testimonials-bg.jpg') }}') center/cover no-repeat fixed;">
       <div class="container section-title text-center mb-5" data-aos="fade-up">
         <h2 class="fw-bold" style="color: #000f3c;">Contact</h2>
         <p class="text-muted">Nous Contacter</p>
