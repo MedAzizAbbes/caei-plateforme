@@ -133,6 +133,75 @@
       background: rgba(255,255,255,0.08);
     }
 
+    /* ===== NAV DROPDOWN ===== */
+    .et-navbar .nav-dropdown {
+      position: relative;
+    }
+
+    .et-navbar .nav-dropdown-toggle {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .et-navbar .nav-dropdown-toggle i {
+      transition: transform 0.3s ease;
+    }
+
+    .et-navbar .nav-dropdown:hover .nav-dropdown-toggle i {
+      transform: rotate(180deg);
+    }
+
+    .et-navbar .nav-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      min-width: 220px;
+      background: rgba(6, 23, 67, 0.96);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(206, 146, 51, 0.3);
+      border-radius: 12px;
+      padding: 8px 0;
+      margin-top: 4px;
+      list-style: none;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+    }
+
+    .et-navbar .nav-dropdown:hover .nav-dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .et-navbar .nav-dropdown-menu li {
+      margin: 0;
+      padding: 0 6px;
+    }
+
+    .et-navbar .nav-dropdown-menu a {
+      display: flex;
+      align-items: center;
+      padding: 10px 16px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9) !important;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .et-navbar .nav-dropdown-menu a:hover {
+      background: rgba(206, 146, 51, 0.15) !important;
+      color: var(--gold-light) !important;
+      transform: translateX(4px);
+    }
+
     .et-navbar .nav-cta {
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
       color: var(--navy) !important;
@@ -469,8 +538,9 @@
     /* ===== ABOUT SECTION ===== */
     .et-about {
       padding: 100px 0;
-      background: var(--off-white);
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat fixed;
       overflow: hidden;
+      position: relative;
     }
 
     .about-visual {
@@ -578,7 +648,8 @@
     /* ===== FEATURES CARDS ===== */
     .et-features {
       padding: 100px 0;
-      background: var(--white);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/cta-bg.jpg") }}') center/cover no-repeat fixed;
+      position: relative;
     }
 
     .feature-card {
@@ -776,7 +847,8 @@
     /* ===== DIPLOMAS SECTION ===== */
     .et-diplomas {
       padding: 100px 0;
-      background: var(--off-white);
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.93) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset("assets/img/testimonials-bg.jpg") }}') center/cover no-repeat fixed;
+      position: relative;
     }
 
     .diploma-card {
@@ -882,7 +954,8 @@
     /* ===== CERTIFICATIONS SECTION ===== */
     .et-certifications {
       padding: 100px 0;
-      background: var(--white);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat fixed;
+      position: relative;
     }
 
     .cert-card {
@@ -960,7 +1033,8 @@
     /* ===== CAROUSEL SECTION ===== */
     .et-schedule {
       padding: 100px 0;
-      background: var(--off-white);
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.93) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat fixed;
+      position: relative;
     }
 
     .month-filter {
@@ -1307,9 +1381,16 @@
 
       <ul class="nav-links mb-0 ps-0">
         <li><a href="#about">À Propos</a></li>
-        <li><a href="#formations">Formations</a></li>
-        <li><a href="#diplomes">Diplômes</a></li>
-        <li><a href="#certifications">Certifications</a></li>
+        <li class="nav-dropdown">
+          <a href="#formations" class="nav-dropdown-toggle">
+            Formations <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="#formations"><i class="bi bi-grid-fill me-2" style="color: var(--gold-light);"></i> Nos Formations</a></li>
+            <li><a href="#diplomes"><i class="bi bi-mortarboard-fill me-2" style="color: var(--gold-light);"></i> Diplômes</a></li>
+            <li><a href="#certifications"><i class="bi bi-patch-check-fill me-2" style="color: var(--gold-light);"></i> Certifications</a></li>
+          </ul>
+        </li>
         <li><a href="#programme">Programme</a></li>
         <li><a href="#contact" class="nav-cta">S'inscrire</a></li>
       </ul>
