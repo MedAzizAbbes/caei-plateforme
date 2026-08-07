@@ -37,6 +37,7 @@
                             <select name="type" required class="w-full rounded-xl border-slate-200 text-sm focus:border-amber-500 focus:ring-amber-500">
                                 <option value="certifiante" {{ old('type') == 'certifiante' ? 'selected' : '' }}>📜 Certifiante (1 à 2 sem.)</option>
                                 <option value="diplomante" {{ old('type') == 'diplomante' ? 'selected' : '' }}>🎓 Diplômante (MBA / Doctorat)</option>
+                                <option value="cycle" {{ old('type') == 'cycle' ? 'selected' : '' }}>🔄 Cycle & Séminaire</option>
                                 <option value="sur_mesure" {{ old('type') == 'sur_mesure' ? 'selected' : '' }}>🎯 Sur Mesure</option>
                                 <option value="elearning" {{ old('type') == 'elearning' ? 'selected' : '' }}>💻 E-Learning</option>
                             </select>

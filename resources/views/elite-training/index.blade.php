@@ -1381,6 +1381,7 @@
 
       <ul class="nav-links mb-0 ps-0">
         <li><a href="#about">À Propos</a></li>
+        <li><a href="#formations">Services</a></li>
         <li class="nav-dropdown">
           <a href="#formations" class="nav-dropdown-toggle">
             Formations <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
@@ -1391,7 +1392,16 @@
             <li><a href="#certifications"><i class="bi bi-patch-check-fill me-2" style="color: var(--gold-light);"></i> Certifications</a></li>
           </ul>
         </li>
-        <li><a href="#programme">Programme</a></li>
+        <li class="nav-dropdown">
+          <a href="#programme" class="nav-dropdown-toggle">
+            Cycles & Séminaires <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><a href="{{ route('elite.nos-cycles') }}"><i class="bi bi-calendar-event me-2" style="color: var(--gold-light);"></i> Nos Cycles</a></li>
+            <li><a href="{{ route('home.old') }}"><i class="bi bi-calendar-check me-2" style="color: var(--gold-light);"></i> Nos Séminaires</a></li>
+          </ul>
+        </li>
+        <li><a href="#contact">Contact</a></li>
         <li><a href="#contact" class="nav-cta">S'inscrire</a></li>
       </ul>
 

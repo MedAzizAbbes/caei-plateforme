@@ -189,6 +189,48 @@ class EliteTrainingController extends Controller
         return view('elite-training.diploma-executive-mba');
     }
 
+    public function nosCycles()
+    {
+        $dbCycles = Formation::active()->where('type', 'cycle')->orderBy('code')->get();
+
+        if ($dbCycles->count() > 0) {
+            $cycles = $dbCycles->map(function ($f) {
+                return [
+                    'id'          => $f->id,
+                    'title'       => $f->title,
+                    'code'        => $f->code ?? 'CP-' . sprintf('%03d', $f->id),
+                    'duration'    => $f->duration ?? '2 Semaines',
+                    'price'       => $f->price ? (number_format($f->price, 0, ',', ' ') . '€') : '3 400€',
+                    'description' => $f->description ?? '',
+                    'link'        => '#',
+                ];
+            });
+        } else {
+            $cycles = [
+                [
+                    'title' => 'Cycle de perfectionnement Manager Spécialiste en Sécurité Alimentaire',
+                    'code' => 'CP-001',
+                    'duration' => '2 Semaines',
+                    'price' => '3400€',
+                    'description' => 'Maîtrisez les normes et outils pour garantir la sécurité alimentaire dans tout type de structure.',
+                    'link' => 'https://caei-afri.com/Elitetraining/formulaire.html?cycle=1',
+                ],
+                [
+                    'title' => 'Cycle perfectionnement Manager Spécialiste en Hygiène Alimentaire',
+                    'code' => 'CP-002',
+                    'duration' => '2 Semaines',
+                    'price' => '3400€',
+                    'description' => 'Maîtrisez les normes et outils pour garantir l’hygiène alimentaire dans tous types de structures.',
+                    'link' => 'https://caei-afri.com/Elitetraining/formulaire.html?cycle=2',
+                ],
+            ];
+        }
+
+        return view('elite-training.nos-cycles', compact('cycles'));
+    }
+
+
+
     public function diplomaDoctorat()
     {
         return view('elite-training.diploma-doctorat');

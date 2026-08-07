@@ -65,6 +65,11 @@ class Formation extends Model
         return $query->where('type', 'elearning');
     }
 
+    public function scopeCycle($query)
+    {
+        return $query->where('type', 'cycle');
+    }
+
     public function scopeByDomain($query, $domain)
     {
         if (!empty($domain)) {
