@@ -315,7 +315,7 @@
 
     section#about-agencies,
     #about-agencies {
-      background: #f8fafc !important;
+      background: linear-gradient(135deg, rgba(0, 15, 60, 0.92) 0%, rgba(0, 31, 63, 0.88) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat fixed !important;
       position: relative !important;
       padding: 90px 0 !important;
       overflow: hidden !important;
@@ -411,6 +411,45 @@
       font-weight: 800 !important;
       font-size: 24px !important;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9) !important;
+    }
+
+    .service-logo-box {
+      width: 95px !important;
+      height: 95px !important;
+      border-radius: 24px !important;
+      background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important;
+      border: 1px solid rgba(255, 196, 81, 0.35) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      box-shadow: 0 12px 28px rgba(0, 15, 60, 0.25) !important;
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+      padding: 12px !important;
+    }
+
+    .service-logo-box img {
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4)) !important;
+      transition: transform 0.4s ease !important;
+    }
+
+    .service-item {
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+      border: 1px solid rgba(0, 15, 60, 0.08) !important;
+    }
+
+    .service-item:hover {
+      transform: translateY(-8px) !important;
+      box-shadow: 0 20px 40px rgba(0, 15, 60, 0.12) !important;
+      border-color: rgba(255, 196, 81, 0.5) !important;
+    }
+
+    .service-item:hover .service-logo-box {
+      transform: scale(1.1) rotate(-3deg) !important;
+      border-color: rgba(255, 196, 81, 0.8) !important;
+      box-shadow: 0 15px 35px rgba(0, 31, 63, 0.4) !important;
     }
 
     .about-agency-photo-card .card-body-content {
@@ -1059,9 +1098,9 @@
       <div class="container" data-aos="fade-up">
         
         <div class="section-title text-center mb-5" data-aos="fade-up">
-          <span class="badge rounded-pill px-3 py-2 mb-2" style="background: rgba(255, 196, 81, 0.18); color: #ffc451; border: 1px solid rgba(255, 196, 81, 0.4); font-size: 13px; letter-spacing: 1px;">FILIALES DU GROUPE</span>
-          <h2 class="fw-bold mt-2" style="color: #000f3c; font-size: 36px;">À PROPOS DE NOS AGENCES</h2>
-          <p class="text-muted" style="font-size: 16px;">Une synergie d'expertises au service de l'excellence et du développement panafricain.</p>
+          <span class="badge rounded-pill px-3 py-2 mb-2" style="background: rgba(255, 196, 81, 0.2); color: #ffc451; border: 1px solid rgba(255, 196, 81, 0.4); font-size: 13px; letter-spacing: 1px;">FILIALES DU GROUPE</span>
+          <h2 class="fw-bold text-white mt-2" style="font-size: 36px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">À PROPOS DE NOS AGENCES</h2>
+          <p class="text-white-50" style="font-size: 16px;">Une synergie d'expertises au service de l'excellence et du développement panafricain.</p>
         </div>
 
         <div class="row gy-4">
@@ -1240,8 +1279,10 @@
           
           <!-- Service 1 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item position-relative p-4 border rounded shadow-sm bg-white h-100">
-              <div class="icon mb-3 text-warning fs-1"><i class="bi bi-laptop"></i></div>
+            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
+              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(204, 136, 0, 0.5) !important;">
+                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov Logo" style="transform: scale(1.3);">
+              </div>
               <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Responsive Web Design</h3>
               <p class="text-muted small">De la compréhension initiale de vos besoins à la mise en ligne finale, notre processus de création de sites web est conçu pour vous offrir une expérience fluide et un site web exceptionnel qui reflète parfaitement votre vision.</p>
             </div>
@@ -1249,8 +1290,10 @@
 
           <!-- Service 2 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative p-4 border rounded shadow-sm bg-white h-100">
-              <div class="icon mb-3 text-warning fs-1"><i class="bi bi-graph-up"></i></div>
+            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
+              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(204, 136, 0, 0.5) !important;">
+                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov Logo" style="transform: scale(1.3);">
+              </div>
               <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Stratégie Marketing Digital</h3>
               <p class="text-muted small">Nous développons des stratégies marketing complètes adaptées à votre entreprise pour augmenter votre visibilité en ligne et atteindre vos objectifs commerciaux.</p>
             </div>
@@ -1258,8 +1301,10 @@
 
           <!-- Service 3 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative p-4 border rounded shadow-sm bg-white h-100">
-              <div class="icon mb-3 text-warning fs-1"><i class="bi bi-shield-check"></i></div>
+            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
+              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(255, 196, 81, 0.5) !important;">
+                <img src="{{ asset('assets/img/logof.png') }}" alt="CAEI Group Logo" style="transform: scale(1.2);">
+              </div>
               <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Consulting & Support</h3>
               <p class="text-muted small">Notre équipe d'experts vous accompagne dans la transformation de votre entreprise avec des solutions personnalisées et un support continu.</p>
             </div>
@@ -1267,8 +1312,10 @@
 
           <!-- Service 4 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative p-4 border rounded shadow-sm bg-white h-100">
-              <div class="icon mb-3 text-warning fs-1"><i class="bi bi-heart-pulse"></i></div>
+            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
+              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(23, 162, 184, 0.5) !important;">
+                <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services Logo" style="transform: scale(1.2);">
+              </div>
               <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Accompagnement Médical</h3>
               <p class="text-muted small">L'accompagnement médical est un aspect crucial des soins de santé moderne, offrant un soutien continu et personnalisé aux patients tout au long de leur parcours médical.</p>
             </div>
@@ -1276,8 +1323,10 @@
 
           <!-- Service 5 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item position-relative p-4 border rounded shadow-sm bg-white h-100">
-              <div class="icon mb-3 text-warning fs-1"><i class="bi bi-chat-dots"></i></div>
+            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
+              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(139, 21, 56, 0.5) !important;">
+                <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center Logo" style="transform: scale(1.3);">
+              </div>
               <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Service Clientèle Unique</h3>
               <p class="text-muted small">Fournissez une expérience client exceptionnelle grâce à notre service client dédié. Nous sommes là pour répondre aux questions, résoudre les problèmes et garantir la satisfaction.</p>
             </div>
@@ -1285,8 +1334,10 @@
 
           <!-- Service 6 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item position-relative p-4 border rounded shadow-sm bg-white h-100">
-              <div class="icon mb-3 text-warning fs-1"><i class="bi bi-book"></i></div>
+            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
+              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(255, 196, 81, 0.5) !important;">
+                <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training Logo" style="transform: scale(1.2);">
+              </div>
               <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Formation Continue</h3>
               <p class="text-muted small">Nous proposons des programmes de formation continue adaptés aux besoins spécifiques de nos partenaires, avec une expertise de pointe et une expérience pratique.</p>
             </div>
