@@ -27,7 +27,7 @@
 
     body {
       font-family: var(--font-main);
-      background-color: #0a0a0f; /* Dark Premium Background */
+      background-color: #0d1b2a; /* Dark Premium Background */
       color: #fff;
       overflow-x: hidden;
       line-height: 1.6;
@@ -166,6 +166,19 @@
       color: white;
       backdrop-filter: blur(10px);
       transition: all 0.3s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-select-glass {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff99' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+    .form-select-glass option {
+      background-color: #0d1b2a;
+      color: white;
     }
     .form-control-glass:focus, .form-select-glass:focus {
       background: rgba(255, 255, 255, 0.08);
@@ -176,6 +189,44 @@
     }
     .form-control-glass::placeholder {
       color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Glass Badge */
+    .glass-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: rgba(209, 17, 65, 0.12);
+      border: 1px solid rgba(209, 17, 65, 0.35);
+      color: var(--cc-red);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Glass Icon Wrapper */
+    .glass-icon-wrapper {
+      width: 60px;
+      height: 60px;
+      background: rgba(209, 17, 65, 0.1);
+      border: 1px solid rgba(209, 17, 65, 0.25);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: var(--cc-red);
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(209, 17, 65, 0.15);
+    }
+    .glass-card:hover .glass-icon-wrapper {
+      background: rgba(209, 17, 65, 0.2);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(209, 17, 65, 0.25);
     }
 
     /* Text Enhancements */
