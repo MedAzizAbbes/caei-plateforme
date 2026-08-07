@@ -37,7 +37,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('digitalmoov/assets/css/main.css') }}?v=2.0" rel="stylesheet">
-  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=1.0" rel="stylesheet">
+  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=2.0" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: UpConstruction
@@ -83,12 +83,19 @@
     <div class="info d-flex align-items-center">
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-6 text-center">
-            <h2 data-aos="fade-down" style="font-family: Snell Roundhand, cursive; color: chocolate; text-align: center; font-size:50px; margin-right: 0;margin-left: 0;">Bienvenue chez Digital MOOV<span></span></h2>
+          <div class="col-lg-8 text-center">
+            <span data-aos="fade-down" class="section-tag-pill mb-3" style="background: rgba(184, 100, 9, 0.25); color: #ff9e59; border-color: rgba(255, 158, 89, 0.4);">
+              <i class="bi bi-rocket-takeoff-fill text-warning"></i> Agence de Marketing Digital & Web
+            </span>
+            <h2 data-aos="fade-down" style="font-weight: 800; color: #ffffff; text-align: center; font-size: 3rem; line-height: 1.2; text-shadow: 0 4px 20px rgba(0,0,0,0.6);" class="mb-3">
+              Bienvenue chez <span style="background: linear-gradient(135deg, #ff9e59 0%, #b86409 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Digital MOOV</span>
+            </h2>
            
-           
-            <p data-aos="fade-up"> Votre partenaire de confiance pour une transformation numérique réussie.</p>
-            <a data-aos="fade-up" data-aos-delay="200" href="{{ route('digitalmoov.contact') }}" class="btn-get-started">Contactez-nous</a>
+            <p data-aos="fade-up" style="font-size: 1.2rem; color: #e2e8f0; max-width: 680px;" class="mx-auto mb-4">Votre partenaire d'excellence pour une transformation numérique réussie et des performances mesurables.</p>
+            <div data-aos="fade-up" data-aos-delay="200" class="d-flex justify-content-center gap-3">
+              <a href="{{ route('digitalmoov.contact') }}" class="ref-cta-btn fs-6">Contactez-nous <i class="bi bi-arrow-right-circle-fill"></i></a>
+              <a href="{{ route('digitalmoov.services') }}" class="btn btn-outline-light rounded-pill px-4 py-3 fw-bold border-2 d-inline-flex align-items-center gap-2">Nos Expertises <i class="bi bi-grid-fill"></i></a>
+            </div>
           </div>
         </div>
       </div>

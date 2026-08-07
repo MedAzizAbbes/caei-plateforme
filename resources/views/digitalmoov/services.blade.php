@@ -28,7 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('digitalmoov/assets/css/main.css') }}?v=2.0" rel="stylesheet">
-  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=1.0" rel="stylesheet">
+  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=2.0" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: UpConstruction
@@ -82,123 +82,194 @@
     </div><!-- End Breadcrumbs -->
 
    <!-- ======= Services Section ======= -->
-   <section id="services" class="services section-bg">
+   <section id="services" class="services">
     <div class="container" data-aos="fade-up">
 
-     
+      <div class="section-header text-center mb-5">
+        <span class="section-tag-pill">
+          <i class="bi bi-lightning-charge-fill text-warning"></i> Nos Expertises & Solutions
+        </span>
+        <h2 style="font-weight: 800; color: #0f172a; font-size: 2.2rem;" class="mt-2 mb-3">Nos Services Digital & Marketing</h2>
+        <p class="mx-auto" style="max-width: 750px; color: #64748b; font-size: 1.05rem;">
+          De la réflexion stratégique à la réalisation technique, nous activons les leviers digitaux les plus performants pour propulser votre entreprise.
+        </p>
+      </div>
+
       <div class="row gy-4">
 
+        <!-- Service 1: Web -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="service-item  position-relative">
+          <div class="service-item position-relative">
             <div class="icon">
-              <i class="fa-solid fa-mountain-city"></i>
+              <i class="bi bi-laptop"></i>
             </div>
-            <h3>Creation ou refonte des sites web</h3>
-            <p>Créez ou modernisez votre présence en ligne avec notre expertise en création et refonte de sites web.</p>
-            <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">Savoir plus <i class="bi bi-arrow-right"></i></a>
+            <h3>Création & Refonte de Sites Web</h3>
+            <p>Créez ou modernisez votre présence en ligne avec des sites web sur-mesure, ultra-rapides, ergonomiques et optimisés pour la conversion.</p>
+            <a href="{{ route('digitalmoov.service-details') }}" class="readmore stretched-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
           </div>
-        </div><!-- End Service Item -->
+        </div><!-- End Service Item 1 -->
 
+        <!-- Service 2: Editorial -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
           <div class="service-item position-relative">
             <div class="icon">
-              <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+              <i class="bi bi-pencil-square"></i>
             </div>
-            <h3>Editorial de contenue web</h3>
-            <p>Optimisez votre contenu en ligne avec notre service éditorial professionnel.</p>
-            <a href="editorial.html" class="readmore stretched-link">Savoir plus <i class="bi bi-arrow-right"></i></a>
+            <h3>Rédaction & Éditorial Web</h3>
+            <p>Optimisez votre visibilité et captez votre audience grâce à un contenu éditorial captivant, professionnel et structuré pour le SEO.</p>
+            <a href="{{ route('digitalmoov.editorial') }}" class="readmore stretched-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
           </div>
-        </div><!-- End Service Item -->
+        </div><!-- End Service Item 2 -->
 
+        <!-- Service 3: Stratégie -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
           <div class="service-item position-relative">
             <div class="icon">
-              <i class="fa-solid fa-compass-drafting"></i>
+              <i class="bi bi-diagram-3-fill"></i>
             </div>
-            <h3>Creation des stratégies numériques personalisés</h3>
-            <p>Concevez une stratégie numérique sur mesure pour propulser votre entreprise vers le succès en ligne.</p>
-            <a href="stratégie.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+            <h3>Stratégie Numérique Sur-Mesure</h3>
+            <p>Concevez une feuille de route digitale performante et alignée sur vos objectifs business pour distancer vos concurrents.</p>
+            <a href="{{ route('digitalmoov.strategie') }}" class="readmore stretched-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
           </div>
-        </div><!-- End Service Item -->
+        </div><!-- End Service Item 3 -->
 
+        <!-- Service 4: Media -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
           <div class="service-item position-relative">
             <div class="icon">
-              <i class="fa-solid fa-trowel-bricks"></i>
+              <i class="bi bi-share-fill"></i>
             </div>
-            <h3>Gestion des medias sociaux</h3>
-            <p>Maximisez votre impact sur les réseaux sociaux avec notre gestion professionnelle des médias sociaux.</p>
-            <a href="media.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+            <h3>Gestion des Réseaux Sociaux</h3>
+            <p>Développez une communauté engagée et boostez votre notoriété grâce à une gestion proactive de vos réseaux sociaux.</p>
+            <a href="{{ route('digitalmoov.media') }}" class="readmore stretched-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
           </div>
-        </div><!-- End Service Item -->
+        </div><!-- End Service Item 4 -->
 
+        <!-- Service 5: Prospection -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
           <div class="service-item position-relative">
             <div class="icon">
-              <i class="fa-solid fa-helmet-safety"></i>
+              <i class="bi bi-funnel-fill"></i>
             </div>
-            <h3>Prospection commerciale</h3>
-            <p>Booster vos ventes avec notre expertise en prospection commerciale.</p>
-            <a href="prospection.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+            <h3>Prospection Commerciale</h3>
+            <p>Générez un flux régulier de leads qualifiés et accélérez votre tunnel de conversion grâce à nos techniques de prospection ciblées.</p>
+            <a href="{{ route('digitalmoov.prospection') }}" class="readmore stretched-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
           </div>
-        </div><!-- End Service Item -->
+        </div><!-- End Service Item 5 -->
 
+        <!-- Service 6: Emailing -->
         <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
           <div class="service-item position-relative">
             <div class="icon">
-              <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+              <i class="bi bi-envelope-check-fill"></i>
             </div>
-            <h3>Compagnes E-mailing</h3>
-            <p>Engagez votre audience avec des campagnes d'e-mailing percutantes.</p>
-            <a href="Compagnes E-mailing.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+            <h3>Campagnes E-mailing & Automation</h3>
+            <p>Engagez vos prospects et fidélisez vos clients avec des campagnes d'e-mailing automatisées à fort taux d'ouverture et de conversion.</p>
+            <a href="{{ route('digitalmoov.emailing') }}" class="readmore stretched-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
           </div>
-        </div><!-- End Service Item -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+        </div><!-- End Service Item 6 -->
+
+        <!-- Service 7: Sponsor -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
           <div class="service-item position-relative">
             <div class="icon">
-              <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+              <i class="bi bi-megaphone-fill"></i>
             </div>
-            <h3> Sponsor-Ship</h3>
-            <p>Élevez votre marque au niveau supérieur grâce à nos opportunités de sponsoring.</p>
-            <a href="sponsor.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+            <h3>Sponsoring & Partenariats Digital</h3>
+            <p>Propulsez l'image de votre marque en l'associant à des événements et des leaders d'opinion stratégiques de votre secteur.</p>
+            <a href="{{ route('digitalmoov.sponsor') }}" class="readmore stretched-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
           </div>
-        </div><!-- End Service Item -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+        </div><!-- End Service Item 7 -->
+
+        <!-- Service 8: SEO/SEA -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="800">
           <div class="service-item position-relative">
             <div class="icon">
-              <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+              <i class="bi bi-search-heart"></i>
             </div>
-            <h3>SEA-SEO</h3>
-            <p>Engagez votre audience avec des campagnes d'e-mailing percutantes.</p>
-            <a href="SEA.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+            <h3>SEO & SEA (Référencement Google)</h3>
+            <p>Dominez les premiers résultats de recherche Google grâce à une alliance puissante entre référencement naturel et annonces payantes.</p>
+            <a href="{{ route('digitalmoov.sea') }}" class="readmore stretched-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
           </div>
-        </div><!-- End Service Item -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
+        </div><!-- End Service Item 8 -->
+
+        <!-- Service 9: Audio-Visuel -->
+        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="900">
           <div class="service-item position-relative">
             <div class="icon">
-              <i class="fa-solid fa-arrow-up-from-ground-water"></i>
+              <i class="bi bi-film"></i>
             </div>
-            <h3>Audio-Visual Service</h3>
-            <p>Créez des expériences audio-visuelles captivantes avec notre service professionnel.</p>
-            <a href="Audio.html" class="readmore stretched-link">Savoir plus  <i class="bi bi-arrow-right"></i></a>
+            <h3>Production Audio-Visuelle & Vidéo</h3>
+            <p>Créez des vidéos immersives et du contenu multimédia captivant qui valorisent vos produits et marquent les esprits.</p>
+            <a href="{{ route('digitalmoov.audio') }}" class="readmore stretched-link">En savoir plus <i class="bi bi-arrow-right"></i></a>
           </div>
-        </div><!-- End Service Item -->
-
-
-
+        </div><!-- End Service Item 9 -->
 
       </div>
 
     </div>
   </section><!-- End Services Section -->
 
-   
+  <!-- ======= Process Section ======= -->
+  <section class="ref-process-section">
+    <div class="container" data-aos="fade-up">
+      <div class="section-header text-center mb-5">
+        <span class="section-tag-pill">
+          <i class="bi bi-gear-wide-connected text-warning"></i> Notre Méthodologie
+        </span>
+        <h2 style="font-weight: 800; color: #0f172a; font-size: 2.2rem;" class="mt-2 mb-3">Comment Nous Accompagnons Votre Succès</h2>
+        <p class="mx-auto" style="max-width: 700px; color: #64748b; font-size: 1.05rem;">
+          Une approche rigoureuse et orientée résultat en 4 étapes clés.
+        </p>
+      </div>
 
-   
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="process-step-card">
+            <div class="process-step-number">01</div>
+            <h4>Audit & Analyse</h4>
+            <p>Étude approfondie de votre marché, de vos concurrents et de votre écosystème actuel.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="process-step-card">
+            <div class="process-step-number">02</div>
+            <h4>Stratégie & Plan</h4>
+            <p>Élaboration d'un plan d'action sur-mesure avec choix des canaux à fort ROI.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="process-step-card">
+            <div class="process-step-number">03</div>
+            <h4>Production & Dév</h4>
+            <p>Conception créative, rédaction, développement technique et déploiement des campagnes.</p>
+          </div>
+        </div>
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="process-step-card">
+            <div class="process-step-number">04</div>
+            <h4>Optimisation & ROI</h4>
+            <p>Suivi en temps réel des KPI, reporting transparent et ajustements continus.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section><!-- End Process Section -->
 
-    
-
-   
+  <!-- ======= CTA Section ======= -->
+  <section class="ref-cta-section">
+    <div class="container" data-aos="zoom-in">
+      <div class="ref-cta-banner text-center">
+        <h2 style="font-weight: 800; font-size: 2.2rem;" class="mb-3">Besoin d'une expertise sur-mesure ?</h2>
+        <p class="mx-auto mb-4" style="max-width: 650px; color: #cbd5e1; font-size: 1.1rem;">
+          Discutons de vos projets et découvrez comment Digital Moov peut accélérer votre croissance digitale dès maintenant.
+        </p>
+        <a href="{{ route('digitalmoov.contact') }}" class="ref-cta-btn">
+          Prendre rendez-vous avec un expert <i class="bi bi-calendar-check-fill"></i>
+        </a>
+      </div>
+    </div>
+  </section><!-- End CTA Section -->
 
   </main><!-- End #main -->
 

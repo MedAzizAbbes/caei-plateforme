@@ -418,6 +418,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/elite-training', [\App\Http\Controllers\Admin\EliteTrainingController::class, 'index'])->name('elite-training.index');
     Route::put('/elite-training/{appointment}', [\App\Http\Controllers\Admin\EliteTrainingController::class, 'updateStatus'])->name('elite-training.update-status');
     Route::delete('/elite-training/{appointment}', [\App\Http\Controllers\Admin\EliteTrainingController::class, 'destroy'])->name('elite-training.destroy');
+
+    // --- Formations Elite Training (Catalogue CRUD) ---
+    Route::resource('formations', AdminFormationController::class);
 });
 
 require __DIR__.'/auth.php';

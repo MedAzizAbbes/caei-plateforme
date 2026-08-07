@@ -28,7 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('digitalmoov/assets/css/main.css') }}?v=2.0" rel="stylesheet">
-  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=1.0" rel="stylesheet">
+  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=2.0" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: UpConstruction
@@ -88,8 +88,8 @@
 
         <div class="row gy-4">
           <div class="col-lg-6">
-            <div class="info-item  d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-map"></i>
+            <div class="info-item d-flex flex-column justify-content-center align-items-center">
+              <i class="bi bi-geo-alt-fill"></i>
               <h3>Adresse de l'entreprise :</h3>
               <p> Immeuble Medina Palace au 53-55 <br>
                 Avenue de Paris Tunis-Tunisie, 1001</p>
@@ -98,16 +98,16 @@
 
           <div class="col-lg-3 col-md-6">
             <div class="info-item d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-envelope"></i>
+              <i class="bi bi-envelope-fill"></i>
               <h3>Email :</h3>
               <p>contact@caei-afri.com</p>
             </div>
           </div><!-- End Info Item -->
 
           <div class="col-lg-3 col-md-6">
-            <div class="info-item  d-flex flex-column justify-content-center align-items-center">
-              <i class="bi bi-telephone"></i>
-              <h3>Numér de télephone :</h3>
+            <div class="info-item d-flex flex-column justify-content-center align-items-center">
+              <i class="bi bi-telephone-fill"></i>
+              <h3>Numéro de téléphone :</h3>
               <p>+216 55 335 286</p>
             </div>
           </div><!-- End Info Item -->
@@ -116,10 +116,10 @@
 
         <div class="row gy-4 mt-1">
 
-          <div class="col-lg-6 ">
-            <div style="position: relative; width: 100%; height: 384px;">
-              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3192.5!2d10.183053!3d36.822484!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd34b3e4d7c8a7%3A0xd5fdd5d20b2f6486!2z!5e0!3m2!1sfr!2stn!4v1700000000000" frameborder="0" style="border:0; width: 100%; height: 100%; border-radius: 16px;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-              <a href="https://maps.app.goo.gl/iU7yMTUZuDXzu5VH9" target="_blank" style="position: absolute; top: 12px; left: 12px; background-color: white; color: #1a73e8; padding: 8px 14px; border-radius: 2px; font-family: Roboto, Arial, sans-serif; font-size: 14px; font-weight: 500; text-decoration: none; box-shadow: rgba(0, 0, 0, 0.3) 0px 1px 4px -1px; display: flex; align-items: center; gap: 8px; transition: background-color 0.2s;">
+          <div class="col-lg-6">
+            <div style="position: relative; width: 100%; height: 100%; min-height: 384px; border-radius: 20px; overflow: hidden; border: 1px solid rgba(226, 232, 240, 0.8); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3192.5!2d10.183053!3d36.822484!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12fd34b3e4d7c8a7%3A0xd5fdd5d20b2f6486!2z!5e0!3m2!1sfr!2stn!4v1700000000000" frameborder="0" style="border:0; width: 100%; height: 100%; min-height: 384px;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              <a href="https://maps.app.goo.gl/iU7yMTUZuDXzu5VH9" target="_blank" style="position: absolute; top: 16px; left: 16px; background-color: rgba(255,255,255,0.92); backdrop-filter: blur(8px); color: #b86409; padding: 8px 16px; border-radius: 30px; font-size: 13px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); display: flex; align-items: center; gap: 8px; transition: all 0.3s ease; border: 1px solid rgba(184, 100, 9, 0.2);">
                 Ouvrir dans Maps <i class="bi bi-box-arrow-up-right"></i>
               </a>
             </div>
@@ -136,17 +136,17 @@
                 </div>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                <input type="text" class="form-control" name="subject" id="subject" placeholder="Sujet / Objet du message" required>
               </div>
               <div class="form-group">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                <textarea class="form-control" name="message" rows="5" placeholder="Votre message..." required></textarea>
               </div>
               <div class="my-3">
-                <div class="loading">Loading</div>
+                <div class="loading">Chargement...</div>
                 <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
+                <div class="sent-message">Votre message a été envoyé avec succès. Merci !</div>
               </div>
-              <div class="text-center"><button type="submit">Envoyer</button></div>
+              <div class="text-center"><button type="submit">Envoyer le message</button></div>
             </form>
           </div><!-- End Contact Form -->
 

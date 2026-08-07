@@ -38,16 +38,30 @@
                         @endif
                     </a>
 
-                    {{-- Lien Elite Training --}}
+                    {{-- Lien Elite Training (RDV & Demandes) --}}
                     <a href="{{ route('admin.elite-training.index') }}" 
                        class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.elite-training.*') ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-200 hover:bg-white/10' }}">
                         <div class="flex items-center gap-3">
                             <span class="text-base">🏆</span>
-                            <span>Elite Training</span>
+                            <span>Elite (RDV & Inscriptions)</span>
                         </div>
                         @if(\App\Models\EliteTrainingAppointment::where('status', 'pending')->count() > 0)
                             <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
                                 {{ \App\Models\EliteTrainingAppointment::where('status', 'pending')->count() }}
+                            </span>
+                        @endif
+                    </a>
+
+                    {{-- Lien Formations Catalogue --}}
+                    <a href="{{ route('admin.formations.index') }}" 
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.formations.*') ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-200 hover:bg-white/10' }}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">📚</span>
+                            <span>Catalogue Formations</span>
+                        </div>
+                        @if(\Illuminate\Support\Facades\Schema::hasTable('formations') && \App\Models\Formation::count() > 0)
+                            <span class="bg-white/20 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                                {{ \App\Models\Formation::count() }}
                             </span>
                         @endif
                     </a>

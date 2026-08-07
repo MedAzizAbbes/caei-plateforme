@@ -28,7 +28,7 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('digitalmoov/assets/css/main.css') }}?v=2.0" rel="stylesheet">
-  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=1.0" rel="stylesheet">
+  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=2.0" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: UpConstruction
@@ -71,89 +71,222 @@
 
     <!-- ======= Breadcrumbs ======= -->
     <div class="breadcrumbs d-flex align-items-center" style="background-image: url('{{ asset('digitalmoov/assets/img/people-working-as-team-company.jpg') }}');">
-     
+      <div class="container position-relative d-flex flex-column align-items-center" data-aos="fade">
+        <h2>Nos Références</h2>
+        <ol>
+          <li><a href="{{ route('digitalmoov') }}">Agence</a></li>
+          <li>Références</li>
+        </ol>
+      </div>
     </div><!-- End Breadcrumbs -->
 
- <!-- ======= Constructions Section ======= -->
- <section id="constructions" class="constructions">
-    <div class="container" data-aos="fade-up">
-
-      <div class="section-header">
-        <h2>*****</h2>
-        <p>Explorez comment Digital Moov a transformé les défis de ses clients en opportunités de croissance exceptionnelles grâce à des stratégies de marketing digital innovantes et des résultats mesurables.</p>
+    <!-- ======= Stats Banner Section ======= -->
+    <section class="ref-stats-banner">
+      <div class="container" data-aos="fade-up">
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="ref-stat-box">
+              <div class="ref-stat-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </div>
+              <div class="ref-stat-number">+300%</div>
+              <div class="ref-stat-label">Ventes & Croissance Client</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="ref-stat-box">
+              <div class="ref-stat-icon">
+                <i class="bi bi-trophy-fill"></i>
+              </div>
+              <div class="ref-stat-number">50+</div>
+              <div class="ref-stat-label">Projets Réussis</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="ref-stat-box">
+              <div class="ref-stat-icon">
+                <i class="bi bi-bullseye"></i>
+              </div>
+              <div class="ref-stat-number">500%</div>
+              <div class="ref-stat-label">ROI Maximal Généré</div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="ref-stat-box">
+              <div class="ref-stat-icon">
+                <i class="bi bi-patch-check-fill"></i>
+              </div>
+              <div class="ref-stat-number">98%</div>
+              <div class="ref-stat-label">Taux de Satisfaction</div>
+            </div>
+          </div>
+        </div>
       </div>
+    </section><!-- End Stats Banner -->
 
-      <div class="row gy-4">
+    <!-- ======= References Grid Section ======= -->
+    <section id="constructions" class="constructions">
+      <div class="container" data-aos="fade-up">
 
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="card-item">
-            <div class="row">
-              <div class="col-xl-5">
-                <div class="card-bg" style="background-image: url({{ asset('digitalmoov/assets/img/front-view-online-shopping-concept.jpg') }});"></div>
+        <div class="section-header text-center mb-5">
+          <span class="section-tag-pill">
+            <i class="bi bi-star-fill text-warning"></i> Case Studies & Impact
+          </span>
+          <h2 style="font-weight: 800; color: #0f172a; font-size: 2.2rem;" class="mt-2 mb-3">Nos Success Stories & Références</h2>
+          <p class="mx-auto" style="max-width: 750px; color: #64748b; font-size: 1.05rem;">
+            Explorez comment Digital Moov a transformé les défis de ses clients en opportunités de croissance exceptionnelles grâce à des stratégies de marketing digital innovantes et des résultats mesurables.
+          </p>
+        </div>
+
+        <div class="row g-4">
+
+          <!-- Card Item 1 -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="ref-card-item">
+              <div class="ref-card-img-wrapper">
+                <img src="{{ asset('digitalmoov/assets/img/front-view-online-shopping-concept.jpg') }}" alt="Ventes en ligne XYZ Fashion" class="ref-card-img">
+                <div class="ref-card-img-overlay"></div>
+                <div class="ref-category-badge">
+                  <i class="bi bi-cart-check"></i> E-Commerce & SEO
+                </div>
+                <div class="ref-kpi-badge">
+                  <i class="bi bi-arrow-up-right"></i> +300% Ventes
+                </div>
               </div>
-              <div class="col-xl-7 d-flex align-items-center">
-                <div class="card-body">
-                  <h4 class="card-title">Étude de cas - Augmentation des ventes en ligne </h4>
-                  <p>Pour notre client XYZ Fashion, nous avons mis en œuvre une stratégie de marketing digital complète, comprenant la refonte de leur site Web, l'optimisation du référencement (SEO) et la gestion de campagnes publicitaires sur les réseaux sociaux. En conséquence, les ventes en ligne de XYZ Fashion ont augmenté de 300 % en six mois, propulsant ainsi leur entreprise vers de nouveaux sommets de succès.</p>
+              <div class="ref-card-body">
+                <h3 class="ref-card-title">Étude de cas - Augmentation des ventes en ligne</h3>
+                <p class="ref-card-text">
+                  Pour notre client XYZ Fashion, nous avons mis en œuvre une stratégie de marketing digital complète, comprenant la refonte de leur site Web, l'optimisation du référencement (SEO) et la gestion de campagnes publicitaires sur les réseaux sociaux. En conséquence, les ventes en ligne ont augmenté de 300 % en 6 mois.
+                </p>
+                <div class="ref-card-footer">
+                  <span class="ref-client-name"><i class="bi bi-building"></i> XYZ Fashion</span>
+                  <a href="{{ route('digitalmoov.contact') }}" class="ref-link-btn">Voir le projet <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>
-          </div>
-        </div><!-- End Card Item -->
+          </div><!-- End Card Item 1 -->
 
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="card-item">
-            <div class="row">
-              <div class="col-xl-5">
-                <div class="card-bg" style="background-image: url({{ asset('digitalmoov/assets/img/relation-client-digital.png') }});"></div>
+          <!-- Card Item 2 -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="ref-card-item">
+              <div class="ref-card-img-wrapper">
+                <img src="{{ asset('digitalmoov/assets/img/relation-client-digital.png') }}" alt="Trafic Web ABC Corporation" class="ref-card-img">
+                <div class="ref-card-img-overlay"></div>
+                <div class="ref-category-badge">
+                  <i class="bi bi-people"></i> Relation Client & Traffic
+                </div>
+                <div class="ref-kpi-badge">
+                  <i class="bi bi-graph-up"></i> +150% Trafic Web
+                </div>
               </div>
-              <div class="col-xl-7 d-flex align-items-center">
-                <div class="card-body">
-                  <h4 class="card-title">Témoignage client - ABC Corporation</h4>
-                  <p>Digital Moov a été un partenaire indispensable pour ABC Corporation. Leur équipe a une compréhension approfondie de notre secteur d'activité et a su développer des stratégies de marketing digital qui ont dépassé nos attentes. Grâce à leur expertise, nous avons vu une augmentation de 150 % du trafic sur notre site Web et une croissance significative de nos revenus en ligne.</p>
+              <div class="ref-card-body">
+                <h3 class="ref-card-title">Témoignage client - ABC Corporation</h3>
+                <p class="ref-card-text">
+                  Digital Moov a été un partenaire indispensable pour ABC Corporation. Grâce à une compréhension approfondie de leur secteur d'activité, nous avons développé des campagnes ciblées ayant permis de générer une hausse de 150 % du trafic qualifié et une nette augmentation de leurs revenus.
+                </p>
+                <div class="ref-card-footer">
+                  <span class="ref-client-name"><i class="bi bi-briefcase"></i> ABC Corporation</span>
+                  <a href="{{ route('digitalmoov.contact') }}" class="ref-link-btn">Voir le projet <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>
-          </div>
-        </div><!-- End Card Item -->
+          </div><!-- End Card Item 2 -->
 
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
-          <div class="card-item">
-            <div class="row">
-              <div class="col-xl-5">
-                <div class="card-bg" style="background-image: url({{ asset('digitalmoov/assets/img/social-media-marketing-concept-marketing-with-applications.jpg') }});"></div>
+          <!-- Card Item 3 -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="ref-card-item">
+              <div class="ref-card-img-wrapper">
+                <img src="{{ asset('digitalmoov/assets/img/social-media-marketing-concept-marketing-with-applications.jpg') }}" alt="Social Media DEF Electronics" class="ref-card-img">
+                <div class="ref-card-img-overlay"></div>
+                <div class="ref-category-badge">
+                  <i class="bi bi-share"></i> Social Media & Ads
+                </div>
+                <div class="ref-kpi-badge">
+                  <i class="bi bi-currency-dollar"></i> 500% ROI
+                </div>
               </div>
-              <div class="col-xl-7 d-flex align-items-center">
-                <div class="card-body">
-                  <h4 class="card-title">Projet remarquable - Campagne publicitaire sur les réseaux sociaux </h4>
-                  <p>Pour le lancement de leur dernier produit, DEF Electronics a fait confiance à Digital Moov pour développer une campagne publicitaire sur les réseaux sociaux. En utilisant des ciblages précis et des annonces créatives, nous avons atteint plus de 1 million d'utilisateurs et généré un retour sur investissement (ROI) de 500 % pour DEF Electronics, établissant ainsi leur positionnement sur le marché.</p>
+              <div class="ref-card-body">
+                <h3 class="ref-card-title">Campagne publicitaire sur les réseaux sociaux</h3>
+                <p class="ref-card-text">
+                  Pour le lancement produit de DEF Electronics, nous avons conçu une stratégie multi-canal ciblée sur les réseaux sociaux. En combinant annonces créatives et ciblage affiné, nous avons atteint plus d'un million d'utilisateurs et généré un retour sur investissement (ROI) exceptionnel de 500 %.
+                </p>
+                <div class="ref-card-footer">
+                  <span class="ref-client-name"><i class="bi bi-laptop"></i> DEF Electronics</span>
+                  <a href="{{ route('digitalmoov.contact') }}" class="ref-link-btn">Voir le projet <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>
-          </div>
-        </div><!-- End Card Item -->
+          </div><!-- End Card Item 3 -->
 
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
-          <div class="card-item">
-            <div class="row">
-              <div class="col-xl-5">
-                <div class="card-bg" style="background-image: url({{ asset('digitalmoov/assets/img/1930702.jpg') }});"></div>
+          <!-- Card Item 4 -->
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="ref-card-item">
+              <div class="ref-card-img-wrapper">
+                <img src="{{ asset('digitalmoov/assets/img/1930702.jpg') }}" alt="Prix Agence Marketing" class="ref-card-img">
+                <div class="ref-card-img-overlay"></div>
+                <div class="ref-category-badge">
+                  <i class="bi bi-award"></i> Distinctions & Prix
+                </div>
+                <div class="ref-kpi-badge">
+                  <i class="bi bi-trophy"></i> Meilleure Agence
+                </div>
               </div>
-              <div class="col-xl-7 d-flex align-items-center">
-                <div class="card-body">
-                  <h4 class="card-title">Reconnaissance de l'industrie - Prix du Meilleur Agence de Marketing Digital</h4>
-                  <p>Digital Moov est honoré d'avoir été désigné Meilleure Agence de Marketing Digital de l'année par l'Association des Professionnels du Marketing. Cette reconnaissance témoigne de notre engagement envers l'excellence et de notre capacité à offrir des résultats exceptionnels à nos clients.</p>
+              <div class="ref-card-body">
+                <h3 class="ref-card-title">Prix de la Meilleure Agence Marketing Digital</h3>
+                <p class="ref-card-text">
+                  Digital Moov est honoré d'avoir été désigné Meilleure Agence de Marketing Digital de l'année par l'Association des Professionnels du Marketing. Cette reconnaissance témoigne de notre engagement constant envers l'excellence et l'innovation au service de nos clients.
+                </p>
+                <div class="ref-card-footer">
+                  <span class="ref-client-name"><i class="bi bi-star"></i> Industry Award</span>
+                  <a href="{{ route('digitalmoov.about') }}" class="ref-link-btn">En savoir plus <i class="bi bi-arrow-right"></i></a>
                 </div>
               </div>
             </div>
-          </div>
-        </div><!-- End Card Item -->
+          </div><!-- End Card Item 4 -->
+
+        </div>
 
       </div>
+    </section><!-- End Constructions Section -->
 
-    </div>
-  </section><!-- End Constructions Section -->
+    <!-- ======= Featured Testimonial Quote Section ======= -->
+    <section class="ref-quote-section">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-center">
+          <div class="col-lg-10">
+            <div class="ref-quote-card text-center">
+              <div class="ref-quote-icon">
+                <i class="bi bi-quote"></i>
+              </div>
+              <p class="ref-quote-text">
+                "Digital Moov ne se contente pas de livrer des services marketing, ils transforment radicalement la présence en ligne et accélèrent la croissance. Leur rigueur, créativité et recherche constante du ROI font toute la différence."
+              </p>
+              <div class="ref-author-info justify-content-center">
+                <div>
+                  <h4 class="ref-author-name">Direction Marketing - ABC Corporation</h4>
+                  <p class="ref-author-role">Partenaire Client depuis 2023</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Featured Testimonial Quote Section -->
 
+    <!-- ======= CTA Call To Action Section ======= -->
+    <section class="ref-cta-section">
+      <div class="container" data-aos="zoom-in">
+        <div class="ref-cta-banner text-center">
+          <h2 style="font-weight: 800; font-size: 2.2rem;" class="mb-3">Prêt à transformer votre entreprise ?</h2>
+          <p class="mx-auto mb-4" style="max-width: 650px; color: #cbd5e1; font-size: 1.1rem;">
+            Rejoignez les marques qui ont multiplié leur impact digital grâce à notre expertise sur-mesure. Contactez-nous dès aujourd'hui pour un audit stratégique offert.
+          </p>
+          <a href="{{ route('digitalmoov.contact') }}" class="ref-cta-btn">
+            Demander une consultation gratuite <i class="bi bi-arrow-right-circle-fill"></i>
+          </a>
+        </div>
+      </div>
+    </section><!-- End CTA Section -->
 
   </main><!-- End #main -->
 
