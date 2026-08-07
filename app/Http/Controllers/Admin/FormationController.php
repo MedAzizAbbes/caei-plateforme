@@ -47,6 +47,7 @@ class FormationController extends Controller
             'total' => Formation::count(),
             'certifiantes' => Formation::certifiante()->count(),
             'diplomantes' => Formation::diplomante()->count(),
+            'cycles' => Formation::cycle()->count(),
             'active' => Formation::active()->count(),
         ];
 
@@ -87,7 +88,7 @@ class FormationController extends Controller
         $data = $request->validate([
             'code'            => ['nullable', 'string', 'max:50'],
             'title'           => ['required', 'string', 'max:255'],
-            'type'            => ['required', 'in:certifiante,diplomante,sur_mesure,elearning'],
+            'type'            => ['required', 'in:certifiante,diplomante,sur_mesure,elearning,cycle'],
             'domain'          => ['nullable', 'string', 'max:150'],
             'duration'        => ['nullable', 'string', 'max:100'],
             'price'           => ['nullable', 'numeric', 'min:0'],
@@ -145,7 +146,7 @@ class FormationController extends Controller
         $data = $request->validate([
             'code'            => ['nullable', 'string', 'max:50'],
             'title'           => ['required', 'string', 'max:255'],
-            'type'            => ['required', 'in:certifiante,diplomante,sur_mesure,elearning'],
+            'type'            => ['required', 'in:certifiante,diplomante,sur_mesure,elearning,cycle'],
             'domain'          => ['nullable', 'string', 'max:150'],
             'duration'        => ['nullable', 'string', 'max:100'],
             'price'           => ['nullable', 'numeric', 'min:0'],

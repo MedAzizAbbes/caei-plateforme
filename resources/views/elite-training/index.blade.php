@@ -1397,8 +1397,8 @@
             Cycles & Séminaires <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="nav-dropdown-menu">
-            <li><a href="#programme"><i class="bi bi-calendar-event me-2" style="color: var(--gold-light);"></i> Nos Cycles</a></li>
-            <li><a href="#programme"><i class="bi bi-calendar-check me-2" style="color: var(--gold-light);"></i> Nos Séminaires</a></li>
+            <li><a href="{{ route('elite.nos-cycles') }}"><i class="bi bi-calendar-event me-2" style="color: var(--gold-light);"></i> Nos Cycles</a></li>
+            <li><a href="{{ route('home.old') }}"><i class="bi bi-calendar-check me-2" style="color: var(--gold-light);"></i> Nos Séminaires</a></li>
           </ul>
         </li>
         <li><a href="#contact">Contact</a></li>

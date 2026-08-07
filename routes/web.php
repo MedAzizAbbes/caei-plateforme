@@ -55,6 +55,7 @@ Route::get('/ancien-accueil', function () {
 })->name('home.old');
 
 Route::get('/elite-training', [EliteTrainingController::class, 'index'])->name('elite.training');
+Route::get('/elite-training/nos-cycles', [EliteTrainingController::class, 'nosCycles'])->name('elite.nos-cycles');
 Route::get('/elite-training/domaine/{slug}', [EliteTrainingController::class, 'domain'])->name('elite.training.domain');
 
 Route::get('/elite-training/diplome/mini-mba', [EliteTrainingController::class, 'diplomaMiniMBA'])->name('elite.training.diploma.mini-mba');
