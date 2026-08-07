@@ -83,10 +83,9 @@
                             <span class="bg-orange-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $dmNew }}</span>
                         @endif
                     </a>
-                    <div class="px-3 py-2 rounded-lg bg-white/5 flex items-center justify-between text-slate-400">
+                    <a href="{{ route('callcenter.index') }}" target="_blank" class="flex items-center justify-between px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-colors group">
                         <span class="flex items-center gap-2 text-xs">📞 Call Center</span>
-                        <span class="text-[9px] text-slate-500">Bientôt</span>
-                    </div>
+                    </a>
                 </div>
             </div>
         </nav>

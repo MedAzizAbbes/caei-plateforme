@@ -410,5 +410,6 @@
       document.getElementById('inscription').scrollIntoView({ behavior: 'smooth' });
     }
   </script>
+  <x-intl-tel-input />
 </body>
 </html>

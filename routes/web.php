@@ -21,9 +21,22 @@ use App\Http\Controllers\SeminarPublicController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\CallCenterController;
 
-
-
+Route::prefix('call-center')->name('callcenter.')->group(function () {
+    Route::get('/', [CallCenterController::class, 'index'])->name('index');
+    Route::get('/about', [CallCenterController::class, 'about'])->name('about');
+    Route::get('/services', [CallCenterController::class, 'services'])->name('services');
+    
+    // Sectors
+    Route::get('/secteurs/energie', [CallCenterController::class, 'energie'])->name('secteurs.energie');
+    Route::get('/secteurs/assurance', [CallCenterController::class, 'assurance'])->name('secteurs.assurance');
+    Route::get('/secteurs/technologie', [CallCenterController::class, 'technologie'])->name('secteurs.technologie');
+    
+    Route::get('/support', [CallCenterController::class, 'support'])->name('support');
+    Route::get('/blog', [CallCenterController::class, 'blog'])->name('blog');
+    Route::get('/contact', [CallCenterController::class, 'contact'])->name('contact');
+});
 
 /*
 |--------------------------------------------------------------------------

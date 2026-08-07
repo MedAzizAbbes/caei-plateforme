@@ -453,8 +453,9 @@
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
         </div>
 
-        <form action="{{ url('/contact') }}" method="POST" id="quickRegisterForm" class="p-4">
+        <form action="{{ route('elite.appointment.store') }}" method="POST" id="quickRegisterForm" class="p-4">
           @csrf
+          <input type="hidden" name="type" value="inscription">
           <input type="hidden" name="subject" id="modalCourseInput">
 
           <div class="mb-3">
@@ -508,5 +509,6 @@
       modal.show();
     }
   </script>
+  <x-intl-tel-input />
 </body>
 </html>

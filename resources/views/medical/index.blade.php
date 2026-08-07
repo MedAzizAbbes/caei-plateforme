@@ -511,6 +511,6 @@
                 <p>Développé par CAEI Digital MOOV</p>
             </div>
         </footer>
-
+        <x-intl-tel-input />
     </body>
 </html>

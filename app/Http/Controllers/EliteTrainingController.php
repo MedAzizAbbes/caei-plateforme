@@ -101,16 +101,20 @@ class EliteTrainingController extends Controller
     {
         if (\Illuminate\Support\Facades\Schema::hasTable('formations')) {
             $certifiantes = Formation::certifiante()->active()->get();
-            $diplomantes = Formation::diplomante()->active()->get();
+            $diplomantes  = Formation::diplomante()->active()->get();
+            $surMesure    = Formation::surMesure()->active()->get();
+            $elearning    = Formation::elearning()->active()->get();
             $allFormations = Formation::active()->get();
         } else {
-            $certifiantes = collect();
-            $diplomantes = collect();
+            $certifiantes  = collect();
+            $diplomantes   = collect();
+            $surMesure     = collect();
+            $elearning     = collect();
             $allFormations = collect();
         }
         $domainsConfig = $this->domainsMap;
 
-        return view('elite-training.index', compact('certifiantes', 'diplomantes', 'allFormations', 'domainsConfig'));
+        return view('elite-training.index', compact('certifiantes', 'diplomantes', 'surMesure', 'elearning', 'allFormations', 'domainsConfig'));
     }
 
     /**
