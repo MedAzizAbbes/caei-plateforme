@@ -1,116 +1,124 @@
 @extends('layouts.callcenter')
 
-@section('title', 'Accueil — CAEI Call Center (Minimaliste)')
+@section('title', 'CAEI Call Center - Accueil')
 
 @section('content')
-  <!-- Hero Minimalist -->
-  <section class="py-5 bg-white position-relative overflow-hidden">
-    <!-- Subtle background decoration -->
-    <div class="position-absolute" style="top: -50px; right: -50px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(209, 17, 65, 0.03) 0%, transparent 70%); border-radius: 50%; z-index: 0;"></div>
-    
-    <div class="container py-lg-5 position-relative z-1">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6" data-aos="fade-up">
-          <span class="badge-clean mb-4 d-inline-block">Excellence Opérationnelle 2.0</span>
-          <h1 class="display-4 fw-bold mb-4" style="line-height: 1.15;">
-            L'innovation au cœur de votre relation client.
-          </h1>
-          <p class="fs-5 text-muted mb-5" style="max-width: 500px;">
-            Optimisez vos interactions, fidélisez vos clients et propulsez votre croissance grâce à nos solutions d'externalisation haut de gamme.
-          </p>
-          <div class="d-flex flex-wrap gap-3">
-            <a href="{{ route('callcenter.contact') }}" class="btn-clean-red">Démarrer un projet</a>
-            <a href="{{ route('callcenter.services') }}" class="btn-outline-clean">Découvrir nos services</a>
+<!-- Hero Section -->
+<div class="position-relative min-vh-100 d-flex align-items-center overflow-hidden">
+  <div class="container py-5 mt-5 position-relative z-1">
+    <div class="row align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start" data-aos="fade-right">
+        <div class="badge bg-danger bg-opacity-10 text-danger border border-danger border-opacity-25 px-3 py-2 rounded-pill mb-4" style="backdrop-filter: blur(4px);">
+          Support Client Nouvelle Génération
+        </div>
+        <h1 class="display-4 fw-bold text-white mb-4 lh-sm">
+          Propulsez votre <br>
+          <span class="text-gradient">Relation Client</span>
+        </h1>
+        <p class="lead text-white-50 mb-5" style="font-size: 1.15rem; max-width: 500px; margin: 0 auto; margin-lg-start: 0;">
+          Des solutions sur mesure d'assistance téléphonique, de fidélisation et de prospection commerciale pour propulser votre entreprise vers l'avenir.
+        </p>
+        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
+          <a href="{{ route('callcenter.services') }}" class="btn-glass-red">Découvrir nos services</a>
+          <a href="{{ route('callcenter.contact') }}" class="btn-glass-outline">Prendre RDV</a>
+        </div>
+        
+        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start mt-5 pt-4 gap-4 gap-md-5 border-top border-light border-opacity-10">
+          <div>
+            <h3 class="fw-bold text-white mb-0">98%</h3>
+            <p class="small text-white-50 mb-0">Satisfaction Client</p>
           </div>
+          <div class="d-none d-md-block" style="width: 1px; height: 40px; background: rgba(255,255,255,0.1);"></div>
+          <div>
+            <h3 class="fw-bold text-white mb-0">24/7</h3>
+            <p class="small text-white-50 mb-0">Disponibilité</p>
+          </div>
+          <div class="d-none d-md-block" style="width: 1px; height: 40px; background: rgba(255,255,255,0.1);"></div>
+          <div>
+            <h3 class="fw-bold text-white mb-0">+10</h3>
+            <p class="small text-white-50 mb-0">Langues parlées</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6" data-aos="fade-left" data-aos-delay="200">
+        <div class="position-relative p-4">
+          <div class="position-absolute top-50 start-50 translate-middle w-75 h-75 bg-danger rounded-circle filter-blur-100" style="opacity: 0.2; filter: blur(60px); z-index: -1;"></div>
           
-          <div class="mt-5 pt-4 d-flex gap-5 border-top border-light">
-            <div>
-              <h3 class="fw-bold mb-1">98%</h3>
-              <p class="text-muted small text-uppercase fw-semibold mb-0" style="letter-spacing: 0.5px; font-size: 11px;">Satisfaction</p>
+          <img src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=2071&auto=format&fit=crop" alt="Call Center Modern" class="img-fluid img-3d w-100">
+          
+          <!-- Floating UI Element -->
+          <div class="position-absolute bottom-0 start-0 translate-middle-x mb-5 ms-5 glass-card p-3 d-none d-md-flex align-items-center gap-3" style="width: auto; animation: float 6s infinite ease-in-out;">
+            <div style="width: 48px; height: 48px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+              <i class="bi bi-headset text-success fs-4"></i>
             </div>
             <div>
-              <h3 class="fw-bold mb-1">24/7</h3>
-              <p class="text-muted small text-uppercase fw-semibold mb-0" style="letter-spacing: 0.5px; font-size: 11px;">Support</p>
+              <p class="small text-white-50 mb-0">Agent Connecté</p>
+              <h6 class="fw-bold text-white mb-0">En ligne</h6>
             </div>
-            <div>
-              <h3 class="fw-bold mb-1">5M+</h3>
-              <p class="text-muted small text-uppercase fw-semibold mb-0" style="letter-spacing: 0.5px; font-size: 11px;">Interactions</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="position-relative">
-            <!-- Subtle shadow frame -->
-            <div class="position-absolute bg-white rounded-4 shadow-sm" style="top: 20px; left: -20px; right: 20px; bottom: -20px; border: 1px solid var(--cc-border); z-index: 0;"></div>
-            <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop" class="img-fluid rounded-4 position-relative z-1" alt="Call Center" style="box-shadow: 0 10px 30px -10px rgba(0,0,0,0.1);">
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <div class="container"><div class="section-divider my-0"></div></div>
+<style>
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+</style>
 
-  <!-- Services Minimalist -->
-  <section class="py-5 section-light">
-    <div class="container py-5">
-      <div class="row mb-5 justify-content-between align-items-end">
-        <div class="col-lg-6" data-aos="fade-right">
-          <h2 class="display-6 fw-bold mb-3">Expertise Multisectorielle</h2>
-          <p class="text-muted mb-0 fs-5">Des solutions sur-mesure pour chaque aspect de votre centre de contact.</p>
-        </div>
-        <div class="col-lg-4 text-lg-end mt-4 mt-lg-0" data-aos="fade-left">
-          <a href="{{ route('callcenter.services') }}" class="text-decoration-none fw-semibold" style="color: var(--cc-red);">Voir tous les services <i class="bi bi-arrow-right ms-1"></i></a>
-        </div>
+<!-- Secteurs d'activité (Glassmorphism Cards) -->
+<div class="py-6 position-relative z-1">
+  <div class="container py-5">
+    <div class="text-center mb-5 pb-3" data-aos="fade-up">
+      <h2 class="display-6 fw-bold text-white mb-3">Nos secteurs d'expertise</h2>
+      <p class="lead text-white-50 mx-auto" style="max-width: 600px;">Des solutions adaptées aux exigences technologiques et sécuritaires de votre domaine.</p>
+    </div>
+    
+    <div class="row g-4 g-lg-5">
+      <!-- Energie -->
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <a href="{{ route('callcenter.secteurs.energie') }}" class="text-decoration-none">
+          <div class="glass-card text-center">
+            <div class="glass-icon mx-auto">
+              <i class="bi bi-lightning-charge-fill"></i>
+            </div>
+            <h4 class="fw-bold text-white mb-3">Énergie</h4>
+            <p class="text-white-50 mb-0">Support client spécialisé, gestion des compteurs et assistance technique pour les acteurs de l'énergie.</p>
+          </div>
+        </a>
       </div>
-
-      <div class="row g-4">
-        <!-- Service 1 -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="clean-card">
-            <div class="clean-icon">
-              <i class="fa-solid fa-headset"></i>
+      
+      <!-- Assurance -->
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <a href="{{ route('callcenter.secteurs.assurance') }}" class="text-decoration-none">
+          <div class="glass-card text-center">
+            <div class="glass-icon mx-auto">
+              <i class="bi bi-shield-fill-check"></i>
             </div>
-            <h4 class="fs-5 fw-bold mb-3">Support Client</h4>
-            <p class="text-muted mb-0 small">Assistance technique et commerciale de premier ordre pour répondre aux exigences de vos clients avec précision et efficacité professionnelle.</p>
+            <h4 class="fw-bold text-white mb-3">Assurance</h4>
+            <p class="text-white-50 mb-0">Traitement sécurisé des sinistres, relation client premium et conformité rgpd stricte.</p>
           </div>
-        </div>
-        
-        <!-- Service 2 -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="clean-card">
-            <div class="clean-icon">
-              <i class="fa-solid fa-phone-volume"></i>
+        </a>
+      </div>
+      
+      <!-- Technologie -->
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+        <a href="{{ route('callcenter.secteurs.technologie') }}" class="text-decoration-none">
+          <div class="glass-card text-center">
+            <div class="glass-icon mx-auto">
+              <i class="bi bi-pc-display"></i>
             </div>
-            <h4 class="fs-5 fw-bold mb-3">Télémarketing</h4>
-            <p class="text-muted mb-0 small">Stratégies d'appels sortants pour générer des leads qualifiés, optimiser vos prises de rendez-vous et accroître vos performances.</p>
+            <h4 class="fw-bold text-white mb-3">Technologie</h4>
+            <p class="text-white-50 mb-0">Helpdesk niveaux 1 à 3, intégration logicielle et assistance continue pour vos utilisateurs.</p>
           </div>
-        </div>
-
-        <!-- Service 3 -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-          <div class="clean-card">
-            <div class="clean-icon">
-              <i class="fa-solid fa-comments"></i>
-            </div>
-            <h4 class="fs-5 fw-bold mb-3">Gestion Omnicanal</h4>
-            <p class="text-muted mb-0 small">Traitement centralisé et sécurisé des emails, chats, et réseaux sociaux pour une expérience client fluide et unifiée.</p>
-          </div>
-        </div>
+        </a>
       </div>
     </div>
-  </section>
-
-  <!-- CTA Minimalist -->
-  <section class="py-5 bg-white">
-    <div class="container py-5" data-aos="zoom-in">
-      <div class="clean-card text-center py-5 border-0 bg-transparent" style="box-shadow: none;">
-        <span class="badge-clean mb-3">Audit gratuit</span>
-        <h2 class="display-5 fw-bold mb-4">Prêt à transformer votre service client ?</h2>
-        <p class="fs-5 mb-5 mx-auto text-muted" style="max-width: 600px;">Consultez nos experts pour un audit de vos processus actuels et découvrez comment notre infrastructure peut réduire vos coûts.</p>
-        <a href="{{ route('callcenter.contact') }}" class="btn-clean-red px-5 py-3">Planifier une consultation</a>
-      </div>
-    </div>
-  </section>
+  </div>
+</div>
 @endsection
