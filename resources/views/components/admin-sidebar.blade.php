@@ -83,6 +83,19 @@
                             <span class="bg-orange-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $dmNew }}</span>
                         @endif
                     </a>
+
+                    <a href="{{ route('admin.callcenter.index') }}"
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.callcenter.*') ? 'bg-red-500 text-white' : 'text-slate-300 hover:bg-white/10' }}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">📞</span>
+                            <span class="font-bold text-xs">Call Center</span>
+                        </div>
+                        @php $ccNew = \App\Models\CallCenterRequest::where('status','Nouveau')->count(); @endphp
+                        @if($ccNew > 0)
+                            <span class="bg-red-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $ccNew }}</span>
+                        @endif
+                    </a>
+
                     <a href="{{ route('callcenter.index') }}" target="_blank" class="flex items-center justify-between px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-colors group">
                         <span class="flex items-center gap-2 text-xs">📞 Call Center</span>
                     </a>

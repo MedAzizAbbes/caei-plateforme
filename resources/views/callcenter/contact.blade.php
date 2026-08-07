@@ -64,7 +64,14 @@
         <div class="col-lg-8" data-aos="fade-left" data-aos-delay="200">
           <div class="glass-card p-4 p-lg-5 h-100">
             <h4 class="fw-bold mb-4 text-white">Formulaire de Demande</h4>
-            <form action="#" method="POST" class="needs-validation">
+            
+            @if(session('success'))
+                <div class="alert alert-success bg-success bg-opacity-25 text-white border-0 mb-4" role="alert">
+                    <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+                </div>
+            @endif
+
+            <form action="{{ route('callcenter.contact.store') }}" method="POST" class="needs-validation">
               @csrf
               <div class="row g-4">
                 <div class="col-md-6">

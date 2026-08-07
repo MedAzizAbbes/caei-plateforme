@@ -36,6 +36,7 @@ Route::prefix('call-center')->name('callcenter.')->group(function () {
     Route::get('/support', [CallCenterController::class, 'support'])->name('support');
     Route::get('/blog', [CallCenterController::class, 'blog'])->name('blog');
     Route::get('/contact', [CallCenterController::class, 'contact'])->name('contact');
+    Route::post('/contact', [CallCenterController::class, 'storeContact'])->name('contact.store');
 });
 
 /*
@@ -377,6 +378,11 @@ Route::middleware(['auth', 'role:formateur,admin'])->prefix('checkin')->name('ch
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     
+    // Call Center Requests
+    Route::get('/callcenter-requests', [\App\Http\Controllers\Admin\CallCenterRequestController::class, 'index'])->name('callcenter.index');
+    Route::put('/callcenter-requests/{request}', [\App\Http\Controllers\Admin\CallCenterRequestController::class, 'updateStatus'])->name('callcenter.update-status');
+    Route::delete('/callcenter-requests/{request}', [\App\Http\Controllers\Admin\CallCenterRequestController::class, 'destroy'])->name('callcenter.destroy');
+
     Route::resource('seminaires', SeminarController::class)
         ->parameters(['seminaires' => 'seminar'])
         ->names('seminars')
