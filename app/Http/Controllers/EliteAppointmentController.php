@@ -12,12 +12,24 @@ class EliteAppointmentController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'nom'     => 'required|string|max:255',
+            'nom'     => 'nullable|string|max:255',
+            'name'    => 'nullable|string|max:255',
             'email'   => 'required|email|max:255',
             'mobile'  => 'nullable|string|max:50',
+            'phone'   => 'nullable|string|max:50',
             'objet'   => 'nullable|string|max:255',
-            'message' => 'required|string',
+            'subject' => 'nullable|string|max:255',
+            'message' => 'nullable|string',
         ]);
+
+        $fullname = $request->input('nom') ?: $request->input('name');
+        if (empty($fullname)) {
+            return redirect()->back()->withErrors(['nom' => 'Le nom complet est obligatoire.']);
+        }
+
+        $phone = $request->input('mobile') ?: $request->input('phone');
+        $subject = $request->input('objet') ?: ($request->input('subject') ?: 'Demande Elite Training');
+        $message = $request->input('message') ?: ("Demande d'inscription / devis pour : " . $subject);
 
         $type = $request->input('type');
         if (!in_array($type, ['appointment', 'inscription'])) {
@@ -25,11 +37,11 @@ class EliteAppointmentController extends Controller
         }
 
         $appointment = EliteTrainingAppointment::create([
-            'fullname' => $validated['nom'],
+            'fullname' => $fullname,
             'email'    => $validated['email'],
-            'phone'    => $validated['mobile'] ?? null,
-            'subject'  => $validated['objet'] ?? 'Rendez-vous Elite Training',
-            'message'  => $validated['message'],
+            'phone'    => $phone,
+            'subject'  => $subject,
+            'message'  => $message,
             'type'     => $type,
             'status'   => 'pending',
         ]);
