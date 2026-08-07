@@ -378,5 +378,6 @@
       AOS.init({ duration: 700, once: true });
     }
   </script>
+  <x-intl-tel-input />
 </body>
 </html>

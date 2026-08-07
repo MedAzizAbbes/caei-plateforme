@@ -509,5 +509,6 @@
       modal.show();
     }
   </script>
+  <x-intl-tel-input />
 </body>
 </html>

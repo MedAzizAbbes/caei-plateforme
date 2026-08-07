@@ -999,6 +999,6 @@
         handleFormSubmit(quoteForm);
         handleFormSubmit(contactForm);
       </script>
+      <x-intl-tel-input />
     </body>
-
 </html>

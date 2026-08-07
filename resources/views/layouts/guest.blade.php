@@ -32,5 +32,6 @@
                 {{ $slot }}
             </div>
         </div>
+        <x-intl-tel-input />
     </body>
 </html>
