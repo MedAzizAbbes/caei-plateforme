@@ -218,3 +218,36 @@
     .iti__search-input:focus { border-color: var(--cc-red) !important; outline: none !important; }
   </style>
 @endsection
+
+@section('scripts')
+  {{-- intl-tel-input chargé uniquement sur la page contact --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <style>
+    .iti__flag {background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/img/flags.png");}
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .iti__flag {background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/img/flags@2x.png");}
+    }
+  </style>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const input = document.querySelector('#phone');
+    if (!input) return;
+
+    const iti = window.intlTelInput(input, {
+      initialCountry: "tn",   // fixé — évite le fetch ipapi.co externe
+      separateDialCode: true,
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+
+    const form = input.closest('form');
+    if (form) {
+      form.addEventListener('submit', function() {
+        if (input.value.trim()) {
+          input.value = iti.getNumber();
+        }
+      });
+    }
+  });
+  </script>
+@endsection

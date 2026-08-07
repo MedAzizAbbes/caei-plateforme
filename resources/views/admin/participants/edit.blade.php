@@ -114,4 +114,8 @@
         </form>
     </div>
 </div>
+
+@section('scripts')
+    <x-intl-tel-input />
+@endsection
 @endsection

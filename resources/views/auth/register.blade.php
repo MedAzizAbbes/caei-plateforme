@@ -100,4 +100,8 @@
             </p>
         </div>
     </form>
+    
+    @section('scripts')
+        <x-intl-tel-input />
+    @endsection
 </x-guest-layout>

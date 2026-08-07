@@ -18,8 +18,8 @@
         <div class="min-h-screen flex flex-col justify-center items-center px-4 py-8 relative overflow-hidden bg-caei-navy">
             <!-- Arrière-plan décoratif subtil -->
             <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                <div class="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-caei-gold/10 blur-[150px]"></div>
-                <div class="absolute top-[40%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[150px]"></div>
+                <div class="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-caei-gold/10 blur-[60px]" style="will-change: transform, opacity;"></div>
+                <div class="absolute top-[40%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[60px]" style="will-change: transform, opacity;"></div>
             </div>
 
             <div class="mb-8 relative z-10 animate-slide-up">
@@ -32,6 +32,6 @@
                 {{ $slot }}
             </div>
         </div>
-        <x-intl-tel-input />
+        @yield('scripts')
     </body>
 </html>

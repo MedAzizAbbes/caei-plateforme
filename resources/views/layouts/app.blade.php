@@ -107,8 +107,8 @@
         <div class="min-h-screen relative flex flex-col">
             <!-- Arrière-plan décoratif subtil -->
             <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                <div class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-caei-gold/5 blur-[120px]"></div>
-                <div class="absolute top-[40%] -left-[10%] w-[40%] h-[40%] rounded-full bg-caei-navy/5 blur-[120px]"></div>
+                <div class="absolute -top-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-caei-gold/5 blur-[60px]" style="will-change: transform, opacity;"></div>
+                <div class="absolute top-[40%] -left-[10%] w-[40%] h-[40%] rounded-full bg-caei-navy/5 blur-[60px]" style="will-change: transform, opacity;"></div>
             </div>
 
             <div class="relative z-10">
@@ -133,6 +133,6 @@
                 </main>
             </div>
         </div>
-        <x-intl-tel-input />
+        @yield('scripts')
     </body>
 </html>
