@@ -462,9 +462,7 @@
           <li><a href="{{ route('home.old') }}">Séminaires</a></li>
           <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="{{ route('home.old') }}">CAEI ELITE TRAINING</a></li>             
-              <li><a href="https://caei-afri.com/Medicalservices/" target="_blank">CAEI MEDICAL SERVICES</a></li>
-              <li><a href="#seminaires">CAEI ELITE TRAINING</a></li>             
+              <li><a href="{{ route('elite.training') }}">CAEI ELITE TRAINING</a></li>
               <li><a href="{{ route('medical.services') }}">CAEI MEDICAL SERVICES</a></li>
               <li><a href="{{ route('digitalmoov') }}">CAEI DIGITAL MOOV</a></li>
               <li><a href="https://caei-afri.com/Callcenter/" target="_blank">CAEI CALL CENTER</a></li>
@@ -518,7 +516,7 @@
 
         <div class="row gy-4 mt-3 justify-content-center">
           <div class="col-6 col-xl-2 col-md-3">
-            <a href="{{ route('home.old') }}" class="hero-service-card-wrapper">
+            <a href="{{ route('elite.training') }}" class="hero-service-card-wrapper">
               <div class="hero-service-card">
                 <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training">
               </div>
@@ -1161,9 +1159,7 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4 class="text-white fw-bold mb-3" style="font-size: 16px;">Nos Agences</h4>
           <ul class="list-unstyled">
-            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('home.old') }}" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
-            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Medicalservices/" target="_blank" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
-            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="#seminaires" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('elite.training') }}" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('medical.services') }}" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('digitalmoov') }}" class="text-decoration-none text-white-50">CAEI DIGITAL MOOV</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Callcenter/" target="_blank" class="text-decoration-none text-white-50">CAEI CALL CENTER</a></li>
