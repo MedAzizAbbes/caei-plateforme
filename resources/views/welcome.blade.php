@@ -99,6 +99,166 @@
       animation: slideInUp 0.8s ease-out 0.2s both;
     }
     
+    /* ═══════════════════════════════════════════════════════════════
+       CINEMATIC HERO STYLING & ANIMATIONS
+       ═══════════════════════════════════════════════════════════════ */
+    .hero.section {
+      background: radial-gradient(circle at 50% 35%, #002255 0%, #000d33 55%, #000518 100%) !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+    
+    .hero.section::before {
+      content: '' !important;
+      display: block !important;
+      position: absolute !important;
+      inset: 0 !important;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(255, 196, 81, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 80% 80%, rgba(0, 102, 204, 0.2) 0%, transparent 50%),
+        linear-gradient(to bottom, rgba(0, 5, 24, 0.4) 0%, transparent 30%, transparent 70%, rgba(0, 5, 24, 0.85) 100%) !important;
+      pointer-events: none !important;
+      z-index: 1 !important;
+    }
+
+    .hero-overlay-gradient {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0, 31, 63, 0.25) 0%, rgba(0, 10, 45, 0.88) 100%) !important;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Ambient Lens Flare Spotlight */
+    .cinematic-lens-flare {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 280px;
+      background: radial-gradient(ellipse at center, rgba(255, 196, 81, 0.2) 0%, rgba(0, 140, 255, 0.1) 45%, transparent 75%);
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 1;
+      animation: flarePulse 7s ease-in-out infinite alternate;
+    }
+
+    @keyframes flarePulse {
+      0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.92); }
+      100% { opacity: 1; transform: translate(-50%, -50%) scale(1.12); }
+    }
+
+    /* Cinematic Text Effects */
+    .hero h2 {
+      font-weight: 900 !important;
+      letter-spacing: 2px !important;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 255, 255, 0.15) !important;
+    }
+
+    .hero h2 span.gradient-gold {
+      background: linear-gradient(135deg, #fff4d4 0%, #ffc451 45%, #e69d00 85%, #ffe699 100%) !important;
+      -webkit-background-clip: text !important;
+      -webkit-text-fill-color: transparent !important;
+      background-clip: text !important;
+      filter: drop-shadow(0 6px 20px rgba(255, 196, 81, 0.45)) !important;
+    }
+
+    .hero-subtitle {
+      letter-spacing: 1.5px !important;
+      color: rgba(255, 255, 255, 0.9) !important;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.6) !important;
+      font-weight: 500 !important;
+    }
+
+    .hero-badge-pill {
+      background: rgba(255, 196, 81, 0.14) !important;
+      border: 1px solid rgba(255, 196, 81, 0.45) !important;
+      box-shadow: 0 0 25px rgba(255, 196, 81, 0.25) !important;
+      backdrop-filter: blur(14px) !important;
+      letter-spacing: 1px !important;
+      font-weight: 700 !important;
+    }
+
+    /* Cinematic Glassmorphism Service Cards & Flying Animation */
+    @keyframes floatCardWave {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero-service-card {
+      width: 160px !important;
+      height: 160px !important;
+      margin: 0 auto !important;
+      padding: 16px !important;
+      background: rgba(255, 255, 255, 0.07) !important;
+      border: 1px solid rgba(255, 255, 255, 0.18) !important;
+      backdrop-filter: blur(20px) !important;
+      -webkit-backdrop-filter: blur(20px) !important;
+      border-radius: 24px !important;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      position: relative !important;
+      overflow: hidden !important;
+      animation: floatCardWave 4s ease-in-out infinite;
+    }
+
+    .col-6:nth-child(1) .hero-service-card { animation-delay: 0s; }
+    .col-6:nth-child(2) .hero-service-card { animation-delay: 0.8s; }
+    .col-6:nth-child(3) .hero-service-card { animation-delay: 1.6s; }
+    .col-6:nth-child(4) .hero-service-card { animation-delay: 2.4s; }
+
+    .hero-service-card-wrapper:hover .hero-service-card {
+      background: rgba(255, 196, 81, 0.16) !important;
+      border-color: rgba(255, 196, 81, 0.7) !important;
+      transform: translateY(-14px) scale(1.06) !important;
+      box-shadow: 0 25px 50px rgba(255, 196, 81, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+      animation-play-state: paused !important;
+    }
+
+    .hero-service-card img {
+      width: 110px !important;
+      height: 110px !important;
+      max-width: 110px !important;
+      max-height: 110px !important;
+      object-fit: contain !important;
+      margin: auto !important;
+      display: block !important;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35)) !important;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease !important;
+    }
+
+    /* Scale boost for logos with transparent padding */
+    .hero-service-card img.logo-boost {
+      transform: scale(1.18) !important;
+      transform-origin: center center !important;
+    }
+
+    .hero-service-card-wrapper:hover img {
+      transform: scale(1.1) rotate(2deg) !important;
+      filter: drop-shadow(0 12px 24px rgba(255, 196, 81, 0.55)) !important;
+    }
+
+    .hero-service-card-wrapper:hover img.logo-boost {
+      transform: scale(1.28) rotate(2deg) !important;
+      filter: drop-shadow(0 12px 24px rgba(255, 196, 81, 0.55)) !important;
+    }
+
+    .agency-label-tag {
+      font-weight: 700 !important;
+      letter-spacing: 1px !important;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+      transition: all 0.3s ease !important;
+    }
+
+    .hero-service-card-wrapper:hover .agency-label-tag {
+      color: #ffc451 !important;
+      text-shadow: 0 0 15px rgba(255, 196, 81, 0.7) !important;
+    }
+    
     /* Chat Widget Styles */
     .chat-widget {
       position: fixed;
@@ -462,9 +622,7 @@
           <li><a href="{{ route('home.old') }}">Séminaires</a></li>
           <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="{{ route('home.old') }}">CAEI ELITE TRAINING</a></li>             
-              <li><a href="https://caei-afri.com/Medicalservices/" target="_blank">CAEI MEDICAL SERVICES</a></li>
-              <li><a href="#seminaires">CAEI ELITE TRAINING</a></li>             
+              <li><a href="{{ route('elite.training') }}">CAEI ELITE TRAINING</a></li>
               <li><a href="{{ route('medical.services') }}">CAEI MEDICAL SERVICES</a></li>
               <li><a href="{{ route('digitalmoov') }}">CAEI DIGITAL MOOV</a></li>
               <li><a href="https://caei-afri.com/Callcenter/" target="_blank">CAEI CALL CENTER</a></li>
@@ -498,6 +656,7 @@
       </video>
 
       <div class="hero-overlay-gradient"></div>
+      <div class="cinematic-lens-flare"></div>
 
       <div class="container text-center" style="position: relative; z-index: 2;">
 
@@ -518,7 +677,7 @@
 
         <div class="row gy-4 mt-3 justify-content-center">
           <div class="col-6 col-xl-2 col-md-3">
-            <a href="{{ route('home.old') }}" class="hero-service-card-wrapper">
+            <a href="{{ route('elite.training') }}" class="hero-service-card-wrapper">
               <div class="hero-service-card">
                 <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training">
               </div>
@@ -536,7 +695,7 @@
           <div class="col-6 col-xl-2 col-md-3">
             <a href="{{ route('digitalmoov') }}" class="hero-service-card-wrapper">
               <div class="hero-service-card">
-                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov">
+                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov" class="logo-boost">
               </div>
               <span class="agency-label-tag">Digital Moov</span>
             </a>
@@ -544,7 +703,7 @@
           <div class="col-6 col-xl-2 col-md-3">
             <a href="https://caei-afri.com/Callcenter/" target="_blank" class="hero-service-card-wrapper">
               <div class="hero-service-card">
-                <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center">
+                <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center" class="logo-boost">
               </div>
               <span class="agency-label-tag">Call Center</span>
             </a>
@@ -1161,9 +1320,7 @@
         <div class="col-lg-2 col-md-3 footer-links">
           <h4 class="text-white fw-bold mb-3" style="font-size: 16px;">Nos Agences</h4>
           <ul class="list-unstyled">
-            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('home.old') }}" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
-            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Medicalservices/" target="_blank" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
-            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="#seminaires" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('elite.training') }}" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('medical.services') }}" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('digitalmoov') }}" class="text-decoration-none text-white-50">CAEI DIGITAL MOOV</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Callcenter/" target="_blank" class="text-decoration-none text-white-50">CAEI CALL CENTER</a></li>
