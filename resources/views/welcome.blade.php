@@ -19,10 +19,10 @@
 
   <!-- Vendor CSS Files (via CDNs) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" media="print" onload="this.media='all'">
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/swiper@11.1.10/swiper-bundle.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/swiper@11.1.10/swiper-bundle.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet" media="print" onload="this.media='all'">
 
   <!-- Main CSS File -->
   <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
@@ -142,6 +142,7 @@
       pointer-events: none;
       z-index: 1;
       animation: flarePulse 7s ease-in-out infinite alternate;
+      will-change: transform, opacity;
     }
 
     @keyframes flarePulse {
@@ -900,7 +901,7 @@
 
         <div class="row gy-4">
           <div class="col-lg-6 order-1 order-lg-2">
-            <img src="{{ asset('assets/img/professionel.jpg') }}" class="about-img img-fluid rounded shadow" alt="CAEI Professionnel">
+            <img src="{{ asset('assets/img/professionel.jpg') }}" class="about-img img-fluid rounded shadow" alt="CAEI Professionnel" loading="lazy">
           </div>
           <div class="col-lg-6 order-2 order-lg-1 content d-flex flex-column justify-content-center">
             <h1 class="fw-bold" style="color: #000f3c;"><strong>Qui sommes-nous ?</strong></h1>
@@ -934,7 +935,7 @@
 
         <div class="row gy-4">
           <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100">
-            <img src="{{ asset('assets/img/features-bg.jpg') }}" alt="Why Choose CAEI" class="img-fluid rounded shadow">
+            <img src="{{ asset('assets/img/features-bg.jpg') }}" alt="Why Choose CAEI" class="img-fluid rounded shadow" loading="lazy">
           </div>
           <div class="col-lg-6 d-flex flex-column justify-content-center">
 
@@ -1310,7 +1311,7 @@
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4 align-items-center justify-content-between">
           <div class="col-lg-5">
-            <img src="{{ asset('assets/img/company.jpg') }}" alt="CAEI Company" class="img-fluid rounded shadow">
+            <img src="{{ asset('assets/img/company.jpg') }}" alt="CAEI Company" class="img-fluid rounded shadow" loading="lazy">
           </div>
           <div class="col-lg-6">
             <h3 class="fw-bold mb-3" style="color: #000f3c; font-size: 28px;">Notre Excellence en Chiffres</h3>

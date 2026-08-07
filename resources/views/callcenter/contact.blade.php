@@ -62,9 +62,16 @@
 
         <!-- Form -->
         <div class="col-lg-8" data-aos="fade-left" data-aos-delay="200">
-          <div class="glass-card p-4 p-lg-5 h-100">
+          <div class="glass-card h-100">
             <h4 class="fw-bold mb-4 text-white">Formulaire de Demande</h4>
-            <form action="#" method="POST" class="needs-validation">
+            
+            @if(session('success'))
+                <div class="alert alert-success bg-success bg-opacity-25 text-white border-0 mb-4" role="alert">
+                    <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+                </div>
+            @endif
+
+            <form action="{{ route('callcenter.contact.store') }}" method="POST" class="needs-validation">
               @csrf
               <div class="row g-4">
                 <div class="col-md-6">
@@ -84,7 +91,7 @@
                   <div class="form-group">
                     <label for="phone" class="form-label fw-semibold small" style="color: #94a3b8;">Numéro de Téléphone <span class="text-danger">*</span></label>
                     <div class="w-100">
-                      <input type="text" class="form-control-glass w-100" id="phone" name="phone" required>
+                      <input type="tel" class="form-control-glass w-100" id="phone" name="phone" required placeholder="+216 XX XXX XXX">
                     </div>
                   </div>
                 </div>
@@ -120,12 +127,127 @@
   </section>
   
   <style>
-    /* Specific adjustments for intl-tel-input to match Glass mode */
+    /* ── intl-tel-input — Glassmorphism Dark Theme ── */
     .iti { width: 100%; display: block; }
     .iti__flag-container { z-index: 5; }
-    .iti input { padding-left: 52px !important; }
-    .iti__country-list { background-color: rgba(5, 5, 10, 0.95) !important; backdrop-filter: blur(10px); color: white !important; border-color: rgba(255,255,255,0.1) !important; }
-    .iti__country.iti__highlight { background-color: rgba(209, 17, 65, 0.3) !important; }
-    .iti__divider { border-bottom: 1px solid rgba(255,255,255,0.1) !important; }
+
+    /* Bouton du drapeau (flag button) */
+    .iti__flag-container .iti__selected-flag {
+      background: rgba(255, 255, 255, 0.06) !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px 0 0 12px;
+      padding: 0 12px;
+      transition: background 0.2s;
+    }
+    .iti__flag-container .iti__selected-flag:hover,
+    .iti__flag-container .iti__selected-flag:focus {
+      background: rgba(209, 17, 65, 0.15) !important;
+    }
+    .iti__selected-dial-code {
+      color: rgba(255,255,255,0.75);
+      font-size: 13px;
+      font-weight: 600;
+      margin-left: 6px;
+    }
+    .iti__arrow {
+      border-top-color: rgba(255,255,255,0.5) !important;
+    }
+
+    /* Padding gauche pour laisser de la place au drapeau */
+    .iti input[type=tel] {
+      padding-left: 90px !important;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      color: white;
+      width: 100%;
+    }
+    .iti input[type=tel]:focus {
+      border-color: var(--cc-red) !important;
+      box-shadow: 0 0 0 4px rgba(209, 17, 65, 0.15) !important;
+      outline: none;
+    }
+    .iti input[type=tel]::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+
+    /* Liste des pays (dropdown) */
+    .iti__country-list {
+      background-color: rgba(10, 14, 26, 0.97) !important;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      border-radius: 12px !important;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      color: rgba(255,255,255,0.85) !important;
+      padding: 6px;
+      max-height: 220px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(209,17,65,0.4) transparent;
+    }
+    .iti__country-list::-webkit-scrollbar { width: 4px; }
+    .iti__country-list::-webkit-scrollbar-track { background: transparent; }
+    .iti__country-list::-webkit-scrollbar-thumb { background: rgba(209,17,65,0.4); border-radius: 4px; }
+
+    .iti__country {
+      border-radius: 8px;
+      padding: 8px 10px !important;
+      transition: background 0.15s;
+    }
+    .iti__country.iti__highlight,
+    .iti__country:hover {
+      background: rgba(209, 17, 65, 0.18) !important;
+      color: white !important;
+    }
+    .iti__country-name, .iti__dial-code {
+      color: inherit !important;
+    }
+    .iti__divider {
+      border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+      margin: 4px 0;
+    }
+    .iti__search-input {
+      background: rgba(255,255,255,0.05) !important;
+      border: 1px solid rgba(255,255,255,0.1) !important;
+      border-radius: 8px !important;
+      color: white !important;
+      padding: 8px 12px !important;
+      margin-bottom: 4px;
+    }
+    .iti__search-input::placeholder { color: rgba(255,255,255,0.35) !important; }
+    .iti__search-input:focus { border-color: var(--cc-red) !important; outline: none !important; }
   </style>
+@endsection
+
+@section('scripts')
+  {{-- intl-tel-input chargé uniquement sur la page contact --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <style>
+    .iti__flag {background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/img/flags.png");}
+    @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+      .iti__flag {background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/img/flags@2x.png");}
+    }
+  </style>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const input = document.querySelector('#phone');
+    if (!input) return;
+
+    const iti = window.intlTelInput(input, {
+      initialCountry: "tn",   // fixé — évite le fetch ipapi.co externe
+      separateDialCode: true,
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+    });
+
+    const form = input.closest('form');
+    if (form) {
+      form.addEventListener('submit', function() {
+        if (input.value.trim()) {
+          input.value = iti.getNumber();
+        }
+      });
+    }
+  });
+  </script>
 @endsection

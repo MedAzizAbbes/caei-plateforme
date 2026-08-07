@@ -6,15 +6,16 @@
   <title>@yield('title', 'CAEI Call Center — 3D Glassmorphism')</title>
   <link rel="icon" type="image/png" href="https://caei-afri.com/Callcenter/img/log%20(1).png">
   
-  <!-- Fonts -->
+  <!-- Fonts (preload for speed) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
   
   <!-- Bootstrap & Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <!-- Font Awesome chargé en différé -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" media="print" onload="this.media='all'">
   
   <!-- AOS Animation -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
@@ -27,41 +28,35 @@
 
     body {
       font-family: var(--font-main);
-      background-color: #0a0a0f; /* Dark Premium Background */
+      background-color: #0d1b2a; /* Dark Premium Background */
       color: #fff;
       overflow-x: hidden;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Ambient Background Orbs */
+    /* Ambient Background Orbs — optimisé (pas d'animation continue) */
     .ambient-orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(100px);
+      filter: blur(50px);       /* réduit de 100px → 50px */
       z-index: -1;
-      animation: float-orb 15s infinite ease-in-out alternate;
+      pointer-events: none;
+      will-change: opacity;     /* layer GPU dédié, pas de repaint */
     }
     .orb-1 {
-      width: 400px;
-      height: 400px;
-      background: rgba(209, 17, 65, 0.15);
-      top: 10%;
-      left: -10%;
+      width: 350px;
+      height: 350px;
+      background: rgba(209, 17, 65, 0.10);
+      top: 5%;
+      left: -8%;
     }
     .orb-2 {
-      width: 500px;
-      height: 500px;
-      background: rgba(43, 88, 118, 0.15);
-      bottom: 20%;
-      right: -10%;
-      animation-delay: -5s;
-    }
-
-    @keyframes float-orb {
-      0% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(50px, 50px) scale(1.1); }
-      100% { transform: translate(-30px, 80px) scale(0.9); }
+      width: 400px;
+      height: 400px;
+      background: rgba(43, 88, 118, 0.10);
+      bottom: 15%;
+      right: -8%;
     }
 
     /* 3D Perspective Wrapper */
@@ -69,25 +64,26 @@
       perspective: 1500px;
     }
 
-    /* Glassmorphism Cards */
+    /* Glassmorphism Cards — optimisé */
     .glass-card {
       background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(10px);       /* réduit de 20px → 10px */
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 20px;
       padding: 40px;
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       height: 100%;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      will-change: transform;            /* layer GPU dédié */
     }
     .glass-card:hover {
       background: rgba(255, 255, 255, 0.06);
       border-color: rgba(255, 255, 255, 0.15);
-      transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(209, 17, 65, 0.2);
+      transform: translateY(-6px);       /* supprimé rotateX/rotateY (repaint GPU) */
+      box-shadow: 0 16px 36px rgba(0,0,0,0.32), 0 0 16px rgba(209, 17, 65, 0.15);
     }
     
     .glass-icon {
@@ -166,6 +162,19 @@
       color: white;
       backdrop-filter: blur(10px);
       transition: all 0.3s;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-select-glass {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff99' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+    .form-select-glass option {
+      background-color: #0d1b2a;
+      color: white;
     }
     .form-control-glass:focus, .form-select-glass:focus {
       background: rgba(255, 255, 255, 0.08);
@@ -176,6 +185,44 @@
     }
     .form-control-glass::placeholder {
       color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* Glass Badge */
+    .glass-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: rgba(209, 17, 65, 0.12);
+      border: 1px solid rgba(209, 17, 65, 0.35);
+      color: var(--cc-red);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    /* Glass Icon Wrapper */
+    .glass-icon-wrapper {
+      width: 60px;
+      height: 60px;
+      background: rgba(209, 17, 65, 0.1);
+      border: 1px solid rgba(209, 17, 65, 0.25);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      color: var(--cc-red);
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(209, 17, 65, 0.15);
+    }
+    .glass-card:hover .glass-icon-wrapper {
+      background: rgba(209, 17, 65, 0.2);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(209, 17, 65, 0.25);
     }
 
     /* Text Enhancements */
@@ -528,6 +575,6 @@
     });
   </script>
   @yield('scripts')
-  <x-intl-tel-input />
+  {{-- intl-tel-input chargé uniquement sur les pages qui en ont besoin via @yield('scripts') --}}
 </body>
 </html>

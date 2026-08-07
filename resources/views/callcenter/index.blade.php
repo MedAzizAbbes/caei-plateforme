@@ -45,7 +45,7 @@
         <div class="position-relative p-4">
           <div class="position-absolute top-50 start-50 translate-middle w-75 h-75 bg-danger rounded-circle filter-blur-100" style="opacity: 0.2; filter: blur(60px); z-index: -1;"></div>
           
-          <img src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=2071&auto=format&fit=crop" alt="Call Center Modern" class="img-fluid img-3d w-100">
+          <img src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=75&w=800&auto=format&fit=crop" alt="Call Center Modern" class="img-fluid img-3d w-100" loading="lazy">
           
           <!-- Floating UI Element -->
           <div class="position-absolute bottom-0 start-0 translate-middle-x mb-5 ms-5 glass-card p-3 d-none d-md-flex align-items-center gap-3" style="width: auto; animation: float 6s infinite ease-in-out;">

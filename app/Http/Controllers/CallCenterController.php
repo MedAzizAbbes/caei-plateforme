@@ -50,4 +50,19 @@ class CallCenterController extends Controller
     {
         return view('callcenter.contact');
     }
+
+    public function storeContact(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:50',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        \App\Models\CallCenterRequest::create($validated);
+
+        return redirect()->back()->with('success', 'Votre demande a été envoyée avec succès. Notre équipe vous contactera dans les plus brefs délais.');
+    }
 }
