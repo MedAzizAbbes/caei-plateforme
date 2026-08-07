@@ -538,8 +538,9 @@
     /* ===== ABOUT SECTION ===== */
     .et-about {
       padding: 100px 0;
-      background: var(--off-white);
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat fixed;
       overflow: hidden;
+      position: relative;
     }
 
     .about-visual {
@@ -647,7 +648,8 @@
     /* ===== FEATURES CARDS ===== */
     .et-features {
       padding: 100px 0;
-      background: var(--white);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/cta-bg.jpg") }}') center/cover no-repeat fixed;
+      position: relative;
     }
 
     .feature-card {
@@ -845,7 +847,8 @@
     /* ===== DIPLOMAS SECTION ===== */
     .et-diplomas {
       padding: 100px 0;
-      background: var(--off-white);
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.93) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset("assets/img/testimonials-bg.jpg") }}') center/cover no-repeat fixed;
+      position: relative;
     }
 
     .diploma-card {
@@ -951,7 +954,8 @@
     /* ===== CERTIFICATIONS SECTION ===== */
     .et-certifications {
       padding: 100px 0;
-      background: var(--white);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat fixed;
+      position: relative;
     }
 
     .cert-card {
@@ -1029,7 +1033,8 @@
     /* ===== CAROUSEL SECTION ===== */
     .et-schedule {
       padding: 100px 0;
-      background: var(--off-white);
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.93) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat fixed;
+      position: relative;
     }
 
     .month-filter {
