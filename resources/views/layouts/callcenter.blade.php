@@ -181,12 +181,183 @@
     /* Text Enhancements */
     h1, h2, h3, h4, h5, h6 {
       font-weight: 700;
-      letter-spacing: -0.02em;
+      letter-spacing: 0;
     }
     .text-gradient {
       background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+    }
+
+    /* Call Center Navbar */
+    .cc-navbar-wrap {
+      z-index: 1030;
+      padding-top: 14px;
+    }
+
+    .cc-navbar {
+      max-width: 1400px;
+      padding: 10px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 18px;
+      background:
+        linear-gradient(135deg, rgba(13, 17, 31, 0.92), rgba(22, 28, 48, 0.78)),
+        radial-gradient(circle at 12% 20%, rgba(209, 17, 65, 0.24), transparent 34%);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .cc-brand {
+      min-width: 96px;
+    }
+
+    .cc-brand::before {
+      content: "";
+      position: absolute;
+      inset: -8px -18px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.9);
+      filter: blur(18px);
+      opacity: 0.18;
+      z-index: -1;
+    }
+
+    .cc-brand img {
+      height: 46px;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
+    }
+
+    .cc-nav-shell {
+      gap: 4px;
+      padding: 5px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.045);
+      box-shadow: inset 0 1px 18px rgba(0, 0, 0, 0.24);
+    }
+
+    .cc-nav-shell .nav-link,
+    .cc-nav-link {
+      position: relative;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.72) !important;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 9px 14px !important;
+      white-space: nowrap;
+      transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cc-nav-shell .nav-link:hover,
+    .cc-nav-shell .nav-link.text-white,
+    .cc-nav-shell .nav-link.show,
+    .cc-nav-link:hover,
+    .cc-nav-link.active,
+    .cc-nav-link.show {
+      color: #fff !important;
+      background: rgba(209, 17, 65, 0.14);
+      box-shadow: inset 0 0 0 1px rgba(209, 17, 65, 0.28);
+    }
+
+    .cc-nav-shell .nav-link.text-white::after,
+    .cc-nav-link.active::after {
+      content: "";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 4px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--cc-red);
+      box-shadow: 0 0 12px rgba(209, 17, 65, 0.8);
+    }
+
+    .cc-nav-shell .dropdown-menu,
+    .cc-dropdown {
+      margin-top: 12px;
+      padding: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      border-radius: 14px;
+      background: rgba(12, 15, 27, 0.96);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.38);
+    }
+
+    .cc-nav-shell .dropdown-item,
+    .cc-dropdown .dropdown-item {
+      border-radius: 10px;
+      color: rgba(255, 255, 255, 0.74) !important;
+      font-size: 14px;
+      padding: 10px 12px;
+    }
+
+    .cc-nav-shell .dropdown-item:hover,
+    .cc-nav-shell .dropdown-item:focus,
+    .cc-dropdown .dropdown-item:hover,
+    .cc-dropdown .dropdown-item:focus,
+    .cc-dropdown .dropdown-item.active {
+      color: #fff !important;
+      background: linear-gradient(135deg, rgba(209, 17, 65, 0.95), rgba(172, 13, 52, 0.9)) !important;
+    }
+
+    .cc-navbar-toggler {
+      width: 44px;
+      height: 42px;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+    }
+
+    .cc-login-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      border-radius: 999px;
+      padding: 9px 18px;
+      background: linear-gradient(135deg, var(--cc-red), #a70d33);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 12px 24px rgba(209, 17, 65, 0.3);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .cc-login-btn:hover {
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 16px 30px rgba(209, 17, 65, 0.4);
+    }
+
+    @media (max-width: 991.98px) {
+      .cc-navbar {
+        border-radius: 16px;
+      }
+
+      .cc-nav-shell {
+        align-items: stretch !important;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .cc-nav-shell .nav-link,
+      .cc-nav-link {
+        border-radius: 12px;
+        padding: 11px 14px !important;
+      }
+
+      .cc-nav-shell .nav-link.text-white::after,
+      .cc-nav-link.active::after {
+        left: 12px;
+        right: auto;
+        bottom: 10px;
+        width: 3px;
+        height: 18px;
+      }
     }
 
     @yield('styles')
@@ -198,55 +369,54 @@
   <div class="ambient-orb orb-2"></div>
 
   <!-- Floating Glass Navbar -->
-  <div class="fixed-top pt-3 px-3 px-lg-5" style="z-index: 1030;">
-    <nav class="navbar navbar-expand-lg mx-auto" style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-width: 1400px; padding: 10px 20px;">
+  <div class="fixed-top cc-navbar-wrap px-3 px-lg-5">
+    <nav class="navbar navbar-expand-lg mx-auto cc-navbar">
       <div class="container-fluid px-0">
         <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center position-relative" href="{{ route('callcenter.index') }}">
-          <div class="position-absolute top-50 start-50 translate-middle w-100 h-100" style="background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0) 70%); z-index: -1; filter: blur(10px);"></div>
-          <img src="https://caei-afri.com/Callcenter/img/log%20(1).png" alt="Logo" height="45" class="position-relative z-1">
+        <a class="navbar-brand d-flex align-items-center position-relative cc-brand" href="{{ route('callcenter.index') }}">
+          <img src="https://caei-afri.com/Callcenter/img/log%20(1).png" alt="Logo" class="position-relative z-1">
         </a>
         
-        <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" style="background: rgba(255,255,255,0.1); border-radius: 12px; padding: 8px 12px;">
-          <i class="bi bi-list fs-2 text-white"></i>
+        <button class="navbar-toggler shadow-none cc-navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <i class="bi bi-list fs-3"></i>
         </button>
         
         <div class="collapse navbar-collapse" id="navbarNav">
           <!-- Center Nav Pill (Glass Style) -->
           <div class="mx-auto my-3 my-lg-0">
-            <ul class="navbar-nav align-items-center px-2 py-1" style="background: rgba(0, 0, 0, 0.2); border-radius: 100px; border: 1px solid rgba(255,255,255,0.05); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);">
+            <ul class="navbar-nav align-items-center cc-nav-shell">
               <li class="nav-item">
-                <a class="nav-link px-3 fw-medium {{ request()->routeIs('callcenter.index') ? 'text-white' : 'text-white-50' }}" href="{{ route('callcenter.index') }}" style="font-size: 14px; {{ request()->routeIs('callcenter.index') ? 'text-shadow: 0 0 10px rgba(255,255,255,0.5);' : '' }} transition: all 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='{{ request()->routeIs('callcenter.index') ? 'white' : 'rgba(255,255,255,0.5)' }}'">Accueil</a>
+                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.index') ? 'active' : '' }}" href="{{ route('callcenter.index') }}">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link px-3 fw-medium {{ request()->routeIs('callcenter.about') ? 'text-white' : 'text-white-50' }}" href="{{ route('callcenter.about') }}" style="font-size: 14px; transition: all 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='{{ request()->routeIs('callcenter.about') ? 'white' : 'rgba(255,255,255,0.5)' }}'">Qui sommes-nous !</a>
+                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.about') ? 'active' : '' }}" href="{{ route('callcenter.about') }}">Qui sommes-nous !</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link px-3 fw-medium {{ request()->routeIs('callcenter.services') ? 'text-white' : 'text-white-50' }}" href="{{ route('callcenter.services') }}" style="font-size: 14px; transition: all 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='{{ request()->routeIs('callcenter.services') ? 'white' : 'rgba(255,255,255,0.5)' }}'">Nos services</a>
+                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.services') ? 'active' : '' }}" href="{{ route('callcenter.services') }}">Nos services</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle px-3 fw-medium text-white-50" href="#" role="button" data-bs-toggle="dropdown" style="font-size: 14px; transition: all 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Secteurs d'activité</a>
-                <ul class="dropdown-menu border-0 shadow-lg rounded-4 mt-3 p-2" style="background: rgba(15, 12, 41, 0.9); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1) !important;">
-                  <li><a class="dropdown-item py-2 px-3 text-white-50 rounded-3" href="{{ route('callcenter.secteurs.energie') }}" onmouseover="this.style.background='var(--cc-red)'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.5)'">Énergie & Environnement</a></li>
-                  <li><a class="dropdown-item py-2 px-3 text-white-50 rounded-3" href="{{ route('callcenter.secteurs.assurance') }}" onmouseover="this.style.background='var(--cc-red)'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.5)'">Assurance & Finance</a></li>
-                  <li><a class="dropdown-item py-2 px-3 text-white-50 rounded-3" href="{{ route('callcenter.secteurs.technologie') }}" onmouseover="this.style.background='var(--cc-red)'; this.style.color='white'" onmouseout="this.style.background='transparent'; this.style.color='rgba(255,255,255,0.5)'">Technologie & Télécom</a></li>
+                <a class="nav-link dropdown-toggle cc-nav-link {{ request()->routeIs('callcenter.secteurs.*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown">Secteurs d'activité</a>
+                <ul class="dropdown-menu cc-dropdown">
+                  <li><a class="dropdown-item {{ request()->routeIs('callcenter.secteurs.energie') ? 'active' : '' }}" href="{{ route('callcenter.secteurs.energie') }}">Énergie & Environnement</a></li>
+                  <li><a class="dropdown-item {{ request()->routeIs('callcenter.secteurs.assurance') ? 'active' : '' }}" href="{{ route('callcenter.secteurs.assurance') }}">Assurance & Finance</a></li>
+                  <li><a class="dropdown-item {{ request()->routeIs('callcenter.secteurs.technologie') ? 'active' : '' }}" href="{{ route('callcenter.secteurs.technologie') }}">Technologie & Télécom</a></li>
                 </ul>
               </li>
               <li class="nav-item">
-                <a class="nav-link px-3 fw-medium {{ request()->routeIs('callcenter.support') ? 'text-white' : 'text-white-50' }}" href="{{ route('callcenter.support') }}" style="font-size: 14px; transition: all 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='{{ request()->routeIs('callcenter.support') ? 'white' : 'rgba(255,255,255,0.5)' }}'">Support client</a>
+                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.support') ? 'active' : '' }}" href="{{ route('callcenter.support') }}">Support client</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link px-3 fw-medium {{ request()->routeIs('callcenter.blog') ? 'text-white' : 'text-white-50' }}" href="{{ route('callcenter.blog') }}" style="font-size: 14px; transition: all 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='{{ request()->routeIs('callcenter.blog') ? 'white' : 'rgba(255,255,255,0.5)' }}'">Actualité</a>
+                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.blog') ? 'active' : '' }}" href="{{ route('callcenter.blog') }}">Actualité</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link px-3 fw-medium {{ request()->routeIs('callcenter.contact') ? 'text-white' : 'text-white-50' }}" href="{{ route('callcenter.contact') }}" style="font-size: 14px; transition: all 0.3s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='{{ request()->routeIs('callcenter.contact') ? 'white' : 'rgba(255,255,255,0.5)' }}'">Contactez-nous !</a>
+                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.contact') ? 'active' : '' }}" href="{{ route('callcenter.contact') }}">Contactez-nous !</a>
               </li>
             </ul>
           </div>
           
           <!-- Right Button -->
           <div class="d-flex mt-3 mt-lg-0">
-            <a href="#" class="btn-glass-red text-decoration-none px-4 py-2" style="font-size: 14px;">Connexion</a>
+            <a href="#" class="cc-login-btn">Connexion</a>
           </div>
         </div>
       </div>
