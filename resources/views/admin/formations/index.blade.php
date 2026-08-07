@@ -74,6 +74,7 @@
                         <option value="">Tous les types</option>
                         <option value="certifiante" {{ request('type') == 'certifiante' ? 'selected' : '' }}>Certifiante</option>
                         <option value="diplomante" {{ request('type') == 'diplomante' ? 'selected' : '' }}>Diplômante</option>
+                        <option value="cycle" {{ request('type') == 'cycle' ? 'selected' : '' }}>Cycle & Séminaire</option>
                         <option value="sur_mesure" {{ request('type') == 'sur_mesure' ? 'selected' : '' }}>Sur Mesure</option>
                         <option value="elearning" {{ request('type') == 'elearning' ? 'selected' : '' }}>E-Learning</option>
                     </select>
