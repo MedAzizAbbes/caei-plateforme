@@ -467,7 +467,7 @@
               <li><a href="#seminaires">CAEI ELITE TRAINING</a></li>             
               <li><a href="{{ route('medical.services') }}">CAEI MEDICAL SERVICES</a></li>
               <li><a href="{{ route('digitalmoov') }}">CAEI DIGITAL MOOV</a></li>
-              <li><a href="https://caei-afri.com/Callcenter/" target="_blank">CAEI CALL CENTER</a></li>
+              <li><a href="{{ route('callcenter.index') }}" target="_blank">CAEI CALL CENTER</a></li>
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
@@ -542,7 +542,7 @@
             </a>
           </div>
           <div class="col-6 col-xl-2 col-md-3">
-            <a href="https://caei-afri.com/Callcenter/" target="_blank" class="hero-service-card-wrapper">
+            <a href="{{ route('callcenter.index') }}" target="_blank" class="hero-service-card-wrapper">
               <div class="hero-service-card">
                 <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center">
               </div>
@@ -707,7 +707,7 @@
                 <p class="text-muted small mb-4">Services de centre d'appels et support</p>
               </div>
               <div>
-                <a href="https://caei-afri.com/Callcenter/" target="_blank" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #8b1538; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#6b0f2a'" onmouseout="this.style.backgroundColor='#8b1538'">Découvrir</a>
+                <a href="{{ route('callcenter.index') }}" target="_blank" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #8b1538; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#6b0f2a'" onmouseout="this.style.backgroundColor='#8b1538'">Découvrir</a>
               </div>
             </div>
           </div>
@@ -788,7 +788,7 @@
               <p style="font-size: 15px; line-height: 1.8;">
                 Le CAEI est une agence de télécommunication centralisée qui permet de traiter les besoins des entreprises et de répondre aux attentes de leurs prospects et clients. Le centre d'appels international du CAEI est équipé de solutions professionnelles. Les différents services offerts par notre centre d'appels sont : Service d'assistance, Service clients, Gestion de l'attention du gouvernement envers la population, Support technique, Télévente e-commerce, Services après-vente, Prise de rendez-vous par appel. Fondé il y a plus de 14 ans, le groupe a développé une vaste expertise et a gagné la confiance de clients nationaux et internationaux.
               </p>
-              <a href="https://caei-afri.com/Callcenter/" target="_blank" class="btn rounded-pill mt-3 px-4 fw-bold text-white" style="background-color: #8b1538;">Visiter le site</a>
+              <a href="{{ route('callcenter.index') }}" target="_blank" class="btn rounded-pill mt-3 px-4 fw-bold text-white" style="background-color: #8b1538;">Visiter le site</a>
             </div>
           </div>
         </div>
@@ -1166,7 +1166,7 @@
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="#seminaires" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('medical.services') }}" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
             <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('digitalmoov') }}" class="text-decoration-none text-white-50">CAEI DIGITAL MOOV</a></li>
-            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="https://caei-afri.com/Callcenter/" target="_blank" class="text-decoration-none text-white-50">CAEI CALL CENTER</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('callcenter.index') }}" target="_blank" class="text-decoration-none text-white-50">CAEI CALL CENTER</a></li>
           </ul>
         </div>
 
