@@ -78,7 +78,15 @@
                             <span class="text-base">📱</span>
                             <span class="font-bold text-xs">Digital Moov</span>
                         </div>
-                        @php $dmNew = \App\Models\DigitalMoovContact::where('status','new')->count(); @endphp
+                        @php 
+                            try {
+                                $dmNew = \Illuminate\Support\Facades\Schema::hasTable('digital_moov_contacts') 
+                                    ? \App\Models\DigitalMoovContact::where('status','new')->count() 
+                                    : 0;
+                            } catch (\Throwable $e) {
+                                $dmNew = 0;
+                            }
+                        @endphp
                         @if($dmNew > 0)
                             <span class="bg-orange-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $dmNew }}</span>
                         @endif
@@ -90,7 +98,15 @@
                             <span class="text-base">📞</span>
                             <span class="font-bold text-xs">Call Center</span>
                         </div>
-                        @php $ccNew = \App\Models\CallCenterRequest::where('status','Nouveau')->count(); @endphp
+                        @php 
+                            try {
+                                $ccNew = \Illuminate\Support\Facades\Schema::hasTable('call_center_requests') 
+                                    ? \App\Models\CallCenterRequest::where('status','Nouveau')->count() 
+                                    : 0;
+                            } catch (\Throwable $e) {
+                                $ccNew = 0;
+                            }
+                        @endphp
                         @if($ccNew > 0)
                             <span class="bg-red-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $ccNew }}</span>
                         @endif

@@ -721,7 +721,7 @@ html {
    CALL TO ACTION
    ═══════════════════════════════════════════════════════════════ */
 .call-to-action.section {
-  background-attachment: fixed !important;
+  background-attachment: scroll !important;
   padding: 100px 0 !important;
   position: relative;
 }
