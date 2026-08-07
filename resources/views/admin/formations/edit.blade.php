@@ -36,9 +36,9 @@
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Type de Formation *</label>
                             <select name="type" required class="w-full rounded-xl border-slate-200 text-sm focus:border-amber-500 focus:ring-amber-500">
-                                <option value="certifiante" {{ old('type', $formation->type) == 'certifiante' ? 'selected' : '' }}>📜 Certifiante (1 à 2 sem.)</option>
-                                <option value="diplomante" {{ old('type', $formation->type) == 'diplomante' ? 'selected' : '' }}>🎓 Diplômante (MBA / Doctorat)</option>
-                                <option value="cycle" {{ old('type', $formation->type) == 'cycle' ? 'selected' : '' }}>🔄 Cycle & Séminaire</option>
+                                <option value="certifiante" {{ old('type', $formation->type) == 'certifiante' ? 'selected' : '' }}>📜 Certifiante </option>
+                                <option value="diplomante" {{ old('type', $formation->type) == 'diplomante' ? 'selected' : '' }}>🎓 Diplômante </option>
+                                <option value="cycle" {{ old('type', $formation->type) == 'cycle' ? 'selected' : '' }}>🔄 Cycle </option>
                                 <option value="sur_mesure" {{ old('type', $formation->type) == 'sur_mesure' ? 'selected' : '' }}>🎯 Sur Mesure</option>
                                 <option value="elearning" {{ old('type', $formation->type) == 'elearning' ? 'selected' : '' }}>💻 E-Learning</option>
                             </select>
@@ -49,8 +49,8 @@
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Statut *</label>
                             <select name="status" required class="w-full rounded-xl border-slate-200 text-sm focus:border-amber-500 focus:ring-amber-500">
-                                <option value="active" {{ old('status', $formation->status) == 'active' ? 'selected' : '' }}>✅ Active (Visible)</option>
-                                <option value="inactive" {{ old('status', $formation->status) == 'inactive' ? 'selected' : '' }}>🚫 Inactive (Masquée)</option>
+                                <option value="active" {{ old('status', $formation->status) == 'active' ? 'selected' : '' }}>✅ Active </option>
+                                <option value="inactive" {{ old('status', $formation->status) == 'inactive' ? 'selected' : '' }}>🚫 Inactive </option>
                             </select>
                             @error('status') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
                         </div>
