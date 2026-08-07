@@ -18,7 +18,10 @@
                     <h1 class="mt-3 text-3xl font-black tracking-tight">Gestion des Formations</h1>
                     <p class="mt-2 text-sm text-slate-300">Gérez le catalogue des formations certifiantes, diplômantes (MBA/Doctorat), sur-mesure et e-learning.</p>
                 </div>
-                <div>
+                <div class="flex items-center gap-3">
+                    <a href="{{ route('admin.elite-training.index') }}" class="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-3 text-sm font-bold text-white border border-white/20 transition-all">
+                        <span>🏆 RDV & Inscriptions</span>
+                    </a>
                     <a href="{{ route('admin.formations.create') }}" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#ce9233] to-[#f0b75a] px-5 py-3 text-sm font-bold text-[#061743] shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                         <span>Nouvelle Formation</span>
