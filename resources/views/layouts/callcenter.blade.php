@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>@yield('title', 'CAEI Call Center — 3D Glassmorphism')</title>
-  <link rel="icon" type="image/png" href="https://caei-afri.com/Callcenter/img/log%20(1).png">
+  <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
   
   <!-- Fonts (preload for speed) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,6 +29,10 @@
     body {
       font-family: var(--font-main);
       background-color: #0d1b2a; /* Dark Premium Background */
+      background-image: linear-gradient(rgba(13, 27, 42, 0.88), rgba(13, 27, 42, 0.88)), url('{{ asset("assets/img/testimonials-bg.jpg") }}');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
       color: #fff;
       overflow-x: hidden;
       line-height: 1.6;
@@ -420,8 +424,8 @@
     <nav class="navbar navbar-expand-lg mx-auto cc-navbar">
       <div class="container-fluid px-0">
         <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center position-relative cc-brand" href="{{ route('callcenter.index') }}">
-          <img src="https://caei-afri.com/Callcenter/img/log%20(1).png" alt="Logo" class="position-relative z-1">
+        <a class="navbar-brand d-flex align-items-center gap-3 py-0" href="{{ route('callcenter.index') }}">
+          <img src="{{ asset('images/logo.png') }}" alt="CAEI Logo" width="55" height="55" class="rounded-circle" style="object-fit: cover; border: 2px solid rgba(255, 255, 255, 0.15); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);"> 
         </a>
         
         <button class="navbar-toggler shadow-none cc-navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -485,8 +489,8 @@
           <div class="col-lg-3 text-center text-lg-start">
             <div class="mb-4 position-relative d-inline-block">
               <!-- Glow behind logo to make black text readable without ugly white box -->
-              <div class="position-absolute top-50 start-50 translate-middle w-100 h-100" style="background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%); z-index: -1; filter: blur(15px);"></div>
-              <img src="https://caei-afri.com/Callcenter/img/log%20(1).png" alt="Logo" class="img-fluid position-relative z-1" style="max-width: 160px;">
+              <div class="position-absolute top-50 start-50 translate-middle w-100 h-100 bg-white rounded-circle" style="filter: blur(25px); opacity: 0.8; z-index: 0;"></div>
+              <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid position-relative z-1" style="max-width: 160px; border-radius: 50%;">
             </div>
             
             <p class="small mb-4" style="color: #cbd5e1; line-height: 1.6;">L'excellence opérationnelle au service de votre relation client grâce aux dernières innovations technologiques.</p>
