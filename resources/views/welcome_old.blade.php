@@ -256,7 +256,7 @@
                     
                     {{-- Desktop Links --}}
                     <div class="caei-public-links">
-                        <a href="{{ route('home') }}">Accueil (Vitrine)</a>
+                        <a href="{{ route('home') }}">Accueil</a>
                         <a class="active" href="#seminaires">Séminaires</a>
                     </div>
 
