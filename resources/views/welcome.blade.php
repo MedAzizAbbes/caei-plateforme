@@ -265,43 +265,43 @@
        ═══════════════════════════════════════════════════════════════ */
     section#presentation.about.section,
     section#presentation {
-      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat fixed !important;
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat scroll !important;
       position: relative !important;
     }
 
     section#features.features.section,
     section#features {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/services.jpg") }}') center/cover no-repeat fixed !important;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/services.jpg") }}') center/cover no-repeat scroll !important;
       position: relative !important;
     }
 
     section#agencies.agencies.section,
     section#agencies {
-      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat fixed !important;
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat scroll !important;
       position: relative !important;
     }
 
     section#services.services.section,
     section#services {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/img3.jpg") }}') center/cover no-repeat fixed !important;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/img3.jpg") }}') center/cover no-repeat scroll !important;
       position: relative !important;
     }
 
     section#stats.stats.section,
     section#stats {
-      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/im1.jpg") }}') center/cover no-repeat fixed !important;
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/im1.jpg") }}') center/cover no-repeat scroll !important;
       position: relative !important;
     }
 
     section#faq.faq.section,
     section#faq {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat fixed !important;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat scroll !important;
       position: relative !important;
     }
 
     section#contact.contact.section,
     section#contact {
-      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/testimonials-bg.jpg") }}') center/cover no-repeat fixed !important;
+      background: linear-gradient(135deg, rgba(248, 249, 252, 0.91) 0%, rgba(255, 255, 255, 0.94) 100%), url('{{ asset("assets/img/testimonials-bg.jpg") }}') center/cover no-repeat scroll !important;
       position: relative !important;
     }
 
@@ -315,10 +315,21 @@
 
     section#about-agencies,
     #about-agencies {
-      background: linear-gradient(135deg, rgba(0, 15, 60, 0.92) 0%, rgba(0, 31, 63, 0.88) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat fixed !important;
+      background: linear-gradient(135deg, rgba(0, 15, 60, 0.92) 0%, rgba(0, 31, 63, 0.88) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat scroll !important;
       position: relative !important;
       padding: 90px 0 !important;
       overflow: hidden !important;
+    }
+
+    section#about-agencies .section-title h2,
+    #about-agencies .section-title h2 {
+      color: #ffffff !important;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8) !important;
+    }
+
+    section#about-agencies .section-title p,
+    #about-agencies .section-title p {
+      color: rgba(255, 255, 255, 0.75) !important;
     }
 
     .about-agency-photo-card {
@@ -804,24 +815,24 @@
 
   <!-- Top Contact Bar -->
   <div id="topbar" class="topbar d-flex align-items-center fixed-top" style="background-color: #000f3c; padding: 5px 0; z-index: 1000; top: 0; width: 100%; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); backdrop-filter: blur(10px);">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between" style="gap: 1rem;">
-      <div class="d-flex align-items-center gap-3" style="flex-wrap: wrap;">
-        <a href="tel:+21655335286" class="d-flex align-items-center gap-2 text-white text-decoration-none" style="font-size: 16px; white-space: nowrap;">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between" style="gap: 0.5rem; flex-wrap: wrap;">
+      <div class="d-flex align-items-center gap-2 gap-md-3" style="flex-wrap: wrap;">
+        <a href="tel:+21655335286" class="d-flex align-items-center gap-2 text-white text-decoration-none" style="font-size: 14px; white-space: nowrap;">
           <i class="bi bi-telephone-fill" style="color: #ffc451;"></i>
-          <span>+216 55 335 286</span>
+          <span class="d-none d-sm-inline">+216 55 335 286</span>
         </a>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@caei-afri.com" target="_blank" class="d-flex align-items-center gap-2 text-white text-decoration-none" style="font-size: 16px; white-space: nowrap;">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@caei-afri.com" target="_blank" class="d-flex align-items-center gap-2 text-white text-decoration-none" style="font-size: 14px; white-space: nowrap;">
           <i class="bi bi-envelope-fill" style="color: #ffc451;"></i>
-          <span>contact@caei-afri.com</span>
+          <span class="d-none d-md-inline">contact@caei-afri.com</span>
         </a>
-        <a href="https://www.google.com/maps/search/?api=1&query=SIS+8+Rue+Claude+Bernard+1002+Belvedere-Tunis+Tunisie" target="_blank" class="d-flex align-items-center gap-2 text-white text-decoration-none" style="font-size: 16px; white-space: nowrap;">
+        <a href="https://www.google.com/maps/search/?api=1&query=SIS+8+Rue+Claude+Bernard+1002+Belvedere-Tunis+Tunisie" target="_blank" class="d-flex align-items-center gap-2 text-white text-decoration-none d-none d-lg-flex" style="font-size: 14px; white-space: nowrap;">
           <i class="bi bi-geo-alt-fill" style="color: #ffc451;"></i>
           <span>SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis , Tunisie</span>
         </a>
       </div>
-      <a href="{{ asset('assets/img/catalogue CAEI GROUP.pdf') }}" target="_blank" style="font-size: 15px; color: #ffc451; text-decoration: none; white-space: nowrap; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; padding: 0 8px;" onmouseover="this.style.color='#ffdb8d'; this.style.transform='translateX(2px)';" onmouseout="this.style.color='#ffc451'; this.style.transform='translateX(0)';">
+      <a href="{{ asset('assets/img/catalogue CAEI GROUP.pdf') }}" target="_blank" style="font-size: 14px; color: #ffc451; text-decoration: none; white-space: nowrap; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; padding: 0 8px;" onmouseover="this.style.color='#ffdb8d'; this.style.transform='translateX(2px)';" onmouseout="this.style.color='#ffc451'; this.style.transform='translateX(0)';">
         <i class="bi bi-file-pdf" style="font-size: 17px;"></i>
-        <span style="font-weight: 400; letter-spacing: 0.5px;">Catalogue CAEI COMPANY GROUP</span>
+        <span style="font-weight: 400; letter-spacing: 0.5px;" class="d-none d-sm-inline">Catalogue CAEI</span>
       </a>
     </div>
   </div>
@@ -934,7 +945,7 @@
     </section><!-- /Hero Section -->
 
     <!-- About Section -->
-    <section id="presentation" class="about section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/features-bg.jpg') }}') center/cover no-repeat fixed;">
+    <section id="presentation" class="about section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/features-bg.jpg') }}') center/cover no-repeat scroll;">
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
@@ -963,7 +974,7 @@
     </section><!-- /About Section -->
 
     <!-- Why Choose Us Section -->
-    <section id="features" class="features section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/services.jpg') }}') center/cover no-repeat fixed;">
+    <section id="features" class="features section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/services.jpg') }}') center/cover no-repeat scroll;">
 
       <div class="container">
 
@@ -1018,7 +1029,7 @@
     </section><!-- /Why Choose Us Section -->
 
     <!-- Agences Section -->
-    <section id="agencies" class="agencies section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/company.jpg') }}') center/cover no-repeat fixed;">
+    <section id="agencies" class="agencies section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/company.jpg') }}') center/cover no-repeat scroll;">
       <div class="container" data-aos="fade-up">
         <div class="section-title text-center mb-5" data-aos="fade-up">
           <h2 class="fw-bold" style="color: #000f3c;">Nos Agences</h2>
@@ -1098,9 +1109,9 @@
       <div class="container" data-aos="fade-up">
         
         <div class="section-title text-center mb-5" data-aos="fade-up">
-          <span class="badge rounded-pill px-3 py-2 mb-2" style="background: rgba(255, 196, 81, 0.2); color: #ffc451; border: 1px solid rgba(255, 196, 81, 0.4); font-size: 13px; letter-spacing: 1px;">FILIALES DU GROUPE</span>
-          <h2 class="fw-bold text-white mt-2" style="font-size: 36px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">À PROPOS DE NOS AGENCES</h2>
-          <p class="text-white-50" style="font-size: 16px;">Une synergie d'expertises au service de l'excellence et du développement panafricain.</p>
+          <span class="badge rounded-pill px-3 py-2 mb-2" style="background: rgba(255, 196, 81, 0.2) !important; color: #ffc451 !important; border: 1px solid rgba(255, 196, 81, 0.4) !important; font-size: 13px; letter-spacing: 1px;">FILIALES DU GROUPE</span>
+          <h2 class="fw-bold text-white mt-2" style="color: #ffffff !important; font-size: 36px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">À PROPOS DE NOS AGENCES</h2>
+          <p style="color: rgba(255, 255, 255, 0.75) !important; font-size: 16px;">Une synergie d'expertises au service de l'excellence et du développement panafricain.</p>
         </div>
 
         <div class="row gy-4">
@@ -1269,7 +1280,7 @@
     <!-- Section Séminaires déplacée vers /ancien-accueil -->
 
     <!-- Services Section -->
-    <section id="services" class="services section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/img3.jpg') }}') center/cover no-repeat fixed;">
+    <section id="services" class="services section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/img3.jpg') }}') center/cover no-repeat scroll;">
       <div class="container section-title text-center mb-5" data-aos="fade-up">
         <h2 class="fw-bold" style="color: #000f3c;">Services</h2>
         <p class="text-muted">Découvrez notre gamme complète de services conçus pour répondre à vos besoins</p>
@@ -1348,7 +1359,7 @@
     </section><!-- /Services Section -->
 
     <!-- Call To Action Section -->
-    <section id="call-to-action" class="call-to-action section dark-background py-5 position-relative" style="background: url('{{ asset('assets/img/cta-bg.jpg') }}') center/cover; background-attachment: fixed;">
+    <section id="call-to-action" class="call-to-action section dark-background py-5 position-relative" style="background: url('{{ asset('assets/img/cta-bg.jpg') }}') center/cover; background-attachment: scroll;">
       <div class="position-absolute w-100 h-100" style="top: 0; left: 0; background: rgba(0, 15, 60, 0.7);"></div>
       <div class="container position-relative text-center text-white py-4" style="z-index: 2;" data-aos="zoom-in">
         <h3>Prêt à Transformer Votre Entreprise ?</h3>
@@ -1358,7 +1369,7 @@
     </section><!-- /Call To Action Section -->
 
     <!-- Stats Section -->
-    <section id="stats" class="stats section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/im1.jpg') }}') center/cover no-repeat fixed;">
+    <section id="stats" class="stats section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/im1.jpg') }}') center/cover no-repeat scroll;">
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4 align-items-center justify-content-between">
           <div class="col-lg-5">
@@ -1413,7 +1424,7 @@
     </section><!-- /Stats Section -->
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section dark-background py-5 position-relative" style="background: url('{{ asset('assets/img/testimonials-bg.jpg') }}') center/cover; background-attachment: fixed;">
+    <section id="testimonials" class="testimonials section dark-background py-5 position-relative" style="background: url('{{ asset('assets/img/testimonials-bg.jpg') }}') center/cover; background-attachment: scroll;">
       <div class="position-absolute w-100 h-100" style="top: 0; left: 0; background: rgba(0, 15, 60, 0.8);"></div>
       <div class="container position-relative text-white py-4" style="z-index: 2;" data-aos="fade-up" data-aos-delay="100">
         <div class="swiper init-swiper">
@@ -1473,7 +1484,7 @@
     </section><!-- /Testimonials Section -->
 
     <!-- FAQ Section -->
-    <section id="faq" class="faq section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/features-bg.jpg') }}') center/cover no-repeat fixed;">
+    <section id="faq" class="faq section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/features-bg.jpg') }}') center/cover no-repeat scroll;">
       <div class="container section-title text-center mb-5" data-aos="fade-up">
         <h2>Foire Aux Questions</h2>
         <p>Retrouvez toutes les réponses aux questions les plus fréquentes sur CAEI Company Group.</p>
@@ -1543,7 +1554,7 @@
     </section><!-- /FAQ Section -->
 
     <!-- Contact Section -->
-    <section id="contact" class="contact section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/testimonials-bg.jpg') }}') center/cover no-repeat fixed;">
+    <section id="contact" class="contact section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/testimonials-bg.jpg') }}') center/cover no-repeat scroll;">
       <div class="container section-title text-center mb-5" data-aos="fade-up">
         <h2 class="fw-bold" style="color: #000f3c;">Contact</h2>
         <p class="text-muted">Nous Contacter</p>

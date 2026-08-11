@@ -78,6 +78,7 @@
                     <p class="mt-1 text-sm text-slate-500">Essayez de modifier vos critères de recherche.</p>
                 </div>
             @else
+                <div class="overflow-x-auto">
                 <table class="w-full divide-y divide-slate-200 text-left text-xs sm:text-sm">
                     <thead class="bg-[#061743]">
                         <tr>
@@ -159,6 +160,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                </div>
 
                 {{-- Pagination --}}
                 @if($registrations->hasPages())

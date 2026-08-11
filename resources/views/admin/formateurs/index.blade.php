@@ -73,6 +73,7 @@
                     </a>
                 </div>
             @else
+                <div class="overflow-x-auto">
                 <table class="min-w-full divide-y divide-slate-200 text-left text-sm">
                     <thead class="bg-[#061743]">
                         <tr>
@@ -136,6 +137,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                </div>
 
                 {{-- Pagination --}}
                 @if($formateurs->hasPages())

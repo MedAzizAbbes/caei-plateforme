@@ -721,7 +721,7 @@ html {
    CALL TO ACTION
    ═══════════════════════════════════════════════════════════════ */
 .call-to-action.section {
-  background-attachment: fixed !important;
+  background-attachment: scroll !important;
   padding: 100px 0 !important;
   position: relative;
 }
@@ -994,12 +994,27 @@ html {
   }
   
   .hero-service-card {
-    width: 125px !important;
-    height: 125px !important;
+    width: 100% !important;
+    max-width: 125px !important;
+    height: auto !important;
+    aspect-ratio: 1/1;
   }
   
   .hero-service-card img {
     max-width: 90px !important;
-    max-height: 90px !important;
+    height: auto !important;
+  }
+
+  /* Fix fixed widths on mobile */
+  [style*="width: 160px"],
+  [style*="width: 120px"],
+  [style*="width: 75px"],
+  [style*="width: 58px"],
+  [style*="width: 90px"],
+  [style*="width: 60px"],
+  [style*="width: 62px"],
+  [style*="width: 48px"] {
+    max-width: 100% !important;
+    height: auto !important;
   }
 }
