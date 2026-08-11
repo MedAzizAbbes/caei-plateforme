@@ -22,6 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             '/stripe/webhook',
         ]);
 
+        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
+
     })
 
     ->withExceptions(function (Exceptions $exceptions): void {
