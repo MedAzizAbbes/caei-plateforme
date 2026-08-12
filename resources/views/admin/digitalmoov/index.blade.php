@@ -112,7 +112,7 @@
                         </thead>
                         <tbody class="divide-y divide-slate-100">
                             @foreach($contacts as $contact)
-                                <tr class="hover:bg-slate-50/80 transition-colors {{ $contact->status === 'new' ? 'bg-orange-50/30' : '' }}">
+                                <tr class="transition-colors {{ $contact->status === 'replied' ? 'bg-emerald-100/60 hover:bg-emerald-200/60' : ($contact->status === 'read' ? 'bg-blue-100/60 hover:bg-blue-200/60' : ($contact->status === 'new' ? 'bg-orange-100/60 hover:bg-orange-200/60' : 'hover:bg-slate-50/80')) }}">
                                     <td class="p-4 font-mono font-bold text-[#061743]">
                                         #{{ ($contacts->currentPage() - 1) * $contacts->perPage() + $loop->iteration }}
                                         <span class="block text-[11px] font-normal text-slate-400 mt-0.5">

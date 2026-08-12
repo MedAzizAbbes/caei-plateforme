@@ -442,6 +442,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     // --- Formations Elite Training (Catalogue CRUD) ---
     Route::resource('formations', AdminFormationController::class);
+
+    // --- Recrutements ---
+    Route::get('/recrutements', [\App\Http\Controllers\Admin\RecrutementController::class, 'index'])->name('recrutements.index');
+    Route::get('/recrutements/{id}/cv', [\App\Http\Controllers\Admin\RecrutementController::class, 'downloadCv'])->name('recrutements.cv');
+    Route::delete('/recrutements/{id}', [\App\Http\Controllers\Admin\RecrutementController::class, 'destroy'])->name('recrutements.destroy');
 });
 
 // --- Recrutement ---

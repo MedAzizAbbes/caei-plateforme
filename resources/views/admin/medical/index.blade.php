@@ -118,7 +118,7 @@
                         </thead>
                         <tbody class="divide-y divide-slate-100">
                             @foreach($requests as $req)
-                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                <tr class="transition-colors {{ $req->status === 'completed' ? 'bg-emerald-100/60 hover:bg-emerald-200/60' : ($req->status === 'in_progress' ? 'bg-blue-100/60 hover:bg-blue-200/60' : 'hover:bg-slate-50/80') }}">
                                     <td class="p-4 font-mono font-bold text-[#061743]">
                                         #{{ ($requests->currentPage() - 1) * $requests->perPage() + $loop->iteration }}
                                         <span class="block text-[11px] font-normal text-slate-400 mt-0.5">

@@ -72,6 +72,25 @@
             <div class="pt-4 border-t border-white/10">
                 <div class="px-3 text-[10px] uppercase font-black tracking-widest text-slate-400 mb-2">Autres Modules</div>
                 <div class="space-y-1.5">
+                    <a href="{{ route('admin.recrutements.index') }}"
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.recrutements.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-white/10' }}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">💼</span>
+                            <span class="font-bold text-xs">Recrutements</span>
+                        </div>
+                        @php 
+                            try {
+                                $recNew = \Illuminate\Support\Facades\Schema::hasTable('recrutements') 
+                                    ? \App\Models\Recrutement::count() 
+                                    : 0;
+                            } catch (\Throwable $e) {
+                                $recNew = 0;
+                            }
+                        @endphp
+                        @if($recNew > 0)
+                            <span class="bg-blue-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $recNew }}</span>
+                        @endif
+                    </a>
                     <a href="{{ route('admin.digitalmoov.index') }}"
                        class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.digitalmoov.*') ? 'bg-orange-500 text-white' : 'text-slate-300 hover:bg-white/10' }}">
                         <div class="flex items-center gap-3">
