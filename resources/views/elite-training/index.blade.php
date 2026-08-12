@@ -93,8 +93,8 @@
     }
 
     .et-navbar .nav-brand img {
-      height: 44px;
-      filter: brightness(0) invert(1);
+      height: 50px;
+      object-fit: contain;
       transition: var(--transition);
     }
 
@@ -436,7 +436,7 @@
       width: 160px;
       height: 160px;
       object-fit: contain;
-      filter: brightness(0) invert(1);
+      filter: drop-shadow(0 8px 25px rgba(206, 146, 51, 0.4));
       animation: rotateSlow 20s linear infinite reverse;
     }
 
