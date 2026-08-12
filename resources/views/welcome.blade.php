@@ -1212,6 +1212,70 @@
 
     <!-- Section Séminaires déplacée vers /ancien-accueil -->
 
+    <style>
+  .service-card-modern {
+    position: relative;
+    overflow: hidden;
+    border-radius: 24px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+  .service-card-modern .service-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.6s ease;
+    z-index: 1;
+  }
+  .service-card-modern .service-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,15,60,0.1) 0%, rgba(0,15,60,0.95) 100%);
+    z-index: 2;
+  }
+  .service-card-modern:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,15,60,0.3);
+  }
+  .service-card-modern:hover .service-bg {
+    transform: scale(1.1);
+  }
+  .service-card-modern .service-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+  }
+  .service-card-modern h3 {
+    color: #ffc451 !important;
+    font-size: 22px;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+  }
+  .service-card-modern p {
+    color: #ffffff !important;
+    font-size: 14.5px;
+    line-height: 1.6;
+    opacity: 0.95;
+    margin: 0;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  }
+</style>
     <!-- Services Section -->
     <section id="services" class="services section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/img3.jpg') }}') center/cover no-repeat scroll;">
       <div class="container section-title text-center mb-5" data-aos="fade-up">
@@ -1223,67 +1287,73 @@
           
           <!-- Service 1 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
-              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(204, 136, 0, 0.5) !important;">
-                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov Logo" style="transform: scale(1.3);">
+            <div class="service-card-modern h-100">
+              <div class="service-bg" style="background-image: url('{{ asset('assets/img/service_webdesign_1786525611976.jpg') }}');"></div>
+              <div class="service-overlay"></div>
+              <div class="service-content">
+                <h3>Responsive Web Design</h3>
+                <p>De la compréhension initiale de vos besoins à la mise en ligne finale, notre processus de création de sites web est conçu pour vous offrir une expérience fluide et un site web exceptionnel qui reflète parfaitement votre vision.</p>
               </div>
-              <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Responsive Web Design</h3>
-              <p class="text-muted small">De la compréhension initiale de vos besoins à la mise en ligne finale, notre processus de création de sites web est conçu pour vous offrir une expérience fluide et un site web exceptionnel qui reflète parfaitement votre vision.</p>
             </div>
           </div>
 
           <!-- Service 2 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
-              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(204, 136, 0, 0.5) !important;">
-                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov Logo" style="transform: scale(1.3);">
+            <div class="service-card-modern h-100">
+              <div class="service-bg" style="background-image: url('{{ asset('assets/img/service_marketing_1786525623115.jpg') }}');"></div>
+              <div class="service-overlay"></div>
+              <div class="service-content">
+                <h3>Stratégie Marketing Digital</h3>
+                <p>Nous développons des stratégies marketing complètes adaptées à votre entreprise pour augmenter votre visibilité en ligne et atteindre vos objectifs commerciaux.</p>
               </div>
-              <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Stratégie Marketing Digital</h3>
-              <p class="text-muted small">Nous développons des stratégies marketing complètes adaptées à votre entreprise pour augmenter votre visibilité en ligne et atteindre vos objectifs commerciaux.</p>
             </div>
           </div>
 
           <!-- Service 3 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
-              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(255, 196, 81, 0.5) !important;">
-                <img src="{{ asset('assets/img/logof.png') }}" alt="CAEI Group Logo" style="transform: scale(1.2);">
+            <div class="service-card-modern h-100">
+              <div class="service-bg" style="background-image: url('{{ asset('assets/img/service_consulting_1786525632369.jpg') }}');"></div>
+              <div class="service-overlay"></div>
+              <div class="service-content">
+                <h3>Consulting & Support</h3>
+                <p>Notre équipe d'experts vous accompagne dans la transformation de votre entreprise avec des solutions personnalisées et un support continu.</p>
               </div>
-              <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Consulting & Support</h3>
-              <p class="text-muted small">Notre équipe d'experts vous accompagne dans la transformation de votre entreprise avec des solutions personnalisées et un support continu.</p>
             </div>
           </div>
 
           <!-- Service 4 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
-              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(23, 162, 184, 0.5) !important;">
-                <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services Logo" style="transform: scale(1.2);">
+            <div class="service-card-modern h-100">
+              <div class="service-bg" style="background-image: url('{{ asset('assets/img/service_medical_1786525641121.jpg') }}');"></div>
+              <div class="service-overlay"></div>
+              <div class="service-content">
+                <h3>Accompagnement Médical</h3>
+                <p>L'accompagnement médical est un aspect crucial des soins de santé moderne, offrant un soutien continu et personnalisé aux patients tout au long de leur parcours médical.</p>
               </div>
-              <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Accompagnement Médical</h3>
-              <p class="text-muted small">L'accompagnement médical est un aspect crucial des soins de santé moderne, offrant un soutien continu et personnalisé aux patients tout au long de leur parcours médical.</p>
             </div>
           </div>
 
           <!-- Service 5 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
-            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
-              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(139, 21, 56, 0.5) !important;">
-                <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center Logo" style="transform: scale(1.3);">
+            <div class="service-card-modern h-100">
+              <div class="service-bg" style="background-image: url('{{ asset('assets/img/service_callcenter_1786525651775.jpg') }}');"></div>
+              <div class="service-overlay"></div>
+              <div class="service-content">
+                <h3>Service Clientèle Unique</h3>
+                <p>Fournissez une expérience client exceptionnelle grâce à notre service client dédié. Nous sommes là pour répondre aux questions, résoudre les problèmes et garantir la satisfaction.</p>
               </div>
-              <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Service Clientèle Unique</h3>
-              <p class="text-muted small">Fournissez une expérience client exceptionnelle grâce à notre service client dédié. Nous sommes là pour répondre aux questions, résoudre les problèmes et garantir la satisfaction.</p>
             </div>
           </div>
 
           <!-- Service 6 -->
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="600">
-            <div class="service-item position-relative p-4 border rounded-4 shadow-sm bg-white h-100">
-              <div class="service-logo-box mb-4" style="background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important; border: 1px solid rgba(255, 196, 81, 0.5) !important;">
-                <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training Logo" style="transform: scale(1.2);">
+            <div class="service-card-modern h-100">
+              <div class="service-bg" style="background-image: url('{{ asset('assets/img/service_training_1786525661524.jpg') }}');"></div>
+              <div class="service-overlay"></div>
+              <div class="service-content">
+                <h3>Formation Continue</h3>
+                <p>Nous proposons des programmes de formation continue adaptés aux besoins spécifiques de nos partenaires, avec une expertise de pointe et une expérience pratique.</p>
               </div>
-              <h3 class="fw-bold" style="color: #000f3c; font-size: 20px;">Formation Continue</h3>
-              <p class="text-muted small">Nous proposons des programmes de formation continue adaptés aux besoins spécifiques de nos partenaires, avec une expertise de pointe et une expérience pratique.</p>
             </div>
           </div>
 
