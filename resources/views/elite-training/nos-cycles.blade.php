@@ -65,7 +65,7 @@
     .et-navbar .nav-brand {
       display: flex; align-items: center; gap: 12px; text-decoration: none;
     }
-    .et-navbar .nav-brand img { height: 42px; filter: brightness(0) invert(1); }
+    .et-navbar .nav-brand img { height: 48px; object-fit: contain; }
     .et-navbar .nav-brand span {
       font-family: var(--font-display); font-weight: 800; font-size: 18px; color: var(--white);
     }
