@@ -103,7 +103,7 @@
        CINEMATIC HERO STYLING & ANIMATIONS
        ═══════════════════════════════════════════════════════════════ */
     .hero.section {
-      background: radial-gradient(circle at 50% 35%, #002255 0%, #000d33 55%, #000518 100%) !important;
+      background: transparent !important;
       position: relative !important;
       overflow: hidden !important;
     }
@@ -113,20 +113,13 @@
       display: block !important;
       position: absolute !important;
       inset: 0 !important;
-      background: 
-        radial-gradient(circle at 20% 20%, rgba(255, 196, 81, 0.14) 0%, transparent 45%),
-        radial-gradient(circle at 80% 80%, rgba(0, 102, 204, 0.2) 0%, transparent 50%),
-        linear-gradient(to bottom, rgba(0, 5, 24, 0.4) 0%, transparent 30%, transparent 70%, rgba(0, 5, 24, 0.85) 100%) !important;
+      background: linear-gradient(to bottom, rgba(0, 5, 24, 0.4) 0%, rgba(0, 5, 24, 0.8) 100%) !important;
       pointer-events: none !important;
       z-index: 1 !important;
     }
 
     .hero-overlay-gradient {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, rgba(0, 31, 63, 0.25) 0%, rgba(0, 10, 45, 0.88) 100%) !important;
-      pointer-events: none;
-      z-index: 1;
+      display: none !important;
     }
 
     /* Ambient Lens Flare Spotlight */
@@ -881,7 +874,9 @@
     <!-- Hero Section -->
     <section id="acceuil" class="hero section">
 
-      <video autoplay muted loop playsinline preload="auto" data-aos="fade-in" style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; image-rendering: high-quality; transform: translateZ(0);">
+      <video autoplay muted loop playsinline preload="auto" style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: 0; transform: translate(-50%, -50%); object-fit: cover; background: #000; pointer-events: none;">
+        <!-- External video fallback because php artisan serve blocks local video streaming -->
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-connection-background-12628-large.mp4" type="video/mp4">
         <source src="{{ asset('assets/img/nv200.mp4') }}" type="video/mp4">
       </video>
 
@@ -900,7 +895,7 @@
               <span class="gradient-gold">CAEI COMPANY GROUP</span>
             </h2>
             <p class="hero-subtitle">
-              Formation d'Élite • Services Médicaux • Transformation Digitale • Centre d'Appels
+              l'union des experts et des elites africains du continent de renommée internationale
             </p>
           </div>
         </div>
