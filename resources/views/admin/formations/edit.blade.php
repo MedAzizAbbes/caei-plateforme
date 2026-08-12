@@ -63,7 +63,7 @@
                         @error('title') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
                         {{-- Domaine / Catégorie --}}
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Domaine / Catégorie</label>
@@ -74,6 +74,13 @@
                                 @endforeach
                             </datalist>
                             @error('domain') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
+                        </div>
+
+                        {{-- Date de début --}}
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Date de début</label>
+                            <input type="date" name="start_date" value="{{ old('start_date', $formation->start_date ? $formation->start_date->format('Y-m-d') : '') }}" class="w-full rounded-xl border-slate-200 text-sm focus:border-amber-500 focus:ring-amber-500">
+                            @error('start_date') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
                         </div>
 
                         {{-- Durée --}}

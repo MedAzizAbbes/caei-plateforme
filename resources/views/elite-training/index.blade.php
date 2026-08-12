@@ -2698,7 +2698,7 @@
     document.querySelector('.progress-section') && observer.observe(document.querySelector('.progress-section'));
 
     // ===== SWIPER INIT =====
-    const scheduleSwiper = new Swiper('.scheduleSwiper', {
+    window.scheduleSwiper = new Swiper('.scheduleSwiper', {
       slidesPerView: 1,
       spaceBetween: 20,
       loop: false,

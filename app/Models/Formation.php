@@ -15,6 +15,7 @@ class Formation extends Model
         'type',
         'domain',
         'duration',
+        'start_date',
         'price',
         'description',
         'objectives',
@@ -27,6 +28,7 @@ class Formation extends Model
 
     protected $casts = [
         'price' => 'decimal:2',
+        'start_date' => 'date',
     ];
 
     /**
