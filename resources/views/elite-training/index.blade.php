@@ -1288,13 +1288,12 @@
     .swiper-button-prev::after {
       font-size: 16px !important;
       font-weight: 900;
-    }0;
     }
 
-    /* ===== CONTACT SECTION ===== */
+    /* ===== CONTACT SECTION GLASSMORPHISM UPGRADE ===== */
     .et-contact {
-      padding: 100px 0;
-      background: linear-gradient(135deg, var(--navy) 0%, #002050 100%);
+      padding: 110px 0;
+      background: radial-gradient(circle at top right, #002d5c 0%, #001229 100%) !important;
       position: relative;
       overflow: hidden;
     }
@@ -1303,117 +1302,250 @@
       content: '';
       position: absolute;
       top: -200px; right: -200px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(206,146,51,0.12) 0%, transparent 70%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(206,146,51,0.18) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    .contact-info-item {
+    .et-contact::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -150px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0, 61, 122, 0.4) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-info-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
       display: flex;
       align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 32px;
+      gap: 18px;
+      backdrop-filter: blur(15px);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .contact-info-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(206, 146, 51, 0.4);
+      transform: translateX(8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     }
 
     .contact-icon {
-      width: 52px;
-      height: 52px;
-      min-width: 52px;
-      background: rgba(206,146,51,0.15);
-      border: 1px solid rgba(206,146,51,0.3);
-      border-radius: 14px;
+      width: 54px;
+      height: 54px;
+      min-width: 54px;
+      background: linear-gradient(135deg, rgba(206,146,51,0.25), rgba(206,146,51,0.05));
+      border: 1.5px solid rgba(206,146,51,0.4);
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--gold-light);
-      font-size: 20px;
+      font-size: 22px;
+      box-shadow: 0 4px 15px rgba(206,146,51,0.15);
     }
 
-    .contact-info-item h6 {
+    .contact-info-card h6 {
       color: var(--gold-light);
-      font-weight: 700;
-      font-size: 13px;
+      font-weight: 800;
+      font-size: 12.5px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
+      letter-spacing: 1.2px;
+      margin-bottom: 5px;
     }
 
-    .contact-info-item p {
-      color: rgba(255,255,255,0.7);
-      font-size: 14px;
+    .contact-info-card p,
+    .contact-info-card a {
+      color: rgba(255,255,255,0.85);
+      font-size: 14.5px;
       margin: 0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-weight: 500;
+    }
+
+    .contact-info-card a:hover {
+      color: var(--gold-light);
     }
 
     .social-links {
       display: flex;
-      gap: 12px;
+      gap: 14px;
     }
 
     .social-link {
-      width: 44px;
-      height: 44px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255,255,255,0.7);
-      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+      font-size: 20px;
       text-decoration: none;
-      transition: var(--transition);
+      transition: all 0.35s ease;
+      backdrop-filter: blur(10px);
     }
 
     .social-link:hover {
-      background: var(--gold);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
       border-color: var(--gold);
       color: var(--navy);
-      transform: translateY(-3px);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(206,146,51,0.4);
     }
 
     .contact-form-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius-md);
-      padding: 50px 40px;
-      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      padding: 50px 44px;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      .contact-form-card {
+        padding: 30px 22px;
+      }
     }
 
     .et-form-group {
       margin-bottom: 20px;
+      position: relative;
     }
 
     .et-form-group label {
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.85);
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 8px;
       display: block;
+      letter-spacing: 0.3px;
+    }
+
+    .input-icon-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon-wrapper i {
+      position: absolute;
+      left: 18px;
+      color: var(--gold-light);
+      font-size: 16px;
+      pointer-events: none;
+      z-index: 2;
+      transition: all 0.3s ease;
     }
 
     .et-form-control {
       width: 100%;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 12px;
-      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      padding: 14px 18px 14px 48px;
       color: var(--white);
-      font-size: 14px;
+      font-size: 14.5px;
       font-family: var(--font-main);
-      transition: var(--transition);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       outline: none;
     }
 
-    .et-form-control::placeholder { color: rgba(255,255,255,0.3); }
-
-    .et-form-control:focus {
-      border-color: var(--gold);
-      background: rgba(255,255,255,0.12);
-      box-shadow: 0 0 0 3px rgba(206,146,51,0.15);
+    textarea.et-form-control {
+      padding-left: 48px;
+      padding-top: 14px;
+      resize: vertical;
+      min-height: 130px;
     }
 
-    textarea.et-form-control {
-      resize: vertical;
-      min-height: 120px;
+    .et-form-control::placeholder { color: rgba(255,255,255,0.35); }
+
+    .et-form-control:focus {
+      border-color: var(--gold-light);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 25px rgba(206,146,51,0.25);
+    }
+
+    .et-form-control:focus + i,
+    .input-icon-wrapper:focus-within i {
+      color: #ffffff;
+      transform: scale(1.15);
+    }
+
+    .btn-contact-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 16px;
+      padding: 16px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.35s ease;
+      box-shadow: 0 8px 30px rgba(206, 146, 51, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .btn-contact-submit:hover {
+      background: linear-gradient(135deg, #ffffff, var(--gold-light));
+      color: var(--navy);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(206, 146, 51, 0.5);
+    }
+
+    /* Intl-tel-input styling & alignment fix */
+    .iti {
+      width: 100%;
+    }
+
+    .iti .et-form-control {
+      padding-left: 95px !important;
+    }
+
+    .iti__flag-container {
+      padding-left: 10px;
+    }
+
+    .iti__selected-dial-code {
+      color: var(--gold-light) !important;
+      font-weight: 700;
+      font-size: 14px;
+      margin-left: 4px;
+    }
+
+    .iti__country-list {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border-radius: 14px !important;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3) !important;
+      border: 1px solid #e2e8f0 !important;
+      z-index: 9999 !important;
+    }
+
+    .iti__country {
+      color: #0f172a !important;
+      padding: 10px 14px !important;
+    }
+
+    .iti__country-name, .iti__dial-code {
+      color: #1e293b !important;
     }
 
     /* ===== FOOTER ===== */
@@ -2097,59 +2229,71 @@
 
   <!-- ===== CONTACT ===== -->
   <section class="et-contact" id="contact">
-    <div class="container position-relative">
-      <div class="row g-5">
+    <div class="container position-relative" style="z-index: 2;">
+      <div class="row g-5 align-items-center">
 
         <!-- Info -->
         <div class="col-lg-5" data-aos="fade-right">
-          <span class="section-label" style="background: rgba(206,146,51,0.15); color: var(--gold-light);">Contact</span>
-          <h2 class="mt-3 mb-4" style="font-family: var(--font-display); font-size: clamp(28px,4vw,44px); font-weight:800; color: white; line-height:1.2;">
-            Restons <span style="color: var(--gold-light);">Connectés !</span>
+          <span class="section-label" style="background: rgba(206,146,51,0.18); color: var(--gold-light); border: 1px solid rgba(206,146,51,0.3);">
+            <i class="bi bi-chat-left-dots-fill me-1"></i> Contact & Rendez-vous
+          </span>
+          <h2 class="mt-3 mb-4" style="font-family: var(--font-display); font-size: clamp(28px,4vw,46px); font-weight:900; color: white; line-height:1.2;">
+            Restons <span style="color: var(--gold-light); background: linear-gradient(135deg, var(--gold-light), #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Connectés !</span>
           </h2>
-          <p class="mb-5" style="color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.8;">
-            Votre opinion compte vraiment pour nous. Contactez-nous pour toute question concernant nos formations, nos programmes ou pour prendre rendez-vous.
+          <p class="mb-5" style="color: rgba(255,255,255,0.75); font-size: 15.5px; line-height: 1.8;">
+            Notre équipe d'experts est à votre disposition pour planifier votre entretien d'admission, personnaliser votre programme ou vous guider sur les modalités de financement.
           </p>
 
-          <div class="contact-info-item">
+          <div class="contact-info-card">
             <div class="contact-icon">
               <i class="bi bi-geo-alt-fill"></i>
             </div>
             <div>
-              <h6>Adresse</h6>
+              <h6>Adresse Siège</h6>
               <p>SIS 8 Rue Claude Bernard 1002 Belvédère-Tunis, Tunisie</p>
             </div>
           </div>
 
-          <div class="contact-info-item">
+          <div class="contact-info-card">
             <div class="contact-icon">
               <i class="bi bi-telephone-fill"></i>
             </div>
             <div>
-              <h6>Téléphone</h6>
-              <p>+216 55 332 885</p>
+              <h6>Ligne Directe</h6>
+              <p><a href="tel:+21655332885">+216 55 332 885</a></p>
             </div>
           </div>
 
-          <div class="contact-info-item">
+          <div class="contact-info-card">
+            <div class="contact-icon">
+              <i class="bi bi-envelope-check-fill"></i>
+            </div>
+            <div>
+              <h6>Email Officiel</h6>
+              <p><a href="mailto:contact@caei-afri.com">contact@caei-afri.com</a></p>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
             <div class="contact-icon">
               <i class="bi bi-clock-fill"></i>
             </div>
             <div>
-              <h6>Horaires</h6>
+              <h6>Horaires d'Ouverture</h6>
               <p>Lundi – Vendredi : 09h00 – 18h00</p>
             </div>
           </div>
 
-          <div class="mt-4">
-            <p class="mb-3" style="color: rgba(255,255,255,0.5); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Suivez-nous</p>
+          <div class="mt-4 pt-2">
+            <p class="mb-3" style="color: rgba(255,255,255,0.6); font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700;">Rejoignez la Communauté</p>
             <div class="social-links">
-              <a href="https://www.facebook.com/CAEIAfrique/" target="_blank" class="social-link">
+              <a href="https://www.facebook.com/CAEIAfrique/" target="_blank" class="social-link" title="Facebook CAEI">
                 <i class="bi bi-facebook"></i>
               </a>
-              <a href="https://www.instagram.com/caei_afri/" target="_blank" class="social-link">
+              <a href="https://www.instagram.com/caei_afri/" target="_blank" class="social-link" title="Instagram CAEI">
                 <i class="bi bi-instagram"></i>
               </a>
-              <a href="https://www.linkedin.com/company/comit%C3%A9-africain-d-expertise-internationale-caei/" target="_blank" class="social-link">
+              <a href="https://www.linkedin.com/company/comit%C3%A9-africain-d-expertise-internationale-caei/" target="_blank" class="social-link" title="LinkedIn CAEI">
                 <i class="bi bi-linkedin"></i>
               </a>
             </div>
@@ -2159,13 +2303,27 @@
         <!-- Form -->
         <div class="col-lg-7" data-aos="fade-left" data-aos-delay="200">
           <div class="contact-form-card">
-            <h4 style="font-family: var(--font-display); color: white; font-weight: 700; margin-bottom: 30px;">
-              Prendre Rendez-vous en Ligne
-            </h4>
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <div>
+                <span class="badge mb-2" style="background: rgba(206,146,51,0.18); color: var(--gold-light); border: 1px solid rgba(206,146,51,0.3); font-size: 11px; padding: 6px 12px; border-radius: 8px;">
+                  Formulaire Rapide
+                </span>
+                <h3 style="font-family: var(--font-display); color: white; font-weight: 800; margin: 0;">
+                  Prendre Rendez-vous en Ligne
+                </h3>
+              </div>
+              <span class="d-none d-sm-inline-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: rgba(206,146,51,0.15); border-radius: 50%; color: var(--gold-light); font-size: 22px;">
+                <i class="bi bi-calendar-plus"></i>
+              </span>
+            </div>
 
             @if(session('success'))
-              <div class="alert alert-success border-0 rounded-4 mb-4 p-3 text-white font-bold" style="background: rgba(40, 167, 69, 0.25); border: 1px solid #28a745 !important;">
-                <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+              <div class="alert alert-success border-0 rounded-4 mb-4 p-3 text-white font-bold d-flex align-items-center gap-3" style="background: rgba(40, 167, 69, 0.25); border: 1px solid #28a745 !important;">
+                <i class="bi bi-check-circle-fill text-success" style="font-size: 24px;"></i>
+                <div>
+                  <strong class="d-block text-white">Demande Envoyée avec Succès !</strong>
+                  <span style="font-size: 13.5px; opacity: 0.9;">{{ session('success') }}</span>
+                </div>
               </div>
             @endif
 
@@ -2175,38 +2333,50 @@
               <div class="row g-4">
                 <div class="col-md-6">
                   <div class="et-form-group">
-                    <label>Nom & Prénom</label>
-                    <input type="text" name="nom" class="et-form-control" placeholder="Votre nom complet" required>
+                    <label>Nom & Prénom <span class="text-danger">*</span></label>
+                    <div class="input-icon-wrapper">
+                      <input type="text" name="nom" class="et-form-control" placeholder="Votre nom complet" required>
+                      <i class="bi bi-person-fill"></i>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="et-form-group">
-                    <label>Email</label>
-                    <input type="email" name="email" class="et-form-control" placeholder="votre@email.com" required>
+                    <label>Adresse Email <span class="text-danger">*</span></label>
+                    <div class="input-icon-wrapper">
+                      <input type="email" name="email" class="et-form-control" placeholder="votre.email@domaine.com" required>
+                      <i class="bi bi-envelope-fill"></i>
+                    </div>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="et-form-group">
-                    <label>Téléphone</label>
-                    <input type="text" name="mobile" class="et-form-control" placeholder="+216 XX XXX XXX">
+                    <label>Téléphone / WhatsApp</label>
+                    <input type="tel" name="mobile" class="et-form-control" placeholder="XX XXX XXX">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="et-form-group">
-                    <label>Objet</label>
-                    <input type="text" name="objet" class="et-form-control" placeholder="Formation, Renseignement...">
+                    <label>Objet de la demande</label>
+                    <div class="input-icon-wrapper">
+                      <input type="text" name="objet" class="et-form-control" placeholder="Nom de la formation, Devis...">
+                      <i class="bi bi-bookmark-star-fill"></i>
+                    </div>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="et-form-group">
-                    <label>Message</label>
-                    <textarea name="message" class="et-form-control" placeholder="Décrivez votre besoin..." required></textarea>
+                    <label>Votre Message <span class="text-danger">*</span></label>
+                    <div class="input-icon-wrapper">
+                      <textarea name="message" class="et-form-control" placeholder="Précisez votre projet de formation ou vos questions..." required></textarea>
+                      <i class="bi bi-chat-left-text-fill" style="top: 24px; transform: none;"></i>
+                    </div>
                   </div>
                 </div>
                 <div class="col-12">
-                  <button type="submit" class="btn-gold w-100 justify-content-center" style="border: none; font-size: 16px;">
-                    <i class="bi bi-send-fill me-2"></i>
-                    Envoyer ma demande
+                  <button type="submit" class="btn-contact-submit">
+                    <i class="bi bi-send-fill"></i>
+                    Envoyer Ma Demande de Rendez-vous
                   </button>
                 </div>
               </div>
