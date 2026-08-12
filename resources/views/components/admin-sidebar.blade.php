@@ -5,7 +5,7 @@
             <img src="{{ asset('images/logo.png') }}" alt="Logo CAEI" class="h-9 w-9 rounded-full object-cover border border-[#f2a90f]">
             <div>
                 <span class="block text-xs font-black uppercase tracking-wider text-white">CAEI ADMIN</span>
-                <span class="block text-[10px] text-[#f2a90f] uppercase font-bold">Back-Office</span>
+                <span class="block text-[10px] font-bold text-slate-400">Tableau de bord</span>
             </div>
         </div>
 
@@ -131,8 +131,16 @@
                         @endif
                     </a>
 
-                    <a href="{{ route('callcenter.index') }}" target="_blank" class="flex items-center justify-between px-3 py-2 text-slate-400 hover:text-white hover:bg-slate-800/50 rounded-lg transition-colors group">
-                        <span class="flex items-center gap-2 text-xs">📞 Call Center</span>
+                    
+
+                    {{-- Lien Gestion Mailing --}}
+                    <a href="https://mailing.caei-afri.com/dashboard"
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all text-slate-300 hover:bg-white/10 hover:text-white group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">📧</span>
+                            <span class="font-bold text-xs">Gestion Mailing</span>
+                        </div>
+                        <span class="bg-purple-500/30 text-purple-200 text-[10px] font-semibold px-2 py-0.5 rounded-full">OVH</span>
                     </a>
                 </div>
             </div>
