@@ -874,11 +874,10 @@
     <!-- Hero Section -->
     <section id="acceuil" class="hero section">
 
-      <video autoplay muted loop playsinline preload="auto" style="position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: 0; transform: translate(-50%, -50%); object-fit: cover; background: #000; pointer-events: none;">
-        <!-- External video fallback because php artisan serve blocks local video streaming -->
-        <source src="https://assets.mixkit.co/videos/preview/mixkit-abstract-technology-connection-background-12628-large.mp4" type="video/mp4">
-        <source src="{{ asset('assets/img/nv200.mp4') }}" type="video/mp4">
-      </video>
+      <!-- YouTube Background Video (World Connection / Globe Loop) - Ultra reliable -->
+      <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; background: #000;">
+        <iframe src="https://www.youtube.com/embed/rDrjQyatgXQ?autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=rDrjQyatgXQ&vq=hd1080" style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.6;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      </div>
 
       <div class="hero-overlay-gradient"></div>
       <div class="cinematic-lens-flare"></div>
