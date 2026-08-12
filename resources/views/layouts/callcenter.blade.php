@@ -22,17 +22,13 @@
 
   <style>
     :root {
-      --cc-red: #d11141;
+      --cc-red: #f97316;
       --font-main: 'Inter', sans-serif;
     }
 
     body {
       font-family: var(--font-main);
-      background-color: #0d1b2a; /* Dark Premium Background */
-      background-image: linear-gradient(rgba(13, 27, 42, 0.88), rgba(13, 27, 42, 0.88)), url('{{ asset("assets/img/testimonials-bg.jpg") }}');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+      background-color: #0b1120;
       color: #fff;
       overflow-x: hidden;
       line-height: 1.6;
@@ -43,25 +39,57 @@
     .ambient-orb {
       position: fixed;
       border-radius: 50%;
-      filter: blur(50px);       /* réduit de 100px → 50px */
+      filter: blur(50px);
       z-index: -1;
       pointer-events: none;
-      will-change: opacity;     /* layer GPU dédié, pas de repaint */
+      will-change: opacity;
     }
     .orb-1 {
       width: 350px;
       height: 350px;
-      background: rgba(209, 17, 65, 0.10);
+      background: rgba(249, 115, 22, 0.15);
       top: 5%;
       left: -8%;
     }
     .orb-2 {
       width: 400px;
       height: 400px;
-      background: rgba(43, 88, 118, 0.10);
+      background: rgba(59, 130, 246, 0.15);
       bottom: 15%;
       right: -8%;
     }
+
+    /* Video Background Container */
+    .video-bg-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -2;
+      overflow: hidden;
+      background: #0b1120;
+    }
+    .video-bg-container iframe {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100vw;
+      height: 56.25vw;
+      min-height: 100vh;
+      min-width: 177.77vh;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      opacity: 0.15; /* Très discret pour rester pro et lisible */
+    }
+    /* Overlay gradient for maximum readability */
+    .video-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(11, 17, 32, 0.95) 0%, rgba(11, 17, 32, 0.7) 100%);
+      z-index: -1;
+    }
+
 
     /* 3D Perspective Wrapper */
     .perspective-wrapper {
@@ -87,7 +115,7 @@
       background: rgba(255, 255, 255, 0.06);
       border-color: rgba(255, 255, 255, 0.15);
       transform: translateY(-6px);       /* supprimé rotateX/rotateY (repaint GPU) */
-      box-shadow: 0 16px 36px rgba(0,0,0,0.32), 0 0 16px rgba(209, 17, 65, 0.15);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.32), 0 0 16px rgba(249, 115, 22, 0.15);
     }
     
     .glass-icon {
@@ -122,7 +150,7 @@
 
     /* Buttons */
     .btn-glass-red {
-      background: rgba(209, 17, 65, 0.8);
+      background: rgba(249, 115, 22, 0.9);
       backdrop-filter: blur(10px);
       color: white;
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -131,12 +159,12 @@
       font-weight: 600;
       font-size: 15px;
       transition: all 0.3s ease;
-      box-shadow: 0 10px 20px rgba(209, 17, 65, 0.3);
+      box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
     }
     .btn-glass-red:hover {
-      background: rgba(209, 17, 65, 1);
+      background: rgba(249, 115, 22, 1);
       transform: translateY(-2px);
-      box-shadow: 0 15px 25px rgba(209, 17, 65, 0.4);
+      box-shadow: 0 15px 25px rgba(249, 115, 22, 0.4);
       color: white;
     }
     .btn-glass-outline {
@@ -183,7 +211,7 @@
     .form-control-glass:focus, .form-select-glass:focus {
       background: rgba(255, 255, 255, 0.08);
       border-color: var(--cc-red);
-      box-shadow: 0 0 0 4px rgba(209, 17, 65, 0.15);
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.15);
       color: white;
       outline: none;
     }
@@ -197,8 +225,8 @@
       align-items: center;
       padding: 6px 18px;
       border-radius: 999px;
-      background: rgba(209, 17, 65, 0.12);
-      border: 1px solid rgba(209, 17, 65, 0.35);
+      background: rgba(249, 115, 22, 0.12);
+      border: 1px solid rgba(249, 115, 22, 0.35);
       color: var(--cc-red);
       font-size: 12px;
       font-weight: 700;
@@ -211,8 +239,8 @@
     .glass-icon-wrapper {
       width: 60px;
       height: 60px;
-      background: rgba(209, 17, 65, 0.1);
-      border: 1px solid rgba(209, 17, 65, 0.25);
+      background: rgba(249, 115, 22, 0.1);
+      border: 1px solid rgba(249, 115, 22, 0.25);
       border-radius: 16px;
       display: flex;
       align-items: center;
@@ -221,12 +249,12 @@
       color: var(--cc-red);
       margin-bottom: 20px;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(209, 17, 65, 0.15);
+      box-shadow: 0 4px 15px rgba(249, 115, 22, 0.15);
     }
     .glass-card:hover .glass-icon-wrapper {
-      background: rgba(209, 17, 65, 0.2);
+      background: rgba(249, 115, 22, 0.2);
       transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(209, 17, 65, 0.25);
+      box-shadow: 0 8px 25px rgba(249, 115, 22, 0.25);
     }
 
     /* Text Enhancements */
@@ -253,7 +281,7 @@
       border-radius: 18px;
       background:
         linear-gradient(135deg, rgba(13, 17, 31, 0.92), rgba(22, 28, 48, 0.78)),
-        radial-gradient(circle at 12% 20%, rgba(209, 17, 65, 0.24), transparent 34%);
+        radial-gradient(circle at 12% 20%, rgba(249, 115, 22, 0.24), transparent 34%);
       backdrop-filter: blur(22px);
       -webkit-backdrop-filter: blur(22px);
       box-shadow: 0 18px 55px rgba(0, 0, 0, 0.34), inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -307,8 +335,8 @@
     .cc-nav-link.active,
     .cc-nav-link.show {
       color: #fff !important;
-      background: rgba(209, 17, 65, 0.14);
-      box-shadow: inset 0 0 0 1px rgba(209, 17, 65, 0.28);
+      background: rgba(249, 115, 22, 0.14);
+      box-shadow: inset 0 0 0 1px rgba(249, 115, 22, 0.28);
     }
 
     .cc-nav-shell .nav-link.text-white::after,
@@ -321,7 +349,7 @@
       height: 2px;
       border-radius: 2px;
       background: var(--cc-red);
-      box-shadow: 0 0 12px rgba(209, 17, 65, 0.8);
+      box-shadow: 0 0 12px rgba(249, 115, 22, 0.9);
     }
 
     .cc-nav-shell .dropdown-menu,
@@ -350,7 +378,7 @@
     .cc-dropdown .dropdown-item:focus,
     .cc-dropdown .dropdown-item.active {
       color: #fff !important;
-      background: linear-gradient(135deg, rgba(209, 17, 65, 0.95), rgba(172, 13, 52, 0.9)) !important;
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.95), rgba(234, 88, 12, 0.9)) !important;
     }
 
     .cc-navbar-toggler {
@@ -369,19 +397,19 @@
       min-height: 38px;
       border-radius: 999px;
       padding: 9px 18px;
-      background: linear-gradient(135deg, var(--cc-red), #a70d33);
+      background: linear-gradient(135deg, var(--cc-red), #ea580c);
       color: #fff;
       font-size: 14px;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 12px 24px rgba(209, 17, 65, 0.3);
+      box-shadow: 0 12px 24px rgba(249, 115, 22, 0.3);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
     .cc-login-btn:hover {
       color: #fff;
       transform: translateY(-1px);
-      box-shadow: 0 16px 30px rgba(209, 17, 65, 0.4);
+      box-shadow: 0 16px 30px rgba(249, 115, 22, 0.4);
     }
 
     @media (max-width: 991.98px) {
@@ -415,6 +443,12 @@
   </style>
 </head>
 <body>
+
+  <!-- Video Background Call Center -->
+  <div class="video-bg-container">
+    <iframe src="https://www.youtube.com/embed/lx8lyKfDQdU?autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=lx8lyKfDQdU&vq=hd1080" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <div class="video-overlay"></div>
+  </div>
 
   <div class="ambient-orb orb-1"></div>
   <div class="ambient-orb orb-2"></div>
@@ -545,7 +579,7 @@
             <p class="small mb-4" style="color: #cbd5e1;">Restez informés des dernières évolutions de la relation client.</p>
             <div class="position-relative w-100">
               <input type="email" placeholder="Votre email" style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px 110px 14px 16px; color: white; outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='var(--cc-red)'" onblur="this.style.borderColor='rgba(255,255,255,0.1)'">
-              <button type="button" class="position-absolute top-50 translate-middle-y end-0 me-2 border-0 text-white fw-medium" style="background: var(--cc-red); border-radius: 8px; padding: 8px 16px; font-size: 13px; transition: background 0.3s;" onmouseover="this.style.background='#a30e32'" onmouseout="this.style.background='var(--cc-red)'">
+              <button type="button" class="position-absolute top-50 translate-middle-y end-0 me-2 border-0 text-white fw-medium" style="background: var(--cc-red); border-radius: 8px; padding: 8px 16px; font-size: 13px; transition: background 0.3s;" onmouseover="this.style.background='#ea580c'" onmouseout="this.style.background='var(--cc-red)'">
                 S'inscrire
               </button>
             </div>
