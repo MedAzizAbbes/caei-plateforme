@@ -1894,11 +1894,13 @@
       </div>
 
       <!-- Month filter tabs -->
-      <div class="month-filter" data-aos="fade-up" data-aos-delay="100">
-        <button class="month-btn active" data-month="janvier">Janvier</button>
-        <button class="month-btn" data-month="fevrier">Février</button>
-        <button class="month-btn" data-month="mars">Mars</button>
-        <button class="month-btn" data-month="tous">Voir Tout</button>
+      <div class="month-filter d-flex align-items-center justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="100">
+        <button class="nav-btn rounded-circle d-flex align-items-center justify-content-center" id="prev-quarter" style="width: 40px; height: 40px; border: none; background: rgba(0,15,60,0.05); color: #000f3c; transition: all 0.3s;"><i class="bi bi-chevron-left fw-bold"></i></button>
+        <div id="quarter-months" class="d-flex flex-wrap gap-2 justify-content-center">
+          <!-- Dynamically populated by JS -->
+        </div>
+        
+        <button class="nav-btn rounded-circle d-flex align-items-center justify-content-center" id="next-quarter" style="width: 40px; height: 40px; border: none; background: rgba(0,15,60,0.05); color: #000f3c; transition: all 0.3s;"><i class="bi bi-chevron-right fw-bold"></i></button>
       </div>
 
       <!-- Swiper Carousel -->
@@ -1906,7 +1908,11 @@
         <div class="swiper-wrapper">
 
           @forelse($allFormations ?? [] as $formation)
-          <div class="swiper-slide" style="width: 300px;">
+          @php 
+            $monthsList = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+            $month = $formation->start_date ? $monthsList[$formation->start_date->format('n') - 1] : 'janvier';
+          @endphp
+          <div class="swiper-slide filterable-slide" data-month="{{ $month }}" style="width: 300px;">
             <div class="schedule-card">
               <div class="schedule-card-img">
                 <img src="{{ $formation->image ? asset('storage/' . $formation->image) : asset('assets/img/img3.jpg') }}" alt="{{ $formation->title }}" loading="lazy">
@@ -2395,7 +2401,7 @@
     document.querySelector('.progress-section') && observer.observe(document.querySelector('.progress-section'));
 
     // ===== SWIPER INIT =====
-    const scheduleSwiper = new Swiper('.scheduleSwiper', {
+    window.scheduleSwiper = new Swiper('.scheduleSwiper', {
       slidesPerView: 1,
       spaceBetween: 20,
       loop: true,
@@ -2415,14 +2421,92 @@
       }
     });
 
-    // ===== MONTH FILTER BUTTONS =====
-    document.querySelectorAll('.month-btn').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
-        this.classList.add('active');
-        // Could filter slides by month attribute if data-month was set on slides
-      });
+    
+    // ===== FILTER LOGIC =====
+    let allSlidesHTML = [];
+    document.addEventListener("DOMContentLoaded", function() {
+        const slides = document.querySelectorAll(".scheduleSwiper .swiper-slide.filterable-slide");
+        slides.forEach(slide => {
+            allSlidesHTML.push({
+                month: slide.getAttribute("data-month"),
+                html: slide.outerHTML
+            });
+        });
+        
+        // Default filter based on first active button (Janvier)
+        setTimeout(() => {
+           filterSlides('janvier');
+        }, 500);
     });
+
+    function filterSlides(month) {
+        const wrapper = document.querySelector(".scheduleSwiper .swiper-wrapper");
+        if (!wrapper) return;
+        
+        wrapper.innerHTML = "";
+        
+        let hasSlides = false;
+        allSlidesHTML.forEach(item => {
+            if (item.month === month) {
+                wrapper.innerHTML += item.html;
+                hasSlides = true;
+            }
+        });
+        
+        if (!hasSlides) {
+            wrapper.innerHTML = '<div class="text-center py-5 text-muted w-100"><p>Aucune session programmée pour ce mois.</p></div>';
+        }
+        
+        if (window.scheduleSwiper) {
+            window.scheduleSwiper.update();
+            window.scheduleSwiper.slideTo(0);
+        }
+    }
+    
+    // ===== TRIMESTER FILTER BUTTONS =====
+    const quarters = [
+        [ { id: 'janvier', label: 'Janvier' }, { id: 'fevrier', label: 'Février' }, { id: 'mars', label: 'Mars' } ],
+        [ { id: 'avril', label: 'Avril' }, { id: 'mai', label: 'Mai' }, { id: 'juin', label: 'Juin' } ],
+        [ { id: 'juillet', label: 'Juillet' }, { id: 'aout', label: 'Août' }, { id: 'septembre', label: 'Septembre' } ],
+        [ { id: 'octobre', label: 'Octobre' }, { id: 'novembre', label: 'Novembre' }, { id: 'decembre', label: 'Décembre' } ]
+    ];
+    let currentQuarterIndex = 0;
+    const quarterContainer = document.getElementById('quarter-months');
+    
+
+    function renderQuarter(index) {
+        if (!quarterContainer) return;
+        quarterContainer.innerHTML = '';
+        quarters[index].forEach((month, i) => {
+            const btn = document.createElement('button');
+            btn.className = `month-btn ${index === 0 && i === 0 ? 'active' : ''}`;
+            btn.dataset.month = month.id;
+            btn.textContent = month.label;
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                filterSlides(this.dataset.month);
+            });
+            quarterContainer.appendChild(btn);
+        });
+    }
+
+    if (quarterContainer) {
+        renderQuarter(currentQuarterIndex);
+
+        document.getElementById('prev-quarter').addEventListener('click', function() {
+            currentQuarterIndex = (currentQuarterIndex > 0) ? currentQuarterIndex - 1 : 3;
+            renderQuarter(currentQuarterIndex);
+            
+        });
+
+        document.getElementById('next-quarter').addEventListener('click', function() {
+            currentQuarterIndex = (currentQuarterIndex < 3) ? currentQuarterIndex + 1 : 0;
+            renderQuarter(currentQuarterIndex);
+            
+        });
+
+            }
 
     // ===== SMOOTH SCROLL for nav links =====
     document.querySelectorAll('a[href^="#"]').forEach(a => {
