@@ -852,6 +852,7 @@
             </ul>
           </li>
           <li><a href="#contact">Contact</a></li>
+          <li><a href="{{ route('recrutement.index') }}">Recrutement</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>

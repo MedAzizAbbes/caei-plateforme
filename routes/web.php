@@ -444,6 +444,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::resource('formations', AdminFormationController::class);
 });
 
+// --- Recrutement ---
+use App\Http\Controllers\RecrutementController;
+Route::get('/recrutement', [RecrutementController::class, 'create'])->name('recrutement.index');
+Route::post('/recrutement', [RecrutementController::class, 'store'])->name('recrutement.store');
+
 require __DIR__.'/auth.php';
 
 Route::post('/stripe/webhook', [\App\Http\Controllers\StripePaymentController::class, 'handleWebhook'])->name('stripe.webhook');
