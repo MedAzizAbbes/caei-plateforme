@@ -192,13 +192,10 @@ html {
   display: flex !important;
   align-items: center !important;
   padding: 170px 0 90px 0 !important;
-  background: radial-gradient(circle at center, #001550 0%, #000720 100%) !important;
+  background-color: transparent !important;
   overflow: hidden !important;
 }
 
-.hero video {
-  filter: brightness(0.5) contrast(1.2) !important;
-}
 
 .hero-overlay-gradient {
   position: absolute;
