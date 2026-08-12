@@ -62,7 +62,7 @@
       border-bottom: 1px solid rgba(255,255,255,0.08);
     }
     .et-navbar .nav-brand { display: flex; align-items: center; gap: 12px; text-decoration: none; }
-    .et-navbar .nav-brand img { height: 44px; filter: brightness(0) invert(1); }
+    .et-navbar .nav-brand img { height: 48px; object-fit: contain; }
     .et-navbar .nav-brand span { font-family: var(--font-display); font-weight: 800; font-size: 19px; color: var(--white); }
     .et-navbar .nav-brand span em { color: var(--gold-light); font-style: normal; }
 
