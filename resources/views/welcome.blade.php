@@ -934,6 +934,60 @@
 
     </section><!-- /About Section -->
 
+    <!-- Formations Section -->
+    <section id="formations" class="section py-5" style="background-color: #f9f9f9;">
+      <div class="container" data-aos="fade-up">
+        <div class="section-title text-center mb-5">
+          <h2 class="fw-bold" style="color: #000f3c;">Formations en cours</h2>
+          <p class="text-muted">Découvrez nos programmes de formation actuels et boostez vos compétences.</p>
+        </div>
+        
+        @if(isset($formations) && $formations->count() > 0)
+        <div class="row gy-4">
+          @foreach($formations as $formation)
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
+              @if($formation->image)
+              <img src="{{ Storage::url($formation->image) }}" class="card-img-top" alt="{{ $formation->title }}" style="height: 200px; object-fit: cover;">
+              @else
+              <div class="d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%);">
+                <i class="bi bi-journal-bookmark text-white" style="font-size: 3rem;"></i>
+              </div>
+              @endif
+              <div class="card-body p-4 d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <span class="badge" style="background-color: #ffc451; color: #000f3c;">{{ ucfirst(str_replace('_', ' ', $formation->type)) }}</span>
+                  <span class="badge bg-light text-secondary border">{{ $formation->domain }}</span>
+                </div>
+                <h5 class="card-title fw-bold" style="color: #000f3c;">{{ $formation->title }}</h5>
+                <p class="card-text text-muted small mt-2 flex-grow-1">{{ Str::limit($formation->description, 120) }}</p>
+                
+                <hr class="text-muted opacity-25">
+                
+                <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted small"><i class="bi bi-clock me-1"></i> {{ $formation->duration }}</span>
+                    @if($formation->price > 0)
+                    <span class="fw-bold" style="color: #000f3c;">{{ number_format($formation->price, 0) }} TND</span>
+                    @else
+                    <span class="fw-bold text-success">Sur devis</span>
+                    @endif
+                </div>
+              </div>
+            </div>
+          </div>
+          @endforeach
+        </div>
+        <div class="text-center mt-5">
+            <a href="#" class="btn btn-warning rounded-pill px-5 py-2 fw-bold" style="background-color: #ffc451; color: #000f3c;">Voir tout le catalogue</a>
+        </div>
+        @else
+        <div class="text-center p-5 bg-white rounded-4 shadow-sm border border-light">
+            <i class="bi bi-calendar-x text-muted" style="font-size: 3rem;"></i>
+            <p class="text-muted mt-3 mb-0 fw-semibold">Aucune formation n'est programmée pour le moment.</p>
+        </div>
+        @endif
+      </div>
+    </section><!-- /Formations Section -->
     <!-- Why Choose Us Section -->
     <section id="features" class="features section py-5" style="background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset('assets/img/services.jpg') }}') center/cover no-repeat scroll;">
 

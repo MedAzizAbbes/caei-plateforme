@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Seminar;
+use App\Models\Formation;
 use Illuminate\Http\Request;
 
 class SeminarPublicController extends Controller
 {
     /**
-     * Page d'accueil publique — liste de tous les séminaires publiés.
+     * Page d'accueil publique — liste de tous les séminaires publiés et formations.
      */
     public function index()
     {
@@ -18,7 +19,9 @@ class SeminarPublicController extends Controller
             ->orderBy('start_date')
             ->get();
 
-        return view('welcome', compact('seminars'));
+        $formations = Formation::active()->take(3)->get();
+
+        return view('welcome', compact('seminars', 'formations'));
     }
 
     /**
