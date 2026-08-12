@@ -905,40 +905,6 @@
           </div>
         </div>
 
-        <div class="row gy-4 mt-3 justify-content-center">
-          <div class="col-6 col-xl-2 col-md-3">
-            <a href="{{ route('elite.training') }}" class="hero-service-card-wrapper">
-              <div class="hero-service-card">
-                <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training">
-              </div>
-              <span class="agency-label-tag">Elite Training</span>
-            </a>
-          </div>
-          <div class="col-6 col-xl-2 col-md-3">
-            <a href="{{ route('medical.services') }}" class="hero-service-card-wrapper">
-              <div class="hero-service-card">
-                <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services">
-              </div>
-              <span class="agency-label-tag">Medical Services</span>
-            </a>
-          </div>
-          <div class="col-6 col-xl-2 col-md-3">
-            <a href="{{ route('digitalmoov') }}" class="hero-service-card-wrapper">
-              <div class="hero-service-card">
-                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov" class="logo-boost">
-              </div>
-              <span class="agency-label-tag">Digital Moov</span>
-            </a>
-          </div>
-          <div class="col-6 col-xl-2 col-md-3">
-            <a href="{{ route('callcenter.index') }}" target="_blank" class="hero-service-card-wrapper">
-              <div class="hero-service-card">
-                <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center" class="logo-boost">
-              </div>
-              <span class="agency-label-tag">Call Center</span>
-            </a>
-          </div>
-        </div>
 
       </div>
 
@@ -1038,66 +1004,38 @@
 
         <div class="row gy-4 justify-content-center">
           <!-- Agence 1 - Elite Training -->
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="agency-card p-4 border rounded-3 bg-white text-center shadow-sm h-100 d-flex flex-column" style="transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.05)';">
-              <div class="flex-grow-1">
-                <div class="mb-4 rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-sm" style="background: linear-gradient(135deg, rgb(203, 225, 247) 0%, #003d7a 100%); width: 80px; height: 80px;">
-                  <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training" style="width: 55px; height: 55px; object-fit: contain;">
-                </div>
-                <h5 class="fw-bold mb-2" style="color: #001f3f; font-size: 16px;">CAEI ELITE TRAINING</h5>
-                <p class="text-muted small mb-4">Formation professionnelle d'excellence</p>
-              </div>
-              <div>
-                <a href="{{ route('elite.training') }}" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #001f3f; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#003d7a'" onmouseout="this.style.backgroundColor='#001f3f'">Découvrir</a>
-              </div>
+          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
+            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 0s; height: 100%; min-height: 200px;">
+              <a href="{{ route('elite.training') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(203, 225, 247) 0%, #003d7a 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 15px 35px rgba(0,61,122,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+                <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training" style="width: 85px; height: 85px; object-fit: contain;">
+              </a>
             </div>
           </div>
 
           <!-- Agence 2 - Medical Services -->
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="agency-card p-4 border rounded-3 bg-white text-center shadow-sm h-100 d-flex flex-column" style="transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.05)';">
-              <div class="flex-grow-1">
-                <div class="mb-4 rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-sm" style="background: linear-gradient(135deg, rgb(206, 241, 247) 0%, #138496 100%); width: 80px; height: 80px;">
-                  <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services" style="width: 55px; height: 55px; object-fit: contain;">
-                </div>
-                <h5 class="fw-bold mb-2" style="color: #17a2b8; font-size: 16px;">CAEI MEDICAL SERVICES</h5>
-                <p class="text-muted small mb-4">Services médicaux et solutions de santé</p>
-              </div>
-              <div>
-                <a href="{{ route('medical.services') }}" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #17a2b8; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#138496'" onmouseout="this.style.backgroundColor='#17a2b8'">Découvrir</a>
-              </div>
+          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 0.5s; height: 100%; min-height: 200px;">
+              <a href="{{ route('medical.services') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(206, 241, 247) 0%, #138496 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(-5deg)'; this.style.boxShadow='0 15px 35px rgba(19,132,150,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+                <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services" style="width: 85px; height: 85px; object-fit: contain;">
+              </a>
             </div>
           </div>
 
           <!-- Agence 3 - Digital Moov -->
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="agency-card p-4 border rounded-3 bg-white text-center shadow-sm h-100 d-flex flex-column" style="transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.05)';">
-              <div class="flex-grow-1">
-                <div class="mb-4 rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-sm" style="background: linear-gradient(135deg, rgb(248, 239, 219) 0%, #b37700 100%); width: 80px; height: 80px;">
-                  <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov" style="width: 55px; height: 55px; object-fit: contain;">
-                </div>
-                <h5 class="fw-bold mb-2" style="color: #cc8800; font-size: 16px;">CAEI DIGITAL MOOV</h5>
-                <p class="text-muted small mb-4">Solutions numériques et transformation</p>
-              </div>
-              <div>
-                <a href="{{ route('digitalmoov') }}" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #cc8800; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#b37700'" onmouseout="this.style.backgroundColor='#cc8800'">Découvrir</a>
-              </div>
+          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="300">
+            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 1s; height: 100%; min-height: 200px;">
+              <a href="{{ route('digitalmoov') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(248, 239, 219) 0%, #b37700 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 15px 35px rgba(179,119,0,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov" style="width: 85px; height: 85px; object-fit: contain;">
+              </a>
             </div>
           </div>
 
           <!-- Agence 4 - Call Center -->
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="agency-card p-4 border rounded-3 bg-white text-center shadow-sm h-100 d-flex flex-column" style="transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.1)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.05)';">
-              <div class="flex-grow-1">
-                <div class="mb-4 rounded-circle d-flex align-items-center justify-content-center mx-auto shadow-sm" style="background: linear-gradient(135deg, rgb(236, 229, 231) 0%, #6b0f2a 100%); width: 80px; height: 80px;">
-                  <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center" style="width: 55px; height: 55px; object-fit: contain;">
-                </div>
-                <h5 class="fw-bold mb-2" style="color: #8b1538; font-size: 16px;">CAEI CALL CENTER</h5>
-                <p class="text-muted small mb-4">Services de centre d'appels et support</p>
-              </div>
-              <div>
-                <a href="{{ route('callcenter.index') }}" target="_blank" class="btn btn-sm rounded-pill px-4 text-white" style="background-color: #8b1538; font-weight: 600; transition: background 0.3s;" onmouseover="this.style.backgroundColor='#6b0f2a'" onmouseout="this.style.backgroundColor='#8b1538'">Découvrir</a>
-              </div>
+          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="400">
+            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 1.5s; height: 100%; min-height: 200px;">
+              <a href="{{ route('callcenter.index') }}" target="_blank" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(236, 229, 231) 0%, #6b0f2a 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(-5deg)'; this.style.boxShadow='0 15px 35px rgba(107,15,42,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+                <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center" style="width: 85px; height: 85px; object-fit: contain;">
+              </a>
             </div>
           </div>
         </div>
