@@ -55,7 +55,7 @@
                     </thead>
                     <tbody class="bg-white divide-y divide-slate-200">
                         @forelse($requests as $request)
-                            <tr class="hover:bg-slate-50 transition-colors duration-150">
+                            <tr class="transition-colors duration-150 {{ $request->status === 'Traité' ? 'bg-emerald-100/60 hover:bg-emerald-200/60' : ($request->status === 'En cours' ? 'bg-blue-100/60 hover:bg-blue-200/60' : 'hover:bg-slate-50') }}">
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
                                     {{ $request->created_at->format('d/m/Y H:i') }}
                                 </td>

@@ -152,7 +152,7 @@
                         </thead>
                         <tbody class="divide-y divide-slate-100">
                             @foreach($appointments as $app)
-                                <tr class="hover:bg-slate-50/80 transition-colors">
+                                <tr class="transition-colors {{ $app->status === 'completed' ? 'bg-emerald-100/60 hover:bg-emerald-200/60' : ($app->status === 'in_progress' ? 'bg-blue-100/60 hover:bg-blue-200/60' : 'hover:bg-slate-50/80') }}">
                                     <td class="p-4 font-mono font-bold text-[#061743]">
                                         #{{ ($appointments->currentPage() - 1) * $appointments->perPage() + $loop->iteration }}
                                         <span class="block text-[11px] font-normal text-slate-400 mt-0.5">
