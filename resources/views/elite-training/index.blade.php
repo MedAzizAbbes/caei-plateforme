@@ -248,13 +248,48 @@
       background: var(--navy);
     }
 
+    .et-hero > .container {
+      position: relative;
+      z-index: 5;
+    }
+
     .et-hero-bg {
       position: absolute;
       inset: 0;
       background: 
-        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(206, 146, 51, 0.15) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0, 100, 200, 0.12) 0%, transparent 60%),
-        linear-gradient(135deg, #000f3c 0%, #001f3f 40%, #002a5c 70%, #001030 100%);
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(206, 146, 51, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0, 100, 200, 0.08) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(0,15,60,0.85) 0%, rgba(0,31,63,0.80) 40%, rgba(0,42,92,0.75) 70%, rgba(0,16,48,0.88) 100%);
+      z-index: 2;
+    }
+
+    /* ===== VIDEO BACKGROUND ===== */
+    .et-hero-video {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .et-hero-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.6) contrast(1.1);
+    }
+
+    .et-hero-video::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 15, 40, 0.4) 0%,
+        rgba(0, 20, 50, 0.2) 50%,
+        rgba(0, 15, 40, 0.5) 100%
+      );
+      z-index: 1;
     }
 
     /* Animated particles canvas */
@@ -263,6 +298,7 @@
       inset: 0;
       opacity: 0.5;
       pointer-events: none;
+      z-index: 3;
     }
 
     /* Animated geometric shapes */
@@ -271,6 +307,7 @@
       inset: 0;
       overflow: hidden;
       pointer-events: none;
+      z-index: 3;
     }
 
     .hero-shapes .shape {
@@ -308,7 +345,7 @@
 
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 5;
     }
 
     .hero-badge {
@@ -486,7 +523,7 @@
       bottom: 40px;
       left: 50%;
       transform: translateX(-50%);
-      z-index: 2;
+      z-index: 5;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -1358,6 +1395,13 @@
       .about-visual { height: 300px; margin-bottom: 40px; }
       .stat-item::after { display: none; }
       .contact-form-card { padding: 30px 20px; }
+      .et-hero-video video { display: none; }
+      .et-hero-bg {
+        background: 
+          radial-gradient(ellipse 80% 60% at 20% 40%, rgba(206, 146, 51, 0.15) 0%, transparent 60%),
+          radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0, 100, 200, 0.12) 0%, transparent 60%),
+          linear-gradient(135deg, #000f3c 0%, #001f3f 40%, #002a5c 70%, #001030 100%);
+      }
     }
 
     @media (max-width: 767px) {
@@ -1415,6 +1459,12 @@
 
   <!-- ===== HERO ===== -->
   <section class="et-hero" id="home">
+    <!-- Video Background -->
+    <div class="et-hero-video">
+      <video autoplay muted loop playsinline preload="auto" poster="{{ asset('assets/img/features-bg.jpg') }}">
+        <source src="{{ asset('assets/img/elite_training_bg.mp4') }}" type="video/mp4">
+      </video>
+    </div>
     <div class="et-hero-bg"></div>
     <canvas id="particles-canvas"></canvas>
     <div class="hero-shapes">
