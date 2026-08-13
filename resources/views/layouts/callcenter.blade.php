@@ -479,17 +479,8 @@
               <li class="nav-item">
                 <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.services') ? 'active' : '' }}" href="{{ route('callcenter.services') }}">Nos services</a>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle cc-nav-link {{ request()->routeIs('callcenter.secteurs.*') ? 'active' : '' }}" href="#" role="button" data-bs-toggle="dropdown">Secteurs d'activité</a>
-                <ul class="dropdown-menu cc-dropdown">
-                  <li><a class="dropdown-item {{ request()->routeIs('callcenter.secteurs.energie') ? 'active' : '' }}" href="{{ route('callcenter.secteurs.energie') }}">Énergie & Environnement</a></li>
-                  <li><a class="dropdown-item {{ request()->routeIs('callcenter.secteurs.assurance') ? 'active' : '' }}" href="{{ route('callcenter.secteurs.assurance') }}">Assurance & Finance</a></li>
-                  <li><a class="dropdown-item {{ request()->routeIs('callcenter.secteurs.technologie') ? 'active' : '' }}" href="{{ route('callcenter.secteurs.technologie') }}">Technologie & Télécom</a></li>
-                </ul>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.support') ? 'active' : '' }}" href="{{ route('callcenter.support') }}">Support client</a>
-              </li>
+
+
               <li class="nav-item">
                 <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.blog') ? 'active' : '' }}" href="{{ route('callcenter.blog') }}">Actualité</a>
               </li>
