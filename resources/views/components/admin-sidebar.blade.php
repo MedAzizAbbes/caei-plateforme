@@ -142,6 +142,15 @@
                         </div>
                         <span class="bg-purple-500/30 text-purple-200 text-[10px] font-semibold px-2 py-0.5 rounded-full">OVH</span>
                     </a>
+
+                    {{-- Lien Gestion Mailing --}}
+                    <a href="https://mailing.caei-afri.com/dashboard" class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all text-slate-300 hover:bg-white/10 hover:text-white group">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">📧</span>
+                            <span class="font-bold text-xs">Gestion Mailing</span>
+                        </div>
+                        <span class="bg-purple-500/30 text-purple-200 text-[10px] font-semibold px-2 py-0.5 rounded-full">OVH</span>
+                    </a>
                 </div>
             </div>
         </nav>
