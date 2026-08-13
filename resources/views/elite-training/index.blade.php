@@ -2096,40 +2096,101 @@
               @csrf
               <input type="hidden" name="type" value="appointment">
               <div class="row g-4">
+                <!-- 1. Nom & Prénom -->
                 <div class="col-md-6">
                   <div class="et-form-group">
-                    <label>Nom & Prénom</label>
+                    <label>Nom & Prénom *</label>
                     <input type="text" name="nom" class="et-form-control" placeholder="Votre nom complet" required>
                   </div>
                 </div>
+
+                <!-- 2. Téléphone / WhatsApp -->
                 <div class="col-md-6">
                   <div class="et-form-group">
-                    <label>Email</label>
+                    <label>Téléphone / WhatsApp *</label>
+                    <input type="tel" name="mobile" class="et-form-control" placeholder="+216 XX XXX XXX" required>
+                  </div>
+                </div>
+
+                <!-- 3. Adresse e-mail -->
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Adresse e-mail *</label>
                     <input type="email" name="email" class="et-form-control" placeholder="votre@email.com" required>
                   </div>
                 </div>
+
+                <!-- 4. Pays -->
                 <div class="col-md-6">
                   <div class="et-form-group">
-                    <label>Téléphone</label>
-                    <input type="text" name="mobile" class="et-form-control" placeholder="+216 XX XXX XXX">
+                    <label>Pays *</label>
+                    <input type="text" name="pays" class="et-form-control" placeholder="Ex: Tunisie, Côte d'Ivoire, Sénégal..." required>
                   </div>
                 </div>
+
+                <!-- 5. Fonction / Poste -->
                 <div class="col-md-6">
                   <div class="et-form-group">
-                    <label>Objet</label>
-                    <input type="text" name="objet" class="et-form-control" placeholder="Formation, Renseignement...">
+                    <label>Fonction / Poste *</label>
+                    <input type="text" name="poste" class="et-form-control" placeholder="Ex: Directeur Financier, Chef de Projet..." required>
                   </div>
                 </div>
-                <div class="col-12">
+
+                <!-- 6. Entreprise / Institution -->
+                <div class="col-md-6">
                   <div class="et-form-group">
-                    <label>Message</label>
-                    <textarea name="message" class="et-form-control" placeholder="Décrivez votre besoin..." required></textarea>
+                    <label>Entreprise / Institution *</label>
+                    <input type="text" name="entreprise" class="et-form-control" placeholder="Nom de votre entreprise ou organisation" required>
                   </div>
                 </div>
+
+                <!-- 7. Formation ou séminaire choisi -->
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Formation ou séminaire choisi *</label>
+                    <input type="text" name="objet" class="et-form-control" placeholder="Intitulé de la formation souhaitée" required>
+                  </div>
+                </div>
+
+                <!-- 8. Date / Session souhaitée -->
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Date / Session souhaitée</label>
+                    <input type="text" name="date_session" class="et-form-control" placeholder="Ex: Octobre 2026 / Session Prochaine">
+                  </div>
+                </div>
+
+                <!-- 9. Mode de participation -->
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Mode de participation *</label>
+                    <select name="mode_participation" class="et-form-control" required style="background: rgba(255,255,255,0.08); color: white;">
+                      <option value="" disabled selected style="background: #001f3f; color: white;">-- Sélectionnez un mode --</option>
+                      <option value="présentiel" style="background: #001f3f; color: white;">Présentiel</option>
+                      <option value="en_ligne" style="background: #001f3f; color: white;">En ligne</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- 10. Comment avez-vous connu cette formation ? -->
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Comment avez-vous connu cette formation ?</label>
+                    <select name="comment_connu" class="et-form-control" style="background: rgba(255,255,255,0.08); color: white;">
+                      <option value="" disabled selected style="background: #001f3f; color: white;">-- Sélectionnez une option --</option>
+                      <option value="Réseaux sociaux" style="background: #001f3f; color: white;">Réseaux sociaux (LinkedIn, Facebook...)</option>
+                      <option value="Recommandation" style="background: #001f3f; color: white;">Recommandation d'un collègue / ami</option>
+                      <option value="Site web" style="background: #001f3f; color: white;">Site web CAEI</option>
+                      <option value="Emailing / Newsletter" style="background: #001f3f; color: white;">Emailing / Newsletter</option>
+                      <option value="Autre" style="background: #001f3f; color: white;">Autre</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div class="col-12">
                   <button type="submit" class="btn-gold w-100 justify-content-center" style="border: none; font-size: 16px;">
                     <i class="bi bi-send-fill me-2"></i>
-                    Envoyer ma demande
+                    Envoyer ma demande d'inscription
                   </button>
                 </div>
               </div>
