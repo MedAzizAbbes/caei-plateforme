@@ -62,6 +62,7 @@
       <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
       <nav id="navbar" class="navbar">
         <ul>
+          <li><a href="{{ route('home') }}" style="color: #ff9e59; font-weight: 700;"><i class="bi bi-arrow-left me-1"></i> Accueil</a></li>
           <li><a href="{{ route('digitalmoov') }}" class="active">Agence</a></li>
           <li><a href="{{ route('digitalmoov.about') }}">A propos </a></li>
           <li><a href="{{ route('digitalmoov.services') }}">Expertises</a></li>
