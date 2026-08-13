@@ -667,41 +667,86 @@
         <div class="modal-body p-4">
           <form action="{{ route('elite.appointment.store') }}" method="POST">
             @csrf
+            <input type="hidden" name="type" value="inscription">
             <input type="hidden" name="formation_title" id="modalFormationTitle">
 
-            <div class="mb-3">
-              <label class="form-label font-semibold text-dark small">Formation Sélectionnée</label>
-              <input type="text" id="modalFormationDisplay" class="form-control bg-light fw-bold text-navy" readonly>
-            </div>
+            <div class="row g-3">
+              <div class="col-12">
+                <label class="form-label font-semibold text-dark small mb-1">Formation / Séminaire choisi</label>
+                <input type="text" id="modalFormationDisplay" name="subject" class="form-control bg-light fw-bold text-navy" readonly>
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label font-semibold text-dark small">Nom Complet *</label>
-              <input type="text" name="name" class="form-control" required placeholder="Ex: Jean Dupont">
-            </div>
+              <!-- 1. Nom & Prénom -->
+              <div class="col-md-6">
+                <label class="form-label font-semibold text-dark small mb-1">Nom & Prénom *</label>
+                <input type="text" name="name" class="form-control" required placeholder="Votre nom complet">
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label font-semibold text-dark small">Adresse Email *</label>
-              <input type="email" name="email" class="form-control" required placeholder="votre.email@domaine.com">
-            </div>
+              <!-- 2. Téléphone / WhatsApp -->
+              <div class="col-md-6">
+                <label class="form-label font-semibold text-dark small mb-1">Téléphone / WhatsApp *</label>
+                <input type="tel" name="phone" class="form-control" required placeholder="+216 XX XXX XXX">
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label font-semibold text-dark small">Téléphone / WhatsApp *</label>
-              <input type="tel" name="phone" class="form-control" required placeholder="+216 XX XXX XXX">
-            </div>
+              <!-- 3. Adresse e-mail -->
+              <div class="col-md-6">
+                <label class="form-label font-semibold text-dark small mb-1">Adresse e-mail *</label>
+                <input type="email" name="email" class="form-control" required placeholder="votre@email.com">
+              </div>
 
-            <div class="mb-3">
-              <label class="form-label font-semibold text-dark small">Entreprise / Organisation</label>
-              <input type="text" name="organization" class="form-control" placeholder="Nom de votre entreprise ou organisation">
-            </div>
+              <!-- 4. Pays -->
+              <div class="col-md-6">
+                <label class="form-label font-semibold text-dark small mb-1">Pays *</label>
+                <input type="text" name="country" class="form-control" required placeholder="Ex: Tunisie, Sénégal, Côte d'Ivoire...">
+              </div>
 
-            <div class="mb-4">
-              <label class="form-label font-semibold text-dark small">Message ou Questions</label>
-              <textarea name="message" class="form-control" rows="3" placeholder="Précisez votre demande, les dates souhaitées..."></textarea>
-            </div>
+              <!-- 5. Fonction / Poste -->
+              <div class="col-md-6">
+                <label class="form-label font-semibold text-dark small mb-1">Fonction / Poste *</label>
+                <input type="text" name="job_title" class="form-control" required placeholder="Ex: Chef de Projet, Directeur...">
+              </div>
 
-            <button type="submit" class="btn text-white w-100 py-3 rounded-pill fw-bold" style="background: linear-gradient(135deg, var(--gold), var(--gold-dark));">
-              Envoyer ma demande d'inscription
-            </button>
+              <!-- 6. Entreprise / Institution -->
+              <div class="col-md-6">
+                <label class="form-label font-semibold text-dark small mb-1">Entreprise / Institution *</label>
+                <input type="text" name="company" class="form-control" required placeholder="Nom de votre entreprise">
+              </div>
+
+              <!-- 7. Date / Session souhaitée -->
+              <div class="col-md-6">
+                <label class="form-label font-semibold text-dark small mb-1">Date / Session souhaitée</label>
+                <input type="text" name="session_date" class="form-control" placeholder="Ex: Octobre 2026 / Prochaine session">
+              </div>
+
+              <!-- 8. Mode de participation -->
+              <div class="col-md-6">
+                <label class="form-label font-semibold text-dark small mb-1">Mode de participation *</label>
+                <select name="participation_mode" class="form-select" required>
+                  <option value="" disabled selected>-- Sélectionnez un mode --</option>
+                  <option value="présentiel">Présentiel</option>
+                  <option value="en_ligne">En ligne</option>
+                </select>
+              </div>
+
+              <!-- 9. Comment avez-vous connu cette formation ? -->
+              <div class="col-12">
+                <label class="form-label font-semibold text-dark small mb-1">Comment avez-vous connu cette formation ?</label>
+                <select name="source" class="form-select">
+                  <option value="" disabled selected>-- Sélectionnez une option --</option>
+                  <option value="Réseaux sociaux">Réseaux sociaux (LinkedIn, Facebook...)</option>
+                  <option value="Recommandation">Recommandation d'un collègue / ami</option>
+                  <option value="Site web">Site web CAEI</option>
+                  <option value="Emailing / Newsletter">Emailing / Newsletter</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
+
+              <div class="col-12 mt-3">
+                <button type="submit" class="btn text-white w-100 py-3 rounded-pill fw-bold" style="background: linear-gradient(135deg, var(--gold), var(--gold-dark));">
+                  Envoyer ma demande d'inscription
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
