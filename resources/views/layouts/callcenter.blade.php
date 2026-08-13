@@ -412,6 +412,40 @@
       box-shadow: 0 16px 30px rgba(249, 115, 22, 0.4);
     }
 
+    .cc-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 38px;
+      border-radius: 999px;
+      padding: 9px 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .cc-back-home:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.3);
+      transform: translateX(-3px);
+    }
+
+    .cc-back-home i {
+      font-size: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .cc-back-home:hover i {
+      transform: translateX(-3px);
+    }
+
     @media (max-width: 991.98px) {
       .cc-navbar {
         border-radius: 16px;
@@ -490,8 +524,11 @@
             </ul>
           </div>
           
-          <!-- Right Button -->
-          <div class="d-flex mt-3 mt-lg-0">
+          <!-- Right Buttons -->
+          <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
+            <a href="{{ route('home') }}" class="cc-back-home">
+              <i class="bi bi-arrow-left"></i> Accueil
+            </a>
             <a href="#" class="cc-login-btn">Connexion</a>
           </div>
         </div>
