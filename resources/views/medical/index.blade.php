@@ -109,6 +109,10 @@
 
                 {{-- Action Button --}}
                 <div class="flex items-center gap-3">
+                    <a href="{{ route('home') }}" class="inline-flex items-center justify-center gap-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs md:text-sm px-4 py-2.5 rounded-full border border-slate-200 transition-all">
+                        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        <span>Accueil</span>
+                    </a>
                     <a href="#devis" class="inline-flex items-center justify-center gap-2 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-full shadow-md shadow-sky-500/20 hover:scale-105 transition-all">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <span>Devis & Rendez-vous</span>

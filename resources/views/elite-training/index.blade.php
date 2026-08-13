@@ -1437,7 +1437,7 @@
           </ul>
         </li>
         <li class="nav-dropdown">
-          <a href="#programme" class="nav-dropdown-toggle">
+          <a href="{{ route('elite.nos-cycles') }}" class="nav-dropdown-toggle">
             Cycles & Séminaires <i class="bi bi-chevron-down ms-1" style="font-size: 10px;"></i>
           </a>
           <ul class="nav-dropdown-menu">
@@ -1493,7 +1493,7 @@
           </p>
 
           <div class="hero-actions">
-            <a href="#programme" class="btn-gold">
+            <a href="{{ route('elite.programme') }}" class="btn-gold">
               <i class="bi bi-calendar3"></i>
               Voir le Programme
             </a>

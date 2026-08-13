@@ -118,6 +118,49 @@ class EliteTrainingController extends Controller
     }
 
     /**
+     * Page du programme complet & catalogue de toutes les formations
+     */
+    public function programme(Request $request)
+    {
+        if (\Illuminate\Support\Facades\Schema::hasTable('formations')) {
+            $query = Formation::active();
+
+            if ($request->filled('type')) {
+                $query->where('type', $request->type);
+            }
+
+            if ($request->filled('domain')) {
+                $query->where('domain', 'like', "%{$request->domain}%");
+            }
+
+            if ($request->filled('search')) {
+                $search = $request->search;
+                $query->where(function($q) use ($search) {
+                    $q->where('title', 'like', "%{$search}%")
+                      ->orWhere('code', 'like', "%{$search}%")
+                      ->orWhere('description', 'like', "%{$search}%");
+                });
+            }
+
+            $allFormations = $query->orderBy('code')->get();
+            $certifiantes = Formation::certifiante()->active()->get();
+            $diplomantes  = Formation::diplomante()->active()->get();
+            $surMesure    = Formation::surMesure()->active()->get();
+            $elearning    = Formation::elearning()->active()->get();
+        } else {
+            $allFormations = collect();
+            $certifiantes  = collect();
+            $diplomantes   = collect();
+            $surMesure     = collect();
+            $elearning     = collect();
+        }
+
+        $domainsConfig = $this->domainsMap;
+
+        return view('elite-training.programme', compact('allFormations', 'certifiantes', 'diplomantes', 'surMesure', 'elearning', 'domainsConfig'));
+    }
+
+    /**
      * Page dédiée à un domaine spécifique /elite-training/domaine/{slug}
      */
     public function domain(Request $request, $slug)
