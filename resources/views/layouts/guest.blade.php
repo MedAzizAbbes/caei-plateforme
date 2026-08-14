@@ -23,12 +23,12 @@
             </div>
 
             <!-- Logo CAEI à gauche (Retour au site) -->
-            <div class="absolute top-6 left-6 md:left-10 z-20">
-                <a href="{{ route('home') }}" class="flex items-center gap-3 group transition-all duration-300 hover:scale-105">
-                    <img src="{{ asset('assets/img/logocompany.png') }}" alt="CAEI Logo" class="h-10 md:h-12 w-auto object-contain filter drop-shadow">
-                    <span class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-white/80 group-hover:text-[#ffbd45] transition-colors bg-white/10 px-3 py-1.5 rounded-full border border-white/15 backdrop-blur-sm">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                        <span>Retour au site</span>
+            <div class="absolute top-4 left-4 sm:top-6 sm:left-6 md:left-10 z-20">
+                <a href="{{ route('home') }}" class="flex items-center gap-2 sm:gap-3 group transition-all duration-300 hover:scale-105">
+                    <img src="{{ asset('assets/img/logocompany.png') }}" alt="CAEI Logo" class="h-8 sm:h-10 md:h-12 w-auto object-contain filter drop-shadow">
+                    <span class="inline-flex items-center gap-1.5 text-[11px] sm:text-xs font-bold text-white/90 group-hover:text-[#ffbd45] transition-colors bg-white/10 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full border border-white/15 backdrop-blur-sm shadow-sm">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        <span>Retour</span>
                     </span>
                 </a>
             </div>

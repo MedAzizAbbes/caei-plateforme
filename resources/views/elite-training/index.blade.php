@@ -1399,6 +1399,30 @@
       border: 1px solid rgba(206, 146, 51, 0.25);
     }
 
+    @media (max-width: 576px) {
+      .quarter-nav-wrapper {
+        border-radius: 24px;
+        padding: 6px 8px;
+        gap: 4px !important;
+        width: 100%;
+        max-width: 100%;
+      }
+      .month-pill-btn {
+        padding: 6px 12px;
+        font-size: 11.5px;
+        border-radius: 20px;
+      }
+      .quarter-nav-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 11px;
+      }
+      .quarter-indicator-badge {
+        font-size: 10.5px;
+        padding: 4px 12px;
+      }
+    }
+
     /* ===== CONTACT SECTION GLASSMORPHISM UPGRADE ===== */
     .et-contact {
       padding: 110px 0;
