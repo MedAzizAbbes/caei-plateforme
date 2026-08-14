@@ -270,7 +270,7 @@
   <nav class="et-navbar">
     <div class="container d-flex align-items-center justify-content-between">
       <a href="{{ route('elite.training') }}" class="nav-brand">
-        <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training">
+        <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training">
         <span>CAEI <em>ELITE TRAINING</em></span>
       </a>
 
