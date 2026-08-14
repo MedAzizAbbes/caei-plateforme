@@ -77,29 +77,8 @@ class EliteAppointmentController extends Controller
             'status'             => 'pending',
         ]);
 
-        try {
-            Mail::raw(
-                "Nouvelle demande d'inscription / rendez-vous Elite Training CAEI :\n\n" .
-                "Nom & Prénom : " . $appointment->fullname . "\n" .
-                "Email : " . $appointment->email . "\n" .
-                "Téléphone / WhatsApp : " . ($appointment->phone ?? 'Non spécifié') . "\n" .
-                "Pays : " . ($appointment->country ?? 'Non spécifié') . "\n" .
-                "Fonction / Poste : " . ($appointment->job_title ?? 'Non spécifié') . "\n" .
-                "Entreprise / Institution : " . ($appointment->company ?? 'Non spécifié') . "\n" .
-                "Formation choisie : " . ($appointment->subject ?? 'Non spécifiée') . "\n" .
-                "Date / Session : " . ($appointment->session_date ?? 'Non spécifiée') . "\n" .
-                "Mode de participation : " . ($appointment->participation_mode ?? 'Non spécifié') . "\n" .
-                "Connu via : " . ($appointment->source ?? 'Non spécifié') . "\n\n" .
-                "Message :\n" . $appointment->message,
-                function ($m) use ($appointment) {
-                    $m->to('contact@caei-afri.com')
-                      ->cc('amenizina12@gmail.com')
-                      ->subject('[Elite Training] Inscription #' . $appointment->id . ' - ' . $appointment->fullname);
-                }
-            );
-        } catch (\Exception $e) {
-            Log::warning("Elite Training notification mail error: " . $e->getMessage());
-        }
+        // Envoi d'email désactivé à la demande du client
+        // Les demandes sont enregistrées directement en base de données et consultables dans l'administration
 
         return redirect()->back()->with('success', 'Votre demande d\'inscription a bien été transmise ! Notre équipe vous contactera dans les plus brefs délais.');
     }

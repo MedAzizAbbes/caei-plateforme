@@ -2820,6 +2820,63 @@
       filterScheduleByMonth(initialActiveBtn.getAttribute('data-month'));
     }
 
+
+    // ===== MONTH FILTERING FOR SWIPER (DYNAMIC DATA-MONTH) =====
+    document.addEventListener("DOMContentLoaded", function() {
+      const monthBtns = document.querySelectorAll('.month-btn');
+      const scheduleSlides = document.querySelectorAll('.scheduleSwiper .swiper-slide');
+
+      function filterScheduleByMonth(targetMonth) {
+        let visibleCount = 0;
+        scheduleSlides.forEach(slide => {
+          const slideMonth = slide.getAttribute('data-month');
+          if (targetMonth === 'tous' || slideMonth === targetMonth) {
+            slide.style.display = '';
+            visibleCount++;
+          } else {
+            slide.style.display = 'none';
+          }
+        });
+
+        let emptyMsg = document.getElementById('schedule-empty-msg');
+        if (visibleCount === 0) {
+          if (!emptyMsg) {
+            emptyMsg = document.createElement('div');
+            emptyMsg.id = 'schedule-empty-msg';
+            emptyMsg.className = 'text-center py-5 text-muted w-100 fs-6';
+            emptyMsg.innerHTML = '<p class="mb-0"><i class="bi bi-calendar-x fs-3 d-block text-warning mb-2"></i>Aucune session programmée pour ce mois.</p>';
+            document.querySelector('.scheduleSwiper .swiper-wrapper').appendChild(emptyMsg);
+          } else {
+            emptyMsg.style.display = 'block';
+          }
+        } else {
+          if (emptyMsg) {
+            emptyMsg.style.display = 'none';
+          }
+        }
+
+        if (window.scheduleSwiper) {
+          window.scheduleSwiper.update();
+          window.scheduleSwiper.slideTo(0);
+        }
+      }
+
+      monthBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          monthBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const targetMonth = this.getAttribute('data-month');
+          filterScheduleByMonth(targetMonth);
+        });
+      });
+
+      // Filter on initial load if an active month button exists
+      const initialActiveBtn = document.querySelector('.month-btn.active');
+      if (initialActiveBtn) {
+        filterScheduleByMonth(initialActiveBtn.getAttribute('data-month'));
+      }
+    });
+
     // ===== SMOOTH SCROLL for nav links =====
     document.querySelectorAll('a[href^="#"]').forEach(a => {
       a.addEventListener('click', function(e) {
