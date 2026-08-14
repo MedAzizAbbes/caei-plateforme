@@ -1051,7 +1051,7 @@
   </footer>
 
   <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center bg-warning text-white rounded-circle shadow" style="width: 40px; height: 40px; position: fixed; bottom: 30px; left: 30px; z-index: 999; display: none; transition: opacity 0.3s;"><i class="bi bi-arrow-up-short fs-4"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center bg-warning text-white rounded-circle shadow" style="width: 40px; height: 40px; position: fixed; bottom: 85px; right: 20px; left: auto; z-index: 999; display: none; transition: opacity 0.3s;"><i class="bi bi-arrow-up-short fs-4"></i></a>
 
   <!-- Chat Widget -->
   <div class="chat-widget">
