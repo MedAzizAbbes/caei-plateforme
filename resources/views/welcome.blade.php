@@ -850,14 +850,11 @@
       </nav>
 
       <!-- Auth Controls (Breeze) -->
-      <div class="d-flex align-items-center gap-2 ms-xl-4">
-        @auth
+      @auth
+        <div class="d-flex align-items-center gap-2 ms-xl-4">
           <a href="{{ route('dashboard') }}" class="btn-getstarted text-decoration-none">Mon espace</a>
-        @else
-          <a href="{{ route('login') }}" class="text-white text-decoration-none fw-semibold me-3 d-none d-sm-inline-block" style="font-size: 14px; transition: color 0.3s;" onmouseover="this.style.color='#ffc451'" onmouseout="this.style.color='#fff'">Connexion</a>
-          <a href="{{ route('register') }}" class="btn-getstarted text-decoration-none">Créer un compte</a>
-        @endauth
-      </div>
+        </div>
+      @endauth
 
     </div>
   </header>

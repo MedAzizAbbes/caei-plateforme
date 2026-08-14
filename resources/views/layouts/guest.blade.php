@@ -22,8 +22,19 @@
                 <div class="absolute top-[40%] -left-[10%] w-[50%] h-[50%] rounded-full bg-blue-500/10 blur-[60px]" style="will-change: transform, opacity;"></div>
             </div>
 
+            <!-- Logo CAEI à gauche (Retour au site) -->
+            <div class="absolute top-6 left-6 md:left-10 z-20">
+                <a href="{{ route('home') }}" class="flex items-center gap-3 group transition-all duration-300 hover:scale-105">
+                    <img src="{{ asset('assets/img/logocompany.png') }}" alt="CAEI Logo" class="h-10 md:h-12 w-auto object-contain filter drop-shadow">
+                    <span class="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-white/80 group-hover:text-[#ffbd45] transition-colors bg-white/10 px-3 py-1.5 rounded-full border border-white/15 backdrop-blur-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        <span>Retour au site</span>
+                    </span>
+                </a>
+            </div>
+
             <div class="mb-8 relative z-10 animate-slide-up">
-                <a href="/" class="flex items-center justify-center hover:scale-105 transition-transform duration-300">
+                <a href="{{ route('home') }}" class="flex items-center justify-center hover:scale-105 transition-transform duration-300" title="Retour à l'accueil">
                     <img src="{{ asset('images/logo.png') }}" alt="Logo CAEI" class="h-24 w-24 rounded-full object-cover shadow-lg border-4 border-white/10">
                 </a>
             </div>
