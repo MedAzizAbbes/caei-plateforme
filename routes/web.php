@@ -478,22 +478,8 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
         'source'  => $request->input('source', 'digital_moov'),
     ]);
 
-    try {
-        \Illuminate\Support\Facades\Mail::raw(
-            "Nouveau message de contact CAEI :\n\n" .
-            "Nom : " . $validated['name'] . "\n" .
-            "Email : " . $validated['email'] . "\n" .
-            "Sujet : " . ($request->input('subject', 'Contact') ) . "\n\n" .
-            "Message :\n" . $validated['message'],
-            function ($m) use ($validated, $request) {
-                $m->to('contact@caei-afri.com')
-                  ->cc('amenizina12@gmail.com')
-                  ->subject('[CAEI Contact] ' . $request->input('subject', 'Nouveau contact'));
-            }
-        );
-    } catch (\Exception $e) {
-        \Illuminate\Support\Facades\Log::warning("Contact mail could not be sent: " . $e->getMessage());
-    }
+    // Envoi d'email désactivé à la demande du client
+    // Les messages sont sauvegardés en base de données et accessibles depuis le panneau d'administration
 
     return response()->json(['status' => 'success']);
 })->name('contact.send');

@@ -93,7 +93,7 @@
     }
 
     .et-navbar .nav-brand img {
-      height: 50px;
+      height: 52px;
       object-fit: contain;
       transition: var(--transition);
     }
@@ -473,6 +473,7 @@
       width: 160px;
       height: 160px;
       object-fit: contain;
+      filter: drop-shadow(0 8px 25px rgba(206, 146, 51, 0.4));
       filter: drop-shadow(0 8px 25px rgba(206, 146, 51, 0.4));
       animation: rotateSlow 20s linear infinite reverse;
     }
@@ -1067,74 +1068,101 @@
       gap: 10px;
     }
 
-    /* ===== CAROUSEL SECTION ===== */
+    /* ===== PROGRAMME / SCHEDULE SECTION UPGRADE ===== */
     .et-schedule {
       padding: 100px 0;
-      background: linear-gradient(135deg, rgba(248, 249, 252, 0.93) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset("assets/img/features-bg.jpg") }}') center/cover no-repeat fixed;
+      background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
       position: relative;
     }
 
     .month-filter {
       display: flex;
-      gap: 10px;
+      gap: 12px;
       flex-wrap: wrap;
       justify-content: center;
       margin-bottom: 50px;
     }
 
     .month-btn {
-      padding: 10px 22px;
-      border: 2px solid #dee2e6;
-      background: transparent;
-      color: var(--gray);
+      padding: 12px 28px;
+      border: 1.5px solid #e2e8f0;
+      background: #ffffff;
+      color: #475569;
       border-radius: 50px;
-      font-size: 14px;
-      font-weight: 600;
+      font-size: 14.5px;
+      font-weight: 700;
       cursor: pointer;
-      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .month-btn.active,
     .month-btn:hover {
+      border-color: var(--gold);
+      color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(206, 146, 51, 0.18);
+    }
+
+    .month-btn.active {
       border-color: var(--gold);
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
       color: var(--navy);
+      box-shadow: 0 8px 25px rgba(206, 146, 51, 0.35);
+      transform: translateY(-2px);
     }
 
     .schedule-card {
-      background: var(--white);
-      border-radius: var(--radius-sm);
+      background: #ffffff;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: var(--shadow-sm);
-      transition: var(--transition);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+      box-shadow: 0 10px 30px rgba(0, 31, 63, 0.05);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
       height: 100%;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
 
     .schedule-card:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0, 31, 63, 0.12);
+      transform: translateY(-8px);
+      border-color: rgba(206, 146, 51, 0.4);
     }
 
     .schedule-card-img {
-      height: 170px;
+      height: 180px;
       overflow: hidden;
+      position: relative;
     }
 
     .schedule-card-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.5s ease;
+      transition: transform 0.6s ease;
     }
 
     .schedule-card:hover .schedule-card-img img {
-      transform: scale(1.08);
+      transform: scale(1.1);
+    }
+
+    .schedule-card-img::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50%;
+      background: linear-gradient(to top, rgba(0, 31, 63, 0.35), transparent);
+      pointer-events: none;
     }
 
     .schedule-card-body {
-      padding: 20px;
+      padding: 22px;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
@@ -1142,51 +1170,69 @@
 
     .schedule-code {
       display: inline-block;
-      background: rgba(206,146,51,0.1);
+      background: rgba(206, 146, 51, 0.12);
       color: var(--gold-dark);
       font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 6px;
-      margin-bottom: 10px;
-      letter-spacing: 0.5px;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: 8px;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
     }
 
     .schedule-card-body h6 {
       font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 15px;
+      font-weight: 800;
+      font-size: 15.5px;
       color: var(--navy);
-      margin-bottom: 12px;
-      flex-grow: 1;
-      line-height: 1.4;
+      margin-top: 10px;
+      margin-bottom: 14px;
+      line-height: 1.45;
+      min-height: 44px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .schedule-meta {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      margin-bottom: 16px;
+      gap: 8px;
+      margin-bottom: 18px;
+      background: #f8fafc;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid #f1f5f9;
     }
 
     .schedule-meta-item {
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 13px;
-      color: var(--gray);
+      gap: 10px;
+      font-size: 12.5px;
+      color: #64748b;
+      font-weight: 600;
     }
 
     .schedule-meta-item i {
       color: var(--gold);
-      font-size: 14px;
+      font-size: 15px;
+      background: rgba(206, 146, 51, 0.1);
+      width: 26px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
     }
 
     .schedule-price {
       font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--gold);
+      font-size: 21px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.5px;
     }
 
     .btn-register {
@@ -1194,45 +1240,86 @@
       width: 100%;
       background: linear-gradient(135deg, var(--navy), var(--navy-mid));
       color: var(--white);
-      font-weight: 700;
-      font-size: 14px;
-      padding: 12px;
-      border-radius: 10px;
+      font-weight: 800;
+      font-size: 13.5px;
+      padding: 13px;
+      border-radius: 12px;
       text-align: center;
       text-decoration: none;
-      transition: var(--transition);
+      transition: all 0.3s ease;
       border: none;
       cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0, 31, 63, 0.15);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .btn-register:hover {
       background: linear-gradient(135deg, var(--gold), var(--gold-light));
       color: var(--navy);
       transform: translateY(-2px);
-      box-shadow: var(--shadow-gold);
+      box-shadow: 0 8px 25px rgba(206, 146, 51, 0.35);
     }
 
     /* Swiper customization */
+    .schedule-swiper-container {
+      position: relative;
+      padding: 0 50px;
+    }
+
+    @media (max-width: 768px) {
+      .schedule-swiper-container {
+        padding: 0 5px;
+      }
+    }
+
+    .scheduleSwiper {
+      padding: 15px 8px 40px 8px;
+    }
+
     .swiper-pagination-bullet {
       width: 10px;
       height: 10px;
-      background: #dee2e6;
+      background: #cbd5e1;
       opacity: 1;
+      transition: all 0.3s ease;
     }
 
     .swiper-pagination-bullet-active {
       background: var(--gold);
-      transform: scale(1.3);
+      width: 28px;
+      border-radius: 10px;
     }
 
-    .swiper-button-next,
-    .swiper-button-prev {
-      color: var(--gold) !important;
-      background: var(--white);
-      width: 46px !important;
-      height: 46px !important;
+    .schedule-swiper-container .swiper-button-next,
+    .schedule-swiper-container .swiper-button-prev {
+      color: var(--navy) !important;
+      background: #ffffff;
+      width: 48px !important;
+      height: 48px !important;
       border-radius: 50%;
-      box-shadow: var(--shadow-md);
+      border: 1.5px solid #e2e8f0;
+      box-shadow: 0 8px 25px rgba(0, 31, 63, 0.12);
+      z-index: 10;
+      top: 45% !important;
+      transition: all 0.3s ease;
+    }
+
+    .schedule-swiper-container .swiper-button-next:hover,
+    .schedule-swiper-container .swiper-button-prev:hover {
+      background: var(--navy);
+      color: var(--gold) !important;
+      border-color: var(--navy);
+      transform: scale(1.1);
+      box-shadow: 0 12px 30px rgba(0, 31, 63, 0.25);
+    }
+
+    .schedule-swiper-container .swiper-button-prev {
+      left: 0 !important;
+    }
+
+    .schedule-swiper-container .swiper-button-next {
+      right: 0 !important;
     }
 
     .swiper-button-next::after,
@@ -1241,10 +1328,10 @@
       font-weight: 900;
     }
 
-    /* ===== CONTACT SECTION ===== */
+    /* ===== CONTACT SECTION GLASSMORPHISM UPGRADE ===== */
     .et-contact {
-      padding: 100px 0;
-      background: linear-gradient(135deg, var(--navy) 0%, #002050 100%);
+      padding: 110px 0;
+      background: radial-gradient(circle at top right, #002d5c 0%, #001229 100%) !important;
       position: relative;
       overflow: hidden;
     }
@@ -1253,117 +1340,250 @@
       content: '';
       position: absolute;
       top: -200px; right: -200px;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(206,146,51,0.12) 0%, transparent 70%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(206,146,51,0.18) 0%, transparent 70%);
+      pointer-events: none;
     }
 
-    .contact-info-item {
+    .et-contact::after {
+      content: '';
+      position: absolute;
+      bottom: -150px; left: -150px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(0, 61, 122, 0.4) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-info-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      padding: 20px 24px;
+      margin-bottom: 20px;
       display: flex;
       align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 32px;
+      gap: 18px;
+      backdrop-filter: blur(15px);
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .contact-info-card:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(206, 146, 51, 0.4);
+      transform: translateX(8px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     }
 
     .contact-icon {
-      width: 52px;
-      height: 52px;
-      min-width: 52px;
-      background: rgba(206,146,51,0.15);
-      border: 1px solid rgba(206,146,51,0.3);
-      border-radius: 14px;
+      width: 54px;
+      height: 54px;
+      min-width: 54px;
+      background: linear-gradient(135deg, rgba(206,146,51,0.25), rgba(206,146,51,0.05));
+      border: 1.5px solid rgba(206,146,51,0.4);
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--gold-light);
-      font-size: 20px;
+      font-size: 22px;
+      box-shadow: 0 4px 15px rgba(206,146,51,0.15);
     }
 
-    .contact-info-item h6 {
+    .contact-info-card h6 {
       color: var(--gold-light);
-      font-weight: 700;
-      font-size: 13px;
+      font-weight: 800;
+      font-size: 12.5px;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
+      letter-spacing: 1.2px;
+      margin-bottom: 5px;
     }
 
-    .contact-info-item p {
-      color: rgba(255,255,255,0.7);
-      font-size: 14px;
+    .contact-info-card p,
+    .contact-info-card a {
+      color: rgba(255,255,255,0.85);
+      font-size: 14.5px;
       margin: 0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-weight: 500;
+    }
+
+    .contact-info-card a:hover {
+      color: var(--gold-light);
     }
 
     .social-links {
       display: flex;
-      gap: 12px;
+      gap: 14px;
     }
 
     .social-link {
-      width: 44px;
-      height: 44px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: rgba(255,255,255,0.7);
-      font-size: 18px;
+      color: rgba(255,255,255,0.8);
+      font-size: 20px;
       text-decoration: none;
-      transition: var(--transition);
+      transition: all 0.35s ease;
+      backdrop-filter: blur(10px);
     }
 
     .social-link:hover {
-      background: var(--gold);
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
       border-color: var(--gold);
       color: var(--navy);
-      transform: translateY(-3px);
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(206,146,51,0.4);
     }
 
     .contact-form-card {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: var(--radius-md);
-      padding: 50px 40px;
-      backdrop-filter: blur(20px);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 28px;
+      padding: 50px 44px;
+      backdrop-filter: blur(25px);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      position: relative;
+    }
+
+    @media (max-width: 768px) {
+      .contact-form-card {
+        padding: 30px 22px;
+      }
     }
 
     .et-form-group {
       margin-bottom: 20px;
+      position: relative;
     }
 
     .et-form-group label {
-      color: rgba(255,255,255,0.7);
+      color: rgba(255,255,255,0.85);
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 8px;
       display: block;
+      letter-spacing: 0.3px;
+    }
+
+    .input-icon-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .input-icon-wrapper i {
+      position: absolute;
+      left: 18px;
+      color: var(--gold-light);
+      font-size: 16px;
+      pointer-events: none;
+      z-index: 2;
+      transition: all 0.3s ease;
     }
 
     .et-form-control {
       width: 100%;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 12px;
-      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1.5px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      padding: 14px 18px 14px 48px;
       color: var(--white);
-      font-size: 14px;
+      font-size: 14.5px;
       font-family: var(--font-main);
-      transition: var(--transition);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       outline: none;
     }
 
-    .et-form-control::placeholder { color: rgba(255,255,255,0.3); }
-
-    .et-form-control:focus {
-      border-color: var(--gold);
-      background: rgba(255,255,255,0.12);
-      box-shadow: 0 0 0 3px rgba(206,146,51,0.15);
+    textarea.et-form-control {
+      padding-left: 48px;
+      padding-top: 14px;
+      resize: vertical;
+      min-height: 130px;
     }
 
-    textarea.et-form-control {
-      resize: vertical;
-      min-height: 120px;
+    .et-form-control::placeholder { color: rgba(255,255,255,0.35); }
+
+    .et-form-control:focus {
+      border-color: var(--gold-light);
+      background: rgba(255,255,255,0.12);
+      box-shadow: 0 0 25px rgba(206,146,51,0.25);
+    }
+
+    .et-form-control:focus + i,
+    .input-icon-wrapper:focus-within i {
+      color: #ffffff;
+      transform: scale(1.15);
+    }
+
+    .btn-contact-submit {
+      width: 100%;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 16px;
+      padding: 16px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.35s ease;
+      box-shadow: 0 8px 30px rgba(206, 146, 51, 0.35);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .btn-contact-submit:hover {
+      background: linear-gradient(135deg, #ffffff, var(--gold-light));
+      color: var(--navy);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 35px rgba(206, 146, 51, 0.5);
+    }
+
+    /* Intl-tel-input styling & alignment fix */
+    .iti {
+      width: 100%;
+    }
+
+    .iti .et-form-control {
+      padding-left: 95px !important;
+    }
+
+    .iti__flag-container {
+      padding-left: 10px;
+    }
+
+    .iti__selected-dial-code {
+      color: var(--gold-light) !important;
+      font-weight: 700;
+      font-size: 14px;
+      margin-left: 4px;
+    }
+
+    .iti__country-list {
+      background-color: #ffffff !important;
+      color: #0f172a !important;
+      border-radius: 14px !important;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3) !important;
+      border: 1px solid #e2e8f0 !important;
+      z-index: 9999 !important;
+    }
+
+    .iti__country {
+      color: #0f172a !important;
+      padding: 10px 14px !important;
+    }
+
+    .iti__country-name, .iti__dial-code {
+      color: #1e293b !important;
     }
 
     /* ===== FOOTER ===== */
@@ -1963,89 +2183,62 @@
         <p class="section-subtitle">Sessions à venir — Inscrivez-vous avant la date limite</p>
       </div>
 
-      <!-- Month filter tabs (Rolling 3 months according to start_date) -->
-      <div class="month-filter" data-aos="fade-up" data-aos-delay="100">
-        @foreach($rollingMonths as $rIndex => $rMonth)
-          <button class="month-btn {{ $rIndex === 0 ? 'active' : '' }}" data-month="{{ $rMonth['slug'] }}">
-            <i class="bi bi-calendar-event me-1"></i> {{ $rMonth['name'] }}
-          </button>
-        @endforeach
-        <button class="month-btn" data-month="tous">
-          <i class="bi bi-grid me-1"></i> Voir Tout
-        </button>
+      <!-- Month filter tabs -->
+      <div class="month-filter d-flex align-items-center justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="100">
+        <button class="nav-btn rounded-circle d-flex align-items-center justify-content-center" id="prev-quarter" style="width: 40px; height: 40px; border: none; background: rgba(0,15,60,0.05); color: #000f3c; transition: all 0.3s;"><i class="bi bi-chevron-left fw-bold"></i></button>
+        <div id="quarter-months" class="d-flex flex-wrap gap-2 justify-content-center">
+          <!-- Dynamically populated by JS -->
+        </div>
+        
+        <button class="nav-btn rounded-circle d-flex align-items-center justify-content-center" id="next-quarter" style="width: 40px; height: 40px; border: none; background: rgba(0,15,60,0.05); color: #000f3c; transition: all 0.3s;"><i class="bi bi-chevron-right fw-bold"></i></button>
       </div>
 
-      <!-- Swiper Carousel Container with padded controls -->
-      <div class="schedule-swiper-container" data-aos="fade-up" data-aos-delay="200">
-        <div class="swiper scheduleSwiper">
-          <div class="swiper-wrapper">
+      <!-- Swiper Carousel -->
+      <div class="swiper scheduleSwiper" data-aos="fade-up" data-aos-delay="200">
+        <div class="swiper-wrapper">
 
-            @forelse($allFormations ?? [] as $fIndex => $formation)
-            @php
-              if ($formation->start_date) {
-                  $mNum = (int)$formation->start_date->format('n');
-                  $assignedMonthName = $frenchMonths[$mNum] ?? $formation->start_date->format('F');
-                  $assignedMonthSlug = \Illuminate\Support\Str::slug($assignedMonthName);
-                  $dateBadge = $formation->start_date->format('d/m/Y');
-              } else {
-                  $assignedMonthSlug = $rollingMonths[$fIndex % 3]['slug'];
-                  $assignedMonthName = $rollingMonths[$fIndex % 3]['name'];
-                  $dateBadge = 'Session ' . $assignedMonthName;
-              }
-
-              $fallbackImages = [
-                'assets/img/formation_finance.jpg',
-                'assets/img/formation_leadership.jpg',
-                'assets/img/formation_tech.jpg',
-                'assets/img/formation_audit.jpg',
-                'assets/img/im1.jpg',
-                'assets/img/img2.jpg',
-                'assets/img/professionel.jpg',
-              ];
-              $chosenImgPath = $formation->image ? asset('storage/' . $formation->image) : asset($fallbackImages[$fIndex % count($fallbackImages)]);
-            @endphp
-            <div class="swiper-slide" data-month="{{ $assignedMonthSlug }}">
-              <div class="schedule-card">
-                <div class="schedule-card-img">
-                  <img src="{{ $chosenImgPath }}" alt="{{ $formation->title }}" loading="lazy">
+          @forelse($allFormations ?? [] as $formation)
+          @php 
+            $monthsList = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+            $month = $formation->start_date ? $monthsList[$formation->start_date->format('n') - 1] : 'janvier';
+          @endphp
+          <div class="swiper-slide filterable-slide" data-month="{{ $month }}" style="width: 300px;">
+            <div class="schedule-card">
+              <div class="schedule-card-img">
+                <img src="{{ $formation->image ? asset('storage/' . $formation->image) : asset('assets/img/img3.jpg') }}" alt="{{ $formation->title }}" loading="lazy">
+              </div>
+              <div class="schedule-card-body">
+                <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
+                <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
+                <div class="schedule-meta">
+                  <div class="schedule-meta-item">
+                    <i class="bi bi-geo-alt"></i>
+                    <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
+                  </div>
+                  <div class="schedule-meta-item">
+                    <i class="bi bi-clock"></i>
+                    <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
+                  </div>
                 </div>
-                <div class="schedule-card-body">
-                  <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
-                    <span class="badge bg-light text-dark border" style="font-size:11px; padding: 4px 8px; border-radius: 6px;">
-                      <i class="bi bi-calendar2-check text-warning me-1"></i>{{ $dateBadge }}
-                    </span>
-                  </div>
-                  <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
-                  <div class="schedule-meta">
-                    <div class="schedule-meta-item">
-                      <i class="bi bi-geo-alt"></i>
-                      <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
-                    </div>
-                    <div class="schedule-meta-item">
-                      <i class="bi bi-clock"></i>
-                      <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center justify-content-between mb-3 mt-auto">
-                    <span class="schedule-price">
-                      @if($formation->price)
-                        {{ number_format($formation->price, 0, ',', ' ') }} €
-                      @else
-                        Sur devis
-                      @endif
-                    </span>
-                    <span class="badge" style="background: rgba(206,146,51,0.15); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
-                  </div>
-                  <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire / Devis</a>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <span class="schedule-price">
+                    @if($formation->price)
+                      {{ number_format($formation->price, 0, ',', ' ') }} €
+                    @else
+                      Sur devis
+                    @endif
+                  </span>
+                  <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
                 </div>
+                <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire / Devis</a>
               </div>
             </div>
-            @empty
-            <div class="text-center py-5 text-muted">
-              <p>Aucune formation disponible pour le moment.</p>
-            </div>
-            @endforelse
+          </div>
+          @empty
+          <div class="text-center py-5 text-muted">
+            <p>Aucune formation disponible pour le moment.</p>
+          </div>
+          @endforelse
 
           </div>
 
@@ -2068,59 +2261,71 @@
 
   <!-- ===== CONTACT ===== -->
   <section class="et-contact" id="contact">
-    <div class="container position-relative">
-      <div class="row g-5">
+    <div class="container position-relative" style="z-index: 2;">
+      <div class="row g-5 align-items-center">
 
         <!-- Info -->
         <div class="col-lg-5" data-aos="fade-right">
-          <span class="section-label" style="background: rgba(206,146,51,0.15); color: var(--gold-light);">Contact</span>
-          <h2 class="mt-3 mb-4" style="font-family: var(--font-display); font-size: clamp(28px,4vw,44px); font-weight:800; color: white; line-height:1.2;">
-            Restons <span style="color: var(--gold-light);">Connectés !</span>
+          <span class="section-label" style="background: rgba(206,146,51,0.18); color: var(--gold-light); border: 1px solid rgba(206,146,51,0.3);">
+            <i class="bi bi-chat-left-dots-fill me-1"></i> Contact & Rendez-vous
+          </span>
+          <h2 class="mt-3 mb-4" style="font-family: var(--font-display); font-size: clamp(28px,4vw,46px); font-weight:900; color: white; line-height:1.2;">
+            Restons <span style="color: var(--gold-light); background: linear-gradient(135deg, var(--gold-light), #ffffff); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Connectés !</span>
           </h2>
-          <p class="mb-5" style="color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.8;">
-            Votre opinion compte vraiment pour nous. Contactez-nous pour toute question concernant nos formations, nos programmes ou pour prendre rendez-vous.
+          <p class="mb-5" style="color: rgba(255,255,255,0.75); font-size: 15.5px; line-height: 1.8;">
+            Notre équipe d'experts est à votre disposition pour planifier votre entretien d'admission, personnaliser votre programme ou vous guider sur les modalités de financement.
           </p>
 
-          <div class="contact-info-item">
+          <div class="contact-info-card">
             <div class="contact-icon">
               <i class="bi bi-geo-alt-fill"></i>
             </div>
             <div>
-              <h6>Adresse</h6>
+              <h6>Adresse Siège</h6>
               <p>SIS 8 Rue Claude Bernard 1002 Belvédère-Tunis, Tunisie</p>
             </div>
           </div>
 
-          <div class="contact-info-item">
+          <div class="contact-info-card">
             <div class="contact-icon">
               <i class="bi bi-telephone-fill"></i>
             </div>
             <div>
-              <h6>Téléphone</h6>
-              <p>+216 55 332 885</p>
+              <h6>Ligne Directe</h6>
+              <p><a href="tel:+21655332885">+216 55 332 885</a></p>
             </div>
           </div>
 
-          <div class="contact-info-item">
+          <div class="contact-info-card">
+            <div class="contact-icon">
+              <i class="bi bi-envelope-check-fill"></i>
+            </div>
+            <div>
+              <h6>Email Officiel</h6>
+              <p><a href="mailto:contact@caei-afri.com">contact@caei-afri.com</a></p>
+            </div>
+          </div>
+
+          <div class="contact-info-card">
             <div class="contact-icon">
               <i class="bi bi-clock-fill"></i>
             </div>
             <div>
-              <h6>Horaires</h6>
+              <h6>Horaires d'Ouverture</h6>
               <p>Lundi – Vendredi : 09h00 – 18h00</p>
             </div>
           </div>
 
-          <div class="mt-4">
-            <p class="mb-3" style="color: rgba(255,255,255,0.5); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Suivez-nous</p>
+          <div class="mt-4 pt-2">
+            <p class="mb-3" style="color: rgba(255,255,255,0.6); font-size: 13px; text-transform: uppercase; letter-spacing: 1.2px; font-weight: 700;">Rejoignez la Communauté</p>
             <div class="social-links">
-              <a href="https://www.facebook.com/CAEIAfrique/" target="_blank" class="social-link">
+              <a href="https://www.facebook.com/CAEIAfrique/" target="_blank" class="social-link" title="Facebook CAEI">
                 <i class="bi bi-facebook"></i>
               </a>
-              <a href="https://www.instagram.com/caei_afri/" target="_blank" class="social-link">
+              <a href="https://www.instagram.com/caei_afri/" target="_blank" class="social-link" title="Instagram CAEI">
                 <i class="bi bi-instagram"></i>
               </a>
-              <a href="https://www.linkedin.com/company/comit%C3%A9-africain-d-expertise-internationale-caei/" target="_blank" class="social-link">
+              <a href="https://www.linkedin.com/company/comit%C3%A9-africain-d-expertise-internationale-caei/" target="_blank" class="social-link" title="LinkedIn CAEI">
                 <i class="bi bi-linkedin"></i>
               </a>
             </div>
@@ -2130,13 +2335,27 @@
         <!-- Form -->
         <div class="col-lg-7" data-aos="fade-left" data-aos-delay="200">
           <div class="contact-form-card">
-            <h4 style="font-family: var(--font-display); color: white; font-weight: 700; margin-bottom: 30px;">
-              Prendre Rendez-vous en Ligne
-            </h4>
+            <div class="d-flex align-items-center justify-content-between mb-4">
+              <div>
+                <span class="badge mb-2" style="background: rgba(206,146,51,0.18); color: var(--gold-light); border: 1px solid rgba(206,146,51,0.3); font-size: 11px; padding: 6px 12px; border-radius: 8px;">
+                  Formulaire Rapide
+                </span>
+                <h3 style="font-family: var(--font-display); color: white; font-weight: 800; margin: 0;">
+                  Prendre Rendez-vous en Ligne
+                </h3>
+              </div>
+              <span class="d-none d-sm-inline-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: rgba(206,146,51,0.15); border-radius: 50%; color: var(--gold-light); font-size: 22px;">
+                <i class="bi bi-calendar-plus"></i>
+              </span>
+            </div>
 
             @if(session('success'))
-              <div class="alert alert-success border-0 rounded-4 mb-4 p-3 text-white font-bold" style="background: rgba(40, 167, 69, 0.25); border: 1px solid #28a745 !important;">
-                <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+              <div class="alert alert-success border-0 rounded-4 mb-4 p-3 text-white font-bold d-flex align-items-center gap-3" style="background: rgba(40, 167, 69, 0.25); border: 1px solid #28a745 !important;">
+                <i class="bi bi-check-circle-fill text-success" style="font-size: 24px;"></i>
+                <div>
+                  <strong class="d-block text-white">Demande Envoyée avec Succès !</strong>
+                  <span style="font-size: 13.5px; opacity: 0.9;">{{ session('success') }}</span>
+                </div>
               </div>
             @endif
 
@@ -2144,20 +2363,6 @@
               @csrf
               <input type="hidden" name="type" value="appointment">
               <div class="row g-4">
-                <!-- 1. Nom & Prénom -->
-                <div class="col-md-6">
-                  <div class="et-form-group">
-                    <label>Nom & Prénom *</label>
-                    <input type="text" name="nom" class="et-form-control" placeholder="Votre nom complet" required>
-                  </div>
-                </div>
-
-                <!-- 2. Téléphone / WhatsApp -->
-                <div class="col-md-6">
-                  <div class="et-form-group">
-                    <label>Téléphone / WhatsApp *</label>
-                    <input type="tel" name="mobile" class="et-form-control" placeholder="+216 XX XXX XXX" required>
-                  </div>
                 </div>
 
                 <!-- 3. Adresse e-mail -->
@@ -2563,14 +2768,14 @@
     window.scheduleSwiper = new Swiper('.scheduleSwiper', {
       slidesPerView: 1,
       spaceBetween: 20,
-      loop: true,
+      loop: false,
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
       },
       navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        nextEl: '.schedule-swiper-container .swiper-button-next',
+        prevEl: '.schedule-swiper-container .swiper-button-prev',
       },
       breakpoints: {
         576: { slidesPerView: 2 },
@@ -2580,92 +2785,97 @@
       }
     });
 
-    
-    // ===== FILTER LOGIC =====
-    let allSlidesHTML = [];
-    document.addEventListener("DOMContentLoaded", function() {
-        const slides = document.querySelectorAll(".scheduleSwiper .swiper-slide.filterable-slide");
-        slides.forEach(slide => {
-            allSlidesHTML.push({
-                month: slide.getAttribute("data-month"),
-                html: slide.outerHTML
-            });
-        });
-        
-        // Default filter based on first active button (Janvier)
-        setTimeout(() => {
-           filterSlides('janvier');
-        }, 500);
+    // ===== MONTH FILTER BUTTONS (3 ROLLING MONTHS) =====
+    const monthBtns = document.querySelectorAll('.month-btn');
+    const scheduleSlides = document.querySelectorAll('.scheduleSwiper .swiper-slide');
+
+    function filterScheduleByMonth(targetMonth) {
+      scheduleSlides.forEach(slide => {
+        const slideMonth = slide.getAttribute('data-month');
+        if (targetMonth === 'tous' || slideMonth === targetMonth) {
+          slide.style.display = '';
+        } else {
+          slide.style.display = 'none';
+        }
+      });
+
+      if (window.scheduleSwiper) {
+        window.scheduleSwiper.update();
+        window.scheduleSwiper.slideTo(0);
+      }
+    }
+
+    monthBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        monthBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const targetMonth = this.getAttribute('data-month');
+        filterScheduleByMonth(targetMonth);
+      });
     });
 
-    function filterSlides(month) {
-        const wrapper = document.querySelector(".scheduleSwiper .swiper-wrapper");
-        if (!wrapper) return;
-        
-        wrapper.innerHTML = "";
-        
-        let hasSlides = false;
-        allSlidesHTML.forEach(item => {
-            if (item.month === month) {
-                wrapper.innerHTML += item.html;
-                hasSlides = true;
-            }
+    // Filter on initial load if an active month button exists
+    const initialActiveBtn = document.querySelector('.month-btn.active');
+    if (initialActiveBtn) {
+      filterScheduleByMonth(initialActiveBtn.getAttribute('data-month'));
+    }
+
+
+    // ===== MONTH FILTERING FOR SWIPER (DYNAMIC DATA-MONTH) =====
+    document.addEventListener("DOMContentLoaded", function() {
+      const monthBtns = document.querySelectorAll('.month-btn');
+      const scheduleSlides = document.querySelectorAll('.scheduleSwiper .swiper-slide');
+
+      function filterScheduleByMonth(targetMonth) {
+        let visibleCount = 0;
+        scheduleSlides.forEach(slide => {
+          const slideMonth = slide.getAttribute('data-month');
+          if (targetMonth === 'tous' || slideMonth === targetMonth) {
+            slide.style.display = '';
+            visibleCount++;
+          } else {
+            slide.style.display = 'none';
+          }
         });
-        
-        if (!hasSlides) {
-            wrapper.innerHTML = '<div class="text-center py-5 text-muted w-100"><p>Aucune session programmée pour ce mois.</p></div>';
+
+        let emptyMsg = document.getElementById('schedule-empty-msg');
+        if (visibleCount === 0) {
+          if (!emptyMsg) {
+            emptyMsg = document.createElement('div');
+            emptyMsg.id = 'schedule-empty-msg';
+            emptyMsg.className = 'text-center py-5 text-muted w-100 fs-6';
+            emptyMsg.innerHTML = '<p class="mb-0"><i class="bi bi-calendar-x fs-3 d-block text-warning mb-2"></i>Aucune session programmée pour ce mois.</p>';
+            document.querySelector('.scheduleSwiper .swiper-wrapper').appendChild(emptyMsg);
+          } else {
+            emptyMsg.style.display = 'block';
+          }
+        } else {
+          if (emptyMsg) {
+            emptyMsg.style.display = 'none';
+          }
         }
-        
+
         if (window.scheduleSwiper) {
-            window.scheduleSwiper.update();
-            window.scheduleSwiper.slideTo(0);
+          window.scheduleSwiper.update();
+          window.scheduleSwiper.slideTo(0);
         }
-    }
-    
-    // ===== TRIMESTER FILTER BUTTONS =====
-    const quarters = [
-        [ { id: 'janvier', label: 'Janvier' }, { id: 'fevrier', label: 'Février' }, { id: 'mars', label: 'Mars' } ],
-        [ { id: 'avril', label: 'Avril' }, { id: 'mai', label: 'Mai' }, { id: 'juin', label: 'Juin' } ],
-        [ { id: 'juillet', label: 'Juillet' }, { id: 'aout', label: 'Août' }, { id: 'septembre', label: 'Septembre' } ],
-        [ { id: 'octobre', label: 'Octobre' }, { id: 'novembre', label: 'Novembre' }, { id: 'decembre', label: 'Décembre' } ]
-    ];
-    let currentQuarterIndex = 0;
-    const quarterContainer = document.getElementById('quarter-months');
-    
+      }
 
-    function renderQuarter(index) {
-        if (!quarterContainer) return;
-        quarterContainer.innerHTML = '';
-        quarters[index].forEach((month, i) => {
-            const btn = document.createElement('button');
-            btn.className = `month-btn ${index === 0 && i === 0 ? 'active' : ''}`;
-            btn.dataset.month = month.id;
-            btn.textContent = month.label;
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                filterSlides(this.dataset.month);
-            });
-            quarterContainer.appendChild(btn);
+      monthBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          monthBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const targetMonth = this.getAttribute('data-month');
+          filterScheduleByMonth(targetMonth);
         });
-    }
+      });
 
-    if (quarterContainer) {
-        renderQuarter(currentQuarterIndex);
-
-        document.getElementById('prev-quarter').addEventListener('click', function() {
-            currentQuarterIndex = (currentQuarterIndex > 0) ? currentQuarterIndex - 1 : 3;
-            renderQuarter(currentQuarterIndex);
-            
-        });
-
-        document.getElementById('next-quarter').addEventListener('click', function() {
-            currentQuarterIndex = (currentQuarterIndex < 3) ? currentQuarterIndex + 1 : 0;
-            renderQuarter(currentQuarterIndex);
-            
-        });
-
-            }
+      // Filter on initial load if an active month button exists
+      const initialActiveBtn = document.querySelector('.month-btn.active');
+      if (initialActiveBtn) {
+        filterScheduleByMonth(initialActiveBtn.getAttribute('data-month'));
+      }
+    });
 
     // ===== SMOOTH SCROLL for nav links =====
     document.querySelectorAll('a[href^="#"]').forEach(a => {
