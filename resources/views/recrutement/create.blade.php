@@ -839,19 +839,12 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-          <li><a href="#acceuil" class="active">Accueil<br></a></li>
-          <li><a href="#presentation">Présentation</a></li>
-          <li><a href="#agencies">Nos Agences</a></li>
+          <li><a href="{{ route('home') }}#acceuil">Accueil<br></a></li>
+          <li><a href="{{ route('home') }}#presentation">Présentation</a></li>
+          <li><a href="{{ route('home') }}#agencies">Nos Agences</a></li>
           <li><a href="{{ route('home.old') }}">Séminaires</a></li>
-          <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="{{ route('elite.training') }}">CAEI ELITE TRAINING</a></li>
-              <li><a href="{{ route('medical.services') }}">CAEI MEDICAL SERVICES</a></li>
-              <li><a href="{{ route('digitalmoov') }}">CAEI DIGITAL MOOV</a></li>
-              <li><a href="{{ route('callcenter.index') }}" target="_blank">CAEI CALL CENTER</a></li>
-            </ul>
-          </li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="{{ route('recrutement.index') }}" class="active">Recrutement</a></li>
+          <li><a href="{{ route('home') }}#contact">Contact</a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -873,48 +866,54 @@
 
     <style>
       .recrutement-form .form-control, .recrutement-form .form-select {
-        color: #ffffff !important;
+        color: #000f3c !important;
+        background-color: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        padding: 0.75rem 1rem;
+        border-radius: 10px;
       }
       .recrutement-form .form-control::placeholder, .recrutement-form .form-select::placeholder {
-        color: rgba(255, 255, 255, 0.4) !important;
+        color: #94a3b8 !important;
       }
       .recrutement-form .form-control:focus, .recrutement-form .form-select:focus {
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        border-color: #ffc451 !important;
-        box-shadow: 0 0 0 0.25rem rgba(255, 196, 81, 0.25) !important;
-        color: #ffffff !important;
+        background-color: #ffffff !important;
+        border-color: #000f3c !important;
+        box-shadow: 0 0 0 0.25rem rgba(0, 15, 60, 0.12) !important;
+        color: #000f3c !important;
       }
       .recrutement-form input[type="file"]::file-selector-button {
-        background-color: #333;
+        background-color: #000f3c;
         color: white;
         border: none;
-        padding: 0.375rem 0.75rem;
+        padding: 0.4rem 0.8rem;
         margin-right: 1rem;
+        border-radius: 6px;
         transition: 0.3s;
       }
       .recrutement-form input[type="file"]::file-selector-button:hover {
-        background-color: #444;
+        background-color: #ffc451;
+        color: #000f3c;
       }
     </style>
 
-    <section class="section" style="padding-top: 150px; padding-bottom: 100px; background-color: #000518; min-height: 80vh;">
+    <section class="section py-5" style="padding-top: 150px !important; padding-bottom: 100px; background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/features-bg.jpg') }}') center/cover no-repeat scroll; min-height: 85vh;">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="text-center mb-5">
-              <h2 class="text-white" style="font-weight: 700; font-family: 'Outfit', sans-serif;">Rejoignez le <span style="color: #ffc451;">CAEI</span></h2>
-              <p class="text-white-50">Postulez dès maintenant pour intégrer l'union des experts et des élites africains du continent de renommée internationale.</p>
+              <h2 class="fw-bold" style="color: #000f3c; font-family: 'Outfit', sans-serif;">Rejoignez le <span style="color: #ffc451;">CAEI</span></h2>
+              <p class="text-muted fs-6">Postulez dès maintenant pour intégrer l'union des experts et des élites africains du continent de renommée internationale.</p>
             </div>
 
             @if(session('success'))
-            <div class="alert alert-success bg-transparent border-success text-success d-flex align-items-center mb-4" role="alert">
+            <div class="alert alert-success bg-white border-success text-success d-flex align-items-center mb-4 shadow-sm rounded-3" role="alert">
               <i class="bi bi-check-circle-fill me-2 fs-4"></i>
               <div>{{ session('success') }}</div>
             </div>
             @endif
 
             @if($errors->any())
-            <div class="alert alert-danger bg-transparent border-danger text-danger mb-4">
+            <div class="alert alert-danger bg-white border-danger text-danger mb-4 shadow-sm rounded-3">
               <ul class="mb-0">
                 @foreach($errors->all() as $error)
                 <li>{{ $error }}</li>
@@ -923,58 +922,58 @@
             </div>
             @endif
 
-            <div class="card bg-transparent border border-secondary shadow-lg rounded-4">
+            <div class="card shadow-lg rounded-4 border-0" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(0, 15, 60, 0.08) !important;">
               <div class="card-body p-4 p-md-5">
                 <form action="{{ route('recrutement.store') }}" method="POST" enctype="multipart/form-data" class="recrutement-form">
                   @csrf
                   
                   <div class="row g-4">
                     <div class="col-md-6">
-                      <label class="form-label text-white-50">Nom <span class="text-danger">*</span></label>
-                      <input type="text" name="nom" class="form-control bg-transparent text-white border-secondary" required placeholder="Votre nom" value="{{ old('nom') }}">
+                      <label class="form-label fw-semibold" style="color: #000f3c;">Nom <span class="text-danger">*</span></label>
+                      <input type="text" name="nom" class="form-control" required placeholder="Votre nom" value="{{ old('nom') }}">
                     </div>
                     
                     <div class="col-md-6">
-                      <label class="form-label text-white-50">Prénom <span class="text-danger">*</span></label>
-                      <input type="text" name="prenom" class="form-control bg-transparent text-white border-secondary" required placeholder="Votre prénom" value="{{ old('prenom') }}">
+                      <label class="form-label fw-semibold" style="color: #000f3c;">Prénom <span class="text-danger">*</span></label>
+                      <input type="text" name="prenom" class="form-control" required placeholder="Votre prénom" value="{{ old('prenom') }}">
                     </div>
                     
                     <div class="col-md-6">
-                      <label class="form-label text-white-50">Email <span class="text-danger">*</span></label>
-                      <input type="email" name="email" class="form-control bg-transparent text-white border-secondary" required placeholder="votre@email.com" value="{{ old('email') }}">
+                      <label class="form-label fw-semibold" style="color: #000f3c;">Email <span class="text-danger">*</span></label>
+                      <input type="email" name="email" class="form-control" required placeholder="votre@email.com" value="{{ old('email') }}">
                     </div>
                     
                     <div class="col-md-6">
-                      <label class="form-label text-white-50">Téléphone <span class="text-danger">*</span></label>
-                      <input type="text" name="telephone" class="form-control bg-transparent text-white border-secondary" required placeholder="+216 XX XXX XXX" value="{{ old('telephone') }}">
+                      <label class="form-label fw-semibold" style="color: #000f3c;">Téléphone <span class="text-danger">*</span></label>
+                      <input type="text" name="telephone" class="form-control" required placeholder="+216 XX XXX XXX" value="{{ old('telephone') }}">
                     </div>
 
                     <div class="col-md-12">
-                      <label class="form-label text-white-50">Domaine d'expertise <span class="text-danger">*</span></label>
-                      <select name="domaine" class="form-select bg-transparent text-white border-secondary" required style="color: #ffffff;">
-                        <option value="" disabled selected style="color: #000;">Sélectionnez votre domaine</option>
-                        <option value="IT & Transformation Digitale" style="color: #000;" {{ old('domaine') == 'IT & Transformation Digitale' ? 'selected' : '' }}>IT & Transformation Digitale</option>
-                        <option value="Marketing & Communication" style="color: #000;" {{ old('domaine') == 'Marketing & Communication' ? 'selected' : '' }}>Marketing & Communication</option>
-                        <option value="Business & Management" style="color: #000;" {{ old('domaine') == 'Business & Management' ? 'selected' : '' }}>Business & Management</option>
-                        <option value="Services Médicaux" style="color: #000;" {{ old('domaine') == 'Services Médicaux' ? 'selected' : '' }}>Services Médicaux</option>
-                        <option value="Centre d'Appels & Support" style="color: #000;" {{ old('domaine') == 'Centre d\'Appels & Support' ? 'selected' : '' }}>Centre d'Appels & Support</option>
-                        <option value="Formation Professionnelle" style="color: #000;" {{ old('domaine') == 'Formation Professionnelle' ? 'selected' : '' }}>Formation Professionnelle</option>
-                        <option value="Autre" style="color: #000;" {{ old('domaine') == 'Autre' ? 'selected' : '' }}>Autre</option>
+                      <label class="form-label fw-semibold" style="color: #000f3c;">Domaine d'expertise <span class="text-danger">*</span></label>
+                      <select name="domaine" class="form-select" required>
+                        <option value="" disabled selected>Sélectionnez votre domaine</option>
+                        <option value="IT & Transformation Digitale" {{ old('domaine') == 'IT & Transformation Digitale' ? 'selected' : '' }}>IT & Transformation Digitale</option>
+                        <option value="Marketing & Communication" {{ old('domaine') == 'Marketing & Communication' ? 'selected' : '' }}>Marketing & Communication</option>
+                        <option value="Business & Management" {{ old('domaine') == 'Business & Management' ? 'selected' : '' }}>Business & Management</option>
+                        <option value="Services Médicaux" {{ old('domaine') == 'Services Médicaux' ? 'selected' : '' }}>Services Médicaux</option>
+                        <option value="Centre d'Appels & Support" {{ old('domaine') == 'Centre d\'Appels & Support' ? 'selected' : '' }}>Centre d'Appels & Support</option>
+                        <option value="Formation Professionnelle" {{ old('domaine') == 'Formation Professionnelle' ? 'selected' : '' }}>Formation Professionnelle</option>
+                        <option value="Autre" {{ old('domaine') == 'Autre' ? 'selected' : '' }}>Autre</option>
                       </select>
                     </div>
                     
                     <div class="col-12">
-                      <label class="form-label text-white-50">Votre CV (PDF, DOC, DOCX - Max 5MB) <span class="text-danger">*</span></label>
-                      <input type="file" name="cv" class="form-control bg-transparent text-white border-secondary" required accept=".pdf,.doc,.docx">
+                      <label class="form-label fw-semibold" style="color: #000f3c;">Votre CV (PDF, DOC, DOCX - Max 5MB) <span class="text-danger">*</span></label>
+                      <input type="file" name="cv" class="form-control" required accept=".pdf,.doc,.docx">
                     </div>
                     
                     <div class="col-12">
-                      <label class="form-label text-white-50">Message de motivation (Optionnel)</label>
-                      <textarea name="message" class="form-control bg-transparent text-white border-secondary" rows="4" placeholder="Parlez-nous de vous...">{{ old('message') }}</textarea>
+                      <label class="form-label fw-semibold" style="color: #000f3c;">Message de motivation (Optionnel)</label>
+                      <textarea name="message" class="form-control" rows="4" placeholder="Parlez-nous de vous...">{{ old('message') }}</textarea>
                     </div>
 
                     <div class="col-12 text-center mt-5">
-                      <button type="submit" class="btn text-dark fw-bold px-5 py-3 rounded-pill" style="background-color: #ffc451; transition: 0.3s;" onmouseover="this.style.backgroundColor='#e5ad3c'" onmouseout="this.style.backgroundColor='#ffc451'">
+                      <button type="submit" class="btn text-white fw-bold px-5 py-3 rounded-pill shadow-sm" style="background-color: #000f3c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc451'; this.style.color='#000f3c';" onmouseout="this.style.backgroundColor='#000f3c'; this.style.color='#ffffff';">
                         Soumettre ma candidature
                       </button>
                     </div>
@@ -987,7 +986,6 @@
       </div>
     </section>
 
-</main>
   </main>
 
   <footer id="footer" class="footer dark-background py-5" style="background-color: #000f3c; color: rgba(255,255,255,0.7);">
