@@ -71,7 +71,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('callcenter.contact.store') }}" method="POST" class="needs-validation">
+            <form action="{{ route('callcenter.contact.store') }}" method="POST" enctype="multipart/form-data" class="needs-validation">
               @csrf
               <div class="row g-4">
                 <div class="col-md-6">
@@ -111,9 +111,21 @@
                 <div class="col-12">
                   <div class="form-group">
                     <label for="message" class="form-label fw-semibold small" style="color: #94a3b8;">Détails du Cahier des Charges <span class="text-danger">*</span></label>
-                    <textarea class="form-control-glass w-100" id="message" name="message" style="height: 150px; resize: none;" required></textarea>
+                    <textarea class="form-control-glass w-100" id="message" name="message" style="height: 130px; resize: none;" required></textarea>
                   </div>
                 </div>
+
+                <!-- Pièce Jointe / Document -->
+                <div class="col-12">
+                  <div class="form-group">
+                    <label for="attachment" class="form-label fw-semibold small d-flex justify-content-between align-items-center" style="color: #94a3b8;">
+                      <span><i class="bi bi-paperclip text-warning me-1"></i> Pièce jointe / Cahier des charges (Optionnel)</span>
+                      <span class="text-white-50" style="font-size: 11px;">PDF, DOC, DOCX, PNG, JPG (Max 10 Mo)</span>
+                    </label>
+                    <input type="file" class="form-control-glass w-100 py-2" id="attachment" name="attachment" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.zip">
+                  </div>
+                </div>
+
                 <div class="col-12 mt-4 text-end">
                   <button class="btn-glass-red" type="submit">Transmettre la demande</button>
                 </div>

@@ -44,18 +44,19 @@
 
     /* Navbar Pro */
     .et-navbar {
-      background: #ffffff;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      background: #061743 !important;
+      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.25);
       padding: 16px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     .nav-brand-title {
       font-family: var(--font-display);
       font-weight: 800;
-      color: var(--primary);
+      color: #ffffff !important;
       font-size: 1.25rem;
     }
     .nav-brand-title span {
-      color: var(--gold);
+      color: var(--gold-light) !important;
     }
 
     /* Hero Banner Pro */
@@ -98,19 +99,19 @@
       color: #061743 !important;
     }
     .btn-outline-pro {
-      border: 2px solid #cbd5e1;
-      color: var(--primary);
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      color: #ffffff !important;
       font-weight: 700;
       padding: 8px 20px;
       border-radius: 50px;
       transition: all 0.3s ease;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.08);
       text-decoration: none;
     }
     .btn-outline-pro:hover {
-      border-color: var(--primary);
-      background: var(--primary);
-      color: #ffffff;
+      border-color: var(--gold-light);
+      background: rgba(242, 169, 15, 0.15);
+      color: var(--gold-light) !important;
     }
 
     /* Section titles */
