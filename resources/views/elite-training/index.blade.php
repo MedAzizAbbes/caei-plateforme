@@ -2445,14 +2445,38 @@
             <form action="{{ route('elite.appointment.store') }}" method="POST" id="contactForm">
               @csrf
               <input type="hidden" name="type" value="appointment">
-              <div class="row g-4">
+              <div class="row g-3">
+
+                <!-- 1. Nom & Prénom -->
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Nom & Prénom *</label>
+                    <div class="input-icon-wrapper">
+                      <i class="bi bi-person-fill"></i>
+                      <input type="text" name="nom" class="et-form-control" placeholder="Votre nom & prénom" required>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- 2. Téléphone -->
+                <div class="col-md-6">
+                  <div class="et-form-group">
+                    <label>Téléphone *</label>
+                    <div class="input-icon-wrapper">
+                      <i class="bi bi-telephone-fill"></i>
+                      <input type="tel" name="telephone" class="et-form-control" placeholder="+216 XX XXX XXX" required>
+                    </div>
+                  </div>
                 </div>
 
                 <!-- 3. Adresse e-mail -->
                 <div class="col-md-6">
                   <div class="et-form-group">
                     <label>Adresse e-mail *</label>
-                    <input type="email" name="email" class="et-form-control" placeholder="votre@email.com" required>
+                    <div class="input-icon-wrapper">
+                      <i class="bi bi-envelope-fill"></i>
+                      <input type="email" name="email" class="et-form-control" placeholder="votre@email.com" required>
+                    </div>
                   </div>
                 </div>
 
@@ -2460,7 +2484,10 @@
                 <div class="col-md-6">
                   <div class="et-form-group">
                     <label>Pays *</label>
-                    <input type="text" name="pays" class="et-form-control" placeholder="Ex: Tunisie, Côte d'Ivoire, Sénégal..." required>
+                    <div class="input-icon-wrapper">
+                      <i class="bi bi-geo-alt-fill"></i>
+                      <input type="text" name="pays" class="et-form-control" placeholder="Ex: Tunisie, Côte d'Ivoire..." required>
+                    </div>
                   </div>
                 </div>
 
@@ -2468,7 +2495,10 @@
                 <div class="col-md-6">
                   <div class="et-form-group">
                     <label>Fonction / Poste *</label>
-                    <input type="text" name="poste" class="et-form-control" placeholder="Ex: Directeur Financier, Chef de Projet..." required>
+                    <div class="input-icon-wrapper">
+                      <i class="bi bi-briefcase-fill"></i>
+                      <input type="text" name="poste" class="et-form-control" placeholder="Ex: Directeur Financier..." required>
+                    </div>
                   </div>
                 </div>
 
@@ -2476,7 +2506,10 @@
                 <div class="col-md-6">
                   <div class="et-form-group">
                     <label>Entreprise / Institution *</label>
-                    <input type="text" name="entreprise" class="et-form-control" placeholder="Nom de votre entreprise ou organisation" required>
+                    <div class="input-icon-wrapper">
+                      <i class="bi bi-building"></i>
+                      <input type="text" name="entreprise" class="et-form-control" placeholder="Nom de votre entreprise" required>
+                    </div>
                   </div>
                 </div>
 
@@ -2484,7 +2517,10 @@
                 <div class="col-md-6">
                   <div class="et-form-group">
                     <label>Formation ou séminaire choisi *</label>
-                    <input type="text" name="objet" class="et-form-control" placeholder="Intitulé de la formation souhaitée" required>
+                    <div class="input-icon-wrapper">
+                      <i class="bi bi-journal-bookmark-fill"></i>
+                      <input type="text" name="objet" class="et-form-control" placeholder="Intitulé de la formation" required>
+                    </div>
                   </div>
                 </div>
 
@@ -2492,7 +2528,10 @@
                 <div class="col-md-6">
                   <div class="et-form-group">
                     <label>Date / Session souhaitée</label>
-                    <input type="text" name="date_session" class="et-form-control" placeholder="Ex: Octobre 2026 / Session Prochaine">
+                    <div class="input-icon-wrapper">
+                      <i class="bi bi-calendar-event-fill"></i>
+                      <input type="text" name="date_session" class="et-form-control" placeholder="Ex: Octobre 2026">
+                    </div>
                   </div>
                 </div>
 
@@ -2500,11 +2539,14 @@
                 <div class="col-md-6">
                   <div class="et-form-group">
                     <label>Mode de participation *</label>
-                    <select name="mode_participation" class="et-form-control" required style="background: rgba(255,255,255,0.08); color: white;">
-                      <option value="" disabled selected style="background: #001f3f; color: white;">-- Sélectionnez un mode --</option>
-                      <option value="présentiel" style="background: #001f3f; color: white;">Présentiel</option>
-                      <option value="en_ligne" style="background: #001f3f; color: white;">En ligne</option>
-                    </select>
+                    <div class="input-icon-wrapper">
+                      <i class="bi bi-laptop-fill"></i>
+                      <select name="mode_participation" class="et-form-control" required style="background: rgba(255,255,255,0.08); color: white;">
+                        <option value="" disabled selected style="background: #001f3f; color: white;">-- Sélectionner un mode --</option>
+                        <option value="présentiel" style="background: #001f3f; color: white;">Présentiel</option>
+                        <option value="en_ligne" style="background: #001f3f; color: white;">En ligne</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
@@ -2512,19 +2554,22 @@
                 <div class="col-md-6">
                   <div class="et-form-group">
                     <label>Comment avez-vous connu cette formation ?</label>
-                    <select name="comment_connu" class="et-form-control" style="background: rgba(255,255,255,0.08); color: white;">
-                      <option value="" disabled selected style="background: #001f3f; color: white;">-- Sélectionnez une option --</option>
-                      <option value="Réseaux sociaux" style="background: #001f3f; color: white;">Réseaux sociaux (LinkedIn, Facebook...)</option>
-                      <option value="Recommandation" style="background: #001f3f; color: white;">Recommandation d'un collègue / ami</option>
-                      <option value="Site web" style="background: #001f3f; color: white;">Site web CAEI</option>
-                      <option value="Emailing / Newsletter" style="background: #001f3f; color: white;">Emailing / Newsletter</option>
-                      <option value="Autre" style="background: #001f3f; color: white;">Autre</option>
-                    </select>
+                    <div class="input-icon-wrapper">
+                      <i class="bi bi-megaphone-fill"></i>
+                      <select name="comment_connu" class="et-form-control" style="background: rgba(255,255,255,0.08); color: white;">
+                        <option value="" disabled selected style="background: #001f3f; color: white;">-- Sélectionner une option --</option>
+                        <option value="Réseaux sociaux" style="background: #001f3f; color: white;">Réseaux sociaux (LinkedIn, Facebook...)</option>
+                        <option value="Recommandation" style="background: #001f3f; color: white;">Recommandation d'un collègue / ami</option>
+                        <option value="Site web" style="background: #001f3f; color: white;">Site web CAEI</option>
+                        <option value="Emailing / Newsletter" style="background: #001f3f; color: white;">Emailing / Newsletter</option>
+                        <option value="Autre" style="background: #001f3f; color: white;">Autre</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
 
-                <div class="col-12">
-                  <button type="submit" class="btn-gold w-100 justify-content-center" style="border: none; font-size: 16px;">
+                <div class="col-12 mt-4">
+                  <button type="submit" class="btn-gold w-100 justify-content-center py-3" style="border: none; font-size: 16px; border-radius: 12px;">
                     <i class="bi bi-send-fill me-2"></i>
                     Envoyer ma demande d'inscription
                   </button>
