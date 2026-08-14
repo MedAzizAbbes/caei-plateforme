@@ -843,14 +843,6 @@
           <li><a href="#presentation">Présentation</a></li>
           <li><a href="#agencies">Nos Agences</a></li>
           <li><a href="{{ route('home.old') }}">Séminaires</a></li>
-          <li class="dropdown"><a href="#"><span>Services</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-            <ul>
-              <li><a href="{{ route('elite.training') }}">CAEI ELITE TRAINING</a></li>
-              <li><a href="{{ route('medical.services') }}">CAEI MEDICAL SERVICES</a></li>
-              <li><a href="{{ route('digitalmoov') }}">CAEI DIGITAL MOOV</a></li>
-              <li><a href="{{ route('callcenter.index') }}" target="_blank">CAEI CALL CENTER</a></li>
-            </ul>
-          </li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="{{ route('recrutement.index') }}">Recrutement</a></li>
         </ul>
