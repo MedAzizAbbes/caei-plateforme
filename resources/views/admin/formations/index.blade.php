@@ -1,21 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8 bg-slate-100">
+<div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8" style="background: linear-gradient(135deg, rgba(241, 245, 249, 0.85) 0%, rgba(226, 232, 240, 0.88) 100%), url('{{ asset('assets/img/company.jpg') }}') center/cover fixed no-repeat;">
     {{-- Sidebar Admin --}}
     <x-admin-sidebar />
 
     {{-- Contenu Principal --}}
     <div class="flex-1 p-6 md:p-8 overflow-y-auto">
         {{-- En-tête --}}
-        <div class="mb-8 rounded-2xl bg-gradient-to-r from-[#061743] via-[#001f3f] to-[#0a2463] p-8 text-white shadow-xl relative overflow-hidden">
-            <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl select-none font-black text-amber-400">📜</div>
+        <div class="mb-8 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6, 23, 67, 0.88) 0%, rgba(0, 31, 63, 0.92) 100%), url('{{ asset('assets/img/company.jpg') }}') center/cover no-repeat;">
+            <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">📚</div>
             <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
                     <span class="inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-3 py-1 text-xs font-bold text-[#ffbd45] border border-amber-500/30">
                         <span>📜</span> CAEI ELITE TRAINING
                     </span>
-                    <h1 class="mt-3 text-3xl font-black tracking-tight">Gestion des Formations</h1>
+                    <h1 class="mt-3 text-3xl font-black tracking-tight flex items-center gap-3">
+                        <span>Gestion des Formations</span> 📚
+                    </h1>
                     <p class="mt-2 text-sm text-slate-300">Gérez le catalogue des formations certifiantes, diplômantes (MBA/Doctorat), sur-mesure et e-learning.</p>
                 </div>
                 <div class="flex items-center gap-3">

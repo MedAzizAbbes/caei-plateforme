@@ -474,6 +474,7 @@
       height: 160px;
       object-fit: contain;
       filter: drop-shadow(0 8px 25px rgba(206, 146, 51, 0.4));
+      filter: drop-shadow(0 8px 25px rgba(206, 146, 51, 0.4));
       animation: rotateSlow 20s linear infinite reverse;
     }
 
@@ -1746,7 +1747,7 @@
 
             <!-- Center logo -->
             <div class="hero-logo-card">
-              <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training">
+              <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training">
             </div>
           </div>
         </div>
@@ -2182,81 +2183,62 @@
         <p class="section-subtitle">Sessions à venir — Inscrivez-vous avant la date limite</p>
       </div>
 
-      <!-- Month filter tabs (Rolling 3 months) -->
-      <div class="month-filter" data-aos="fade-up" data-aos-delay="100">
-        @foreach($rollingMonths as $rIndex => $rMonth)
-          <button class="month-btn {{ $rIndex === 0 ? 'active' : '' }}" data-month="{{ $rMonth['slug'] }}">
-            <i class="bi bi-calendar-event me-1"></i> {{ $rMonth['name'] }}
-          </button>
-        @endforeach
-        <button class="month-btn" data-month="tous">
-          <i class="bi bi-grid me-1"></i> Voir Tout
-        </button>
+      <!-- Month filter tabs -->
+      <div class="month-filter d-flex align-items-center justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="100">
+        <button class="nav-btn rounded-circle d-flex align-items-center justify-content-center" id="prev-quarter" style="width: 40px; height: 40px; border: none; background: rgba(0,15,60,0.05); color: #000f3c; transition: all 0.3s;"><i class="bi bi-chevron-left fw-bold"></i></button>
+        <div id="quarter-months" class="d-flex flex-wrap gap-2 justify-content-center">
+          <!-- Dynamically populated by JS -->
+        </div>
+        
+        <button class="nav-btn rounded-circle d-flex align-items-center justify-content-center" id="next-quarter" style="width: 40px; height: 40px; border: none; background: rgba(0,15,60,0.05); color: #000f3c; transition: all 0.3s;"><i class="bi bi-chevron-right fw-bold"></i></button>
       </div>
 
-      <!-- Swiper Carousel Container with padded controls -->
-      <div class="schedule-swiper-container" data-aos="fade-up" data-aos-delay="200">
-        <div class="swiper scheduleSwiper">
-          <div class="swiper-wrapper">
+      <!-- Swiper Carousel -->
+      <div class="swiper scheduleSwiper" data-aos="fade-up" data-aos-delay="200">
+        <div class="swiper-wrapper">
 
-            @forelse($allFormations ?? [] as $fIndex => $formation)
-            @php
-              $assignedMonthSlug = $rollingMonths[$fIndex % 3]['slug'];
-              $assignedMonthName = $rollingMonths[$fIndex % 3]['name'];
-
-              $fallbackImages = [
-                'assets/img/formation_finance.jpg',
-                'assets/img/formation_leadership.jpg',
-                'assets/img/formation_tech.jpg',
-                'assets/img/formation_audit.jpg',
-                'assets/img/im1.jpg',
-                'assets/img/img2.jpg',
-                'assets/img/professionel.jpg',
-              ];
-              $chosenImgPath = $formation->image ? asset('storage/' . $formation->image) : asset($fallbackImages[$fIndex % count($fallbackImages)]);
-            @endphp
-            <div class="swiper-slide" data-month="{{ $assignedMonthSlug }}">
-              <div class="schedule-card">
-                <div class="schedule-card-img">
-                  <img src="{{ $chosenImgPath }}" alt="{{ $formation->title }}" loading="lazy">
+          @forelse($allFormations ?? [] as $formation)
+          @php 
+            $monthsList = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+            $month = $formation->start_date ? $monthsList[$formation->start_date->format('n') - 1] : 'janvier';
+          @endphp
+          <div class="swiper-slide filterable-slide" data-month="{{ $month }}" style="width: 300px;">
+            <div class="schedule-card">
+              <div class="schedule-card-img">
+                <img src="{{ $formation->image ? asset('storage/' . $formation->image) : asset('assets/img/img3.jpg') }}" alt="{{ $formation->title }}" loading="lazy">
+              </div>
+              <div class="schedule-card-body">
+                <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
+                <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
+                <div class="schedule-meta">
+                  <div class="schedule-meta-item">
+                    <i class="bi bi-geo-alt"></i>
+                    <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
+                  </div>
+                  <div class="schedule-meta-item">
+                    <i class="bi bi-clock"></i>
+                    <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
+                  </div>
                 </div>
-                <div class="schedule-card-body">
-                  <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
-                    <span class="badge bg-light text-dark border" style="font-size:11px; padding: 4px 8px; border-radius: 6px;">
-                      <i class="bi bi-calendar2-check text-warning me-1"></i>{{ $assignedMonthName }}
-                    </span>
-                  </div>
-                  <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
-                  <div class="schedule-meta">
-                    <div class="schedule-meta-item">
-                      <i class="bi bi-geo-alt"></i>
-                      <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
-                    </div>
-                    <div class="schedule-meta-item">
-                      <i class="bi bi-clock"></i>
-                      <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center justify-content-between mb-3 mt-auto">
-                    <span class="schedule-price">
-                      @if($formation->price)
-                        {{ number_format($formation->price, 0, ',', ' ') }} €
-                      @else
-                        Sur devis
-                      @endif
-                    </span>
-                    <span class="badge" style="background: rgba(206,146,51,0.15); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
-                  </div>
-                  <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire / Devis</a>
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                  <span class="schedule-price">
+                    @if($formation->price)
+                      {{ number_format($formation->price, 0, ',', ' ') }} €
+                    @else
+                      Sur devis
+                    @endif
+                  </span>
+                  <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
                 </div>
+                <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire / Devis</a>
               </div>
             </div>
-            @empty
-            <div class="text-center py-5 text-muted">
-              <p>Aucune formation disponible pour le moment.</p>
-            </div>
-            @endforelse
+          </div>
+          @empty
+          <div class="text-center py-5 text-muted">
+            <p>Aucune formation disponible pour le moment.</p>
+          </div>
+          @endforelse
 
           </div>
 

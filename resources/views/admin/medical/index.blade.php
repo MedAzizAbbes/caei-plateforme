@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8 bg-slate-100">
+<div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8" style="background: linear-gradient(135deg, rgba(241, 245, 249, 0.85) 0%, rgba(226, 232, 240, 0.88) 100%), url('{{ asset('assets/img/service_medical_1786525641121.jpg') }}') center/cover fixed no-repeat;">
     
     {{-- Sidebar Administrateur --}}
     <x-admin-sidebar />
@@ -10,15 +10,20 @@
     <div class="flex-1 p-6 md:p-10 overflow-y-auto">
         
         {{-- En-tête du module --}}
-        <div class="mb-8 rounded-2xl bg-[#061743] p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div>
-                <span class="inline-block bg-[#f2a90f] text-[#061743] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">CAEI Medical Center</span>
-                <h1 class="text-3xl font-black uppercase tracking-tight">Gestion des Devis & Rendez-vous Médicaux</h1>
-                <p class="mt-2 text-slate-300 text-sm">Consultez, traitez et suivez les demandes d'accompagnement et d'évacuation sanitaire de vos patients internationaux.</p>
+        <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6, 23, 67, 0.88) 0%, rgba(0, 15, 60, 0.92) 100%), url('{{ asset('assets/img/service_medical_1786525641121.jpg') }}') center/cover no-repeat;">
+            <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">🩺</div>
+            <div class="relative z-10">
+                <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-[#061743] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                    <span>🩺</span> CAEI Medical Center
+                </span>
+                <h1 class="text-3xl font-black uppercase tracking-tight flex items-center gap-3">
+                    <span>Gestion des Devis & Rendez-vous Médicaux</span> 🏥
+                </h1>
+                <p class="mt-2 text-slate-200 text-sm">Consultez, traitez et suivez les demandes d'accompagnement et d'évacuation sanitaire de vos patients internationaux.</p>
             </div>
-            <div class="shrink-0 flex items-center gap-3">
+            <div class="shrink-0 flex items-center gap-3 relative z-10">
                 <a href="{{ route('medical.services') }}" target="_blank" class="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-[#061743] font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all">
-                    <span>Voir le site Medical Center</span>
+                    <span>Voir le site Medical Center 🩺</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 </a>
             </div>

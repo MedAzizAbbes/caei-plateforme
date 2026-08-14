@@ -1,17 +1,24 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8 bg-slate-100">
+<div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8" style="background: linear-gradient(135deg, rgba(241, 245, 249, 0.85) 0%, rgba(226, 232, 240, 0.88) 100%), url('{{ asset('assets/img/company.jpg') }}') center/cover fixed no-repeat;">
     
     {{-- Sidebar avec liens Séminaires et Medical Center --}}
     <x-admin-sidebar />
 
     {{-- Contenu principal original conservé à 100% --}}
     <div class="flex-1 p-6 md:p-8 overflow-y-auto">
-        <div class="mb-8 rounded-lg bg-[#061743] p-8 text-white">
-            <p class="text-sm font-black uppercase text-[#ffbd45]">Back-office CAEI</p>
-            <h1 class="mt-2 text-3xl font-black uppercase">Tableau de bord administrateur</h1>
-            <p class="mt-3 text-white/75">Bienvenue {{ Auth::user()->first_name }}. Gere les seminaires, participants, contenus et statistiques.</p>
+        <div class="mb-8 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6, 23, 67, 0.88) 0%, rgba(0, 15, 60, 0.92) 100%), url('{{ asset('assets/img/company.jpg') }}') center/cover no-repeat;">
+            <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">📊</div>
+            <div class="relative z-10">
+                <p class="text-sm font-black uppercase text-[#ffbd45] flex items-center gap-2">
+                    <span>📊</span> Back-office CAEI
+                </p>
+                <h1 class="mt-2 text-3xl font-black uppercase flex items-center gap-3">
+                    <span>Tableau de bord administrateur</span> ⚡
+                </h1>
+                <p class="mt-3 text-white/75">Bienvenue {{ Auth::user()->first_name }}. Gère les séminaires, participants, contenus et statistiques.</p>
+            </div>
         </div>
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
