@@ -1048,7 +1048,7 @@
           <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
             <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 0s; height: 100%; min-height: 200px;">
               <a href="{{ route('elite.training') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(203, 225, 247) 0%, #003d7a 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 15px 35px rgba(0,61,122,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training" style="width: 85px; height: 85px; object-fit: contain;">
+                <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training" style="width: 85px; height: 85px; object-fit: contain;">
               </a>
             </div>
           </div>
@@ -1103,7 +1103,7 @@
                 <div>
                   <div class="d-flex align-items-center gap-3 mb-4">
                     <div class="agency-logo-wrapper" style="background: linear-gradient(135deg, rgba(255, 196, 81, 0.3) 0%, rgba(0, 31, 63, 0.8) 100%);">
-                      <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training Logo">
+                      <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training Logo">
                     </div>
                     <div>
                       <span class="badge mb-1 px-3 py-1" style="background: rgba(255, 196, 81, 0.25); color: #ffc451; border: 1px solid rgba(255, 196, 81, 0.5); font-size: 11px;">Formation & Cadres</span>
