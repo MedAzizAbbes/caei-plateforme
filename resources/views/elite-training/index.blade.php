@@ -2580,92 +2580,63 @@
       }
     });
 
-    
-    // ===== FILTER LOGIC =====
-    let allSlidesHTML = [];
+
+
+    // ===== MONTH FILTERING FOR SWIPER (DYNAMIC DATA-MONTH) =====
     document.addEventListener("DOMContentLoaded", function() {
-        const slides = document.querySelectorAll(".scheduleSwiper .swiper-slide.filterable-slide");
-        slides.forEach(slide => {
-            allSlidesHTML.push({
-                month: slide.getAttribute("data-month"),
-                html: slide.outerHTML
-            });
-        });
-        
-        // Default filter based on first active button (Janvier)
-        setTimeout(() => {
-           filterSlides('janvier');
-        }, 500);
-    });
+      const monthBtns = document.querySelectorAll('.month-btn');
+      const scheduleSlides = document.querySelectorAll('.scheduleSwiper .swiper-slide');
 
-    function filterSlides(month) {
-        const wrapper = document.querySelector(".scheduleSwiper .swiper-wrapper");
-        if (!wrapper) return;
-        
-        wrapper.innerHTML = "";
-        
-        let hasSlides = false;
-        allSlidesHTML.forEach(item => {
-            if (item.month === month) {
-                wrapper.innerHTML += item.html;
-                hasSlides = true;
-            }
+      function filterScheduleByMonth(targetMonth) {
+        let visibleCount = 0;
+        scheduleSlides.forEach(slide => {
+          const slideMonth = slide.getAttribute('data-month');
+          if (targetMonth === 'tous' || slideMonth === targetMonth) {
+            slide.style.display = '';
+            visibleCount++;
+          } else {
+            slide.style.display = 'none';
+          }
         });
-        
-        if (!hasSlides) {
-            wrapper.innerHTML = '<div class="text-center py-5 text-muted w-100"><p>Aucune session programmée pour ce mois.</p></div>';
+
+        let emptyMsg = document.getElementById('schedule-empty-msg');
+        if (visibleCount === 0) {
+          if (!emptyMsg) {
+            emptyMsg = document.createElement('div');
+            emptyMsg.id = 'schedule-empty-msg';
+            emptyMsg.className = 'text-center py-5 text-muted w-100 fs-6';
+            emptyMsg.innerHTML = '<p class="mb-0"><i class="bi bi-calendar-x fs-3 d-block text-warning mb-2"></i>Aucune session programmée pour ce mois.</p>';
+            document.querySelector('.scheduleSwiper .swiper-wrapper').appendChild(emptyMsg);
+          } else {
+            emptyMsg.style.display = 'block';
+          }
+        } else {
+          if (emptyMsg) {
+            emptyMsg.style.display = 'none';
+          }
         }
-        
+
         if (window.scheduleSwiper) {
-            window.scheduleSwiper.update();
-            window.scheduleSwiper.slideTo(0);
+          window.scheduleSwiper.update();
+          window.scheduleSwiper.slideTo(0);
         }
-    }
-    
-    // ===== TRIMESTER FILTER BUTTONS =====
-    const quarters = [
-        [ { id: 'janvier', label: 'Janvier' }, { id: 'fevrier', label: 'Février' }, { id: 'mars', label: 'Mars' } ],
-        [ { id: 'avril', label: 'Avril' }, { id: 'mai', label: 'Mai' }, { id: 'juin', label: 'Juin' } ],
-        [ { id: 'juillet', label: 'Juillet' }, { id: 'aout', label: 'Août' }, { id: 'septembre', label: 'Septembre' } ],
-        [ { id: 'octobre', label: 'Octobre' }, { id: 'novembre', label: 'Novembre' }, { id: 'decembre', label: 'Décembre' } ]
-    ];
-    let currentQuarterIndex = 0;
-    const quarterContainer = document.getElementById('quarter-months');
-    
+      }
 
-    function renderQuarter(index) {
-        if (!quarterContainer) return;
-        quarterContainer.innerHTML = '';
-        quarters[index].forEach((month, i) => {
-            const btn = document.createElement('button');
-            btn.className = `month-btn ${index === 0 && i === 0 ? 'active' : ''}`;
-            btn.dataset.month = month.id;
-            btn.textContent = month.label;
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-                filterSlides(this.dataset.month);
-            });
-            quarterContainer.appendChild(btn);
+      monthBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          monthBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          const targetMonth = this.getAttribute('data-month');
+          filterScheduleByMonth(targetMonth);
         });
-    }
+      });
 
-    if (quarterContainer) {
-        renderQuarter(currentQuarterIndex);
-
-        document.getElementById('prev-quarter').addEventListener('click', function() {
-            currentQuarterIndex = (currentQuarterIndex > 0) ? currentQuarterIndex - 1 : 3;
-            renderQuarter(currentQuarterIndex);
-            
-        });
-
-        document.getElementById('next-quarter').addEventListener('click', function() {
-            currentQuarterIndex = (currentQuarterIndex < 3) ? currentQuarterIndex + 1 : 0;
-            renderQuarter(currentQuarterIndex);
-            
-        });
-
-            }
+      // Filter on initial load if an active month button exists
+      const initialActiveBtn = document.querySelector('.month-btn.active');
+      if (initialActiveBtn) {
+        filterScheduleByMonth(initialActiveBtn.getAttribute('data-month'));
+      }
+    });
 
     // ===== SMOOTH SCROLL for nav links =====
     document.querySelectorAll('a[href^="#"]').forEach(a => {
