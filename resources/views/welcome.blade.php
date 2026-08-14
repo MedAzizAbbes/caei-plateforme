@@ -113,7 +113,7 @@
       display: block !important;
       position: absolute !important;
       inset: 0 !important;
-      background: linear-gradient(to bottom, rgba(0, 5, 24, 0.4) 0%, rgba(0, 5, 24, 0.8) 100%) !important;
+      background: linear-gradient(to bottom, rgba(0, 5, 24, 0.15) 0%, rgba(0, 15, 45, 0.35) 100%) !important;
       pointer-events: none !important;
       z-index: 1 !important;
     }
@@ -866,7 +866,7 @@
 
       <!-- YouTube Background Video (World Connection / Globe Loop) - Ultra reliable -->
       <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; background: #000;">
-        <iframe src="https://www.youtube.com/embed/rDrjQyatgXQ?autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=rDrjQyatgXQ&vq=hd1080" style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.6;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/rDrjQyatgXQ?autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=rDrjQyatgXQ&vq=hd1080" style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.88;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
       </div>
 
       <div class="hero-overlay-gradient"></div>
