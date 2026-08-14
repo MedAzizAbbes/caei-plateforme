@@ -25,10 +25,92 @@
   <link href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" rel="stylesheet" media="print" onload="this.media='all'">
 
   <!-- Main CSS File -->
-  <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
-  <link href="{{ asset('assets/css/welcome-modern.css') }}?v=7.0" rel="stylesheet">
+  <link href="{{ asset('assets/css/main.css') }}?v={{ time() }}" rel="stylesheet">
+  <link href="{{ asset('assets/css/welcome-modern.css') }}?v={{ time() }}" rel="stylesheet">
   
   <style>
+    /* Mobile Navigation Full Screen Overlay Fix */
+    @media (max-width: 1199px) {
+      .mobile-nav-toggle {
+        color: #ffffff !important;
+        font-size: 32px !important;
+        cursor: pointer !important;
+        z-index: 10001 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+
+      body.mobile-nav-active {
+        overflow: hidden !important;
+      }
+
+      body.mobile-nav-active .navmenu {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background: rgba(0, 7, 32, 0.96) !important;
+        backdrop-filter: blur(15px) !important;
+        -webkit-backdrop-filter: blur(15px) !important;
+        z-index: 9999 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 80px 24px 40px 24px !important;
+      }
+
+      body.mobile-nav-active .navmenu > ul {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 16px !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 0 auto !important;
+        padding: 0 !important;
+        list-style: none !important;
+        background: transparent !important;
+        position: static !important;
+        box-shadow: none !important;
+      }
+
+      body.mobile-nav-active .navmenu a {
+        color: #ffffff !important;
+        font-size: 18px !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        padding: 12px 24px !important;
+        border-radius: 30px !important;
+        transition: all 0.3s ease !important;
+        width: 100% !important;
+        text-align: center !important;
+        display: block !important;
+        text-decoration: none !important;
+      }
+
+      body.mobile-nav-active .navmenu a:hover,
+      body.mobile-nav-active .navmenu a.active {
+        color: #000f3c !important;
+        background: linear-gradient(135deg, #ffbd45 0%, #ce9233 100%) !important;
+        box-shadow: 0 8px 20px rgba(255, 189, 69, 0.4) !important;
+      }
+
+      body.mobile-nav-active .mobile-nav-toggle {
+        position: fixed !important;
+        top: 20px !important;
+        right: 20px !important;
+        color: #ffbd45 !important;
+        font-size: 36px !important;
+      }
+    }
+
     #topbar {
       padding: 6px 0 !important;
     }
