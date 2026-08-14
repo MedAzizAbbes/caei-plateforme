@@ -1,23 +1,28 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8 bg-slate-100">
+<div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8" style="background: linear-gradient(135deg, rgba(241, 245, 249, 0.85) 0%, rgba(226, 232, 240, 0.88) 100%), url('{{ asset('assets/img/features-bg.jpg') }}') center/cover fixed no-repeat;">
 
     <x-admin-sidebar />
 
     <div class="flex-1 p-6 md:p-10 overflow-y-auto">
 
         {{-- En-tête --}}
-        <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6"
-             style="background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);">
-            <div>
-                <span class="inline-block bg-white/20 text-white text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">CAEI Recrutement</span>
-                <h1 class="text-3xl font-black uppercase tracking-tight">Candidatures Reçues</h1>
+        <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden"
+             style="background: linear-gradient(135deg, rgba(30, 58, 138, 0.88) 0%, rgba(30, 64, 175, 0.92) 100%), url('{{ asset('assets/img/features-bg.jpg') }}') center/cover no-repeat;">
+            <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">💼</div>
+            <div class="relative z-10">
+                <span class="inline-flex items-center gap-1.5 bg-white/20 text-white text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                    <span>💼</span> CAEI Recrutement
+                </span>
+                <h1 class="text-3xl font-black uppercase tracking-tight flex items-center gap-3">
+                    <span>Candidatures Reçues</span> 👔
+                </h1>
                 <p class="mt-2 text-blue-100 text-sm">Gérez les candidatures soumises depuis le formulaire de recrutement.</p>
             </div>
             <a href="{{ route('recrutement.index') }}" target="_blank"
-               class="shrink-0 inline-flex items-center gap-2 bg-white hover:bg-blue-50 text-blue-800 font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all">
-                <span>Voir le formulaire</span>
+               class="shrink-0 inline-flex items-center gap-2 bg-white hover:bg-blue-50 text-blue-800 font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all relative z-10">
+                <span>Voir le formulaire 💼</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
             </a>
         </div>
