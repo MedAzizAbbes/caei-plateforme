@@ -93,8 +93,8 @@
     }
 
     .et-navbar .nav-brand img {
-      height: 44px;
-      filter: brightness(0) invert(1);
+      height: 50px;
+      object-fit: contain;
       transition: var(--transition);
     }
 
@@ -473,7 +473,7 @@
       width: 160px;
       height: 160px;
       object-fit: contain;
-      filter: brightness(0) invert(1);
+      filter: drop-shadow(0 8px 25px rgba(206, 146, 51, 0.4));
       animation: rotateSlow 20s linear infinite reverse;
     }
 
@@ -1419,7 +1419,7 @@
   <nav class="et-navbar" id="etNavbar">
     <div class="container d-flex align-items-center justify-content-between">
       <a href="{{ route('home') }}" class="nav-brand">
-        <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training">
+        <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training">
         <span>CAEI <em>ELITE TRAINING</em></span>
       </a>
 
@@ -1527,7 +1527,7 @@
 
             <!-- Center logo -->
             <div class="hero-logo-card">
-              <img src="{{ asset('assets/img/training1.png') }}" alt="CAEI Elite Training">
+              <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training">
             </div>
           </div>
         </div>
@@ -1935,6 +1935,26 @@
 
 
   <!-- ===== PROGRAMME / CALENDAR ===== -->
+  @php
+    $frenchMonths = [
+      1 => 'Janvier', 2 => 'Février', 3 => 'Mars', 4 => 'Avril',
+      5 => 'Mai', 6 => 'Juin', 7 => 'Juillet', 8 => 'Août',
+      9 => 'Septembre', 10 => 'Octobre', 11 => 'Novembre', 12 => 'Décembre'
+    ];
+    $currentMonthNum = (int)date('n'); // Month 1..12
+    $rollingMonths = [];
+    for ($i = 0; $i < 3; $i++) {
+        $mNum = (($currentMonthNum - 1 + $i) % 12) + 1;
+        $name = $frenchMonths[$mNum];
+        $slug = \Illuminate\Support\Str::slug($name);
+        $rollingMonths[] = [
+            'name' => $name,
+            'slug' => $slug,
+            'num'  => $mNum
+        ];
+    }
+  @endphp
+
   <section class="et-schedule" id="programme">
     <div class="container">
       <div class="text-center mb-5" data-aos="fade-up">
@@ -1943,66 +1963,94 @@
         <p class="section-subtitle">Sessions à venir — Inscrivez-vous avant la date limite</p>
       </div>
 
-      <!-- Month filter tabs -->
-      <div class="month-filter d-flex align-items-center justify-content-center gap-3 flex-wrap" data-aos="fade-up" data-aos-delay="100">
-        <button class="nav-btn rounded-circle d-flex align-items-center justify-content-center" id="prev-quarter" style="width: 40px; height: 40px; border: none; background: rgba(0,15,60,0.05); color: #000f3c; transition: all 0.3s;"><i class="bi bi-chevron-left fw-bold"></i></button>
-        <div id="quarter-months" class="d-flex flex-wrap gap-2 justify-content-center">
-          <!-- Dynamically populated by JS -->
-        </div>
-        
-        <button class="nav-btn rounded-circle d-flex align-items-center justify-content-center" id="next-quarter" style="width: 40px; height: 40px; border: none; background: rgba(0,15,60,0.05); color: #000f3c; transition: all 0.3s;"><i class="bi bi-chevron-right fw-bold"></i></button>
+      <!-- Month filter tabs (Rolling 3 months according to start_date) -->
+      <div class="month-filter" data-aos="fade-up" data-aos-delay="100">
+        @foreach($rollingMonths as $rIndex => $rMonth)
+          <button class="month-btn {{ $rIndex === 0 ? 'active' : '' }}" data-month="{{ $rMonth['slug'] }}">
+            <i class="bi bi-calendar-event me-1"></i> {{ $rMonth['name'] }}
+          </button>
+        @endforeach
+        <button class="month-btn" data-month="tous">
+          <i class="bi bi-grid me-1"></i> Voir Tout
+        </button>
       </div>
 
-      <!-- Swiper Carousel -->
-      <div class="swiper scheduleSwiper" data-aos="fade-up" data-aos-delay="200">
-        <div class="swiper-wrapper">
+      <!-- Swiper Carousel Container with padded controls -->
+      <div class="schedule-swiper-container" data-aos="fade-up" data-aos-delay="200">
+        <div class="swiper scheduleSwiper">
+          <div class="swiper-wrapper">
 
-          @forelse($allFormations ?? [] as $formation)
-          @php 
-            $monthsList = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
-            $month = $formation->start_date ? $monthsList[$formation->start_date->format('n') - 1] : 'janvier';
-          @endphp
-          <div class="swiper-slide filterable-slide" data-month="{{ $month }}" style="width: 300px;">
-            <div class="schedule-card">
-              <div class="schedule-card-img">
-                <img src="{{ $formation->image ? asset('storage/' . $formation->image) : asset('assets/img/img3.jpg') }}" alt="{{ $formation->title }}" loading="lazy">
-              </div>
-              <div class="schedule-card-body">
-                <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
-                <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
-                <div class="schedule-meta">
-                  <div class="schedule-meta-item">
-                    <i class="bi bi-geo-alt"></i>
-                    <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
-                  </div>
-                  <div class="schedule-meta-item">
-                    <i class="bi bi-clock"></i>
-                    <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
-                  </div>
+            @forelse($allFormations ?? [] as $fIndex => $formation)
+            @php
+              if ($formation->start_date) {
+                  $mNum = (int)$formation->start_date->format('n');
+                  $assignedMonthName = $frenchMonths[$mNum] ?? $formation->start_date->format('F');
+                  $assignedMonthSlug = \Illuminate\Support\Str::slug($assignedMonthName);
+                  $dateBadge = $formation->start_date->format('d/m/Y');
+              } else {
+                  $assignedMonthSlug = $rollingMonths[$fIndex % 3]['slug'];
+                  $assignedMonthName = $rollingMonths[$fIndex % 3]['name'];
+                  $dateBadge = 'Session ' . $assignedMonthName;
+              }
+
+              $fallbackImages = [
+                'assets/img/formation_finance.jpg',
+                'assets/img/formation_leadership.jpg',
+                'assets/img/formation_tech.jpg',
+                'assets/img/formation_audit.jpg',
+                'assets/img/im1.jpg',
+                'assets/img/img2.jpg',
+                'assets/img/professionel.jpg',
+              ];
+              $chosenImgPath = $formation->image ? asset('storage/' . $formation->image) : asset($fallbackImages[$fIndex % count($fallbackImages)]);
+            @endphp
+            <div class="swiper-slide" data-month="{{ $assignedMonthSlug }}">
+              <div class="schedule-card">
+                <div class="schedule-card-img">
+                  <img src="{{ $chosenImgPath }}" alt="{{ $formation->title }}" loading="lazy">
                 </div>
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                  <span class="schedule-price">
-                    @if($formation->price)
-                      {{ number_format($formation->price, 0, ',', ' ') }} €
-                    @else
-                      Sur devis
-                    @endif
-                  </span>
-                  <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
+                <div class="schedule-card-body">
+                  <div class="d-flex align-items-center justify-content-between mb-2">
+                    <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
+                    <span class="badge bg-light text-dark border" style="font-size:11px; padding: 4px 8px; border-radius: 6px;">
+                      <i class="bi bi-calendar2-check text-warning me-1"></i>{{ $dateBadge }}
+                    </span>
+                  </div>
+                  <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
+                  <div class="schedule-meta">
+                    <div class="schedule-meta-item">
+                      <i class="bi bi-geo-alt"></i>
+                      <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
+                    </div>
+                    <div class="schedule-meta-item">
+                      <i class="bi bi-clock"></i>
+                      <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-3 mt-auto">
+                    <span class="schedule-price">
+                      @if($formation->price)
+                        {{ number_format($formation->price, 0, ',', ' ') }} €
+                      @else
+                        Sur devis
+                      @endif
+                    </span>
+                    <span class="badge" style="background: rgba(206,146,51,0.15); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
+                  </div>
+                  <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire / Devis</a>
                 </div>
-                <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire / Devis</a>
               </div>
             </div>
-          </div>
-          @empty
-          <div class="text-center py-5 text-muted">
-            <p>Aucune formation disponible pour le moment.</p>
-          </div>
-          @endforelse
+            @empty
+            <div class="text-center py-5 text-muted">
+              <p>Aucune formation disponible pour le moment.</p>
+            </div>
+            @endforelse
 
+          </div>
+
+          <div class="swiper-pagination mt-4" style="position: relative;"></div>
         </div>
-
-        <div class="swiper-pagination mt-5" style="position: relative; margin-top: 30px;"></div>
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
       </div>
@@ -2010,7 +2058,7 @@
       <div class="text-center mt-5">
         <a href="{{ route('home') }}" class="btn-gold">
           <i class="bi bi-calendar4-week"></i>
-          Voir tout le programme 2025
+          Voir tout le programme
         </a>
       </div>
     </div>
