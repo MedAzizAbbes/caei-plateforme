@@ -59,10 +59,16 @@ class CallCenterController extends Controller
             'phone' => 'required|string|max:50',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
+            'attachment' => 'nullable|file|mimes:pdf,doc,docx,png,jpg,jpeg,zip|max:10240',
         ]);
+
+        if ($request->hasFile('attachment')) {
+            $path = $request->file('attachment')->store('callcenter_attachments', 'public');
+            $validated['attachment'] = $path;
+        }
 
         \App\Models\CallCenterRequest::create($validated);
 
-        return redirect()->back()->with('success', 'Votre demande a été envoyée avec succès. Notre équipe vous contactera dans les plus brefs délais.');
+        return redirect()->back()->with('success', 'Votre demande a été envoyée avec succès avec votre pièce jointe. Notre équipe vous contactera dans les plus brefs délais.');
     }
 }

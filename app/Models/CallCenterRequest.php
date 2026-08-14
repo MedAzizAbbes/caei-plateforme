@@ -15,6 +15,7 @@ class CallCenterRequest extends Model
         'phone',
         'subject',
         'message',
+        'attachment',
         'status',
     ];
 }

@@ -1016,15 +1016,38 @@
         @if(isset($formations) && $formations->count() > 0)
         <div class="row gy-4">
           @foreach($formations as $formation)
+          @php
+            $domainLower = strtolower($formation->domain ?? '');
+            $titleLower = strtolower($formation->title ?? '');
+            
+            if ($formation->image) {
+                $imgSrc = Storage::url($formation->image);
+            } elseif (str_contains($titleLower, 'comptabilit') || str_contains($titleLower, 'trésorerie') || str_contains($titleLower, 'financ') || str_contains($domainLower, 'finance') || str_contains($domainLower, 'comptabilit')) {
+                $imgSrc = asset('assets/img/formation_finance.jpg');
+            } elseif (str_contains($titleLower, 'audit') || str_contains($titleLower, 'contrôle') || str_contains($domainLower, 'audit')) {
+                $imgSrc = asset('assets/img/formation_audit.jpg');
+            } elseif (str_contains($titleLower, 'leader') || str_contains($titleLower, 'management') || str_contains($domainLower, 'management')) {
+                $imgSrc = asset('assets/img/formation_leadership.jpg');
+            } elseif (str_contains($titleLower, 'tech') || str_contains($titleLower, 'digital') || str_contains($domainLower, 'digital')) {
+                $imgSrc = asset('assets/img/formation_tech.jpg');
+            } else {
+                $fallbackImages = [
+                    asset('assets/img/formation_finance.jpg'),
+                    asset('assets/img/formation_audit.jpg'),
+                    asset('assets/img/formation_leadership.jpg'),
+                    asset('assets/img/formation_tech.jpg'),
+                    asset('assets/img/professionel.jpg'),
+                    asset('assets/img/img3.jpg'),
+                ];
+                $imgSrc = $fallbackImages[$loop->index % count($fallbackImages)];
+            }
+          @endphp
           <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
             <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-              @if($formation->image)
-              <img src="{{ Storage::url($formation->image) }}" class="card-img-top" alt="{{ $formation->title }}" style="height: 200px; object-fit: cover;">
-              @else
-              <div class="d-flex align-items-center justify-content-center" style="height: 200px; background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%);">
-                <i class="bi bi-journal-bookmark text-white" style="font-size: 3rem;"></i>
+              <div class="position-relative overflow-hidden" style="height: 200px; background-color: #000f3c;">
+                <img src="{{ $imgSrc }}" class="card-img-top w-100 h-100" alt="{{ $formation->title }}" style="object-fit: cover;" loading="lazy">
+                <div class="position-absolute bottom-0 start-0 end-0 p-2" style="background: linear-gradient(to top, rgba(0,15,60,0.7) 0%, transparent 100%);"></div>
               </div>
-              @endif
               <div class="card-body p-4 d-flex flex-column">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                   <span class="badge" style="background-color: #ffc451; color: #000f3c;">{{ ucfirst(str_replace('_', ' ', $formation->type)) }}</span>
