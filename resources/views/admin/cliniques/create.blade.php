@@ -123,19 +123,33 @@
                         <input type="text" name="address" value="{{ old('address') }}" placeholder="Adresse complète de la clinique" class="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm focus:border-[#061743] focus:outline-none">
                     </div>
 
-                </div>
-
-                <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start gap-3">
-                    <span class="text-xl shrink-0">🔑</span>
-                    <div class="text-sm text-amber-800">
-                        <strong>Génération automatique du mot de passe</strong> — Un mot de passe sécurisé sera généré automatiquement et affiché <strong>une seule fois</strong> après la création. Copiez-le et envoyez-le à la clinique.
+                    <div class="md:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div>
+                            <label class="block text-xs font-black uppercase text-slate-600 mb-2">Mot de passe *</label>
+                            <div class="relative">
+                                <input type="password" name="password" id="pwd-field" required minlength="8" placeholder="Minimum 8 caractères" class="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm focus:border-[#061743] focus:outline-none pr-11">
+                                <button type="button" onclick="togglePwd('pwd-field', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-black uppercase text-slate-600 mb-2">Confirmer le mot de passe *</label>
+                            <div class="relative">
+                                <input type="password" name="password_confirmation" id="pwd-confirm-field" required minlength="8" placeholder="Répétez le mot de passe" class="w-full rounded-xl border-2 border-slate-200 px-4 py-3 text-sm focus:border-[#061743] focus:outline-none pr-11">
+                                <button type="button" onclick="togglePwd('pwd-confirm-field', this)" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 transition-colors">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                </div>
+
+                </div>{{-- fin grid --}}
 
                 <div class="flex items-center gap-3 pt-2">
                     <button type="submit" class="bg-[#061743] hover:bg-[#0a2569] text-white font-black text-sm px-8 py-3 rounded-xl shadow transition-all flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-                        Créer la clinique & générer les identifiants
+                        Créer la clinique
                     </button>
                     <a href="{{ route('admin.cliniques.index') }}" class="text-slate-500 hover:text-slate-800 text-sm font-semibold transition-colors">Annuler</a>
                 </div>
@@ -151,5 +165,9 @@ function copyText(text) {
     navigator.clipboard.writeText(text).then(() => {
         alert('✅ Copié dans le presse-papiers !');
     });
+}
+function togglePwd(fieldId, btn) {
+    const input = document.getElementById(fieldId);
+    input.type = input.type === 'password' ? 'text' : 'password';
 }
 </script>
