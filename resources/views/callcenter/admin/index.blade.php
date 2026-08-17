@@ -30,6 +30,14 @@
                 <p class="mt-2 text-slate-300 text-sm">Gestion unifiée du workflow RDV, des demandes du site public et des comptes utilisateurs (Agents & Partenaires).</p>
             </div>
             <div class="flex flex-wrap items-center gap-3 relative z-10">
+                <a href="{{ route('admin.callcenter.export.excel', request()->only(['statut', 'agent_id', 'partenaire_id'])) }}" 
+                   class="shrink-0 inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all">
+                    <span>📊 Exporter Excel (.csv)</span>
+                </a>
+                <a href="{{ route('admin.callcenter.export.pdf', request()->only(['statut'])) }}" 
+                   class="shrink-0 inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all">
+                    <span>📄 Exporter PDF</span>
+                </a>
                 <a href="{{ route('callcenter.index') }}" target="_blank"
                    class="shrink-0 inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-[#061743] font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all">
                     <span>Voir le site Call Center 🌐</span>

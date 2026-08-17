@@ -24,6 +24,35 @@
                 </div>
             @endif
 
+            {{-- Notifications en direct dans l'Espace Laravel du Partenaire --}}
+            @if(auth()->user()->unreadNotifications->count() > 0)
+                <div class="p-6 rounded-2xl bg-amber-500/10 border-2 border-amber-500/40 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl">🎯</span>
+                            <h3 class="text-sm font-black uppercase text-amber-900">
+                                Notifications en direct : {{ auth()->user()->unreadNotifications->count() }} nouveau(x) RDV affecté(s) !
+                            </h3>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        @foreach(auth()->user()->unreadNotifications as $notification)
+                            <div class="p-3 bg-white rounded-xl border border-amber-200 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs">
+                                <div>
+                                    <span class="font-black text-slate-900">{{ $notification->data['title'] ?? 'Nouveau RDV' }}</span>
+                                    <p class="text-slate-600 mt-0.5">{{ $notification->data['message'] ?? '' }}</p>
+                                </div>
+                                @if(isset($notification->data['url']))
+                                    <a href="{{ $notification->data['url'] }}" class="shrink-0 rounded-lg bg-[#061743] px-3 py-1.5 text-xs font-bold text-white hover:bg-[#0a2060]">
+                                        📋 Qualifier le prospect ➔
+                                    </a>
+                                @endif
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
             <!-- Banner Partenaire -->
             <div class="bg-[#061743] p-6 rounded-2xl text-white shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
                 <div class="relative z-10">
@@ -51,7 +80,7 @@
                                 <th class="p-4">Objet</th>
                                 <th class="p-4">Statut RDV</th>
                                 <th class="p-4">Qualification</th>
-                                <th class="p-4 text-right">Évaluation</th>
+                                <th class="p-4 text-right">Actions & Évaluation</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
@@ -99,15 +128,18 @@
                                         @endif
                                     </td>
 
-                                    <td class="p-4 text-right whitespace-nowrap">
+                                    <td class="p-4 text-right whitespace-nowrap space-x-2">
+                                        <a href="{{ route('callcenter.ics', $rdv) }}" title="Ajouter à l'agenda Google/Outlook" class="inline-flex items-center gap-1 rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 transition shadow-sm">
+                                            <span>📅 .ics</span>
+                                        </a>
                                         <a href="{{ route('callcenter.partenaire.qualify', $rdv) }}" class="inline-flex items-center gap-2 rounded-xl bg-[#061743] hover:bg-[#0a2060] px-4 py-2 text-xs font-black uppercase text-white shadow transition-all">
-                                            <span>📋 {{ $rdv->qualification ? 'Modifier Qualif.' : 'Qualifier le RDV' }}</span>
+                                            <span>📋 {{ $rdv->qualification ? 'Modifier Qualif.' : 'Qualifier' }}</span>
                                         </a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="7" class="p-8 text-center text-slate-400">
+                                    <td colspan="7" class="p-8 text-center text-slate-500">
                                         Aucun rendez-vous ne vous est attribué pour le moment.
                                     </td>
                                 </tr>
@@ -116,7 +148,7 @@
                     </table>
                 </div>
 
-                <div class="p-4 border-t border-slate-100">
+                <div class="p-4 border-t border-slate-100 bg-slate-50">
                     {{ $rendezVousList->links() }}
                 </div>
             </div>

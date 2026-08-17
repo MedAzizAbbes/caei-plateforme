@@ -16,17 +16,30 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                     @auth
-                        @if(Auth::user()->role === 'admin')
-                            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.*')">
+                        @if(Auth::user()->isAdmin())
+                            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                                 Administration
                             </x-nav-link>
+                            <x-nav-link :href="route('admin.callcenter.index')" :active="request()->routeIs('admin.callcenter.*')">
+                                📞 Call Center Admin
+                            </x-nav-link>
                         @endif
-                        @if(Auth::user()->role === 'participant')
+                        @if(Auth::user()->isCallCenterPartenaire())
+                            <x-nav-link :href="route('callcenter.partenaire.index')" :active="request()->routeIs('callcenter.partenaire.*')">
+                                🤝 Espace Partenaire Call Center
+                            </x-nav-link>
+                        @endif
+                        @if(Auth::user()->isCallCenterAgent())
+                            <x-nav-link :href="route('callcenter.agent.index')" :active="request()->routeIs('callcenter.agent.*')">
+                                🎧 Espace Agent Call Center
+                            </x-nav-link>
+                        @endif
+                        @if(Auth::user()->isParticipant())
                             <x-nav-link :href="route('participant.dashboard')" :active="request()->routeIs('participant.*')">
                                 Espace participant
                             </x-nav-link>
                         @endif
-                        @if(Auth::user()->role === 'formateur')
+                        @if(Auth::user()->isFormateur())
                             <x-nav-link :href="route('formateur.dashboard')" :active="request()->routeIs('formateur.*')">
                                 Espace formateur
                             </x-nav-link>

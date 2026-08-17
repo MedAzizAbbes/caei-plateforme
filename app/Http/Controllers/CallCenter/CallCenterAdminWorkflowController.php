@@ -102,7 +102,99 @@ class CallCenterAdminWorkflowController extends Controller
 
         RendezVousHistory::log($rendezVous->id, auth()->id(), $action, $desc);
 
-        return back()->with('success', "Le rendez-vous a été affecté avec succès au partenaire {$partenaire->fullName()}.");
+        // 🔔 Notification en direct dans l'espace Laravel du Partenaire
+        try {
+            $partenaire->notify(new \App\Notifications\RendezVousAssignedNotification($rendezVous));
+        } catch (\Throwable $e) {
+            // Ignorer si la notification échoue silencieusement
+        }
+
+        return back()->with('success', "Le rendez-vous a été affecté avec succès au partenaire {$partenaire->fullName()} et une notification lui a été transmise dans son espace.");
+    }
+
+    /**
+     * Exportation des Rendez-vous au format Excel (CSV UTF-8)
+     */
+    public function exportExcel(Request $request)
+    {
+        $fileName = 'callcenter_rdv_export_' . now()->format('Y-m-d_H-i') . '.csv';
+
+        $query = RendezVous::with(['prospect', 'agent', 'partenaire', 'qualification']);
+
+        if ($request->filled('statut')) {
+            $query->where('statut', $request->statut);
+        }
+        if ($request->filled('agent_id')) {
+            $query->where('agent_id', $request->agent_id);
+        }
+        if ($request->filled('partenaire_id')) {
+            $query->where('partenaire_id', $request->partenaire_id);
+        }
+
+        $list = $query->orderBy('created_at', 'desc')->get();
+
+        $headers = [
+            'Content-Type'        => 'text/csv; charset=UTF-8',
+            'Content-Disposition' => "attachment; filename=\"{$fileName}\"",
+            'Pragma'              => 'no-cache',
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
+            'Expires'             => '0',
+        ];
+
+        $callback = function () use ($list) {
+            $file = fopen('php://output', 'w');
+            // BOM UTF-8 pour Excel
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+
+            fputcsv($file, [
+                'ID RDV', 'Date RDV', 'Heure', 'Nom Prospect', 'Téléphone', 'Email', 
+                'Société', 'Secteur', 'Agent Créateur', 'Partenaire Affecté', 
+                'Statut RDV', 'Résultat Qualification', 'Niveau Potentiel'
+            ], ';');
+
+            foreach ($list as $rdv) {
+                fputcsv($file, [
+                    $rdv->id,
+                    $rdv->date_rendez_vous ? $rdv->date_rendez_vous->format('d/m/Y') : '',
+                    $rdv->heure_rendez_vous,
+                    $rdv->prospect ? $rdv->prospect->nomComplet() : '',
+                    $rdv->prospect ? $rdv->prospect->telephone : '',
+                    $rdv->prospect ? $rdv->prospect->email : '',
+                    $rdv->prospect ? $rdv->prospect->societe : '',
+                    $rdv->prospect ? $rdv->prospect->secteur : '',
+                    $rdv->agent ? $rdv->agent->fullName() : '',
+                    $rdv->partenaire ? $rdv->partenaire->fullName() : 'Non affecté',
+                    $rdv->statusLabel(),
+                    $rdv->qualification ? $rdv->qualification->resultat : 'Non qualifié',
+                    $rdv->qualification ? $rdv->qualification->potentiel : '',
+                ], ';');
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    /**
+     * Exportation du Rapport au format PDF
+     */
+    public function exportPdf(Request $request)
+    {
+        $query = RendezVous::with(['prospect', 'agent', 'partenaire', 'qualification']);
+
+        if ($request->filled('statut')) {
+            $query->where('statut', $request->statut);
+        }
+
+        $rendezVousList = $query->orderBy('created_at', 'desc')->get();
+
+        if (class_exists('\Barryvdh\DomPDF\Facade\Pdf')) {
+            $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.callcenter_report', compact('rendezVousList'));
+            return $pdf->download('rapport_callcenter_' . now()->format('Y-m-d') . '.pdf');
+        }
+
+        return back()->with('error', 'Le module PDF n\'est pas actif sur le serveur.');
     }
 
     /**

@@ -61,6 +61,9 @@ Route::prefix('call-center')->name('callcenter.')->group(function () {
             Route::get('/rendez-vous/{rendezVous}', [CallCenterAgentWorkflowController::class, 'show'])->name('show');
         });
 
+        // Export Agenda .ics pour Google / Outlook / iCal (Agent, Partenaire, Admin)
+        Route::get('/rendez-vous/{rendezVous}/ics', [CallCenterAgentWorkflowController::class, 'exportIcs'])->name('ics');
+
         // Espace Partenaire Call Center
         Route::middleware(['role:callcenter_partenaire,admin'])->prefix('partenaire')->name('partenaire.')->group(function () {
             Route::get('/rendez-vous', [CallCenterPartenaireWorkflowController::class, 'index'])->name('index');
@@ -468,6 +471,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::delete('/callcenter-request/{id}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'destroyRequest'])->name('callcenter.request.destroy');
     Route::get('/callcenter-users', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'users'])->name('callcenter.users');
     Route::post('/callcenter-users', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'storeUser'])->name('callcenter.users.store');
+    Route::get('/callcenter-export/excel', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'exportExcel'])->name('callcenter.export.excel');
+    Route::get('/callcenter-export/pdf', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'exportPdf'])->name('callcenter.export.pdf');
 
     Route::resource('seminaires', SeminarController::class)
         ->parameters(['seminaires' => 'seminar'])

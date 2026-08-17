@@ -7,7 +7,10 @@
                 </h2>
                 <p class="text-sm text-slate-500 font-medium">Consultation du prospect et résultat de la qualification commerciale</p>
             </div>
-            <div>
+            <div class="flex items-center gap-2">
+                <a href="{{ route('callcenter.ics', $rendezVous) }}" class="inline-flex items-center gap-2 rounded-xl bg-[#061743] hover:bg-[#0a2060] px-4 py-2.5 text-xs font-bold text-white shadow-sm transition">
+                    <span>📅 Télécharger (.ics) Google / Outlook</span>
+                </a>
                 <a href="{{ route('callcenter.agent.index') }}" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 transition shadow-sm">
                     ⬅ Retour à mes rendez-vous
                 </a>
