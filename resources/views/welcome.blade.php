@@ -6,7 +6,20 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>{{ config('app.name', 'CAEI Plateforme') }} — Séminaires & Portail Officiel</title>
   <meta name="description" content="Consultez et inscrivez-vous aux séminaires CAEI Company Group. Formation professionnelle, gestion des participants et suivi de présence.">
-  <meta name="keywords" content="CAEI, Elite Training, séminaires, formation, Afrique, Tunisie">
+  <meta name="keywords" content="CAEI, Elite Training, séminaires, formation, Afrique, Tunisie, Digital Moov, Call Center, Medical Services">
+
+  <!-- Open Graph / Social Media Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ url()->current() }}">
+  <meta property="og:title" content="{{ config('app.name', 'CAEI Company Group') }} — Séminaires & Portail Officiel">
+  <meta property="og:description" content="Le Comité Africain d'Expertise Internationale regroupe des experts et élites africains de renommée internationale pour la formation, transformation digitale et services médicaux.">
+  <meta property="og:image" content="{{ asset('assets/img/logocompany.png') }}">
+
+  <!-- Twitter Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ config('app.name', 'CAEI Company Group') }}">
+  <meta name="twitter:description" content="Le Comité Africain d'Expertise Internationale regroupe des experts et élites africains de renommée internationale.">
+  <meta name="twitter:image" content="{{ asset('assets/img/logocompany.png') }}">
 
   <!-- Favicons -->
   <link href="{{ asset('assets/img/logoh.ico') }}" rel="icon">
@@ -1061,7 +1074,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="text-muted small"><i class="bi bi-clock me-1"></i> {{ $formation->duration }}</span>
                     @if($formation->price > 0)
-                    <span class="fw-bold" style="color: #000f3c;">{{ number_format($formation->price, 0) }} TND</span>
+                    <span class="fw-bold" style="color: #000f3c;">{{ number_format($formation->price, 0, ',', ' ') }} €</span>
                     @else
                     <span class="fw-bold text-success">Sur devis</span>
                     @endif
@@ -1072,7 +1085,7 @@
           @endforeach
         </div>
         <div class="text-center mt-5">
-            <a href="#" class="btn btn-warning rounded-pill px-5 py-2 fw-bold" style="background-color: #ffc451; color: #000f3c;">Voir tout le catalogue</a>
+            <a href="{{ route('home.old') }}" class="btn btn-warning rounded-pill px-5 py-2 fw-bold" style="background-color: #ffc451; color: #000f3c;">Voir tout le catalogue</a>
         </div>
         @else
         <div class="text-center p-5 bg-white rounded-4 shadow-sm border border-light">
@@ -1536,7 +1549,7 @@
                 <div class="d-flex align-items-center">
                   <i class="bi bi-emoji-smile text-warning fs-2 me-3"></i>
                   <div>
-                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="337" data-purecounter-duration="1" class="purecounter">0</span></h3>
+                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="337" data-purecounter-duration="1" class="purecounter">337</span></h3>
                     <p class="small text-muted mb-0">Clients Satisfaits</p>
                   </div>
                 </div>
@@ -1545,7 +1558,7 @@
                 <div class="d-flex align-items-center">
                   <i class="bi bi-journal-richtext text-warning fs-2 me-3"></i>
                   <div>
-                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="200" data-purecounter-duration="1" class="purecounter">0</span></h3>
+                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="200" data-purecounter-duration="1" class="purecounter">200</span></h3>
                     <p class="small text-muted mb-0">Projets Réalisés</p>
                   </div>
                 </div>
@@ -1554,7 +1567,7 @@
                 <div class="d-flex align-items-center">
                   <i class="bi bi-headset text-warning fs-2 me-3"></i>
                   <div>
-                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="14" data-purecounter-duration="1" class="purecounter">0</span></h3>
+                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="14" data-purecounter-duration="1" class="purecounter">14</span></h3>
                     <p class="small text-muted mb-0">Années d'Expérience</p>
                   </div>
                 </div>
@@ -1563,7 +1576,7 @@
                 <div class="d-flex align-items-center">
                   <i class="bi bi-people text-warning fs-2 me-3"></i>
                   <div>
-                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter">0</span></h3>
+                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1" class="purecounter">150</span></h3>
                     <p class="small text-muted mb-0">Experts Qualifiés</p>
                   </div>
                 </div>
