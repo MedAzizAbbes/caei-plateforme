@@ -81,15 +81,9 @@
                                     </td>
                                     <td class="p-4 text-right">
                                         <div class="flex items-center justify-end gap-2">
-                                            <a href="{{ route('admin.cliniques.show', $clinic) }}" class="inline-flex items-center gap-1 text-xs font-bold text-[#061743] hover:text-[#f2a90f] bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-all">
-                                                Voir
+                                            <a href="{{ route('admin.cliniques.show', $clinic) }}" class="inline-flex items-center gap-1 text-xs font-bold text-indigo-700 hover:text-indigo-900 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg transition-all">
+                                                <span>⚙️ Gérer & Accès</span>
                                             </a>
-                                            <form action="{{ route('admin.cliniques.reset-password', $clinic) }}" method="POST" onsubmit="return confirm('Regénérer le mot de passe pour {{ addslashes($clinic->name) }} ?');">
-                                                @csrf
-                                                <button type="submit" class="text-xs font-bold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg transition-all">
-                                                    🔑 Nouveau mdp
-                                                </button>
-                                            </form>
                                             <form action="{{ route('admin.cliniques.toggle-active', $clinic) }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="text-xs font-bold {{ $clinic->is_active ? 'text-amber-600 bg-amber-50 hover:bg-amber-100' : 'text-emerald-600 bg-emerald-50 hover:bg-emerald-100' }} px-3 py-1.5 rounded-lg transition-all">

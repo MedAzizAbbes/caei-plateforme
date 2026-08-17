@@ -149,11 +149,22 @@
                                     </td>
                                     <td class="p-4">
                                         @if($req->partner_clinic)
-                                            <span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 font-bold text-[11px] px-2.5 py-1 rounded-lg border border-indigo-100">
-                                                🏥 {{ $req->partner_clinic }}
-                                            </span>
+                                            <div>
+                                                <span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 font-bold text-[11px] px-2.5 py-1 rounded-lg border border-indigo-100">
+                                                    🏥 {{ $req->partner_clinic }}
+                                                </span>
+                                            </div>
+                                            @if($req->clinic_status === 'pending_review')
+                                                <span class="bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block">⏳ En attente validation</span>
+                                            @elseif($req->clinic_status === 'accepted')
+                                                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block">✅ Accepté par la clinique</span>
+                                            @elseif($req->clinic_status === 'quoted')
+                                                <span class="bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block">💰 Devis : {{ number_format($req->devis_amount, 2) }} {{ $req->devis_currency }}</span>
+                                            @elseif($req->clinic_status === 'rejected')
+                                                <span class="bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block">❌ Refusé</span>
+                                            @endif
                                             @if($req->assigned_at)
-                                                <div class="text-[10px] text-slate-400 mt-0.5">{{ $req->assigned_at->format('d/m/Y H:i') }}</div>
+                                                <div class="text-[10px] text-slate-400 mt-0.5">Affecté le {{ $req->assigned_at->format('d/m/Y H:i') }}</div>
                                             @endif
                                         @else
                                             <span class="text-slate-300 italic text-xs">Non affecté</span>
@@ -214,6 +225,57 @@
                                                 <div class="p-4 bg-teal-50/60 rounded-2xl text-xs text-slate-800 border border-teal-100 whitespace-pre-wrap">
                                                     {{ $req->message }}
                                                 </div>
+                                            </div>
+                                        @endif
+
+                                        {{-- ════ Section : Retour de la Clinique Partenaire (Devis & Notes) ════ --}}
+                                        @if($req->partner_clinic && ($req->clinic_status || $req->devis_amount || $req->clinic_notes))
+                                            <div class="rounded-2xl border-2 {{ $req->clinic_status === 'quoted' ? 'border-blue-200 bg-blue-50/40' : ($req->clinic_status === 'accepted' ? 'border-emerald-200 bg-emerald-50/40' : ($req->clinic_status === 'rejected' ? 'border-rose-200 bg-rose-50/40' : 'border-amber-200 bg-amber-50/40')) }} p-5 space-y-3">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex items-center gap-2">
+                                                        <span class="text-lg">🏥</span>
+                                                        <div>
+                                                            <div class="text-xs font-black uppercase {{ $req->clinic_status === 'quoted' ? 'text-blue-900' : ($req->clinic_status === 'accepted' ? 'text-emerald-900' : 'text-slate-900') }}">
+                                                                Retour de {{ $req->partner_clinic }}
+                                                            </div>
+                                                            <div class="text-[11px] text-slate-500">Statut et devis transmis par la clinique partenaire</div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        @if($req->clinic_status === 'pending_review')
+                                                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">⏳ En attente de traitement</span>
+                                                        @elseif($req->clinic_status === 'accepted')
+                                                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">✅ Dossier Accepté</span>
+                                                        @elseif($req->clinic_status === 'quoted')
+                                                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">💰 Devis Transmis</span>
+                                                        @elseif($req->clinic_status === 'rejected')
+                                                            <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full">❌ Dossier Refusé</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                @if($req->devis_amount)
+                                                    <div class="bg-white rounded-xl p-4 border border-blue-100">
+                                                        <div class="flex items-baseline justify-between mb-1">
+                                                            <span class="text-xs font-black uppercase text-blue-700">Montant proposé par la clinique</span>
+                                                            <span class="text-[10px] text-slate-400">{{ $req->devis_sent_at?->format('d/m/Y H:i') }}</span>
+                                                        </div>
+                                                        <div class="text-2xl font-black text-blue-900">
+                                                            {{ number_format($req->devis_amount, 2) }} {{ $req->devis_currency }}
+                                                        </div>
+                                                        @if($req->devis_message)
+                                                            <div class="mt-2 text-xs text-slate-700 bg-blue-50/50 p-3 rounded-lg border border-blue-100 whitespace-pre-wrap">
+                                                                <strong>Détails du devis :</strong><br>{{ $req->devis_message }}
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                @endif
+
+                                                @if($req->clinic_notes)
+                                                    <div class="text-xs text-slate-700 bg-white p-3 rounded-xl border border-slate-200">
+                                                        <strong>Notes transmises par la clinique :</strong><br>{{ $req->clinic_notes }}
+                                                    </div>
+                                                @endif
                                             </div>
                                         @endif
 

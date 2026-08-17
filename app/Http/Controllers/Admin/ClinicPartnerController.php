@@ -44,10 +44,10 @@ class ClinicPartnerController extends Controller
             'phone'     => 'nullable|string|max:50',
             'specialty' => 'nullable|string|max:255',
             'email'     => 'required|email|max:255|unique:users,email',
+            'password'  => 'required|string|min:8|confirmed',
         ]);
 
-        // Générer un mot de passe sécurisé
-        $rawPassword = 'Clinic@' . Str::upper(Str::random(6)) . rand(10, 99);
+        $rawPassword = $validated['password'];
 
         // Créer le compte utilisateur
         $user = User::create([
@@ -101,11 +101,15 @@ class ClinicPartnerController extends Controller
     }
 
     /**
-     * Regénérer le mot de passe d'une clinique.
+     * Définir un nouveau mot de passe pour une clinique.
      */
-    public function resetPassword(ClinicPartner $clinique)
+    public function resetPassword(Request $request, ClinicPartner $clinique)
     {
-        $rawPassword = 'Clinic@' . Str::upper(Str::random(6)) . rand(10, 99);
+        $validated = $request->validate([
+            'password' => 'required|string|min:8',
+        ]);
+
+        $rawPassword = $validated['password'];
 
         $clinique->user->update(['password' => Hash::make($rawPassword)]);
 
@@ -117,7 +121,7 @@ class ClinicPartnerController extends Controller
         ]);
 
         return redirect()->route('admin.cliniques.show', $clinique)
-            ->with('success', 'Mot de passe regénéré avec succès pour "' . $clinique->name . '".');
+            ->with('success', 'Nouveau mot de passe défini avec succès pour "' . $clinique->name . '".');
     }
 
     /**

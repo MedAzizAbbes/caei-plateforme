@@ -173,12 +173,24 @@
                 <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 space-y-3">
                     <h2 class="font-black text-slate-800 mb-4">Actions</h2>
 
-                    <form action="{{ route('admin.cliniques.reset-password', $clinique) }}" method="POST" onsubmit="return confirm('Regénérer le mot de passe ?');">
-                        @csrf
-                        <button type="submit" class="w-full flex items-center gap-2 justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm py-2.5 px-4 rounded-xl transition-all">
-                            🔑 Regénérer le mot de passe
-                        </button>
-                    </form>
+                    {{-- Formulaire Modifier le mot de passe --}}
+                    <div class="rounded-xl border border-indigo-100 bg-indigo-50/50 p-4 space-y-3">
+                        <div class="text-xs font-black uppercase text-indigo-900 flex items-center gap-1.5">
+                            <span>🔑</span> Modifier le mot de passe
+                        </div>
+                        <form action="{{ route('admin.cliniques.reset-password', $clinique) }}" method="POST" class="space-y-3">
+                            @csrf
+                            <div class="relative">
+                                <input type="password" name="password" id="new-clinic-pwd" required minlength="8" placeholder="Nouveau mot de passe" class="w-full rounded-xl border border-indigo-200 bg-white px-3 py-2 text-xs font-semibold focus:border-indigo-500 focus:outline-none pr-9">
+                                <button type="button" onclick="togglePwd('new-clinic-pwd', this)" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                                </button>
+                            </div>
+                            <button type="submit" class="w-full flex items-center gap-2 justify-center bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs py-2 px-3 rounded-lg shadow-xs transition-all">
+                                Mettre à jour le mot de passe
+                            </button>
+                        </form>
+                    </div>
 
                     <form action="{{ route('admin.cliniques.toggle-active', $clinique) }}" method="POST">
                         @csrf
@@ -210,5 +222,9 @@ function copyText(text) {
     navigator.clipboard.writeText(text).then(() => {
         alert('✅ Copié dans le presse-papiers !');
     });
+}
+function togglePwd(fieldId, btn) {
+    const input = document.getElementById(fieldId);
+    input.type = input.type === 'password' ? 'text' : 'password';
 }
 </script>

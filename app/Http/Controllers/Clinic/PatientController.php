@@ -77,10 +77,17 @@ class PatientController extends Controller
             'clinic_notes'  => 'nullable|string|max:2000',
         ]);
 
-        $patient->update($validated);
+        $updateData = $validated;
+        if ($validated['clinic_status'] === 'accepted') {
+            $updateData['status'] = 'completed'; // Automatiquement Traité / Devis Envoyé
+        } elseif ($validated['clinic_status'] === 'pending_review') {
+            $updateData['status'] = 'in_progress';
+        }
+
+        $patient->update($updateData);
 
         $label = match ($validated['clinic_status']) {
-            'accepted' => 'accepté',
+            'accepted' => 'accepté (statut passé à Traité)',
             'rejected' => 'refusé',
             default    => 'mis à jour',
         };
@@ -108,8 +115,9 @@ class PatientController extends Controller
             'devis_message'  => $validated['devis_message'],
             'devis_sent_at'  => now(),
             'clinic_status'  => 'quoted',
+            'status'         => 'completed', // Changement automatique du statut admin à "Traité"
         ]);
 
-        return back()->with('success', 'Le devis de ' . number_format($validated['devis_amount'], 2) . ' ' . $validated['devis_currency'] . ' a été envoyé pour ' . $patient->fullname . '.');
+        return back()->with('success', 'Le devis de ' . number_format($validated['devis_amount'], 2) . ' ' . $validated['devis_currency'] . ' a été envoyé avec succès. Le dossier est désormais marqué comme Traité.');
     }
 }
