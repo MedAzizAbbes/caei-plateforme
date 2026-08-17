@@ -82,6 +82,57 @@
             </div>
         </div>
 
+        <!-- 📈 Section Analytics & Graphiques de Performance (Chart.js) -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Graphique 1: Performance Partenaires -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-1">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+                    <div>
+                        <h3 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                            Performance par Partenaire
+                        </h3>
+                        <p class="text-[11px] text-slate-400 mt-0.5">RDV Qualifiés vs Non Qualifiés</p>
+                    </div>
+                </div>
+                <div class="relative h-60">
+                    <canvas id="ccPartenaireChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Graphique 2: Évolution Mensuelle -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-1">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+                    <div>
+                        <h3 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                            Évolution Mensuelle des RDV
+                        </h3>
+                        <p class="text-[11px] text-slate-400 mt-0.5">Tendance sur les 6 derniers mois</p>
+                    </div>
+                </div>
+                <div class="relative h-60">
+                    <canvas id="ccMonthlyChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Graphique 3: Activité des Agents -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-1">
+                <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+                    <div>
+                        <h3 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                            Volume RDV par Agent
+                        </h3>
+                        <p class="text-[11px] text-slate-400 mt-0.5">Total de rendez-vous générés</p>
+                    </div>
+                </div>
+                <div class="relative h-60">
+                    <canvas id="ccAgentChart"></canvas>
+                </div>
+            </div>
+        </div>
+
         <!-- 2. Navigation par Onglets Centralisés (Tabs) -->
         <div class="bg-white p-2 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap gap-2 mb-6">
             <button @click="setTab('workflow')" 
@@ -466,4 +517,106 @@
 
     </div>
 </div>
+
+<!-- Script Chart.js Analytics -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Graphique Partenaires (Qualifiés vs Non Qualifiés)
+        const pCtx = document.getElementById('ccPartenaireChart');
+        if (pCtx) {
+            new Chart(pCtx, {
+                type: 'bar',
+                data: {
+                    labels: {!! json_encode($analyticsCharts['partenaires']['labels'] ?? []) !!},
+                    datasets: [
+                        {
+                            label: 'Qualifiés',
+                            data: {!! json_encode($analyticsCharts['partenaires']['qualifies'] ?? []) !!},
+                            backgroundColor: '#10b981',
+                            borderRadius: 6
+                        },
+                        {
+                            label: 'En cours / Non qualifié',
+                            data: {!! json_encode($analyticsCharts['partenaires']['en_cours'] ?? []) !!},
+                            backgroundColor: '#f59e0b',
+                            borderRadius: 6
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 11, weight: 'bold' } } }
+                    },
+                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                }
+            });
+        }
+
+        // 2. Graphique Évolution Mensuelle
+        const mCtx = document.getElementById('ccMonthlyChart');
+        if (mCtx) {
+            new Chart(mCtx, {
+                type: 'line',
+                data: {
+                    labels: {!! json_encode($analyticsCharts['monthly']['labels'] ?? []) !!},
+                    datasets: [
+                        {
+                            label: 'Total RDV Créés',
+                            data: {!! json_encode($analyticsCharts['monthly']['crees'] ?? []) !!},
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.3
+                        },
+                        {
+                            label: 'RDV Qualifiés',
+                            data: {!! json_encode($analyticsCharts['monthly']['qualifies'] ?? []) !!},
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            fill: true,
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 11, weight: 'bold' } } }
+                    },
+                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                }
+            });
+        }
+
+        // 3. Graphique Activité Agents
+        const aCtx = document.getElementById('ccAgentChart');
+        if (aCtx) {
+            new Chart(aCtx, {
+                type: 'bar',
+                data: {
+                    labels: {!! json_encode($analyticsCharts['agents']['labels'] ?? []) !!},
+                    datasets: [{
+                        label: 'Total RDV Créés',
+                        data: {!! json_encode($analyticsCharts['agents']['total'] ?? []) !!},
+                        backgroundColor: '#061743',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
+                }
+            });
+        }
+    });
+</script>
 @endsection

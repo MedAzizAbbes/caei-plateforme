@@ -67,13 +67,68 @@ class CallCenterAdminWorkflowController extends Controller
             'total_partenaires'      => count($partenaires),
         ];
 
+        // --- 📊 Analytics & Données Graphiques Chart.js ---
+        $partenaireChartLabels = [];
+        $partenaireQualifiedData = [];
+        $partenairePendingData = [];
+
+        foreach ($partenaires as $p) {
+            $partenaireChartLabels[] = $p->fullName() ?: $p->email;
+            $partenaireQualifiedData[] = RendezVous::where('partenaire_id', $p->id)->where('statut', 'qualifie')->count();
+            $partenairePendingData[] = RendezVous::where('partenaire_id', $p->id)->where('statut', '!=', 'qualifie')->count();
+        }
+
+        $agentChartLabels = [];
+        $agentRdvData = [];
+
+        foreach ($agents as $a) {
+            $agentChartLabels[] = $a->fullName() ?: $a->email;
+            $agentRdvData[] = RendezVous::where('agent_id', $a->id)->count();
+        }
+
+        $monthlyTrendLabels = [];
+        $monthlyCreatedData = [];
+        $monthlyQualifiedData = [];
+
+        for ($i = 5; $i >= 0; $i--) {
+            $date = now()->subMonths($i);
+            $monthlyTrendLabels[] = ucfirst($date->translatedFormat('M Y'));
+
+            $monthlyCreatedData[] = RendezVous::whereYear('created_at', $date->year)
+                ->whereMonth('created_at', $date->month)
+                ->count();
+
+            $monthlyQualifiedData[] = RendezVous::where('statut', 'qualifie')
+                ->whereYear('created_at', $date->year)
+                ->whereMonth('created_at', $date->month)
+                ->count();
+        }
+
+        $analyticsCharts = [
+            'partenaires' => [
+                'labels'    => $partenaireChartLabels,
+                'qualifies' => $partenaireQualifiedData,
+                'en_cours'  => $partenairePendingData,
+            ],
+            'agents' => [
+                'labels' => $agentChartLabels,
+                'total'  => $agentRdvData,
+            ],
+            'monthly' => [
+                'labels'    => $monthlyTrendLabels,
+                'crees'     => $monthlyCreatedData,
+                'qualifies' => $monthlyQualifiedData,
+            ],
+        ];
+
         return view('callcenter.admin.index', compact(
             'activeTab', 
             'rendezVousList', 
             'publicRequests', 
             'agents', 
             'partenaires', 
-            'stats'
+            'stats',
+            'analyticsCharts'
         ));
     }
 
