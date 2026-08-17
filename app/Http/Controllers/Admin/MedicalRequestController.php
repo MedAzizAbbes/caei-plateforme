@@ -117,8 +117,16 @@ class MedicalRequestController extends Controller
             'clinic_status'     => $clinicId ? 'pending_review' : null,
         ]);
 
+        if ($clinicId && isset($clinic) && $clinic->user) {
+            try {
+                $clinic->user->notify(new \App\Notifications\MedicalPatientAssignedNotification($medicalRequest));
+            } catch (\Throwable $e) {
+                // Ignore silent notification errors
+            }
+        }
+
         $message = $clinicId
-            ? 'Le patient ' . $medicalRequest->fullname . ' a été affecté à ' . $clinicName . ' avec succès.'
+            ? 'Le patient ' . $medicalRequest->fullname . ' a été affecté à ' . $clinicName . ' avec succès et une notification lui a été transmise.'
             : 'L\'affectation au partenaire a été retirée.';
 
         return back()->with('success', $message);

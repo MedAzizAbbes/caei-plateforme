@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Mes Patients — {{ $clinic->name }}</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
@@ -51,9 +52,14 @@
     {{-- Main --}}
     <main class="flex-1 p-8 overflow-y-auto">
 
-        <div class="mb-6">
-            <h1 class="text-2xl font-black text-slate-900">Mes Patients Affectés</h1>
-            <p class="text-slate-500 text-sm mt-1">Consultez et traitez les dossiers patients qui vous ont été confiés par CAEI Medical Center</p>
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-black text-slate-900">Mes Patients Affectés</h1>
+                <p class="text-slate-500 text-sm mt-1">Consultez et traitez les dossiers patients qui vous ont été confiés par CAEI Medical Center</p>
+            </div>
+            <div class="flex items-center gap-4">
+                <x-clinic-notification-bell />
+            </div>
         </div>
 
         @if(session('success'))

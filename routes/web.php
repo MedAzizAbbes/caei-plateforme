@@ -310,6 +310,11 @@ Route::middleware(['auth', 'role:clinic'])->prefix('cliniques/espace')->name('cl
     Route::get('/patients/{id}', [\App\Http\Controllers\Clinic\PatientController::class, 'show'])->name('patients.show');
     Route::put('/patients/{id}/statut', [\App\Http\Controllers\Clinic\PatientController::class, 'updateStatus'])->name('patients.status');
     Route::post('/patients/{id}/devis', [\App\Http\Controllers\Clinic\PatientController::class, 'sendDevis'])->name('patients.devis');
+
+    // Notifications
+    Route::get('/notifications', [\App\Http\Controllers\Clinic\ClinicNotificationController::class, 'index'])->name('notifications.index');
+    Route::post('/notifications/{id}/read', [\App\Http\Controllers\Clinic\ClinicNotificationController::class, 'markAsRead'])->name('notifications.read');
+    Route::post('/notifications/mark-all-read', [\App\Http\Controllers\Clinic\ClinicNotificationController::class, 'markAllAsRead'])->name('notifications.markAllRead');
 });
 
 // Lien sécurisé du QR code -> connexion automatique + redirection tableau de bord
