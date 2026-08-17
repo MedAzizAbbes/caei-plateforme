@@ -116,6 +116,7 @@
                                 <th class="p-4">Patient</th>
                                 <th class="p-4">Coordonnées</th>
                                 <th class="p-4">Prestation Médicale</th>
+                                <th class="p-4">Partenaire</th>
                                 <th class="p-4">Date Souhaitée</th>
                                 <th class="p-4">Statut</th>
                                 <th class="p-4 text-right">Actions</th>
@@ -144,6 +145,29 @@
                                         </span>
                                         @if($req->message)
                                             <p class="text-xs text-slate-500 mt-1 line-clamp-1 italic">"{{ $req->message }}"</p>
+                                        @endif
+                                    </td>
+                                    <td class="p-4">
+                                        @if($req->partner_clinic)
+                                            <div>
+                                                <span class="inline-flex items-center gap-1 bg-indigo-50 text-indigo-700 font-bold text-[11px] px-2.5 py-1 rounded-lg border border-indigo-100">
+                                                    🏥 {{ $req->partner_clinic }}
+                                                </span>
+                                            </div>
+                                            @if($req->clinic_status === 'pending_review')
+                                                <span class="bg-amber-50 text-amber-700 border border-amber-200 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block">⏳ En attente validation</span>
+                                            @elseif($req->clinic_status === 'accepted')
+                                                <span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block">✅ Accepté par la clinique</span>
+                                            @elseif($req->clinic_status === 'quoted')
+                                                <span class="bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block">💰 Devis : {{ number_format($req->devis_amount, 2) }} {{ $req->devis_currency }}</span>
+                                            @elseif($req->clinic_status === 'rejected')
+                                                <span class="bg-rose-50 text-rose-700 border border-rose-200 text-[10px] font-bold px-2 py-0.5 rounded-full mt-1 inline-block">❌ Refusé</span>
+                                            @endif
+                                            @if($req->assigned_at)
+                                                <div class="text-[10px] text-slate-400 mt-0.5">Affecté le {{ $req->assigned_at->format('d/m/Y H:i') }}</div>
+                                            @endif
+                                        @else
+                                            <span class="text-slate-300 italic text-xs">Non affecté</span>
                                         @endif
                                     </td>
                                     <td class="p-4 font-semibold text-slate-800">
@@ -190,6 +214,9 @@
                                             <div><strong>Prestation :</strong> {{ $req->service_type }}</div>
                                             <div><strong>Date souhaitée :</strong> {{ $req->preferred_date ? $req->preferred_date->format('d/m/Y') : 'Non spécifiée' }}</div>
                                             <div><strong>Demande reçue :</strong> {{ $req->created_at->format('d/m/Y H:i') }}</div>
+                                            @if($req->partner_clinic)
+                                                <div class="col-span-2"><strong>🏥 Affecté à :</strong> <span class="text-indigo-700 font-bold">{{ $req->partner_clinic }}</span> <span class="text-slate-400">({{ $req->assigned_at?->format('d/m/Y H:i') }})</span></div>
+                                            @endif
                                         </div>
 
                                         @if($req->message)
@@ -201,6 +228,100 @@
                                             </div>
                                         @endif
 
+                                        {{-- ════ Section : Retour de la Clinique Partenaire (Devis & Notes) ════ --}}
+                                        @if($req->partner_clinic && ($req->clinic_status || $req->devis_amount || $req->clinic_notes))
+                                            <div class="rounded-2xl border-2 {{ $req->clinic_status === 'quoted' ? 'border-blue-200 bg-blue-50/40' : ($req->clinic_status === 'accepted' ? 'border-emerald-200 bg-emerald-50/40' : ($req->clinic_status === 'rejected' ? 'border-rose-200 bg-rose-50/40' : 'border-amber-200 bg-amber-50/40')) }} p-5 space-y-3">
+                                                <div class="flex items-center justify-between">
+                                                    <div class="flex items-center gap-2">
+                                                        <span class="text-lg">🏥</span>
+                                                        <div>
+                                                            <div class="text-xs font-black uppercase {{ $req->clinic_status === 'quoted' ? 'text-blue-900' : ($req->clinic_status === 'accepted' ? 'text-emerald-900' : 'text-slate-900') }}">
+                                                                Retour de {{ $req->partner_clinic }}
+                                                            </div>
+                                                            <div class="text-[11px] text-slate-500">Statut et devis transmis par la clinique partenaire</div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        @if($req->clinic_status === 'pending_review')
+                                                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">⏳ En attente de traitement</span>
+                                                        @elseif($req->clinic_status === 'accepted')
+                                                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">✅ Dossier Accepté</span>
+                                                        @elseif($req->clinic_status === 'quoted')
+                                                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">💰 Devis Transmis</span>
+                                                        @elseif($req->clinic_status === 'rejected')
+                                                            <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full">❌ Dossier Refusé</span>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                @if($req->devis_amount)
+                                                    <div class="bg-white rounded-xl p-4 border border-blue-100">
+                                                        <div class="flex items-baseline justify-between mb-1">
+                                                            <span class="text-xs font-black uppercase text-blue-700">Montant proposé par la clinique</span>
+                                                            <span class="text-[10px] text-slate-400">{{ $req->devis_sent_at?->format('d/m/Y H:i') }}</span>
+                                                        </div>
+                                                        <div class="text-2xl font-black text-blue-900">
+                                                            {{ number_format($req->devis_amount, 2) }} {{ $req->devis_currency }}
+                                                        </div>
+                                                        @if($req->devis_message)
+                                                            <div class="mt-2 text-xs text-slate-700 bg-blue-50/50 p-3 rounded-lg border border-blue-100 whitespace-pre-wrap">
+                                                                <strong>Détails du devis :</strong><br>{{ $req->devis_message }}
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                @endif
+
+                                                @if($req->clinic_notes)
+                                                    <div class="text-xs text-slate-700 bg-white p-3 rounded-xl border border-slate-200">
+                                                        <strong>Notes transmises par la clinique :</strong><br>{{ $req->clinic_notes }}
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        @endif
+
+                                        {{-- ════ Section : Affecter au Partenaire Clinique ════ --}}
+                                        <div class="rounded-2xl border-2 border-indigo-100 bg-indigo-50/40 p-5 space-y-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center gap-2">
+                                                    <span class="text-lg">🏥</span>
+                                                    <div>
+                                                        <div class="text-sm font-black text-indigo-900">Affecter au Partenaire Clinique</div>
+                                                        <div class="text-[11px] text-indigo-600">Sélectionnez la clinique partenaire à qui référer ce patient</div>
+                                                    </div>
+                                                </div>
+                                                <a href="{{ route('admin.cliniques.create') }}" target="_blank" class="text-[11px] text-indigo-600 hover:text-indigo-900 font-bold underline">+ Ajouter une clinique</a>
+                                            </div>
+                                            <form action="{{ route('admin.medical-requests.assign-partner', $req) }}" method="POST" class="flex items-end gap-3">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="flex-1">
+                                                    <label class="block text-[11px] font-bold uppercase text-indigo-700 mb-1.5">Clinique partenaire</label>
+                                                    @if($partnerClinics->count() > 0)
+                                                        <select name="partner_clinic_id" class="w-full rounded-xl border-2 border-indigo-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 focus:border-indigo-500 focus:outline-none">
+                                                            <option value="">— Aucune affectation —</option>
+                                                            @foreach($partnerClinics as $clinic)
+                                                                <option value="{{ $clinic->id }}" {{ $req->partner_clinic_id == $clinic->id ? 'selected' : '' }}>
+                                                                    🏥 {{ $clinic->name }}@if($clinic->city) — {{ $clinic->city }}@endif
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    @else
+                                                        <div class="text-xs text-slate-500 italic p-3 bg-white rounded-xl border border-indigo-100">
+                                                            Aucune clinique partenaire enregistrée.
+                                                            <a href="{{ route('admin.cliniques.create') }}" target="_blank" class="text-indigo-600 font-bold hover:underline">Créer la première →</a>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                @if($partnerClinics->count() > 0)
+                                                    <button type="submit" class="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow transition-all flex items-center gap-2">
+                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                                        Affecter
+                                                    </button>
+                                                @endif
+                                            </form>
+                                        </div>
+
+                                        {{-- ════ Section : Statut & Notes ════ --}}
                                         <form action="{{ route('admin.medical-requests.update-status', $req) }}" method="POST" class="space-y-4">
                                             @csrf
                                             @method('PUT')

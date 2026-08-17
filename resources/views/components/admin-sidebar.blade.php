@@ -38,6 +38,21 @@
                         @endif
                     </a>
 
+                    {{-- Lien Cliniques Partenaires --}}
+                    <a href="{{ route('admin.cliniques.index') }}"
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.cliniques.*') ? 'bg-indigo-500 text-white' : 'text-slate-200 hover:bg-white/10' }}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">🏦</span>
+                            <span>Cliniques Partenaires</span>
+                        </div>
+                        @php $pendingClinicCount = \App\Models\MedicalRequest::where('clinic_status', 'pending_review')->whereNotNull('partner_clinic_id')->count(); @endphp
+                        @if($pendingClinicCount > 0)
+                            <span class="bg-indigo-300 text-indigo-900 text-[10px] font-black px-2 py-0.5 rounded-full">
+                                {{ $pendingClinicCount }}
+                            </span>
+                        @endif
+                    </a>
+
                     {{-- Lien Elite Training (RDV & Demandes) --}}
                     <a href="{{ route('admin.elite-training.index') }}" 
                        class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.elite-training.*') ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-200 hover:bg-white/10' }}">
