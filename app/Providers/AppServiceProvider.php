@@ -14,9 +14,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        // Registration de la Policy de Sécurité Call Center (P3 RBAC)
+        \Illuminate\Support\Facades\Gate::policy(\App\Models\RendezVous::class, \App\Policies\RendezVousPolicy::class);
+
         // Force le HTTPS sur toutes les URLs générées (formulaires, redirections, assets)
-        // — nécessaire quand l'app tourne en local derrière un tunnel ngrok, sinon
-        // Laravel génère des liens en http et le navigateur les bloque/avertit.
         if (str_starts_with(config('app.url'), 'https://')) {
             URL::forceScheme('https');
         }

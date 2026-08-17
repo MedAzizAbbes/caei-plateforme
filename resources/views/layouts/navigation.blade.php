@@ -51,6 +51,20 @@
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 sm:gap-4">
                 @auth
+                    {{-- Notification Bell (Partenaire Call Center) --}}
+                    @if(Auth::user()->isCallCenterPartenaire())
+                    <a href="{{ route('callcenter.partenaire.index') }}" class="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-white/10 transition" title="Rendez-vous attribués">
+                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                        </svg>
+                        @if(Auth::user()->unreadNotifications->count() > 0)
+                            <span class="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-[20px] h-5 rounded-full bg-amber-500 text-slate-900 text-[10px] font-black px-1 shadow-lg animate-pulse">
+                                {{ Auth::user()->unreadNotifications->count() }}
+                            </span>
+                        @endif
+                    </a>
+                    @endif
+
                     {{-- Notification Bell (admin only) --}}
                     @if(Auth::user()->role === 'admin')
                     <div x-data="notificationBell()" x-init="fetchNotifications(); startPolling()" @click.away="open = false" class="relative">

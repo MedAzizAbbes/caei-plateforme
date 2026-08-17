@@ -34,11 +34,8 @@ class CallCenterPartenaireWorkflowController extends Controller
      */
     public function showQualifyForm(RendezVous $rendezVous)
     {
+        $this->authorize('qualify', $rendezVous);
         $partenaire = auth()->user();
-
-        if ($rendezVous->partenaire_id !== $partenaire->id) {
-            abort(403, 'Ce rendez-vous ne vous est pas affecté.');
-        }
 
         if ($rendezVous->statut === 'affecte') {
             $rendezVous->update(['statut' => 'qualification_en_cours']);
@@ -60,11 +57,8 @@ class CallCenterPartenaireWorkflowController extends Controller
      */
     public function storeQualification(Request $request, RendezVous $rendezVous)
     {
+        $this->authorize('qualify', $rendezVous);
         $partenaire = auth()->user();
-
-        if ($rendezVous->partenaire_id !== $partenaire->id) {
-            abort(403, 'Action non autorisée.');
-        }
 
         $request->validate([
             'resultat'    => 'required|string|in:Intéressé,Non intéressé,À rappeler,Prospect qualifié,Prospect non qualifié',

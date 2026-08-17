@@ -92,9 +92,7 @@ class CallCenterAgentWorkflowController extends Controller
      */
     public function show(RendezVous $rendezVous)
     {
-        if ($rendezVous->agent_id !== auth()->id() && !auth()->user()->isAdmin()) {
-            abort(403, 'Accès non autorisé à ce rendez-vous.');
-        }
+        $this->authorize('view', $rendezVous);
 
         $rendezVous->load(['prospect', 'agent', 'partenaire', 'qualification.partenaire', 'histories.user']);
 
@@ -106,6 +104,9 @@ class CallCenterAgentWorkflowController extends Controller
      */
     public function exportIcs(RendezVous $rendezVous)
     {
+        // 🔒 Sécurité RBAC Policy : Vérification de l'autorisation d'accès
+        $this->authorize('exportIcs', $rendezVous);
+
         $dateStr = $rendezVous->date_rendez_vous ? $rendezVous->date_rendez_vous->format('Y-m-d') : now()->format('Y-m-d');
         $timeStr = $rendezVous->heure_rendez_vous ?: '09:00';
         

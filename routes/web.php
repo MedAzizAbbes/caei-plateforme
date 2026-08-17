@@ -39,7 +39,7 @@ Route::prefix('call-center')->name('callcenter.')->group(function () {
     Route::get('/support', [CallCenterController::class, 'support'])->name('support');
     Route::get('/blog', [CallCenterController::class, 'blog'])->name('blog');
     Route::get('/contact', [CallCenterController::class, 'contact'])->name('contact');
-    Route::post('/contact', [CallCenterController::class, 'storeContact'])->name('contact.store');
+    Route::post('/contact', [CallCenterController::class, 'storeContact'])->middleware('throttle:5,1')->name('contact.store');
 
     // Workflow Call Center (Authentifié & Rôles)
     Route::middleware(['auth'])->group(function () {
