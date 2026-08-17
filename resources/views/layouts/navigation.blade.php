@@ -53,16 +53,88 @@
                 @auth
                     {{-- Notification Bell (Partenaire Call Center) --}}
                     @if(Auth::user()->isCallCenterPartenaire())
-                    <a href="{{ route('callcenter.partenaire.index') }}" class="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-white/10 transition" title="Rendez-vous attribués">
-                        <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                        </svg>
-                        @if(Auth::user()->unreadNotifications->count() > 0)
-                            <span class="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-[20px] h-5 rounded-full bg-amber-500 text-slate-900 text-[10px] font-black px-1 shadow-lg animate-pulse">
-                                {{ Auth::user()->unreadNotifications->count() }}
-                            </span>
-                        @endif
-                    </a>
+                    <div x-data="{ open: false }" @click.away="open = false" class="relative">
+                        <button @click="open = !open" class="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-white/10 focus:outline-none transition duration-150" title="Notifications RDV">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                            </svg>
+                            @if(Auth::user()->unreadNotifications->count() > 0)
+                                <span class="absolute -top-0.5 -right-0.5 flex items-center justify-center min-w-[20px] h-5 rounded-full bg-amber-500 text-slate-900 text-[10px] font-black px-1 shadow-lg animate-pulse">
+                                    {{ Auth::user()->unreadNotifications->count() }}
+                                </span>
+                            @endif
+                        </button>
+
+                        {{-- Dropdown Partenaire --}}
+                        <div x-show="open"
+                             x-transition:enter="transition ease-out duration-200"
+                             x-transition:enter-start="opacity-0 scale-95 translate-y-1"
+                             x-transition:enter-end="opacity-100 scale-100 translate-y-0"
+                             x-transition:leave="transition ease-in duration-100"
+                             x-transition:leave-start="opacity-100 scale-100 translate-y-0"
+                             x-transition:leave-end="opacity-0 scale-95 translate-y-1"
+                             class="absolute right-0 mt-3 w-96 rounded-2xl bg-white shadow-2xl ring-1 ring-black/5 z-50 overflow-hidden text-slate-900"
+                             style="display: none;">
+
+                            {{-- Header --}}
+                            <div class="flex items-center justify-between px-5 py-4 border-b border-slate-100 bg-gradient-to-r from-[#061743] to-[#0a2463]">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-base">🎯</span>
+                                    <h3 class="text-xs font-black text-white uppercase tracking-wider">Vos RDV Affectés</h3>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    @if(Auth::user()->unreadNotifications->count() > 0)
+                                        <form method="POST" action="{{ route('callcenter.partenaire.notifications.markread') }}">
+                                            @csrf
+                                            <button type="submit" class="text-[11px] font-bold text-[#ffbd45] hover:underline">
+                                                Tout marquer comme vu
+                                            </button>
+                                        </form>
+                                    @else
+                                        <span class="text-[11px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                                            Tout est vu ✓
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+
+                            {{-- Notifications List --}}
+                            <div class="max-h-80 overflow-y-auto divide-y divide-slate-100">
+                                @forelse(Auth::user()->notifications->take(8) as $notif)
+                                    <div class="p-4 hover:bg-slate-50 transition flex flex-col gap-2 {{ $notif->unread() ? 'bg-amber-500/5' : '' }}">
+                                        <div class="flex items-start justify-between gap-2">
+                                            <div>
+                                                <span class="font-black text-slate-900 text-xs flex items-center gap-1.5">
+                                                    @if($notif->unread())
+                                                        <span class="w-2 h-2 rounded-full bg-amber-500 inline-block"></span>
+                                                    @endif
+                                                    {{ $notif->data['title'] ?? 'Nouveau RDV Affecté' }}
+                                                </span>
+                                                <p class="text-xs text-slate-600 mt-1 leading-relaxed">{{ $notif->data['message'] ?? '' }}</p>
+                                                <span class="text-[10px] text-slate-400 mt-1 block">{{ $notif->created_at->diffForHumans() }}</span>
+                                            </div>
+                                        </div>
+                                        @if(isset($notif->data['url']))
+                                            <a href="{{ $notif->data['url'] }}" class="inline-flex items-center justify-center gap-1 rounded-xl bg-[#061743] hover:bg-[#0a2060] px-3 py-1.5 text-xs font-bold text-white transition self-end">
+                                                <span>📋 Qualifier ce RDV ➔</span>
+                                            </a>
+                                        @endif
+                                    </div>
+                                @empty
+                                    <div class="px-5 py-8 text-center text-xs text-slate-400">
+                                        Aucune notification pour le moment.
+                                    </div>
+                                @endforelse
+                            </div>
+
+                            {{-- Footer --}}
+                            <div class="p-3 bg-slate-50 border-t border-slate-100 text-center">
+                                <a href="{{ route('callcenter.partenaire.index') }}" class="text-xs font-bold text-[#061743] hover:underline">
+                                    Voir tous mes rendez-vous attribués ➔
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     @endif
 
                     {{-- Notification Bell (admin only) --}}
