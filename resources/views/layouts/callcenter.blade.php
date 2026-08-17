@@ -527,9 +527,21 @@
           <!-- Right Buttons -->
           <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
             <a href="{{ route('home') }}" class="cc-back-home">
-              <i class="bi bi-arrow-left"></i> Accueil
+              <i class="bi bi-arrow-left"></i> Accueil CAEI
             </a>
-            <a href="#" class="cc-login-btn">Connexion</a>
+            @auth
+              @if(auth()->user()->isAdmin())
+                <a href="{{ route('admin.callcenter.index') }}" class="cc-login-btn"><i class="bi bi-speedometer2 me-1"></i> Espace Admin</a>
+              @elseif(auth()->user()->isCallCenterAgent())
+                <a href="{{ route('callcenter.agent.index') }}" class="cc-login-btn"><i class="bi bi-headset me-1"></i> Espace Agent</a>
+              @elseif(auth()->user()->isCallCenterPartenaire())
+                <a href="{{ route('callcenter.partenaire.index') }}" class="cc-login-btn"><i class="bi bi-handbag me-1"></i> Espace Partenaire</a>
+              @else
+                <a href="{{ route('dashboard') }}" class="cc-login-btn"><i class="bi bi-person-circle me-1"></i> Mon Compte</a>
+              @endif
+            @else
+              <a href="{{ route('login') }}" class="cc-login-btn"><i class="bi bi-box-arrow-in-right me-1"></i> Connexion</a>
+            @endauth
           </div>
         </div>
       </div>
