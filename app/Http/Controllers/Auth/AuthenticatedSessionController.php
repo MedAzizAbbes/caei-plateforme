@@ -32,10 +32,12 @@ class AuthenticatedSessionController extends Controller
         $user = $request->user();
 
         $destination = match ($user->role) {
-            'admin'      => route('admin.dashboard'),
-            'formateur'  => route('formateur.dashboard'),
-            'participant' => route('participant.dashboard'),
-            default       => route('dashboard'),
+            'admin'                 => route('admin.dashboard'),
+            'formateur'             => route('formateur.dashboard'),
+            'participant'           => route('participant.dashboard'),
+            'callcenter_agent'      => route('callcenter.agent.index'),
+            'callcenter_partenaire' => route('callcenter.partenaire.index'),
+            default                 => route('dashboard'),
         };
 
         return redirect()->intended($destination);

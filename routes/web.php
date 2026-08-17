@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CallCenterController;
+use App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController;
+use App\Http\Controllers\CallCenter\CallCenterAgentWorkflowController;
+use App\Http\Controllers\CallCenter\CallCenterPartenaireWorkflowController;
 
 Route::prefix('call-center')->name('callcenter.')->group(function () {
     Route::get('/', [CallCenterController::class, 'index'])->name('index');
@@ -37,6 +40,37 @@ Route::prefix('call-center')->name('callcenter.')->group(function () {
     Route::get('/blog', [CallCenterController::class, 'blog'])->name('blog');
     Route::get('/contact', [CallCenterController::class, 'contact'])->name('contact');
     Route::post('/contact', [CallCenterController::class, 'storeContact'])->name('contact.store');
+
+    // Workflow Call Center (Authentifié & Rôles)
+    Route::middleware(['auth'])->group(function () {
+        // Espace Admin Call Center
+        Route::middleware(['role:admin'])->prefix('admin')->name('admin.')->group(function () {
+            Route::get('/dashboard', [CallCenterAdminWorkflowController::class, 'index'])->name('dashboard');
+            Route::post('/rendez-vous/{rendezVous}/assign', [CallCenterAdminWorkflowController::class, 'assignPartner'])->name('assign');
+            Route::post('/rendez-vous/{rendezVous}/status', [CallCenterAdminWorkflowController::class, 'updateStatus'])->name('status');
+            Route::get('/users', [CallCenterAdminWorkflowController::class, 'users'])->name('users');
+            Route::post('/users', [CallCenterAdminWorkflowController::class, 'storeUser'])->name('users.store');
+            Route::post('/request/{id}/status', [CallCenterAdminWorkflowController::class, 'updateRequestStatus'])->name('request.status');
+            Route::delete('/request/{id}', [CallCenterAdminWorkflowController::class, 'destroyRequest'])->name('request.destroy');
+        });
+
+        // Espace Agent Call Center
+        Route::middleware(['role:callcenter_agent,admin'])->prefix('agent')->name('agent.')->group(function () {
+            Route::get('/rendez-vous', [CallCenterAgentWorkflowController::class, 'index'])->name('index');
+            Route::post('/rendez-vous', [CallCenterAgentWorkflowController::class, 'store'])->name('store');
+            Route::get('/rendez-vous/{rendezVous}', [CallCenterAgentWorkflowController::class, 'show'])->name('show');
+        });
+
+        // Export Agenda .ics pour Google / Outlook / iCal (Agent, Partenaire, Admin)
+        Route::get('/rendez-vous/{rendezVous}/ics', [CallCenterAgentWorkflowController::class, 'exportIcs'])->name('ics');
+
+        // Espace Partenaire Call Center
+        Route::middleware(['role:callcenter_partenaire,admin'])->prefix('partenaire')->name('partenaire.')->group(function () {
+            Route::get('/rendez-vous', [CallCenterPartenaireWorkflowController::class, 'index'])->name('index');
+            Route::get('/rendez-vous/{rendezVous}/qualify', [CallCenterPartenaireWorkflowController::class, 'showQualifyForm'])->name('qualify');
+            Route::post('/rendez-vous/{rendezVous}/qualify', [CallCenterPartenaireWorkflowController::class, 'storeQualification'])->name('qualify.store');
+        });
+    });
 });
 
 /*
@@ -428,10 +462,17 @@ Route::middleware(['auth', 'role:formateur,admin'])->prefix('checkin')->name('ch
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     
-    // Call Center Requests
-    Route::get('/callcenter-requests', [\App\Http\Controllers\Admin\CallCenterRequestController::class, 'index'])->name('callcenter.index');
-    Route::put('/callcenter-requests/{request}', [\App\Http\Controllers\Admin\CallCenterRequestController::class, 'updateStatus'])->name('callcenter.update-status');
-    Route::delete('/callcenter-requests/{request}', [\App\Http\Controllers\Admin\CallCenterRequestController::class, 'destroy'])->name('callcenter.destroy');
+    // Call Center Requests & Dashboard Unifié
+    Route::get('/callcenter-requests', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'index'])->name('callcenter.index');
+    Route::get('/callcenter-dashboard', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'index'])->name('callcenter.dashboard');
+    Route::post('/callcenter-assign/{rendezVous}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'assignPartner'])->name('callcenter.assign');
+    Route::post('/callcenter-status/{rendezVous}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'updateStatus'])->name('callcenter.status');
+    Route::post('/callcenter-request-status/{id}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'updateRequestStatus'])->name('callcenter.request.status');
+    Route::delete('/callcenter-request/{id}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'destroyRequest'])->name('callcenter.request.destroy');
+    Route::get('/callcenter-users', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'users'])->name('callcenter.users');
+    Route::post('/callcenter-users', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'storeUser'])->name('callcenter.users.store');
+    Route::get('/callcenter-export/excel', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'exportExcel'])->name('callcenter.export.excel');
+    Route::get('/callcenter-export/pdf', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'exportPdf'])->name('callcenter.export.pdf');
 
     Route::resource('seminaires', SeminarController::class)
         ->parameters(['seminaires' => 'seminar'])

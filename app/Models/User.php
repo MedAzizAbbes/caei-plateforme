@@ -73,11 +73,38 @@ class User extends Authenticatable
         return $this->role === 'clinic';
     }
 
+    public function isCallCenterAgent(): bool
+    {
+        return $this->role === 'callcenter_agent';
+    }
+
+    public function isCallCenterPartenaire(): bool
+    {
+        return $this->role === 'callcenter_partenaire';
+    }
+
     // ─── Relations clinique ───────────────────────────────────
 
     public function clinicPartner()
     {
         return $this->hasOne(ClinicPartner::class);
+    }
+
+    // ─── Relations Call Center ───────────────────────────────────
+
+    public function prospects()
+    {
+        return $this->hasMany(Prospect::class, 'agent_id');
+    }
+
+    public function rendezVousAsAgent()
+    {
+        return $this->hasMany(RendezVous::class, 'agent_id');
+    }
+
+    public function rendezVousAsPartenaire()
+    {
+        return $this->hasMany(RendezVous::class, 'partenaire_id');
     }
 
     public function fullName(): string

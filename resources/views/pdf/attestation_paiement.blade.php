@@ -316,7 +316,7 @@
     @if($payment->seminar->price)
     <div class="amount-block">
         <div class="amount-label">Montant réglé</div>
-        <div class="amount-val">{{ number_format($payment->seminar->price, 0, ',', ' ') }} FCFA</div>
+        <div class="amount-val">{{ number_format($payment->seminar->price, 0, ',', ' ') }} €</div>
     </div>
     @endif
 

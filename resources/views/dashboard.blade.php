@@ -18,7 +18,14 @@
                         </p>
                         <div class="mt-8 flex flex-wrap gap-4">
                             @if(Auth::user()->isAdmin())
-                                <a href="{{ route('admin.dashboard') }}" class="caei-btn caei-btn-gold">Administration</a>
+                                <a href="{{ route('admin.dashboard') }}" class="caei-btn caei-btn-gold">Administration CAEI</a>
+                                <a href="{{ route('admin.callcenter.index') }}" class="caei-btn caei-btn-gold">📞 Call Center Admin</a>
+                            @endif
+                            @if(Auth::user()->isCallCenterPartenaire())
+                                <a href="{{ route('callcenter.partenaire.index') }}" class="caei-btn caei-btn-gold">🤝 Espace Partenaire Call Center</a>
+                            @endif
+                            @if(Auth::user()->isCallCenterAgent())
+                                <a href="{{ route('callcenter.agent.index') }}" class="caei-btn caei-btn-gold">🎧 Espace Agent Call Center</a>
                             @endif
                             @if(Auth::user()->isParticipant())
                                 <a href="{{ route('participant.dashboard') }}" class="caei-btn caei-btn-gold">Espace participant</a>

@@ -23,7 +23,6 @@
                         </div>
                     </a>
 
-
                     {{-- Lien Medical Center --}}
                     <a href="{{ route('admin.medical-requests.index') }}" 
                        class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.medical-requests.*') ? 'bg-teal-500 text-white' : 'text-slate-200 hover:bg-white/10' }}">
@@ -83,10 +82,12 @@
                 </div>
             </div>
 
-            {{-- Emplacement Extensible pour futurs ajouts --}}
+            {{-- Emplacement Extensible pour autres modules --}}
             <div class="pt-4 border-t border-white/10">
                 <div class="px-3 text-[10px] uppercase font-black tracking-widest text-slate-400 mb-2">Autres Modules</div>
                 <div class="space-y-1.5">
+                    
+                    {{-- Recrutements --}}
                     <a href="{{ route('admin.recrutements.index') }}"
                        class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.recrutements.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-white/10' }}">
                         <div class="flex items-center gap-3">
@@ -95,17 +96,15 @@
                         </div>
                         @php 
                             try {
-                                $recNew = \Illuminate\Support\Facades\Schema::hasTable('recrutements') 
-                                    ? \App\Models\Recrutement::count() 
-                                    : 0;
-                            } catch (\Throwable $e) {
-                                $recNew = 0;
-                            }
+                                $recNew = \Illuminate\Support\Facades\Schema::hasTable('recrutements') ? \App\Models\Recrutement::count() : 0;
+                            } catch (\Throwable $e) { $recNew = 0; }
                         @endphp
                         @if($recNew > 0)
                             <span class="bg-blue-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $recNew }}</span>
                         @endif
                     </a>
+
+                    {{-- Digital Moov --}}
                     <a href="{{ route('admin.digitalmoov.index') }}"
                        class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.digitalmoov.*') ? 'bg-orange-500 text-white' : 'text-slate-300 hover:bg-white/10' }}">
                         <div class="flex items-center gap-3">
@@ -114,39 +113,29 @@
                         </div>
                         @php 
                             try {
-                                $dmNew = \Illuminate\Support\Facades\Schema::hasTable('digital_moov_contacts') 
-                                    ? \App\Models\DigitalMoovContact::where('status','new')->count() 
-                                    : 0;
-                            } catch (\Throwable $e) {
-                                $dmNew = 0;
-                            }
+                                $dmNew = \Illuminate\Support\Facades\Schema::hasTable('digital_moov_contacts') ? \App\Models\DigitalMoovContact::where('status','new')->count() : 0;
+                            } catch (\Throwable $e) { $dmNew = 0; }
                         @endphp
                         @if($dmNew > 0)
                             <span class="bg-orange-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $dmNew }}</span>
                         @endif
-                    </a>
-
+                    {{-- Call Center --}}
                     <a href="{{ route('admin.callcenter.index') }}"
-                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.callcenter.*') ? 'bg-red-500 text-white' : 'text-slate-300 hover:bg-white/10' }}">
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ (request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*')) ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-300 hover:bg-white/10' }}">
                         <div class="flex items-center gap-3">
                             <span class="text-base">📞</span>
                             <span class="font-bold text-xs">Call Center</span>
                         </div>
                         @php 
                             try {
-                                $ccNew = \Illuminate\Support\Facades\Schema::hasTable('call_center_requests') 
-                                    ? \App\Models\CallCenterRequest::where('status','Nouveau')->count() 
-                                    : 0;
-                            } catch (\Throwable $e) {
-                                $ccNew = 0;
-                            }
+                                $ccTotal = (\Illuminate\Support\Facades\Schema::hasTable('rendez_vous') ? \App\Models\RendezVous::where('statut','en_attente_affectation')->count() : 0)
+                                    + (\Illuminate\Support\Facades\Schema::hasTable('call_center_requests') ? \App\Models\CallCenterRequest::where('status','Nouveau')->count() : 0);
+                            } catch (\Throwable $e) { $ccTotal = 0; }
                         @endphp
-                        @if($ccNew > 0)
-                            <span class="bg-red-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $ccNew }}</span>
+                        @if($ccTotal > 0)
+                            <span class="{{ (request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*')) ? 'bg-[#061743] text-white' : 'bg-[#f2a90f] text-[#061743]' }} text-[10px] font-black px-2 py-0.5 rounded-full">{{ $ccTotal }}</span>
                         @endif
                     </a>
-
-                    
 
                     {{-- Lien Gestion Mailing --}}
                     <a href="https://mailing.caei-afri.com/dashboard"
@@ -157,16 +146,7 @@
                         </div>
                         <span class="bg-purple-500/30 text-purple-200 text-[10px] font-semibold px-2 py-0.5 rounded-full">OVH</span>
                     </a>
-                    >
 
-                    {{-- Lien Gestion Mailing --}}
-                    <a href="https://mailing.caei-afri.com/dashboard" class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all text-slate-300 hover:bg-white/10 hover:text-white group">
-                        <div class="flex items-center gap-3">
-                            <span class="text-base">📧</span>
-                            <span class="font-bold text-xs">Gestion Mailing</span>
-                        </div>
-                        <span class="bg-purple-500/30 text-purple-200 text-[10px] font-semibold px-2 py-0.5 rounded-full">OVH</span>
-                    </a>
                 </div>
             </div>
         </nav>

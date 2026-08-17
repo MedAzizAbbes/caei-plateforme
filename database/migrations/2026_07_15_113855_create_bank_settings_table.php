@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('iban')->nullable();
             $table->string('rib')->nullable();
             $table->string('swift_code')->nullable();
-            $table->string('currency')->default('TND');
+            $table->string('currency')->default('EUR');
             $table->timestamps();
         });
     }

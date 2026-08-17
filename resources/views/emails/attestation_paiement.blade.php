@@ -77,7 +77,7 @@
             @if($payment->seminar->price)
             <div class="info-row">
                 <span class="lbl">Montant</span>
-                <span class="val">{{ number_format($payment->seminar->price, 0, ',', ' ') }} FCFA</span>
+                <span class="val">{{ number_format($payment->seminar->price, 0, ',', ' ') }} €</span>
             </div>
             @endif
             <div class="info-row">

@@ -199,9 +199,8 @@
                                             <div>
                                                 <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Devise *</label>
                                                 <select name="currency" required class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
-                                                    <option value="TND" {{ old('currency', $bankSetting?->currency ?? 'TND') == 'TND' ? 'selected' : '' }}>TND</option>
-                                                    <option value="EUR" {{ old('currency') == 'EUR' ? 'selected' : '' }}>EUR</option>
-                                                    <option value="USD" {{ old('currency') == 'USD' ? 'selected' : '' }}>USD</option>
+                                                    <option value="EUR" {{ old('currency', $bankSetting?->currency ?? 'EUR') == 'EUR' ? 'selected' : '' }}>EUR (€)</option>
+                                                    <option value="USD" {{ old('currency') == 'USD' ? 'selected' : '' }}>USD ($)</option>
                                                 </select>
                                                 @error('currency')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                                             </div>

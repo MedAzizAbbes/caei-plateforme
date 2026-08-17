@@ -71,9 +71,9 @@
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Devise par défaut</label>
                             <select name="currency" class="w-full rounded-lg border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
+                                <option value="EUR" {{ old('currency', $setting->currency ?? 'EUR') == 'EUR' ? 'selected' : '' }}>EUR - Euro (€)</option>
+                                <option value="USD" {{ old('currency', $setting->currency) == 'USD' ? 'selected' : '' }}>USD - Dollar Américain ($)</option>
                                 <option value="TND" {{ old('currency', $setting->currency) == 'TND' ? 'selected' : '' }}>TND - Dinar Tunisien</option>
-                                <option value="EUR" {{ old('currency', $setting->currency) == 'EUR' ? 'selected' : '' }}>EUR - Euro</option>
-                                <option value="USD" {{ old('currency', $setting->currency) == 'USD' ? 'selected' : '' }}>USD - Dollar Américain</option>
                             </select>
                             @error('currency')<p class="mt-1 text-xs text-red-600">{{ $message }}</p>@enderror
                         </div>

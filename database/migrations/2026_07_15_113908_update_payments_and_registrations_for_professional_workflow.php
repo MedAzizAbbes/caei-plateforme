@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('payments', function (Blueprint $table) {
-            $table->string('currency')->default('TND')->after('amount');
+            $table->string('currency')->default('EUR')->after('amount');
             $table->string('bank_name')->nullable()->after('currency'); // participant's bank
             $table->string('country')->nullable()->after('bank_name'); // participant's country
             $table->date('transfer_date')->nullable()->after('country');
