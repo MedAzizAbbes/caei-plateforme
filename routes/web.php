@@ -231,6 +231,53 @@ Route::get('/medical-services', [\App\Http\Controllers\MedicalServiceController:
 Route::post('/medical-services/devis', [\App\Http\Controllers\MedicalServiceController::class, 'storeRequest'])->name('medical.services.request');
 Route::get('/seminaires/{seminar}', [SeminarPublicController::class, 'show'])->name('seminaires.show');
 
+/*
+|--------------------------------------------------------------------------
+| Espace Cliniques Partenaires — Connexion dédiée
+|--------------------------------------------------------------------------
+*/
+Route::get('/cliniques/connexion', function () {
+    if (auth()->check() && auth()->user()->role === 'clinic') {
+        return redirect()->route('clinic.dashboard');
+    }
+    return view('clinic.login');
+})->name('clinic.login');
+
+Route::post('/cliniques/connexion', function (\Illuminate\Http\Request $request) {
+    $credentials = $request->validate([
+        'email'    => 'required|email',
+        'password' => 'required',
+    ]);
+
+    if (auth()->attempt($credentials) && auth()->user()->role === 'clinic') {
+        $request->session()->regenerate();
+        return redirect()->route('clinic.dashboard');
+    }
+
+    // Si l'utilisateur existe mais n'est pas clinic, déconnecter
+    if (auth()->check() && auth()->user()->role !== 'clinic') {
+        auth()->logout();
+    }
+
+    return back()->withErrors(['email' => 'Identifiants incorrects ou accès non autorisé.'])->withInput();
+})->name('clinic.login.post');
+
+Route::post('/cliniques/deconnexion', function (\Illuminate\Http\Request $request) {
+    auth()->logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect()->route('clinic.login');
+})->name('clinic.logout');
+
+// Espace clinique (authéntifié + rôle clinic)
+Route::middleware(['auth', 'role:clinic'])->prefix('cliniques/espace')->name('clinic.')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Clinic\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/patients', [\App\Http\Controllers\Clinic\PatientController::class, 'index'])->name('patients.index');
+    Route::get('/patients/{id}', [\App\Http\Controllers\Clinic\PatientController::class, 'show'])->name('patients.show');
+    Route::put('/patients/{id}/statut', [\App\Http\Controllers\Clinic\PatientController::class, 'updateStatus'])->name('patients.status');
+    Route::post('/patients/{id}/devis', [\App\Http\Controllers\Clinic\PatientController::class, 'sendDevis'])->name('patients.devis');
+});
+
 // Lien sécurisé du QR code -> connexion automatique + redirection tableau de bord
 Route::get('/p/{token}', [PortalController::class, 'show'])->name('portal.show');
 
@@ -429,7 +476,18 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     // --- Devis Médicaux CAEI Medical Center ---
     Route::get('/devis-medicaux', [\App\Http\Controllers\Admin\MedicalRequestController::class, 'index'])->name('medical-requests.index');
     Route::put('/devis-medicaux/{medicalRequest}', [\App\Http\Controllers\Admin\MedicalRequestController::class, 'updateStatus'])->name('medical-requests.update-status');
+    Route::put('/devis-medicaux/{medicalRequest}/affecter', [\App\Http\Controllers\Admin\MedicalRequestController::class, 'assignPartner'])->name('medical-requests.assign-partner');
     Route::delete('/devis-medicaux/{medicalRequest}', [\App\Http\Controllers\Admin\MedicalRequestController::class, 'destroy'])->name('medical-requests.destroy');
+
+    // --- Cliniques Partenaires ---
+    Route::get('/cliniques', [\App\Http\Controllers\Admin\ClinicPartnerController::class, 'index'])->name('cliniques.index');
+    Route::get('/cliniques/creer', [\App\Http\Controllers\Admin\ClinicPartnerController::class, 'create'])->name('cliniques.create');
+    Route::post('/cliniques', [\App\Http\Controllers\Admin\ClinicPartnerController::class, 'store'])->name('cliniques.store');
+    Route::get('/cliniques/{clinique}', [\App\Http\Controllers\Admin\ClinicPartnerController::class, 'show'])->name('cliniques.show');
+    Route::post('/cliniques/{clinique}/reset-password', [\App\Http\Controllers\Admin\ClinicPartnerController::class, 'resetPassword'])->name('cliniques.reset-password');
+    Route::post('/cliniques/{clinique}/toggle-active', [\App\Http\Controllers\Admin\ClinicPartnerController::class, 'toggleActive'])->name('cliniques.toggle-active');
+    Route::delete('/cliniques/{clinique}', [\App\Http\Controllers\Admin\ClinicPartnerController::class, 'destroy'])->name('cliniques.destroy');
+
 
     // --- Contacts Digital Moov ---
     Route::get('/digital-moov', [\App\Http\Controllers\Admin\DigitalMoovController::class, 'index'])->name('digitalmoov.index');

@@ -68,6 +68,18 @@ class User extends Authenticatable
         return $this->role === 'participant';
     }
 
+    public function isClinic(): bool
+    {
+        return $this->role === 'clinic';
+    }
+
+    // ─── Relations clinique ───────────────────────────────────
+
+    public function clinicPartner()
+    {
+        return $this->hasOne(ClinicPartner::class);
+    }
+
     public function fullName(): string
     {
         return trim("{$this->first_name} {$this->last_name}");

@@ -9,6 +9,32 @@ use Illuminate\Http\Request;
 class MedicalRequestController extends Controller
 {
     /**
+     * Liste des cliniques partenaires disponibles.
+     */
+    public static array $partnerClinics = [
+        // Tunis
+        'Clinique Beau Séjour (Tunis)',
+        'Clinique La Marsa (Tunis)',
+        'Clinique Taoufik (Tunis)',
+        'Clinique El Manar (Tunis)',
+        'Clinique Ennasr (Ariana)',
+        'Clinique Ibn Khaldoun (Tunis)',
+        'Clinique El Menzah (Tunis)',
+        // Sfax
+        'Clinique Les Oliviers (Sfax)',
+        'Clinique Azzahra (Sfax)',
+        // Sousse
+        'Clinique Sahloul (Sousse)',
+        'Clinique Bougatfa (Sousse)',
+        // Monastir / Mahdia
+        'Clinique Fattouma Bourguiba (Monastir)',
+        // Hammamet
+        'Clinique Hannibal (Hammamet)',
+        // Autre
+        'Autre partenaire (préciser dans les notes)',
+    ];
+
+    /**
      * Liste toutes les demandes de devis et rendez-vous médicaux.
      */
     public function index(Request $request)
@@ -46,7 +72,9 @@ class MedicalRequestController extends Controller
             'cancelled'   => MedicalRequest::where('status', 'cancelled')->count(),
         ];
 
-        return view('admin.medical.index', compact('requests', 'stats'));
+        $partnerClinics = \App\Models\ClinicPartner::where('is_active', true)->orderBy('name')->get();
+
+        return view('admin.medical.index', compact('requests', 'stats', 'partnerClinics'));
     }
 
     /**
@@ -62,6 +90,38 @@ class MedicalRequestController extends Controller
         $medicalRequest->update($validated);
 
         return back()->with('success', 'La demande de devis médical #' . $medicalRequest->id . ' a été mise à jour.');
+    }
+
+    /**
+     * Affecter un patient à un partenaire (clinique).
+     */
+    public function assignPartner(Request $request, MedicalRequest $medicalRequest)
+    {
+        $validated = $request->validate([
+            'partner_clinic_id' => 'nullable|exists:clinic_partners,id',
+        ]);
+
+        $clinicId   = $validated['partner_clinic_id'] ?: null;
+        $clinicName = null;
+
+        if ($clinicId) {
+            $clinic     = \App\Models\ClinicPartner::find($clinicId);
+            $clinicName = $clinic?->name;
+        }
+
+        $medicalRequest->update([
+            'partner_clinic_id' => $clinicId,
+            'partner_clinic'    => $clinicName, // garder le string pour compatibilité
+            'assigned_at'       => $clinicId ? now() : null,
+            'status'            => $clinicId ? 'in_progress' : $medicalRequest->status,
+            'clinic_status'     => $clinicId ? 'pending_review' : null,
+        ]);
+
+        $message = $clinicId
+            ? 'Le patient ' . $medicalRequest->fullname . ' a été affecté à ' . $clinicName . ' avec succès.'
+            : 'L\'affectation au partenaire a été retirée.';
+
+        return back()->with('success', $message);
     }
 
     /**
