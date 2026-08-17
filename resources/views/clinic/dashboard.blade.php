@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $clinic->name }} — Espace Partenaire CAEI Medical</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700,800,900&display=swap" rel="stylesheet" />
@@ -78,9 +79,14 @@
                 <h1 class="text-2xl font-black text-slate-900">Bonjour, {{ $clinic->name }} 👋</h1>
                 <p class="text-slate-500 text-sm mt-1">Bienvenue dans votre espace partenaire CAEI Medical Center</p>
             </div>
-            <div class="text-right text-xs text-slate-400">
-                <div>{{ now()->format('d/m/Y') }}</div>
-                <div class="font-bold text-slate-600">{{ now()->format('H:i') }}</div>
+            <div class="flex items-center gap-5">
+                {{-- Icône de Notification Cloche --}}
+                <x-clinic-notification-bell />
+
+                <div class="text-right text-xs text-slate-400 border-l border-slate-200 pl-4">
+                    <div>{{ now()->format('d/m/Y') }}</div>
+                    <div class="font-bold text-slate-600">{{ now()->format('H:i') }}</div>
+                </div>
             </div>
         </div>
 
