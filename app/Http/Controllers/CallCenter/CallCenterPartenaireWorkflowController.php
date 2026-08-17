@@ -37,6 +37,11 @@ class CallCenterPartenaireWorkflowController extends Controller
         $this->authorize('qualify', $rendezVous);
         $partenaire = auth()->user();
 
+        // 🔔 Marquer la notification comme lue dès l'ouverture de la fiche
+        $partenaire->unreadNotifications
+            ->filter(fn($n) => ($n->data['rendez_vous_id'] ?? null) == $rendezVous->id)
+            ->each(fn($n) => $n->markAsRead());
+
         if ($rendezVous->statut === 'affecte') {
             $rendezVous->update(['statut' => 'qualification_en_cours']);
             RendezVousHistory::log(
@@ -50,6 +55,16 @@ class CallCenterPartenaireWorkflowController extends Controller
         $rendezVous->load(['prospect', 'agent', 'qualification']);
 
         return view('callcenter.partenaire.qualify', compact('rendezVous'));
+    }
+
+    /**
+     * Marquer toutes les notifications comme lues (Partenaire)
+     */
+    public function markNotificationsRead()
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+
+        return back()->with('success', 'Toutes les notifications ont été marquées comme vues.');
     }
 
     /**

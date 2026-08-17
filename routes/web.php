@@ -69,6 +69,7 @@ Route::prefix('call-center')->name('callcenter.')->group(function () {
             Route::get('/rendez-vous', [CallCenterPartenaireWorkflowController::class, 'index'])->name('index');
             Route::get('/rendez-vous/{rendezVous}/qualify', [CallCenterPartenaireWorkflowController::class, 'showQualifyForm'])->name('qualify');
             Route::post('/rendez-vous/{rendezVous}/qualify', [CallCenterPartenaireWorkflowController::class, 'storeQualification'])->name('qualify.store');
+            Route::post('/notifications/mark-read', [CallCenterPartenaireWorkflowController::class, 'markNotificationsRead'])->name('notifications.markread');
         });
     });
 });
