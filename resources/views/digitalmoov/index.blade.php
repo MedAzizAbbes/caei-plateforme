@@ -36,8 +36,8 @@
   <link href="https://cdn.jsdelivr.net/npm/swiper@11.1.10/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="{{ asset('digitalmoov/assets/css/main.css') }}?v=2.0" rel="stylesheet">
-  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=2.0" rel="stylesheet">
+  <link href="{{ asset('digitalmoov/assets/css/main.css') }}?v=3.0" rel="stylesheet">
+  <link href="{{ asset('digitalmoov/assets/css/modern.css') }}?v=3.0" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: UpConstruction
