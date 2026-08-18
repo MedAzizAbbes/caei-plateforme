@@ -19,7 +19,7 @@ class SeminarPublicController extends Controller
             ->orderBy('start_date')
             ->get();
 
-        $formations = Formation::active()->take(3)->get();
+        $formations = Formation::active()->take(6)->get();
 
         return view('welcome', compact('seminars', 'formations'));
     }
