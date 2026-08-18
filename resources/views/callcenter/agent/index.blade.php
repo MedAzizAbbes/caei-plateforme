@@ -96,10 +96,10 @@
                                     <td class="p-4">
                                         @if($rdv->qualification)
                                             <div class="space-y-1">
-                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                                                <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold border {{ $rdv->qualification->resultatBadgeClasses() }}">
                                                     {{ $rdv->qualification->resultat }}
                                                 </span>
-                                                <div class="text-[11px] text-slate-500">Potentiel: <strong>{{ $rdv->qualification->potentiel }}</strong></div>
+                                                <div class="text-[11px] text-slate-500 font-medium">Potentiel: <strong class="text-slate-800">{{ $rdv->qualification->potentiel }}</strong></div>
                                             </div>
                                         @else
                                             <span class="text-xs text-slate-400 italic">Non qualifié</span>
