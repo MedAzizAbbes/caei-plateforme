@@ -103,6 +103,8 @@ class PatientController extends Controller
         $clinic  = $this->getClinic();
         $patient = $clinic->medicalRequests()->findOrFail($id);
 
+        \Illuminate\Support\Facades\Gate::authorize('view', $patient);
+
         $validated = $request->validate([
             'devis_amount'   => 'required|numeric|min:0',
             'devis_currency' => 'required|in:TND,EUR,USD',
@@ -112,7 +114,7 @@ class PatientController extends Controller
         $patient->update([
             'devis_amount'   => $validated['devis_amount'],
             'devis_currency' => $validated['devis_currency'],
-            'devis_message'  => $validated['devis_message'],
+            'devis_message'  => \App\Support\Sanitizer::clean($validated['devis_message']),
             'devis_sent_at'  => now(),
             'clinic_status'  => 'quoted',
             'status'         => 'completed', // Changement automatique du statut admin à "Traité"
