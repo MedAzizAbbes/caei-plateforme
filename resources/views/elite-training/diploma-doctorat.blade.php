@@ -198,7 +198,7 @@
         <span class="nav-brand-title">CAEI <span>ELITE TRAINING</span></span>
       </a>
       <div class="d-flex align-items-center gap-3">
-        <a href="{{ route('elite.training') }}" class="btn-outline-pro btn-sm">← Retour aux Formations</a>
+        <a href="{{ route('elite.training') }}" class="btn-outline-pro btn-sm">← Accueil</a>
         <a href="#inscription" class="btn-gold btn-sm">Postuler au DBA</a>
       </div>
     </div>

@@ -276,9 +276,6 @@
 
       <div class="d-flex align-items-center gap-3">
         <a href="{{ route('elite.training') }}" class="btn-back">
-          <i class="bi bi-grid-3x3-gap"></i> Voir toutes les catégories
-        </a>
-        <a href="{{ route('home') }}" class="btn-back">
           <i class="bi bi-arrow-left"></i> Accueil
         </a>
       </div>

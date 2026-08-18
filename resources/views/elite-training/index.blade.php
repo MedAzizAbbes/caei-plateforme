@@ -1765,7 +1765,7 @@
       </ul>
 
       <a href="{{ route('home') }}" class="btn-back-home d-none d-lg-flex">
-        <i class="bi bi-arrow-left"></i> Accueil
+        <i class="bi bi-arrow-left"></i> Caei Company
       </a>
     </div>
   </nav>

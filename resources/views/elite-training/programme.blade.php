@@ -637,7 +637,7 @@
                   </div>
 
                   <button type="button" class="btn-card-action btn-card-gold" data-bs-toggle="modal" data-bs-target="#inscriptionModal" data-formation-title="{{ $f->title }}" data-formation-code="{{ $f->code ?? 'CAEI-'.$f->id }}">
-                    <i class="bi bi-pencil-square"></i> S'inscrire / Demander la Brochure
+                    <i class="bi bi-pencil-square"></i> S'inscrire
                   </button>
                 </div>
               </div>
@@ -661,7 +661,7 @@
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title text-white">Demande d'Inscription / Information</h5>
+          <h5 class="modal-title text-white">Demande d'Inscription</h5>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
         </div>
         <div class="modal-body p-4">
