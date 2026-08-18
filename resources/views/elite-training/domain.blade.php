@@ -84,8 +84,8 @@
     /* DOMAIN HERO HEADER */
     .domain-hero {
       position: relative;
-      padding: 140px 0 70px;
-      background: linear-gradient(135deg, #000f3c 0%, #001f3f 40%, #002a5c 80%, #001030 100%);
+      padding: 150px 0 80px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #334155 80%, #0f172a 100%);
       color: var(--white);
       overflow: hidden;
     }

@@ -61,7 +61,7 @@
 
     /* Hero Banner Pro */
     .hero-banner {
-      background: linear-gradient(135deg, rgba(6, 23, 67, 0.9) 0%, rgba(10, 37, 105, 0.82) 100%), url('{{ asset("assets/img/professionel.jpg") }}') center/cover no-repeat;
+      background: linear-gradient(135deg, rgba(6, 23, 67, 0.4) 0%, rgba(10, 37, 105, 0.3) 100%), url('{{ asset("assets/img/professionel.jpg") }}') center/cover no-repeat;
       color: #ffffff;
       padding: 100px 0 80px;
       box-shadow: inset 0 -10px 30px rgba(0, 0, 0, 0.15);

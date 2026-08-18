@@ -259,7 +259,7 @@
       background: 
         radial-gradient(ellipse 80% 60% at 20% 40%, rgba(240, 183, 90, 0.15) 0%, transparent 60%),
         radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0, 122, 255, 0.15) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(6, 30, 75, 0.52) 0%, rgba(10, 48, 110, 0.42) 40%, rgba(15, 65, 140, 0.38) 70%, rgba(5, 25, 65, 0.50) 100%);
+        linear-gradient(135deg, rgba(6, 30, 75, 0.3) 0%, rgba(10, 48, 110, 0.2) 40%, rgba(15, 65, 140, 0.15) 70%, rgba(5, 25, 65, 0.25) 100%);
       z-index: 2;
     }
 
@@ -285,9 +285,9 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(10, 50, 110, 0.25) 0%,
-        rgba(0, 40, 90, 0.15) 50%,
-        rgba(10, 50, 110, 0.30) 100%
+        rgba(10, 50, 110, 0.15) 0%,
+        rgba(0, 40, 90, 0.05) 50%,
+        rgba(10, 50, 110, 0.15) 100%
       );
       z-index: 1;
     }
