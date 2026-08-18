@@ -4,21 +4,42 @@
 @php
     $documentsRoutePrefix = request()->routeIs('formateur.*') ? 'formateur' : 'admin';
     $backRoute = $documentsRoutePrefix === 'formateur' ? route('formateur.dashboard') : route('admin.seminars.index');
-    $backLabel = $documentsRoutePrefix === 'formateur' ? 'Retour espace formateur' : 'Retour aux seminaires';
+    $backLabel = $documentsRoutePrefix === 'formateur' ? 'Retour espace formateur' : 'Retour aux séminaires';
+    $isAdmin = Auth::user()?->isAdmin();
 @endphp
+
+@if($isAdmin)
+<div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8" style="background: linear-gradient(135deg, rgba(241,245,249,0.85) 0%, rgba(226,232,240,0.88) 100%);">
+    <x-admin-sidebar />
+
+    <div class="flex-1 p-6 md:p-10 overflow-y-auto">
+        {{-- En-tête --}}
+        <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6,23,67,0.92) 0%, rgba(12,58,110,0.95) 100%);">
+            <div class="absolute -right-6 -bottom-8 opacity-15 text-8xl pointer-events-none">📁</div>
+            <div class="relative z-10">
+                <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-[#061743] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                    📁 Contenus & Supports de cours
+                </span>
+                <h1 class="text-3xl font-black uppercase tracking-tight">{{ $seminar->theme }}</h1>
+                <p class="mt-2 text-slate-200 text-sm">Gestion des supports pédagogiques, fichiers PDF, présentations et ressources vidéo par jour.</p>
+            </div>
+            <a href="{{ $backRoute }}" class="shrink-0 inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/20 transition">
+                &larr; {{ $backLabel }}
+            </a>
+        </div>
+@else
 <div class="py-6">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900">
-                <div class="flex items-center justify-between mb-6">
-                    <div>
-                        <h1 class="text-2xl font-semibold">{{ $seminar->theme }}</h1>
-                        <p class="text-gray-600 text-sm">Gérer les contenus et documents</p>
-                    </div>
-                    <a href="{{ $backRoute }}" class="text-indigo-600 hover:text-indigo-700">
-                        &larr; {{ $backLabel }}
-                    </a>
-                </div>
+        <div class="flex items-center justify-between mb-6">
+            <div>
+                <h1 class="text-2xl font-semibold">{{ $seminar->theme }}</h1>
+                <p class="text-gray-600 text-sm">Gérer les contenus et documents</p>
+            </div>
+            <a href="{{ $backRoute }}" class="text-indigo-600 hover:text-indigo-700">
+                &larr; {{ $backLabel }}
+            </a>
+        </div>
+@endif
 
                 @if(session('success'))
                     <div class="mb-4 rounded-md bg-green-100 p-3 text-sm text-green-700">
@@ -201,6 +222,11 @@
                 closePreview();
             }
         });
-    </script>
+@if($isAdmin)
+    </div>
 </div>
+@else
+    </div>
+</div>
+@endif
 @endsection
