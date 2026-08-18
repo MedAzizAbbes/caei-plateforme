@@ -23,41 +23,96 @@
                         </div>
                     </a>
 
-                    {{-- Lien Medical Center --}}
-                    <a href="{{ route('admin.medical-requests.index') }}" 
-                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.medical-requests.*') ? 'bg-teal-500 text-white' : 'text-slate-200 hover:bg-white/10' }}">
-                        <div class="flex items-center gap-3">
-                            <span class="text-base">🏥</span>
-                            <span>Medical Center</span>
+                    {{-- Section Medical Center --}}
+                    @php
+                        $isMedicalCenterActive = request()->routeIs('admin.medical-requests.*') || request()->routeIs('admin.cliniques.*');
+                        $pendingMedRequests = \App\Models\MedicalRequest::where('status', 'pending')->count();
+                        $pendingClinicReview = \App\Models\MedicalRequest::where('clinic_status', 'pending_review')->whereNotNull('partner_clinic_id')->count();
+                    @endphp
+                    <div class="rounded-xl {{ $isMedicalCenterActive ? 'bg-white/5 pb-1 border border-teal-500/20' : '' }}">
+                        <a href="{{ route('admin.medical-requests.index') }}" 
+                           class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ $isMedicalCenterActive ? 'bg-teal-600 text-white shadow-md' : 'text-slate-200 hover:bg-white/10' }}">
+                            <div class="flex items-center gap-3">
+                                <span class="text-base">🏥</span>
+                                <span class="font-bold">Medical Center</span>
+                            </div>
+                            @if($pendingMedRequests > 0 || $pendingClinicReview > 0)
+                                <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
+                                    {{ $pendingMedRequests + $pendingClinicReview }}
+                                </span>
+                            @endif
+                        </a>
+                        {{-- Sous-liens Medical Center --}}
+                        <div class="pl-6 pr-2 py-1.5 space-y-1">
+                            <a href="{{ route('admin.medical-requests.index') }}" 
+                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ request()->routeIs('admin.medical-requests.*') ? 'bg-teal-500/30 text-teal-300 font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
+                                <div class="flex items-center gap-2">
+                                    <span>📋</span>
+                                    <span>Devis & RDV</span>
+                                </div>
+                                @if($pendingMedRequests > 0)
+                                    <span class="bg-amber-500/30 text-amber-300 text-[10px] font-black px-1.5 py-0.5 rounded">
+                                        {{ $pendingMedRequests }}
+                                    </span>
+                                @endif
+                            </a>
+
+                            <a href="{{ route('admin.cliniques.index') }}"
+                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ request()->routeIs('admin.cliniques.*') ? 'bg-indigo-500/40 text-indigo-200 font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
+                                <div class="flex items-center gap-2">
+                                    <span>🏥</span>
+                                    <span>Cliniques Partenaires</span>
+                                </div>
+                                @if($pendingClinicReview > 0)
+                                    <span class="bg-indigo-400 text-indigo-950 text-[10px] font-black px-1.5 py-0.5 rounded-full">
+                                        {{ $pendingClinicReview }}
+                                    </span>
+                                @endif
+                            </a>
                         </div>
-                        @if(\App\Models\MedicalRequest::where('status', 'pending')->count() > 0)
-                            <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
-                                {{ \App\Models\MedicalRequest::where('status', 'pending')->count() }}
-                            </span>
+                    </div>
+
+                    {{-- Lien Digital Moov --}}
+                    <a href="{{ route('admin.digitalmoov.index') }}"
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.digitalmoov.*') ? 'bg-orange-500 text-white' : 'text-slate-200 hover:bg-white/10' }}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">📱</span>
+                            <span>Digital Moov</span>
+                        </div>
+                        @php 
+                            try {
+                                $dmNew = \Illuminate\Support\Facades\Schema::hasTable('digital_moov_contacts') ? \App\Models\DigitalMoovContact::where('status','new')->count() : 0;
+                            } catch (\Throwable $e) { $dmNew = 0; }
+                        @endphp
+                        @if($dmNew > 0)
+                            <span class="bg-orange-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $dmNew }}</span>
                         @endif
                     </a>
 
-                    {{-- Lien Cliniques Partenaires --}}
-                    <a href="{{ route('admin.cliniques.index') }}"
-                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.cliniques.*') ? 'bg-indigo-500 text-white' : 'text-slate-200 hover:bg-white/10' }}">
+                    {{-- Lien Call Center --}}
+                    <a href="{{ route('admin.callcenter.index') }}"
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ (request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*')) ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-200 hover:bg-white/10' }}">
                         <div class="flex items-center gap-3">
-                            <span class="text-base">🏦</span>
-                            <span>Cliniques Partenaires</span>
+                            <span class="text-base">📞</span>
+                            <span>Call Center</span>
                         </div>
-                        @php $pendingClinicCount = \App\Models\MedicalRequest::where('clinic_status', 'pending_review')->whereNotNull('partner_clinic_id')->count(); @endphp
-                        @if($pendingClinicCount > 0)
-                            <span class="bg-indigo-300 text-indigo-900 text-[10px] font-black px-2 py-0.5 rounded-full">
-                                {{ $pendingClinicCount }}
-                            </span>
+                        @php 
+                            try {
+                                $ccTotal = (\Illuminate\Support\Facades\Schema::hasTable('rendez_vous') ? \App\Models\RendezVous::where('statut','en_attente_affectation')->count() : 0)
+                                    + (\Illuminate\Support\Facades\Schema::hasTable('call_center_requests') ? \App\Models\CallCenterRequest::where('status','Nouveau')->count() : 0);
+                            } catch (\Throwable $e) { $ccTotal = 0; }
+                        @endphp
+                        @if($ccTotal > 0)
+                            <span class="{{ (request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*')) ? 'bg-[#061743] text-white' : 'bg-[#f2a90f] text-[#061743]' }} text-[10px] font-black px-2 py-0.5 rounded-full">{{ $ccTotal }}</span>
                         @endif
                     </a>
 
-                    {{-- Lien Elite Training (RDV & Demandes) --}}
+                    {{-- Lien Elite Training --}}
                     <a href="{{ route('admin.elite-training.index') }}" 
                        class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.elite-training.*') ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-200 hover:bg-white/10' }}">
                         <div class="flex items-center gap-3">
                             <span class="text-base">🏆</span>
-                            <span>Elite (RDV & Inscriptions)</span>
+                            <span>Elite Training</span>
                         </div>
                         @if(\App\Models\EliteTrainingAppointment::where('status', 'pending')->count() > 0)
                             <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
@@ -111,39 +166,6 @@
                         @endphp
                         @if($recNew > 0)
                             <span class="bg-blue-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $recNew }}</span>
-                        @endif
-                    </a>
-
-                    {{-- Digital Moov --}}
-                    <a href="{{ route('admin.digitalmoov.index') }}"
-                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.digitalmoov.*') ? 'bg-orange-500 text-white' : 'text-slate-300 hover:bg-white/10' }}">
-                        <div class="flex items-center gap-3">
-                            <span class="text-base">📱</span>
-                            <span class="font-bold text-xs">Digital Moov</span>
-                        </div>
-                        @php 
-                            try {
-                                $dmNew = \Illuminate\Support\Facades\Schema::hasTable('digital_moov_contacts') ? \App\Models\DigitalMoovContact::where('status','new')->count() : 0;
-                            } catch (\Throwable $e) { $dmNew = 0; }
-                        @endphp
-                        @if($dmNew > 0)
-                            <span class="bg-orange-400 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $dmNew }}</span>
-                        @endif
-                    {{-- Call Center --}}
-                    <a href="{{ route('admin.callcenter.index') }}"
-                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ (request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*')) ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-300 hover:bg-white/10' }}">
-                        <div class="flex items-center gap-3">
-                            <span class="text-base">📞</span>
-                            <span class="font-bold text-xs">Call Center</span>
-                        </div>
-                        @php 
-                            try {
-                                $ccTotal = (\Illuminate\Support\Facades\Schema::hasTable('rendez_vous') ? \App\Models\RendezVous::where('statut','en_attente_affectation')->count() : 0)
-                                    + (\Illuminate\Support\Facades\Schema::hasTable('call_center_requests') ? \App\Models\CallCenterRequest::where('status','Nouveau')->count() : 0);
-                            } catch (\Throwable $e) { $ccTotal = 0; }
-                        @endphp
-                        @if($ccTotal > 0)
-                            <span class="{{ (request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*')) ? 'bg-[#061743] text-white' : 'bg-[#f2a90f] text-[#061743]' }} text-[10px] font-black px-2 py-0.5 rounded-full">{{ $ccTotal }}</span>
                         @endif
                     </a>
 

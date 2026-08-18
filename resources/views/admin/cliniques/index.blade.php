@@ -7,20 +7,69 @@
 
     <div class="flex-1 p-6 md:p-10 overflow-y-auto">
 
-        {{-- En-tête --}}
-        <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6,23,67,0.92) 0%, rgba(12,58,110,0.95) 100%);">
-            <div class="absolute -right-6 -bottom-8 opacity-15 text-8xl pointer-events-none">🏥</div>
+        {{-- En-tête Medical Center --}}
+        <div class="mb-6 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6, 23, 67, 0.92) 0%, rgba(12, 58, 110, 0.95) 100%), url('{{ asset('assets/img/service_medical_1786525641121.jpg') }}') center/cover no-repeat;">
+            <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none">🏥</div>
             <div class="relative z-10">
                 <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-[#061743] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
-                    🏥 Partenaires Cliniques
+                    <span>🩺</span> CAEI Medical Center • Partenaires
                 </span>
-                <h1 class="text-3xl font-black uppercase tracking-tight">Gestion des Cliniques Partenaires</h1>
-                <p class="mt-2 text-slate-200 text-sm">Créez et gérez les comptes des cliniques partenaires, générez leurs identifiants de connexion.</p>
+                <h1 class="text-3xl font-black uppercase tracking-tight flex items-center gap-3">
+                    <span>Gestion des Cliniques Partenaires</span> 🏥
+                </h1>
+                <p class="mt-2 text-slate-200 text-sm">Créez et gérez les comptes des cliniques partenaires, générez leurs identifiants de connexion (email & mot de passe).</p>
             </div>
-            <a href="{{ route('admin.cliniques.create') }}" class="shrink-0 inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-[#061743] font-black text-sm px-5 py-3 rounded-xl shadow transition-all">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-                Ajouter une clinique
-            </a>
+            <div class="shrink-0 flex items-center gap-3 relative z-10">
+                <a href="{{ route('admin.cliniques.create') }}" class="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-[#061743] font-black text-xs px-5 py-2.5 rounded-xl shadow transition-all">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                    <span>Ajouter une clinique</span>
+                </a>
+                <a href="{{ route('medical.services') }}" target="_blank" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl transition-all">
+                    <span>Site public 🩺 ↗</span>
+                </a>
+            </div>
+        </div>
+
+        {{-- Barre d'onglets Medical Center --}}
+        @php
+            $pendingMedRequests = \App\Models\MedicalRequest::where('status', 'pending')->count();
+            $pendingClinicsReviews = \App\Models\MedicalRequest::where('clinic_status', 'pending_review')->whereNotNull('partner_clinic_id')->count();
+        @endphp
+        <div class="mb-6 bg-white rounded-2xl p-2 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <a href="{{ route('admin.medical-requests.index') }}" 
+                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs transition-all text-slate-700 hover:bg-slate-100 hover:text-[#061743]">
+                    <span>📋</span>
+                    <span>Devis & Rendez-vous</span>
+                    @if($pendingMedRequests > 0)
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-black px-2 py-0.5 rounded-full">
+                            {{ $pendingMedRequests }} en attente
+                        </span>
+                    @endif
+                </a>
+
+                <a href="{{ route('admin.cliniques.index') }}" 
+                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-black text-xs transition-all bg-indigo-600 text-white shadow-sm">
+                    <span>🏥</span>
+                    <span>Cliniques Partenaires</span>
+                    <span class="bg-indigo-800 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+                        {{ $clinics->total() }}
+                    </span>
+                    @if($pendingClinicsReviews > 0)
+                        <span class="bg-amber-400 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full">
+                            {{ $pendingClinicsReviews }} à valider
+                        </span>
+                    @endif
+                </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <a href="{{ route('admin.cliniques.create') }}" 
+                   class="inline-flex items-center gap-1.5 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition-all">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                    <span>Créer un compte clinique</span>
+                </a>
+            </div>
         </div>
 
         @if(session('success'))
