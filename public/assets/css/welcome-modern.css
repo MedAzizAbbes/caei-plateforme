@@ -10,11 +10,11 @@
   --caei-navy-dark: #000720;
   --caei-navy-light: #0a1f5c;
   
-  --caei-gold: #ffc451;
-  --caei-gold-dark: #e5a730;
-  --caei-gold-light: #ffdb8d;
-  --caei-gold-gradient: linear-gradient(135deg, #ffc451 0%, #f59e0b 100%);
-  --caei-gold-glow: rgba(255, 196, 81, 0.35);
+  --caei-gold: #b86409;
+  --caei-gold-dark: #944e05;
+  --caei-gold-light: #d98223;
+  --caei-gold-gradient: linear-gradient(135deg, #b86409 0%, #d98223 100%);
+  --caei-gold-glow: rgba(184, 100, 9, 0.35);
   
   --caei-bg-page: #ffffff;
   --caei-bg-surface: #ffffff;
@@ -25,7 +25,7 @@
   --caei-text-muted: #1e293b;
   
   --caei-border-subtle: rgba(0, 15, 60, 0.1);
-  --caei-border-gold: rgba(255, 196, 81, 0.5);
+  --caei-border-gold: rgba(184, 100, 9, 0.5);
   
   --caei-radius-sm: 12px;
   --caei-radius-md: 20px;
@@ -232,7 +232,7 @@ html {
 }
 
 .hero h2 span.gradient-gold {
-  background: linear-gradient(135deg, #ffffff 0%, #ffc451 50%, #f59e0b 100%) !important;
+  background: linear-gradient(135deg, #ffffff 0%, #b86409 50%, #d98223 100%) !important;
   -webkit-background-clip: text !important;
   -webkit-text-fill-color: transparent !important;
   background-clip: text !important;

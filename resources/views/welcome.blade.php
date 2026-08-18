@@ -246,11 +246,11 @@
     }
 
     .hero h2 span.gradient-gold {
-      background: linear-gradient(135deg, #fff4d4 0%, #ffc451 45%, #e69d00 85%, #ffe699 100%) !important;
+      background: linear-gradient(135deg, #fff4d4 0%, #b86409 45%, #944e05 85%, #ffe699 100%) !important;
       -webkit-background-clip: text !important;
       -webkit-text-fill-color: transparent !important;
       background-clip: text !important;
-      filter: drop-shadow(0 6px 20px rgba(255, 196, 81, 0.45)) !important;
+      filter: drop-shadow(0 6px 20px rgba(184, 100, 9, 0.45)) !important;
     }
 
     .hero-subtitle {
@@ -261,9 +261,9 @@
     }
 
     .hero-badge-pill {
-      background: rgba(255, 196, 81, 0.14) !important;
-      border: 1px solid rgba(255, 196, 81, 0.45) !important;
-      box-shadow: 0 0 25px rgba(255, 196, 81, 0.25) !important;
+      background: rgba(184, 100, 9, 0.14) !important;
+      border: 1px solid rgba(184, 100, 9, 0.45) !important;
+      box-shadow: 0 0 25px rgba(184, 100, 9, 0.25) !important;
       backdrop-filter: blur(14px) !important;
       letter-spacing: 1px !important;
       font-weight: 700 !important;
@@ -301,10 +301,10 @@
     .col-6:nth-child(4) .hero-service-card { animation-delay: 2.4s; }
 
     .hero-service-card-wrapper:hover .hero-service-card {
-      background: rgba(255, 196, 81, 0.16) !important;
-      border-color: rgba(255, 196, 81, 0.7) !important;
+      background: rgba(184, 100, 9, 0.16) !important;
+      border-color: rgba(184, 100, 9, 0.7) !important;
       transform: translateY(-14px) scale(1.06) !important;
-      box-shadow: 0 25px 50px rgba(255, 196, 81, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+      box-shadow: 0 25px 50px rgba(184, 100, 9, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
       animation-play-state: paused !important;
     }
 
@@ -328,12 +328,12 @@
 
     .hero-service-card-wrapper:hover img {
       transform: scale(1.1) rotate(2deg) !important;
-      filter: drop-shadow(0 12px 24px rgba(255, 196, 81, 0.55)) !important;
+      filter: drop-shadow(0 12px 24px rgba(184, 100, 9, 0.55)) !important;
     }
 
     .hero-service-card-wrapper:hover img.logo-boost {
       transform: scale(1.28) rotate(2deg) !important;
-      filter: drop-shadow(0 12px 24px rgba(255, 196, 81, 0.55)) !important;
+      filter: drop-shadow(0 12px 24px rgba(184, 100, 9, 0.55)) !important;
     }
 
     .agency-label-tag {
@@ -344,8 +344,8 @@
     }
 
     .hero-service-card-wrapper:hover .agency-label-tag {
-      color: #ffc451 !important;
-      text-shadow: 0 0 15px rgba(255, 196, 81, 0.7) !important;
+      color: #b86409 !important;
+      text-shadow: 0 0 15px rgba(184, 100, 9, 0.7) !important;
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -501,7 +501,7 @@
 
     .about-agency-photo-card:hover .bi-check-circle-fill {
       transform: scale(1.2) !important;
-      color: #ffc451 !important;
+      color: #b86409 !important;
       transition: transform 0.3s ease !important;
     }
 
@@ -588,9 +588,9 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #ffc451 0%, #ff9800 100%);
+      background: linear-gradient(135deg, #b86409 0%, #d98223 100%);
       border: none;
-      box-shadow: 0 4px 15px rgba(255, 196, 81, 0.4);
+      box-shadow: 0 4px 15px rgba(184, 100, 9, 0.4);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -817,7 +817,7 @@
     }
     .seminar-card-meta-row i {
         font-size: 0.9rem;
-        color: #ffc451;
+        color: #b86409;
         flex-shrink: 0;
     }
     .seminar-card-buttons {
@@ -855,20 +855,20 @@
         padding: 0.55rem 1rem;
         border-radius: 10px;
         border: none;
-        background: #ffc451;
-        color: #061743;
+        background: #b86409;
+        color: #ffffff;
         font-size: 0.72rem;
         font-weight: 900;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        box-shadow: 0 4px 12px rgba(255, 196, 81, 0.2);
+        box-shadow: 0 4px 12px rgba(184, 100, 9, 0.2);
         transition: all 0.3s ease;
         text-decoration: none;
     }
     .seminar-card-btn-sub:hover {
-        background: #ffd581;
+        background: #d98223;
         transform: translateY(-1px);
-        box-shadow: 0 6px 16px rgba(255, 196, 81, 0.35);
+        box-shadow: 0 6px 16px rgba(184, 100, 9, 0.35);
     }
     .seminar-card-image-fallback {
         width: 100%;
@@ -906,19 +906,19 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between" style="gap: 0.5rem; flex-wrap: wrap;">
       <div class="d-flex align-items-center gap-2 gap-md-3" style="flex-wrap: wrap;">
         <a href="tel:+21655335286" class="d-flex align-items-center gap-2 text-white text-decoration-none" style="font-size: 14px; white-space: nowrap;">
-          <i class="bi bi-telephone-fill" style="color: #ffc451;"></i>
+          <i class="bi bi-telephone-fill" style="color: #b86409;"></i>
           <span class="d-none d-sm-inline">+216 55 335 286</span>
         </a>
         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@caei-afri.com" target="_blank" class="d-flex align-items-center gap-2 text-white text-decoration-none" style="font-size: 14px; white-space: nowrap;">
-          <i class="bi bi-envelope-fill" style="color: #ffc451;"></i>
+          <i class="bi bi-envelope-fill" style="color: #b86409;"></i>
           <span class="d-none d-md-inline">contact@caei-afri.com</span>
         </a>
         <a href="https://www.google.com/maps/search/?api=1&query=SIS+8+Rue+Claude+Bernard+1002+Belvedere-Tunis+Tunisie" target="_blank" class="d-flex align-items-center gap-2 text-white text-decoration-none d-none d-lg-flex" style="font-size: 14px; white-space: nowrap;">
-          <i class="bi bi-geo-alt-fill" style="color: #ffc451;"></i>
+          <i class="bi bi-geo-alt-fill" style="color: #b86409;"></i>
           <span>SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis , Tunisie</span>
         </a>
       </div>
-      <a href="{{ asset('assets/img/catalogue CAEI GROUP.pdf') }}" target="_blank" style="font-size: 14px; color: #ffc451; text-decoration: none; white-space: nowrap; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; padding: 0 8px;" onmouseover="this.style.color='#ffdb8d'; this.style.transform='translateX(2px)';" onmouseout="this.style.color='#ffc451'; this.style.transform='translateX(0)';">
+      <a href="{{ asset('assets/img/catalogue CAEI GROUP.pdf') }}" target="_blank" style="font-size: 14px; color: #b86409; text-decoration: none; white-space: nowrap; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; padding: 0 8px;" onmouseover="this.style.color='#d98223'; this.style.transform='translateX(2px)';" onmouseout="this.style.color='#b86409'; this.style.transform='translateX(0)';">
         <i class="bi bi-file-pdf" style="font-size: 17px;"></i>
         <span style="font-weight: 400; letter-spacing: 0.5px;" class="d-none d-sm-inline">Catalogue CAEI</span>
       </a>
@@ -1064,7 +1064,7 @@
               </div>
               <div class="card-body p-4 d-flex flex-column">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                  <span class="badge" style="background-color: #ffc451; color: #000f3c;">{{ ucfirst(str_replace('_', ' ', $formation->type)) }}</span>
+                  <span class="badge" style="background-color: #b86409; color: #ffffff;">{{ ucfirst(str_replace('_', ' ', $formation->type)) }}</span>
                   <span class="badge bg-light text-secondary border">{{ $formation->domain }}</span>
                 </div>
                 <h5 class="card-title fw-bold" style="color: #000f3c;">{{ $formation->title }}</h5>
@@ -1086,7 +1086,7 @@
           @endforeach
         </div>
         <div class="text-center mt-5">
-            <a href="{{ route('home.old') }}" class="btn btn-warning rounded-pill px-5 py-2 fw-bold" style="background-color: #ffc451; color: #000f3c;">Voir tout le catalogue</a>
+            <a href="{{ route('home.old') }}" class="btn btn-warning rounded-pill px-5 py-2 fw-bold" style="background-color: #b86409; color: #ffffff; border: none;">Voir tout le catalogue</a>
         </div>
         @else
         <div class="text-center p-5 bg-white rounded-4 shadow-sm border border-light">
@@ -1204,7 +1204,7 @@
       <div class="container" data-aos="fade-up">
         
         <div class="section-title text-center mb-5" data-aos="fade-up">
-          <span class="badge rounded-pill px-3 py-2 mb-2" style="background: rgba(255, 196, 81, 0.2) !important; color: #ffc451 !important; border: 1px solid rgba(255, 196, 81, 0.4) !important; font-size: 13px; letter-spacing: 1px;">FILIALES DU GROUPE</span>
+          <span class="badge rounded-pill px-3 py-2 mb-2" style="background: rgba(184, 100, 9, 0.2) !important; color: #b86409 !important; border: 1px solid rgba(184, 100, 9, 0.4) !important; font-size: 13px; letter-spacing: 1px;">FILIALES DU GROUPE</span>
           <h2 class="fw-bold text-white mt-2" style="color: #ffffff !important; font-size: 36px; text-shadow: 0 2px 10px rgba(0,0,0,0.8);">À PROPOS DE NOS AGENCES</h2>
           <p style="color: rgba(255, 255, 255, 0.75) !important; font-size: 16px;">Une synergie d'expertises au service de l'excellence et du développement panafricain.</p>
         </div>
@@ -1218,11 +1218,11 @@
               <div class="card-body-content d-flex flex-column justify-content-between h-100">
                 <div>
                   <div class="d-flex align-items-center gap-3 mb-4">
-                    <div class="agency-logo-wrapper" style="background: linear-gradient(135deg, rgba(255, 196, 81, 0.3) 0%, rgba(0, 31, 63, 0.8) 100%);">
+                    <div class="agency-logo-wrapper" style="background: linear-gradient(135deg, rgba(184, 100, 9, 0.3) 0%, rgba(0, 31, 63, 0.8) 100%);">
                       <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training Logo">
                     </div>
                     <div>
-                      <span class="badge mb-1 px-3 py-1" style="background: rgba(255, 196, 81, 0.25); color: #ffc451; border: 1px solid rgba(255, 196, 81, 0.5); font-size: 11px;">Formation & Cadres</span>
+                      <span class="badge mb-1 px-3 py-1" style="background: rgba(184, 100, 9, 0.25); color: #b86409; border: 1px solid rgba(184, 100, 9, 0.5); font-size: 11px;">Formation & Cadres</span>
                       <h3 class="fw-bold text-white mb-0" style="color: #ffffff !important; font-size: 24px; text-shadow: 0 2px 10px rgba(0,0,0,0.9);">CAEI ELITE TRAINING</h3>
                     </div>
                   </div>
@@ -1421,7 +1421,7 @@
     text-align: center;
   }
   .service-card-modern h3 {
-    color: #ffc451 !important;
+    color: #b86409 !important;
     font-size: 22px;
     font-weight: 900;
     margin-bottom: 15px;
@@ -1529,7 +1529,7 @@
       <div class="container position-relative text-center text-white py-4" style="z-index: 2;" data-aos="zoom-in">
         <h3>Prêt à Transformer Votre Entreprise ?</h3>
         <p>Découvrez comment nos services peuvent vous aider à atteindre vos objectifs. Contactez-nous dès aujourd'hui.</p>
-        <a class="btn btn-warning rounded-pill px-4 py-2 fw-bold mt-3" href="#contact" style="background-color: #ffc451; color: #000f3c;">Nous Contacter</a>
+        <a class="btn btn-warning rounded-pill px-4 py-2 fw-bold mt-3" href="#contact" style="background-color: #b86409; color: #ffffff; border: none;">Nous Contacter</a>
       </div>
     </section><!-- /Call To Action Section -->
 
@@ -1777,7 +1777,7 @@
                   <div id="formLoading" class="d-none text-muted mb-2"><i class="bi bi-arrow-repeat spin me-2"></i>Chargement...</div>
                   <div id="formError" class="alert alert-danger d-none mb-2"></div>
                   <div id="formSuccess" class="alert alert-success d-none mb-2">Votre message a été envoyé. Merci!</div>
-                  <button type="submit" class="btn btn-warning rounded-pill px-4 text-white fw-bold" style="background-color: #ffc451; color: #000f3c !important; border: none;">Envoyer le Message</button>
+                  <button type="submit" class="btn btn-warning rounded-pill px-4 text-white fw-bold" style="background-color: #b86409; color: #ffffff !important; border: none;">Envoyer le Message</button>
                 </div>
               </div>
             </form>
@@ -1834,7 +1834,7 @@
             @csrf
             <div class="input-group">
               <input type="email" name="email" class="form-control" placeholder="Votre email" required>
-              <button class="btn btn-warning fw-bold" type="submit" style="background-color: #ffc451; color: #000f3c;">S'abonner</button>
+              <button class="btn btn-warning fw-bold" type="submit" style="background-color: #b86409; color: #ffffff; border: none;">S'abonner</button>
             </div>
           </form>
         </div>
