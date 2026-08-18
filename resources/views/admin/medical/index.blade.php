@@ -22,9 +22,54 @@
                 <p class="mt-2 text-slate-200 text-sm">Consultez, traitez et suivez les demandes d'accompagnement et d'évacuation sanitaire de vos patients internationaux.</p>
             </div>
             <div class="shrink-0 flex items-center gap-3 relative z-10">
+                <a href="{{ route('admin.cliniques.index') }}" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all">
+                    <span>🏥 Cliniques Partenaires</span>
+                </a>
                 <a href="{{ route('medical.services') }}" target="_blank" class="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-[#061743] font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all">
                     <span>Voir le site Medical Center 🩺</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                </a>
+            </div>
+        </div>
+
+        {{-- Barre d'onglets Medical Center --}}
+        @php
+            $totalClinicsCount = \App\Models\ClinicPartner::count();
+            $pendingClinicsReviews = \App\Models\MedicalRequest::where('clinic_status', 'pending_review')->whereNotNull('partner_clinic_id')->count();
+        @endphp
+        <div class="mb-6 bg-white rounded-2xl p-2 shadow-sm border border-slate-200 flex flex-wrap items-center justify-between gap-3">
+            <div class="flex items-center gap-2">
+                <a href="{{ route('admin.medical-requests.index') }}" 
+                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-black text-xs transition-all bg-teal-600 text-white shadow-sm">
+                    <span>📋</span>
+                    <span>Devis & Rendez-vous</span>
+                    @if($stats['pending'] > 0)
+                        <span class="bg-amber-400 text-slate-900 text-[10px] font-black px-2 py-0.5 rounded-full">
+                            {{ $stats['pending'] }} en attente
+                        </span>
+                    @endif
+                </a>
+
+                <a href="{{ route('admin.cliniques.index') }}" 
+                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs transition-all text-slate-700 hover:bg-slate-100 hover:text-[#061743]">
+                    <span>🏥</span>
+                    <span>Cliniques Partenaires</span>
+                    <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-slate-200">
+                        {{ $totalClinicsCount }}
+                    </span>
+                    @if($pendingClinicsReviews > 0)
+                        <span class="bg-indigo-100 text-indigo-800 text-[10px] font-black px-2 py-0.5 rounded-full">
+                            {{ $pendingClinicsReviews }} à valider
+                        </span>
+                    @endif
+                </a>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <a href="{{ route('admin.cliniques.create') }}" 
+                   class="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition-all">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                    <span>Ajouter une clinique</span>
                 </a>
             </div>
         </div>

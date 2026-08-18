@@ -7,11 +7,12 @@
 
     <div class="flex-1 p-6 md:p-10 overflow-y-auto max-w-3xl">
 
-        <div class="mb-6">
-            <a href="{{ route('admin.cliniques.index') }}" class="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-800 font-semibold">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                Retour aux cliniques
-            </a>
+        <div class="mb-6 flex items-center gap-2 text-xs font-bold text-slate-500">
+            <a href="{{ route('admin.medical-requests.index') }}" class="hover:text-teal-600">🩺 Medical Center</a>
+            <span>/</span>
+            <a href="{{ route('admin.cliniques.index') }}" class="hover:text-indigo-600">🏥 Cliniques Partenaires</a>
+            <span>/</span>
+            <span class="text-slate-800">Ajouter une clinique</span>
         </div>
 
         {{-- Affichage des credentials (une seule fois) --}}
