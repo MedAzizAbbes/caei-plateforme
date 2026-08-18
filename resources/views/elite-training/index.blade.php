@@ -2337,7 +2337,7 @@
                   </span>
                   <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
                 </div>
-                <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire / Devis</a>
+                <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire</a>
               </div>
             </div>
           </div>
@@ -2730,7 +2730,7 @@
                   <span class="font-black" style="font-size: 18px; color: #ce9233;">${formattedPrice}</span>
                 </div>
                 <button type="button" onclick="selectCourseAndContact('${escapeHtml(f.code ? '['+f.code+'] '+f.title : f.title)}')" class="btn btn-sm btn-gold font-bold px-3 py-2 rounded-pill" style="font-size: 13px;">
-                  S'inscrire / Devis →
+                  S'inscrire →
                 </button>
               </div>
             </div>
