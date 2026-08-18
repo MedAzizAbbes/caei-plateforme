@@ -118,20 +118,17 @@
                                     <td class="p-4">
                                         @if($rdv->qualification)
                                             <div class="space-y-1">
-                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                                                <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold border {{ $rdv->qualification->resultatBadgeClasses() }}">
                                                     {{ $rdv->qualification->resultat }}
                                                 </span>
-                                                <div class="text-[11px] text-slate-500">Potentiel: <strong>{{ $rdv->qualification->potentiel }}</strong></div>
+                                                <div class="text-[11px] text-slate-500 font-medium">Potentiel: <strong class="text-slate-800">{{ $rdv->qualification->potentiel }}</strong></div>
                                             </div>
                                         @else
-                                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded border border-amber-200">À qualifier</span>
+                                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200">À qualifier</span>
                                         @endif
                                     </td>
 
                                     <td class="p-4 text-right whitespace-nowrap space-x-2">
-                                        <a href="{{ route('callcenter.ics', $rdv) }}" title="Ajouter à l'agenda Google/Outlook" class="inline-flex items-center gap-1 rounded-xl border border-slate-300 bg-white px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 transition shadow-sm">
-                                            <span>📅 .ics</span>
-                                        </a>
                                         <a href="{{ route('callcenter.partenaire.qualify', $rdv) }}" class="inline-flex items-center gap-2 rounded-xl bg-[#061743] hover:bg-[#0a2060] px-4 py-2 text-xs font-black uppercase text-white shadow transition-all">
                                             <span>📋 {{ $rdv->qualification ? 'Modifier Qualif.' : 'Qualifier' }}</span>
                                         </a>

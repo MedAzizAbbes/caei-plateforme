@@ -1,29 +1,49 @@
 <x-app-layout>
     @php
-        $backRoute = Auth::user()->isFormateur()
-            ? route('formateur.dashboard')
-            : route('participant.dashboard');
+        $user = Auth::user();
+        $isAdmin = $user?->isAdmin();
+        $backRoute = $isAdmin 
+            ? route('admin.seminars.index') 
+            : ($user?->isFormateur() ? route('formateur.dashboard') : route('participant.dashboard'));
     @endphp
 
-    <x-slot name="header">
-        <div class="flex items-center gap-4">
-            <a href="{{ $backRoute }}" class="inline-flex items-center text-[#061743] hover:text-[#f2a90f] font-bold text-sm transition">
-                <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                </svg>
-                Retour
-            </a>
-            <div>
-                <h2 class="font-black text-xl text-slate-900 leading-tight">
-                    {{ $seminar->theme }}
-                </h2>
-                <p class="text-xs text-slate-600">Espace échange et discussion en temps réel</p>
+    @if($isAdmin)
+    <div class="flex min-h-screen -mt-8 -mx-4 sm:-mx-6 lg:-mx-8" style="background: linear-gradient(135deg, rgba(241,245,249,0.85) 0%, rgba(226,232,240,0.88) 100%);">
+        <x-admin-sidebar />
+        <div class="flex-1 p-6 md:p-8 overflow-y-auto">
+            <div class="mb-6 flex items-center justify-between">
+                <div>
+                    <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-[#061743] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                        💬 Espace Discussions & Échanges
+                    </span>
+                    <h1 class="text-2xl font-black uppercase text-slate-900 tracking-tight">{{ $seminar->theme }}</h1>
+                    <p class="text-xs text-slate-500 font-medium mt-0.5">Fil de discussion en temps réel du séminaire</p>
+                </div>
+                <a href="{{ $backRoute }}" class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white px-4 py-2 text-xs font-bold text-slate-700 hover:bg-slate-50 shadow-sm transition">
+                    ⬅ Retour aux séminaires
+                </a>
             </div>
-        </div>
-    </x-slot>
+    @else
+        <x-slot name="header">
+            <div class="flex items-center gap-4">
+                <a href="{{ $backRoute }}" class="inline-flex items-center text-[#061743] hover:text-[#f2a90f] font-bold text-sm transition">
+                    <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                    Retour
+                </a>
+                <div>
+                    <h2 class="font-black text-xl text-slate-900 leading-tight">
+                        {{ $seminar->theme }}
+                    </h2>
+                    <p class="text-xs text-slate-600">Espace échange et discussion en temps réel</p>
+                </div>
+            </div>
+        </x-slot>
 
-    <div class="py-8">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div class="py-8">
+            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    @endif
             <div class="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden grid grid-cols-1 md:grid-cols-[16rem_1fr] h-[calc(100vh-14rem)] min-h-[500px]">
                 
                 <!-- Sidebar: Threads list -->
@@ -93,8 +113,13 @@
                 </div>
 
             </div>
+        @if($isAdmin)
+            </div>
         </div>
-    </div>
+        @else
+            </div>
+        </div>
+        @endif
 
     <script>
         let currentThread = '{{ $activeThread }}';

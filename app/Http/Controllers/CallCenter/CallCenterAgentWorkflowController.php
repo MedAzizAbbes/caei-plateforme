@@ -116,18 +116,23 @@ class CallCenterAgentWorkflowController extends Controller
         $prospectName = $rendezVous->prospect ? $rendezVous->prospect->nomComplet() : 'Prospect';
         $phone = $rendezVous->prospect ? $rendezVous->prospect->telephone : '';
 
+        $isCancelled = ($rendezVous->statut === 'annule');
+        $method = $isCancelled ? 'CANCEL' : 'REQUEST';
+        $status = $isCancelled ? 'CANCELLED' : 'CONFIRMED';
+        $summaryPrefix = $isCancelled ? '[ANNULÉ] ' : '';
+
         $icsContent = "BEGIN:VCALENDAR\r\n";
         $icsContent .= "VERSION:2.0\r\n";
         $icsContent .= "PRODID:-//CAEI Platforme//Call Center//FR\r\n";
-        $icsContent .= "METHOD:REQUEST\r\n";
+        $icsContent .= "METHOD:" . $method . "\r\n";
         $icsContent .= "BEGIN:VEVENT\r\n";
         $icsContent .= "UID:rdv-" . $rendezVous->id . "@caei-afri.com\r\n";
         $icsContent .= "DTSTAMP:" . now()->format('Ymd\THis\Z') . "\r\n";
         $icsContent .= "DTSTART:" . $start->format('Ymd\THis\Z') . "\r\n";
         $icsContent .= "DTEND:" . $end->format('Ymd\THis\Z') . "\r\n";
-        $icsContent .= "SUMMARY:RDV Call Center CAEI - Prospect " . $prospectName . "\r\n";
+        $icsContent .= "SUMMARY:" . $summaryPrefix . "RDV Call Center CAEI - Prospect " . $prospectName . "\r\n";
         $icsContent .= "DESCRIPTION:Objet: " . addcslashes($rendezVous->objet, ",;") . "\\nTel Prospect: " . $phone . "\\nNotes: " . addcslashes((string)$rendezVous->notes, ",;") . "\r\n";
-        $icsContent .= "STATUS:CONFIRMED\r\n";
+        $icsContent .= "STATUS:" . $status . "\r\n";
         $icsContent .= "END:VEVENT\r\n";
         $icsContent .= "END:VCALENDAR\r\n";
 

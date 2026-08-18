@@ -218,84 +218,116 @@
             </div>
 
             <!-- Tableau Workflow RDV -->
-            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-                <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-                    <h3 class="text-sm font-black uppercase tracking-wider text-slate-800">Prises de Rendez-vous & Qualifications</h3>
-                    <span class="text-xs font-semibold text-slate-500">{{ $rendezVousList->total() }} RDV enregistrés</span>
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+                <div class="px-6 py-4 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-gradient-to-r from-slate-50 to-white">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-[#061743]/10 text-[#061743] flex items-center justify-center font-bold text-base">
+                            📅
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-black uppercase tracking-wider text-slate-900">Prises de Rendez-vous & Qualifications</h3>
+                            <p class="text-xs text-slate-500 font-medium">Gestion globale des rendez-vous et affectations partenaires</p>
+                        </div>
+                    </div>
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                        {{ $rendezVousList->total() }} RDV enregistrés
+                    </span>
                 </div>
 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-sm">
                         <thead>
-                            <tr class="border-b border-slate-200 bg-slate-100/70 text-[11px] font-black uppercase tracking-wider text-slate-600">
-                                <th class="p-4">Date & Heure</th>
-                                <th class="p-4">Prospect</th>
-                                <th class="p-4">Agent créateur</th>
-                                <th class="p-4">Objet</th>
-                                <th class="p-4">Partenaire affecté</th>
-                                <th class="p-4">Statut RDV</th>
-                                <th class="p-4">Qualification</th>
-                                <th class="p-4 text-right">Affectation</th>
+                            <tr class="border-b border-slate-200 bg-slate-50 text-[11px] font-black uppercase tracking-wider text-slate-600">
+                                <th class="py-3.5 px-4">Date & Heure</th>
+                                <th class="py-3.5 px-4">Prospect</th>
+                                <th class="py-3.5 px-4">Agent créateur</th>
+                                <th class="py-3.5 px-4">Objet</th>
+                                <th class="py-3.5 px-4">Partenaire affecté</th>
+                                <th class="py-3.5 px-4">Statut RDV</th>
+                                <th class="py-3.5 px-4">Qualification</th>
+                                <th class="py-3.5 px-4 text-right">Affectation</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
                             @forelse($rendezVousList as $rdv)
-                                <tr class="hover:bg-slate-50/80 transition">
-                                    <td class="p-4 whitespace-nowrap">
-                                        <div class="font-bold text-slate-900">{{ \Carbon\Carbon::parse($rdv->date_rendez_vous)->format('d/m/Y') }}</div>
-                                        <div class="text-xs text-slate-400">{{ \Carbon\Carbon::parse($rdv->heure_rendez_vous)->format('H:i') }}</div>
+                                <tr class="hover:bg-slate-50/90 transition-colors">
+                                    <td class="py-3.5 px-4 whitespace-nowrap">
+                                        <div class="font-bold text-slate-900 flex items-center gap-1.5">
+                                            <span>📅</span> {{ \Carbon\Carbon::parse($rdv->date_rendez_vous)->format('d/m/Y') }}
+                                        </div>
+                                        <div class="mt-0.5 inline-block text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
+                                            ⏰ {{ \Carbon\Carbon::parse($rdv->heure_rendez_vous)->format('H:i') }}
+                                        </div>
                                     </td>
 
-                                    <td class="p-4">
-                                        <div class="font-bold text-slate-900">{{ $rdv->prospect->nomComplet() }}</div>
-                                        <div class="text-xs text-slate-500">📞 {{ $rdv->prospect->telephone }}</div>
-                                        @if($rdv->prospect->societe)
-                                            <div class="text-[11px] text-slate-400">🏢 {{ $rdv->prospect->societe }}</div>
-                                        @endif
+                                    <td class="py-3.5 px-4">
+                                        <div class="flex items-start gap-2.5">
+                                            <div class="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-700 font-black text-xs flex items-center justify-center shrink-0">
+                                                {{ strtoupper(substr($rdv->prospect->nom ?? 'P', 0, 1) . substr($rdv->prospect->prenom ?? '', 0, 1)) }}
+                                            </div>
+                                            <div>
+                                                <div class="font-bold text-slate-900 leading-snug">{{ $rdv->prospect->nomComplet() }}</div>
+                                                <div class="text-xs font-semibold text-slate-500 flex items-center gap-1 mt-0.5">
+                                                    <span>📞</span> <a href="tel:{{ $rdv->prospect->telephone }}" class="hover:underline hover:text-slate-800">{{ $rdv->prospect->telephone }}</a>
+                                                </div>
+                                                @if($rdv->prospect->societe)
+                                                    <div class="text-[11px] text-slate-400 font-medium mt-0.5 flex items-center gap-1">
+                                                        <span>🏢</span> {{ $rdv->prospect->societe }}
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
                                     </td>
 
-                                    <td class="p-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700">
+                                    <td class="py-3.5 px-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
                                             🎧 {{ $rdv->agent->fullName() }}
                                         </span>
                                     </td>
 
-                                    <td class="p-4">
-                                        <div class="font-semibold text-slate-800 max-w-xs truncate">{{ $rdv->objet }}</div>
+                                    <td class="py-3.5 px-4">
+                                        <div class="font-semibold text-slate-800 max-w-xs truncate" title="{{ $rdv->objet }}">{{ $rdv->objet }}</div>
                                     </td>
 
-                                    <td class="p-4 whitespace-nowrap">
+                                    <td class="py-3.5 px-4 whitespace-nowrap">
                                         @if($rdv->partenaire)
-                                            <div class="font-bold text-blue-900">🤝 {{ $rdv->partenaire->fullName() }}</div>
-                                            <div class="text-[11px] text-slate-400">{{ $rdv->partenaire->institution ?? 'Partenaire' }}</div>
+                                            <div class="font-bold text-[#061743] flex items-center gap-1">
+                                                <span>🤝</span> {{ $rdv->partenaire->fullName() }}
+                                            </div>
+                                            <div class="text-[11px] text-slate-400 font-medium">{{ $rdv->partenaire->institution ?? 'Partenaire' }}</div>
                                         @else
-                                            <span class="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-1 rounded-md border border-amber-200">Non affecté</span>
+                                            <span class="inline-flex items-center gap-1 text-xs font-bold text-amber-700 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200">
+                                                <span>⚠️</span> Non affecté
+                                            </span>
                                         @endif
                                     </td>
 
-                                    <td class="p-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold border {{ $rdv->statusBadgeClasses() }}">
+                                    <td class="py-3.5 px-4 whitespace-nowrap">
+                                        <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold border shadow-2xs {{ $rdv->statusBadgeClasses() }}">
                                             {{ $rdv->statusLabel() }}
                                         </span>
                                     </td>
 
-                                    <td class="p-4">
+                                    <td class="py-3.5 px-4">
                                         @if($rdv->qualification)
                                             <div class="space-y-1">
-                                                <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300">
+                                                <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold border {{ $rdv->qualification->resultatBadgeClasses() }}">
                                                     {{ $rdv->qualification->resultat }}
                                                 </span>
-                                                <div class="text-[11px] text-slate-500">Potentiel: <strong>{{ $rdv->qualification->potentiel }}</strong></div>
+                                                <div class="text-[11px] text-slate-500 font-medium">Potentiel: <strong class="text-slate-800">{{ $rdv->qualification->potentiel }}</strong></div>
                                             </div>
                                         @else
-                                            <span class="text-xs text-slate-400 italic">En attente</span>
+                                            <span class="inline-flex items-center gap-1 text-xs text-slate-400 bg-slate-50 px-2.5 py-1 rounded-lg border border-slate-200 italic font-medium">
+                                                ⏳ En attente
+                                            </span>
                                         @endif
                                     </td>
 
-                                    <td class="p-4 text-right whitespace-nowrap">
-                                        <form method="POST" action="{{ route('callcenter.admin.assign', $rdv) }}" class="inline-flex items-center gap-1">
+                                    <td class="py-3.5 px-4 text-right whitespace-nowrap">
+                                        <form method="POST" action="{{ route('callcenter.admin.assign', $rdv) }}" class="inline-flex items-center gap-1.5">
                                             @csrf
-                                            <select name="partenaire_id" required class="text-xs rounded-lg border-slate-300 py-1 px-2 text-slate-800 focus:border-[#061743]">
+                                            <select name="partenaire_id" required class="text-xs rounded-lg border-slate-300 py-1.5 px-2.5 text-slate-800 font-semibold focus:border-[#061743] focus:ring-1 focus:ring-[#061743] bg-white shadow-2xs">
                                                 <option value="">-- Partenaire --</option>
                                                 @foreach($partenaires as $p)
                                                     <option value="{{ $p->id }}" {{ $rdv->partenaire_id == $p->id ? 'selected' : '' }}>
@@ -303,7 +335,7 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <button type="submit" class="rounded-lg bg-[#061743] px-3 py-1 text-xs font-bold text-white hover:bg-[#0a2060] transition">
+                                            <button type="submit" class="rounded-lg bg-[#061743] px-3.5 py-1.5 text-xs font-black uppercase tracking-wider text-white hover:bg-[#0a2060] transition shadow-sm">
                                                 {{ $rdv->partenaire_id ? 'Réaffecter' : 'Affecter' }}
                                             </button>
                                         </form>

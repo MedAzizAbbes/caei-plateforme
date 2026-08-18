@@ -43,11 +43,7 @@
                             <div><strong class="text-slate-700">Agent créateur:</strong> {{ $rendezVous->agent->fullName() }}</div>
                         </div>
 
-                        <div class="pt-2">
-                            <a href="{{ route('callcenter.ics', $rendezVous) }}" class="w-full inline-flex justify-center items-center gap-2 rounded-xl border border-slate-300 bg-slate-50 px-3 py-2 text-xs font-bold text-slate-700 hover:bg-slate-100 transition">
-                                📅 Exporter Agenda (.ics)
-                            </a>
-                        </div>
+
                     </div>
                 </div>
 
@@ -63,14 +59,18 @@
 
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div>
-                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Résultat Commercial *</label>
+                                    <label class="block text-xs font-bold text-slate-700 uppercase mb-1">Résultat de la qualification *</label>
+                                    @php
+                                        $currentResultat = optional($rendezVous->qualification)->resultat;
+                                    @endphp
                                     <select name="resultat" required class="w-full rounded-xl border-slate-300 text-sm font-medium focus:border-[#061743] focus:ring-[#061743]">
                                         <option value="">-- Sélectionner --</option>
-                                        <option value="Prospect qualifié" {{ optional($rendezVous->qualification)->resultat == 'Prospect qualifié' ? 'selected' : '' }}>✅ Prospect qualifié (Opportunité validée)</option>
-                                        <option value="Intéressé" {{ optional($rendezVous->qualification)->resultat == 'Intéressé' ? 'selected' : '' }}>🟢 Intéressé (Devis / Suite à donner)</option>
-                                        <option value="À rappeler" {{ optional($rendezVous->qualification)->resultat == 'À rappeler' ? 'selected' : '' }}>🟡 À rappeler (Relance programmée)</option>
-                                        <option value="Non intéressé" {{ optional($rendezVous->qualification)->resultat == 'Non intéressé' ? 'selected' : '' }}>🔴 Non intéressé</option>
-                                        <option value="Prospect non qualifié" {{ optional($rendezVous->qualification)->resultat == 'Prospect non qualifié' ? 'selected' : '' }}>❌ Prospect non qualifié (Hors cible)</option>
+                                        <option value="Prospect qualifié" {{ $currentResultat === 'Prospect qualifié' ? 'selected' : '' }}>Prospect qualifié</option>
+                                        <option value="Prospect intéressé" {{ ($currentResultat === 'Prospect intéressé' || $currentResultat === 'Intéressé') ? 'selected' : '' }}>Prospect intéressé</option>
+                                        <option value="À rappeler" {{ $currentResultat === 'À rappeler' ? 'selected' : '' }}>À rappeler</option>
+                                        <option value="Non intéressé" {{ $currentResultat === 'Non intéressé' ? 'selected' : '' }}>Non intéressé</option>
+                                        <option value="Non joignable" {{ $currentResultat === 'Non joignable' ? 'selected' : '' }}>Non joignable</option>
+                                        <option value="Refus" {{ $currentResultat === 'Refus' ? 'selected' : '' }}>Refus</option>
                                     </select>
                                 </div>
 
