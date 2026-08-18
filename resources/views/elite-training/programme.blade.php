@@ -671,21 +671,16 @@
             <input type="hidden" name="formation_title" id="modalFormationTitle">
 
             <div class="row g-3">
-              <div class="col-12">
-                <label class="form-label font-semibold text-dark small mb-1">Formation / Séminaire choisi</label>
-                <input type="text" id="modalFormationDisplay" name="subject" class="form-control bg-light fw-bold text-navy" readonly>
-              </div>
-
               <!-- 1. Nom & Prénom -->
               <div class="col-md-6">
                 <label class="form-label font-semibold text-dark small mb-1">Nom & Prénom *</label>
-                <input type="text" name="name" class="form-control" required placeholder="Votre nom complet">
+                <input type="text" name="nom" class="form-control" required placeholder="Votre nom & prénom">
               </div>
 
-              <!-- 2. Téléphone / WhatsApp -->
+              <!-- 2. Téléphone -->
               <div class="col-md-6">
-                <label class="form-label font-semibold text-dark small mb-1">Téléphone / WhatsApp *</label>
-                <input type="tel" name="phone" class="form-control" required placeholder="+216 XX XXX XXX">
+                <label class="form-label font-semibold text-dark small mb-1">Téléphone *</label>
+                <input type="tel" name="telephone" class="form-control" required placeholder="+216 XX XXX XXX">
               </div>
 
               <!-- 3. Adresse e-mail -->
@@ -697,42 +692,48 @@
               <!-- 4. Pays -->
               <div class="col-md-6">
                 <label class="form-label font-semibold text-dark small mb-1">Pays *</label>
-                <input type="text" name="country" class="form-control" required placeholder="Ex: Tunisie, Sénégal, Côte d'Ivoire...">
+                <input type="text" name="pays" class="form-control" required placeholder="Ex: Tunisie, Côte d'Ivoire...">
               </div>
 
               <!-- 5. Fonction / Poste -->
               <div class="col-md-6">
                 <label class="form-label font-semibold text-dark small mb-1">Fonction / Poste *</label>
-                <input type="text" name="job_title" class="form-control" required placeholder="Ex: Chef de Projet, Directeur...">
+                <input type="text" name="poste" class="form-control" required placeholder="Ex: Directeur Financier...">
               </div>
 
               <!-- 6. Entreprise / Institution -->
               <div class="col-md-6">
                 <label class="form-label font-semibold text-dark small mb-1">Entreprise / Institution *</label>
-                <input type="text" name="company" class="form-control" required placeholder="Nom de votre entreprise">
+                <input type="text" name="entreprise" class="form-control" required placeholder="Nom de votre entreprise">
               </div>
 
-              <!-- 7. Date / Session souhaitée -->
+              <!-- 7. Formation ou séminaire choisi -->
+              <div class="col-md-6">
+                <label class="form-label font-semibold text-dark small mb-1">Formation ou séminaire choisi *</label>
+                <input type="text" id="modalFormationDisplay" name="objet" class="form-control bg-light fw-bold text-navy" placeholder="Intitulé de la formation" required>
+              </div>
+
+              <!-- 8. Date / Session souhaitée -->
               <div class="col-md-6">
                 <label class="form-label font-semibold text-dark small mb-1">Date / Session souhaitée</label>
-                <input type="text" name="session_date" class="form-control" placeholder="Ex: Octobre 2026 / Prochaine session">
+                <input type="text" name="date_session" class="form-control" placeholder="Ex: Octobre 2026">
               </div>
 
-              <!-- 8. Mode de participation -->
+              <!-- 9. Mode de participation -->
               <div class="col-md-6">
                 <label class="form-label font-semibold text-dark small mb-1">Mode de participation *</label>
-                <select name="participation_mode" class="form-select" required>
-                  <option value="" disabled selected>-- Sélectionnez un mode --</option>
+                <select name="mode_participation" class="form-select" required>
+                  <option value="" disabled selected>-- Sélectionner un mode --</option>
                   <option value="présentiel">Présentiel</option>
                   <option value="en_ligne">En ligne</option>
                 </select>
               </div>
 
-              <!-- 9. Comment avez-vous connu cette formation ? -->
-              <div class="col-12">
+              <!-- 10. Comment avez-vous connu cette formation ? -->
+              <div class="col-md-6">
                 <label class="form-label font-semibold text-dark small mb-1">Comment avez-vous connu cette formation ?</label>
-                <select name="source" class="form-select">
-                  <option value="" disabled selected>-- Sélectionnez une option --</option>
+                <select name="comment_connu" class="form-select">
+                  <option value="" disabled selected>-- Sélectionner une option --</option>
                   <option value="Réseaux sociaux">Réseaux sociaux (LinkedIn, Facebook...)</option>
                   <option value="Recommandation">Recommandation d'un collègue / ami</option>
                   <option value="Site web">Site web CAEI</option>

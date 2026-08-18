@@ -453,29 +453,81 @@
         <form action="{{ route('elite.appointment.store') }}" method="POST" id="quickRegisterForm" class="p-4">
           @csrf
           <input type="hidden" name="type" value="inscription">
-          <input type="hidden" name="subject" id="modalCourseInput">
 
-          <div class="mb-3">
-            <label class="form-label text-xs font-bold uppercase text-muted">Nom & Prénom *</label>
-            <input type="text" name="name" required placeholder="Votre nom complet" class="form-control rounded-3 py-2 text-sm">
+          <div class="row g-3">
+            <!-- 1. Nom & Prénom -->
+            <div class="col-md-6">
+              <label class="form-label text-xs font-bold uppercase text-muted">Nom & Prénom *</label>
+              <input type="text" name="nom" required placeholder="Votre nom & prénom" class="form-control rounded-3 py-2 text-sm">
+            </div>
+
+            <!-- 2. Téléphone -->
+            <div class="col-md-6">
+              <label class="form-label text-xs font-bold uppercase text-muted">Téléphone *</label>
+              <input type="tel" name="telephone" required placeholder="+216 XX XXX XXX" class="form-control rounded-3 py-2 text-sm">
+            </div>
+
+            <!-- 3. Adresse e-mail -->
+            <div class="col-md-6">
+              <label class="form-label text-xs font-bold uppercase text-muted">Adresse e-mail *</label>
+              <input type="email" name="email" required placeholder="votre@email.com" class="form-control rounded-3 py-2 text-sm">
+            </div>
+
+            <!-- 4. Pays -->
+            <div class="col-md-6">
+              <label class="form-label text-xs font-bold uppercase text-muted">Pays *</label>
+              <input type="text" name="pays" required placeholder="Ex: Tunisie, Côte d'Ivoire..." class="form-control rounded-3 py-2 text-sm">
+            </div>
+
+            <!-- 5. Fonction / Poste -->
+            <div class="col-md-6">
+              <label class="form-label text-xs font-bold uppercase text-muted">Fonction / Poste *</label>
+              <input type="text" name="poste" required placeholder="Ex: Directeur Financier..." class="form-control rounded-3 py-2 text-sm">
+            </div>
+
+            <!-- 6. Entreprise / Institution -->
+            <div class="col-md-6">
+              <label class="form-label text-xs font-bold uppercase text-muted">Entreprise / Institution *</label>
+              <input type="text" name="entreprise" required placeholder="Nom de votre entreprise" class="form-control rounded-3 py-2 text-sm">
+            </div>
+
+            <!-- 7. Formation ou séminaire choisi -->
+            <div class="col-md-6">
+              <label class="form-label text-xs font-bold uppercase text-muted">Formation ou séminaire choisi *</label>
+              <input type="text" name="objet" id="modalCourseInput" required placeholder="Intitulé de la formation" class="form-control rounded-3 py-2 text-sm">
+            </div>
+
+            <!-- 8. Date / Session souhaitée -->
+            <div class="col-md-6">
+              <label class="form-label text-xs font-bold uppercase text-muted">Date / Session souhaitée</label>
+              <input type="text" name="date_session" placeholder="Ex: Octobre 2026" class="form-control rounded-3 py-2 text-sm">
+            </div>
+
+            <!-- 9. Mode de participation -->
+            <div class="col-md-6">
+              <label class="form-label text-xs font-bold uppercase text-muted">Mode de participation *</label>
+              <select name="mode_participation" required class="form-select rounded-3 py-2 text-sm">
+                <option value="" disabled selected>-- Sélectionner un mode --</option>
+                <option value="présentiel">Présentiel</option>
+                <option value="en_ligne">En ligne</option>
+              </select>
+            </div>
+
+            <!-- 10. Comment avez-vous connu cette formation ? -->
+            <div class="col-md-6">
+              <label class="form-label text-xs font-bold uppercase text-muted">Comment avez-vous connu cette formation ?</label>
+              <select name="comment_connu" class="form-select rounded-3 py-2 text-sm">
+                <option value="" disabled selected>-- Sélectionner une option --</option>
+                <option value="Réseaux sociaux">Réseaux sociaux (LinkedIn, Facebook...)</option>
+                <option value="Recommandation">Recommandation d'un collègue / ami</option>
+                <option value="Site web">Site web CAEI</option>
+                <option value="Emailing / Newsletter">Emailing / Newsletter</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </div>
           </div>
 
-          <div class="mb-3">
-            <label class="form-label text-xs font-bold uppercase text-muted">Email Professionnel *</label>
-            <input type="email" name="email" required placeholder="votre@adresse.com" class="form-control rounded-3 py-2 text-sm">
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label text-xs font-bold uppercase text-muted">Téléphone / WhatsApp</label>
-            <input type="text" name="phone" placeholder="+216 XX XXX XXX" class="form-control rounded-3 py-2 text-sm">
-          </div>
-
-          <div class="mb-4">
-            <label class="form-label text-xs font-bold uppercase text-muted">Message / Précisions</label>
-            <textarea name="message" rows="3" placeholder="Organisme, dates souhaitées ou questions..." class="form-control rounded-3 text-sm"></textarea>
-          </div>
-
-          <div class="d-flex items-center justify-end gap-2">
+          <div class="d-flex items-center justify-end gap-2 mt-4">
             <button type="button" class="btn btn-light rounded-pill font-semibold text-xs px-4 py-2" data-bs-dismiss="modal">Annuler</button>
             <button type="submit" class="btn btn-gold rounded-pill font-bold text-sm px-4 py-2">
               <i class="bi bi-send-fill me-1"></i> Envoyer ma demande

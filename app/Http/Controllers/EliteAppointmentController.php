@@ -18,6 +18,7 @@ class EliteAppointmentController extends Controller
             'email'              => 'required|email|max:255',
             'mobile'             => 'nullable|string|max:50',
             'phone'              => 'nullable|string|max:50',
+            'telephone'          => 'nullable|string|max:50',
             'country'            => 'nullable|string|max:255',
             'pays'               => 'nullable|string|max:255',
             'job_title'          => 'nullable|string|max:255',
@@ -45,7 +46,7 @@ class EliteAppointmentController extends Controller
             return redirect()->back()->withErrors(['nom' => 'Le nom complet est obligatoire.']);
         }
 
-        $phone = $request->input('phone') ?: $request->input('mobile');
+        $phone = $request->input('phone') ?: ($request->input('mobile') ?: $request->input('telephone'));
         $country = $request->input('country') ?: $request->input('pays');
         $jobTitle = $request->input('job_title') ?: ($request->input('fonction') ?: $request->input('poste'));
         $company = $request->input('company') ?: ($request->input('entreprise') ?: ($request->input('institution') ?: $request->input('organization')));
