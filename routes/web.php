@@ -340,15 +340,17 @@ Route::middleware('auth')->group(function () {
 */
 Route::get('/dashboard', function () {
     if (auth()->check() && auth()->user()->role === 'admin') {
+        // --- 1. SÉMINAIRES & FORMATIONS ---
         $totalParticipants = \App\Models\User::where('role', 'participant')->count();
         $totalRegistrations = \App\Models\Registration::count();
         $totalPresent = \App\Models\Registration::where('status', 'present')->count();
         $totalAbsent = \App\Models\Registration::where('status', 'absent')->count();
-        $totalInscribedOnly = $totalRegistrations - ($totalPresent + $totalAbsent);
+        $totalInscribedOnly = max(0, $totalRegistrations - ($totalPresent + $totalAbsent));
+        $attendanceRate = $totalRegistrations > 0 ? round(($totalPresent / $totalRegistrations) * 100, 1) : 0;
 
-        $attendanceRate = $totalRegistrations > 0
-            ? round(($totalPresent / $totalRegistrations) * 100, 1)
-            : 0;
+        $totalSeminars = \App\Models\Seminar::count();
+        $publishedSeminars = \App\Models\Seminar::where('status', 'published')->count();
+        $totalSeminarDocuments = \App\Models\Document::count();
 
         $institutionsCount = \App\Models\User::where('role', 'participant')
             ->whereNotNull('institution')
@@ -372,6 +374,42 @@ Route::get('/dashboard', function () {
         ->orderByDesc('registrations_count')
         ->get();
 
+        // --- 2. CALL CENTER ---
+        $totalCallCenterRDV = \App\Models\RendezVous::count();
+        $totalQualifiedRDV = \App\Models\Qualification::where('resultat', 'Prospect qualifié')->count();
+        $totalInterestedRDV = \App\Models\Qualification::where('resultat', 'Prospect intéressé')->count();
+        $totalPendingRDV = \App\Models\RendezVous::where('statut', 'en_attente')->count();
+        $totalCallCenterRequests = \App\Models\CallCenterRequest::count();
+        $callCenterConversionRate = $totalCallCenterRDV > 0 ? round((($totalQualifiedRDV + $totalInterestedRDV) / $totalCallCenterRDV) * 100, 1) : 0;
+
+        $qualificationStats = \App\Models\Qualification::select('resultat', \DB::raw('count(*) as count'))
+            ->groupBy('resultat')
+            ->pluck('count', 'resultat')
+            ->toArray();
+
+        $callCenterSecteurs = \App\Models\CallCenterRequest::select('status', \DB::raw('count(*) as count'))
+            ->groupBy('status')
+            ->pluck('count', 'status')
+            ->toArray();
+
+        // --- 3. MÉDICAL & CLINIK ---
+        $totalMedicalRequests = \App\Models\MedicalRequest::count();
+        $pendingMedicalRequests = \App\Models\MedicalRequest::where('status', 'en_attente')->count();
+        $processedMedicalRequests = \App\Models\MedicalRequest::where('status', 'traite')->count();
+        $totalClinics = \App\Models\ClinicPartner::count();
+        $medicalDevisTotalSum = \App\Models\MedicalRequest::whereNotNull('devis_amount')->sum('devis_amount');
+
+        // --- 4. ÉCOSYSTÈME UTILISATEURS ---
+        $totalUsers = \App\Models\User::count();
+        $usersByRole = \App\Models\User::select('role', \DB::raw('count(*) as count'))
+            ->groupBy('role')
+            ->pluck('count', 'role')
+            ->toArray();
+
+        // --- 5. RECENT ACTIVITY LOGS ---
+        $recentCallCenterRDV = \App\Models\RendezVous::with(['qualification'])->latest()->limit(5)->get();
+        $recentMedicalRequests = \App\Models\MedicalRequest::latest()->limit(5)->get();
+
         return view('dashboard', compact(
             'totalParticipants',
             'totalRegistrations',
@@ -379,9 +417,29 @@ Route::get('/dashboard', function () {
             'totalAbsent',
             'totalInscribedOnly',
             'attendanceRate',
+            'totalSeminars',
+            'publishedSeminars',
+            'totalSeminarDocuments',
             'institutionsCount',
             'topInstitutions',
-            'bySeminar'
+            'bySeminar',
+            'totalCallCenterRDV',
+            'totalQualifiedRDV',
+            'totalInterestedRDV',
+            'totalPendingRDV',
+            'totalCallCenterRequests',
+            'callCenterConversionRate',
+            'qualificationStats',
+            'callCenterSecteurs',
+            'totalMedicalRequests',
+            'pendingMedicalRequests',
+            'processedMedicalRequests',
+            'totalClinics',
+            'medicalDevisTotalSum',
+            'totalUsers',
+            'usersByRole',
+            'recentCallCenterRDV',
+            'recentMedicalRequests'
         ));
     }
 
@@ -467,6 +525,10 @@ Route::middleware(['auth', 'role:formateur,admin'])->prefix('checkin')->name('ch
 */
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    
+    // System & Real-Time Monitoring
+    Route::get('/monitoring', [\App\Http\Controllers\Admin\MonitoringController::class, 'index'])->name('monitoring.index');
+    Route::get('/monitoring/api', [\App\Http\Controllers\Admin\MonitoringController::class, 'api'])->name('monitoring.api');
     
     // Call Center Requests & Dashboard Unifié
     Route::get('/callcenter-requests', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'index'])->name('callcenter.index');

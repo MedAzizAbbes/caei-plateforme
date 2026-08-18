@@ -87,6 +87,16 @@
                 <div class="px-3 text-[10px] uppercase font-black tracking-widest text-slate-400 mb-2">Autres Modules</div>
                 <div class="space-y-1.5">
                     
+                    {{-- Monitoring System --}}
+                    <a href="{{ route('admin.monitoring.index') }}"
+                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.monitoring.*') ? 'bg-emerald-500 text-white' : 'text-slate-300 hover:bg-white/10' }}">
+                        <div class="flex items-center gap-3">
+                            <span class="text-base">⚡</span>
+                            <span class="font-bold text-xs">Monitoring System</span>
+                        </div>
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    </a>
+
                     {{-- Recrutements --}}
                     <a href="{{ route('admin.recrutements.index') }}"
                        class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.recrutements.*') ? 'bg-blue-600 text-white' : 'text-slate-300 hover:bg-white/10' }}">
