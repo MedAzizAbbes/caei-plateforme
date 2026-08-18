@@ -2300,52 +2300,53 @@
         </div>
       </div>
 
-      <!-- Swiper Carousel -->
-      <div class="swiper scheduleSwiper" data-aos="fade-up" data-aos-delay="200">
-        <div class="swiper-wrapper">
+      <!-- Swiper Carousel Container -->
+      <div class="schedule-swiper-container position-relative" data-aos="fade-up" data-aos-delay="200">
+        <div class="swiper scheduleSwiper">
+          <div class="swiper-wrapper">
 
-          @forelse($allFormations ?? [] as $index => $formation)
-          @php 
-            $monthsList = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
-            $month = $formation->start_date ? $monthsList[$formation->start_date->format('n') - 1] : $monthsList[$index % 12];
-          @endphp
-          <div class="swiper-slide filterable-slide" data-month="{{ $month }}" style="width: 300px;">
-            <div class="schedule-card">
-              <div class="schedule-card-img">
-                <img src="{{ $formation->image ? asset('storage/' . $formation->image) : asset('assets/img/img3.jpg') }}" alt="{{ $formation->title }}" loading="lazy">
-              </div>
-              <div class="schedule-card-body">
-                <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
-                <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
-                <div class="schedule-meta">
-                  <div class="schedule-meta-item">
-                    <i class="bi bi-geo-alt"></i>
-                    <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
-                  </div>
-                  <div class="schedule-meta-item">
-                    <i class="bi bi-clock"></i>
-                    <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
-                  </div>
+            @forelse($allFormations ?? [] as $index => $formation)
+            @php 
+              $monthsList = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+              $month = $formation->start_date ? $monthsList[$formation->start_date->format('n') - 1] : $monthsList[$index % 12];
+            @endphp
+            <div class="swiper-slide filterable-slide" data-month="{{ $month }}" style="width: 300px;">
+              <div class="schedule-card">
+                <div class="schedule-card-img">
+                  <img src="{{ $formation->image ? asset('storage/' . $formation->image) : asset('assets/img/img3.jpg') }}" alt="{{ $formation->title }}" loading="lazy">
                 </div>
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                  <span class="schedule-price">
-                    @if($formation->price)
-                      {{ number_format($formation->price, 0, ',', ' ') }} €
-                    @else
-                      Sur devis
-                    @endif
-                  </span>
-                  <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
+                <div class="schedule-card-body">
+                  <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
+                  <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
+                  <div class="schedule-meta">
+                    <div class="schedule-meta-item">
+                      <i class="bi bi-geo-alt"></i>
+                      <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
+                    </div>
+                    <div class="schedule-meta-item">
+                      <i class="bi bi-clock"></i>
+                      <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="schedule-price">
+                      @if($formation->price)
+                        {{ number_format($formation->price, 0, ',', ' ') }} €
+                      @else
+                        Sur devis
+                      @endif
+                    </span>
+                    <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
+                  </div>
+                  <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire</a>
                 </div>
-                <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire</a>
               </div>
             </div>
-          </div>
-          @empty
-          <div class="text-center py-5 text-muted">
-            <p>Aucune formation disponible pour le moment.</p>
-          </div>
-          @endforelse
+            @empty
+            <div class="text-center py-5 text-muted">
+              <p>Aucune formation disponible pour le moment.</p>
+            </div>
+            @endforelse
 
           </div>
 
@@ -2921,6 +2922,11 @@
       slidesPerView: 1,
       spaceBetween: 20,
       loop: false,
+      speed: 800,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
       pagination: {
         el: '.swiper-pagination',
         clickable: true,
