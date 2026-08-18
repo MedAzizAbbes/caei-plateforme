@@ -2356,9 +2356,9 @@
       </div>
 
       <div class="text-center mt-5">
-        <a href="{{ route('home') }}" class="btn-gold">
+        <a href="{{ route('home.old') }}" class="btn-gold">
           <i class="bi bi-calendar4-week"></i>
-          Voir tout le programme
+          Voir les séminaires actuels
         </a>
       </div>
     </div>
