@@ -257,9 +257,9 @@
       position: absolute;
       inset: 0;
       background: 
-        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(206, 146, 51, 0.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0, 100, 200, 0.08) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(0,15,60,0.85) 0%, rgba(0,31,63,0.80) 40%, rgba(0,42,92,0.75) 70%, rgba(0,16,48,0.88) 100%);
+        radial-gradient(ellipse 80% 60% at 20% 40%, rgba(240, 183, 90, 0.15) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0, 122, 255, 0.15) 0%, transparent 60%),
+        linear-gradient(135deg, rgba(6, 30, 75, 0.52) 0%, rgba(10, 48, 110, 0.42) 40%, rgba(15, 65, 140, 0.38) 70%, rgba(5, 25, 65, 0.50) 100%);
       z-index: 2;
     }
 
@@ -276,7 +276,7 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
-      filter: brightness(0.6) contrast(1.1);
+      filter: brightness(0.85) contrast(1.05);
     }
 
     .et-hero-video::after {
@@ -285,9 +285,9 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(0, 15, 40, 0.4) 0%,
-        rgba(0, 20, 50, 0.2) 50%,
-        rgba(0, 15, 40, 0.5) 100%
+        rgba(10, 50, 110, 0.25) 0%,
+        rgba(0, 40, 90, 0.15) 50%,
+        rgba(10, 50, 110, 0.30) 100%
       );
       z-index: 1;
     }
@@ -1765,7 +1765,7 @@
       </ul>
 
       <a href="{{ route('home') }}" class="btn-back-home d-none d-lg-flex">
-        <i class="bi bi-arrow-left"></i> Accueil
+        <i class="bi bi-arrow-left"></i> Caei Company
       </a>
     </div>
   </nav>
@@ -2337,7 +2337,7 @@
                   </span>
                   <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
                 </div>
-                <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire / Devis</a>
+                <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire</a>
               </div>
             </div>
           </div>
@@ -2356,9 +2356,9 @@
       </div>
 
       <div class="text-center mt-5">
-        <a href="{{ route('home') }}" class="btn-gold">
+        <a href="{{ route('home.old') }}" class="btn-gold">
           <i class="bi bi-calendar4-week"></i>
-          Voir tout le programme
+          Voir les séminaires actuels
         </a>
       </div>
     </div>
@@ -2730,7 +2730,7 @@
                   <span class="font-black" style="font-size: 18px; color: #ce9233;">${formattedPrice}</span>
                 </div>
                 <button type="button" onclick="selectCourseAndContact('${escapeHtml(f.code ? '['+f.code+'] '+f.title : f.title)}')" class="btn btn-sm btn-gold font-bold px-3 py-2 rounded-pill" style="font-size: 13px;">
-                  S'inscrire / Devis →
+                  S'inscrire →
                 </button>
               </div>
             </div>

@@ -99,16 +99,6 @@
                             </div>
                         </div>
 
-                        {{-- Description --}}
-                        @if($seminar->description)
-                            <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6 sm:p-8">
-                                <h2 class="text-lg font-black text-[#061743] mb-4 flex items-center gap-2">
-                                    <span class="w-1 h-5 bg-[#f2a90f] rounded-full"></span>
-                                    Description du Séminaire
-                                </h2>
-                                <div class="text-slate-600 leading-relaxed whitespace-pre-line text-sm sm:text-base font-medium">{{ $seminar->description }}</div>
-                            </div>
-                        @endif
 
                         {{-- Formateurs --}}
                         @if($seminar->trainers->isNotEmpty())
@@ -211,12 +201,14 @@
                                 <div class="flex items-start gap-3">
                                     <div class="p-2 rounded-lg bg-slate-50 text-[#061743] shrink-0">
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/>
                                         </svg>
                                     </div>
                                     <div>
-                                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Inscriptions</span>
-                                        <span class="text-sm font-bold text-slate-800">{{ $seminar->registrations_count }} inscrit(s)</span>
+                                        <span class="block text-[10px] font-bold text-slate-400 uppercase tracking-wider">Description</span>
+                                        <span class="text-sm font-medium text-slate-700 leading-relaxed block mt-0.5">
+                                            {{ $seminar->description ?: "Séminaire d'excellence CAEI axé sur le renforcement des compétences pratiques et l'échange d'expertises." }}
+                                        </span>
                                     </div>
                                 </div>
                             </div>

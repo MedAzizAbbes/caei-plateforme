@@ -276,9 +276,6 @@
 
       <div class="d-flex align-items-center gap-3">
         <a href="{{ route('elite.training') }}" class="btn-back">
-          <i class="bi bi-grid-3x3-gap"></i> Voir toutes les catégories
-        </a>
-        <a href="{{ route('home') }}" class="btn-back">
           <i class="bi bi-arrow-left"></i> Accueil
         </a>
       </div>
@@ -418,7 +415,7 @@
                     <button type="button" 
                             onclick="openRegistrationModal('{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}')"
                             class="btn-register-course">
-                      <span>S'inscrire / Devis</span>
+                      <span>S'inscrire</span>
                       <i class="bi bi-arrow-right"></i>
                     </button>
                   </div>
@@ -447,7 +444,7 @@
       <div class="modal-content rounded-4 border-0 shadow-lg overflow-hidden">
         <div class="modal-header p-4 text-white" style="background: linear-gradient(135deg, var(--navy), #002a5c);">
           <div>
-            <span class="text-gold-light text-uppercase tracking-wider font-bold text-xs">Inscription / Demande de Devis</span>
+            <span class="text-gold-light text-uppercase tracking-wider font-bold text-xs">Inscription</span>
             <h5 class="modal-title font-black text-white mt-1" id="modalCourseTitle" style="font-family: var(--font-display);">Intitulé du Cours</h5>
           </div>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
