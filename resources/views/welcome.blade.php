@@ -1037,9 +1037,17 @@
     <!-- Hero Section -->
     <section id="acceuil" class="hero section">
 
-      <!-- YouTube Background Video (World Connection / Globe Loop) - Ultra reliable -->
+      <!-- Vidéo de fond native HTML5 (Globe Loop) - 0 Logo YouTube, 0 Boutons de contrôle -->
       <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; background: #000;">
-        <iframe src="https://www.youtube.com/embed/rDrjQyatgXQ?autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=rDrjQyatgXQ&vq=hd1080" style="width: 100vw; height: 56.25vw; min-height: 100vh; min-width: 177.77vh; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.88;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        <video 
+          autoplay 
+          muted 
+          loop 
+          playsinline 
+          preload="auto"
+          style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.88; pointer-events: none;">
+          <source src="{{ asset('assets/img/globe_bg.mp4') }}" type="video/mp4">
+        </video>
       </div>
 
       <div class="hero-overlay-gradient"></div>
