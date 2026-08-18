@@ -13,9 +13,17 @@
         <style>
             html { scroll-behavior: smooth; }
             .medical-blue-text {
-                background: linear-gradient(135deg, #0284c7 0%, #0284c7 100%);
+                background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
+            }
+            .btn-medical-primary {
+                background-color: #0284c7 !important;
+                color: #ffffff !important;
+            }
+            .btn-medical-primary:hover {
+                background-color: #0369a1 !important;
+                color: #ffffff !important;
             }
             .card-hover-light {
                 transition: all 0.35s cubic-bezier(0.165, 0.84, 0.44, 1);
@@ -117,7 +125,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                         <span>Espace Cliniques</span>
                     </a>
-                    <a href="#devis" class="inline-flex items-center justify-center gap-2 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-full shadow-md shadow-sky-500/20 hover:scale-105 transition-all">
+                    <a href="#devis" class="btn-medical-primary inline-flex items-center justify-center gap-2 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-full shadow-md shadow-sky-500/20 hover:scale-105 transition-all" style="background-color: #0284c7 !important; color: #ffffff !important;">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <span>Devis & Rendez-vous</span>
                     </a>
@@ -129,14 +137,13 @@
         {{-- ══════════ HERO SECTION AVEC VIDEO BACKGROUND ══════════ --}}
         <section id="accueil" class="relative py-16 lg:py-24 px-4 overflow-hidden border-b border-sky-50">
             <!-- Video Background Container -->
-            <div class="absolute inset-0 w-full h-full z-0 overflow-hidden bg-sky-50">
+            <div class="absolute inset-0 w-full h-full z-0 overflow-hidden bg-sky-50 pointer-events-none">
                 <!-- Overlay blanc/bleu très transparent pour l'effet clinique -->
                 <div class="absolute inset-0 bg-white/75 z-10"></div>
                 
-                <!-- Remplacez 'VOTRE_ID_YOUTUBE_ICI' par l'ID de votre vidéo médicale -->
                 <iframe 
-                    class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-60"
-                    src="https://www.youtube.com/embed/7apjhhiyNlg?autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=7apjhhiyNlg&vq=hd1080" 
+                    class="absolute top-1/2 left-1/2 w-[125vw] h-[70vw] min-h-[125vh] min-w-[210vh] -translate-x-1/2 -translate-y-1/2 pointer-events-none opacity-60 scale-125 origin-center"
+                    src="https://www.youtube.com/embed/7apjhhiyNlg?autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=7apjhhiyNlg&vq=hd1080&rel=0&modestbranding=1" 
                     frameborder="0" 
                     allow="autoplay; fullscreen" 
                     allowfullscreen>
@@ -162,11 +169,11 @@
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                        <a href="#devis" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#0284c7] hover:bg-[#0369a1] text-white font-black text-base px-8 py-4 rounded-[20px] shadow-lg shadow-sky-600/25 hover:scale-105 transition-all">
+                        <a href="#devis" class="btn-medical-primary w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#0284c7] hover:bg-[#0369a1] text-white font-black text-base px-8 py-4 rounded-[20px] shadow-lg shadow-sky-600/25 hover:scale-105 transition-all" style="background-color: #0284c7 !important; color: #ffffff !important;">
                             <span>Demander un Devis Gratuit</span>
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </a>
-                        <a href="#evacsan" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-rose-500 hover:bg-rose-50 text-rose-700 font-bold text-base px-6 py-4 rounded-[20px] bg-white shadow-sm transition-all">
+                        <a href="#evacsan" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 border-2 border-rose-500 hover:bg-rose-50 text-rose-700 font-bold text-base px-6 py-4 rounded-[20px] bg-white shadow-sm transition-all" style="background-color: #ffffff !important; color: #be123c !important; border-color: #f43f5e !important;">
                             <svg class="w-5 h-5 text-rose-600 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                             <span>Urgence EVACSAN 24/7</span>
                         </a>
@@ -483,7 +490,7 @@
                             <textarea name="message" rows="4" placeholder="Décrivez succinctement vos besoins ou symptômes..." class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0284c7] focus:bg-white focus:outline-none transition-all"></textarea>
                         </div>
 
-                        <button type="submit" class="w-full bg-[#0284c7] hover:bg-[#0369a1] text-white font-black text-base py-4 rounded-full shadow-lg shadow-sky-600/20 hover:scale-[1.01] transition-all">
+                        <button type="submit" class="btn-medical-primary w-full bg-[#0284c7] hover:bg-[#0369a1] text-white font-black text-base py-4 rounded-full shadow-lg shadow-sky-600/20 hover:scale-[1.01] transition-all" style="background-color: #0284c7 !important; color: #ffffff !important;">
                             Envoyer la Demande de Devis Gratuit
                         </button>
                     </form>
