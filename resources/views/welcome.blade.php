@@ -208,7 +208,7 @@
       display: block !important;
       position: absolute !important;
       inset: 0 !important;
-      background: linear-gradient(to bottom, rgba(0, 5, 24, 0.15) 0%, rgba(0, 15, 45, 0.35) 100%) !important;
+      background: linear-gradient(to bottom, rgba(0, 10, 35, 0.45) 0%, rgba(0, 15, 45, 0.65) 100%) !important;
       pointer-events: none !important;
       z-index: 1 !important;
     }
@@ -352,77 +352,403 @@
       50% { transform: translateY(-10px); }
     }
 
-    .hero-service-card {
-      width: 160px !important;
-      height: 160px !important;
-      margin: 0 auto !important;
-      padding: 16px !important;
-      background: rgba(255, 255, 255, 0.07) !important;
-      border: 1px solid rgba(255, 255, 255, 0.18) !important;
-      backdrop-filter: blur(20px) !important;
-      -webkit-backdrop-filter: blur(20px) !important;
-      border-radius: 24px !important;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    /* ═══════════════════════════════════════════════════════════════
+       HERO AGENCIES QUICK ACCESS (4 AGENCES DANS LE HERO)
+       ═══════════════════════════════════════════════════════════════ */
+    @keyframes floatHeroCircle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-agency-link {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-decoration: none !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    }
+
+    .hero-agency-circle {
+      width: 130px !important;
+      height: 130px !important;
+      min-width: 130px !important;
+      min-height: 130px !important;
+      max-width: 130px !important;
+      max-height: 130px !important;
+      border-radius: 50% !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       position: relative !important;
       overflow: hidden !important;
-      animation: floatCardWave 4s ease-in-out infinite;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+      animation: floatHeroCircle 4s ease-in-out infinite !important;
+      cursor: pointer !important;
     }
 
-    .col-6:nth-child(1) .hero-service-card { animation-delay: 0s; }
-    .col-6:nth-child(2) .hero-service-card { animation-delay: 0.8s; }
-    .col-6:nth-child(3) .hero-service-card { animation-delay: 1.6s; }
-    .col-6:nth-child(4) .hero-service-card { animation-delay: 2.4s; }
+    .hero-agency-col:nth-child(1) .hero-agency-circle { animation-delay: 0s !important; }
+    .hero-agency-col:nth-child(2) .hero-agency-circle { animation-delay: 0.6s !important; }
+    .hero-agency-col:nth-child(3) .hero-agency-circle { animation-delay: 1.2s !important; }
+    .hero-agency-col:nth-child(4) .hero-agency-circle { animation-delay: 1.8s !important; }
 
-    .hero-service-card-wrapper:hover .hero-service-card {
-      background: rgba(255, 122, 0, 0.2) !important;
-      border-color: rgba(255, 122, 0, 0.75) !important;
-      transform: translateY(-14px) scale(1.06) !important;
-      box-shadow: 0 25px 50px rgba(255, 122, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
-      animation-play-state: paused !important;
+    .hero-agency-circle.circle-elite {
+      background: linear-gradient(135deg, rgb(203, 225, 247) 0%, #003d7a 100%) !important;
+    }
+    .hero-agency-link:hover .hero-agency-circle.circle-elite {
+      transform: scale(1.18) rotate(5deg) !important;
+      box-shadow: 0 20px 45px rgba(0, 61, 122, 0.75), 0 0 35px rgba(0, 140, 255, 0.6) !important;
     }
 
-    .hero-service-card img {
-      width: 110px !important;
-      height: 110px !important;
-      max-width: 110px !important;
-      max-height: 110px !important;
+    .hero-agency-circle.circle-medical {
+      background: linear-gradient(135deg, rgb(206, 241, 247) 0%, #138496 100%) !important;
+    }
+    .hero-agency-link:hover .hero-agency-circle.circle-medical {
+      transform: scale(1.18) rotate(-5deg) !important;
+      box-shadow: 0 20px 45px rgba(19, 132, 150, 0.75), 0 0 35px rgba(19, 206, 235, 0.6) !important;
+    }
+
+    .hero-agency-circle.circle-digital {
+      background: linear-gradient(135deg, rgb(248, 239, 219) 0%, #b37700 100%) !important;
+    }
+    .hero-agency-link:hover .hero-agency-circle.circle-digital {
+      transform: scale(1.18) rotate(5deg) !important;
+      box-shadow: 0 20px 45px rgba(179, 119, 0, 0.75), 0 0 35px rgba(255, 170, 0, 0.6) !important;
+    }
+
+    .hero-agency-circle.circle-callcenter {
+      background: linear-gradient(135deg, rgb(236, 229, 231) 0%, #6b0f2a 100%) !important;
+    }
+    .hero-agency-link:hover .hero-agency-circle.circle-callcenter {
+      transform: scale(1.18) rotate(-5deg) !important;
+      box-shadow: 0 20px 45px rgba(107, 15, 42, 0.75), 0 0 35px rgba(200, 30, 80, 0.6) !important;
+    }
+
+    /* Force strict sizing and override general .hero img absolute positioning */
+    .hero .hero-agency-circle img,
+    .hero-agency-circle .hero-agency-logo,
+    .hero-agency-logo {
+      position: static !important;
+      inset: auto !important;
+      width: 90px !important;
+      height: 90px !important;
+      min-width: 90px !important;
+      min-height: 90px !important;
+      max-width: 90px !important;
+      max-height: 90px !important;
       object-fit: contain !important;
-      margin: auto !important;
       display: block !important;
-      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35)) !important;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease !important;
+      margin: auto !important;
+      z-index: 2 !important;
+      pointer-events: none !important;
+      transition: transform 0.35s ease !important;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35)) !important;
     }
 
-    /* Scale boost for logos with transparent padding */
-    .hero-service-card img.logo-boost {
-      transform: scale(1.18) !important;
-      transform-origin: center center !important;
+    .hero-agency-link:hover .hero-agency-logo {
+      transform: scale(1.08) !important;
     }
 
-    .hero-service-card-wrapper:hover img {
-      transform: scale(1.1) rotate(2deg) !important;
-      filter: drop-shadow(0 12px 24px rgba(255, 122, 0, 0.55)) !important;
+    @media (max-width: 991px) {
+      .hero-agency-circle {
+        width: 105px !important;
+        height: 105px !important;
+        min-width: 105px !important;
+        min-height: 105px !important;
+        max-width: 105px !important;
+        max-height: 105px !important;
+      }
+      .hero .hero-agency-circle img,
+      .hero-agency-circle .hero-agency-logo,
+      .hero-agency-logo {
+        width: 65px !important;
+        height: 65px !important;
+        min-width: 65px !important;
+        min-height: 65px !important;
+        max-width: 65px !important;
+        max-height: 65px !important;
+      }
     }
 
-    .hero-service-card-wrapper:hover img.logo-boost {
-      transform: scale(1.28) rotate(2deg) !important;
-      filter: drop-shadow(0 12px 24px rgba(255, 122, 0, 0.55)) !important;
+    @media (max-width: 576px) {
+      .hero-agency-circle {
+        width: 85px !important;
+        height: 85px !important;
+        min-width: 85px !important;
+        min-height: 85px !important;
+        max-width: 85px !important;
+        max-height: 85px !important;
+      }
+      .hero .hero-agency-circle img,
+      .hero-agency-circle .hero-agency-logo,
+      .hero-agency-logo {
+        width: 52px !important;
+        height: 52px !important;
+        min-width: 52px !important;
+        min-height: 52px !important;
+        max-width: 52px !important;
+        max-height: 52px !important;
+      }
     }
 
-    .agency-label-tag {
-      font-weight: 700 !important;
-      letter-spacing: 1px !important;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
-      transition: all 0.3s ease !important;
+    /* ═══════════════════════════════════════════════════════════════
+       3D CIRCULAR CAROUSEL FOR FORMATIONS EN COURS
+       ═══════════════════════════════════════════════════════════════ */
+    .formation-circle-stage {
+      position: relative;
+      width: 100%;
+      min-height: 560px;
+      perspective: 1400px;
+      perspective-origin: 50% 48%;
+      overflow: hidden;
+      padding: 40px 0 20px 0;
+      user-select: none;
     }
 
-    .hero-service-card-wrapper:hover .agency-label-tag {
-      color: #ff7a00 !important;
-      text-shadow: 0 0 15px rgba(255, 122, 0, 0.75) !important;
+    .formation-circle-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 320px;
+      height: 440px;
+      transform-style: preserve-3d;
+      transform: translate(-50%, -50%) rotateY(0deg);
+      cursor: grab;
+      will-change: transform;
+    }
+
+    .formation-circle-ring:active {
+      cursor: grabbing;
+    }
+
+    .formation-circle-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 320px;
+      height: 440px;
+      border-radius: 22px;
+      background: #ffffff;
+      box-shadow: 0 15px 40px rgba(0, 15, 60, 0.14), 0 2px 10px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 15, 60, 0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transform-style: preserve-3d;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transition: box-shadow 0.4s ease, filter 0.4s ease, border-color 0.4s ease;
+      text-decoration: none !important;
+    }
+
+    .formation-circle-item.active-front {
+      box-shadow: 0 25px 60px rgba(0, 15, 60, 0.28), 0 0 35px rgba(255, 122, 0, 0.35);
+      border-color: rgba(255, 122, 0, 0.6);
+    }
+
+    .formation-circle-item:hover {
+      box-shadow: 0 25px 60px rgba(0, 15, 60, 0.25), 0 0 35px rgba(255, 122, 0, 0.4);
+      border-color: #ff7a00;
+    }
+
+    .formation-card-img-wrap {
+      position: relative;
+      width: 100%;
+      height: 180px;
+      background-color: #000f3c;
+      overflow: hidden;
+    }
+
+    .formation-card-img-wrap img {
+      position: static !important;
+      inset: auto !important;
+      width: 100% !important;
+      height: 100% !important;
+      max-width: 100% !important;
+      max-height: 100% !important;
+      object-fit: cover !important;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .formation-circle-item:hover .formation-card-img-wrap img {
+      transform: scale(1.08) !important;
+    }
+
+    .formation-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0, 15, 60, 0.75) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .formation-card-badges {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      right: 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 2;
+    }
+
+    .formation-card-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      background: #ffffff;
+    }
+
+    .formation-card-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #000f3c;
+      margin-bottom: 8px;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .formation-card-desc {
+      font-size: 0.82rem;
+      color: #6c757d;
+      line-height: 1.45;
+      flex-grow: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .formation-card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 12px;
+      border-top: 1px solid rgba(0, 0, 0, 0.07);
+    }
+
+    .formation-card-price {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #000f3c;
+    }
+
+    /* Controls */
+    .formation-circle-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .circle-arrow-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid #ff7a00;
+      background: #ffffff;
+      color: #ff7a00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 122, 0, 0.25);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .circle-arrow-btn:hover {
+      background: #ff7a00;
+      color: #ffffff;
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(255, 122, 0, 0.45);
+    }
+
+    .circle-auto-toggle {
+      background: rgba(0, 15, 60, 0.06);
+      border: 1px solid rgba(0, 15, 60, 0.15);
+      color: #000f3c;
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .circle-auto-toggle.active {
+      background: rgba(255, 122, 0, 0.15);
+      border-color: #ff7a00;
+      color: #ff7a00;
+    }
+
+    .formation-circle-dots {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .formation-circle-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d1d5db;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .formation-circle-dot.active {
+      width: 24px;
+      border-radius: 10px;
+      background: #ff7a00;
+    }
+
+    @media (max-width: 991px) {
+      .formation-circle-stage {
+        min-height: 510px;
+      }
+      .formation-circle-ring,
+      .formation-circle-item {
+        width: 280px;
+        height: 410px;
+      }
+      .formation-card-img-wrap {
+        height: 160px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .formation-circle-stage {
+        min-height: 460px;
+        perspective: 900px;
+      }
+      .formation-circle-ring,
+      .formation-circle-item {
+        width: 250px;
+        height: 380px;
+      }
+      .formation-card-img-wrap {
+        height: 140px;
+      }
+      .formation-card-body {
+        padding: 12px 14px;
+      }
+      .formation-card-title {
+        font-size: 0.95rem;
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -480,7 +806,7 @@
 
     section#about-agencies,
     #about-agencies {
-      background: linear-gradient(135deg, rgba(0, 15, 60, 0.92) 0%, rgba(0, 31, 63, 0.88) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat scroll !important;
+      background: linear-gradient(135deg, rgba(15, 17, 21, 0.65) 0%, rgba(20, 22, 26, 0.70) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat scroll !important;
       position: relative !important;
       padding: 90px 0 !important;
       overflow: hidden !important;
@@ -524,7 +850,7 @@
       transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.6s ease !important;
       z-index: 1 !important;
       opacity: 1 !important;
-      filter: brightness(0.85) contrast(1.08) !important;
+      filter: brightness(0.92) contrast(1.05) !important;
     }
 
     .about-agency-photo-card.card-elite::before {
@@ -546,7 +872,7 @@
     .about-agency-photo-card .card-overlay {
       position: absolute !important;
       inset: 0 !important;
-      background: linear-gradient(135deg, rgba(0, 10, 45, 0.88) 0%, rgba(0, 20, 55, 0.80) 100%) !important;
+      background: linear-gradient(135deg, rgba(14, 16, 20, 0.82) 0%, rgba(20, 22, 28, 0.75) 100%) !important;
       z-index: 2 !important;
       transition: background 0.4s ease !important;
     }
@@ -564,7 +890,7 @@
     }
 
     .about-agency-photo-card:hover .card-overlay {
-      background: linear-gradient(135deg, rgba(0, 10, 45, 0.78) 0%, rgba(0, 20, 55, 0.68) 100%) !important;
+      background: linear-gradient(135deg, rgba(14, 16, 20, 0.68) 0%, rgba(20, 22, 28, 0.58) 100%) !important;
     }
 
     .about-agency-photo-card .agency-logo-wrapper {
@@ -593,12 +919,12 @@
       width: 95px !important;
       height: 95px !important;
       border-radius: 24px !important;
-      background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important;
+      background: linear-gradient(135deg, #222630 0%, #121418 100%) !important;
       border: 1px solid rgba(255, 196, 81, 0.35) !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      box-shadow: 0 12px 28px rgba(0, 15, 60, 0.25) !important;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35) !important;
       transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
       padding: 12px !important;
     }
@@ -1013,7 +1339,7 @@
         <ul>
           <li><a href="#acceuil" class="active">Accueil<br></a></li>
           <li><a href="#presentation">Présentation</a></li>
-          <li><a href="#agencies">Nos Agences</a></li>
+          <li><a href="#about-agencies">Nos Agences</a></li>
           <li><a href="{{ route('home.old') }}">Nos séminaires</a></li>
           <li><a href="{{ route('callcenter.blog') }}">Nos actualités</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -1037,7 +1363,7 @@
     <!-- Hero Section -->
     <section id="acceuil" class="hero section">
 
-      <!-- Vidéo de fond native HTML5 (Globe Loop) - 0 Logo YouTube, 0 Boutons de contrôle -->
+      <!-- Vidéo de fond native HTML5 (Réunion / Meeting Loop) - 0 Logo YouTube, 0 Boutons de contrôle -->
       <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; background: #000;">
         <video 
           autoplay 
@@ -1045,8 +1371,9 @@
           loop 
           playsinline 
           preload="auto"
-          style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.88; pointer-events: none;">
-          <source src="{{ asset('assets/img/globe_bg.mp4') }}" type="video/mp4">
+          style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.85; pointer-events: none;">
+          <source src="{{ asset('assets/img/meeting_boardroom.mp4') }}" type="video/mp4">
+          <source src="{{ asset('assets/img/meeting_room.mp4') }}" type="video/mp4">
         </video>
       </div>
 
@@ -1070,6 +1397,44 @@
           </div>
         </div>
 
+        <!-- 4 Agences Directement Accessibles dans le Hero (Logos purs sans box) -->
+        <div class="row justify-content-center align-items-center mt-4 pt-3 g-4">
+          <!-- Agence 1 - Elite Training -->
+          <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center hero-agency-col" data-aos="zoom-in" data-aos-delay="100">
+            <a href="{{ route('elite.training') }}" class="hero-agency-link" title="CAEI Elite Training">
+              <div class="hero-agency-circle circle-elite">
+                <img src="{{ asset('assets/img/logo_elite_norm.png') }}" alt="CAEI Elite Training" class="hero-agency-logo">
+              </div>
+            </a>
+          </div>
+
+          <!-- Agence 2 - Medical Services -->
+          <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center hero-agency-col" data-aos="zoom-in" data-aos-delay="200">
+            <a href="{{ route('medical.services') }}" class="hero-agency-link" title="CAEI Medical Services">
+              <div class="hero-agency-circle circle-medical">
+                <img src="{{ asset('assets/img/logo_medical_norm.png') }}" alt="CAEI Medical Services" class="hero-agency-logo">
+              </div>
+            </a>
+          </div>
+
+          <!-- Agence 3 - Digital Moov -->
+          <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center hero-agency-col" data-aos="zoom-in" data-aos-delay="300">
+            <a href="{{ route('digitalmoov') }}" class="hero-agency-link" title="CAEI Digital Moov">
+              <div class="hero-agency-circle circle-digital">
+                <img src="{{ asset('assets/img/logo_digitalmoov_norm.png') }}" alt="CAEI Digital Moov" class="hero-agency-logo">
+              </div>
+            </a>
+          </div>
+
+          <!-- Agence 4 - Call Center -->
+          <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center hero-agency-col" data-aos="zoom-in" data-aos-delay="400">
+            <a href="{{ route('callcenter.index') }}" target="_blank" class="hero-agency-link" title="CAEI Call Center">
+              <div class="hero-agency-circle circle-callcenter">
+                <img src="{{ asset('assets/img/logo_callcenter_norm.png') }}" alt="CAEI Call Center" class="hero-agency-logo">
+              </div>
+            </a>
+          </div>
+        </div>
 
       </div>
 
@@ -1113,66 +1478,269 @@
         </div>
         
         @if(isset($formations) && $formations->count() > 0)
-        <div class="row gy-4">
-          @foreach($formations as $formation)
-          @php
-            $domainLower = strtolower($formation->domain ?? '');
-            $titleLower = strtolower($formation->title ?? '');
-            
-            if ($formation->image) {
-                $imgSrc = Storage::url($formation->image);
-            } elseif (str_contains($titleLower, 'comptabilit') || str_contains($titleLower, 'trésorerie') || str_contains($titleLower, 'financ') || str_contains($domainLower, 'finance') || str_contains($domainLower, 'comptabilit')) {
-                $imgSrc = asset('assets/img/formation_finance.jpg');
-            } elseif (str_contains($titleLower, 'audit') || str_contains($titleLower, 'contrôle') || str_contains($domainLower, 'audit')) {
-                $imgSrc = asset('assets/img/formation_audit.jpg');
-            } elseif (str_contains($titleLower, 'leader') || str_contains($titleLower, 'management') || str_contains($domainLower, 'management')) {
-                $imgSrc = asset('assets/img/formation_leadership.jpg');
-            } elseif (str_contains($titleLower, 'tech') || str_contains($titleLower, 'digital') || str_contains($domainLower, 'digital')) {
-                $imgSrc = asset('assets/img/formation_tech.jpg');
-            } else {
-                $fallbackImages = [
-                    asset('assets/img/formation_finance.jpg'),
-                    asset('assets/img/formation_audit.jpg'),
-                    asset('assets/img/formation_leadership.jpg'),
-                    asset('assets/img/formation_tech.jpg'),
-                    asset('assets/img/professionel.jpg'),
-                    asset('assets/img/img3.jpg'),
-                ];
-                $imgSrc = $fallbackImages[$loop->index % count($fallbackImages)];
-            }
-          @endphp
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ $loop->iteration * 100 }}">
-            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden" style="transition: transform 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'" onmouseout="this.style.transform='translateY(0)'">
-              <div class="position-relative overflow-hidden" style="height: 200px; background-color: #000f3c;">
-                <img src="{{ $imgSrc }}" class="card-img-top w-100 h-100" alt="{{ $formation->title }}" style="object-fit: cover;" loading="lazy">
-                <div class="position-absolute bottom-0 start-0 end-0 p-2" style="background: linear-gradient(to top, rgba(0,15,60,0.7) 0%, transparent 100%);"></div>
-              </div>
-              <div class="card-body p-4 d-flex flex-column">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <span class="badge" style="background-color: #ff7a00; color: #ffffff;">{{ ucfirst(str_replace('_', ' ', $formation->type)) }}</span>
-                  <span class="badge bg-light text-secondary border">{{ $formation->domain }}</span>
+        <!-- 3D Circular Carousel Stage -->
+        <div class="formation-circle-stage" id="formationCircleStage">
+          <div class="formation-circle-ring" id="formationCircleRing">
+            @foreach($formations as $formation)
+            @php
+              $domainLower = strtolower($formation->domain ?? '');
+              $titleLower = strtolower($formation->title ?? '');
+              
+              if ($formation->image) {
+                  $imgSrc = Storage::url($formation->image);
+              } elseif (str_contains($titleLower, 'comptabilit') || str_contains($titleLower, 'trésorerie') || str_contains($titleLower, 'financ') || str_contains($domainLower, 'finance') || str_contains($domainLower, 'comptabilit')) {
+                  $imgSrc = asset('assets/img/formation_finance.jpg');
+              } elseif (str_contains($titleLower, 'audit') || str_contains($titleLower, 'contrôle') || str_contains($domainLower, 'audit')) {
+                  $imgSrc = asset('assets/img/formation_audit.jpg');
+              } elseif (str_contains($titleLower, 'leader') || str_contains($titleLower, 'management') || str_contains($domainLower, 'management')) {
+                  $imgSrc = asset('assets/img/formation_leadership.jpg');
+              } elseif (str_contains($titleLower, 'tech') || str_contains($titleLower, 'digital') || str_contains($domainLower, 'digital')) {
+                  $imgSrc = asset('assets/img/formation_tech.jpg');
+              } else {
+                  $fallbackImages = [
+                      asset('assets/img/formation_finance.jpg'),
+                      asset('assets/img/formation_audit.jpg'),
+                      asset('assets/img/formation_leadership.jpg'),
+                      asset('assets/img/formation_tech.jpg'),
+                      asset('assets/img/professionel.jpg'),
+                      asset('assets/img/img3.jpg'),
+                  ];
+                  $imgSrc = $fallbackImages[$loop->index % count($fallbackImages)];
+              }
+            @endphp
+            <div class="formation-circle-item" data-index="{{ $loop->index }}">
+              <div class="formation-card-img-wrap">
+                <img src="{{ $imgSrc }}" alt="{{ $formation->title }}" loading="lazy">
+                <div class="formation-card-overlay"></div>
+                <div class="formation-card-badges">
+                  <span class="badge" style="background-color: #ff7a00; color: #ffffff; font-weight: 700; font-size: 0.75rem;">{{ ucfirst(str_replace('_', ' ', $formation->type)) }}</span>
+                  <span class="badge bg-white text-dark shadow-sm" style="font-weight: 600; font-size: 0.72rem;">{{ $formation->domain }}</span>
                 </div>
-                <h5 class="card-title fw-bold" style="color: #000f3c;">{{ $formation->title }}</h5>
-                <p class="card-text text-muted small mt-2 flex-grow-1">{{ Str::limit($formation->description, 120) }}</p>
+              </div>
+              <div class="formation-card-body">
+                <h5 class="formation-card-title">{{ $formation->title }}</h5>
+                <p class="formation-card-desc">{{ Str::limit($formation->description, 110) }}</p>
                 
-                <hr class="text-muted opacity-25">
-                
-                <div class="d-flex justify-content-between align-items-center">
-                    <span class="text-muted small"><i class="bi bi-clock me-1"></i> {{ $formation->duration }}</span>
-                    @if($formation->price > 0)
-                    <span class="fw-bold" style="color: #000f3c;">{{ number_format($formation->price, 0, ',', ' ') }} €</span>
-                    @else
-                    <span class="fw-bold text-success">Sur devis</span>
-                    @endif
+                <div class="formation-card-footer">
+                  <span class="text-muted small"><i class="bi bi-clock me-1 text-warning"></i> {{ $formation->duration }}</span>
+                  @if($formation->price > 0)
+                  <span class="formation-card-price">{{ number_format($formation->price, 0, ',', ' ') }} €</span>
+                  @else
+                  <span class="fw-bold text-success">Sur devis</span>
+                  @endif
                 </div>
               </div>
             </div>
+            @endforeach
           </div>
-          @endforeach
         </div>
-        <div class="text-center mt-5">
-            <a href="{{ route('home.old') }}" class="btn btn-warning rounded-pill px-5 py-2 fw-bold" style="background-color: #ff7a00; color: #ffffff; border: none;">Voir tout le catalogue</a>
+
+        <!-- Carousel Navigation Controls -->
+        <div class="formation-circle-nav">
+          <button type="button" class="circle-arrow-btn" id="circlePrevBtn" aria-label="Formation précédente">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          
+          <div class="formation-circle-dots" id="formationCircleDots">
+            @foreach($formations as $formation)
+            <span class="formation-circle-dot {{ $loop->first ? 'active' : '' }}" data-index="{{ $loop->index }}"></span>
+            @endforeach
+          </div>
+
+          <button type="button" class="circle-arrow-btn" id="circleNextBtn" aria-label="Formation suivante">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+
+          <button type="button" class="circle-auto-toggle active ms-2" id="circleAutoToggle">
+            <i class="bi bi-pause-fill"></i> Auto
+          </button>
         </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ route('home.old') }}" class="btn btn-warning rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #ff7a00; color: #ffffff; border: none; font-size: 0.95rem;">Voir tout le catalogue</a>
+        </div>
+
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const stage = document.getElementById('formationCircleStage');
+          const ring = document.getElementById('formationCircleRing');
+          if (!ring || !stage) return;
+
+          const items = ring.querySelectorAll('.formation-circle-item');
+          const total = items.length;
+          if (total === 0) return;
+
+          let currentAngle = 0;
+          let targetAngle = 0;
+          let isAutoRotating = true;
+          let isHovered = false;
+          let isDragging = false;
+          let startX = 0;
+          let startAngle = 0;
+          let lastTime = performance.now();
+          const speedDegPerSec = 14; // Smooth continuous glide
+
+          function getRadius() {
+            const w = window.innerWidth;
+            if (w < 576) return 210;
+            if (w < 992) return 290;
+            return 380;
+          }
+
+          function layoutCircle() {
+            const radius = getRadius();
+            const angleStep = 360 / total;
+            items.forEach(function(item, index) {
+              const angle = index * angleStep;
+              item.style.transform = 'rotateY(' + angle + 'deg) translateZ(' + radius + 'px)';
+              item.dataset.initialAngle = angle;
+            });
+          }
+
+          function updateDepthAndBadges() {
+            const angleStep = 360 / total;
+            let norm = ((-currentAngle % 360) + 360) % 360;
+            let activeIndex = Math.round(norm / angleStep) % total;
+
+            items.forEach(function(item, index) {
+              const initialAngle = parseFloat(item.dataset.initialAngle || 0);
+              let relAngle = ((initialAngle + currentAngle) % 360 + 360) % 360;
+              if (relAngle > 180) relAngle -= 360;
+
+              const dist = Math.abs(relAngle) / 180;
+              const opacity = 1.0 - (dist * 0.45);
+              const blur = dist > 0.6 ? (dist - 0.6) * 4 : 0;
+
+              item.style.filter = blur > 0.5 ? 'blur(' + blur.toFixed(1) + 'px)' : 'none';
+              item.style.opacity = opacity.toFixed(2);
+
+              if (index === activeIndex) {
+                item.classList.add('active-front');
+              } else {
+                item.classList.remove('active-front');
+              }
+            });
+
+            const dots = document.querySelectorAll('.formation-circle-dot');
+            dots.forEach(function(dot, index) {
+              if (index === activeIndex) {
+                dot.classList.add('active');
+              } else {
+                dot.classList.remove('active');
+              }
+            });
+          }
+
+          function animLoop(now) {
+            const dt = Math.min((now - lastTime) / 1000, 0.1);
+            lastTime = now;
+
+            if (isAutoRotating && !isHovered && !isDragging) {
+              targetAngle -= speedDegPerSec * dt;
+            }
+
+            if (!isDragging) {
+              currentAngle += (targetAngle - currentAngle) * 0.12;
+            }
+
+            ring.style.transform = 'translate(-50%, -50%) rotateY(' + currentAngle + 'deg)';
+            updateDepthAndBadges();
+
+            requestAnimationFrame(animLoop);
+          }
+
+          const nextBtn = document.getElementById('circleNextBtn');
+          const prevBtn = document.getElementById('circlePrevBtn');
+          const toggleBtn = document.getElementById('circleAutoToggle');
+
+          function next() {
+            const angleStep = 360 / total;
+            targetAngle = Math.round(targetAngle / angleStep) * angleStep - angleStep;
+          }
+
+          function prev() {
+            const angleStep = 360 / total;
+            targetAngle = Math.round(targetAngle / angleStep) * angleStep + angleStep;
+          }
+
+          if (nextBtn) nextBtn.addEventListener('click', function(e) { e.preventDefault(); next(); });
+          if (prevBtn) prevBtn.addEventListener('click', function(e) { e.preventDefault(); prev(); });
+
+          if (toggleBtn) {
+            toggleBtn.addEventListener('click', function() {
+              isAutoRotating = !isAutoRotating;
+              toggleBtn.classList.toggle('active', isAutoRotating);
+              toggleBtn.innerHTML = isAutoRotating ? '<i class="bi bi-pause-fill"></i> Auto' : '<i class="bi bi-play-fill"></i> Reprendre';
+            });
+          }
+
+          stage.addEventListener('mouseenter', function() { isHovered = true; });
+          stage.addEventListener('mouseleave', function() { isHovered = false; });
+
+          stage.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            startX = e.clientX;
+            startAngle = currentAngle;
+          });
+
+          window.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            const dx = e.clientX - startX;
+            currentAngle = startAngle + (dx * 0.35);
+            targetAngle = currentAngle;
+          });
+
+          window.addEventListener('mouseup', function() {
+            if (!isDragging) return;
+            isDragging = false;
+            const angleStep = 360 / total;
+            targetAngle = Math.round(currentAngle / angleStep) * angleStep;
+          });
+
+          stage.addEventListener('touchstart', function(e) {
+            isDragging = true;
+            startX = e.touches[0].clientX;
+            startAngle = currentAngle;
+          }, { passive: true });
+
+          stage.addEventListener('touchmove', function(e) {
+            if (!isDragging) return;
+            const dx = e.touches[0].clientX - startX;
+            currentAngle = startAngle + (dx * 0.35);
+            targetAngle = currentAngle;
+          }, { passive: true });
+
+          stage.addEventListener('touchend', function() {
+            if (!isDragging) return;
+            isDragging = false;
+            const angleStep = 360 / total;
+            targetAngle = Math.round(currentAngle / angleStep) * angleStep;
+          });
+
+          items.forEach(function(item, index) {
+            item.addEventListener('click', function() {
+              const angleStep = 360 / total;
+              const normTarget = Math.round(targetAngle / 360) * 360;
+              targetAngle = normTarget - (index * angleStep);
+            });
+          });
+
+          const dots = document.querySelectorAll('.formation-circle-dot');
+          dots.forEach(function(dot) {
+            dot.addEventListener('click', function() {
+              const idx = parseInt(dot.dataset.index);
+              const angleStep = 360 / total;
+              const normTarget = Math.round(targetAngle / 360) * 360;
+              targetAngle = normTarget - (idx * angleStep);
+            });
+          });
+
+          window.addEventListener('resize', layoutCircle);
+
+          layoutCircle();
+          requestAnimationFrame(animLoop);
+        });
+        </script>
         @else
         <div class="text-center p-5 bg-white rounded-4 shadow-sm border border-light">
             <i class="bi bi-calendar-x text-muted" style="font-size: 3rem;"></i>
@@ -1236,53 +1804,7 @@
 
     </section><!-- /Why Choose Us Section -->
 
-    <!-- Agences Section -->
-    <section id="agencies" class="agencies section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/company.jpg') }}') center/cover no-repeat scroll;">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title text-center mb-5" data-aos="fade-up">
-          <h2 class="fw-bold" style="color: #000f3c;">Nos Agences</h2>
-          <p class="text-muted">Découvrez nos différentes plateformes en ligne pour mieux nous connaître.</p>
-        </div>
 
-        <div class="row gy-4 justify-content-center">
-          <!-- Agence 1 - Elite Training -->
-          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 0s; height: 100%; min-height: 200px;">
-              <a href="{{ route('elite.training') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(203, 225, 247) 0%, #003d7a 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 15px 35px rgba(0,61,122,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training" style="width: 85px; height: 85px; object-fit: contain;">
-              </a>
-            </div>
-          </div>
-
-          <!-- Agence 2 - Medical Services -->
-          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 0.5s; height: 100%; min-height: 200px;">
-              <a href="{{ route('medical.services') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(206, 241, 247) 0%, #138496 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(-5deg)'; this.style.boxShadow='0 15px 35px rgba(19,132,150,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services" style="width: 85px; height: 85px; object-fit: contain;">
-              </a>
-            </div>
-          </div>
-
-          <!-- Agence 3 - Digital Moov -->
-          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 1s; height: 100%; min-height: 200px;">
-              <a href="{{ route('digitalmoov') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(248, 239, 219) 0%, #b37700 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 15px 35px rgba(179,119,0,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov" style="width: 85px; height: 85px; object-fit: contain;">
-              </a>
-            </div>
-          </div>
-
-          <!-- Agence 4 - Call Center -->
-          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 1.5s; height: 100%; min-height: 200px;">
-              <a href="{{ route('callcenter.index') }}" target="_blank" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(236, 229, 231) 0%, #6b0f2a 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(-5deg)'; this.style.boxShadow='0 15px 35px rgba(107,15,42,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center" style="width: 85px; height: 85px; object-fit: contain;">
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- /Agencies Section -->
 
     <!-- About Agencies Section -->
     <section id="about-agencies" class="about-agencies section py-5">
@@ -1490,8 +2012,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,15,60,0.1) 0%, rgba(0,15,60,0.95) 100%);
+    background: linear-gradient(to bottom, rgba(0, 30, 80, 0.08) 0%, rgba(0, 35, 90, 0.32) 45%, rgba(0, 22, 65, 0.65) 100%);
     z-index: 2;
+    transition: background 0.4s ease;
+  }
+  .service-card-modern:hover .service-overlay {
+    background: linear-gradient(to bottom, rgba(0, 30, 80, 0.04) 0%, rgba(0, 35, 90, 0.22) 45%, rgba(0, 22, 65, 0.55) 100%);
   }
   .service-card-modern:hover {
     transform: translateY(-10px);
