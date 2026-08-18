@@ -2012,8 +2012,12 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0,15,60,0.1) 0%, rgba(0,15,60,0.95) 100%);
+    background: linear-gradient(to bottom, rgba(0, 30, 80, 0.08) 0%, rgba(0, 35, 90, 0.32) 45%, rgba(0, 22, 65, 0.65) 100%);
     z-index: 2;
+    transition: background 0.4s ease;
+  }
+  .service-card-modern:hover .service-overlay {
+    background: linear-gradient(to bottom, rgba(0, 30, 80, 0.04) 0%, rgba(0, 35, 90, 0.22) 45%, rgba(0, 22, 65, 0.55) 100%);
   }
   .service-card-modern:hover {
     transform: translateY(-10px);
