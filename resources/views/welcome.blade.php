@@ -208,7 +208,7 @@
       display: block !important;
       position: absolute !important;
       inset: 0 !important;
-      background: linear-gradient(to bottom, rgba(0, 5, 24, 0.15) 0%, rgba(0, 15, 45, 0.35) 100%) !important;
+      background: linear-gradient(to bottom, rgba(0, 10, 35, 0.45) 0%, rgba(0, 15, 45, 0.65) 100%) !important;
       pointer-events: none !important;
       z-index: 1 !important;
     }
@@ -352,77 +352,147 @@
       50% { transform: translateY(-10px); }
     }
 
-    .hero-service-card {
-      width: 160px !important;
-      height: 160px !important;
-      margin: 0 auto !important;
-      padding: 16px !important;
-      background: rgba(255, 255, 255, 0.07) !important;
-      border: 1px solid rgba(255, 255, 255, 0.18) !important;
-      backdrop-filter: blur(20px) !important;
-      -webkit-backdrop-filter: blur(20px) !important;
-      border-radius: 24px !important;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    /* ═══════════════════════════════════════════════════════════════
+       HERO AGENCIES QUICK ACCESS (4 AGENCES DANS LE HERO)
+       ═══════════════════════════════════════════════════════════════ */
+    @keyframes floatHeroCircle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-agency-link {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      text-decoration: none !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0 !important;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    }
+
+    .hero-agency-circle {
+      width: 130px !important;
+      height: 130px !important;
+      min-width: 130px !important;
+      min-height: 130px !important;
+      max-width: 130px !important;
+      max-height: 130px !important;
+      border-radius: 50% !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       position: relative !important;
       overflow: hidden !important;
-      animation: floatCardWave 4s ease-in-out infinite;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+      animation: floatHeroCircle 4s ease-in-out infinite !important;
+      cursor: pointer !important;
     }
 
-    .col-6:nth-child(1) .hero-service-card { animation-delay: 0s; }
-    .col-6:nth-child(2) .hero-service-card { animation-delay: 0.8s; }
-    .col-6:nth-child(3) .hero-service-card { animation-delay: 1.6s; }
-    .col-6:nth-child(4) .hero-service-card { animation-delay: 2.4s; }
+    .hero-agency-col:nth-child(1) .hero-agency-circle { animation-delay: 0s !important; }
+    .hero-agency-col:nth-child(2) .hero-agency-circle { animation-delay: 0.6s !important; }
+    .hero-agency-col:nth-child(3) .hero-agency-circle { animation-delay: 1.2s !important; }
+    .hero-agency-col:nth-child(4) .hero-agency-circle { animation-delay: 1.8s !important; }
 
-    .hero-service-card-wrapper:hover .hero-service-card {
-      background: rgba(255, 122, 0, 0.2) !important;
-      border-color: rgba(255, 122, 0, 0.75) !important;
-      transform: translateY(-14px) scale(1.06) !important;
-      box-shadow: 0 25px 50px rgba(255, 122, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
-      animation-play-state: paused !important;
+    .hero-agency-circle.circle-elite {
+      background: linear-gradient(135deg, rgb(203, 225, 247) 0%, #003d7a 100%) !important;
+    }
+    .hero-agency-link:hover .hero-agency-circle.circle-elite {
+      transform: scale(1.18) rotate(5deg) !important;
+      box-shadow: 0 20px 45px rgba(0, 61, 122, 0.75), 0 0 35px rgba(0, 140, 255, 0.6) !important;
     }
 
-    .hero-service-card img {
-      width: 110px !important;
-      height: 110px !important;
-      max-width: 110px !important;
-      max-height: 110px !important;
+    .hero-agency-circle.circle-medical {
+      background: linear-gradient(135deg, rgb(206, 241, 247) 0%, #138496 100%) !important;
+    }
+    .hero-agency-link:hover .hero-agency-circle.circle-medical {
+      transform: scale(1.18) rotate(-5deg) !important;
+      box-shadow: 0 20px 45px rgba(19, 132, 150, 0.75), 0 0 35px rgba(19, 206, 235, 0.6) !important;
+    }
+
+    .hero-agency-circle.circle-digital {
+      background: linear-gradient(135deg, rgb(248, 239, 219) 0%, #b37700 100%) !important;
+    }
+    .hero-agency-link:hover .hero-agency-circle.circle-digital {
+      transform: scale(1.18) rotate(5deg) !important;
+      box-shadow: 0 20px 45px rgba(179, 119, 0, 0.75), 0 0 35px rgba(255, 170, 0, 0.6) !important;
+    }
+
+    .hero-agency-circle.circle-callcenter {
+      background: linear-gradient(135deg, rgb(236, 229, 231) 0%, #6b0f2a 100%) !important;
+    }
+    .hero-agency-link:hover .hero-agency-circle.circle-callcenter {
+      transform: scale(1.18) rotate(-5deg) !important;
+      box-shadow: 0 20px 45px rgba(107, 15, 42, 0.75), 0 0 35px rgba(200, 30, 80, 0.6) !important;
+    }
+
+    /* Force strict sizing and override general .hero img absolute positioning */
+    .hero .hero-agency-circle img,
+    .hero-agency-circle .hero-agency-logo,
+    .hero-agency-logo {
+      position: static !important;
+      inset: auto !important;
+      width: 90px !important;
+      height: 90px !important;
+      min-width: 90px !important;
+      min-height: 90px !important;
+      max-width: 90px !important;
+      max-height: 90px !important;
       object-fit: contain !important;
-      margin: auto !important;
       display: block !important;
-      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.35)) !important;
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease !important;
+      margin: auto !important;
+      z-index: 2 !important;
+      pointer-events: none !important;
+      transition: transform 0.35s ease !important;
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35)) !important;
     }
 
-    /* Scale boost for logos with transparent padding */
-    .hero-service-card img.logo-boost {
-      transform: scale(1.18) !important;
-      transform-origin: center center !important;
+    .hero-agency-link:hover .hero-agency-logo {
+      transform: scale(1.08) !important;
     }
 
-    .hero-service-card-wrapper:hover img {
-      transform: scale(1.1) rotate(2deg) !important;
-      filter: drop-shadow(0 12px 24px rgba(255, 122, 0, 0.55)) !important;
+    @media (max-width: 991px) {
+      .hero-agency-circle {
+        width: 105px !important;
+        height: 105px !important;
+        min-width: 105px !important;
+        min-height: 105px !important;
+        max-width: 105px !important;
+        max-height: 105px !important;
+      }
+      .hero .hero-agency-circle img,
+      .hero-agency-circle .hero-agency-logo,
+      .hero-agency-logo {
+        width: 65px !important;
+        height: 65px !important;
+        min-width: 65px !important;
+        min-height: 65px !important;
+        max-width: 65px !important;
+        max-height: 65px !important;
+      }
     }
 
-    .hero-service-card-wrapper:hover img.logo-boost {
-      transform: scale(1.28) rotate(2deg) !important;
-      filter: drop-shadow(0 12px 24px rgba(255, 122, 0, 0.55)) !important;
-    }
-
-    .agency-label-tag {
-      font-weight: 700 !important;
-      letter-spacing: 1px !important;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6) !important;
-      transition: all 0.3s ease !important;
-    }
-
-    .hero-service-card-wrapper:hover .agency-label-tag {
-      color: #ff7a00 !important;
-      text-shadow: 0 0 15px rgba(255, 122, 0, 0.75) !important;
+    @media (max-width: 576px) {
+      .hero-agency-circle {
+        width: 85px !important;
+        height: 85px !important;
+        min-width: 85px !important;
+        min-height: 85px !important;
+        max-width: 85px !important;
+        max-height: 85px !important;
+      }
+      .hero .hero-agency-circle img,
+      .hero-agency-circle .hero-agency-logo,
+      .hero-agency-logo {
+        width: 52px !important;
+        height: 52px !important;
+        min-width: 52px !important;
+        min-height: 52px !important;
+        max-width: 52px !important;
+        max-height: 52px !important;
+      }
     }
 
     /* ═══════════════════════════════════════════════════════════════
@@ -1037,7 +1107,7 @@
     <!-- Hero Section -->
     <section id="acceuil" class="hero section">
 
-      <!-- Vidéo de fond native HTML5 (Globe Loop) - 0 Logo YouTube, 0 Boutons de contrôle -->
+      <!-- Vidéo de fond native HTML5 (Réunion / Meeting Loop) - 0 Logo YouTube, 0 Boutons de contrôle -->
       <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: hidden; background: #000;">
         <video 
           autoplay 
@@ -1045,8 +1115,9 @@
           loop 
           playsinline 
           preload="auto"
-          style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.88; pointer-events: none;">
-          <source src="{{ asset('assets/img/globe_bg.mp4') }}" type="video/mp4">
+          style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); opacity: 0.85; pointer-events: none;">
+          <source src="{{ asset('assets/img/meeting_boardroom.mp4') }}" type="video/mp4">
+          <source src="{{ asset('assets/img/meeting_room.mp4') }}" type="video/mp4">
         </video>
       </div>
 
@@ -1070,6 +1141,44 @@
           </div>
         </div>
 
+        <!-- 4 Agences Directement Accessibles dans le Hero (Logos purs sans box) -->
+        <div class="row justify-content-center align-items-center mt-4 pt-3 g-4">
+          <!-- Agence 1 - Elite Training -->
+          <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center hero-agency-col" data-aos="zoom-in" data-aos-delay="100">
+            <a href="{{ route('elite.training') }}" class="hero-agency-link" title="CAEI Elite Training">
+              <div class="hero-agency-circle circle-elite">
+                <img src="{{ asset('assets/img/logo_elite_norm.png') }}" alt="CAEI Elite Training" class="hero-agency-logo">
+              </div>
+            </a>
+          </div>
+
+          <!-- Agence 2 - Medical Services -->
+          <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center hero-agency-col" data-aos="zoom-in" data-aos-delay="200">
+            <a href="{{ route('medical.services') }}" class="hero-agency-link" title="CAEI Medical Services">
+              <div class="hero-agency-circle circle-medical">
+                <img src="{{ asset('assets/img/logo_medical_norm.png') }}" alt="CAEI Medical Services" class="hero-agency-logo">
+              </div>
+            </a>
+          </div>
+
+          <!-- Agence 3 - Digital Moov -->
+          <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center hero-agency-col" data-aos="zoom-in" data-aos-delay="300">
+            <a href="{{ route('digitalmoov') }}" class="hero-agency-link" title="CAEI Digital Moov">
+              <div class="hero-agency-circle circle-digital">
+                <img src="{{ asset('assets/img/logo_digitalmoov_norm.png') }}" alt="CAEI Digital Moov" class="hero-agency-logo">
+              </div>
+            </a>
+          </div>
+
+          <!-- Agence 4 - Call Center -->
+          <div class="col-lg-3 col-md-3 col-6 d-flex justify-content-center hero-agency-col" data-aos="zoom-in" data-aos-delay="400">
+            <a href="{{ route('callcenter.index') }}" target="_blank" class="hero-agency-link" title="CAEI Call Center">
+              <div class="hero-agency-circle circle-callcenter">
+                <img src="{{ asset('assets/img/logo_callcenter_norm.png') }}" alt="CAEI Call Center" class="hero-agency-logo">
+              </div>
+            </a>
+          </div>
+        </div>
 
       </div>
 
@@ -1249,7 +1358,7 @@
           <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
             <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 0s; height: 100%; min-height: 200px;">
               <a href="{{ route('elite.training') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(203, 225, 247) 0%, #003d7a 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 15px 35px rgba(0,61,122,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training" style="width: 85px; height: 85px; object-fit: contain;">
+                <img src="{{ asset('assets/img/logo_elite_norm.png') }}" alt="CAEI Elite Training" style="width: 85px; height: 85px; object-fit: contain;">
               </a>
             </div>
           </div>
@@ -1258,7 +1367,7 @@
           <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="200">
             <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 0.5s; height: 100%; min-height: 200px;">
               <a href="{{ route('medical.services') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(206, 241, 247) 0%, #138496 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(-5deg)'; this.style.boxShadow='0 15px 35px rgba(19,132,150,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/t.png') }}" alt="CAEI Medical Services" style="width: 85px; height: 85px; object-fit: contain;">
+                <img src="{{ asset('assets/img/logo_medical_norm.png') }}" alt="CAEI Medical Services" style="width: 85px; height: 85px; object-fit: contain;">
               </a>
             </div>
           </div>
@@ -1267,7 +1376,7 @@
           <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="300">
             <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 1s; height: 100%; min-height: 200px;">
               <a href="{{ route('digitalmoov') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(248, 239, 219) 0%, #b37700 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 15px 35px rgba(179,119,0,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/caeidm02.png') }}" alt="CAEI Digital Moov" style="width: 85px; height: 85px; object-fit: contain;">
+                <img src="{{ asset('assets/img/logo_digitalmoov_norm.png') }}" alt="CAEI Digital Moov" style="width: 85px; height: 85px; object-fit: contain;">
               </a>
             </div>
           </div>
@@ -1276,7 +1385,7 @@
           <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="400">
             <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 1.5s; height: 100%; min-height: 200px;">
               <a href="{{ route('callcenter.index') }}" target="_blank" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(236, 229, 231) 0%, #6b0f2a 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(-5deg)'; this.style.boxShadow='0 15px 35px rgba(107,15,42,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/CAEICALL.png') }}" alt="CAEI Call Center" style="width: 85px; height: 85px; object-fit: contain;">
+                <img src="{{ asset('assets/img/logo_callcenter_norm.png') }}" alt="CAEI Call Center" style="width: 85px; height: 85px; object-fit: contain;">
               </a>
             </div>
           </div>
