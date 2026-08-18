@@ -119,7 +119,7 @@
                 <div class="col-12">
                   <div class="form-group">
                     <label for="attachment" class="form-label fw-semibold small d-flex justify-content-between align-items-center" style="color: #94a3b8;">
-                      <span><i class="bi bi-paperclip text-warning me-1"></i> Pièce jointe / Cahier des charges (Optionnel)</span>
+                      <span><i class="bi bi-paperclip me-1" style="color: #ff6b6b;"></i> Pièce jointe / Cahier des charges (Optionnel)</span>
                       <span class="text-white-50" style="font-size: 11px;">PDF, DOC, DOCX, PNG, JPG (Max 10 Mo)</span>
                     </label>
                     <input type="file" class="form-control-glass w-100 py-2" id="attachment" name="attachment" accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.zip">
