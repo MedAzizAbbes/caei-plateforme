@@ -625,26 +625,77 @@
             @csrf
             <input type="hidden" name="type" value="service_request">
             <div class="row g-3">
+              <!-- 1. Nom & Prénom -->
               <div class="col-md-6">
                 <label class="form-label fw-semibold text-dark fs-6">Nom & Prénom <span class="text-danger">*</span></label>
-                <input type="text" name="nom" class="form-control form-control-lg rounded-3 border-light-subtle shadow-sm" placeholder="Ex: M. Souleymane Diallo" required>
+                <input type="text" name="nom" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="Votre nom & prénom" required>
               </div>
+
+              <!-- 2. Téléphone -->
               <div class="col-md-6">
-                <label class="form-label fw-semibold text-dark fs-6">Adresse Email Professionnelle <span class="text-danger">*</span></label>
-                <input type="email" name="email" class="form-control form-control-lg rounded-3 border-light-subtle shadow-sm" placeholder="votre@entreprise.com" required>
+                <label class="form-label fw-semibold text-dark fs-6">Téléphone <span class="text-danger">*</span></label>
+                <input type="tel" name="telephone" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="+216 XX XXX XXX" required>
               </div>
+
+              <!-- 3. Adresse e-mail -->
               <div class="col-md-6">
-                <label class="form-label fw-semibold text-dark fs-6">Téléphone / WhatsApp</label>
-                <input type="text" name="mobile" class="form-control form-control-lg rounded-3 border-light-subtle shadow-sm" placeholder="+216 XX XXX XXX">
+                <label class="form-label fw-semibold text-dark fs-6">Adresse e-mail <span class="text-danger">*</span></label>
+                <input type="email" name="email" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="votre@email.com" required>
               </div>
+
+              <!-- 4. Pays -->
               <div class="col-md-6">
-                <label class="form-label fw-semibold text-dark fs-6">Service Sélectionné</label>
-                <input type="text" name="objet" id="modalServiceInput" class="form-control form-control-lg rounded-3 border-light-subtle shadow-sm bg-light" readonly>
+                <label class="form-label fw-semibold text-dark fs-6">Pays <span class="text-danger">*</span></label>
+                <input type="text" name="pays" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="Ex: Tunisie, Côte d'Ivoire..." required>
               </div>
-              <div class="col-12">
-                <label class="form-label fw-semibold text-dark fs-6">Détails de votre besoin ou cahier des charges</label>
-                <textarea name="message" class="form-control rounded-3 border-light-subtle shadow-sm" rows="3" placeholder="Précisez votre secteur, le nombre de collaborateurs à former ou la date souhaitée..."></textarea>
+
+              <!-- 5. Fonction / Poste -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold text-dark fs-6">Fonction / Poste <span class="text-danger">*</span></label>
+                <input type="text" name="poste" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="Ex: Directeur Financier..." required>
               </div>
+
+              <!-- 6. Entreprise / Institution -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold text-dark fs-6">Entreprise / Institution <span class="text-danger">*</span></label>
+                <input type="text" name="entreprise" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="Nom de votre entreprise" required>
+              </div>
+
+              <!-- 7. Formation ou séminaire choisi -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold text-dark fs-6">Formation ou séminaire choisi <span class="text-danger">*</span></label>
+                <input type="text" name="objet" id="modalServiceInput" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="Intitulé de la formation" required>
+              </div>
+
+              <!-- 8. Date / Session souhaitée -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold text-dark fs-6">Date / Session souhaitée</label>
+                <input type="text" name="date_session" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="Ex: Octobre 2026">
+              </div>
+
+              <!-- 9. Mode de participation -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold text-dark fs-6">Mode de participation <span class="text-danger">*</span></label>
+                <select name="mode_participation" class="form-select rounded-3 border-light-subtle shadow-sm" required>
+                  <option value="" disabled selected>-- Sélectionner un mode --</option>
+                  <option value="présentiel">Présentiel</option>
+                  <option value="en_ligne">En ligne</option>
+                </select>
+              </div>
+
+              <!-- 10. Comment avez-vous connu cette formation ? -->
+              <div class="col-md-6">
+                <label class="form-label fw-semibold text-dark fs-6">Comment avez-vous connu cette formation ?</label>
+                <select name="comment_connu" class="form-select rounded-3 border-light-subtle shadow-sm">
+                  <option value="" disabled selected>-- Sélectionner une option --</option>
+                  <option value="Réseaux sociaux">Réseaux sociaux (LinkedIn, Facebook...)</option>
+                  <option value="Recommandation">Recommandation d'un collègue / ami</option>
+                  <option value="Site web">Site web CAEI</option>
+                  <option value="Emailing / Newsletter">Emailing / Newsletter</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
+
               <div class="col-12 pt-3">
                 <button type="submit" class="btn btn-warning btn-lg w-100 fw-bold rounded-3 text-dark py-3 shadow" style="background: linear-gradient(135deg, #f0b75a 0%, #ce9233 100%); border: none;">
                   <i class="bi bi-send-fill me-2"></i> Transmettre Ma Demande

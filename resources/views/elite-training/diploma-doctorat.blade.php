@@ -332,26 +332,77 @@
             @csrf
             <input type="hidden" name="type" value="inscription">
             <div class="row g-3">
+              <!-- 1. Nom & Prénom -->
               <div class="col-md-6">
                 <label class="form-label font-bold text-slate-700 small">Nom & Prénom <span class="text-danger">*</span></label>
-                <input type="text" name="nom" class="form-control pro-input" placeholder="Votre nom complet" required>
+                <input type="text" name="nom" class="form-control pro-input" placeholder="Votre nom & prénom" required>
               </div>
+
+              <!-- 2. Téléphone -->
               <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Email professionnel <span class="text-danger">*</span></label>
+                <label class="form-label font-bold text-slate-700 small">Téléphone <span class="text-danger">*</span></label>
+                <input type="tel" name="telephone" class="form-control pro-input" placeholder="+216 XX XXX XXX" required>
+              </div>
+
+              <!-- 3. Adresse e-mail -->
+              <div class="col-md-6">
+                <label class="form-label font-bold text-slate-700 small">Adresse e-mail <span class="text-danger">*</span></label>
                 <input type="email" name="email" class="form-control pro-input" placeholder="votre@email.com" required>
               </div>
+
+              <!-- 4. Pays -->
               <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Téléphone</label>
-                <input type="text" name="mobile" class="form-control pro-input" placeholder="+216 XX XXX XXX">
+                <label class="form-label font-bold text-slate-700 small">Pays <span class="text-danger">*</span></label>
+                <input type="text" name="pays" class="form-control pro-input" placeholder="Ex: Tunisie, Côte d'Ivoire..." required>
               </div>
+
+              <!-- 5. Fonction / Poste -->
               <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Programme sélectionné</label>
-                <input type="text" id="objetInput" name="objet" class="form-control pro-input bg-white font-bold text-[#061743]" value="Candidature Doctorat / DBA" readonly>
+                <label class="form-label font-bold text-slate-700 small">Fonction / Poste <span class="text-danger">*</span></label>
+                <input type="text" name="poste" class="form-control pro-input" placeholder="Ex: Directeur Financier..." required>
               </div>
-              <div class="col-12">
-                <label class="form-label font-bold text-slate-700 small">Sujet / Projet de recherche proposé <span class="text-danger">*</span></label>
-                <textarea name="message" class="form-control pro-input" rows="4" placeholder="Décrivez votre parcours académique/professionnel et votre domaine de recherche souhaité..." required></textarea>
+
+              <!-- 6. Entreprise / Institution -->
+              <div class="col-md-6">
+                <label class="form-label font-bold text-slate-700 small">Entreprise / Institution <span class="text-danger">*</span></label>
+                <input type="text" name="entreprise" class="form-control pro-input" placeholder="Nom de votre entreprise" required>
               </div>
+
+              <!-- 7. Formation ou séminaire choisi -->
+              <div class="col-md-6">
+                <label class="form-label font-bold text-slate-700 small">Formation ou séminaire choisi <span class="text-danger">*</span></label>
+                <input type="text" id="objetInput" name="objet" class="form-control pro-input" value="Candidature Doctorat / DBA" placeholder="Intitulé de la formation" required>
+              </div>
+
+              <!-- 8. Date / Session souhaitée -->
+              <div class="col-md-6">
+                <label class="form-label font-bold text-slate-700 small">Date / Session souhaitée</label>
+                <input type="text" name="date_session" class="form-control pro-input" placeholder="Ex: Octobre 2026">
+              </div>
+
+              <!-- 9. Mode de participation -->
+              <div class="col-md-6">
+                <label class="form-label font-bold text-slate-700 small">Mode de participation <span class="text-danger">*</span></label>
+                <select name="mode_participation" class="form-control pro-input" required>
+                  <option value="" disabled selected>-- Sélectionner un mode --</option>
+                  <option value="présentiel">Présentiel</option>
+                  <option value="en_ligne">En ligne</option>
+                </select>
+              </div>
+
+              <!-- 10. Comment avez-vous connu cette formation ? -->
+              <div class="col-md-6">
+                <label class="form-label font-bold text-slate-700 small">Comment avez-vous connu cette formation ?</label>
+                <select name="comment_connu" class="form-control pro-input">
+                  <option value="" disabled selected>-- Sélectionner une option --</option>
+                  <option value="Réseaux sociaux">Réseaux sociaux (LinkedIn, Facebook...)</option>
+                  <option value="Recommandation">Recommandation d'un collègue / ami</option>
+                  <option value="Site web">Site web CAEI</option>
+                  <option value="Emailing / Newsletter">Emailing / Newsletter</option>
+                  <option value="Autre">Autre</option>
+                </select>
+              </div>
+
               <div class="col-12 text-center mt-4">
                 <button type="submit" class="btn-gold px-5 py-3 border-0">
                   <i class="bi bi-check2-circle me-2 fs-5"></i>Soumettre ma Candidature
