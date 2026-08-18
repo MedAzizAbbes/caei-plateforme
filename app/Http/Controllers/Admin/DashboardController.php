@@ -265,4 +265,12 @@ class DashboardController extends Controller
             'unifiedActivityFeed'
         ));
     }
+
+    /**
+     * Tableau de bord d'administration Back-Office d'origine (/admin).
+     */
+    public function admin()
+    {
+        return view('admin.dashboard');
+    }
 }

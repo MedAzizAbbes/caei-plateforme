@@ -424,7 +424,7 @@ Route::middleware(['auth', 'role:formateur,admin'])->prefix('checkin')->name('ch
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [AdminDashboardController::class, 'admin'])->name('dashboard');
     
     // System & Real-Time Monitoring
     Route::get('/monitoring', [\App\Http\Controllers\Admin\MonitoringController::class, 'index'])->name('monitoring.index');
