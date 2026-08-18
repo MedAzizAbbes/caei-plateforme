@@ -86,7 +86,8 @@ class MedicalServiceController extends Controller
             'message'        => 'nullable|string|max:2000',
         ]);
 
-        $medicalRequest = \App\Models\MedicalRequest::create($validated);
+        $sanitized = \App\Support\Sanitizer::cleanArray($validated);
+        $medicalRequest = \App\Models\MedicalRequest::create($sanitized);
 
         // Notifier les administrateurs
         if (class_exists('\App\Models\AdminNotification')) {

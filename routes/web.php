@@ -99,7 +99,9 @@ Route::get('/elite-training/diplome/mini-mba', [EliteTrainingController::class, 
 Route::get('/elite-training/diplome/executive-mba', [EliteTrainingController::class, 'diplomaExecutiveMBA'])->name('elite.training.diploma.executive-mba');
 Route::get('/elite-training/diplome/doctorat', [EliteTrainingController::class, 'diplomaDoctorat'])->name('elite.training.diploma.doctorat');
 
-Route::post('/elite-training/appointment', [\App\Http\Controllers\EliteAppointmentController::class, 'store'])->name('elite.appointment.store');
+Route::post('/elite-training/appointment', [\App\Http\Controllers\EliteAppointmentController::class, 'store'])
+    ->middleware('throttle:6,1')
+    ->name('elite.appointment.store');
 
 Route::get('/digital-moov', function () {
     return view('digitalmoov.index');
@@ -263,7 +265,9 @@ Route::get('/digital-moov/project-details.html', function () {
 
 Route::get('/plateforme', [SeminarPublicController::class, 'index'])->name('plateforme');
 Route::get('/medical-services', [\App\Http\Controllers\MedicalServiceController::class, 'index'])->name('medical.services');
-Route::post('/medical-services/devis', [\App\Http\Controllers\MedicalServiceController::class, 'storeRequest'])->name('medical.services.request');
+Route::post('/medical-services/devis', [\App\Http\Controllers\MedicalServiceController::class, 'storeRequest'])
+    ->middleware('throttle:6,1')
+    ->name('medical.services.request');
 Route::get('/seminaires/{seminar}', [SeminarPublicController::class, 'show'])->name('seminaires.show');
 
 /*
@@ -338,246 +342,9 @@ Route::middleware('auth')->group(function () {
 | Dashboard général (Breeze)
 |--------------------------------------------------------------------------
 */
-Route::get('/dashboard', function () {
-    if (auth()->check() && auth()->user()->role === 'admin') {
-        // --- 1. SÉMINAIRES & FORMATIONS B2B ---
-        $totalParticipants = \App\Models\User::where('role', 'participant')->count();
-        $totalRegistrations = \App\Models\Registration::count();
-        $totalPresent = \App\Models\Registration::where('status', 'present')->count();
-        $totalAbsent = \App\Models\Registration::where('status', 'absent')->count();
-        $totalInscribedOnly = max(0, $totalRegistrations - ($totalPresent + $totalAbsent));
-        $attendanceRate = $totalRegistrations > 0 ? round(($totalPresent / $totalRegistrations) * 100, 1) : 0;
-
-        $totalSeminars = \App\Models\Seminar::count();
-        $publishedSeminars = \App\Models\Seminar::where('status', 'published')->count();
-        $totalSeminarDocuments = \App\Models\Document::count();
-
-        $institutionsCount = \App\Models\User::where('role', 'participant')
-            ->whereNotNull('institution')
-            ->where('institution', '!=', '')
-            ->distinct('institution')
-            ->count('institution');
-
-        $topInstitutions = \App\Models\User::where('role', 'participant')
-            ->whereNotNull('institution')
-            ->where('institution', '!=', '')
-            ->groupBy('institution')
-            ->select('institution', \DB::raw('count(*) as count'))
-            ->orderByDesc('count')
-            ->limit(5)
-            ->get();
-
-        $bySeminar = \App\Models\Seminar::withCount([
-            'registrations',
-            'registrations as presents_count' => fn($q) => $q->where('status', 'present')
-        ])
-        ->orderByDesc('registrations_count')
-        ->limit(6)
-        ->get();
-
-        // --- 2. FINANCES & PAIEMENTS (REVENUE BI) ---
-        $totalRevenue = \App\Models\Payment::whereIn('status', ['paid', 'approved'])->sum('amount');
-        $pendingRevenue = \App\Models\Payment::whereIn('status', ['pending', 'arrangement_pending'])->sum('amount');
-        $paymentsByMethod = \App\Models\Payment::select('payment_method', \DB::raw('count(*) as count'), \DB::raw('sum(amount) as total_amount'))
-            ->groupBy('payment_method')
-            ->get()
-            ->keyBy('payment_method')
-            ->toArray();
-
-        // --- 3. CALL CENTER OUTSOURCING ---
-        $totalCallCenterRDV = \App\Models\RendezVous::count();
-        $totalQualifiedRDV = \App\Models\Qualification::where('resultat', 'Prospect qualifié')->count();
-        $totalInterestedRDV = \App\Models\Qualification::where('resultat', 'Prospect intéressé')->count();
-        $totalPendingRDV = \App\Models\RendezVous::whereIn('statut', ['en_attente_affectation', 'en_attente'])->count();
-        $totalCallCenterRequests = \App\Models\CallCenterRequest::count();
-        $callCenterConversionRate = $totalCallCenterRDV > 0 ? round((($totalQualifiedRDV + $totalInterestedRDV) / $totalCallCenterRDV) * 100, 1) : 0;
-
-        $qualificationStats = \App\Models\Qualification::select('resultat', \DB::raw('count(*) as count'))
-            ->groupBy('resultat')
-            ->pluck('count', 'resultat')
-            ->toArray();
-
-        $callCenterSecteurs = \App\Models\CallCenterRequest::select('status', \DB::raw('count(*) as count'))
-            ->groupBy('status')
-            ->pluck('count', 'status')
-            ->toArray();
-
-        // --- 4. CAEI MEDICAL CENTER & CLINICS ---
-        $totalMedicalRequests = \App\Models\MedicalRequest::count();
-        $pendingMedicalRequests = \App\Models\MedicalRequest::where('status', 'en_attente')->count();
-        $processedMedicalRequests = \App\Models\MedicalRequest::whereIn('status', ['traite', 'affecte'])->count();
-        $totalClinics = \App\Models\ClinicPartner::count();
-        $medicalDevisTotalSum = \App\Models\MedicalRequest::whereNotNull('devis_amount')->sum('devis_amount');
-
-        // --- 5. DIGITAL MOOV (AGENCE MARKETING DIGITAL) ---
-        $totalDigitalMoovContacts = \App\Models\DigitalMoovContact::count();
-        $digitalMoovByStatus = \App\Models\DigitalMoovContact::select('status', \DB::raw('count(*) as count'))
-            ->groupBy('status')
-            ->pluck('count', 'status')
-            ->toArray();
-
-        // --- 6. ELITE TRAINING (EXECUTIVE EDUCATION) ---
-        $totalEliteAppointments = \App\Models\EliteTrainingAppointment::count();
-        $eliteByMode = \App\Models\EliteTrainingAppointment::select('participation_mode', \DB::raw('count(*) as count'))
-            ->groupBy('participation_mode')
-            ->pluck('count', 'participation_mode')
-            ->toArray();
-        $totalFormationsElite = \App\Models\Formation::count();
-
-        // --- 7. RECRUTEMENT & TALENT RH ---
-        $totalRecrutements = \App\Models\Recrutement::count();
-
-        // --- 8. ÉCOSYSTÈME UTILISATEURS ---
-        $totalUsers = \App\Models\User::count();
-        $usersByRole = \App\Models\User::select('role', \DB::raw('count(*) as count'))
-            ->groupBy('role')
-            ->pluck('count', 'role')
-            ->toArray();
-
-        // --- 9. UNIFIED REAL-TIME OPERATIONAL LOG (ALL 7 SERVICES) ---
-        $recentCallCenter = \App\Models\RendezVous::with(['prospect', 'qualification'])->latest()->limit(6)->get()->map(function($item) {
-            return [
-                'id' => $item->id,
-                'service' => 'Call Center',
-                'service_code' => 'callcenter',
-                'service_badge' => '📞 Call Center',
-                'badge_class' => 'bg-amber-50 text-amber-900 border-amber-300 font-black',
-                'name' => $item->prospect ? $item->prospect->nomComplet() : 'Prospect',
-                'contact' => $item->prospect ? $item->prospect->telephone : '—',
-                'detail' => $item->qualification ? $item->qualification->resultat : $item->statusLabel(),
-                'action_url' => route('admin.callcenter.index'),
-                'date' => $item->created_at,
-            ];
-        });
-
-        $recentMedical = \App\Models\MedicalRequest::latest()->limit(6)->get()->map(function($item) {
-            return [
-                'id' => $item->id,
-                'service' => 'Médical',
-                'service_code' => 'medical',
-                'service_badge' => '🏥 Médical',
-                'badge_class' => 'bg-rose-50 text-rose-900 border-rose-300 font-black',
-                'name' => $item->fullname,
-                'contact' => $item->phone ?? $item->email,
-                'detail' => $item->devis_amount ? 'Devis émis: ' . number_format($item->devis_amount, 0) . ' €' : ($item->service_type ?? ucfirst($item->status ?? 'Nouveau')),
-                'action_url' => route('admin.medical-requests.index'),
-                'date' => $item->created_at,
-            ];
-        });
-
-        $recentDigitalMoov = \App\Models\DigitalMoovContact::latest()->limit(6)->get()->map(function($item) {
-            return [
-                'id' => $item->id,
-                'service' => 'Digital Moov',
-                'service_code' => 'digitalmoov',
-                'service_badge' => '🚀 Digital Moov',
-                'badge_class' => 'bg-cyan-50 text-cyan-900 border-cyan-300 font-black',
-                'name' => $item->name,
-                'contact' => $item->email,
-                'detail' => $item->subject ?? 'Demande Agence Web',
-                'action_url' => route('admin.digitalmoov.index'),
-                'date' => $item->created_at,
-            ];
-        });
-
-        $recentElite = \App\Models\EliteTrainingAppointment::latest()->limit(6)->get()->map(function($item) {
-            return [
-                'id' => $item->id,
-                'service' => 'Elite Training',
-                'service_code' => 'elite',
-                'service_badge' => '🎓 Elite Exec',
-                'badge_class' => 'bg-indigo-50 text-indigo-900 border-indigo-300 font-black',
-                'name' => $item->fullname,
-                'contact' => $item->phone ?? $item->email,
-                'detail' => $item->participation_mode ? 'Mode: ' . ucfirst($item->participation_mode) : 'RDV Exécutif',
-                'action_url' => route('admin.elite-training.index'),
-                'date' => $item->created_at,
-            ];
-        });
-
-        $recentRecrutement = \App\Models\Recrutement::latest()->limit(6)->get()->map(function($item) {
-            return [
-                'id' => $item->id,
-                'service' => 'Recrutement',
-                'service_code' => 'recrutement',
-                'service_badge' => '📄 Recrutement RH',
-                'badge_class' => 'bg-emerald-50 text-emerald-900 border-emerald-300 font-black',
-                'name' => $item->prenom . ' ' . $item->nom,
-                'contact' => $item->telephone ?? $item->email,
-                'detail' => 'Candidature CV: ' . ($item->domaine ?? 'Spécialité'),
-                'action_url' => route('admin.recrutements.index'),
-                'date' => $item->created_at,
-            ];
-        });
-
-        $recentPayments = \App\Models\Payment::with(['user'])->latest()->limit(6)->get()->map(function($item) {
-            return [
-                'id' => $item->id,
-                'service' => 'Finances',
-                'service_code' => 'finance',
-                'service_badge' => '💰 Finance',
-                'badge_class' => 'bg-purple-50 text-purple-900 border-purple-300 font-black',
-                'name' => $item->user ? $item->user->fullName() : ($item->contact_person ?? 'Participant'),
-                'contact' => $item->contact_email ?? ($item->user ? $item->user->email : '—'),
-                'detail' => 'Paiement: ' . number_format($item->amount, 0) . ' € (' . $item->methodLabel() . ') — ' . $item->statusLabel(),
-                'action_url' => route('admin.arrangements.index'),
-                'date' => $item->created_at,
-            ];
-        });
-
-        $unifiedActivityFeed = collect()
-            ->merge($recentCallCenter)
-            ->merge($recentMedical)
-            ->merge($recentDigitalMoov)
-            ->merge($recentElite)
-            ->merge($recentRecrutement)
-            ->merge($recentPayments)
-            ->sortByDesc('date')
-            ->take(24);
-
-        return view('dashboard', compact(
-            'totalParticipants',
-            'totalRegistrations',
-            'totalPresent',
-            'totalAbsent',
-            'totalInscribedOnly',
-            'attendanceRate',
-            'totalSeminars',
-            'publishedSeminars',
-            'totalSeminarDocuments',
-            'institutionsCount',
-            'topInstitutions',
-            'bySeminar',
-            'totalRevenue',
-            'pendingRevenue',
-            'paymentsByMethod',
-            'totalCallCenterRDV',
-            'totalQualifiedRDV',
-            'totalInterestedRDV',
-            'totalPendingRDV',
-            'totalCallCenterRequests',
-            'callCenterConversionRate',
-            'qualificationStats',
-            'callCenterSecteurs',
-            'totalMedicalRequests',
-            'pendingMedicalRequests',
-            'processedMedicalRequests',
-            'totalClinics',
-            'medicalDevisTotalSum',
-            'totalDigitalMoovContacts',
-            'digitalMoovByStatus',
-            'totalEliteAppointments',
-            'eliteByMode',
-            'totalFormationsElite',
-            'totalRecrutements',
-            'totalUsers',
-            'usersByRole',
-            'unifiedActivityFeed'
-        ));
-    }
-
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -657,7 +424,7 @@ Route::middleware(['auth', 'role:formateur,admin'])->prefix('checkin')->name('ch
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [AdminDashboardController::class, 'admin'])->name('dashboard');
     
     // System & Real-Time Monitoring
     Route::get('/monitoring', [\App\Http\Controllers\Admin\MonitoringController::class, 'index'])->name('monitoring.index');
@@ -753,7 +520,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 // --- Recrutement ---
 use App\Http\Controllers\RecrutementController;
 Route::get('/recrutement', [RecrutementController::class, 'create'])->name('recrutement.index');
-Route::post('/recrutement', [RecrutementController::class, 'store'])->name('recrutement.store');
+Route::post('/recrutement', [RecrutementController::class, 'store'])
+    ->middleware('throttle:6,1')
+    ->name('recrutement.store');
 
 require __DIR__.'/auth.php';
 
@@ -778,9 +547,6 @@ Route::post('/contact', function (\Illuminate\Http\Request $request) {
         'source'  => $request->input('source', 'digital_moov'),
     ]);
 
-    // Envoi d'email désactivé à la demande du client
-    // Les messages sont sauvegardés en base de données et accessibles depuis le panneau d'administration
-
     return response()->json(['status' => 'success']);
-})->name('contact.send');
+})->middleware('throttle:6,1')->name('contact.send');
 

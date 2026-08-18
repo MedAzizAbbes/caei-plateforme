@@ -27,12 +27,12 @@ class RecrutementController extends Controller
         $cvPath = $request->file('cv')->store('cvs', 'public');
 
         Recrutement::create([
-            'nom' => $request->nom,
-            'prenom' => $request->prenom,
+            'nom' => \App\Support\Sanitizer::clean($request->nom),
+            'prenom' => \App\Support\Sanitizer::clean($request->prenom),
             'email' => $request->email,
-            'telephone' => $request->telephone,
-            'domaine' => $request->domaine,
-            'message' => $request->message,
+            'telephone' => \App\Support\Sanitizer::clean($request->telephone),
+            'domaine' => \App\Support\Sanitizer::clean($request->domaine),
+            'message' => \App\Support\Sanitizer::clean($request->message),
             'cv_path' => $cvPath,
         ]);
 
