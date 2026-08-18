@@ -806,7 +806,7 @@
 
     section#about-agencies,
     #about-agencies {
-      background: linear-gradient(135deg, rgba(0, 15, 60, 0.92) 0%, rgba(0, 31, 63, 0.88) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat scroll !important;
+      background: linear-gradient(135deg, rgba(15, 17, 21, 0.65) 0%, rgba(20, 22, 26, 0.70) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat scroll !important;
       position: relative !important;
       padding: 90px 0 !important;
       overflow: hidden !important;
@@ -850,7 +850,7 @@
       transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1), filter 0.6s ease !important;
       z-index: 1 !important;
       opacity: 1 !important;
-      filter: brightness(0.85) contrast(1.08) !important;
+      filter: brightness(0.92) contrast(1.05) !important;
     }
 
     .about-agency-photo-card.card-elite::before {
@@ -872,7 +872,7 @@
     .about-agency-photo-card .card-overlay {
       position: absolute !important;
       inset: 0 !important;
-      background: linear-gradient(135deg, rgba(0, 10, 45, 0.88) 0%, rgba(0, 20, 55, 0.80) 100%) !important;
+      background: linear-gradient(135deg, rgba(14, 16, 20, 0.82) 0%, rgba(20, 22, 28, 0.75) 100%) !important;
       z-index: 2 !important;
       transition: background 0.4s ease !important;
     }
@@ -890,7 +890,7 @@
     }
 
     .about-agency-photo-card:hover .card-overlay {
-      background: linear-gradient(135deg, rgba(0, 10, 45, 0.78) 0%, rgba(0, 20, 55, 0.68) 100%) !important;
+      background: linear-gradient(135deg, rgba(14, 16, 20, 0.68) 0%, rgba(20, 22, 28, 0.58) 100%) !important;
     }
 
     .about-agency-photo-card .agency-logo-wrapper {
@@ -919,12 +919,12 @@
       width: 95px !important;
       height: 95px !important;
       border-radius: 24px !important;
-      background: linear-gradient(135deg, #001f3f 0%, #000f3c 100%) !important;
+      background: linear-gradient(135deg, #222630 0%, #121418 100%) !important;
       border: 1px solid rgba(255, 196, 81, 0.35) !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
-      box-shadow: 0 12px 28px rgba(0, 15, 60, 0.25) !important;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35) !important;
       transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
       padding: 12px !important;
     }
@@ -1339,7 +1339,7 @@
         <ul>
           <li><a href="#acceuil" class="active">Accueil<br></a></li>
           <li><a href="#presentation">Présentation</a></li>
-          <li><a href="#agencies">Nos Agences</a></li>
+          <li><a href="#about-agencies">Nos Agences</a></li>
           <li><a href="{{ route('home.old') }}">Nos séminaires</a></li>
           <li><a href="{{ route('callcenter.blog') }}">Nos actualités</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -1804,53 +1804,7 @@
 
     </section><!-- /Why Choose Us Section -->
 
-    <!-- Agences Section -->
-    <section id="agencies" class="agencies section py-5" style="background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/company.jpg') }}') center/cover no-repeat scroll;">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title text-center mb-5" data-aos="fade-up">
-          <h2 class="fw-bold" style="color: #000f3c;">Nos Agences</h2>
-          <p class="text-muted">Découvrez nos différentes plateformes en ligne pour mieux nous connaître.</p>
-        </div>
 
-        <div class="row gy-4 justify-content-center">
-          <!-- Agence 1 - Elite Training -->
-          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="100">
-            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 0s; height: 100%; min-height: 200px;">
-              <a href="{{ route('elite.training') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(203, 225, 247) 0%, #003d7a 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 15px 35px rgba(0,61,122,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/logo_elite_norm.png') }}" alt="CAEI Elite Training" style="width: 85px; height: 85px; object-fit: contain;">
-              </a>
-            </div>
-          </div>
-
-          <!-- Agence 2 - Medical Services -->
-          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="200">
-            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 0.5s; height: 100%; min-height: 200px;">
-              <a href="{{ route('medical.services') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(206, 241, 247) 0%, #138496 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(-5deg)'; this.style.boxShadow='0 15px 35px rgba(19,132,150,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/logo_medical_norm.png') }}" alt="CAEI Medical Services" style="width: 85px; height: 85px; object-fit: contain;">
-              </a>
-            </div>
-          </div>
-
-          <!-- Agence 3 - Digital Moov -->
-          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="300">
-            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 1s; height: 100%; min-height: 200px;">
-              <a href="{{ route('digitalmoov') }}" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(248, 239, 219) 0%, #b37700 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(5deg)'; this.style.boxShadow='0 15px 35px rgba(179,119,0,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/logo_digitalmoov_norm.png') }}" alt="CAEI Digital Moov" style="width: 85px; height: 85px; object-fit: contain;">
-              </a>
-            </div>
-          </div>
-
-          <!-- Agence 4 - Call Center -->
-          <div class="col-lg-3 col-md-6 col-6" data-aos="fade-up" data-aos-delay="400">
-            <div class="text-center d-flex align-items-center justify-content-center" style="animation: floatCardWave 4s ease-in-out infinite; animation-delay: 1.5s; height: 100%; min-height: 200px;">
-              <a href="{{ route('callcenter.index') }}" target="_blank" class="rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="background: linear-gradient(135deg, rgb(236, 229, 231) 0%, #6b0f2a 100%); width: 130px; height: 130px; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);" onmouseover="this.style.transform='scale(1.15) rotate(-5deg)'; this.style.boxShadow='0 15px 35px rgba(107,15,42,0.4)';" onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
-                <img src="{{ asset('assets/img/logo_callcenter_norm.png') }}" alt="CAEI Call Center" style="width: 85px; height: 85px; object-fit: contain;">
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section><!-- /Agencies Section -->
 
     <!-- About Agencies Section -->
     <section id="about-agencies" class="about-agencies section py-5">
