@@ -924,7 +924,8 @@
           <li><a href="{{ route('home') }}#acceuil">Accueil<br></a></li>
           <li><a href="{{ route('home') }}#presentation">Présentation</a></li>
           <li><a href="{{ route('home') }}#agencies">Nos Agences</a></li>
-          <li><a href="{{ route('home.old') }}">Séminaires</a></li>
+          <li><a href="{{ route('home.old') }}">Nos séminaires</a></li>
+          <li><a href="{{ route('callcenter.blog') }}">Actualité</a></li>
           <li><a href="{{ route('recrutement.index') }}" class="active">Recrutement</a></li>
           <li><a href="{{ route('home') }}#contact">Contact</a></li>
         </ul>
