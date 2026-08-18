@@ -16,7 +16,51 @@ class SeminarController extends Controller
             ->orderByDesc('start_date')
             ->paginate(20);
 
-        return view('admin.seminars.index', compact('seminars'));
+        // Statistics from main dashboard
+        $totalParticipants = \App\Models\User::where('role', 'participant')->count();
+        $totalRegistrations = \App\Models\Registration::count();
+        $totalPresent = \App\Models\Registration::where('status', 'present')->count();
+        $totalAbsent = \App\Models\Registration::where('status', 'absent')->count();
+        $totalInscribedOnly = max(0, $totalRegistrations - ($totalPresent + $totalAbsent));
+
+        $attendanceRate = $totalRegistrations > 0
+            ? round(($totalPresent / $totalRegistrations) * 100, 1)
+            : 0;
+
+        $institutionsCount = \App\Models\User::where('role', 'participant')
+            ->whereNotNull('institution')
+            ->where('institution', '!=', '')
+            ->distinct('institution')
+            ->count('institution');
+
+        $topInstitutions = \App\Models\User::where('role', 'participant')
+            ->whereNotNull('institution')
+            ->where('institution', '!=', '')
+            ->groupBy('institution')
+            ->select('institution', \DB::raw('count(*) as count'))
+            ->orderByDesc('count')
+            ->limit(5)
+            ->get();
+
+        $bySeminar = Seminar::withCount([
+            'registrations',
+            'registrations as presents_count' => fn($q) => $q->where('status', 'present')
+        ])
+        ->orderByDesc('registrations_count')
+        ->get();
+
+        return view('admin.seminars.index', compact(
+            'seminars',
+            'totalParticipants',
+            'totalRegistrations',
+            'totalPresent',
+            'totalAbsent',
+            'totalInscribedOnly',
+            'attendanceRate',
+            'institutionsCount',
+            'topInstitutions',
+            'bySeminar'
+        ));
     }
 
     public function create()

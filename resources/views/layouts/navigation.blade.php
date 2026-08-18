@@ -20,9 +20,6 @@
                             <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                                 Administration
                             </x-nav-link>
-                            <x-nav-link :href="route('admin.callcenter.index')" :active="request()->routeIs('admin.callcenter.*')">
-                                📞 Call Center Admin
-                            </x-nav-link>
                         @endif
                         @if(Auth::user()->isCallCenterPartenaire())
                             <x-nav-link :href="route('callcenter.partenaire.index')" :active="request()->routeIs('callcenter.partenaire.*')">
