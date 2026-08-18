@@ -940,7 +940,7 @@
           <li><a href="#presentation">Présentation</a></li>
           <li><a href="#agencies">Nos Agences</a></li>
           <li><a href="{{ route('home.old') }}">Nos séminaires</a></li>
-          <li><a href="{{ route('callcenter.blog') }}">Actualité</a></li>
+          <li><a href="{{ route('callcenter.blog') }}">Nos actualités</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="{{ route('recrutement.index') }}">Recrutement</a></li>
         </ul>
@@ -1795,7 +1795,7 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="{{ route('home') }}" class="logo d-flex align-items-center mb-3">
-            <img src="{{ asset('assets/img/logof.png') }}" alt="CAEI Logo" style="max-height: 50px;">
+            <img src="{{ asset('assets/img/logocompany.png') }}" alt="CAEI Logo" style="max-height: 55px; width: auto; max-width: 220px; object-fit: contain;">
           </a>
           <div class="footer-contact pt-2 text-white-50">
             <p><a href="https://www.google.com/maps/search/?api=1&query=SIS+8+Rue+Claude+Bernard+1002+Belvedere-Tunis+Tunisie" target="_blank" style="color: inherit; text-decoration: none;">SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis, Tunisie</a></p>
@@ -1847,9 +1847,9 @@
 
     <div class="copyright text-center text-white-50 pt-3">
       <div class="container">
-        <p class="mb-1">&copy; Copyright <strong class="text-white">CAEI Company Group</strong>. All Rights Reserved</p>
+        <p class="mb-1">&copy; Copyright 2026 <strong class="text-white">CAEI Company Group</strong>. All Rights Reserved</p>
         <div class="credits text-white-50" style="font-size: 12px;">
-          Designed by <a href="{{ route('digitalmoov') }}" class="text-decoration-none text-warning fw-bold">CAEI DIGITAL MOOV</a>
+          Designed by <a href="{{ route('digitalmoov') }}" class="text-decoration-none text-white fw-bold" style="color: #ffffff !important;">CAEI DIGITAL MOOV</a>
         </div>
       </div>
     </div>
