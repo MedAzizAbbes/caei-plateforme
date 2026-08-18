@@ -1761,7 +1761,7 @@
           </ul>
         </li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#contact" class="nav-cta">S'inscrire</a></li>
+        <li><a href="{{ route('elite.inscription') }}" class="nav-cta">S'inscrire</a></li>
       </ul>
 
       <a href="{{ route('home') }}" class="btn-back-home d-none d-lg-flex">
@@ -1974,7 +1974,7 @@
             </div>
             <h5>Formation Sur Mesure</h5>
             <p>Des parcours personnalisés adaptés à vos besoins spécifiques et à votre secteur d'activité particulier.</p>
-            <a href="#contact" class="feature-link">
+            <a href="{{ route('elite.inscription', ['formation_title' => 'Formation Sur Mesure']) }}" class="feature-link">
               Nous contacter <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -1987,7 +1987,7 @@
             </div>
             <h5>Formation en Ligne</h5>
             <p>Suivez vos cours à distance avec flexibilité grâce à notre plateforme numérique interactive et moderne.</p>
-            <a href="#contact" class="feature-link">
+            <a href="{{ route('elite.inscription', ['formation_title' => 'Formation en Ligne']) }}" class="feature-link">
               S'inscrire <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -2338,7 +2338,7 @@
                     </span>
                     <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
                   </div>
-                  <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire</a>
+                  <a href="{{ route('elite.inscription') }}?formation_title={{ urlencode($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}" class="btn-register">S'inscrire</a>
                 </div>
               </div>
             </div>
@@ -2555,7 +2555,7 @@
                     <label>Date / Session souhaitée</label>
                     <div class="input-icon-wrapper">
                       <i class="bi bi-calendar-event-fill"></i>
-                      <input type="text" name="date_session" class="et-form-control" placeholder="Ex: Octobre 2026">
+                      <input type="date" name="date_session" class="et-form-control" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
                     </div>
                   </div>
                 </div>

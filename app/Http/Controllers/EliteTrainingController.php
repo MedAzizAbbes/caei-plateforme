@@ -94,6 +94,11 @@ class EliteTrainingController extends Controller
         ],
     ];
 
+    public function inscription(Request $request)
+    {
+        return view('elite-training.inscription');
+    }
+
     /**
      * Page principale /elite-training
      */

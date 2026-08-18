@@ -670,7 +670,7 @@
               <!-- 8. Date / Session souhaitée -->
               <div class="col-md-6">
                 <label class="form-label fw-semibold text-dark fs-6">Date / Session souhaitée</label>
-                <input type="text" name="date_session" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="Ex: Octobre 2026">
+                <input type="date" name="date_session" class="form-control rounded-3 border-light-subtle shadow-sm" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
               </div>
 
               <!-- 9. Mode de participation -->

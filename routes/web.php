@@ -90,6 +90,7 @@ Route::get('/ancien-accueil', function () {
 })->name('home.old');
 
 Route::get('/elite-training', [EliteTrainingController::class, 'index'])->name('elite.training');
+Route::get('/elite-training/inscription', [EliteTrainingController::class, 'inscription'])->name('elite.inscription');
 Route::get('/elite-training/services', [EliteTrainingController::class, 'services'])->name('elite.services');
 Route::get('/elite-training/programme', [EliteTrainingController::class, 'programme'])->name('elite.programme');
 Route::get('/elite-training/nos-cycles', [EliteTrainingController::class, 'nosCycles'])->name('elite.nos-cycles');

@@ -199,7 +199,7 @@
       </a>
       <div class="d-flex align-items-center gap-3">
         <a href="{{ route('elite.training') }}" class="btn-outline-pro btn-sm">← Accueil</a>
-        <a href="#inscription" class="btn-gold btn-sm">Postuler au DBA</a>
+        <a href="{{ route('elite.inscription', ['formation_title' => 'Doctorat / DBA']) }}" class="btn-gold btn-sm">Postuler au DBA</a>
       </div>
     </div>
   </nav>
@@ -377,7 +377,7 @@
               <!-- 8. Date / Session souhaitée -->
               <div class="col-md-6">
                 <label class="form-label font-bold text-slate-700 small">Date / Session souhaitée</label>
-                <input type="text" name="date_session" class="form-control pro-input" placeholder="Ex: Octobre 2026">
+                <input type="date" name="date_session" class="form-control pro-input" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
               </div>
 
               <!-- 9. Mode de participation -->
