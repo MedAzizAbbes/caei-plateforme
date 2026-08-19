@@ -259,7 +259,7 @@
       background: 
         radial-gradient(ellipse 80% 60% at 20% 40%, rgba(240, 183, 90, 0.15) 0%, transparent 60%),
         radial-gradient(ellipse 60% 80% at 80% 20%, rgba(0, 122, 255, 0.15) 0%, transparent 60%),
-        linear-gradient(135deg, rgba(6, 30, 75, 0.52) 0%, rgba(10, 48, 110, 0.42) 40%, rgba(15, 65, 140, 0.38) 70%, rgba(5, 25, 65, 0.50) 100%);
+        linear-gradient(135deg, rgba(6, 30, 75, 0.3) 0%, rgba(10, 48, 110, 0.2) 40%, rgba(15, 65, 140, 0.15) 70%, rgba(5, 25, 65, 0.25) 100%);
       z-index: 2;
     }
 
@@ -285,9 +285,9 @@
       inset: 0;
       background: linear-gradient(
         180deg,
-        rgba(10, 50, 110, 0.25) 0%,
-        rgba(0, 40, 90, 0.15) 50%,
-        rgba(10, 50, 110, 0.30) 100%
+        rgba(10, 50, 110, 0.15) 0%,
+        rgba(0, 40, 90, 0.05) 50%,
+        rgba(10, 50, 110, 0.15) 100%
       );
       z-index: 1;
     }
@@ -1761,7 +1761,7 @@
           </ul>
         </li>
         <li><a href="#contact">Contact</a></li>
-        <li><a href="#contact" class="nav-cta">S'inscrire</a></li>
+        <li><a href="{{ route('elite.inscription') }}" class="nav-cta">S'inscrire</a></li>
       </ul>
 
       <a href="{{ route('home') }}" class="btn-back-home d-none d-lg-flex">
@@ -1974,7 +1974,7 @@
             </div>
             <h5>Formation Sur Mesure</h5>
             <p>Des parcours personnalisés adaptés à vos besoins spécifiques et à votre secteur d'activité particulier.</p>
-            <a href="#contact" class="feature-link">
+            <a href="{{ route('elite.inscription', ['formation_title' => 'Formation Sur Mesure']) }}" class="feature-link">
               Nous contacter <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -1987,7 +1987,7 @@
             </div>
             <h5>Formation en Ligne</h5>
             <p>Suivez vos cours à distance avec flexibilité grâce à notre plateforme numérique interactive et moderne.</p>
-            <a href="#contact" class="feature-link">
+            <a href="{{ route('elite.inscription', ['formation_title' => 'Formation en Ligne']) }}" class="feature-link">
               S'inscrire <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -2300,52 +2300,53 @@
         </div>
       </div>
 
-      <!-- Swiper Carousel -->
-      <div class="swiper scheduleSwiper" data-aos="fade-up" data-aos-delay="200">
-        <div class="swiper-wrapper">
+      <!-- Swiper Carousel Container -->
+      <div class="schedule-swiper-container position-relative" data-aos="fade-up" data-aos-delay="200">
+        <div class="swiper scheduleSwiper">
+          <div class="swiper-wrapper">
 
-          @forelse($allFormations ?? [] as $index => $formation)
-          @php 
-            $monthsList = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
-            $month = $formation->start_date ? $monthsList[$formation->start_date->format('n') - 1] : $monthsList[$index % 12];
-          @endphp
-          <div class="swiper-slide filterable-slide" data-month="{{ $month }}" style="width: 300px;">
-            <div class="schedule-card">
-              <div class="schedule-card-img">
-                <img src="{{ $formation->image ? asset('storage/' . $formation->image) : asset('assets/img/img3.jpg') }}" alt="{{ $formation->title }}" loading="lazy">
-              </div>
-              <div class="schedule-card-body">
-                <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
-                <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
-                <div class="schedule-meta">
-                  <div class="schedule-meta-item">
-                    <i class="bi bi-geo-alt"></i>
-                    <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
-                  </div>
-                  <div class="schedule-meta-item">
-                    <i class="bi bi-clock"></i>
-                    <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
-                  </div>
+            @forelse($allFormations ?? [] as $index => $formation)
+            @php 
+              $monthsList = ['janvier', 'fevrier', 'mars', 'avril', 'mai', 'juin', 'juillet', 'aout', 'septembre', 'octobre', 'novembre', 'decembre'];
+              $month = $formation->start_date ? $monthsList[$formation->start_date->format('n') - 1] : $monthsList[$index % 12];
+            @endphp
+            <div class="swiper-slide filterable-slide" data-month="{{ $month }}" style="width: 300px;">
+              <div class="schedule-card">
+                <div class="schedule-card-img">
+                  <img src="{{ $formation->image ? asset('storage/' . $formation->image) : asset('assets/img/img3.jpg') }}" alt="{{ $formation->title }}" loading="lazy">
                 </div>
-                <div class="d-flex align-items-center justify-content-between mb-3">
-                  <span class="schedule-price">
-                    @if($formation->price)
-                      {{ number_format($formation->price, 0, ',', ' ') }} €
-                    @else
-                      Sur devis
-                    @endif
-                  </span>
-                  <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
+                <div class="schedule-card-body">
+                  <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
+                  <h6 title="{{ $formation->title }}">{{ $formation->title }}</h6>
+                  <div class="schedule-meta">
+                    <div class="schedule-meta-item">
+                      <i class="bi bi-geo-alt"></i>
+                      <span>{{ $formation->location ?: 'Tunis & En ligne' }}</span>
+                    </div>
+                    <div class="schedule-meta-item">
+                      <i class="bi bi-clock"></i>
+                      <span>{{ $formation->duration ?: 'Non spécifiée' }}</span>
+                    </div>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-3">
+                    <span class="schedule-price">
+                      @if($formation->price)
+                        {{ number_format($formation->price, 0, ',', ' ') }} €
+                      @else
+                        Sur devis
+                      @endif
+                    </span>
+                    <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
+                  </div>
+                  <a href="{{ route('elite.inscription') }}?formation_title={{ urlencode($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}" class="btn-register">S'inscrire</a>
                 </div>
-                <a href="#contact" onclick="document.querySelector('input[name=objet]').value = '{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}'" class="btn-register">S'inscrire</a>
               </div>
             </div>
-          </div>
-          @empty
-          <div class="text-center py-5 text-muted">
-            <p>Aucune formation disponible pour le moment.</p>
-          </div>
-          @endforelse
+            @empty
+            <div class="text-center py-5 text-muted">
+              <p>Aucune formation disponible pour le moment.</p>
+            </div>
+            @endforelse
 
           </div>
 
@@ -2554,7 +2555,7 @@
                     <label>Date / Session souhaitée</label>
                     <div class="input-icon-wrapper">
                       <i class="bi bi-calendar-event-fill"></i>
-                      <input type="text" name="date_session" class="et-form-control" placeholder="Ex: Octobre 2026">
+                      <input type="date" name="date_session" class="et-form-control" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
                     </div>
                   </div>
                 </div>
@@ -2921,6 +2922,11 @@
       slidesPerView: 1,
       spaceBetween: 20,
       loop: false,
+      speed: 800,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
       pagination: {
         el: '.swiper-pagination',
         clickable: true,

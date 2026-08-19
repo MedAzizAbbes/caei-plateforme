@@ -61,7 +61,7 @@
 
     /* Hero Banner Pro */
     .hero-banner {
-      background: linear-gradient(135deg, rgba(6, 23, 67, 0.9) 0%, rgba(10, 37, 105, 0.82) 100%), url('{{ asset("assets/img/professionel.jpg") }}') center/cover no-repeat;
+      background: linear-gradient(135deg, rgba(6, 23, 67, 0.4) 0%, rgba(10, 37, 105, 0.3) 100%), url('{{ asset("assets/img/professionel.jpg") }}') center/cover no-repeat;
       color: #ffffff;
       padding: 100px 0 80px;
       box-shadow: inset 0 -10px 30px rgba(0, 0, 0, 0.15);
@@ -212,7 +212,7 @@
       </a>
       <div class="d-flex align-items-center gap-3">
         <a href="{{ route('elite.training') }}" class="btn-outline-pro btn-sm">← Accueil</a>
-        <a href="#inscription" class="btn-gold btn-sm">S'inscrire</a>
+        <a href="{{ route('elite.inscription', ['formation_title' => 'Executive MBA']) }}" class="btn-gold btn-sm">S'inscrire</a>
       </div>
     </div>
   </nav>
@@ -331,7 +331,7 @@
                 </div>
                 <div class="pt-3 border-top d-flex justify-content-between align-items-center">
                   <span class="fs-5 fw-bold text-amber-600">{{ $item['price'] }}</span>
-                  <a href="#inscription" onclick="setProgram('Executive MBA : {{ $item['title'] }}')" class="btn-gold btn-sm py-2 px-3 fs-7">
+                  <a href="{{ route('elite.inscription') }}?formation_title=Executive MBA : {{ urlencode($item['title']) }}" class="btn-gold btn-sm py-2 px-3 fs-7">
                     S'inscrire <i class="bi bi-arrow-right"></i>
                   </a>
                 </div>
@@ -405,7 +405,7 @@
               <!-- 8. Date / Session souhaitée -->
               <div class="col-md-6">
                 <label class="form-label font-bold text-slate-700 small">Date / Session souhaitée</label>
-                <input type="text" name="date_session" class="form-control pro-input" placeholder="Ex: Octobre 2026">
+                <input type="date" name="date_session" class="form-control pro-input" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
               </div>
 
               <!-- 9. Mode de participation -->

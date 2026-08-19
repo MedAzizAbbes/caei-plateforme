@@ -80,21 +80,24 @@
                     <p class="mt-2 text-sm text-slate-600">Les supports du séminaire seront bientot disponibles.</p>
                 </div>
             @else
-                <div class="space-y-6">
+                <div class="space-y-6" x-data="{ activeDay: {{ $documentsByDay->keys()->first() ?? 'null' }} }">
                     @foreach($documentsByDay as $dayNumber => $documents)
-                        <div class="caei-card">
+                        <div class="caei-card overflow-hidden">
                             <!-- En-tête du jour -->
-                            <div class="border-b border-slate-200 bg-[#061743] px-6 py-4">
+                            <div @click="activeDay = activeDay === {{ $dayNumber }} ? null : {{ $dayNumber }}" class="border-b border-slate-200 bg-[#061743] px-6 py-4 cursor-pointer flex justify-between items-center transition hover:bg-[#0a2260]">
                                 <h3 class="flex items-center text-lg font-black text-white">
                                     <svg class="mr-2 h-6 w-6 text-[#ffbd45]" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v2h16V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5H4v8a2 2 0 002 2h12a2 2 0 002-2V7h-2v1a1 1 0 11-2 0V7H9v1a1 1 0 11-2 0V7H6v1a1 1 0 11-2 0V7z" clip-rule="evenodd"></path>
                                     </svg>
                                     Jour {{ $dayNumber }} — {{ $documents->count() }} document(s)
                                 </h3>
+                                <svg class="h-5 w-5 text-white transition-transform" :class="{'rotate-180': activeDay === {{ $dayNumber }} }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
                             </div>
 
                             <!-- Liste des documents -->
-                            <div class="divide-y divide-slate-200">
+                            <div x-show="activeDay === {{ $dayNumber }}" style="display: none;" class="divide-y divide-slate-200">
                                 @foreach($documents as $document)
                                     @php
                                         $fileExt = $document->getFileExtension();

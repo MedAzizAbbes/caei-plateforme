@@ -10,22 +10,22 @@
     <div class="flex-1 p-6 md:p-10 overflow-y-auto">
         
         {{-- En-tête du module --}}
-        <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6, 23, 67, 0.88) 0%, rgba(0, 15, 60, 0.92) 100%), url('{{ asset('assets/img/service_medical_1786525641121.jpg') }}') center/cover no-repeat;">
+        <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(17, 94, 89, 0.9) 0%, rgba(4, 47, 46, 0.95) 100%), url('{{ asset('assets/img/service_medical_1786525641121.jpg') }}') center/cover no-repeat;">
             <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">🩺</div>
             <div class="relative z-10">
-                <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-[#061743] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                <span class="inline-flex items-center gap-1.5 bg-teal-100 text-[#0f766e] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
                     <span>🩺</span> CAEI Medical Center
                 </span>
                 <h1 class="text-3xl font-black uppercase tracking-tight flex items-center gap-3">
                     <span>Gestion des Devis & Rendez-vous Médicaux</span> 🏥
                 </h1>
-                <p class="mt-2 text-slate-200 text-sm">Consultez, traitez et suivez les demandes d'accompagnement et d'évacuation sanitaire de vos patients internationaux.</p>
+                <p class="mt-2 text-[#ccfbf1] text-sm">Consultez, traitez et suivez les demandes d'accompagnement et d'évacuation sanitaire de vos patients internationaux.</p>
             </div>
             <div class="shrink-0 flex items-center gap-3 relative z-10">
-                <a href="{{ route('admin.cliniques.index') }}" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all">
+                <a href="{{ route('admin.cliniques.index') }}" class="inline-flex items-center gap-2 bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all">
                     <span>🏥 Cliniques Partenaires</span>
                 </a>
-                <a href="{{ route('medical.services') }}" target="_blank" class="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-[#061743] font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all">
+                <a href="{{ route('medical.services') }}" target="_blank" class="inline-flex items-center gap-2 bg-white hover:bg-[#f0fdfa] text-[#0f766e] font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all">
                     <span>Voir le site Medical Center 🩺</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 </a>
@@ -51,14 +51,14 @@
                 </a>
 
                 <a href="{{ route('admin.cliniques.index') }}" 
-                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs transition-all text-slate-700 hover:bg-slate-100 hover:text-[#061743]">
+                   class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs transition-all text-slate-700 hover:bg-slate-100 hover:text-[#134e4a]">
                     <span>🏥</span>
                     <span>Cliniques Partenaires</span>
                     <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-2 py-0.5 rounded-full border border-slate-200">
                         {{ $totalClinicsCount }}
                     </span>
                     @if($pendingClinicsReviews > 0)
-                        <span class="bg-indigo-100 text-indigo-800 text-[10px] font-black px-2 py-0.5 rounded-full">
+                        <span class="bg-[#ccfbf1] text-[#115e59] text-[10px] font-black px-2 py-0.5 rounded-full">
                             {{ $pendingClinicsReviews }} à valider
                         </span>
                     @endif
@@ -67,7 +67,7 @@
 
             <div class="flex items-center gap-2">
                 <a href="{{ route('admin.cliniques.create') }}" 
-                   class="inline-flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition-all">
+                   class="inline-flex items-center gap-1.5 bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs px-4 py-2.5 rounded-xl shadow-sm transition-all">
                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                     <span>Ajouter une clinique</span>
                 </a>

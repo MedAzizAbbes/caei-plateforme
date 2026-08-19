@@ -85,8 +85,8 @@
     /* PROGRAMME HERO */
     .programme-hero {
       position: relative;
-      padding: 140px 0 70px;
-      background: linear-gradient(135deg, #000f3c 0%, #001f3f 40%, #002a5c 80%, #001030 100%);
+      padding: 150px 0 80px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #334155 80%, #0f172a 100%);
       color: var(--white);
       overflow: hidden;
     }
@@ -418,7 +418,7 @@
             </div>
             <h5>Formation Sur Mesure</h5>
             <p>Des parcours personnalisés adaptés aux besoins spécifiques de votre entreprise ou de votre secteur d'activité.</p>
-            <a href="#inscriptionModal" data-bs-toggle="modal" data-formation-title="Formation Sur Mesure" class="feature-link">
+            <a href="{{ route('elite.inscription', ['formation_title' => 'Formation Sur Mesure']) }}" class="feature-link">
               Nous contacter <i class="bi bi-arrow-right"></i>
             </a>
           </div>
@@ -636,9 +636,9 @@
                     @endif
                   </div>
 
-                  <button type="button" class="btn-card-action btn-card-gold" data-bs-toggle="modal" data-bs-target="#inscriptionModal" data-formation-title="{{ $f->title }}" data-formation-code="{{ $f->code ?? 'CAEI-'.$f->id }}">
+                  <a href="{{ route('elite.inscription', ['formation_title' => ($f->code ?? 'CAEI-'.$f->id) . ' — ' . $f->title]) }}" class="btn-card-action btn-card-gold" style="text-decoration: none;">
                     <i class="bi bi-pencil-square"></i> S'inscrire
-                  </button>
+                  </a>
                 </div>
               </div>
             </div>
@@ -716,7 +716,7 @@
               <!-- 8. Date / Session souhaitée -->
               <div class="col-md-6">
                 <label class="form-label font-semibold text-dark small mb-1">Date / Session souhaitée</label>
-                <input type="text" name="date_session" class="form-control" placeholder="Ex: Octobre 2026">
+                <input type="date" name="date_session" class="form-control" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
               </div>
 
               <!-- 9. Mode de participation -->

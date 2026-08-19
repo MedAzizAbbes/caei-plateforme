@@ -86,10 +86,16 @@
                 @if($documentsByDay->isEmpty())
                     <p class="text-gray-600">Aucun document pour ce séminaire.</p>
                 @else
-                    @foreach($documentsByDay as $day => $documents)
-                        <div class="mb-6">
-                            <h3 class="text-lg font-semibold text-gray-900 mb-3">Jour {{ $day }}</h3>
-                            <div class="space-y-2">
+                    <div x-data="{ activeDay: {{ $documentsByDay->keys()->first() ?? 'null' }} }">
+                        @foreach($documentsByDay as $day => $documents)
+                            <div class="mb-6 border border-gray-200 rounded-lg overflow-hidden bg-white">
+                                <h3 @click="activeDay = activeDay === {{ $day }} ? null : {{ $day }}" class="text-lg font-semibold text-gray-900 bg-gray-100 p-4 m-0 cursor-pointer flex justify-between items-center transition hover:bg-gray-200">
+                                    <span>Jour {{ $day }}</span>
+                                    <svg class="h-5 w-5 text-gray-500 transition-transform" :class="{'rotate-180': activeDay === {{ $day }} }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </h3>
+                                <div x-show="activeDay === {{ $day }}" style="display: none;" class="space-y-2 p-4">
                                 @foreach($documents as $doc)
                                     <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg border border-gray-200">
                                         <div class="flex items-center">
@@ -151,6 +157,7 @@
                             </div>
                         </div>
                     @endforeach
+                    </div>
                 @endif
             </div>
         </div>

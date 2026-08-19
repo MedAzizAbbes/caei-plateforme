@@ -85,7 +85,7 @@
     .cycles-hero {
       position: relative;
       padding: 150px 0 80px;
-      background: linear-gradient(135deg, #000f3c 0%, #001f3f 40%, #002a5c 80%, #001030 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #334155 80%, #0f172a 100%);
       color: var(--white);
       overflow: hidden;
     }
@@ -305,9 +305,9 @@
               </div>
             </div>
 
-            <button type="button" class="btn-register-cycle" data-bs-toggle="modal" data-bs-target="#cycleRegistrationModal" data-cycle-code="{{ $cycle['code'] }}" data-cycle-title="{{ $cycle['title'] }}" data-cycle-price="{{ $cycle['price'] }}">
+            <a href="{{ route('elite.inscription') }}?formation_title={{ urlencode('['.$cycle['code'].'] '.$cycle['title']) }}" class="btn-register-cycle" style="text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 8px;">
               <i class="bi bi-pencil-square"></i> S'inscrire à ce cycle
-            </button>
+            </a>
           </div>
         </div>
         @endforeach
@@ -419,7 +419,7 @@
               <!-- 8. Date / Session souhaitée -->
               <div class="col-md-6">
                 <label class="form-label fw-semibold text-dark fs-6">Date / Session souhaitée</label>
-                <input type="text" name="date_session" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="Ex: Octobre 2026">
+                <input type="date" name="date_session" class="form-control rounded-3 border-light-subtle shadow-sm" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
               </div>
 
               <!-- 9. Mode de participation -->

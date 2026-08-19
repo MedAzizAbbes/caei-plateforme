@@ -78,7 +78,7 @@
     .services-hero {
       position: relative;
       padding: 170px 0 100px;
-      background: linear-gradient(135deg, #000c1a 0%, #001f3f 45%, #002d5e 80%, #001026 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 45%, #334155 80%, #0f172a 100%);
       color: var(--white);
       overflow: hidden;
     }
@@ -226,7 +226,7 @@
 
     /* PACK SEJOUR SECTION ULTRA LUXE */
     .pack-sejour-luxe {
-      background: linear-gradient(135deg, #000c1a 0%, #001f3f 50%, #001229 100%);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
       color: white; padding: 90px 0; position: relative; overflow: hidden;
     }
     .pack-glow-bg {
@@ -670,7 +670,7 @@
               <!-- 8. Date / Session souhaitée -->
               <div class="col-md-6">
                 <label class="form-label fw-semibold text-dark fs-6">Date / Session souhaitée</label>
-                <input type="text" name="date_session" class="form-control rounded-3 border-light-subtle shadow-sm" placeholder="Ex: Octobre 2026">
+                <input type="date" name="date_session" class="form-control rounded-3 border-light-subtle shadow-sm" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
               </div>
 
               <!-- 9. Mode de participation -->

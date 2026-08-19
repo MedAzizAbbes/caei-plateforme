@@ -84,8 +84,8 @@
     /* DOMAIN HERO HEADER */
     .domain-hero {
       position: relative;
-      padding: 140px 0 70px;
-      background: linear-gradient(135deg, #000f3c 0%, #001f3f 40%, #002a5c 80%, #001030 100%);
+      padding: 150px 0 80px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #334155 80%, #0f172a 100%);
       color: var(--white);
       overflow: hidden;
     }
@@ -412,12 +412,11 @@
                       </span>
                     </div>
 
-                    <button type="button" 
-                            onclick="openRegistrationModal('{{ addslashes($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}')"
-                            class="btn-register-course">
+                    <a href="{{ route('elite.inscription') }}?formation_title={{ urlencode($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}"
+                            class="btn-register-course" style="text-decoration: none;">
                       <span>S'inscrire</span>
                       <i class="bi bi-arrow-right"></i>
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -500,7 +499,7 @@
             <!-- 8. Date / Session souhaitée -->
             <div class="col-md-6">
               <label class="form-label text-xs font-bold uppercase text-muted">Date / Session souhaitée</label>
-              <input type="text" name="date_session" placeholder="Ex: Octobre 2026" class="form-control rounded-3 py-2 text-sm">
+              <input type="date" name="date_session" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date" class="form-control rounded-3 py-2 text-sm">
             </div>
 
             <!-- 9. Mode de participation -->
