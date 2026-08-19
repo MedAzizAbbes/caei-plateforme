@@ -97,7 +97,7 @@ class FormationController extends Controller
             'objectives'      => ['nullable', 'string'],
             'target_audience' => ['nullable', 'string'],
             'location'        => ['nullable', 'string', 'max:150'],
-            'image'           => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'image'           => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
             'status'          => ['required', 'in:active,inactive'],
         ]);
 
@@ -156,7 +156,7 @@ class FormationController extends Controller
             'objectives'      => ['nullable', 'string'],
             'target_audience' => ['nullable', 'string'],
             'location'        => ['nullable', 'string', 'max:150'],
-            'image'           => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:2048'],
+            'image'           => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
             'status'          => ['required', 'in:active,inactive'],
         ]);
 
