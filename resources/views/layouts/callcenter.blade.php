@@ -506,7 +506,7 @@
       <div class="container-fluid px-0">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center gap-3 py-0" href="{{ route('callcenter.index') }}">
-          <img src="{{ asset('images/logo-callcenter-v.png') }}" alt="CAEI Call Center Logo" height="52" style="height: 52px; width: auto; object-fit: contain;"> 
+          <img src="{{ asset('images/logo-caei-transparent.png') }}" alt="CAEI Call Center Logo" style="height: 100px; width: auto; object-fit: contain;">
         </a>
         
         <button class="navbar-toggler shadow-none cc-navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">

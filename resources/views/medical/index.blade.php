@@ -89,20 +89,11 @@
         </div>
 
         {{-- ══════════ NAVBAR BLANCHE ET LUMINEUSE ══════════ --}}
-        <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm px-4 lg:px-8 py-3.5">
+        <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm px-4 lg:px-8 py-2">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 {{-- Logo --}}
-                <a href="{{ route('medical.services') }}" class="flex items-center gap-3.5 hover:scale-105 transition-transform">
-                    <div class="relative">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo CAEI Medical Services" class="h-12 w-12 md:h-14 md:w-14 rounded-full object-cover shadow-md border-2 border-[#0284c7]">
-                        <span class="absolute -bottom-1 -right-1 bg-[#0284c7] text-white p-0.5 rounded-full border-2 border-white">
-                            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/></svg>
-                        </span>
-                    </div>
-                    <div>
-                        <span class="block text-xl font-black tracking-wider text-slate-900 uppercase leading-none">CAEI MEDICAL</span>
-                        <span class="block text-[10px] font-bold text-[#0284c7] uppercase tracking-widest mt-1">Services & Évacuation Sanitaire</span>
-                    </div>
+                <a href="{{ route('medical.services') }}" class="flex items-center hover:opacity-80 transition-opacity">
+                    <img src="{{ asset('images/logo-caei-transparent.png') }}" alt="Logo CAEI Medical Services" style="height: 75px; width: auto; object-fit: contain;">
                 </a>
 
                 {{-- Desktop Links --}}

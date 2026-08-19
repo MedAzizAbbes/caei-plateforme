@@ -55,7 +55,7 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <img src="{{ asset('digitalmoov/assets/img/caei dm cov.png') }}" alt="" >
+        <img src="{{ asset('images/logo-caei-white.png') }}" alt="CAEI Digital Moov" style="height: 85px; width: auto; object-fit: contain;">
       </div>
 
       <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
