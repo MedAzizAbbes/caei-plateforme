@@ -18,16 +18,16 @@
 
         {{-- En-tête --}}
         <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden"
-             style="background: linear-gradient(135deg, rgba(6, 23, 67, 0.88) 0%, rgba(0, 31, 63, 0.92) 100%), url('{{ asset('assets/img/service_callcenter_1786525651775.jpg') }}') center/cover no-repeat;">
+             style="background: linear-gradient(135deg, rgba(127, 5, 4, 0.92) 0%, rgba(70, 2, 2, 0.95) 100%), url('{{ asset('assets/img/service_callcenter_1786525651775.jpg') }}') center/cover no-repeat;">
             <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">🎧</div>
             <div class="relative z-10">
-                <span class="inline-flex items-center gap-1.5 bg-white/20 text-white text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                <span class="inline-flex items-center gap-1.5 bg-red-100 text-[#7f0504] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
                     <span>📞</span> CAEI Call Center
                 </span>
                 <h1 class="text-3xl font-black uppercase tracking-tight flex items-center gap-3">
                     <span>Dashboard Administration Centralisé</span> 🎧
                 </h1>
-                <p class="mt-2 text-slate-300 text-sm">Gestion unifiée du workflow RDV, des demandes du site public et des comptes utilisateurs (Agents & Partenaires).</p>
+                <p class="mt-2 text-red-50 text-sm">Gestion unifiée du workflow RDV, des demandes du site public et des comptes utilisateurs (Agents & Partenaires).</p>
             </div>
             <div class="flex flex-wrap items-center gap-3 relative z-10">
                 <a href="{{ route('admin.callcenter.export.excel', request()->only(['statut', 'agent_id', 'partenaire_id'])) }}" 
@@ -39,7 +39,7 @@
                     <span>📄 Exporter PDF</span>
                 </a>
                 <a href="{{ route('callcenter.index') }}" target="_blank"
-                   class="shrink-0 inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-[#061743] font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all">
+                   class="shrink-0 inline-flex items-center gap-2 bg-white hover:bg-red-50 text-[#7f0504] font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all">
                     <span>Voir le site Call Center 🌐</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -136,7 +136,7 @@
         <!-- 2. Navigation par Onglets Centralisés (Tabs) -->
         <div class="bg-white p-2 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap gap-2 mb-6">
             <button @click="setTab('workflow')" 
-                    :class="activeTab === 'workflow' ? 'bg-[#061743] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'"
+                    :class="activeTab === 'workflow' ? 'bg-[#7f0504] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-[#7f0504]'"
                     class="px-5 py-3 rounded-xl text-xs font-black uppercase transition flex items-center gap-2">
                 <span>📊 Onglet 1 : Workflow RDV & Partenaires</span>
                 @if($stats['en_attente_affectation'] > 0)
@@ -145,7 +145,7 @@
             </button>
 
             <button @click="setTab('demandes_web')" 
-                    :class="activeTab === 'demandes_web' ? 'bg-[#061743] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'"
+                    :class="activeTab === 'demandes_web' ? 'bg-[#7f0504] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-[#7f0504]'"
                     class="px-5 py-3 rounded-xl text-xs font-black uppercase transition flex items-center gap-2">
                 <span>📩 Onglet 2 : Demandes de Contact du Site Public</span>
                 @if($stats['demandes_nouvelles'] > 0)
@@ -154,7 +154,7 @@
             </button>
 
             <button @click="setTab('utilisateurs')" 
-                    :class="activeTab === 'utilisateurs' ? 'bg-[#061743] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100'"
+                    :class="activeTab === 'utilisateurs' ? 'bg-[#7f0504] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-[#7f0504]'"
                     class="px-5 py-3 rounded-xl text-xs font-black uppercase transition flex items-center gap-2">
                 <span>👥 Onglet 3 : Gestion des Comptes (Agents & Partenaires)</span>
             </button>
@@ -171,7 +171,7 @@
 
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Statut RDV</label>
-                        <select name="statut" class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm text-slate-800 focus:border-[#061743]">
+                        <select name="statut" class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm text-slate-800 focus:border-[#7f0504]">
                             <option value="">Tous les statuts</option>
                             <option value="en_attente_affectation" {{ request('statut') == 'en_attente_affectation' ? 'selected' : '' }}>En attente d'affectation</option>
                             <option value="affecte" {{ request('statut') == 'affecte' ? 'selected' : '' }}>Affecté</option>
@@ -183,7 +183,7 @@
 
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Agent Call Center</label>
-                        <select name="agent_id" class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm text-slate-800 focus:border-[#061743]">
+                        <select name="agent_id" class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm text-slate-800 focus:border-[#7f0504]">
                             <option value="">Tous les agents</option>
                             @foreach($agents as $agent)
                                 <option value="{{ $agent->id }}" {{ request('agent_id') == $agent->id ? 'selected' : '' }}>{{ $agent->fullName() }}</option>
@@ -193,7 +193,7 @@
 
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Partenaire Commercial</label>
-                        <select name="partenaire_id" class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm text-slate-800 focus:border-[#061743]">
+                        <select name="partenaire_id" class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm text-slate-800 focus:border-[#7f0504]">
                             <option value="">Tous les partenaires</option>
                             @foreach($partenaires as $partenaire)
                                 <option value="{{ $partenaire->id }}" {{ request('partenaire_id') == $partenaire->id ? 'selected' : '' }}>{{ $partenaire->fullName() }} ({{ $partenaire->institution ?? 'Partenaire' }})</option>
@@ -203,11 +203,11 @@
 
                     <div>
                         <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Date RDV</label>
-                        <input type="date" name="date" value="{{ request('date') }}" class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm text-slate-800 focus:border-[#061743]">
+                        <input type="date" name="date" value="{{ request('date') }}" class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm text-slate-800 focus:border-[#7f0504]">
                     </div>
 
                     <div class="flex gap-2">
-                        <button type="submit" class="w-full rounded-xl bg-[#061743] py-2.5 text-xs font-black uppercase text-white hover:bg-[#0a2060] transition">
+                        <button type="submit" class="w-full rounded-xl bg-[#7f0504] py-2.5 text-xs font-black uppercase text-white hover:bg-[#a81111] transition">
                             Filtrer
                         </button>
                         <a href="{{ route('callcenter.admin.dashboard', ['tab' => 'workflow']) }}" class="rounded-xl border border-slate-300 px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-100 transition flex items-center justify-center">
@@ -221,7 +221,7 @@
             <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
                 <div class="px-6 py-4 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-gradient-to-r from-slate-50 to-white">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-[#061743]/10 text-[#061743] flex items-center justify-center font-bold text-base">
+                        <div class="w-9 h-9 rounded-xl bg-[#7f0504]/10 text-[#7f0504] flex items-center justify-center font-bold text-base">
                             📅
                         </div>
                         <div>
@@ -292,7 +292,7 @@
 
                                     <td class="py-3.5 px-4 whitespace-nowrap">
                                         @if($rdv->partenaire)
-                                            <div class="font-bold text-[#061743] flex items-center gap-1">
+                                            <div class="font-bold text-[#7f0504] flex items-center gap-1">
                                                 <span>🤝</span> {{ $rdv->partenaire->fullName() }}
                                             </div>
                                             <div class="text-[11px] text-slate-400 font-medium">{{ $rdv->partenaire->institution ?? 'Partenaire' }}</div>
@@ -327,7 +327,7 @@
                                     <td class="py-3.5 px-4 text-right whitespace-nowrap">
                                         <form method="POST" action="{{ route('callcenter.admin.assign', $rdv) }}" class="inline-flex items-center gap-1.5">
                                             @csrf
-                                            <select name="partenaire_id" required class="text-xs rounded-lg border-slate-300 py-1.5 px-2.5 text-slate-800 font-semibold focus:border-[#061743] focus:ring-1 focus:ring-[#061743] bg-white shadow-2xs">
+                                            <select name="partenaire_id" required class="text-xs rounded-lg border-slate-300 py-1.5 px-2.5 text-slate-800 font-semibold focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504] bg-white shadow-2xs">
                                                 <option value="">-- Partenaire --</option>
                                                 @foreach($partenaires as $p)
                                                     <option value="{{ $p->id }}" {{ $rdv->partenaire_id == $p->id ? 'selected' : '' }}>
@@ -335,7 +335,7 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <button type="submit" class="rounded-lg bg-[#061743] px-3.5 py-1.5 text-xs font-black uppercase tracking-wider text-white hover:bg-[#0a2060] transition shadow-sm">
+                                            <button type="submit" class="rounded-lg bg-[#7f0504] px-3.5 py-1.5 text-xs font-black uppercase tracking-wider text-white hover:bg-[#a81111] transition shadow-sm">
                                                 {{ $rdv->partenaire_id ? 'Réaffecter' : 'Affecter' }}
                                             </button>
                                         </form>
@@ -446,7 +446,7 @@
             <!-- Formulaire de Création de Compte -->
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                 <div class="border-b border-slate-100 pb-4 mb-6">
-                    <h3 class="text-base font-black uppercase text-[#061743]">➕ Créer un nouveau compte Call Center</h3>
+                    <h3 class="text-base font-black uppercase text-[#7f0504]">➕ Créer un nouveau compte Call Center</h3>
                     <p class="text-xs text-slate-500">Génération automatique des identifiants d'accès pour les agents et les partenaires.</p>
                 </div>
 
@@ -457,7 +457,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Rôle du compte *</label>
-                            <select name="role" required class="w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#061743]">
+                            <select name="role" required class="w-full rounded-xl border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-800 focus:border-[#7f0504]">
                                 <option value="callcenter_agent">🎧 Agent Call Center (Créateur de RDV)</option>
                                 <option value="callcenter_partenaire">🤝 Partenaire Commercial (Évaluateur / Qualificateur)</option>
                             </select>
@@ -495,7 +495,7 @@
                     </div>
 
                     <div class="mt-6 text-right border-t border-slate-100 pt-4">
-                        <button type="submit" class="inline-flex rounded-xl bg-[#061743] px-6 py-3 text-xs font-black uppercase text-white hover:bg-[#0a2060] transition">
+                        <button type="submit" class="inline-flex rounded-xl bg-[#7f0504] px-6 py-3 text-xs font-black uppercase text-white hover:bg-[#a81111] transition">
                             ➕ Générer le Compte
                         </button>
                     </div>
@@ -634,7 +634,7 @@
                     datasets: [{
                         label: 'Total RDV Créés',
                         data: {!! json_encode($analyticsCharts['agents']['total'] ?? []) !!},
-                        backgroundColor: '#061743',
+                        backgroundColor: '#7f0504',
                         borderRadius: 6
                     }]
                 },
