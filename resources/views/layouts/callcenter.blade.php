@@ -565,14 +565,16 @@
       <div class="container pt-5 pb-4">
         <div class="row g-5 align-items-start">
           <!-- Logo & Social -->
-          <div class="col-lg-3 col-md-6 text-center text-md-start">
+          <div class="col-lg-4 col-md-12 text-center text-lg-start">
             <div class="mb-4 d-inline-block">
               <img src="{{ asset('images/logo-callcenter-footer.png') }}" alt="CAEI Call Center Logo" class="img-fluid" style="max-height: 75px; max-width: 250px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.06));">
             </div>
             
-            <p class="small mb-4" style="color: #334155; line-height: 1.7; font-weight: 500;">L'excellence opérationnelle au service de votre relation client grâce aux dernières innovations technologiques.</p>
+            <p class="small mb-4" style="color: #334155; line-height: 1.7; font-weight: 500; max-width: 340px; margin: 0 auto; margin-lg-0: 0;">
+              L'excellence opérationnelle au service de votre relation client grâce aux dernières innovations technologiques.
+            </p>
             
-            <div class="d-flex justify-content-center justify-content-md-start gap-2">
+            <div class="d-flex justify-content-center justify-content-lg-start gap-2">
               <a href="https://www.facebook.com/CAEICallCenter/" class="d-flex align-items-center justify-content-center text-decoration-none" style="width: 40px; height: 40px; background: rgba(255, 255, 255, 0.9); border: 1px solid #cbd5e1; border-radius: 10px; color: var(--cc-red); transition: all 0.3s; box-shadow: 0 2px 8px rgba(0,0,0,0.04);" onmouseover="this.style.background='var(--cc-red)'; this.style.color='#fff'; this.style.borderColor='var(--cc-red)'; this.style.transform='translateY(-3px)'" onmouseout="this.style.background='rgba(255, 255, 255, 0.9)'; this.style.color='var(--cc-red)'; this.style.borderColor='#cbd5e1'; this.style.transform='translateY(0)'">
                 <i class="fab fa-facebook-f"></i>
               </a>
@@ -586,7 +588,7 @@
           </div>
           
           <!-- Contactez-nous -->
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 17px; letter-spacing: 0.5px;">Contactez-nous</h5>
             <ul class="list-unstyled mb-0">
               <li class="d-flex align-items-start mb-3">
@@ -605,7 +607,7 @@
           </div>
           
           <!-- Liens utiles -->
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 17px; letter-spacing: 0.5px;">Liens utiles</h5>
             <ul class="list-unstyled mb-0">
               <li class="mb-3"><a href="{{ route('callcenter.about') }}" class="text-decoration-none small fw-semibold" style="color: #334155; transition: all 0.2s;" onmouseover="this.style.color='var(--cc-red)'; this.style.paddingLeft='4px'" onmouseout="this.style.color='#334155'; this.style.paddingLeft='0'"><i class="bi bi-chevron-right me-2" style="color: var(--cc-red); font-size: 12px;"></i>Qui Sommes-Nous ?</a></li>
@@ -614,18 +616,6 @@
               <li class="mb-3"><a href="#" class="text-decoration-none small fw-semibold" style="color: #334155; transition: all 0.2s;" onmouseover="this.style.color='var(--cc-red)'; this.style.paddingLeft='4px'" onmouseout="this.style.color='#334155'; this.style.paddingLeft='0'"><i class="bi bi-chevron-right me-2" style="color: var(--cc-red); font-size: 12px;"></i>Confidentialité</a></li>
               <li class="mb-0"><a href="{{ route('callcenter.support') }}" class="text-decoration-none small fw-semibold" style="color: #334155; transition: all 0.2s;" onmouseover="this.style.color='var(--cc-red)'; this.style.paddingLeft='4px'" onmouseout="this.style.color='#334155'; this.style.paddingLeft='0'"><i class="bi bi-chevron-right me-2" style="color: var(--cc-red); font-size: 12px;"></i>Support Client</a></li>
             </ul>
-          </div>
-          
-          <!-- Newsletter -->
-          <div class="col-lg-3 col-md-6">
-            <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 17px; letter-spacing: 0.5px;">Newsletter</h5>
-            <p class="small mb-4" style="color: #334155; line-height: 1.6; font-weight: 500;">Restez informés des dernières évolutions de la relation client.</p>
-            <div class="position-relative w-100">
-              <input type="email" placeholder="Votre email" style="width: 100%; background: rgba(255, 255, 255, 0.95); border: 1.5px solid #cbd5e1; border-radius: 12px; padding: 14px 110px 14px 16px; color: #0f172a; outline: none; transition: border-color 0.3s; box-shadow: 0 2px 6px rgba(0,0,0,0.03);" onfocus="this.style.borderColor='var(--cc-red)'" onblur="this.style.borderColor='#cbd5e1'">
-              <button type="button" class="position-absolute top-50 translate-middle-y end-0 me-2 border-0 text-white fw-medium" style="background: linear-gradient(135deg, #7f0504, #a81111); border-radius: 8px; padding: 8px 16px; font-size: 13px; transition: all 0.3s; box-shadow: 0 4px 12px rgba(127, 5, 4, 0.3);" onmouseover="this.style.background='linear-gradient(135deg, #990505, #bd1515)'" onmouseout="this.style.background='linear-gradient(135deg, #7f0504, #a81111)'">
-                S'inscrire
-              </button>
-            </div>
           </div>
         </div>
         

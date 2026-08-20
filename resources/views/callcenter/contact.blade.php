@@ -76,14 +76,14 @@
               <div class="row g-4">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label for="name" class="form-label fw-semibold small" style="color: #94a3b8;">Raison Sociale / Nom <span class="text-danger">*</span></label>
-                    <input type="text" class="form-control-glass w-100" id="name" name="name" required>
+                    <label for="name" class="form-label fw-semibold small" style="color: #94a3b8;">Nom & Prénom / Contact <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control-glass w-100" id="name" name="name" required placeholder="Votre nom & prénom">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="email" class="form-label fw-semibold small" style="color: #94a3b8;">Email Professionnel <span class="text-danger">*</span></label>
-                    <input type="email" class="form-control-glass w-100" id="email" name="email" required>
+                    <input type="email" class="form-control-glass w-100" id="email" name="email" required placeholder="votre@email.com">
                   </div>
                 </div>
                 
@@ -97,21 +97,43 @@
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
+                    <label for="pays" class="form-label fw-semibold small" style="color: #94a3b8;">Pays <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control-glass w-100" id="pays" name="pays" required placeholder="Ex: Tunisie, France, Côte d'Ivoire...">
+                  </div>
+                </div>
+
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="entreprise" class="form-label fw-semibold small" style="color: #94a3b8;">Entreprise / Institution <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control-glass w-100" id="entreprise" name="entreprise" required placeholder="Nom de votre entreprise">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="poste" class="form-label fw-semibold small" style="color: #94a3b8;">Fonction / Poste <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control-glass w-100" id="poste" name="poste" required placeholder="Ex: Directeur Commercial, Responsable SAV...">
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="form-group">
                     <label for="subject" class="form-label fw-semibold small" style="color: #94a3b8;">Objet de la demande <span class="text-danger">*</span></label>
                     <select class="form-select-glass w-100" id="subject" name="subject" required>
                       <option value="" selected disabled>Sélectionner une option</option>
-                      <option value="Devis">Demande de Devis d'Externalisation</option>
-                      <option value="Information">Demande d'Information Générale</option>
+                      <option value="Devis Externalisation">Demande de Devis d'Externalisation</option>
+                      <option value="Service Client 24/7">Service Client & Réception d'appels</option>
+                      <option value="Téléprospection & Vente">Téléprospection & Vente Sortante</option>
+                      <option value="Support Technique & Helpdesk">Support Technique & Helpdesk</option>
+                      <option value="Information Générale">Demande d'Information Générale</option>
                       <option value="Partenariat">Proposition de Partenariat</option>
-                      <option value="Recrutement">Recrutement</option>
                     </select>
                   </div>
                 </div>
                 
                 <div class="col-12">
                   <div class="form-group">
-                    <label for="message" class="form-label fw-semibold small" style="color: #94a3b8;">Détails du Cahier des Charges <span class="text-danger">*</span></label>
-                    <textarea class="form-control-glass w-100" id="message" name="message" style="height: 130px; resize: none;" required></textarea>
+                    <label for="message" class="form-label fw-semibold small" style="color: #94a3b8;">Détails de votre besoin / Message <span class="text-danger">*</span></label>
+                    <textarea class="form-control-glass w-100" id="message" name="message" style="height: 130px; resize: none;" required placeholder="Précisez vos besoins, volumes d'appels, plages horaires souhaitées..."></textarea>
                   </div>
                 </div>
 
