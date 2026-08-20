@@ -96,6 +96,12 @@
             <p class="text-muted">Veuillez remplir le formulaire ci-dessous pour confirmer votre inscription.</p>
           </div>
           
+          @if(isset($formation) && $formation->image)
+            <div class="mb-4 text-center">
+              <img src="{{ asset('storage/' . $formation->image) }}" class="img-fluid rounded shadow-sm" style="max-height: 400px; width: auto; object-fit: contain;" alt="Affiche de la formation">
+            </div>
+          @endif
+          
           <form action="{{ route('elite.appointment.store') }}" method="POST">
             @csrf
             <input type="hidden" name="type" value="inscription">

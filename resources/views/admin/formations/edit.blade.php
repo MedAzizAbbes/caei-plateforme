@@ -67,12 +67,12 @@
                         {{-- Domaine / Catégorie --}}
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Domaine / Catégorie</label>
-                            <input type="text" name="domain" value="{{ old('domain', $formation->domain) }}" list="domains_list" class="w-full rounded-xl border-slate-200 text-sm focus:border-amber-500 focus:ring-amber-500">
-                            <datalist id="domains_list">
+                            <select name="domain" class="w-full rounded-xl border-slate-200 text-sm focus:border-amber-500 focus:ring-amber-500">
+                                <option value="">-- Sélectionner un domaine --</option>
                                 @foreach($domains as $dom)
-                                    <option value="{{ $dom }}"></option>
+                                    <option value="{{ $dom }}" {{ old('domain', $formation->domain) == $dom ? 'selected' : '' }}>{{ $dom }}</option>
                                 @endforeach
-                            </datalist>
+                            </select>
                             @error('domain') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
                         </div>
 
@@ -108,7 +108,7 @@
 
                         {{-- Image d'illustration --}}
                         <div>
-                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Image d'illustration</label>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Affiche / Image d'illustration</label>
                             @if($formation->image)
                                 <div class="mb-2 flex items-center gap-3">
                                     <img src="{{ asset('storage/' . $formation->image) }}" class="h-12 w-16 object-cover rounded-lg border border-slate-200">
