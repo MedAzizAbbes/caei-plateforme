@@ -31,11 +31,8 @@
 
     body {
       font-family: var(--font-main);
-      background-color: #f8fafc;
-      background-image: 
-        radial-gradient(circle at 15% 15%, rgba(127, 5, 4, 0.05) 0%, transparent 40%),
-        radial-gradient(circle at 85% 85%, rgba(15, 23, 42, 0.04) 0%, transparent 40%),
-        linear-gradient(135deg, #f8fafc 0%, #f1f5f9 50%, #edf2f7 100%);
+      background-color: #f1f5f9;
+      background-image: none;
       color: #334155;
       overflow-x: hidden;
       line-height: 1.6;
@@ -89,17 +86,26 @@
       min-height: 100vh;
       min-width: 177.77vh;
       object-fit: cover;
-      transform: translate(-50%, -50%) scale(1.25);
+      /* Scale slightly to ensure full coverage with no black bars */
+      transform: translate(-50%, -50%) scale(1.1);
       pointer-events: none !important;
       opacity: 0.38;
       border: none;
       z-index: 0;
     }
-    /* Overlay gradient for maximum readability placed ON TOP of video to block any UI */
+    /* Transparent shield placed directly over the iframe to block YouTube UI icons */
+    .video-iframe-shield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none !important;
+      background: transparent;
+    }
+    /* Overlay gradient — suffisamment opaque pour garantir la lisibilité */
     .video-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(248, 250, 252, 0.65) 0%, rgba(241, 245, 249, 0.45) 50%, rgba(248, 250, 252, 0.65) 100%);
+      background: rgba(248, 250, 252, 0.82);
       z-index: 2;
       pointer-events: none !important;
     }
@@ -459,7 +465,7 @@
       transform: translateX(-3px);
     }
 
-    @media (max-width: 991.98px) {
+    @media (max-width: 1199.98px) {
       .cc-navbar {
         border-radius: 16px;
       }
@@ -491,9 +497,11 @@
 </head>
 <body>
 
-  <!-- Video Background Call Center -->
+  <!-- Video Background Call Center (self-hosted — no YouTube icons) -->
   <div class="video-bg-container">
-    <iframe src="https://www.youtube.com/embed/lx8lyKfDQdU?autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=lx8lyKfDQdU&playsinline=1&enablejsapi=1&disablekb=1&iv_load_policy=3&modestbranding=1&rel=0&vq=hd1080" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="{{ asset('assets/video/callcenter-bg.mp4') }}" type="video/mp4">
+    </video>
     <div class="video-overlay"></div>
   </div>
 
@@ -501,12 +509,12 @@
   <div class="ambient-orb orb-2"></div>
 
   <!-- Floating Glass Navbar -->
-  <div class="fixed-top cc-navbar-wrap px-3 px-lg-5">
-    <nav class="navbar navbar-expand-lg mx-auto cc-navbar">
+  <div class="fixed-top cc-navbar-wrap px-2 px-xl-5">
+    <nav class="navbar navbar-expand-xl mx-auto cc-navbar">
       <div class="container-fluid px-0">
         <!-- Logo -->
         <a class="navbar-brand d-flex align-items-center gap-3 py-0" href="{{ route('callcenter.index') }}">
-          <img src="{{ asset('images/logo-callcenter-v.png') }}" alt="CAEI Call Center Logo" height="52" style="height: 52px; width: auto; object-fit: contain;"> 
+          <img src="{{ asset('images/logo-caei-transparent.png') }}" alt="CAEI Call Center Logo" style="height: 52px; width: auto; object-fit: contain;">
         </a>
         
         <button class="navbar-toggler shadow-none cc-navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
