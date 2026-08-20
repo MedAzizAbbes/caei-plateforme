@@ -14,7 +14,7 @@
             <div class="absolute -right-6 -bottom-8 opacity-15 text-8xl pointer-events-none select-none">⚡</div>
             <div class="relative z-10 space-y-2">
                 <div class="flex items-center gap-2">
-                    <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-[#061743] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider">
+                    <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider" style="color: #061743;">
                         ⚡ SYSTEM MONITORING & HEALTH
                     </span>
                     <span class="inline-flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 text-xs font-bold px-2.5 py-0.5 rounded-full border border-emerald-500/30">

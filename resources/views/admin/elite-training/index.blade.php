@@ -13,7 +13,7 @@
         <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6, 23, 67, 0.88) 0%, rgba(0, 15, 60, 0.92) 100%), url('{{ asset('assets/img/service_training_1786525661524.jpg') }}') center/cover no-repeat;">
             <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">🏆</div>
             <div class="relative z-10">
-                <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-[#061743] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2" style="color: #061743;">
                     <span>🏆</span> CAEI Elite Training
                 </span>
                 <h1 class="text-3xl font-black uppercase tracking-tight flex items-center gap-3">
@@ -25,7 +25,7 @@
                 <a href="{{ route('admin.formations.index') }}" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs px-4 py-2.5 rounded-xl border border-white/20 transition-all">
                     <span>📚 Catalogue Formations</span>
                 </a>
-                <a href="{{ route('elite.training') }}" target="_blank" class="inline-flex items-center gap-2 bg-[#f2a90f] hover:bg-amber-400 text-[#061743] font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all">
+                <a href="{{ route('elite.training') }}" target="_blank" class="inline-flex items-center gap-2 bg-[#f2a90f] hover:bg-amber-400 font-bold text-xs px-4 py-2.5 rounded-xl shadow transition-all" style="color: #061743;">
                     <span>Voir le site public 🏆</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                 </a>
