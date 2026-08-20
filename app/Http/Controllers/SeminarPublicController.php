@@ -33,6 +33,14 @@ class SeminarPublicController extends Controller
     }
 
     /**
+     * Page publique des actualités et événements CAEI Company Group.
+     */
+    public function actualites()
+    {
+        return view('actualites.index');
+    }
+
+    /**
      * Page de détail publique d'un séminaire.
      */
     public function show(Seminar $seminar)
