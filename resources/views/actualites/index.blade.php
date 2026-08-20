@@ -292,7 +292,7 @@
               Décembre 2025
             </span>
             <span class="badge bg-secondary bg-opacity-10 text-dark fw-semibold px-3 py-2 rounded-pill">
-              <i class="bi bi-geo-alt-fill text-danger me-1"></i> Sénégal | Tunis
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i> Tunis, Tunisie
             </span>
           </div>
 
@@ -335,7 +335,7 @@
               <div class="col-4">
                 <div class="p-2 rounded-3 bg-light border">
                   <span class="d-block text-muted small">📍 Lieu</span>
-                  <strong style="color: #000f3c;">Tunis</strong>
+                  <strong style="color: #000f3c; font-size: 13px;">Tunis, Tunisie</strong>
                 </div>
               </div>
               <div class="col-4">
@@ -553,6 +553,258 @@
                 <div class="photo-caption">
                   <h6>Clôture Officielle</h6>
                   <p>Partage et certification</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </article>
+
+      <!-- Article 3 : Formation professionnelle — Techniques de vente et prospection -->
+      <article class="article-card" data-aos="fade-up">
+        
+        <!-- En-tête de l'article -->
+        <div class="mb-4 pb-3" style="border-bottom: 2px solid #f1f5f9;">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+            <span class="badge px-3 py-2 fw-bold" style="background: #000f3c; color: #ffffff !important; border-radius: 8px; font-size: 12.5px;">
+              🎓 Formation professionnelle
+            </span>
+            <span class="badge px-3 py-2 fw-bold rounded-pill" style="background: rgba(255, 122, 0, 0.15); color: #d96600;">
+              Novembre 2024
+            </span>
+            <span class="badge bg-secondary bg-opacity-10 text-dark fw-semibold px-3 py-2 rounded-pill">
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i> Tunis, Tunisie
+            </span>
+          </div>
+
+          <h2 class="fw-bold mb-2" style="color: #000f3c; font-size: 2.2rem; line-height: 1.3;">
+            Techniques de vente et prospection
+          </h2>
+          <p class="text-muted mb-0">Développement Commercial, Négociation et Gestion de la Relation Client</p>
+        </div>
+
+        <!-- Corps et photo vedette -->
+        <div class="row align-items-center g-4 g-lg-5 mb-5">
+          <div class="col-lg-6">
+            <div class="rounded-4 overflow-hidden shadow-sm" style="border: 4px solid #f8fafc;">
+              <img src="{{ asset('images/actualites/vente-prospection-2.png') }}" alt="Formation professionnelle techniques de vente CAEI Tunis" class="img-fluid w-100" style="max-height: 390px; object-fit: cover; border-radius: 12px;">
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <p class="fs-6 mb-3" style="color: #334155; line-height: 1.85; text-align: justify;">
+              Le <strong>Comité Africain d’Expertise Internationale (CAEI)</strong> a organisé à <strong>Tunis</strong> une formation professionnelle dédiée aux <strong>techniques de vente</strong> et de <strong>prospection commerciale</strong>.
+            </p>
+
+            <p class="fs-6 mb-4" style="color: #475569; line-height: 1.85; text-align: justify;">
+              Cette formation a permis aux participants de renforcer leurs compétences en matière de prospection, prise de contact, argumentation commerciale, traitement des objections et développement de la relation client.
+            </p>
+
+            <!-- Fiche mémo -->
+            <div class="row g-2 text-center">
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">📍 Lieu</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Tunis, Tunisie</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">📅 Date</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Novembre 2024</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">🎯 Thématique</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Vente & Prospection</strong>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Galerie Photos de la formation -->
+        <div class="pt-4" style="border-top: 1px solid #f1f5f9;">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+              <span class="badge px-3 py-1 mb-2" style="background: #000f3c; color: #ff7a00; font-size: 11px;">MOMENTS FORTS</span>
+              <h4 class="fw-bold mb-0" style="color: #000f3c;">Galerie Photos — Session Tunis</h4>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            
+            <!-- Photo 1 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/vente-prospection-1.jpg') }}" alt="Session interactive & Argumentation commerciale">
+                <div class="photo-caption">
+                  <h6>Atelier Interactif</h6>
+                  <p>Prise de contact & vente</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/vente-prospection-5.jpg') }}" alt="Travaux pratiques en salle de réunion" style="object-position: center;">
+                <div class="photo-caption">
+                  <h6>Session de Travail</h6>
+                  <p>Études de cas & prospection</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/vente-prospection-3.png') }}" alt="Participants en séance de formation">
+                <div class="photo-caption">
+                  <h6>Échanges & Pratique</h6>
+                  <p>Traitement des objections</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/vente-prospection-4.jpg') }}" alt="Clôture et moment convivial">
+                <div class="photo-caption">
+                  <h6>Moment Convivial</h6>
+                  <p>Équipe & participants CAEI</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </article>
+
+      <!-- Article 4 : Visite professionnelle — Archives Nationales de Tunisie -->
+      <article class="article-card" data-aos="fade-up">
+        
+        <!-- En-tête de l'article -->
+        <div class="mb-4 pb-3" style="border-bottom: 2px solid #f1f5f9;">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+            <span class="badge px-3 py-2 fw-bold" style="background: #000f3c; color: #ffffff !important; border-radius: 8px; font-size: 12.5px;">
+              🏛️ Visite professionnelle
+            </span>
+            <span class="badge px-3 py-2 fw-bold rounded-pill" style="background: rgba(255, 122, 0, 0.15); color: #d96600;">
+              Juillet 2025
+            </span>
+            <span class="badge bg-secondary bg-opacity-10 text-dark fw-semibold px-3 py-2 rounded-pill">
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i> Tunis, Tunisie
+            </span>
+          </div>
+
+          <h2 class="fw-bold mb-2" style="color: #000f3c; font-size: 2.2rem; line-height: 1.3;">
+            Archives Nationales de Tunisie
+          </h2>
+          <p class="text-muted mb-0">Conservation, Valorisation, Modernisation et Gestion Documentaire</p>
+        </div>
+
+        <!-- Corps et photo vedette -->
+        <div class="row align-items-center g-4 g-lg-5 mb-5">
+          <div class="col-lg-5 text-center">
+            <img src="{{ asset('images/actualites/archives-tunisie-1.jpg') }}" alt="Visite professionnelle Archives Nationales de Tunisie CAEI BAD" class="img-fluid shadow" style="max-height: 530px; width: auto; max-width: 100%; border-radius: 26px; border: 2px solid #e2e8f0; display: inline-block;">
+          </div>
+
+          <div class="col-lg-7">
+            <p class="fs-6 mb-3" style="color: #334155; line-height: 1.85; text-align: justify;">
+              Dans le cadre de ses activités professionnelles et de ses échanges internationaux, le <strong>Comité Africain d’Expertise Internationale (CAEI)</strong> a organisé une visite aux <strong>Archives Nationales de Tunisie</strong> en <strong>juillet 2025</strong>.
+            </p>
+
+            <p class="fs-6 mb-3" style="color: #475569; line-height: 1.85; text-align: justify;">
+              Cette visite a réuni des professionnels autour des enjeux liés à la gestion documentaire, la conservation, la valorisation et la modernisation des archives, avec la présence de représentants de la <strong>Banque Africaine de Développement (BAD)</strong> de Côte d’Ivoire.
+            </p>
+
+            <p class="fs-6 mb-4" style="color: #475569; line-height: 1.85; text-align: justify;">
+              Cette rencontre a également permis de favoriser les échanges d’expériences et le partage de bonnes pratiques dans le domaine de la gestion et de l’archivage documentaire.
+            </p>
+
+            <!-- Partenaire BAD Côte d'Ivoire -->
+            <div class="p-3 rounded-3 mb-4 d-flex align-items-center gap-3" style="background: #fff7ed; border-left: 4px solid #ff7a00;">
+              <i class="bi bi-bank fs-2 text-warning flex-shrink-0"></i>
+              <div>
+                <strong style="color: #000f3c; font-size: 14.5px;">🤝 Coopération Institutionnelle :</strong>
+                <p class="small mb-0" style="color: #334155;">
+                  Avec la présence de représentants de la <strong>Banque Africaine de Développement (BAD)</strong> – Côte d’Ivoire.
+                </p>
+              </div>
+            </div>
+
+            <!-- Fiche mémo -->
+            <div class="row g-2 text-center">
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">📍 Lieu</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Tunis, Tunisie</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">📅 Date</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Juillet 2025</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">🎯 Thématique</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Archives & Gestion</strong>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Galerie Photos de la visite -->
+        <div class="pt-4" style="border-top: 1px solid #f1f5f9;">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+              <span class="badge px-3 py-1 mb-2" style="background: #000f3c; color: #ff7a00; font-size: 11px;">MOMENTS FORTS</span>
+              <h4 class="fw-bold mb-0" style="color: #000f3c;">Galerie Photos — Archives Nationales</h4>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            
+            <!-- Photo 1 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/archives-tunisie-2.png') }}" alt="Consultation des registres d'archives et boîtes de classement" style="object-position: center;">
+                <div class="photo-caption">
+                  <h6>Conservation & Rayonnages</h6>
+                  <p>Présentation des boîtes et registres</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/archives-tunisie-3.png') }}" alt="Échanges techniques avec les experts archivistes" style="object-position: center;">
+                <div class="photo-caption">
+                  <h6>Échanges Techniques</h6>
+                  <p>Partage de méthodes et bonnes pratiques</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/archives-tunisie-4.jpg') }}" alt="Consultation documentaire Archidoc" style="object-position: center;">
+                <div class="photo-caption">
+                  <h6>Atelier de Traitement</h6>
+                  <p>Dématérialisation et archivage</p>
                 </div>
               </div>
             </div>
