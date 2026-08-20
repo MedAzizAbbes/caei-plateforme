@@ -89,23 +89,67 @@
                         @endif
                     </a>
 
-                    {{-- Lien Call Center --}}
-                    <a href="{{ route('admin.callcenter.index') }}"
-                       class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ (request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*')) ? 'bg-[#f2a90f] text-[#061743]' : 'text-slate-200 hover:bg-white/10' }}">
-                        <div class="flex items-center gap-3">
-                            <span class="text-base">📞</span>
-                            <span>Call Center</span>
+                    {{-- Section Call Center --}}
+                    @php
+                        $isCallCenterActive = request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*');
+                        $currentTab = request('tab', 'workflow');
+                        try {
+                            $ccWorkflowNew = \Illuminate\Support\Facades\Schema::hasTable('rendez_vous') ? \App\Models\RendezVous::where('statut','en_attente_affectation')->count() : 0;
+                            $ccDemandesNew = \Illuminate\Support\Facades\Schema::hasTable('call_center_requests') ? \App\Models\CallCenterRequest::where('status','Nouveau')->count() : 0;
+                            $ccTotal = $ccWorkflowNew + $ccDemandesNew;
+                        } catch (\Throwable $e) { $ccTotal = 0; $ccWorkflowNew = 0; $ccDemandesNew = 0; }
+                    @endphp
+                    <div class="rounded-xl {{ $isCallCenterActive ? 'bg-white/5 pb-1 border border-[#f2a90f]/20' : '' }}">
+                        <a href="{{ route('admin.callcenter.index') }}"
+                           class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ $isCallCenterActive ? 'bg-[#f2a90f] text-[#061743] shadow-md' : 'text-slate-200 hover:bg-white/10' }}">
+                            <div class="flex items-center gap-3">
+                                <span class="text-base">📞</span>
+                                <span class="font-bold">Call Center</span>
+                            </div>
+                            @if($ccTotal > 0)
+                                <span class="{{ $isCallCenterActive ? 'bg-[#061743] text-white' : 'bg-[#f2a90f] text-[#061743]' }} text-[10px] font-black px-2 py-0.5 rounded-full">{{ $ccTotal }}</span>
+                            @endif
+                        </a>
+                        
+                        {{-- Sous-liens Call Center --}}
+                        @if($isCallCenterActive)
+                        <div class="pl-6 pr-2 py-1.5 space-y-1">
+                            <a href="{{ route('admin.callcenter.index', ['tab' => 'workflow']) }}" 
+                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ $currentTab === 'workflow' ? 'bg-[#f2a90f]/30 text-[#f2a90f] font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
+                                <div class="flex items-center gap-2">
+                                    <span>📊</span>
+                                    <span class="truncate">Workflow RDV</span>
+                                </div>
+                                @if($ccWorkflowNew > 0)
+                                    <span class="bg-amber-500/30 text-amber-300 text-[10px] font-black px-1.5 py-0.5 rounded">
+                                        {{ $ccWorkflowNew }}
+                                    </span>
+                                @endif
+                            </a>
+
+                            <a href="{{ route('admin.callcenter.index', ['tab' => 'demandes_web']) }}"
+                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ $currentTab === 'demandes_web' ? 'bg-[#f2a90f]/30 text-[#f2a90f] font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
+                                <div class="flex items-center gap-2">
+                                    <span>📩</span>
+                                    <span class="truncate">Demandes Web</span>
+                                </div>
+                                @if($ccDemandesNew > 0)
+                                    <span class="bg-red-500/30 text-red-300 text-[10px] font-black px-1.5 py-0.5 rounded-full">
+                                        {{ $ccDemandesNew }}
+                                    </span>
+                                @endif
+                            </a>
+
+                            <a href="{{ route('admin.callcenter.index', ['tab' => 'utilisateurs']) }}"
+                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ $currentTab === 'utilisateurs' ? 'bg-[#f2a90f]/30 text-[#f2a90f] font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
+                                <div class="flex items-center gap-2">
+                                    <span>👥</span>
+                                    <span class="truncate">Comptes</span>
+                                </div>
+                            </a>
                         </div>
-                        @php 
-                            try {
-                                $ccTotal = (\Illuminate\Support\Facades\Schema::hasTable('rendez_vous') ? \App\Models\RendezVous::where('statut','en_attente_affectation')->count() : 0)
-                                    + (\Illuminate\Support\Facades\Schema::hasTable('call_center_requests') ? \App\Models\CallCenterRequest::where('status','Nouveau')->count() : 0);
-                            } catch (\Throwable $e) { $ccTotal = 0; }
-                        @endphp
-                        @if($ccTotal > 0)
-                            <span class="{{ (request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*')) ? 'bg-[#061743] text-white' : 'bg-[#f2a90f] text-[#061743]' }} text-[10px] font-black px-2 py-0.5 rounded-full">{{ $ccTotal }}</span>
                         @endif
-                    </a>
+                    </div>
 
                     {{-- Lien Elite Training --}}
                     <a href="{{ route('admin.elite-training.index') }}" 

@@ -12,7 +12,7 @@
             <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">📚</div>
             <div class="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
-                    <span class="inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-3 py-1 text-xs font-bold text-[#ffbd45] border border-amber-500/30">
+                    <span class="inline-flex items-center gap-2 rounded-full bg-amber-500/20 px-3 py-1 text-xs font-bold border border-amber-500/30" style="color: #ffbd45;">
                         <span>📜</span> CAEI ELITE TRAINING
                     </span>
                     <h1 class="mt-3 text-3xl font-black tracking-tight flex items-center gap-3">
@@ -24,7 +24,7 @@
                     <a href="{{ route('admin.elite-training.index') }}" class="inline-flex items-center gap-2 rounded-xl bg-white/10 hover:bg-white/20 px-4 py-3 text-sm font-bold text-white border border-white/20 transition-all">
                         <span>🏆 RDV & Inscriptions</span>
                     </a>
-                    <a href="{{ route('admin.formations.create') }}" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#ce9233] to-[#f0b75a] px-5 py-3 text-sm font-bold text-[#061743] shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all">
+                    <a href="{{ route('admin.formations.create') }}" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-[#ce9233] to-[#f0b75a] px-5 py-3 text-sm font-bold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all" style="color: #061743;">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                         <span>Nouvelle Formation</span>
                     </a>

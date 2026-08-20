@@ -36,7 +36,7 @@
     /* NAVBAR */
     .et-navbar {
       position: fixed;
-      top: 0; width: 100%; z-index: 1000;
+      top: 0; width: 100%; z-index: 1050;
       padding: 16px 0;
       background: rgba(0, 31, 63, 0.97);
       backdrop-filter: blur(20px);

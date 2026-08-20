@@ -9,13 +9,13 @@
         <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6,23,67,0.92) 0%, rgba(12,58,110,0.95) 100%);">
             <div class="absolute -right-6 -bottom-8 opacity-15 text-8xl pointer-events-none">🎓</div>
             <div class="relative z-10">
-                <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-[#061743] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2" style="color: #061743;">
                     🎓 Gestion & Statistiques des Séminaires
                 </span>
                 <h1 class="text-3xl font-black uppercase tracking-tight">Catalogue et Statistiques des Séminaires</h1>
                 <p class="mt-2 text-slate-200 text-sm">Gérez les séminaires, analysez le taux de présence, les inscriptions et le suivi des institutions.</p>
             </div>
-            <a href="{{ route('admin.seminars.create') }}" class="shrink-0 inline-flex items-center gap-2 bg-[#f2a90f] hover:bg-[#d9950b] text-[#061743] font-black text-sm px-5 py-3 rounded-xl shadow transition-all">
+            <a href="{{ route('admin.seminars.create') }}" class="shrink-0 inline-flex items-center gap-2 bg-[#f2a90f] hover:bg-[#d9950b] font-black text-sm px-5 py-3 rounded-xl shadow transition-all" style="color: #061743;">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                 Ajouter un séminaire
             </a>

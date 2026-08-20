@@ -72,7 +72,7 @@
       position: fixed;
       top: 0;
       width: 100%;
-      z-index: 1000;
+      z-index: 1050;
       padding: 18px 0;
       transition: var(--transition);
       background: transparent;
@@ -170,7 +170,7 @@
       opacity: 0;
       visibility: hidden;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 1000;
+      z-index: 1050;
     }
 
     .et-navbar .nav-dropdown:hover .nav-dropdown-menu {
@@ -2213,13 +2213,13 @@
       <div class="row g-4">
         @php
           $certifications = [
-            ['slug' => 'audit-comptabilite-finance', 'domain' => 'Audit, Comptabilité & Finance', 'img' => 'img3.jpg', 'title' => 'Audit, Comptabilité & Finance', 'desc' => 'Maîtrisez les outils comptables, le reporting IFRS et les analyses financières essentielles.'],
-            ['slug' => 'controle-de-gestion', 'domain' => 'Contrôle de Gestion', 'img' => 'img3.jpg', 'title' => 'Contrôle de Gestion', 'desc' => 'Pilotez la performance financière et la trésorerie de votre entreprise avec efficacité.'],
-            ['slug' => 'informatique-ntic', 'domain' => 'Informatique & NTIC', 'img' => 'company.jpg', 'title' => 'Informatique & NTIC', 'desc' => 'Cybersécurité, audit de sécurité, réseaux et systèmes d\'information.'],
-            ['slug' => 'soft-skills', 'domain' => 'Soft Skills & Développement Personnel', 'img' => 'professionel.jpg', 'title' => 'Développement Personnel & Soft Skills', 'desc' => 'Gestion du temps, intelligence émotionnelle, négociation et leadership.'],
-            ['slug' => 'projets-developpement', 'domain' => 'Projets & Programmes de Développement', 'img' => 'cta-bg.jpg', 'title' => 'Projets & Programmes de Développement', 'desc' => 'Planification, exécution, suivi-évaluation et audit des projets en Afrique.'],
-            ['slug' => 'projet-educatif', 'domain' => 'Projet Éducatif en Afrique', 'img' => 'services.jpg', 'title' => 'Projet Éducatif en Afrique', 'desc' => 'Gouvernance, pilotage et amélioration de la qualité du secteur éducatif.'],
-            ['slug' => 'ecommerce-fintech', 'domain' => 'E-Commerce, Fintech & Développement Durable', 'img' => 'services.jpg', 'title' => 'E-Commerce & Fintech', 'desc' => 'Intelligence Artificielle, transformation numérique et solutions financières.'],
+            ['slug' => 'audit-comptabilite-finance', 'domain' => 'Audit, Comptabilité & Finance', 'img' => 'formation_audit.jpg', 'title' => 'Audit, Comptabilité & Finance', 'desc' => 'Maîtrisez les outils comptables, le reporting IFRS et les analyses financières essentielles.'],
+            ['slug' => 'controle-de-gestion', 'domain' => 'Contrôle de Gestion', 'img' => 'formation_finance.jpg', 'title' => 'Contrôle de Gestion', 'desc' => 'Pilotez la performance financière et la trésorerie de votre entreprise avec efficacité.'],
+            ['slug' => 'informatique-ntic', 'domain' => 'Informatique & NTIC', 'img' => 'formation_tech.jpg', 'title' => 'Informatique & NTIC', 'desc' => 'Cybersécurité, audit de sécurité, réseaux et systèmes d\'information.'],
+            ['slug' => 'soft-skills', 'domain' => 'Soft Skills & Développement Personnel', 'img' => 'formation_leadership.jpg', 'title' => 'Développement Personnel & Soft Skills', 'desc' => 'Gestion du temps, intelligence émotionnelle, négociation et leadership.'],
+            ['slug' => 'projets-developpement', 'domain' => 'Projets & Programmes de Développement', 'img' => 'service_consulting_1786525632369.jpg', 'title' => 'Projets & Programmes de Développement', 'desc' => 'Planification, exécution, suivi-évaluation et audit des projets en Afrique.'],
+            ['slug' => 'projet-educatif', 'domain' => 'Projet Éducatif en Afrique', 'img' => 'cta-bg.jpg', 'title' => 'Projet Éducatif en Afrique', 'desc' => 'Gouvernance, pilotage et amélioration de la qualité du secteur éducatif.'],
+            ['slug' => 'ecommerce-fintech', 'domain' => 'E-Commerce, Fintech & Développement Durable', 'img' => 'service_webdesign_1786525611976.jpg', 'title' => 'E-Commerce & Fintech', 'desc' => 'Intelligence Artificielle, transformation numérique et solutions financières.'],
             ['slug' => 'marches-publics', 'domain' => 'Marchés Publics', 'img' => 'im1.jpg', 'title' => 'Marchés Publics', 'desc' => 'Passation, exécution et suivi des contrats de marchés publics.'],
           ];
         @endphp

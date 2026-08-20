@@ -38,6 +38,7 @@ Route::prefix('call-center')->name('callcenter.')->group(function () {
     
     Route::get('/support', [CallCenterController::class, 'support'])->name('support');
     Route::get('/blog', [CallCenterController::class, 'blog'])->name('blog');
+    Route::get('/blog/details/{slug}', [CallCenterController::class, 'blogDetails'])->name('blog.details');
     Route::get('/contact', [CallCenterController::class, 'contact'])->name('contact');
     Route::post('/contact', [CallCenterController::class, 'storeContact'])->middleware('throttle:5,1')->name('contact.store');
 

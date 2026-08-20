@@ -17,7 +17,7 @@
         <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6,23,67,0.92) 0%, rgba(12,58,110,0.95) 100%);">
             <div class="absolute -right-6 -bottom-8 opacity-15 text-8xl pointer-events-none">📁</div>
             <div class="relative z-10">
-                <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-[#061743] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                <span class="inline-flex items-center gap-1.5 bg-[#f2a90f] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2" style="color: #061743;">
                     📁 Contenus & Supports de cours
                 </span>
                 <h1 class="text-3xl font-black uppercase tracking-tight">{{ $seminar->theme }}</h1>

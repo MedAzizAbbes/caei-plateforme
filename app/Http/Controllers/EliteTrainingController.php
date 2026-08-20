@@ -17,7 +17,7 @@ class EliteTrainingController extends Controller
             'code_prefix' => 'ACF',
             'title' => 'Audit, Comptabilité & Finance (normes IFRS & Gestion financière)',
             'subtitle' => 'Maîtrisez les principes comptables IFRS, l\'analyse financière, le reporting et l\'audit d\'entreprise.',
-            'img' => 'assets/img/img3.jpg',
+            'img' => 'assets/img/formation_audit.jpg',
             'icon' => 'bi-calculator-fill',
         ],
         'controle-de-gestion' => [
@@ -25,7 +25,7 @@ class EliteTrainingController extends Controller
             'code_prefix' => 'GC',
             'title' => 'Contrôle de Gestion & Trésorerie',
             'subtitle' => 'Pilotez la performance financière, le cadrage budgétaire et la gestion de trésorerie.',
-            'img' => 'assets/img/img3.jpg',
+            'img' => 'assets/img/formation_finance.jpg',
             'icon' => 'bi-graph-up-arrow',
         ],
         'informatique-ntic' => [
@@ -33,7 +33,7 @@ class EliteTrainingController extends Controller
             'code_prefix' => 'INT',
             'title' => 'Informatique, Cybersécurité & NTIC',
             'subtitle' => 'Audit de sécurité, investigation numérique, performance des réseaux et transformation digitale.',
-            'img' => 'assets/img/company.jpg',
+            'img' => 'assets/img/formation_tech.jpg',
             'icon' => 'bi-shield-lock-fill',
         ],
         'soft-skills' => [
@@ -41,7 +41,7 @@ class EliteTrainingController extends Controller
             'code_prefix' => 'DPS',
             'title' => 'Développement Personnel & Soft Skills',
             'subtitle' => 'Gestion du temps, intelligence émotionnelle, communication assertive et leadership.',
-            'img' => 'assets/img/professionel.jpg',
+            'img' => 'assets/img/formation_leadership.jpg',
             'icon' => 'bi-person-badge-fill',
         ],
         'projets-developpement' => [
@@ -49,7 +49,7 @@ class EliteTrainingController extends Controller
             'code_prefix' => 'PPD',
             'title' => 'Projets & Programmes de Développement en Afrique',
             'subtitle' => 'Planification, exécution, suivi-évaluation, audit et gestion financière des projets.',
-            'img' => 'assets/img/cta-bg.jpg',
+            'img' => 'assets/img/service_consulting_1786525632369.jpg',
             'icon' => 'bi-diagram-3-fill',
         ],
         'projet-educatif' => [
@@ -57,7 +57,7 @@ class EliteTrainingController extends Controller
             'code_prefix' => 'PEA',
             'title' => 'Gouvernance & Pilotage du Secteur Éducatif en Afrique',
             'subtitle' => 'Stratégies nationales d\'éducation, décentralisation et amélioration de la qualité de l\'enseignement.',
-            'img' => 'assets/img/services.jpg',
+            'img' => 'assets/img/cta-bg.jpg',
             'icon' => 'bi-journal-check',
         ],
         'ecommerce-fintech' => [
@@ -65,7 +65,7 @@ class EliteTrainingController extends Controller
             'code_prefix' => 'EF',
             'title' => 'E-Commerce, Fintech & Intelligence Artificielle',
             'subtitle' => 'IA appliquée, transformation numérique des services financiers et transition écologique.',
-            'img' => 'assets/img/services.jpg',
+            'img' => 'assets/img/service_webdesign_1786525611976.jpg',
             'icon' => 'bi-cpu-fill',
         ],
         'marches-publics' => [
@@ -81,7 +81,7 @@ class EliteTrainingController extends Controller
             'code_prefix' => 'OHADA',
             'title' => 'Droit des Affaires & Espace OHADA',
             'subtitle' => 'Sécurité juridique des opérations commerciales, droit des contrats et sociétés.',
-            'img' => 'assets/img/im1.jpg',
+            'img' => 'assets/img/professionel.jpg',
             'icon' => 'bi-bank2',
         ],
         'marketing-communication' => [
@@ -89,7 +89,7 @@ class EliteTrainingController extends Controller
             'code_prefix' => 'MCD',
             'title' => 'Marketing Stratégique, Communication & Distribution',
             'subtitle' => 'Stratégies modernes de marketing digital, communication institutionnelle et vente.',
-            'img' => 'assets/img/img2.jpg',
+            'img' => 'assets/img/service_marketing_1786525623115.jpg',
             'icon' => 'bi-megaphone-fill',
         ],
     ];
