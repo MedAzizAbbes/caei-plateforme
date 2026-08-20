@@ -253,71 +253,15 @@
       perspective: 1000px;
     }
 
-    /* ANIMATION FORTE DE CROISEMENT : BIENVENUE chez (gauche -> milieu) & CAEI COMPANY GROUP (droite -> milieu) */
-    @keyframes strongCrossLeft {
-      0% {
-        opacity: 0;
-        transform: translate3d(-100vw, 0, 0) scale(0.6) rotate(-8deg);
-        filter: blur(16px);
-      }
-      65% {
-        opacity: 1;
-        transform: translate3d(50px, 0, 0) scale(1.12) rotate(2deg);
-        filter: blur(0px);
-      }
-      82% {
-        transform: translate3d(-15px, 0, 0) scale(0.98) rotate(-1deg);
-      }
-      100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-        filter: blur(0px);
-      }
-    }
-
-    @keyframes strongCrossRight {
-      0% {
-        opacity: 0;
-        transform: translate3d(100vw, 0, 0) scale(0.6) rotate(8deg);
-        filter: blur(16px);
-      }
-      65% {
-        opacity: 1;
-        transform: translate3d(-50px, 0, 0) scale(1.12) rotate(-2deg);
-        filter: blur(0px);
-      }
-      82% {
-        transform: translate3d(15px, 0, 0) scale(0.98) rotate(1deg);
-      }
-      100% {
-        opacity: 1;
-        transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-        filter: blur(0px);
-      }
-    }
-
-    @keyframes orangeGlowPulse {
-      0%, 100% {
-        filter: drop-shadow(0 6px 20px rgba(255, 122, 0, 0.75)) drop-shadow(0 2px 8px rgba(0, 0, 0, 0.9));
-      }
-      50% {
-        filter: drop-shadow(0 8px 40px rgba(255, 122, 0, 1)) drop-shadow(0 0 60px rgba(255, 170, 0, 0.9)) drop-shadow(0 2px 10px rgba(0, 0, 0, 0.95));
-      }
-    }
-
     .hero-text-left {
       display: inline-block !important;
       color: #ffffff !important;
       -webkit-text-fill-color: #ffffff !important;
       text-shadow: 0 6px 30px rgba(0, 0, 0, 0.95), 0 0 25px rgba(255, 255, 255, 0.4) !important;
-      animation: strongCrossLeft 2.4s cubic-bezier(0.16, 1, 0.3, 1) both !important;
-      will-change: transform, opacity;
     }
 
     .hero-text-right {
       display: inline-block !important;
-      animation: strongCrossRight 2.4s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both, orangeGlowPulse 3s ease-in-out 2.5s infinite !important;
-      will-change: transform, opacity;
     }
 
     .hero h2 span.gradient-gold {
