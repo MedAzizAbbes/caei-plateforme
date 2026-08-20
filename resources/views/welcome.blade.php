@@ -1305,23 +1305,23 @@
 <body class="index-page">
 
   <!-- Top Contact Bar -->
-  <div id="topbar" class="topbar d-flex align-items-center fixed-top" style="background-color: #000f3c; padding: 5px 0; z-index: 1000; top: 0; width: 100%; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); backdrop-filter: blur(10px);">
+  <div id="topbar" class="topbar d-flex align-items-center fixed-top" style="background-color: #ffffff; padding: 5px 0; z-index: 1000; top: 0; width: 100%; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border-bottom: 1px solid #e5e7eb;">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between" style="gap: 0.5rem; flex-wrap: wrap;">
       <div class="d-flex align-items-center gap-2 gap-md-3" style="flex-wrap: wrap;">
-        <a href="tel:+21655335286" class="d-flex align-items-center gap-2 text-white text-decoration-none" style="font-size: 14px; white-space: nowrap;">
+        <a href="tel:+21655335286" class="d-flex align-items-center gap-2 text-decoration-none" style="font-size: 14px; white-space: nowrap; color: #000f3c;">
           <i class="bi bi-telephone-fill" style="color: #ff7a00;"></i>
           <span class="d-none d-sm-inline">+216 55 335 286</span>
         </a>
-        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@caei-afri.com" target="_blank" class="d-flex align-items-center gap-2 text-white text-decoration-none" style="font-size: 14px; white-space: nowrap;">
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@caei-afri.com" target="_blank" class="d-flex align-items-center gap-2 text-decoration-none" style="font-size: 14px; white-space: nowrap; color: #000f3c;">
           <i class="bi bi-envelope-fill" style="color: #ff7a00;"></i>
           <span class="d-none d-md-inline">contact@caei-afri.com</span>
         </a>
-        <a href="https://www.google.com/maps/search/?api=1&query=SIS+8+Rue+Claude+Bernard+1002+Belvedere-Tunis+Tunisie" target="_blank" class="d-flex align-items-center gap-2 text-white text-decoration-none d-none d-lg-flex" style="font-size: 14px; white-space: nowrap;">
+        <a href="https://www.google.com/maps/search/?api=1&query=SIS+8+Rue+Claude+Bernard+1002+Belvedere-Tunis+Tunisie" target="_blank" class="d-flex align-items-center gap-2 text-decoration-none d-none d-lg-flex" style="font-size: 14px; white-space: nowrap; color: #000f3c;">
           <i class="bi bi-geo-alt-fill" style="color: #ff7a00;"></i>
           <span>SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis , Tunisie</span>
         </a>
       </div>
-      <a href="{{ asset('assets/img/catalogue CAEI GROUP.pdf') }}" target="_blank" style="font-size: 14px; color: #ff7a00; text-decoration: none; white-space: nowrap; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; padding: 0 8px;" onmouseover="this.style.color='#ffa500'; this.style.transform='translateX(2px)';" onmouseout="this.style.color='#ff7a00'; this.style.transform='translateX(0)';">
+      <a href="{{ asset('assets/img/catalogue CAEI GROUP.pdf') }}" target="_blank" style="font-size: 14px; color: #ff7a00; text-decoration: none; white-space: nowrap; transition: all 0.3s ease; display: flex; align-items: center; gap: 6px; padding: 0 8px;" onmouseover="this.style.color='#cc5e00'; this.style.transform='translateX(2px)';" onmouseout="this.style.color='#ff7a00'; this.style.transform='translateX(0)';">
         <i class="bi bi-file-pdf" style="font-size: 17px;"></i>
         <span style="font-weight: 400; letter-spacing: 0.5px;" class="d-none d-sm-inline">Catalogue CAEI</span>
       </a>
