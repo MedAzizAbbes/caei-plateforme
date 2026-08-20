@@ -82,6 +82,7 @@ Route::prefix('call-center')->name('callcenter.')->group(function () {
 */
 Route::get('/', [SeminarPublicController::class, 'index'])->name('home');
 Route::get('/actualites', [SeminarPublicController::class, 'actualites'])->name('actualites.index');
+Route::get('/actualites/{slug}', [SeminarPublicController::class, 'actualiteShow'])->name('actualites.show');
 Route::get('/ancien-accueil', function () {
     $seminars = \App\Models\Seminar::where('status', 'published')
         ->withCount('registrations')
