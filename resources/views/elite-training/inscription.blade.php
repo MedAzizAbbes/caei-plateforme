@@ -89,105 +89,94 @@
 
   <main class="container inscription-container">
     <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="form-wrapper" data-aos="fade-up">
-          <div class="text-center mb-4">
-            <h2 class="font-display fw-bold text-navy">Demande d'Inscription</h2>
-            <p class="text-muted">Veuillez remplir le formulaire ci-dessous pour confirmer votre inscription.</p>
-          </div>
-          
-          @if(isset($formation) && $formation->image)
-            <div class="mb-4 text-center">
-              <img src="{{ asset('storage/' . $formation->image) }}" class="img-fluid rounded shadow-sm" style="max-height: 400px; width: auto; object-fit: contain;" alt="Affiche de la formation">
-            </div>
-          @endif
-          
-          <form action="{{ route('elite.appointment.store') }}" method="POST">
-            @csrf
-            <input type="hidden" name="type" value="inscription">
+      <div class="col-lg-10">
+        <div class="form-wrapper p-0 overflow-hidden shadow-lg" data-aos="fade-up" style="border-radius: 20px;">
+          <div class="row g-0">
+            @if(isset($formation) && $formation->image)
+              <!-- Colonne Image (Gauche) -->
+              <div class="col-md-5 d-flex align-items-center justify-content-center p-4 bg-light" style="border-right: 1px solid #eef0f5;">
+                <img src="{{ asset('storage/' . $formation->image) }}" class="w-100 rounded shadow-sm" style="object-fit: contain; max-height: 800px;" alt="Affiche de la formation">
+              </div>
+              
+              <!-- Colonne Formulaire (Droite) -->
+              <div class="col-md-7 p-4 p-md-5 bg-white">
+            @else
+              <!-- Colonne Formulaire Seule -->
+              <div class="col-12 p-4 p-md-5 bg-white">
+            @endif
             
-            <!-- Default values are pre-filled if passed via query string -->
-            <input type="hidden" name="formation_title" value="{{ request('formation_title') }}">
-
-            <div class="row g-3">
-              <!-- 1. Nom & Prénom -->
-              <div class="col-md-6">
-                <label class="form-label font-semibold text-dark small mb-1">Nom & Prénom *</label>
-                <input type="text" name="nom" class="form-control" required placeholder="Votre nom & prénom">
-              </div>
-
-              <!-- 2. Téléphone -->
-              <div class="col-md-6">
-                <label class="form-label font-semibold text-dark small mb-1">Téléphone *</label>
-                <input type="tel" name="telephone" class="form-control" required placeholder="+216 XX XXX XXX">
-              </div>
-
-              <!-- 3. Adresse e-mail -->
-              <div class="col-md-6">
-                <label class="form-label font-semibold text-dark small mb-1">Adresse e-mail *</label>
-                <input type="email" name="email" class="form-control" required placeholder="votre@email.com">
-              </div>
-
-              <!-- 4. Pays -->
-              <div class="col-md-6">
-                <label class="form-label font-semibold text-dark small mb-1">Pays *</label>
-                <input type="text" name="pays" class="form-control" required placeholder="Ex: Tunisie, Côte d'Ivoire...">
-              </div>
-
-              <!-- 5. Fonction / Poste -->
-              <div class="col-md-6">
-                <label class="form-label font-semibold text-dark small mb-1">Fonction / Poste *</label>
-                <input type="text" name="poste" class="form-control" required placeholder="Ex: Directeur Financier...">
-              </div>
-
-              <!-- 6. Entreprise / Institution -->
-              <div class="col-md-6">
-                <label class="form-label font-semibold text-dark small mb-1">Entreprise / Institution *</label>
-                <input type="text" name="entreprise" class="form-control" required placeholder="Nom de votre entreprise">
-              </div>
-
-              <!-- 7. Formation ou séminaire choisi -->
-              <div class="col-md-12">
-                <label class="form-label font-semibold text-dark small mb-1">Formation ou séminaire choisi *</label>
-                <input type="text" name="objet" class="form-control bg-light fw-bold text-navy" placeholder="Intitulé de la formation" required value="{{ request('formation_title') }}" {{ request('formation_title') ? 'readonly' : '' }}>
-              </div>
-
-              <!-- 8. Date / Session souhaitée -->
-              <div class="col-md-6">
-                <label class="form-label font-semibold text-dark small mb-1">Date / Session souhaitée</label>
-                <input type="date" name="date_session" class="form-control" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
-              </div>
-
-              <!-- 9. Mode de participation -->
-              <div class="col-md-6">
-                <label class="form-label font-semibold text-dark small mb-1">Mode de participation *</label>
-                <select name="mode_participation" class="form-select" required>
-                  <option value="" disabled selected>-- Sélectionner un mode --</option>
-                  <option value="présentiel">Présentiel</option>
-                  <option value="en_ligne">En ligne</option>
-                </select>
-              </div>
-
-              <!-- 10. Comment avez-vous connu cette formation ? -->
-              <div class="col-md-12">
-                <label class="form-label font-semibold text-dark small mb-1">Comment avez-vous connu cette formation ?</label>
-                <select name="comment_connu" class="form-select">
-                  <option value="" disabled selected>-- Sélectionner une option --</option>
-                  <option value="Réseaux sociaux">Réseaux sociaux (LinkedIn, Facebook...)</option>
-                  <option value="Recommandation">Recommandation d'un collègue / ami</option>
-                  <option value="Site web">Site web CAEI</option>
-                  <option value="Emailing / Newsletter">Emailing / Newsletter</option>
-                  <option value="Autre">Autre</option>
-                </select>
-              </div>
-
-              <div class="col-12 mt-4">
-                <button type="submit" class="btn text-white w-100 py-3 rounded-pill fw-bold shadow" style="background: linear-gradient(135deg, var(--gold), var(--gold-dark));">
-                  Envoyer ma demande d'inscription
-                </button>
-              </div>
+            <div class="text-center mb-5">
+              <h2 class="font-display fw-bold text-navy">Demande d'Inscription</h2>
+              <p class="text-muted">Veuillez remplir le formulaire ci-dessous pour confirmer votre inscription.</p>
             </div>
-          </form>
+            
+            <form action="{{ route('elite.appointment.store') }}" method="POST">
+              @csrf
+              <input type="hidden" name="type" value="inscription">
+              <input type="hidden" name="formation_title" value="{{ request('formation_title') }}">
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label class="form-label font-semibold text-dark small mb-1">Nom & Prénom *</label>
+                  <input type="text" name="nom" class="form-control" required placeholder="Votre nom & prénom">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label font-semibold text-dark small mb-1">Téléphone *</label>
+                  <input type="tel" name="telephone" class="form-control" required placeholder="+216 XX XXX XXX">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label font-semibold text-dark small mb-1">Adresse e-mail *</label>
+                  <input type="email" name="email" class="form-control" required placeholder="votre@email.com">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label font-semibold text-dark small mb-1">Pays *</label>
+                  <input type="text" name="pays" class="form-control" required placeholder="Ex: Tunisie, Côte d'Ivoire...">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label font-semibold text-dark small mb-1">Fonction / Poste *</label>
+                  <input type="text" name="poste" class="form-control" required placeholder="Ex: Directeur Financier...">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label font-semibold text-dark small mb-1">Entreprise / Institution *</label>
+                  <input type="text" name="entreprise" class="form-control" required placeholder="Nom de votre entreprise">
+                </div>
+                <div class="col-md-12">
+                  <label class="form-label font-semibold text-dark small mb-1">Formation ou séminaire choisi *</label>
+                  <input type="text" name="objet" class="form-control bg-light fw-bold text-navy" placeholder="Intitulé de la formation" required value="{{ request('formation_title') }}" {{ request('formation_title') ? 'readonly' : '' }}>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label font-semibold text-dark small mb-1">Date / Session souhaitée</label>
+                  <input type="date" name="date_session" class="form-control" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label font-semibold text-dark small mb-1">Mode de participation *</label>
+                  <select name="mode_participation" class="form-select" required>
+                    <option value="" disabled selected>-- Sélectionner un mode --</option>
+                    <option value="présentiel">Présentiel</option>
+                    <option value="en_ligne">En ligne</option>
+                  </select>
+                </div>
+                <div class="col-md-12">
+                  <label class="form-label font-semibold text-dark small mb-1">Comment avez-vous connu cette formation ?</label>
+                  <select name="comment_connu" class="form-select">
+                    <option value="" disabled selected>-- Sélectionner une option --</option>
+                    <option value="Réseaux sociaux">Réseaux sociaux (LinkedIn, Facebook...)</option>
+                    <option value="Recommandation">Recommandation d'un collègue / ami</option>
+                    <option value="Site web">Site web CAEI</option>
+                    <option value="Emailing / Newsletter">Emailing / Newsletter</option>
+                    <option value="Autre">Autre</option>
+                  </select>
+                </div>
+                <div class="col-12 mt-4">
+                  <button type="submit" class="btn text-white w-100 py-3 rounded-pill fw-bold shadow" style="background: linear-gradient(135deg, var(--gold), var(--gold-dark));">
+                    Envoyer ma demande d'inscription
+                  </button>
+                </div>
+              </div>
+            </form>
+            
+            </div> <!-- End Form Column -->
+          </div> <!-- End row g-0 -->
         </div>
       </div>
     </div>
