@@ -1355,6 +1355,168 @@
 
       </article>
 
+      <!-- Article 8 : Séminaire international – Pilotage de projet GED & Archivage numérique -->
+      <article class="article-card" data-aos="fade-up">
+        
+        <!-- En-tête de l'article -->
+        <div class="mb-4 pb-3" style="border-bottom: 2px solid #f1f5f9;">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+            <span class="badge px-3 py-2 fw-bold" style="background: #000f3c; color: #ffffff !important; border-radius: 8px; font-size: 12.5px;">
+              📁 Séminaire international
+            </span>
+            <span class="badge px-3 py-2 fw-bold rounded-pill" style="background: rgba(255, 122, 0, 0.15); color: #d96600;">
+              Session Multinationale
+            </span>
+            <span class="badge bg-secondary bg-opacity-10 text-dark fw-semibold px-3 py-2 rounded-pill">
+              🌍 🇹🇳 🇨🇮 🇧🇯 🇳🇪 🇸🇳 🇬🇳
+            </span>
+          </div>
+
+          <h2 class="fw-bold mb-2" style="color: #000f3c; font-size: 2.2rem; line-height: 1.3;">
+            Pilotage de projet GED & Archivage numérique
+          </h2>
+          <p class="text-muted mb-0">Gestion Électronique des Documents, Dématérialisation et Transformation Digitale</p>
+        </div>
+
+        <!-- Corps et photo vedette -->
+        <div class="row align-items-center g-4 g-lg-5 mb-5">
+          <div class="col-lg-6">
+            <div class="rounded-4 overflow-hidden shadow" style="border: 3px solid #ffffff; border-radius: 22px;">
+              <img src="{{ asset('images/actualites/ged-multinational-1.jpg') }}" alt="Séminaire international pilotage de projet GED CAEI" class="img-fluid w-100" style="max-height: 420px; object-fit: cover; border-radius: 20px;">
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <p class="fs-6 mb-3" style="color: #334155; line-height: 1.85; text-align: justify;">
+              Le <strong>Comité Africain d’Expertise Internationale (CAEI)</strong> a eu le plaisir d’accueillir des participants venus de divers horizons professionnels à l’occasion de son séminaire dédié au <strong>pilotage de projet en Gestion Électronique des Documents (GED)</strong>.
+            </p>
+
+            <p class="fs-6 mb-3" style="color: #475569; line-height: 1.85; text-align: justify;">
+              🌍 La diversité des profils et pays présents (<strong>Tunisie · Côte d’Ivoire · Bénin · Niger · Sénégal · Guinée</strong>) a enrichi les discussions et renforcé la dynamique collaborative entre les participants.
+            </p>
+
+            <p class="fs-6 mb-4" style="color: #475569; line-height: 1.85; text-align: justify;">
+              🙏 Nous remercions l’ensemble des participants pour leur engagement et la qualité des échanges. Ensemble, continuons à construire des organisations plus performantes grâce à la digitalisation et à une gestion intelligente de l’information. 🚀
+            </p>
+
+            <!-- Fiche mémo -->
+            <div class="row g-2 text-center">
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">🌍 Délégations</span>
+                  <strong style="color: #000f3c; font-size: 13px;">6 Pays Africains</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">🎯 Thématique</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Pilotage GED</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">🚀 Enjeux</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Digitalisation</strong>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Galerie Photos de la session -->
+        <div class="pt-4" style="border-top: 1px solid #f1f5f9;">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+              <span class="badge px-3 py-1 mb-2" style="background: #000f3c; color: #ff7a00; font-size: 11px;">MOMENTS FORTS</span>
+              <h4 class="fw-bold mb-0" style="color: #000f3c;">Galerie Photos — Session Multinationale GED</h4>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            
+            <!-- Photo 1 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/ged-multinational-5.png') }}" alt="Intervention du formateur expert CAEI" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Intervention Expert</h6>
+                  <p>Méthodologie & Déploiement GED</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/ged-multinational-2.jpg') }}" alt="Délégations attentives aux travaux" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Délégations & Écoute Active</h6>
+                  <p>Sessions d'apprentissage intensives</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/ged-multinational-3.png') }}" alt="Cadres et professionnels CAEI Company Group" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Cadres & Professionnels</h6>
+                  <p>Partage d'expériences métier</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/ged-multinational-4.jpg') }}" alt="Travaux pratiques sur laptop" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Travaux Pratiques</h6>
+                  <p>Études de cas & digitalisation</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 5 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/ged-multinational-7.jpg') }}" alt="Table de travail participants et analyse documentaire" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Session de Travail</h6>
+                  <p>Analyse documentaire & méthodologie</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 6 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/ged-multinational-8.jpg') }}" alt="Participants attentifs aux présentations" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Concertation & Écoute</h6>
+                  <p>Échanges professionnels approfondis</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 7 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/ged-multinational-6.jpg') }}" alt="Coordination et encadrement CAEI" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Coordination CAEI</h6>
+                  <p>Encadrement & suivi des sessions</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </article>
+
       <!-- Bannière Contact / Collaboration -->
       <div class="p-5 text-center rounded-4 shadow-sm" style="background: linear-gradient(135deg, #000f3c 0%, #002266 100%);" data-aos="zoom-in">
         <h3 class="fw-bold mb-3" style="color: #ffffff !important; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-size: 1.9rem;">Vous souhaitez organiser un séminaire ou un audit pour votre institution ?</h3>
