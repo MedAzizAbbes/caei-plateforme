@@ -89,17 +89,26 @@
       min-height: 100vh;
       min-width: 177.77vh;
       object-fit: cover;
-      transform: translate(-50%, -50%) scale(1.25);
+      /* Scale slightly to ensure full coverage with no black bars */
+      transform: translate(-50%, -50%) scale(1.1);
       pointer-events: none !important;
       opacity: 0.38;
       border: none;
       z-index: 0;
     }
+    /* Transparent shield placed directly over the iframe to block YouTube UI icons */
+    .video-iframe-shield {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none !important;
+      background: transparent;
+    }
     /* Overlay gradient for maximum readability placed ON TOP of video to block any UI */
     .video-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, rgba(248, 250, 252, 0.65) 0%, rgba(241, 245, 249, 0.45) 50%, rgba(248, 250, 252, 0.65) 100%);
+      background: linear-gradient(135deg, rgba(248, 250, 252, 0.80) 0%, rgba(241, 245, 249, 0.65) 50%, rgba(248, 250, 252, 0.80) 100%);
       z-index: 2;
       pointer-events: none !important;
     }
@@ -491,9 +500,11 @@
 </head>
 <body>
 
-  <!-- Video Background Call Center -->
+  <!-- Video Background Call Center (self-hosted — no YouTube icons) -->
   <div class="video-bg-container">
-    <iframe src="https://www.youtube.com/embed/lx8lyKfDQdU?autoplay=1&mute=1&controls=0&showinfo=0&autohide=1&loop=1&playlist=lx8lyKfDQdU&playsinline=1&enablejsapi=1&disablekb=1&iv_load_policy=3&modestbranding=1&rel=0&vq=hd1080" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="{{ asset('assets/video/callcenter-bg.mp4') }}" type="video/mp4">
+    </video>
     <div class="video-overlay"></div>
   </div>
 
