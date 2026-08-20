@@ -282,9 +282,39 @@
       color: #0f172a;
       letter-spacing: 0;
     }
+    /* ── Global text color overrides for light video background ── */
+
+    /* text-white → dark (sauf boutons/badges) */
     .text-white:not(.btn-glass-red):not(.cc-login-btn):not(.dropdown-item):not(.badge):not(.btn) {
       color: #0f172a !important;
     }
+
+    /* Toutes les couleurs pâles inline → sombre */
+    [style*="color: #cbd5e1"],
+    [style*="color:#cbd5e1"] {
+      color: #334155 !important;
+    }
+    [style*="color: #94a3b8"],
+    [style*="color:#94a3b8"] {
+      color: #475569 !important;
+    }
+    [style*="color: #64748b"],
+    [style*="color:#64748b"] {
+      color: #475569 !important;
+    }
+
+    /* Labels des formulaires */
+    .form-label {
+      color: #334155 !important;
+    }
+
+    /* Encadrés internes sombres dans glass-card → fond clair */
+    [style*="background: rgba(255,255,255,0.05)"],
+    [style*="background: rgba(255,255,255,0.03)"] {
+      background: rgba(241, 245, 249, 0.9) !important;
+      border-color: rgba(203, 213, 225, 0.8) !important;
+    }
+
     .text-white-50 {
       color: #64748b !important;
     }
