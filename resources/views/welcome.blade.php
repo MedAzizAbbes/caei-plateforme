@@ -1341,7 +1341,7 @@
           <li><a href="#presentation">Présentation</a></li>
           <li><a href="#about-agencies">Nos Agences</a></li>
           <li><a href="{{ route('home.old') }}">Nos séminaires</a></li>
-          <li><a href="{{ route('callcenter.blog') }}">Nos actualités</a></li>
+          <li><a href="{{ route('actualites.index') }}">Nos actualités</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="{{ route('recrutement.index') }}">Recrutement</a></li>
         </ul>
