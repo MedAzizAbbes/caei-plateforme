@@ -605,14 +605,20 @@
         <div class="row g-4">
           @foreach($allFormations as $f)
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 6) * 50 }}">
-              <div class="formation-card">
-                <div>
-                  <div class="d-flex align-items-center justify-content-between mb-2">
-                    <span class="formation-badge badge-{{ $f->type ?? 'certifiante' }}">
-                      {{ ucfirst(str_replace('_', ' ', $f->type ?? 'certifiante')) }}
-                    </span>
-                    <span class="formation-code">{{ $f->code ?? 'CAEI-'.sprintf('%03d', $f->id) }}</span>
+              <div class="formation-card p-0 overflow-hidden">
+                @if($f->image)
+                  <div style="height: 200px; width: 100%; overflow: hidden;">
+                    <img src="{{ asset('storage/' . $f->image) }}" alt="{{ $f->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                   </div>
+                @endif
+                <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
+                  <div>
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                      <span class="formation-badge badge-{{ $f->type ?? 'certifiante' }}">
+                        {{ ucfirst(str_replace('_', ' ', $f->type ?? 'certifiante')) }}
+                      </span>
+                      <span class="formation-code">{{ $f->code ?? 'CAEI-'.sprintf('%03d', $f->id) }}</span>
+                    </div>
 
                   <h5 class="formation-title">{{ $f->title }}</h5>
 
@@ -636,9 +642,10 @@
                     @endif
                   </div>
 
-                  <a href="{{ route('elite.inscription', ['formation_title' => ($f->code ?? 'CAEI-'.$f->id) . ' — ' . $f->title]) }}" class="btn-card-action btn-card-gold" style="text-decoration: none;">
+                  <a href="{{ route('elite.inscription', ['formation_id' => $f->id, 'formation_title' => ($f->code ?? 'CAEI-'.$f->id) . ' — ' . $f->title]) }}" class="btn-card-action btn-card-gold" style="text-decoration: none;">
                     <i class="bi bi-pencil-square"></i> S'inscrire
                   </a>
+                </div>
                 </div>
               </div>
             </div>
