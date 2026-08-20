@@ -66,12 +66,12 @@
                         {{-- Domaine / Catégorie --}}
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Domaine / Catégorie</label>
-                            <input type="text" name="domain" value="{{ old('domain') }}" list="domains_list" placeholder="ex: Audit, Comptabilité & Finance" class="w-full rounded-xl border-slate-200 text-sm focus:border-amber-500 focus:ring-amber-500">
-                            <datalist id="domains_list">
+                            <select name="domain" class="w-full rounded-xl border-slate-200 text-sm focus:border-amber-500 focus:ring-amber-500">
+                                <option value="">-- Sélectionner un domaine --</option>
                                 @foreach($domains as $dom)
-                                    <option value="{{ $dom }}"></option>
+                                    <option value="{{ $dom }}" {{ old('domain') == $dom ? 'selected' : '' }}>{{ $dom }}</option>
                                 @endforeach
-                            </datalist>
+                            </select>
                             @error('domain') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
                         </div>
 
@@ -107,7 +107,7 @@
 
                         {{-- Image de présentation --}}
                         <div>
-                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Image d d'illustration (Optionnel)</label>
+                            <label class="block text-xs font-bold uppercase text-slate-600 mb-2">Affiche / Image d'illustration (Optionnel)</label>
                             <input type="file" name="image" accept="image/*" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100">
                             @error('image') <p class="mt-1 text-xs text-red-600">{{ $message }}</p> @enderror
                         </div>

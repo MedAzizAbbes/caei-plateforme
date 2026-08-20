@@ -96,7 +96,11 @@ class EliteTrainingController extends Controller
 
     public function inscription(Request $request)
     {
-        return view('elite-training.inscription');
+        $formation = null;
+        if ($request->has('formation_id')) {
+            $formation = Formation::find($request->formation_id);
+        }
+        return view('elite-training.inscription', compact('formation'));
     }
 
     /**

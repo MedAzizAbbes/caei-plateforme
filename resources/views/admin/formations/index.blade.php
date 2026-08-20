@@ -132,11 +132,24 @@
 
                                 {{-- Intitulé & Domaine --}}
                                 <td class="px-6 py-4">
-                                    <div class="font-bold text-slate-900 line-clamp-1" title="{{ $formation->title }}">
-                                        {{ $formation->title }}
-                                    </div>
-                                    <div class="text-xs text-slate-400 mt-0.5">
-                                        {{ $formation->domain ?: 'Domaine non spécifié' }}
+                                    <div class="flex items-center gap-3">
+                                        @if($formation->image)
+                                            <div class="h-10 w-10 flex-shrink-0">
+                                                <img src="{{ asset('storage/' . $formation->image) }}" class="h-10 w-10 rounded-lg object-cover border border-slate-200">
+                                            </div>
+                                        @else
+                                            <div class="h-10 w-10 flex-shrink-0 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center">
+                                                <span class="text-slate-400 text-xs font-bold">CAEI</span>
+                                            </div>
+                                        @endif
+                                        <div>
+                                            <div class="font-bold text-slate-900 line-clamp-1" title="{{ $formation->title }}">
+                                                {{ $formation->title }}
+                                            </div>
+                                            <div class="text-xs text-slate-400 mt-0.5">
+                                                {{ $formation->domain ?: 'Domaine non spécifié' }}
+                                            </div>
+                                        </div>
                                     </div>
                                 </td>
 

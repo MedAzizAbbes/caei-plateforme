@@ -412,7 +412,7 @@
                       </span>
                     </div>
 
-                    <a href="{{ route('elite.inscription') }}?formation_title={{ urlencode($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}"
+                    <a href="{{ route('elite.inscription') }}?formation_id={{ $formation->id }}&formation_title={{ urlencode($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}"
                             class="btn-register-course" style="text-decoration: none;">
                       <span>S'inscrire</span>
                       <i class="bi bi-arrow-right"></i>
