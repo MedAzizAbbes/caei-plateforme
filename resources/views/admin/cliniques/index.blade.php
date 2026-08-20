@@ -11,7 +11,7 @@
         <div class="mb-6 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(17, 94, 89, 0.9) 0%, rgba(4, 47, 46, 0.95) 100%), url('{{ asset('assets/img/service_medical_1786525641121.jpg') }}') center/cover no-repeat;">
             <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none">🏥</div>
             <div class="relative z-10">
-                <span class="inline-flex items-center gap-1.5 bg-teal-100 text-[#0f766e] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                <span class="inline-flex items-center gap-1.5 bg-teal-100 text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2" style="color: #0f766e;">
                     <span>🩺</span> CAEI Medical Center • Partenaires
                 </span>
                 <h1 class="text-3xl font-black uppercase tracking-tight flex items-center gap-3">

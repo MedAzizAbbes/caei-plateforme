@@ -12,7 +12,7 @@
             <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">📊</div>
             <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div>
-                    <p class="text-sm font-black uppercase text-[#ffbd45] flex items-center gap-2">
+                    <p class="text-sm font-black uppercase flex items-center gap-2" style="color: #ffbd45;">
                         <span>📊</span> Back-office CAEI Administrateur
                     </p>
                     <h1 class="mt-2 text-3xl font-black uppercase flex items-center gap-3">
@@ -21,7 +21,7 @@
                     <p class="mt-3 text-white/75">Bienvenue {{ Auth::user()->first_name }}. Gère l'ensemble des séminaires, participants, contenus et statistiques.</p>
                 </div>
                 <div>
-                    <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#f2a90f] hover:bg-[#d9950b] text-[#061743] text-xs font-black uppercase tracking-wider rounded-xl shadow-lg transition">
+                    <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 px-4 py-2.5 bg-[#f2a90f] hover:bg-[#d9950b] text-xs font-black uppercase tracking-wider rounded-xl shadow-lg transition" style="color: #061743;">
                         📊 Console BI Executive ➔
                     </a>
                 </div>

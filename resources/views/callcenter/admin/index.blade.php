@@ -21,7 +21,7 @@
              style="background: linear-gradient(135deg, rgba(127, 5, 4, 0.92) 0%, rgba(70, 2, 2, 0.95) 100%), url('{{ asset('assets/img/service_callcenter_1786525651775.jpg') }}') center/cover no-repeat;">
             <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">🎧</div>
             <div class="relative z-10">
-                <span class="inline-flex items-center gap-1.5 bg-red-100 text-[#7f0504] text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2">
+                <span class="inline-flex items-center gap-1.5 bg-red-100 text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2" style="color: #7f0504;">
                     <span>📞</span> CAEI Call Center
                 </span>
                 <h1 class="text-3xl font-black uppercase tracking-tight flex items-center gap-3">
@@ -39,7 +39,7 @@
                     <span>📄 Exporter PDF</span>
                 </a>
                 <a href="{{ route('callcenter.index') }}" target="_blank"
-                   class="shrink-0 inline-flex items-center gap-2 bg-white hover:bg-red-50 text-[#7f0504] font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all">
+                   class="shrink-0 inline-flex items-center gap-2 bg-white hover:bg-slate-50 font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all" style="color: #7f0504;">
                     <span>Voir le site Call Center 🌐</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -133,32 +133,7 @@
             </div>
         </div>
 
-        <!-- 2. Navigation par Onglets Centralisés (Tabs) -->
-        <div class="bg-white p-2 rounded-2xl border border-slate-200 shadow-sm flex flex-wrap gap-2 mb-6">
-            <button @click="setTab('workflow')" 
-                    :class="activeTab === 'workflow' ? 'bg-[#7f0504] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-[#7f0504]'"
-                    class="px-5 py-3 rounded-xl text-xs font-black uppercase transition flex items-center gap-2">
-                <span>📊 Onglet 1 : Workflow RDV & Partenaires</span>
-                @if($stats['en_attente_affectation'] > 0)
-                    <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $stats['en_attente_affectation'] }}</span>
-                @endif
-            </button>
-
-            <button @click="setTab('demandes_web')" 
-                    :class="activeTab === 'demandes_web' ? 'bg-[#7f0504] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-[#7f0504]'"
-                    class="px-5 py-3 rounded-xl text-xs font-black uppercase transition flex items-center gap-2">
-                <span>📩 Onglet 2 : Demandes de Contact du Site Public</span>
-                @if($stats['demandes_nouvelles'] > 0)
-                    <span class="bg-red-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">{{ $stats['demandes_nouvelles'] }}</span>
-                @endif
-            </button>
-
-            <button @click="setTab('utilisateurs')" 
-                    :class="activeTab === 'utilisateurs' ? 'bg-[#7f0504] text-white shadow-md' : 'text-slate-600 hover:bg-slate-100 hover:text-[#7f0504]'"
-                    class="px-5 py-3 rounded-xl text-xs font-black uppercase transition flex items-center gap-2">
-                <span>👥 Onglet 3 : Gestion des Comptes (Agents & Partenaires)</span>
-            </button>
-        </div>
+        <!-- 2. Navigation par Onglets supprimée -->
 
         <!-- ================================================================================== -->
         <!-- TAB 1 : WORKFLOW RDV & PARTENAIRES -->
@@ -207,8 +182,8 @@
                     </div>
 
                     <div class="flex gap-2">
-                        <button type="submit" class="w-full rounded-xl bg-[#7f0504] py-2.5 text-xs font-black uppercase text-white hover:bg-[#a81111] transition">
-                            Filtrer
+                        <button type="submit" class="w-full rounded-xl py-2.5 text-xs font-black uppercase text-white transition" style="background-color: #991b1b;">
+                            Appliquer les filtres
                         </button>
                         <a href="{{ route('callcenter.admin.dashboard', ['tab' => 'workflow']) }}" class="rounded-xl border border-slate-300 px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-100 transition flex items-center justify-center">
                             ↺
@@ -221,7 +196,7 @@
             <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
                 <div class="px-6 py-4 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-gradient-to-r from-slate-50 to-white">
                     <div class="flex items-center gap-3">
-                        <div class="w-9 h-9 rounded-xl bg-[#7f0504]/10 text-[#7f0504] flex items-center justify-center font-bold text-base">
+                        <div class="w-9 h-9 rounded-xl bg-red-100 text-red-800 flex items-center justify-center font-bold text-base">
                             📅
                         </div>
                         <div>
@@ -335,7 +310,7 @@
                                                     </option>
                                                 @endforeach
                                             </select>
-                                            <button type="submit" class="rounded-lg bg-[#7f0504] px-3.5 py-1.5 text-xs font-black uppercase tracking-wider text-white hover:bg-[#a81111] transition shadow-sm">
+                                            <button type="submit" class="rounded-lg px-3.5 py-1.5 text-xs font-black uppercase tracking-wider text-white transition shadow-sm" style="background-color: #991b1b;">
                                                 {{ $rdv->partenaire_id ? 'Réaffecter' : 'Affecter' }}
                                             </button>
                                         </form>
@@ -495,8 +470,8 @@
                     </div>
 
                     <div class="mt-6 text-right border-t border-slate-100 pt-4">
-                        <button type="submit" class="inline-flex rounded-xl bg-[#7f0504] px-6 py-3 text-xs font-black uppercase text-white hover:bg-[#a81111] transition">
-                            ➕ Générer le Compte
+                        <button type="submit" class="inline-flex rounded-xl px-6 py-3 text-xs font-black uppercase text-white transition" style="background-color: #991b1b;">
+                            <span class="mr-2">➕</span> Créer le compte
                         </button>
                     </div>
                 </form>
