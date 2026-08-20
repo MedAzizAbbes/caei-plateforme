@@ -331,112 +331,65 @@
       -webkit-text-fill-color: transparent;
     }
 
-    /* Call Center Navbar */
+    /* Call Center Navbar — Statique */
     .cc-navbar-wrap {
-      z-index: 1030;
-      padding-top: 14px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+      box-shadow: 0 2px 20px rgba(15, 23, 42, 0.06);
+      position: relative;
+      z-index: 100;
+      padding: 0 24px;
     }
 
     .cc-navbar {
       max-width: 1400px;
-      padding: 10px 18px;
-      border: 1px solid rgba(226, 232, 240, 0.9);
-      border-radius: 18px;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
-      box-shadow: 0 10px 35px rgba(15, 23, 42, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    }
-
-    .cc-brand {
-      min-width: 96px;
-    }
-
-    .cc-brand img {
-      height: 48px;
-      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.08));
+      margin: 0 auto;
+      padding: 12px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
     }
 
     .cc-nav-shell {
-      gap: 4px;
-      padding: 5px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      padding: 4px;
       border: 1px solid rgba(226, 232, 240, 0.8);
       border-radius: 999px;
       background: rgba(241, 245, 249, 0.8);
-      box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.04);
     }
 
-    .cc-nav-shell .nav-link,
     .cc-nav-link {
       position: relative;
       border-radius: 999px;
       color: #475569 !important;
       font-size: 14px;
       font-weight: 600;
-      padding: 9px 14px !important;
+      padding: 8px 14px;
       white-space: nowrap;
-      transition: color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+      text-decoration: none;
+      transition: color 0.25s ease, background 0.25s ease;
     }
 
-    .cc-nav-shell .nav-link:hover,
-    .cc-nav-shell .nav-link.show,
     .cc-nav-link:hover,
-    .cc-nav-link.active,
-    .cc-nav-link.show {
+    .cc-nav-link.active {
       color: var(--cc-red) !important;
       background: rgba(127, 5, 4, 0.08);
-      box-shadow: inset 0 0 0 1px rgba(127, 5, 4, 0.2);
     }
 
-    .cc-nav-shell .nav-link.active::after,
     .cc-nav-link.active::after {
       content: "";
       position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 4px;
+      left: 14px;
+      right: 14px;
+      bottom: 3px;
       height: 2px;
       border-radius: 2px;
       background: var(--cc-red);
-      box-shadow: 0 0 8px rgba(127, 5, 4, 0.6);
-    }
-
-    .cc-nav-shell .dropdown-menu,
-    .cc-dropdown {
-      margin-top: 12px;
-      padding: 8px;
-      border: 1px solid rgba(226, 232, 240, 0.9) !important;
-      border-radius: 14px;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 20px 45px rgba(15, 23, 42, 0.1);
-    }
-
-    .cc-nav-shell .dropdown-item,
-    .cc-dropdown .dropdown-item {
-      border-radius: 10px;
-      color: #334155 !important;
-      font-size: 14px;
-      padding: 10px 12px;
-    }
-
-    .cc-nav-shell .dropdown-item:hover,
-    .cc-nav-shell .dropdown-item:focus,
-    .cc-dropdown .dropdown-item:hover,
-    .cc-dropdown .dropdown-item:focus,
-    .cc-dropdown .dropdown-item.active {
-      color: #fff !important;
-      background: linear-gradient(135deg, #7f0504, #a81111) !important;
-    }
-
-    .cc-navbar-toggler {
-      width: 44px;
-      height: 42px;
-      border: 1px solid #cbd5e1 !important;
-      border-radius: 12px;
-      background: rgba(241, 245, 249, 0.8);
-      color: #0f172a;
     }
 
     .cc-login-btn {
@@ -451,15 +404,16 @@
       font-size: 14px;
       font-weight: 700;
       text-decoration: none;
-      box-shadow: 0 10px 20px rgba(127, 5, 4, 0.25);
+      box-shadow: 0 6px 16px rgba(127, 5, 4, 0.25);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
+      white-space: nowrap;
     }
 
     .cc-login-btn:hover {
       color: #fff !important;
       transform: translateY(-1px);
       background: linear-gradient(135deg, #990505, #bd1515);
-      box-shadow: 0 14px 25px rgba(127, 5, 4, 0.35);
+      box-shadow: 0 10px 22px rgba(127, 5, 4, 0.35);
     }
 
     .cc-back-home {
@@ -468,57 +422,66 @@
       gap: 6px;
       min-height: 38px;
       border-radius: 999px;
-      padding: 9px 16px;
-      background: rgba(255, 255, 255, 0.9);
+      padding: 8px 16px;
+      background: #ffffff;
       border: 1px solid #cbd5e1;
       color: #334155;
       font-size: 13px;
       font-weight: 600;
       text-decoration: none;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+      transition: all 0.25s ease;
+      white-space: nowrap;
     }
 
     .cc-back-home:hover {
       color: var(--cc-red);
-      background: #ffffff;
       border-color: var(--cc-red);
-      transform: translateX(-3px);
     }
 
-    .cc-back-home i {
-      font-size: 15px;
-      transition: transform 0.3s ease;
+    .cc-nav-mobile-toggle {
+      display: none;
+      background: rgba(241, 245, 249, 0.9);
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor: pointer;
+      color: #0f172a;
+      font-size: 20px;
+      line-height: 1;
     }
 
-    .cc-back-home:hover i {
-      transform: translateX(-3px);
-    }
-
-    @media (max-width: 1199.98px) {
+    @media (max-width: 991.98px) {
       .cc-navbar {
-        border-radius: 16px;
+        flex-wrap: wrap;
       }
-
+      .cc-nav-mobile-toggle {
+        display: block;
+      }
+      .cc-nav-center,
+      .cc-nav-right {
+        display: none;
+        width: 100%;
+      }
+      .cc-nav-center.open,
+      .cc-nav-right.open {
+        display: flex;
+      }
       .cc-nav-shell {
-        align-items: stretch !important;
-        border-radius: 16px;
-        background: rgba(241, 245, 249, 0.95);
+        flex-direction: column;
+        border-radius: 14px;
+        width: 100%;
+        align-items: stretch;
       }
-
-      .cc-nav-shell .nav-link,
       .cc-nav-link {
-        border-radius: 12px;
-        padding: 11px 14px !important;
+        border-radius: 10px;
+        padding: 10px 14px;
       }
-
-      .cc-nav-shell .nav-link.active::after,
-      .cc-nav-link.active::after {
-        left: 12px;
-        right: auto;
-        bottom: 10px;
-        width: 3px;
-        height: 18px;
+      .cc-nav-right {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-bottom: 10px;
+        justify-content: flex-start;
       }
     }
 
@@ -538,66 +501,58 @@
   <div class="ambient-orb orb-1"></div>
   <div class="ambient-orb orb-2"></div>
 
-  <!-- Floating Glass Navbar -->
-  <div class="fixed-top cc-navbar-wrap px-2 px-xl-5">
-    <nav class="navbar navbar-expand-xl mx-auto cc-navbar">
-      <div class="container-fluid px-0">
-        <!-- Logo -->
-        <a class="navbar-brand d-flex align-items-center gap-3 py-0" href="{{ route('callcenter.index') }}">
-          <img src="{{ asset('images/logo-caei-transparent.png') }}" alt="CAEI Call Center Logo" style="height: 52px; width: auto; object-fit: contain;">
-        </a>
-        
-        <button class="navbar-toggler shadow-none cc-navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-          <i class="bi bi-list fs-3"></i>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <!-- Center Nav Pill (Glass Style) -->
-          <div class="mx-auto my-3 my-lg-0">
-            <ul class="navbar-nav align-items-center cc-nav-shell">
-              <li class="nav-item">
-                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.index') ? 'active' : '' }}" href="{{ route('callcenter.index') }}">Accueil</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.about') ? 'active' : '' }}" href="{{ route('callcenter.about') }}">Qui sommes-nous !</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.services') ? 'active' : '' }}" href="{{ route('callcenter.services') }}">Nos services</a>
-              </li>
+  <!-- Navbar Statique -->
+  <header class="cc-navbar-wrap">
+    <nav class="cc-navbar">
 
+      <!-- Logo -->
+      <a href="{{ route('callcenter.index') }}" style="flex-shrink:0;">
+        <img src="{{ asset('images/logo-caei-transparent.png') }}" alt="CAEI Call Center" style="height: 52px; width: auto; object-fit: contain;">
+      </a>
 
-              <li class="nav-item">
-                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.blog') ? 'active' : '' }}" href="{{ route('callcenter.blog') }}">Nos actualités</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link cc-nav-link {{ request()->routeIs('callcenter.contact') ? 'active' : '' }}" href="{{ route('callcenter.contact') }}">Contactez-nous !</a>
-              </li>
-            </ul>
-          </div>
-          
-          <!-- Right Buttons -->
-          <div class="d-flex align-items-center gap-2 mt-3 mt-lg-0">
-            <a href="{{ route('home') }}" class="cc-back-home">
-              <i class="bi bi-arrow-left"></i> Accueil CAEI
-            </a>
-            @auth
-              @if(auth()->user()->isAdmin())
-                <a href="{{ route('admin.callcenter.index') }}" class="cc-login-btn"><i class="bi bi-speedometer2 me-1"></i> Espace Admin</a>
-              @elseif(auth()->user()->isCallCenterAgent())
-                <a href="{{ route('callcenter.agent.index') }}" class="cc-login-btn"><i class="bi bi-headset me-1"></i> Espace Agent</a>
-              @elseif(auth()->user()->isCallCenterPartenaire())
-                <a href="{{ route('callcenter.partenaire.index') }}" class="cc-login-btn"><i class="bi bi-handbag me-1"></i> Espace Partenaire</a>
-              @else
-                <a href="{{ route('dashboard') }}" class="cc-login-btn"><i class="bi bi-person-circle me-1"></i> Mon Compte</a>
-              @endif
-            @else
-              <a href="{{ route('login') }}" class="cc-login-btn"><i class="bi bi-box-arrow-in-right me-1"></i> Connexion</a>
-            @endauth
-          </div>
+      <!-- Bouton mobile -->
+      <button class="cc-nav-mobile-toggle" onclick="
+        var c = document.getElementById('cc-nav-center');
+        var r = document.getElementById('cc-nav-right');
+        c.classList.toggle('open');
+        r.classList.toggle('open');
+      ">
+        <i class="bi bi-list"></i>
+      </button>
+
+      <!-- Liens de navigation -->
+      <div id="cc-nav-center" class="cc-nav-center" style="display:flex; align-items:center;">
+        <div class="cc-nav-shell">
+          <a class="cc-nav-link {{ request()->routeIs('callcenter.index') ? 'active' : '' }}" href="{{ route('callcenter.index') }}">Accueil</a>
+          <a class="cc-nav-link {{ request()->routeIs('callcenter.about') ? 'active' : '' }}" href="{{ route('callcenter.about') }}">Qui sommes-nous !</a>
+          <a class="cc-nav-link {{ request()->routeIs('callcenter.services') ? 'active' : '' }}" href="{{ route('callcenter.services') }}">Nos services</a>
+          <a class="cc-nav-link {{ request()->routeIs('callcenter.blog') ? 'active' : '' }}" href="{{ route('callcenter.blog') }}">Nos actualités</a>
+          <a class="cc-nav-link {{ request()->routeIs('callcenter.contact') ? 'active' : '' }}" href="{{ route('callcenter.contact') }}">Contactez-nous !</a>
         </div>
       </div>
+
+      <!-- Boutons droite -->
+      <div id="cc-nav-right" class="cc-nav-right" style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+        <a href="{{ route('home') }}" class="cc-back-home">
+          <i class="bi bi-arrow-left"></i> Accueil CAEI
+        </a>
+        @auth
+          @if(auth()->user()->isAdmin())
+            <a href="{{ route('admin.callcenter.index') }}" class="cc-login-btn"><i class="bi bi-speedometer2 me-1"></i> Espace Admin</a>
+          @elseif(auth()->user()->isCallCenterAgent())
+            <a href="{{ route('callcenter.agent.index') }}" class="cc-login-btn"><i class="bi bi-headset me-1"></i> Espace Agent</a>
+          @elseif(auth()->user()->isCallCenterPartenaire())
+            <a href="{{ route('callcenter.partenaire.index') }}" class="cc-login-btn"><i class="bi bi-handbag me-1"></i> Espace Partenaire</a>
+          @else
+            <a href="{{ route('dashboard') }}" class="cc-login-btn"><i class="bi bi-person-circle me-1"></i> Mon Compte</a>
+          @endif
+        @else
+          <a href="{{ route('login') }}" class="cc-login-btn"><i class="bi bi-box-arrow-in-right me-1"></i> Connexion</a>
+        @endauth
+      </div>
+
     </nav>
-  </div>
+  </header>
 
   <!-- Page Content -->
   <div class="perspective-wrapper">
