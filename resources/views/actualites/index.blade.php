@@ -256,6 +256,10 @@
         <div class="d-flex align-items-center gap-2 ms-xl-4">
           <a href="{{ route('dashboard') }}" class="btn-getstarted text-decoration-none">Mon espace</a>
         </div>
+      @else
+        <div class="d-flex align-items-center gap-2 ms-xl-4">
+          <a href="{{ route('login') }}" class="btn-getstarted text-decoration-none">Connexion</a>
+        </div>
       @endauth
 
     </div>
