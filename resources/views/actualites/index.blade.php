@@ -1065,6 +1065,296 @@
 
       </article>
 
+      <!-- Article 6 : Fête de fin d’année — CAEI -->
+      <article class="article-card" data-aos="fade-up">
+        
+        <!-- En-tête de l'article -->
+        <div class="mb-4 pb-3" style="border-bottom: 2px solid #f1f5f9;">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+            <span class="badge px-3 py-2 fw-bold" style="background: #000f3c; color: #ffffff !important; border-radius: 8px; font-size: 12.5px;">
+              🎉 Événement interne
+            </span>
+            <span class="badge px-3 py-2 fw-bold rounded-pill" style="background: rgba(255, 122, 0, 0.15); color: #d96600;">
+              Décembre 2024
+            </span>
+            <span class="badge bg-secondary bg-opacity-10 text-dark fw-semibold px-3 py-2 rounded-pill">
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i> Tunis, Tunisie 🇹🇳
+            </span>
+          </div>
+
+          <h2 class="fw-bold mb-2" style="color: #000f3c; font-size: 2.2rem; line-height: 1.3;">
+            Fête de fin d’année — CAEI
+          </h2>
+          <p class="text-muted mb-0">Célébration des Réalisations, Convivialité et Cohésion d'Équipe</p>
+        </div>
+
+        <!-- Corps et photo vedette -->
+        <div class="row align-items-center g-4 g-lg-5 mb-5">
+          <div class="col-lg-5 text-center">
+            <img src="{{ asset('images/actualites/fete-fin-annee-1.jpg') }}" alt="Fête de fin d'année CAEI gâteau et équipe" class="img-fluid shadow" style="max-height: 530px; width: auto; max-width: 100%; border-radius: 26px; border: 2px solid #e2e8f0; display: inline-block;">
+          </div>
+
+          <div class="col-lg-7">
+            <p class="fs-6 mb-3" style="color: #334155; line-height: 1.85; text-align: justify;">
+              Le <strong>Comité Africain d’Expertise Internationale (CAEI)</strong> a célébré sa fête de fin d’année <strong>2024</strong> dans une ambiance conviviale, réunissant ses équipes autour d’un moment de partage et de convivialité.
+            </p>
+
+            <p class="fs-6 mb-3" style="color: #475569; line-height: 1.85; text-align: justify;">
+              Cette rencontre a été l’occasion de célébrer les réalisations de l’année, remercier les collaborateurs pour leur engagement et renforcer l’esprit d’équipe.
+            </p>
+
+            <p class="fs-6 mb-4" style="color: #475569; line-height: 1.85; text-align: justify;">
+              Un moment chaleureux pour clôturer l’année et commencer une nouvelle année avec de nouvelles ambitions. ✨
+            </p>
+
+            <!-- Fiche mémo -->
+            <div class="row g-2 text-center">
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">📍 Lieu</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Tunis, Tunisie</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">📅 Date</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Décembre 2024</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">🎉 Événement</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Fête de fin d’année</strong>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Galerie Photos de la fête -->
+        <div class="pt-4" style="border-top: 1px solid #f1f5f9;">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+              <span class="badge px-3 py-1 mb-2" style="background: #000f3c; color: #ff7a00; font-size: 11px;">MOMENTS FORTS</span>
+              <h4 class="fw-bold mb-0" style="color: #000f3c;">Galerie Photos — Ambiance & Équipe</h4>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            
+            <!-- Photo 1 -->
+            <div class="col-md-6">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/fete-fin-annee-1.jpg') }}" alt="Gâteau de fin d'année et équipe CAEI" style="object-position: center;">
+                <div class="photo-caption">
+                  <h6>Célébration & Partage</h6>
+                  <p>Équipe CAEI autour du gâteau de l'an 2025</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="col-md-6">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/fete-fin-annee-2.jpg') }}" alt="Accueil et ambiance festive Call Center CAEI" style="object-position: center;">
+                <div class="photo-caption">
+                  <h6>Ambiance Festive & Accueil</h6>
+                  <p>Pôle CAEI Call Center aux couleurs de fête</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </article>
+
+      <!-- Article 7 : Démarrage du séminaire international — Audit du dispositif de conformité LCB/FT -->
+      <article class="article-card" data-aos="fade-up">
+        
+        <!-- En-tête de l'article -->
+        <div class="mb-4 pb-3" style="border-bottom: 2px solid #f1f5f9;">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+            <span class="badge px-3 py-2 fw-bold" style="background: #000f3c; color: #ffffff !important; border-radius: 8px; font-size: 12.5px;">
+              🎓 Démarrage de séminaire
+            </span>
+            <span class="badge px-3 py-2 fw-bold rounded-pill" style="background: rgba(255, 122, 0, 0.15); color: #d96600;">
+              15 juin 2026
+            </span>
+            <span class="badge bg-secondary bg-opacity-10 text-dark fw-semibold px-3 py-2 rounded-pill">
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i> Abidjan, Côte d’Ivoire 🇨🇮
+            </span>
+            <span class="badge bg-light text-secondary border fw-semibold px-3 py-2 rounded-pill small">
+              🇹🇳 Tunisie · 🇨🇮 Côte d’Ivoire · 🇬🇳 Guinée
+            </span>
+          </div>
+
+          <h2 class="fw-bold mb-2" style="color: #000f3c; font-size: 2.2rem; line-height: 1.3;">
+            Démarrage du séminaire international — Audit LCB/FT
+          </h2>
+          <p class="text-muted mb-0">Audit du Dispositif de Conformité, Gestion des Risques et Contrôle Interne</p>
+        </div>
+
+        <!-- Corps et photo vedette -->
+        <div class="row align-items-center g-4 g-lg-5 mb-5">
+          <div class="col-lg-5 text-center">
+            <img src="{{ asset('images/actualites/lcbft-abidjan-session-7.jpg') }}" alt="Démarrage séminaire international LCB/FT Abidjan CAEI" class="img-fluid shadow" style="max-height: 530px; width: auto; max-width: 100%; border-radius: 26px; border: 2px solid #e2e8f0; display: inline-block;">
+          </div>
+
+          <div class="col-lg-7">
+            <p class="fs-6 mb-3" style="color: #334155; line-height: 1.85; text-align: justify;">
+              Le <strong>Comité Africain d’Expertise Internationale (CAEI)</strong> a donné le coup d’envoi de sa session internationale consacrée à l’audit du dispositif de conformité en matière de Lutte contre le Blanchiment de Capitaux et le Financement du Terrorisme (<strong>LCB/FT</strong>).
+            </p>
+
+            <p class="fs-6 mb-3" style="color: #475569; line-height: 1.85; text-align: justify;">
+              Cette nouvelle session à <strong>Abidjan</strong> réunit des professionnels du secteur financier et institutionnel autour des enjeux de conformité, de gestion des risques, de contrôle et d’audit des dispositifs LCB/FT.
+            </p>
+
+            <p class="fs-6 mb-4" style="color: #475569; line-height: 1.85; text-align: justify;">
+              Une nouvelle occasion pour le CAEI de favoriser le partage d’expertise, les échanges professionnels et le développement des compétences à l’échelle africaine.
+            </p>
+
+            <!-- Fiche mémo -->
+            <div class="row g-2 text-center">
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">📍 Lieu</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Abidjan, Côte d’Ivoire</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">📅 Date</span>
+                  <strong style="color: #000f3c; font-size: 13px;">15 juin 2026</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">🎯 Thématique</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Audit LCB/FT</strong>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Galerie Photos de la session -->
+        <div class="pt-4" style="border-top: 1px solid #f1f5f9;">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+              <span class="badge px-3 py-1 mb-2" style="background: #000f3c; color: #ff7a00; font-size: 11px;">MOMENTS FORTS</span>
+              <h4 class="fw-bold mb-0" style="color: #000f3c;">Galerie Photos — Session & Travaux d'Audit</h4>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            
+            <!-- Photo 1 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/lcbft-abidjan-session-8.jpg') }}" alt="Séance plénière et projection" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Séance Plénière</h6>
+                  <p>Présentation & projections</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/lcbft-abidjan-session-6.png') }}" alt="Prise de parole représentante CAEI" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Ouverture & Cadrage</h6>
+                  <p>Délégation CAEI Abidjan</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/lcbft-abidjan-session-10.png') }}" alt="Présentation méthodes et tendances LCB/FT" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Méthodes & Tendances</h6>
+                  <p>Module Lutte Anti-Blanchiment</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/lcbft-abidjan-session-9.png') }}" alt="Échanges et concertation" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Concertation & Débats</h6>
+                  <p>Échanges interactifs autour de la table</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 5 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/lcbft-abidjan-session-1.jpg') }}" alt="Travaux sur dossiers et laptop" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Travaux d'Audit</h6>
+                  <p>Études de cas opérationnels</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 6 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/lcbft-abidjan-session-5.jpg') }}" alt="Participants attentifs" style="object-position: center;">
+                <div class="photo-caption">
+                  <h6>Écoute Active</h6>
+                  <p>Participants en session de travail</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 7 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/lcbft-abidjan-session-2.jpg') }}" alt="Expert participant LCB/FT" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Expertise Métier</h6>
+                  <p>Cadrage & gouvernance du risque</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 8 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/lcbft-abidjan-session-3.jpg') }}" alt="Participante avec dossiers de formation" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Dossiers Techniques</h6>
+                  <p>Dispositifs & conformité LCB/FT</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 9 -->
+            <div class="col-md-6 col-lg-3">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/lcbft-abidjan-session-11.png') }}" alt="Travaux pratiques et prise de notes" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Travaux & Prise de Notes</h6>
+                  <p>Session opérationnelle d'audit</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </article>
+
       <!-- Bannière Contact / Collaboration -->
       <div class="p-5 text-center rounded-4 shadow-sm" style="background: linear-gradient(135deg, #000f3c 0%, #002266 100%);" data-aos="zoom-in">
         <h3 class="fw-bold mb-3" style="color: #ffffff !important; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-size: 1.9rem;">Vous souhaitez organiser un séminaire ou un audit pour votre institution ?</h3>
