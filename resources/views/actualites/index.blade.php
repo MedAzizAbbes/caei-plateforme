@@ -100,27 +100,34 @@
 
     /* Footer CAEI */
     .footer-caei {
-      background: #000b26;
-      color: #94a3b8;
+      background: #000b26 !important;
+      color: #e2e8f0 !important;
       padding: 60px 0 25px 0;
       border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     .footer-caei h5 {
-      color: #ffffff;
-      font-size: 17px;
+      color: #ffffff !important;
+      font-size: 18px;
       font-weight: 700;
       margin-bottom: 20px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    }
+
+    .footer-caei p, 
+    .footer-caei li,
+    .footer-caei span {
+      color: #e2e8f0 !important;
     }
 
     .footer-caei a {
-      color: #cbd5e1;
+      color: #f1f5f9 !important;
       text-decoration: none;
       transition: color 0.2s;
     }
 
     .footer-caei a:hover {
-      color: #ff7a00;
+      color: #ff7a00 !important;
     }
 
     /* Mobile Navigation Full Screen Overlay Fix */
@@ -556,9 +563,9 @@
       </article>
 
       <!-- Bannière Contact / Collaboration -->
-      <div class="p-5 text-center rounded-4" style="background: linear-gradient(135deg, #000f3c 0%, #002266 100%); color: white;" data-aos="zoom-in">
-        <h3 class="fw-bold mb-3">Vous souhaitez organiser un séminaire ou un audit pour votre institution ?</h3>
-        <p class="fs-6 mb-4 mx-auto" style="color: #cbd5e1; max-width: 650px;">
+      <div class="p-5 text-center rounded-4 shadow-sm" style="background: linear-gradient(135deg, #000f3c 0%, #002266 100%);" data-aos="zoom-in">
+        <h3 class="fw-bold mb-3" style="color: #ffffff !important; text-shadow: 0 2px 8px rgba(0,0,0,0.5); font-size: 1.9rem;">Vous souhaitez organiser un séminaire ou un audit pour votre institution ?</h3>
+        <p class="fs-6 mb-4 mx-auto" style="color: #f1f5f9 !important; max-width: 650px; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">
           Le CAEI accompagne les banques, institutions financières et organisations africaines dans le renforcement de leurs compétences et de leur conformité.
         </p>
         <div class="d-flex flex-wrap justify-content-center gap-3">
