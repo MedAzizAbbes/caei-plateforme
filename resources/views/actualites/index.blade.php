@@ -207,13 +207,13 @@
 
 <body>
 
-  <!-- Top Bar Contact & PDF Catalogue (Exact identical size & position as main page) -->
-  <div style="background: rgba(255, 255, 255, 0.98); border-bottom: 1px solid rgba(0, 0, 0, 0.08); position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 35px; backdrop-filter: blur(10px);">
-    <div class="container-fluid container-xl h-100 d-flex justify-content-between align-items-center">
-      <div class="d-flex align-items-center gap-3">
+  <!-- Top Contact Bar -->
+  <div id="topbar" class="topbar d-flex align-items-center fixed-top" style="background-color: #ffffff; padding: 5px 0; z-index: 1000; top: 0; width: 100%; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); border-bottom: 1px solid #e5e7eb; height: 35px;">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between" style="gap: 0.5rem; flex-wrap: wrap;">
+      <div class="d-flex align-items-center gap-2 gap-md-3" style="flex-wrap: wrap;">
         <a href="tel:+21655335286" class="d-flex align-items-center gap-2 text-decoration-none" style="font-size: 14px; white-space: nowrap; color: #000f3c;">
           <i class="bi bi-telephone-fill" style="color: #ff7a00;"></i>
-          <span>+216 55 335 286</span>
+          <span class="d-none d-sm-inline">+216 55 335 286</span>
         </a>
         <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@caei-afri.com" target="_blank" class="d-flex align-items-center gap-2 text-decoration-none" style="font-size: 14px; white-space: nowrap; color: #000f3c;">
           <i class="bi bi-envelope-fill" style="color: #ff7a00;"></i>
@@ -228,30 +228,21 @@
         <i class="bi bi-file-pdf" style="font-size: 17px;"></i>
         <span style="font-weight: 400; letter-spacing: 0.5px;" class="d-none d-sm-inline">Catalogue CAEI</span>
       </a>
-        <span><i class="bi bi-telephone-fill text-warning me-1"></i> +216 55 335 286</span>
-        <span class="d-none d-md-inline"><i class="bi bi-envelope-fill text-warning me-1"></i> contact@caei-afri.com</span>
-        <span class="d-none d-lg-inline"><i class="bi bi-geo-alt-fill text-warning me-1"></i> SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis , Tunisie</span>
-      </div>
-      <div>
-        <a href="{{ route('home') }}#catalogue" class="fw-semibold"><i class="bi bi-journal-text text-warning me-1"></i> Catalogue CAEI</a>
-      </div>
     </div>
   </div>
 
-  <!-- Header -->
-  <header id="header" class="header fixed-top">
-    <div class="container header-container">
-      
-      <a href="{{ route('home') }}" class="logo d-flex align-items-center text-decoration-none">
-        <img src="{{ asset('assets/img/logocompany.png') }}" alt="CAEI Company Group">
+  <header id="header" class="header d-flex align-items-center fixed-top" style="top: 35px; background: rgba(0, 15, 60, 0.85); backdrop-filter: blur(10px);">
+    <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="{{ route('home') }}" class="logo d-flex align-items-center me-auto me-lg-0">
+        <img src="{{ asset('assets/img/logocompany.png') }}" alt="CAEI Logo" height="60px" width="150px" style="object-fit: contain;">
       </a>
 
-      <!-- Navigation -->
       <nav id="navmenu" class="navmenu">
         <ul>
           <li><a href="{{ route('home') }}">Accueil</a></li>
           <li><a href="{{ route('home') }}#presentation">Présentation</a></li>
-          <li><a href="{{ route('home') }}#agences">Nos Agences</a></li>
+          <li><a href="{{ route('home') }}#about-agencies">Nos Agences</a></li>
           <li><a href="{{ route('home.old') }}">Nos séminaires</a></li>
           <li><a href="{{ route('actualites.index') }}" class="active">Nos actualités</a></li>
           <li><a href="{{ route('home') }}#contact">Contact</a></li>
@@ -260,12 +251,13 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <!-- Auth Controls -->
+      <!-- Auth Controls (Breeze) -->
       @auth
         <div class="d-flex align-items-center gap-2 ms-xl-4">
           <a href="{{ route('dashboard') }}" class="btn-getstarted text-decoration-none">Mon espace</a>
         </div>
       @endauth
+
     </div>
   </header>
 
