@@ -139,94 +139,93 @@
   </section>
   
   <style>
-    /* ── intl-tel-input — Glassmorphism Dark Theme ── */
+    /* ── intl-tel-input — Light Theme ── */
     .iti { width: 100%; display: block; }
     .iti__flag-container { z-index: 5; }
 
-    /* Bouton du drapeau (flag button) */
+    /* Bouton du drapeau */
     .iti__flag-container .iti__selected-flag {
-      background: rgba(255, 255, 255, 0.06) !important;
-      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(241, 245, 249, 0.9) !important;
+      border-right: 1px solid #cbd5e1;
       border-radius: 12px 0 0 12px;
       padding: 0 12px;
       transition: background 0.2s;
     }
     .iti__flag-container .iti__selected-flag:hover,
     .iti__flag-container .iti__selected-flag:focus {
-      background: rgba(209, 17, 65, 0.15) !important;
+      background: rgba(127, 5, 4, 0.08) !important;
     }
     .iti__selected-dial-code {
-      color: rgba(255,255,255,0.75);
+      color: #334155;
       font-size: 13px;
       font-weight: 600;
       margin-left: 6px;
     }
     .iti__arrow {
-      border-top-color: rgba(255,255,255,0.5) !important;
+      border-top-color: #64748b !important;
     }
 
-    /* Padding gauche pour laisser de la place au drapeau */
+    /* Input téléphone */
     .iti input[type=tel] {
       padding-left: 90px !important;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      color: white;
+      background: #ffffff !important;
+      border: 1px solid #cbd5e1 !important;
+      border-radius: 12px !important;
+      color: #0f172a !important;
       width: 100%;
     }
     .iti input[type=tel]:focus {
       border-color: var(--cc-red) !important;
-      box-shadow: 0 0 0 4px rgba(209, 17, 65, 0.15) !important;
+      box-shadow: 0 0 0 4px rgba(127, 5, 4, 0.12) !important;
       outline: none;
     }
     .iti input[type=tel]::placeholder {
-      color: rgba(255,255,255,0.35);
+      color: #94a3b8;
     }
 
     /* Liste des pays (dropdown) */
     .iti__country-list {
-      background-color: rgba(10, 14, 26, 0.97) !important;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1) !important;
+      background-color: #ffffff !important;
+      border: 1px solid #e2e8f0 !important;
       border-radius: 12px !important;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-      color: rgba(255,255,255,0.85) !important;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.1);
+      color: #334155 !important;
       padding: 6px;
       max-height: 220px;
       scrollbar-width: thin;
-      scrollbar-color: rgba(209,17,65,0.4) transparent;
+      scrollbar-color: rgba(127,5,4,0.3) transparent;
     }
     .iti__country-list::-webkit-scrollbar { width: 4px; }
     .iti__country-list::-webkit-scrollbar-track { background: transparent; }
-    .iti__country-list::-webkit-scrollbar-thumb { background: rgba(209,17,65,0.4); border-radius: 4px; }
+    .iti__country-list::-webkit-scrollbar-thumb { background: rgba(127,5,4,0.3); border-radius: 4px; }
 
     .iti__country {
       border-radius: 8px;
       padding: 8px 10px !important;
       transition: background 0.15s;
+      color: #334155;
     }
     .iti__country.iti__highlight,
     .iti__country:hover {
-      background: rgba(209, 17, 65, 0.18) !important;
-      color: white !important;
+      background: rgba(127, 5, 4, 0.08) !important;
+      color: var(--cc-red) !important;
     }
     .iti__country-name, .iti__dial-code {
       color: inherit !important;
     }
     .iti__divider {
-      border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+      border-bottom: 1px solid #e2e8f0 !important;
       margin: 4px 0;
     }
     .iti__search-input {
-      background: rgba(255,255,255,0.05) !important;
-      border: 1px solid rgba(255,255,255,0.1) !important;
+      background: #f8fafc !important;
+      border: 1px solid #cbd5e1 !important;
       border-radius: 8px !important;
-      color: white !important;
+      color: #0f172a !important;
       padding: 8px 12px !important;
       margin-bottom: 4px;
     }
-    .iti__search-input::placeholder { color: rgba(255,255,255,0.35) !important; }
+    .iti__search-input::placeholder { color: #94a3b8 !important; }
     .iti__search-input:focus { border-color: var(--cc-red) !important; outline: none !important; }
   </style>
 @endsection
