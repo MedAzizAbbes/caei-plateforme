@@ -72,7 +72,7 @@
       position: fixed;
       top: 0;
       width: 100%;
-      z-index: 1000;
+      z-index: 1050;
       padding: 18px 0;
       transition: var(--transition);
       background: transparent;
@@ -170,7 +170,7 @@
       opacity: 0;
       visibility: hidden;
       transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 1000;
+      z-index: 1050;
     }
 
     .et-navbar .nav-dropdown:hover .nav-dropdown-menu {

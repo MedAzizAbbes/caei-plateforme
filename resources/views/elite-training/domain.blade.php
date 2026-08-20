@@ -55,7 +55,7 @@
     /* NAVBAR */
     .et-navbar {
       position: fixed;
-      top: 0; width: 100%; z-index: 1000;
+      top: 0; width: 100%; z-index: 1050;
       padding: 16px 0;
       background: rgba(0, 31, 63, 0.97);
       backdrop-filter: blur(20px);
@@ -329,28 +329,30 @@
         
         <!-- SIDEBAR DOMAINES -->
         <div class="col-lg-3">
-          <div class="sidebar-widget sticky-top" style="top: 100px;">
-            <h6 class="sidebar-widget-title">Toutes les Catégories</h6>
-            <ul class="domain-list-group">
-              @foreach($allDomains as $key => $info)
-                <li class="domain-list-item {{ $slug === $key ? 'active' : '' }}">
-                  <a href="{{ route('elite.training.domain', $key) }}">
-                    <span><i class="bi {{ $info['icon'] }} me-2"></i> {{ $info['name'] }}</span>
-                    <i class="bi bi-chevron-right text-xs"></i>
-                  </a>
-                </li>
-              @endforeach
-            </ul>
-          </div>
+          <div class="sticky-top" style="top: 100px; z-index: 10;">
+            <div class="sidebar-widget">
+              <h6 class="sidebar-widget-title">Toutes les Catégories</h6>
+              <ul class="domain-list-group">
+                @foreach($allDomains as $key => $info)
+                  <li class="domain-list-item {{ $slug === $key ? 'active' : '' }}">
+                    <a href="{{ route('elite.training.domain', $key) }}">
+                      <span><i class="bi {{ $info['icon'] }} me-2"></i> {{ $info['name'] }}</span>
+                      <i class="bi bi-chevron-right text-xs"></i>
+                    </a>
+                  </li>
+                @endforeach
+              </ul>
+            </div>
 
-          <!-- ASSISTANCE CARD -->
-          <div class="p-4 rounded-4 text-white text-center position-relative overflow-hidden shadow-md" style="background: linear-gradient(135deg, var(--navy), #003366);">
-            <i class="bi bi-headset text-gold display-4 mb-3 d-block"></i>
-            <h6 class="font-bold mb-2" style="font-family: var(--font-display);">Besoin de conseil ?</h6>
-            <p class="text-white-50 text-xs mb-3">Nos conseillers vous orientent vers le programme le mieux adapté à vos objectifs.</p>
-            <a href="tel:+21655332885" class="btn btn-sm btn-gold font-bold rounded-pill px-3 py-2 w-100">
-              <i class="bi bi-telephone-fill me-1"></i> +216 55 332 885
-            </a>
+            <!-- ASSISTANCE CARD -->
+            <div class="p-4 rounded-4 text-white text-center position-relative overflow-hidden shadow-md" style="background: linear-gradient(135deg, var(--navy), #003366);">
+              <i class="bi bi-headset text-gold display-4 mb-3 d-block"></i>
+              <h6 class="font-bold mb-2" style="font-family: var(--font-display);">Besoin de conseil ?</h6>
+              <p class="text-white-50 text-xs mb-3">Nos conseillers vous orientent vers le programme le mieux adapté à vos objectifs.</p>
+              <a href="tel:+21655332885" class="btn btn-sm btn-gold font-bold rounded-pill px-3 py-2 w-100">
+                <i class="bi bi-telephone-fill me-1"></i> +216 55 332 885
+              </a>
+            </div>
           </div>
         </div>
 
