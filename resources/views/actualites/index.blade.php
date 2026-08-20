@@ -462,13 +462,11 @@
 
         <!-- Corps et photo vedette -->
         <div class="row align-items-center g-4 g-lg-5 mb-5">
-          <div class="col-lg-6">
-            <div class="rounded-4 overflow-hidden shadow-sm" style="border: 4px solid #f8fafc;">
-              <img src="{{ asset('images/actualites/ged-abidjan-salle.jpg') }}" alt="Participants et salle de formation GED Abidjan CAEI" class="img-fluid w-100" style="max-height: 390px; object-fit: cover; border-radius: 12px;">
-            </div>
+          <div class="col-lg-5 text-center">
+            <img src="{{ asset('images/actualites/ged-abidjan-1.jpg') }}" alt="Délégation et Formateurs Experts CAEI Abidjan" class="img-fluid shadow" style="max-height: 530px; width: auto; max-width: 100%; border-radius: 26px; border: 2px solid #e2e8f0; display: inline-block;">
           </div>
 
-          <div class="col-lg-6">
+          <div class="col-lg-7">
             <p class="fs-6 mb-3" style="color: #334155; line-height: 1.85; text-align: justify;">
               Le <strong>Comité Africain d’Expertise Internationale (CAEI)</strong> a organisé en <strong>décembre 2025</strong> à <strong>Abidjan</strong> un séminaire international consacré au pilotage des projets de <strong>Gestion Électronique des Documents (GED)</strong> et d’<strong>archivage numérique</strong>.
             </p>
@@ -527,10 +525,10 @@
             <!-- Photo 2 -->
             <div class="col-md-6 col-lg-3">
               <div class="photo-box position-relative">
-                <img src="{{ asset('images/actualites/ged-abidjan-1.jpg') }}" alt="Délégation et Experts CAEI Abidjan" style="object-position: top center;">
+                <img src="{{ asset('images/actualites/ged-abidjan-salle.jpg') }}" alt="Salle de formation et participants GED Abidjan" style="object-position: center;">
                 <div class="photo-caption">
-                  <h6>Délégation CAEI</h6>
-                  <p>Formateurs & Experts</p>
+                  <h6>Salle & Participants</h6>
+                  <p>Travaux & échanges Abidjan</p>
                 </div>
               </div>
             </div>
@@ -805,6 +803,259 @@
                 <div class="photo-caption">
                   <h6>Atelier de Traitement</h6>
                   <p>Dématérialisation et archivage</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </article>
+
+      <!-- Article 5 : Remise des certificats internationaux — Séminaire LCB/FT -->
+      <article class="article-card" data-aos="fade-up">
+        
+        <!-- En-tête de l'article -->
+        <div class="mb-4 pb-3" style="border-bottom: 2px solid #f1f5f9;">
+          <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+            <span class="badge px-3 py-2 fw-bold" style="background: #000f3c; color: #ffffff !important; border-radius: 8px; font-size: 12.5px;">
+              🏆 Remise des certificats
+            </span>
+            <span class="badge px-3 py-2 fw-bold rounded-pill" style="background: rgba(255, 122, 0, 0.15); color: #d96600;">
+              15 au 17 juin 2026
+            </span>
+            <span class="badge bg-secondary bg-opacity-10 text-dark fw-semibold px-3 py-2 rounded-pill">
+              <i class="bi bi-geo-alt-fill text-danger me-1"></i> Abidjan, Côte d’Ivoire 🇨🇮
+            </span>
+            <span class="badge bg-light text-secondary border fw-semibold px-3 py-2 rounded-pill small">
+              🇹🇳 Tunisie · 🇨🇮 Côte d’Ivoire · 🇬🇳 Guinée
+            </span>
+          </div>
+
+          <h2 class="fw-bold mb-2" style="color: #000f3c; font-size: 2.2rem; line-height: 1.3;">
+            Remise des certificats internationaux — Séminaire LCB/FT
+          </h2>
+          <p class="text-muted mb-0">Reconnaissance de l'Excellence et Clôture du Séminaire International de Conformité</p>
+        </div>
+
+        <!-- Corps et photo vedette -->
+        <div class="row align-items-center g-4 g-lg-5 mb-5">
+          <div class="col-lg-6">
+            <div class="rounded-4 overflow-hidden shadow" style="border: 3px solid #ffffff; border-radius: 22px;">
+              <img src="{{ asset('images/actualites/certificats-abidjan-groupe.jpg') }}" alt="Photo de groupe officielle remise des certificats LCB/FT Abidjan CAEI" class="img-fluid w-100" style="max-height: 420px; object-fit: cover; border-radius: 20px;">
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <p class="fs-6 mb-3" style="color: #334155; line-height: 1.85; text-align: justify;">
+              À l’issue du séminaire international consacré à l’audit du dispositif de conformité en matière de Lutte contre le Blanchiment de Capitaux et le Financement du Terrorisme (<strong>LCB/FT</strong>), le <strong>Comité Africain d’Expertise Internationale (CAEI)</strong> a organisé la remise des certificats internationaux aux participants.
+            </p>
+
+            <p class="fs-6 mb-3" style="color: #475569; line-height: 1.85; text-align: justify;">
+              Cette cérémonie a réuni plusieurs professionnels et représentants d’organisations, notamment le <strong>Trésor Public de Côte d’Ivoire</strong>, <strong>ARTWORKS INTERNATIONAL</strong>, <strong>THALYS CONSEILS & ASSOCIÉS</strong> et <strong>AVENI-RE</strong>.
+            </p>
+
+            <p class="fs-6 mb-4" style="color: #475569; line-height: 1.85; text-align: justify;">
+              Un moment de reconnaissance qui vient clôturer une session riche en échanges, en expertise et en partage d’expériences autour des enjeux de conformité et de lutte contre la criminalité financière.
+            </p>
+
+            <!-- Institutions participantes -->
+            <div class="p-3 rounded-3 mb-4 d-flex align-items-center gap-3" style="background: #fff7ed; border-left: 4px solid #ff7a00;">
+              <i class="bi bi-award fs-2 text-warning flex-shrink-0"></i>
+              <div>
+                <strong style="color: #000f3c; font-size: 14.5px;">🤝 Institutions participantes :</strong>
+                <p class="small mb-0" style="color: #334155;">
+                  Trésor Public de Côte d’Ivoire · ARTWORKS INTERNATIONAL · THALYS CONSEILS & ASSOCIÉS · AVENI-RE
+                </p>
+              </div>
+            </div>
+
+            <!-- Fiche mémo -->
+            <div class="row g-2 text-center">
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">📍 Lieu</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Abidjan, Côte d’Ivoire</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">📅 Date</span>
+                  <strong style="color: #000f3c; font-size: 13px;">15 – 17 juin 2026</strong>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="p-2 rounded-3 bg-light border">
+                  <span class="d-block text-muted small">🎯 Thématique</span>
+                  <strong style="color: #000f3c; font-size: 13px;">Audit LCB/FT</strong>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Galerie Photos de la remise -->
+        <div class="pt-4" style="border-top: 1px solid #f1f5f9;">
+          <div class="d-flex align-items-center justify-content-between mb-4">
+            <div>
+              <span class="badge px-3 py-1 mb-2" style="background: #000f3c; color: #ff7a00; font-size: 11px;">MOMENTS FORTS</span>
+              <h4 class="fw-bold mb-0" style="color: #000f3c;">Galerie Photos — Remise Individuelle des Certificats</h4>
+            </div>
+          </div>
+
+          <div class="row g-4">
+            
+            <!-- Photo 1 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-4.jpg') }}" alt="Remise de certificat Mme Bamba Zeinab" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Remise de Certificat</h6>
+                  <p>Mme Bamba Zeinab — Attestation CAEI</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 2 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-1.jpg') }}" alt="Remise de certificat international LCB/FT" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Remise de Certificat</h6>
+                  <p>Attestation & sacoche officielle CAEI</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 3 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-2.jpg') }}" alt="Remise de certificat participant LCB/FT" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Certification & Honneur</h6>
+                  <p>Validation du cycle d'audit LCB/FT</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 4 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-3.jpg') }}" alt="Célébration et remise de certificat" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Reconnaissance Officielle</h6>
+                  <p>Félicitations et certificat CAEI</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 5 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-5.jpg') }}" alt="Remise de diplôme M. Tassonou" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Excellence Professionnelle</h6>
+                  <p>M. Tassonou — Distinction CAEI</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 6 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-6.jpg') }}" alt="Cérémonie officielle de remise" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Délégation & Cérémonie</h6>
+                  <p>Partage et clôture officielle</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 7 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-7.jpg') }}" alt="Attestation de compétences LCB/FT" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Attestation de Compétences</h6>
+                  <p>Comité Africain d'Expertise Internationale</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 8 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-8.jpg') }}" alt="Remise de certificat M. Agja Pierre" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Distinction d'Honneur</h6>
+                  <p>M. Agja Pierre — Certification LCB/FT</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 9 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-9.jpg') }}" alt="Remise de certificat M. Bosson" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Validation de Formation</h6>
+                  <p>M. Bosson — Remise officielle</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 10 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-10.jpg') }}" alt="Remise de certificat Mme Becher" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Reconnaissance & Mérite</h6>
+                  <p>Mme Becher — Conformité LCB/FT</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 11 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-11.jpg') }}" alt="Remise de certificat Mme Koua" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Excellence Professionnelle</h6>
+                  <p>Mme Koua — Certification CAEI</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 12 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-12.jpg') }}" alt="Remise de certificat M. Kouakou" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Cérémonie & Félicitations</h6>
+                  <p>M. Kouakou — Audit LCB/FT</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 13 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-13.jpg') }}" alt="Remise de certificat M. Konan Jean Pierre" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Attestation Officielle</h6>
+                  <p>M. Konan Jean Pierre — Conformité LCB/FT</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Photo 14 -->
+            <div class="col-md-6 col-lg-4">
+              <div class="photo-box position-relative">
+                <img src="{{ asset('images/actualites/certificats-abidjan-14.jpg') }}" alt="Remise de certificat M. N'Gori" style="object-position: top center;">
+                <div class="photo-caption">
+                  <h6>Honneur & Clôture</h6>
+                  <p>M. N'Gori — Certification CAEI</p>
                 </div>
               </div>
             </div>
