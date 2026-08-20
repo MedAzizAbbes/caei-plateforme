@@ -7,7 +7,7 @@
 <div class="position-relative min-vh-100 d-flex align-items-center overflow-hidden">
   <div class="container py-5 mt-5 position-relative z-1">
     <div class="row align-items-center">
-      <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start" data-aos="fade-right">
+      <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-right">
         <div class="glass-badge mb-4">
           Support Client Nouvelle Génération
         </div>
@@ -15,15 +15,15 @@
           Propulsez votre <br>
           <span class="text-gradient">Relation Client</span>
         </h1>
-        <p class="lead mb-5" style="color: #475569; font-size: 1.15rem; max-width: 500px; margin: 0 auto; margin-lg-start: 0;">
+        <p class="lead mb-5" style="color: #334155; font-size: 1.1rem; max-width: 520px;">
           Des solutions sur mesure d'assistance téléphonique, de fidélisation et de prospection commerciale pour propulser votre entreprise vers l'avenir.
         </p>
-        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start gap-3">
+        <div class="d-flex flex-wrap gap-3">
           <a href="{{ route('callcenter.services') }}" class="btn-glass-red">Découvrir nos services</a>
           <a href="{{ route('callcenter.contact') }}" class="btn-glass-outline">Prendre RDV</a>
         </div>
         
-        <div class="d-flex flex-wrap justify-content-center justify-content-lg-start mt-5 pt-4 gap-4 gap-md-5" style="border-top: 1px solid rgba(226, 232, 240, 0.9);">
+        <div class="d-flex flex-wrap mt-5 pt-4 gap-4 gap-md-5" style="border-top: 1px solid rgba(226, 232, 240, 0.9);">
           <div>
             <h3 class="fw-bold mb-0" style="color: #0f172a;">98%</h3>
             <p class="small mb-0" style="color: #64748b;">Satisfaction Client</p>
