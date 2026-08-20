@@ -105,7 +105,6 @@
             <div class="glass-badge mb-2">Moments Forts en Images</div>
             <h3 class="fw-bold mb-0" style="color: #0f172a;">Galerie du Séminaire LCB/FT</h3>
           </div>
-          <span class="text-muted small d-none d-md-block"><i class="bi bi-zoom-in me-1"></i> Cliquez sur une photo pour l'agrandir</span>
         </div>
 
         <div class="row g-4">
@@ -113,8 +112,8 @@
           <!-- Photo 1 -->
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="glass-card p-2 h-100 overflow-hidden" style="border-radius: 20px;">
-              <div class="position-relative overflow-hidden rounded-4" style="height: 270px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#photoModal1">
-                <img src="{{ asset('images/actualites/reunion-caei-1.jpg') }}" alt="Séminaire LCB/FT - Travaux" class="w-100 h-100" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+              <div class="position-relative overflow-hidden rounded-4" style="height: 270px;">
+                <img src="{{ asset('images/actualites/reunion-caei-1.jpg') }}" alt="Séminaire LCB/FT - Travaux" class="w-100 h-100" style="object-fit: cover;">
                 <div class="position-absolute bottom-0 start-0 end-0 p-3" style="background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.6) 60%, transparent 100%);">
                   <h6 class="fw-bold mb-1" style="color: #ffffff !important; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">Cadrage & Travaux en Commission</h6>
                   <p class="small mb-0" style="color: rgba(255, 255, 255, 0.85) !important; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Échanges et études de cas financiers</p>
@@ -126,8 +125,8 @@
           <!-- Photo 2 -->
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
             <div class="glass-card p-2 h-100 overflow-hidden" style="border-radius: 20px;">
-              <div class="position-relative overflow-hidden rounded-4" style="height: 270px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#photoModal2">
-                <img src="{{ asset('images/actualites/reunion-caei-2.jpg') }}" alt="Séminaire LCB/FT - Présentation" class="w-100 h-100" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+              <div class="position-relative overflow-hidden rounded-4" style="height: 270px;">
+                <img src="{{ asset('images/actualites/reunion-caei-2.jpg') }}" alt="Séminaire LCB/FT - Présentation" class="w-100 h-100" style="object-fit: cover;">
                 <div class="position-absolute bottom-0 start-0 end-0 p-3" style="background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.6) 60%, transparent 100%);">
                   <h6 class="fw-bold mb-1" style="color: #ffffff !important; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">Présentation Méthodologique</h6>
                   <p class="small mb-0" style="color: rgba(255, 255, 255, 0.85) !important; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Normes et mécanismes de contrôle interne</p>
@@ -139,8 +138,8 @@
           <!-- Photo 3 -->
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
             <div class="glass-card p-2 h-100 overflow-hidden" style="border-radius: 20px;">
-              <div class="position-relative overflow-hidden rounded-4" style="height: 270px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#photoModal3">
-                <img src="{{ asset('images/actualites/reunion-caei-3.jpg') }}" alt="Délégation BNDE Sénégal & CAEI" class="w-100 h-100" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+              <div class="position-relative overflow-hidden rounded-4" style="height: 270px;">
+                <img src="{{ asset('images/actualites/reunion-caei-3.jpg') }}" alt="Délégation BNDE Sénégal & CAEI" class="w-100 h-100" style="object-fit: cover;">
                 <div class="position-absolute bottom-0 start-0 end-0 p-3" style="background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.6) 60%, transparent 100%);">
                   <h6 class="fw-bold mb-1" style="color: #ffffff !important; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">Coopération Internationale</h6>
                   <p class="small mb-0" style="color: rgba(255, 255, 255, 0.85) !important; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Délégation BNDE Sénégal & Experts CAEI</p>
@@ -152,8 +151,8 @@
           <!-- Photo 4 -->
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="400">
             <div class="glass-card p-2 h-100 overflow-hidden" style="border-radius: 20px;">
-              <div class="position-relative overflow-hidden rounded-4" style="height: 270px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#photoModal4">
-                <img src="{{ asset('images/actualites/reunion-caei-4.jpg') }}" alt="Session d'analyse des risques" class="w-100 h-100" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+              <div class="position-relative overflow-hidden rounded-4" style="height: 270px;">
+                <img src="{{ asset('images/actualites/reunion-caei-4.jpg') }}" alt="Session d'analyse des risques" class="w-100 h-100" style="object-fit: cover;">
                 <div class="position-absolute bottom-0 start-0 end-0 p-3" style="background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.6) 60%, transparent 100%);">
                   <h6 class="fw-bold mb-1" style="color: #ffffff !important; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">Identification des Risques</h6>
                   <p class="small mb-0" style="color: rgba(255, 255, 255, 0.85) !important; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Cartographie des risques et gouvernance</p>
@@ -165,8 +164,8 @@
           <!-- Photo 5 -->
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="500">
             <div class="glass-card p-2 h-100 overflow-hidden" style="border-radius: 20px;">
-              <div class="position-relative overflow-hidden rounded-4" style="height: 270px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#photoModal5">
-                <img src="{{ asset('images/actualites/reunion-caei-5.jpg') }}" alt="Intervention Audit & Conformité" class="w-100 h-100" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+              <div class="position-relative overflow-hidden rounded-4" style="height: 270px;">
+                <img src="{{ asset('images/actualites/reunion-caei-5.jpg') }}" alt="Intervention Audit & Conformité" class="w-100 h-100" style="object-fit: cover;">
                 <div class="position-absolute bottom-0 start-0 end-0 p-3" style="background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.6) 60%, transparent 100%);">
                   <h6 class="fw-bold mb-1" style="color: #ffffff !important; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">Intervention Expert LCB/FT</h6>
                   <p class="small mb-0" style="color: rgba(255, 255, 255, 0.85) !important; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Dispositif de conformité et audit opérationnel</p>
@@ -178,8 +177,8 @@
           <!-- Photo 6 -->
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="600">
             <div class="glass-card p-2 h-100 overflow-hidden" style="border-radius: 20px;">
-              <div class="position-relative overflow-hidden rounded-4" style="height: 270px; cursor: pointer;" data-bs-toggle="modal" data-bs-target="#photoModal6">
-                <img src="{{ asset('images/actualites/reunion-caei-6.jpg') }}" alt="CAEI Company Group & Délégation" class="w-100 h-100" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+              <div class="position-relative overflow-hidden rounded-4" style="height: 270px;">
+                <img src="{{ asset('images/actualites/reunion-caei-6.jpg') }}" alt="CAEI Company Group & Délégation" class="w-100 h-100" style="object-fit: cover;">
                 <div class="position-absolute bottom-0 start-0 end-0 p-3" style="background: linear-gradient(to top, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.6) 60%, transparent 100%);">
                   <h6 class="fw-bold mb-1" style="color: #ffffff !important; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">Clôture & Synergie CAEI</h6>
                   <p class="small mb-0" style="color: rgba(255, 255, 255, 0.85) !important; text-shadow: 0 1px 3px rgba(0,0,0,0.8);">Comité Africain d’Expertise Internationale</p>
@@ -209,95 +208,4 @@
 
     </div>
   </section>
-
-  <!-- Modales Lightbox -->
-  <div class="modal fade" id="photoModal1" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content bg-dark border-0 rounded-4 overflow-hidden shadow-lg">
-        <div class="modal-header border-0 pb-0">
-          <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-        <div class="modal-body p-4 text-center">
-          <img src="{{ asset('images/actualites/reunion-caei-1.jpg') }}" class="img-fluid rounded-3 mb-3" alt="Séminaire LCB/FT" style="max-height: 80vh; object-fit: contain;">
-          <h5 class="text-white fw-bold mb-1">Cadrage Opérationnel & Travaux en Commission</h5>
-          <p class="text-white-50 small mb-0">Séminaire international — Audit du dispositif de conformité LCB/FT (Tunis, Décembre 2025)</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="photoModal2" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content bg-dark border-0 rounded-4 overflow-hidden shadow-lg">
-        <div class="modal-header border-0 pb-0">
-          <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-        <div class="modal-body p-4 text-center">
-          <img src="{{ asset('images/actualites/reunion-caei-2.jpg') }}" class="img-fluid rounded-3 mb-3" alt="Séminaire LCB/FT" style="max-height: 80vh; object-fit: contain;">
-          <h5 class="text-white fw-bold mb-1">Présentation Méthodologique & Audit</h5>
-          <p class="text-white-50 small mb-0">Séminaire international — Audit du dispositif de conformité LCB/FT (Tunis, Décembre 2025)</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="photoModal3" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content bg-dark border-0 rounded-4 overflow-hidden shadow-lg">
-        <div class="modal-header border-0 pb-0">
-          <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-        <div class="modal-body p-4 text-center">
-          <img src="{{ asset('images/actualites/reunion-caei-3.jpg') }}" class="img-fluid rounded-3 mb-3" alt="Délégation BNDE Sénégal & CAEI" style="max-height: 80vh; object-fit: contain;">
-          <h5 class="text-white fw-bold mb-1">Coopération Internationale — BNDE Sénégal</h5>
-          <p class="text-white-50 small mb-0">Avec la participation de la Banque Nationale pour le Développement Économique (BNDE) du Sénégal</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="photoModal4" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content bg-dark border-0 rounded-4 overflow-hidden shadow-lg">
-        <div class="modal-header border-0 pb-0">
-          <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-        <div class="modal-body p-4 text-center">
-          <img src="{{ asset('images/actualites/reunion-caei-4.jpg') }}" class="img-fluid rounded-3 mb-3" alt="Identification des Risques" style="max-height: 80vh; object-fit: contain;">
-          <h5 class="text-white fw-bold mb-1">Identification des Risques & Contrôle Interne</h5>
-          <p class="text-white-50 small mb-0">Séminaire international — Audit du dispositif de conformité LCB/FT (Tunis, Décembre 2025)</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="photoModal5" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content bg-dark border-0 rounded-4 overflow-hidden shadow-lg">
-        <div class="modal-header border-0 pb-0">
-          <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-        <div class="modal-body p-4 text-center">
-          <img src="{{ asset('images/actualites/reunion-caei-5.jpg') }}" class="img-fluid rounded-3 mb-3" alt="Intervention Expert LCB/FT" style="max-height: 80vh; object-fit: contain;">
-          <h5 class="text-white fw-bold mb-1">Intervention Expert : Audit de Conformité LCB/FT</h5>
-          <p class="text-white-50 small mb-0">Séminaire international — Audit du dispositif de conformité LCB/FT (Tunis, Décembre 2025)</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="photoModal6" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-      <div class="modal-content bg-dark border-0 rounded-4 overflow-hidden shadow-lg">
-        <div class="modal-header border-0 pb-0">
-          <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal" aria-label="Fermer"></button>
-        </div>
-        <div class="modal-body p-4 text-center">
-          <img src="{{ asset('images/actualites/reunion-caei-6.jpg') }}" class="img-fluid rounded-3 mb-3" alt="CAEI Company Group" style="max-height: 80vh; object-fit: contain;">
-          <h5 class="text-white fw-bold mb-1">CAEI Company Group — Clôture & Synergies</h5>
-          <p class="text-white-50 small mb-0">Comité Africain d’Expertise Internationale (CAEI)</p>
-        </div>
-      </div>
-    </div>
-  </div>
 @endsection
