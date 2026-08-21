@@ -1,81 +1,87 @@
 @extends('layouts.callcenter')
 
-@section('title', 'Insights & Actualités — CAEI Call Center')
+@section('title', 'Actualités du Centre d\'Appels CAEI')
 
 @section('content')
-  <!-- Header -->
-  <section class="py-5 text-center position-relative">
-    <div class="container py-4 position-relative z-1" data-aos="fade-up">
-      <div class="glass-badge mb-4 d-inline-block">
-        <i class="bi bi-newspaper me-2"></i> Pôle Relation Client
+  <div class="d-flex flex-column justify-content-center" style="min-height: 70vh;">
+    <!-- Header -->
+    <section class="py-5 text-center position-relative mt-5">
+      <div class="container py-5 position-relative z-1" data-aos="fade-up">
+        <h1 class="display-4 fw-bold mb-4" style="color: #0f172a;">Actualités du Centre d'Appels CAEI</h1>
+        <p class="fs-4 max-w-2xl mx-auto mb-0" style="color: #475569;">
+          Découvrez nos dernières initiatives et les améliorations apportées à notre service clientèle.
+        </p>
       </div>
-      <h1 class="display-4 fw-bold mb-3" style="color: #0f172a;">Actualités Call Center</h1>
-      <p class="fs-5 max-w-2xl mx-auto mb-0" style="color: #475569;">
-        Tendances de la relation client, innovations technologiques et bonnes pratiques de l'externalisation.
-      </p>
-    </div>
-  </section>
+    </section>
 
-  <!-- Blog List Call Center -->
-  <section class="py-4 position-relative mb-5">
-    <div class="container position-relative z-1">
+    <!-- Blog List Call Center -->
+    <section class="pb-5 position-relative mb-5">
+      <div class="container position-relative z-1">
       <div class="row g-4">
         
         <!-- Article 1 -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-          <div class="glass-card p-0 d-flex flex-column h-100 overflow-hidden" style="border-radius: 24px;">
-            <div class="position-relative overflow-hidden" style="height: 220px;">
-              <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=2070&auto=format&fit=crop" class="w-100 h-100" alt="IA et Relation Client" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="card border-0 bg-transparent h-100">
+            <div class="position-relative overflow-hidden mb-3" style="height: 200px;">
+              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" class="w-100 h-100" alt="Innovation" style="object-fit: cover;">
             </div>
-            <div class="p-4 flex-grow-1 d-flex flex-column" style="background: rgba(255,255,255,0.85);">
-              <span class="badge bg-danger bg-opacity-10 text-danger fw-bold align-self-start mb-2 px-3 py-1 rounded-pill small">Intelligence Artificielle</span>
-              <h5 class="fw-bold mb-3" style="color: #0f172a;">L'IA générative au service des conseillers client</h5>
-              <p class="small mb-4" style="color: #475569; line-height: 1.7;">
-                Comment les assistants IA permettent d'augmenter la productivité des téléconseillers et de réduire le délai moyen de traitement (DMT) sans déshumaniser l'échange.
-              </p>
-              <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                <span class="small text-muted"><i class="bi bi-clock me-1"></i> 4 min de lecture</span>
-                <span class="small fw-bold text-danger">CAEI Tech</span>
+            <div class="card-body p-0 d-flex flex-column">
+              <span class="text-danger fw-bold small text-uppercase mb-2" style="letter-spacing: 1px;">INNOVATION</span>
+              <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 1.1rem; line-height: 1.4;">Amélioration des processus de gestion des appels</h5>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center border-0">
+                <span class="small text-muted" style="font-size: 0.85rem;">Janvier 1, 2025</span>
+                <span class="small text-muted" style="font-size: 0.85rem;">500 vues</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Article 2 -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-          <div class="glass-card p-0 d-flex flex-column h-100 overflow-hidden" style="border-radius: 24px;">
-            <div class="position-relative overflow-hidden" style="height: 220px;">
-              <img src="https://images.unsplash.com/photo-1549923746-c502d488b3ea?q=80&w=2071&auto=format&fit=crop" class="w-100 h-100" alt="Qualité et Formation" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="card border-0 bg-transparent h-100">
+            <div class="position-relative overflow-hidden mb-3" style="height: 200px;">
+              <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop" class="w-100 h-100" alt="Formation" style="object-fit: cover;">
             </div>
-            <div class="p-4 flex-grow-1 d-flex flex-column" style="background: rgba(255,255,255,0.85);">
-              <span class="badge bg-primary bg-opacity-10 text-primary fw-bold align-self-start mb-2 px-3 py-1 rounded-pill small">Qualité & Formation</span>
-              <h5 class="fw-bold mb-3" style="color: #0f172a;">Rétention des talents et excellence opérationnelle</h5>
-              <p class="small mb-4" style="color: #475569; line-height: 1.7;">
-                La fidélisation des agents est la clé de la satisfaction client. Découvrez les programmes de coaching continu mis en place au sein de CAEI Call Center.
-              </p>
-              <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                <span class="small text-muted"><i class="bi bi-clock me-1"></i> 5 min de lecture</span>
-                <span class="small fw-bold text-primary">Management</span>
+            <div class="card-body p-0 d-flex flex-column">
+              <span class="text-danger fw-bold small text-uppercase mb-2" style="letter-spacing: 1px;">FORMATION</span>
+              <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 1.1rem; line-height: 1.4;">Formation continue pour nos agents</h5>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center border-0">
+                <span class="small text-muted" style="font-size: 0.85rem;">Janvier 3, 2025</span>
+                <span class="small text-muted" style="font-size: 0.85rem;">400 vues</span>
               </div>
             </div>
           </div>
         </div>
 
         <!-- Article 3 -->
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
-          <div class="glass-card p-0 d-flex flex-column h-100 overflow-hidden" style="border-radius: 24px;">
-            <div class="position-relative overflow-hidden" style="height: 220px;">
-              <img src="https://images.unsplash.com/photo-1556740714-a8395b3bf30f?q=80&w=2070&auto=format&fit=crop" class="w-100 h-100" alt="Omnicanalité" style="object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+          <div class="card border-0 bg-transparent h-100">
+            <div class="position-relative overflow-hidden mb-3" style="height: 200px;">
+              <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?q=80&w=2069&auto=format&fit=crop" class="w-100 h-100" alt="Technologie" style="object-fit: cover;">
             </div>
-            <div class="p-4 flex-grow-1 d-flex flex-column" style="background: rgba(255,255,255,0.85);">
-              <span class="badge bg-success bg-opacity-10 text-success fw-bold align-self-start mb-2 px-3 py-1 rounded-pill small">Stratégie Omnicanale</span>
-              <h5 class="fw-bold mb-3" style="color: #0f172a;">Réussir la transition vers une relation client 360°</h5>
-              <p class="small mb-4" style="color: #475569; line-height: 1.7;">
-                Voix, WhatsApp, live chat, réseaux sociaux : comment synchroniser l'ensemble de vos canaux de contact pour offrir une expérience sans couture.
-              </p>
-              <div class="mt-auto pt-3 border-top d-flex justify-content-between align-items-center">
-                <span class="small text-muted"><i class="bi bi-clock me-1"></i> 3 min de lecture</span>
-                <span class="small fw-bold text-success">Stratégie</span>
+            <div class="card-body p-0 d-flex flex-column">
+              <span class="text-danger fw-bold small text-uppercase mb-2" style="letter-spacing: 1px;">TECHNOLOGIE</span>
+              <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 1.1rem; line-height: 1.4;">Mise à jour de notre technologie d'appel</h5>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center border-0">
+                <span class="small text-muted" style="font-size: 0.85rem;">Janvier 5, 2025</span>
+                <span class="small text-muted" style="font-size: 0.85rem;">350 vues</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Article 4 -->
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+          <div class="card border-0 bg-transparent h-100">
+            <div class="position-relative overflow-hidden mb-3" style="height: 200px;">
+              <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop" class="w-100 h-100" alt="Performance" style="object-fit: cover;">
+            </div>
+            <div class="card-body p-0 d-flex flex-column">
+              <span class="text-danger fw-bold small text-uppercase mb-2" style="letter-spacing: 1px;">PERFORMANCE</span>
+              <h5 class="fw-bold mb-4" style="color: #0f172a; font-size: 1.1rem; line-height: 1.4;">Optimisation des performances du centre d'appel</h5>
+              <div class="mt-auto pt-2 d-flex justify-content-between align-items-center border-0">
+                <span class="small text-muted" style="font-size: 0.85rem;">Janvier 7, 2025</span>
+                <span class="small text-muted" style="font-size: 0.85rem;">300 vues</span>
               </div>
             </div>
           </div>
