@@ -44,9 +44,16 @@ class CallCenterAdminWorkflowController extends Controller
 
         $rendezVousList = $queryRdv->orderBy('created_at', 'desc')->paginate(10, ['*'], 'rdv_page');
 
-        // Données Utilisateurs (Agents & Partenaires)
-        $agents = User::where('role', 'callcenter_agent')->latest()->get();
-        $partenaires = User::where('role', 'callcenter_partenaire')->latest()->get();
+        // Données Utilisateurs (Agents & Partenaires avec leurs RDVs)
+        $agents = User::where('role', 'callcenter_agent')
+            ->with(['rendezVousAsAgent.prospect', 'rendezVousAsAgent.partenaire', 'rendezVousAsAgent.qualification'])
+            ->latest()
+            ->get();
+            
+        $partenaires = User::where('role', 'callcenter_partenaire')
+            ->with(['rendezVousAsPartenaire.prospect', 'rendezVousAsPartenaire.agent', 'rendezVousAsPartenaire.qualification'])
+            ->latest()
+            ->get();
 
         // --- Tab 2: Demandes du Site Public ---
         $publicRequests = CallCenterRequest::latest()->paginate(10, ['*'], 'req_page');
@@ -322,7 +329,99 @@ class CallCenterAdminWorkflowController extends Controller
 
         $roleLabel = $user->role === 'callcenter_agent' ? 'Agent Call Center' : 'Partenaire Call Center';
 
-        return back()->with('success', "Le compte {$roleLabel} '{$user->fullName()}' a été créé avec succès.");
+        $redirectUrl = url()->previous();
+        if (!str_contains($redirectUrl, 'tab=')) {
+            $separator = str_contains($redirectUrl, '?') ? '&' : '?';
+            $redirectUrl .= "{$separator}tab=utilisateurs";
+        }
+
+        return redirect($redirectUrl)->with('success', "Le compte {$roleLabel} '{$user->fullName()}' a été créé avec succès.");
+    }
+
+    /**
+     * Modification d'un compte Agent ou Partenaire
+     */
+    public function updateUser(Request $request, User $user)
+    {
+        // Sécurité : autoriser uniquement la modification des comptes call center
+        if (!in_array($user->role, ['callcenter_agent', 'callcenter_partenaire'])) {
+            return back()->with('error', "Opération non autorisée sur cet utilisateur.");
+        }
+
+        $request->validate([
+            'first_name'  => 'required|string|max:255',
+            'last_name'   => 'required|string|max:255',
+            'email'       => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
+            'phone'       => 'nullable|string|max:50',
+            'institution' => 'nullable|string|max:255',
+            'role'        => 'required|in:callcenter_agent,callcenter_partenaire',
+            'password'    => 'nullable|string|min:6',
+        ]);
+
+        $updateData = [
+            'first_name'  => $request->first_name,
+            'last_name'   => $request->last_name,
+            'email'       => $request->email,
+            'phone'       => $request->phone,
+            'institution' => $request->institution,
+            'role'        => $request->role,
+        ];
+
+        if ($request->filled('password')) {
+            $updateData['password'] = Hash::make($request->password);
+        }
+
+        $user->update($updateData);
+
+        $roleLabel = $user->role === 'callcenter_agent' ? 'Agent Call Center' : 'Partenaire Call Center';
+
+        $redirectUrl = url()->previous();
+        if (!str_contains($redirectUrl, 'tab=')) {
+            $separator = str_contains($redirectUrl, '?') ? '&' : '?';
+            $redirectUrl .= "{$separator}tab=utilisateurs";
+        }
+
+        return redirect($redirectUrl)->with('success', "Le compte {$roleLabel} '{$user->fullName()}' a été mis à jour avec succès.");
+    }
+
+    /**
+     * Suppression d'un compte Agent ou Partenaire
+     */
+    public function destroyUser(Request $request, User $user)
+    {
+        // Sécurité : autoriser uniquement la suppression des comptes call center
+        if (!in_array($user->role, ['callcenter_agent', 'callcenter_partenaire'])) {
+            return back()->with('error', "Opération non autorisée sur cet utilisateur.");
+        }
+
+        $fullName = $user->fullName();
+        $roleLabel = $user->role === 'callcenter_agent' ? 'Agent' : 'Partenaire';
+
+        // Nettoyage des notifications associées
+        \Illuminate\Support\Facades\DB::table('notifications')
+            ->where('notifiable_type', User::class)
+            ->where('notifiable_id', $user->id)
+            ->delete();
+
+        // Si partenaire, remettre les rendez-vous non qualifiés en attente pour réaffectation
+        if ($user->role === 'callcenter_partenaire') {
+            RendezVous::where('partenaire_id', $user->id)
+                ->where('statut', '!=', 'qualifie')
+                ->update([
+                    'partenaire_id' => null,
+                    'statut'        => 'en_attente_affectation'
+                ]);
+        }
+
+        $user->delete();
+
+        $redirectUrl = url()->previous();
+        if (!str_contains($redirectUrl, 'tab=')) {
+            $separator = str_contains($redirectUrl, '?') ? '&' : '?';
+            $redirectUrl .= "{$separator}tab=utilisateurs";
+        }
+
+        return redirect($redirectUrl)->with('success', "Le compte {$roleLabel} '{$fullName}' a été supprimé avec succès.");
     }
 
     /**
