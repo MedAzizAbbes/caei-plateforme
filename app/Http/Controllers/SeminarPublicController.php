@@ -280,7 +280,7 @@ class SeminarPublicController extends Controller
      */
     public function actualites()
     {
-        $actualites = self::getActualitesList();
+        $actualites = \App\Models\Actualite::all()->toArray();
         return view('actualites.index', compact('actualites'));
     }
 
@@ -289,12 +289,9 @@ class SeminarPublicController extends Controller
      */
     public function actualiteShow($slug)
     {
-        $all = self::getActualitesList();
-        if (!isset($all[$slug])) {
-            abort(404);
-        }
-        $actualite = $all[$slug];
-        $otherActualites = array_filter($all, fn($k) => $k !== $slug, ARRAY_FILTER_USE_KEY);
+        $actualiteModel = \App\Models\Actualite::where('slug', $slug)->firstOrFail();
+        $actualite = $actualiteModel->toArray();
+        $otherActualites = \App\Models\Actualite::where('slug', '!=', $slug)->limit(3)->get()->toArray();
 
         return view('actualites.show', compact('actualite', 'otherActualites'));
     }
