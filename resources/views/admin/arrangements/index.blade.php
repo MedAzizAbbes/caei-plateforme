@@ -61,7 +61,9 @@
                     <select name="seminar_id" class="w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-800 focus:border-[#061743] focus:outline-none">
                         <option value="">Tous les séminaires</option>
                         @foreach($seminars as $seminar)
-                            <option value="{{ $seminar->id }}" {{ request('seminar_id') == $seminar->id ? 'selected' : '' }}>{{ $seminar->theme }}</option>
+                            <option value="{{ $seminar->id }}" {{ request('seminar_id') == $seminar->id ? 'selected' : '' }}>
+                                {{ $seminar->theme }}{{ method_exists($seminar, 'trashed') && $seminar->trashed() ? ' (Archivé)' : '' }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
@@ -95,6 +97,10 @@
                     @foreach($payments as $payment)
                         @php
                             $isPending = in_array($payment->status, ['pending', 'arrangement_pending'], true);
+                            $userInitials = 'U';
+                            if ($payment->user) {
+                                $userInitials = strtoupper(substr($payment->user->first_name ?? 'U', 0, 1) . substr($payment->user->last_name ?? '', 0, 1));
+                            }
                         @endphp
                         <div class="p-6 hover:bg-slate-50 transition-colors" x-data="{ showNote: false, showReject: false }">
                             <div class="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
@@ -104,13 +110,13 @@
                                     {{-- Participant + status + method --}}
                                     <div class="flex items-center gap-3 flex-wrap">
                                         <div class="flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-full bg-[#061743] text-xs font-black text-white">
-                                            {{ strtoupper(substr($payment->user->first_name, 0, 1) . substr($payment->user->last_name, 0, 1)) }}
+                                            {{ $userInitials }}
                                         </div>
                                         <div>
                                             <p class="font-bold text-[#061743]">
-                                                {{ $payment->user->first_name }} {{ $payment->user->last_name }}
+                                                {{ $payment->user ? ($payment->user->first_name . ' ' . $payment->user->last_name) : 'Participant inconnu' }}
                                             </p>
-                                            <p class="text-xs text-slate-500">{{ $payment->user->email }}</p>
+                                            <p class="text-xs text-slate-500">{{ $payment->user?->email ?? 'Email non renseigné' }}</p>
                                         </div>
                                         <span class="inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-xs font-bold {{ $payment->statusBadgeClasses() }}">
                                             {{ $payment->statusEmoji() }} {{ $payment->statusLabel() }}
@@ -125,9 +131,16 @@
                                         <svg class="h-4 w-4 text-[#f2a90f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                                         </svg>
-                                        <span class="font-semibold text-slate-700">{{ $payment->seminar->theme }}</span>
-                                        <span class="text-slate-400">·</span>
-                                        <span class="text-slate-500">{{ $payment->seminar->country }}</span>
+                                        <span class="font-semibold text-slate-700">
+                                            {{ $payment->seminar?->theme ?? 'Séminaire indisponible' }}
+                                            @if($payment->seminar && method_exists($payment->seminar, 'trashed') && $payment->seminar->trashed())
+                                                <span class="text-xs font-normal text-amber-600">(Archivé)</span>
+                                            @endif
+                                        </span>
+                                        @if($payment->seminar?->country)
+                                            <span class="text-slate-400">·</span>
+                                            <span class="text-slate-500">{{ $payment->seminar->country }}</span>
+                                        @endif
                                     </div>
 
                                     {{-- Détails selon la méthode --}}

@@ -192,15 +192,15 @@
 
     <!-- Recipient -->
     <div class="body-text">
-        <strong>{{ $payment->seminar->country }}, le {{ now()->format('d/m/Y') }}</strong>
+        <strong>{{ $payment->seminar?->country ?? 'Tunisie' }}, le {{ now()->format('d/m/Y') }}</strong>
     </div>
 
     <div class="body-text">
         <strong>À l'attention de :</strong><br>
-        {{ $payment->user->first_name }} {{ $payment->user->last_name }}<br>
-        @if($payment->user->poste){{ $payment->user->poste }}<br>@endif
-        @if($payment->user->institution){{ $payment->user->institution }}<br>@endif
-        @if($payment->user->pays){{ $payment->user->pays }}@endif
+        {{ $payment->user ? ($payment->user->first_name . ' ' . $payment->user->last_name) : 'Participant' }}<br>
+        @if($payment->user?->poste){{ $payment->user->poste }}<br>@endif
+        @if($payment->user?->institution){{ $payment->user->institution }}<br>@endif
+        @if($payment->user?->pays){{ $payment->user->pays }}@endif
     </div>
 
     <!-- Body -->
@@ -215,21 +215,25 @@
     <div class="info-box">
         <div class="info-row">
             <span class="info-label">Thème</span>
-            <span class="info-val">{{ $payment->seminar->theme }}</span>
+            <span class="info-val">{{ $payment->seminar?->theme ?? 'Séminaire CAEI' }}</span>
         </div>
         <div class="info-row">
             <span class="info-label">Lieu</span>
-            <span class="info-val">{{ $payment->seminar->country }}</span>
+            <span class="info-val">{{ $payment->seminar?->country ?? 'Tunisie' }}</span>
         </div>
+        @if($payment->seminar?->start_date)
         <div class="info-row">
             <span class="info-label">Date de début</span>
             <span class="info-val">{{ $payment->seminar->start_date->format('d/m/Y') }}</span>
         </div>
+        @endif
+        @if($payment->seminar?->end_date)
         <div class="info-row">
             <span class="info-label">Date de fin</span>
             <span class="info-val">{{ $payment->seminar->end_date->format('d/m/Y') }}</span>
         </div>
-        @if($payment->seminar->hours)
+        @endif
+        @if($payment->seminar?->hours)
         <div class="info-row">
             <span class="info-label">Volume horaire</span>
             <span class="info-val">{{ $payment->seminar->hours }} heures</span>
