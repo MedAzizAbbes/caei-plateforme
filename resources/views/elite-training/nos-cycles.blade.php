@@ -154,6 +154,14 @@
       height: 5px;
     }
 
+    .cycle-card-img {
+      width: calc(100% + 60px);
+      margin: -30px -30px 20px -30px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+    }
+
     .cycle-code-badge {
       display: inline-block;
       align-self: flex-start;
@@ -289,8 +297,11 @@
     <div class="container">
       <div class="row g-4">
         @foreach($cycles as $index => $cycle)
-        <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ ($index % 3) * 100 }}">
+        <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="{{ ($index % 4) * 100 }}">
           <div class="cycle-card">
+            @if(!empty($cycle['image']))
+            <img src="{{ asset($cycle['image']) }}" alt="{{ $cycle['title'] }}" class="cycle-card-img">
+            @endif
             <span class="cycle-code-badge"><i class="bi bi-bookmark-star-fill me-1"></i> {{ $cycle['code'] }}</span>
             <h3 class="cycle-title">{{ $cycle['title'] }}</h3>
             <p class="cycle-desc">{{ $cycle['description'] }}</p>
