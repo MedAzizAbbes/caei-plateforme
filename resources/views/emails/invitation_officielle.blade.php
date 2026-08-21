@@ -40,7 +40,7 @@
     </div>
     <div class="body">
         <div class="greeting">
-            Bonjour, <strong>{{ $payment->user->first_name }} {{ $payment->user->last_name }}</strong>,
+            Bonjour, <strong>{{ $payment->user ? ($payment->user->first_name . ' ' . $payment->user->last_name) : 'Cher participant' }}</strong>,
         </div>
         <span class="badge">🎓 Participation confirmée</span>
         <p>
@@ -51,21 +51,25 @@
         <div class="info-card">
             <div class="info-row">
                 <span class="lbl">Thème</span>
-                <span class="val">{{ $payment->seminar->theme }}</span>
+                <span class="val">{{ $payment->seminar?->theme ?? 'Séminaire CAEI' }}</span>
             </div>
             <div class="info-row">
                 <span class="lbl">Lieu</span>
-                <span class="val">{{ $payment->seminar->country }}</span>
+                <span class="val">{{ $payment->seminar?->country ?? 'Tunisie' }}</span>
             </div>
+            @if($payment->seminar?->start_date)
             <div class="info-row">
                 <span class="lbl">Du</span>
                 <span class="val">{{ $payment->seminar->start_date->format('d/m/Y') }}</span>
             </div>
+            @endif
+            @if($payment->seminar?->end_date)
             <div class="info-row">
                 <span class="lbl">Au</span>
                 <span class="val">{{ $payment->seminar->end_date->format('d/m/Y') }}</span>
             </div>
-            @if($payment->seminar->hours)
+            @endif
+            @if($payment->seminar?->hours)
             <div class="info-row">
                 <span class="lbl">Volume horaire</span>
                 <span class="val">{{ $payment->seminar->hours }} heures de formation</span>

@@ -35,28 +35,29 @@
     </div>
     <div class="body">
         <div class="greeting">
-            Bonjour, <strong>{{ $payment->user->first_name }} {{ $payment->user->last_name }}</strong>,
+            Bonjour, <strong>{{ $payment->user ? ($payment->user->first_name . ' ' . $payment->user->last_name) : 'Cher participant' }}</strong>,
         </div>
         <span class="badge">✅ Paiement confirmé</span>
         <p>
             Nous avons le plaisir de vous informer que votre paiement pour le séminaire
-            <strong>« {{ $payment->seminar->theme }} »</strong> a été validé avec succès.
+            <strong>« {{ $payment->seminar?->theme ?? 'Séminaire CAEI' }} »</strong> a été validé avec succès.
             Veuillez trouver ci-dessous votre attestation de paiement.
         </p>
 
         <div class="info-card">
             <div class="info-row">
                 <span class="lbl">Participant</span>
-                <span class="val">{{ $payment->user->first_name }} {{ $payment->user->last_name }}</span>
+                <span class="val">{{ $payment->user ? ($payment->user->first_name . ' ' . $payment->user->last_name) : 'Participant' }}</span>
             </div>
             <div class="info-row">
                 <span class="lbl">Séminaire</span>
-                <span class="val">{{ $payment->seminar->theme }}</span>
+                <span class="val">{{ $payment->seminar?->theme ?? 'Séminaire CAEI' }}</span>
             </div>
             <div class="info-row">
                 <span class="lbl">Lieu</span>
-                <span class="val">{{ $payment->seminar->country }}</span>
+                <span class="val">{{ $payment->seminar?->country ?? 'Tunisie' }}</span>
             </div>
+            @if($payment->seminar?->start_date && $payment->seminar?->end_date)
             <div class="info-row">
                 <span class="lbl">Période</span>
                 <span class="val">
@@ -64,6 +65,7 @@
                     au {{ $payment->seminar->end_date->format('d/m/Y') }}
                 </span>
             </div>
+            @endif
             <div class="info-row">
                 <span class="lbl">Mode de paiement</span>
                 <span class="val">{{ $payment->methodLabel() }}</span>
@@ -74,10 +76,10 @@
                 <span class="val">{{ $payment->organization_name }}</span>
             </div>
             @endif
-            @if($payment->seminar->price)
+            @if($payment->seminar?->price || $payment->amount)
             <div class="info-row">
                 <span class="lbl">Montant</span>
-                <span class="val">{{ number_format($payment->seminar->price, 0, ',', ' ') }} €</span>
+                <span class="val">{{ number_format($payment->amount ?: ($payment->seminar?->price ?? 0), 0, ',', ' ') }} {{ $payment->currency ?? '€' }}</span>
             </div>
             @endif
             <div class="info-row">

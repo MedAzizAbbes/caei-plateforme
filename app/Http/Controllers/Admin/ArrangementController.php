@@ -17,7 +17,11 @@ class ArrangementController extends Controller
     /** Liste tous les paiements (virement, visa, arrangement). */
     public function index(Request $request)
     {
-        $payments = Payment::with(['user', 'seminar', 'registration'])
+        $payments = Payment::with([
+            'user',
+            'seminar' => fn ($q) => $q->withTrashed(),
+            'registration.seminar' => fn ($q) => $q->withTrashed(),
+        ])
             ->when($request->filled('status'), fn ($q) => $q->where('status', $request->status))
             ->when($request->filled('payment_method'), fn ($q) => $q->where('payment_method', $request->payment_method))
             ->when($request->filled('seminar_id'), fn ($q) => $q->where('seminar_id', $request->seminar_id))
@@ -25,7 +29,7 @@ class ArrangementController extends Controller
             ->paginate(20)
             ->withQueryString();
 
-        $seminars = Seminar::orderBy('start_date')->get(['id', 'theme']);
+        $seminars = Seminar::withTrashed()->orderBy('start_date')->get(['id', 'theme', 'deleted_at']);
 
         return view('admin.arrangements.index', compact('payments', 'seminars'));
     }
@@ -37,12 +41,24 @@ class ArrangementController extends Controller
             return back()->with('error', 'Ce paiement ne peut pas être validé dans son état actuel.');
         }
 
-        $registration = $payment->registration()->with(['qrCode', 'user', 'seminar'])->firstOrFail();
+        $registration = $payment->registration()
+            ->with([
+                'qrCode',
+                'user',
+                'seminar' => fn ($q) => $q->withTrashed(),
+            ])
+            ->first();
+
+        if (! $registration) {
+            return back()->with('error', 'Inscription associée introuvable pour ce paiement.');
+        }
 
         if (! $registration->qrCode) {
             QrCode::generateFor($registration);
             $registration->load('qrCode');
         }
+
+        $payment->load(['seminar' => fn($q) => $q->withTrashed(), 'user']);
 
         $attestationPath = $this->generatePdf('pdf.attestation_paiement', [
             'payment'      => $payment,
@@ -66,17 +82,19 @@ class ArrangementController extends Controller
 
         $registration->markConfirmed();
 
-        try {
-            Mail::to($payment->user->email)
-                ->send(new ArrangementApprovedMail($payment, $registration, 'attestation'));
+        if ($payment->user && !empty($payment->user->email)) {
+            try {
+                Mail::to($payment->user->email)
+                    ->send(new ArrangementApprovedMail($payment, $registration, 'attestation'));
 
-            Mail::to($payment->user->email)
-                ->send(new ArrangementApprovedMail($payment, $registration, 'invitation'));
+                Mail::to($payment->user->email)
+                    ->send(new ArrangementApprovedMail($payment, $registration, 'invitation'));
 
-            Mail::to($payment->user->email)
-                ->send(new RegistrationQrCodeMail($registration));
-        } catch (\Exception $e) {
-            logger()->error('Erreur envoi email validation paiement: ' . $e->getMessage());
+                Mail::to($payment->user->email)
+                    ->send(new RegistrationQrCodeMail($registration));
+            } catch (\Exception $e) {
+                logger()->error('Erreur envoi email validation paiement: ' . $e->getMessage());
+            }
         }
 
         return back()->with('success', 'Paiement (' . $payment->methodLabel() . ') validé. Inscription confirmée, documents générés et envoyés par email.');

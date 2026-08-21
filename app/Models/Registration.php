@@ -22,7 +22,7 @@ class Registration extends Model
 
     public function seminar()
     {
-        return $this->belongsTo(Seminar::class);
+        return $this->belongsTo(Seminar::class)->withTrashed();
     }
 
     public function qrCode()
