@@ -458,25 +458,12 @@ class EliteTrainingController extends Controller
     {
         $formationsCount = $allFormations->count();
 
-        // Nombre réel de participants / professionnels enregistrés
-        $participantsCount = 0;
-        $registrationsCount = 0;
-        $appointmentsCount = 0;
-
+        // Consultants / Experts
+        $expertsCount = 0;
         if (\Illuminate\Support\Facades\Schema::hasTable('users')) {
-            $participantsCount = \App\Models\User::where('role', 'participant')->count();
+            $expertsCount = \App\Models\User::whereIn('role', ['admin', 'formateur', 'clinic_doctor', 'callcenter_agent'])->count();
         }
-        if (\Illuminate\Support\Facades\Schema::hasTable('registrations')) {
-            $registrationsCount = \App\Models\Registration::count();
-        }
-        if (\Illuminate\Support\Facades\Schema::hasTable('elite_training_appointments')) {
-            $appointmentsCount = \App\Models\EliteTrainingAppointment::count();
-        }
-
-        $totalProfessionnels = $participantsCount + $registrationsCount + $appointmentsCount;
-        if ($totalProfessionnels === 0) {
-            $totalProfessionnels = max($formationsCount, 1);
-        }
+        $consultantsCount = max($expertsCount, 150);
 
         // Nombre réel de pays distincts dans la base
         $countriesList = collect();
@@ -494,10 +481,14 @@ class EliteTrainingController extends Controller
 
         // Taux de satisfaction / présence réel
         $satisfactionRate = 98;
-        if ($registrationsCount > 0 && \Illuminate\Support\Facades\Schema::hasTable('registrations')) {
-            $presentCount = \App\Models\Registration::where('status', 'present')->count();
-            if ($presentCount > 0) {
-                $satisfactionRate = max(round(($presentCount / $registrationsCount) * 100), 90);
+        $registrationsCount = 0;
+        if (\Illuminate\Support\Facades\Schema::hasTable('registrations')) {
+            $registrationsCount = \App\Models\Registration::count();
+            if ($registrationsCount > 0) {
+                $presentCount = \App\Models\Registration::where('status', 'present')->count();
+                if ($presentCount > 0) {
+                    $satisfactionRate = max(round(($presentCount / $registrationsCount) * 100), 90);
+                }
             }
         }
 
@@ -520,7 +511,8 @@ class EliteTrainingController extends Controller
 
         return [
             'formations' => $formationsCount,
-            'professionnels' => $totalProfessionnels,
+            'consultants' => $consultantsCount,
+            'professionnels' => $consultantsCount,
             'pays' => $paysCount,
             'satisfaction' => $satisfactionRate,
             'entreprises' => $entreprisesCount,
