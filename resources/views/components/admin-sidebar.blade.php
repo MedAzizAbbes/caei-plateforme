@@ -25,25 +25,32 @@
 
                     {{-- Section Medical Center --}}
                     @php
-                        $isMedicalCenterActive = request()->routeIs('admin.medical-requests.*') || request()->routeIs('admin.cliniques.*');
+                        $isMedicalCenterActive = request()->routeIs('admin.medical-requests.*') || request()->routeIs('admin.cliniques.*') || request()->routeIs('admin.medical.*');
                         $pendingMedRequests = \App\Models\MedicalRequest::where('status', 'pending')->count();
                         $pendingClinicReview = \App\Models\MedicalRequest::where('clinic_status', 'pending_review')->whereNotNull('partner_clinic_id')->count();
                     @endphp
-                    <div class="rounded-xl {{ $isMedicalCenterActive ? 'bg-white/5 pb-1 border border-teal-500/20' : '' }}">
-                        <a href="{{ route('admin.medical-requests.index') }}" 
-                           class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ $isMedicalCenterActive ? 'bg-teal-600 text-white shadow-md' : 'text-slate-200 hover:bg-white/10' }}">
+                    <div x-data="{ open: {{ $isMedicalCenterActive ? 'true' : 'false' }} }" class="rounded-xl overflow-hidden {{ $isMedicalCenterActive ? 'bg-white/5 border border-teal-500/20' : '' }}">
+                        <button type="button"
+                                @click="open = !open"
+                                class="w-full flex items-center justify-between px-3.5 py-3 rounded-xl transition-all cursor-pointer {{ $isMedicalCenterActive ? 'bg-teal-600 text-white shadow-md' : 'text-slate-200 hover:bg-white/10' }}">
                             <div class="flex items-center gap-3">
                                 <span class="text-base">🏥</span>
                                 <span class="font-bold">Medical Center</span>
                             </div>
-                            @if($pendingMedRequests > 0 || $pendingClinicReview > 0)
-                                <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
-                                    {{ $pendingMedRequests + $pendingClinicReview }}
-                                </span>
-                            @endif
-                        </a>
+                            <div class="flex items-center gap-2">
+                                @if($pendingMedRequests > 0 || $pendingClinicReview > 0)
+                                    <span class="bg-amber-500 text-white text-[10px] font-black px-2 py-0.5 rounded-full">
+                                        {{ $pendingMedRequests + $pendingClinicReview }}
+                                    </span>
+                                @endif
+                                <svg class="w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                        </button>
+                        
                         {{-- Sous-liens Medical Center --}}
-                        <div class="pl-6 pr-2 py-1.5 space-y-1">
+                        <div x-show="open" x-cloak class="pl-6 pr-2 py-1.5 space-y-1 bg-black/10">
                             <a href="{{ route('admin.medical-requests.index') }}" 
                                class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ request()->routeIs('admin.medical-requests.*') ? 'bg-teal-500/30 text-teal-300 font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
                                 <div class="flex items-center gap-2">
@@ -91,7 +98,7 @@
 
                     {{-- Section Call Center --}}
                     @php
-                        $isCallCenterActive = request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*');
+                        $isCallCenterActive = request()->routeIs('admin.callcenter.*') || request()->routeIs('callcenter.*') || request()->routeIs('admin.callcenter-requests.*');
                         $currentTab = request('tab', 'workflow');
                         try {
                             $ccWorkflowNew = \Illuminate\Support\Facades\Schema::hasTable('rendez_vous') ? \App\Models\RendezVous::where('statut','en_attente_affectation')->count() : 0;
@@ -99,23 +106,28 @@
                             $ccTotal = $ccWorkflowNew + $ccDemandesNew;
                         } catch (\Throwable $e) { $ccTotal = 0; $ccWorkflowNew = 0; $ccDemandesNew = 0; }
                     @endphp
-                    <div class="rounded-xl {{ $isCallCenterActive ? 'bg-white/5 pb-1 border border-[#f2a90f]/20' : '' }}">
-                        <a href="{{ route('admin.callcenter.index') }}"
-                           class="flex items-center justify-between px-3.5 py-3 rounded-xl transition-all {{ $isCallCenterActive ? 'bg-[#f2a90f] text-[#061743] shadow-md' : 'text-slate-200 hover:bg-white/10' }}">
+                    <div x-data="{ open: {{ $isCallCenterActive ? 'true' : 'false' }} }" class="rounded-xl overflow-hidden {{ $isCallCenterActive ? 'bg-white/5 border border-[#f2a90f]/20' : '' }}">
+                        <button type="button"
+                                @click="open = !open"
+                                class="w-full flex items-center justify-between px-3.5 py-3 rounded-xl transition-all cursor-pointer {{ $isCallCenterActive ? 'bg-[#f2a90f] text-[#061743] shadow-md' : 'text-slate-200 hover:bg-white/10' }}">
                             <div class="flex items-center gap-3">
                                 <span class="text-base">📞</span>
                                 <span class="font-bold">Call Center</span>
                             </div>
-                            @if($ccTotal > 0)
-                                <span class="{{ $isCallCenterActive ? 'bg-[#061743] text-white' : 'bg-[#f2a90f] text-[#061743]' }} text-[10px] font-black px-2 py-0.5 rounded-full">{{ $ccTotal }}</span>
-                            @endif
-                        </a>
+                            <div class="flex items-center gap-2">
+                                @if($ccTotal > 0)
+                                    <span class="{{ $isCallCenterActive ? 'bg-[#061743] text-white' : 'bg-[#f2a90f] text-[#061743]' }} text-[10px] font-black px-2 py-0.5 rounded-full">{{ $ccTotal }}</span>
+                                @endif
+                                <svg class="w-4 h-4 transition-transform duration-200" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </div>
+                        </button>
                         
                         {{-- Sous-liens Call Center --}}
-                        @if($isCallCenterActive)
-                        <div class="pl-6 pr-2 py-1.5 space-y-1">
+                        <div x-show="open" x-cloak class="pl-6 pr-2 py-1.5 space-y-1 bg-black/10">
                             <a href="{{ route('admin.callcenter.index', ['tab' => 'workflow']) }}" 
-                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ $currentTab === 'workflow' ? 'bg-[#f2a90f]/30 text-[#f2a90f] font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
+                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ ($isCallCenterActive && $currentTab === 'workflow') ? 'bg-[#f2a90f]/30 text-[#f2a90f] font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
                                 <div class="flex items-center gap-2">
                                     <span>📊</span>
                                     <span class="truncate">Workflow RDV</span>
@@ -128,7 +140,7 @@
                             </a>
 
                             <a href="{{ route('admin.callcenter.index', ['tab' => 'demandes_web']) }}"
-                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ $currentTab === 'demandes_web' ? 'bg-[#f2a90f]/30 text-[#f2a90f] font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
+                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ ($isCallCenterActive && $currentTab === 'demandes_web') ? 'bg-[#f2a90f]/30 text-[#f2a90f] font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
                                 <div class="flex items-center gap-2">
                                     <span>📩</span>
                                     <span class="truncate">Demandes Web</span>
@@ -141,14 +153,13 @@
                             </a>
 
                             <a href="{{ route('admin.callcenter.index', ['tab' => 'utilisateurs']) }}"
-                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ $currentTab === 'utilisateurs' ? 'bg-[#f2a90f]/30 text-[#f2a90f] font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
+                               class="flex items-center justify-between px-3 py-1.5 rounded-lg text-xs transition-all {{ ($isCallCenterActive && $currentTab === 'utilisateurs') ? 'bg-[#f2a90f]/30 text-[#f2a90f] font-black' : 'text-slate-400 hover:text-white hover:bg-white/5' }}">
                                 <div class="flex items-center gap-2">
                                     <span>👥</span>
                                     <span class="truncate">Comptes</span>
                                 </div>
                             </a>
                         </div>
-                        @endif
                     </div>
 
                     {{-- Lien Elite Training --}}
