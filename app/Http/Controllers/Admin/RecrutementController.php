@@ -26,6 +26,24 @@ class RecrutementController extends Controller
         return back()->with('error', 'Le fichier CV est introuvable.');
     }
 
+    public function updateStatut(Request $request, $id)
+    {
+        $request->validate([
+            'statut' => 'required|in:en_attente,accepte,refuse',
+        ]);
+
+        $recrutement = Recrutement::findOrFail($id);
+        $recrutement->update(['statut' => $request->statut]);
+
+        $labels = [
+            'en_attente' => 'En attente',
+            'accepte'    => 'Accepté',
+            'refuse'     => 'Refusé',
+        ];
+
+        return back()->with('success', "Statut mis à jour : {$labels[$request->statut]}.");
+    }
+
     public function destroy($id)
     {
         $recrutement = Recrutement::findOrFail($id);

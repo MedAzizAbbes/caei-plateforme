@@ -521,6 +521,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/recrutements', [\App\Http\Controllers\Admin\RecrutementController::class, 'index'])->name('recrutements.index');
     Route::get('/recrutements/{id}/cv', [\App\Http\Controllers\Admin\RecrutementController::class, 'downloadCv'])->name('recrutements.cv');
     Route::delete('/recrutements/{id}', [\App\Http\Controllers\Admin\RecrutementController::class, 'destroy'])->name('recrutements.destroy');
+    Route::patch('/recrutements/{id}/statut', [\App\Http\Controllers\Admin\RecrutementController::class, 'updateStatut'])->name('recrutements.statut');
 });
 
 // --- Recrutement ---

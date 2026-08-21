@@ -241,167 +241,166 @@
                                     </td>
                                 </tr>
 
-                                {{-- Modal de Gestion de la Demande --}}
+                                {{-- Modal de Gestion de la Demande (Compact 2-colonnes sans scroll) --}}
                                 <div id="modal-{{ $req->id }}" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-                                    <div class="bg-white rounded-3xl max-w-2xl w-full p-8 shadow-2xl space-y-6 relative text-left">
-                                        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
-                                            <div>
-                                                <span class="text-xs font-bold uppercase text-teal-600">Devis Médical #{{ ($requests->currentPage() - 1) * $requests->perPage() + $loop->iteration }}</span>
-                                                <h3 class="text-xl font-black text-slate-900">{{ $req->fullname }}</h3>
+                                    <div class="bg-white rounded-3xl max-w-4xl w-full p-6 shadow-2xl relative text-left my-auto max-h-[92vh] overflow-y-auto">
+                                        {{-- Header --}}
+                                        <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-4">
+                                            <div class="flex items-center gap-3">
+                                                <span class="text-xs font-bold uppercase text-teal-700 bg-teal-50 px-2.5 py-1 rounded-lg border border-teal-200">
+                                                    Devis #{{ ($requests->currentPage() - 1) * $requests->perPage() + $loop->iteration }}
+                                                </span>
+                                                <h3 class="text-lg font-black text-slate-900">{{ $req->fullname }}</h3>
+                                                <span class="text-xs font-bold px-2.5 py-0.5 rounded-full {{ $req->status === 'pending' ? 'bg-amber-100 text-amber-800' : ($req->status === 'in_progress' ? 'bg-blue-100 text-blue-800' : ($req->status === 'completed' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800')) }}">
+                                                    {{ $req->status === 'pending' ? 'En attente' : ($req->status === 'in_progress' ? 'En cours' : ($req->status === 'completed' ? 'Traité' : 'Annulé')) }}
+                                                </span>
                                             </div>
-                                            <button onclick="closeModal('modal-{{ $req->id }}')" class="text-slate-400 hover:text-slate-700 text-xl font-bold p-2">✕</button>
+                                            <button onclick="closeModal('modal-{{ $req->id }}')" class="text-slate-400 hover:text-slate-700 text-lg font-bold p-1 hover:bg-slate-100 rounded-lg transition-colors">✕</button>
                                         </div>
 
-                                        <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl text-xs space-y-1">
-                                            <div><strong>Email :</strong> {{ $req->email }}</div>
-                                            <div><strong>Téléphone :</strong> {{ $req->phone }}</div>
-                                            <div><strong>Pays :</strong> {{ $req->country }}</div>
-                                            <div><strong>Prestation :</strong> {{ $req->service_type }}</div>
-                                            <div><strong>Date souhaitée :</strong> {{ $req->preferred_date ? $req->preferred_date->format('d/m/Y') : 'Non spécifiée' }}</div>
-                                            <div><strong>Demande reçue :</strong> {{ $req->created_at->format('d/m/Y H:i') }}</div>
-                                            @if($req->partner_clinic)
-                                                <div class="col-span-2"><strong>🏥 Affecté à :</strong> <span class="text-indigo-700 font-bold">{{ $req->partner_clinic }}</span> <span class="text-slate-400">({{ $req->assigned_at?->format('d/m/Y H:i') }})</span></div>
-                                            @endif
-                                        </div>
-
-                                        @if($req->message)
-                                            <div>
-                                                <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Message du patient :</label>
-                                                <div class="p-4 bg-teal-50/60 rounded-2xl text-xs text-slate-800 border border-teal-100 whitespace-pre-wrap">
-                                                    {{ $req->message }}
-                                                </div>
-                                            </div>
-                                        @endif
-
-                                        {{-- ════ Section : Retour de la Clinique Partenaire (Devis & Notes) ════ --}}
-                                        @if($req->partner_clinic && ($req->clinic_status || $req->devis_amount || $req->clinic_notes))
-                                            <div class="rounded-2xl border-2 {{ $req->clinic_status === 'quoted' ? 'border-blue-200 bg-blue-50/40' : ($req->clinic_status === 'accepted' ? 'border-emerald-200 bg-emerald-50/40' : ($req->clinic_status === 'rejected' ? 'border-rose-200 bg-rose-50/40' : 'border-amber-200 bg-amber-50/40')) }} p-5 space-y-3">
-                                                <div class="flex items-center justify-between">
-                                                    <div class="flex items-center gap-2">
-                                                        <span class="text-lg">🏥</span>
-                                                        <div>
-                                                            <div class="text-xs font-black uppercase {{ $req->clinic_status === 'quoted' ? 'text-blue-900' : ($req->clinic_status === 'accepted' ? 'text-emerald-900' : 'text-slate-900') }}">
-                                                                Retour de {{ $req->partner_clinic }}
-                                                            </div>
-                                                            <div class="text-[11px] text-slate-500">Statut et devis transmis par la clinique partenaire</div>
-                                                        </div>
+                                        {{-- 2 Colonnes --}}
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                            {{-- Colonne Gauche : Infos Patient + Message + Retour Clinique --}}
+                                            <div class="space-y-3">
+                                                {{-- Carte Coordonnées --}}
+                                                <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-200/80 text-xs">
+                                                    <div class="font-bold text-slate-700 mb-2 pb-1.5 border-b border-slate-200/60 flex items-center gap-1.5">
+                                                        <span>👤</span> Coordonnées du Patient
                                                     </div>
-                                                    <div>
-                                                        @if($req->clinic_status === 'pending_review')
-                                                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full">⏳ En attente de traitement</span>
-                                                        @elseif($req->clinic_status === 'accepted')
-                                                            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full">✅ Dossier Accepté</span>
-                                                        @elseif($req->clinic_status === 'quoted')
-                                                            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full">💰 Devis Transmis</span>
-                                                        @elseif($req->clinic_status === 'rejected')
-                                                            <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full">❌ Dossier Refusé</span>
-                                                        @endif
+                                                    <div class="grid grid-cols-2 gap-2 text-slate-700">
+                                                        <div><span class="text-slate-400 block text-[10px] uppercase font-bold">Email</span> <span class="font-medium break-all">{{ $req->email }}</span></div>
+                                                        <div><span class="text-slate-400 block text-[10px] uppercase font-bold">Téléphone</span> <span class="font-medium">{{ $req->phone }}</span></div>
+                                                        <div><span class="text-slate-400 block text-[10px] uppercase font-bold">Pays</span> <span class="font-medium">{{ $req->country }}</span></div>
+                                                        <div><span class="text-slate-400 block text-[10px] uppercase font-bold">Prestation</span> <span class="font-semibold text-teal-700">{{ $req->service_type }}</span></div>
+                                                        <div><span class="text-slate-400 block text-[10px] uppercase font-bold">Date souhaitée</span> <span class="font-medium">{{ $req->preferred_date ? $req->preferred_date->format('d/m/Y') : 'Non spécifiée' }}</span></div>
+                                                        <div><span class="text-slate-400 block text-[10px] uppercase font-bold">Demande reçue</span> <span class="font-medium">{{ $req->created_at->format('d/m/Y H:i') }}</span></div>
                                                     </div>
-                                                </div>
-
-                                                @if($req->devis_amount)
-                                                    <div class="bg-white rounded-xl p-4 border border-blue-100">
-                                                        <div class="flex items-baseline justify-between mb-1">
-                                                            <span class="text-xs font-black uppercase text-blue-700">Montant proposé par la clinique</span>
-                                                            <span class="text-[10px] text-slate-400">{{ $req->devis_sent_at?->format('d/m/Y H:i') }}</span>
-                                                        </div>
-                                                        <div class="text-2xl font-black text-blue-900">
-                                                            {{ number_format($req->devis_amount, 2) }} {{ $req->devis_currency }}
-                                                        </div>
-                                                        @if($req->devis_message)
-                                                            <div class="mt-2 text-xs text-slate-700 bg-blue-50/50 p-3 rounded-lg border border-blue-100 whitespace-pre-wrap">
-                                                                <strong>Détails du devis :</strong><br>{{ $req->devis_message }}
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                @endif
-
-                                                @if($req->clinic_notes)
-                                                    <div class="text-xs text-slate-700 bg-white p-3 rounded-xl border border-slate-200">
-                                                        <strong>Notes transmises par la clinique :</strong><br>{{ $req->clinic_notes }}
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        @endif
-
-                                        {{-- ════ Section : Affecter au Partenaire Clinique ════ --}}
-                                        <div class="rounded-2xl border-2 border-indigo-100 bg-indigo-50/40 p-5 space-y-3">
-                                            <div class="flex items-center justify-between">
-                                                <div class="flex items-center gap-2">
-                                                    <span class="text-lg">🏥</span>
-                                                    <div>
-                                                        <div class="text-sm font-black text-indigo-900">Affecter au Partenaire Clinique</div>
-                                                        <div class="text-[11px] text-indigo-600">Sélectionnez la clinique partenaire à qui référer ce patient</div>
-                                                    </div>
-                                                </div>
-                                                <a href="{{ route('admin.cliniques.create') }}" target="_blank" class="text-[11px] text-indigo-600 hover:text-indigo-900 font-bold underline">+ Ajouter une clinique</a>
-                                            </div>
-                                            <form action="{{ route('admin.medical-requests.assign-partner', $req) }}" method="POST" class="flex items-end gap-3">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="flex-1">
-                                                    <label class="block text-[11px] font-bold uppercase text-indigo-700 mb-1.5">Clinique partenaire</label>
-                                                    @if($partnerClinics->count() > 0)
-                                                        <select name="partner_clinic_id" class="w-full rounded-xl border-2 border-indigo-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-800 focus:border-indigo-500 focus:outline-none">
-                                                            <option value="">— Aucune affectation —</option>
-                                                            @foreach($partnerClinics as $clinic)
-                                                                <option value="{{ $clinic->id }}" {{ $req->partner_clinic_id == $clinic->id ? 'selected' : '' }}>
-                                                                    🏥 {{ $clinic->name }}@if($clinic->city) — {{ $clinic->city }}@endif
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                    @else
-                                                        <div class="text-xs text-slate-500 italic p-3 bg-white rounded-xl border border-indigo-100">
-                                                            Aucune clinique partenaire enregistrée.
-                                                            <a href="{{ route('admin.cliniques.create') }}" target="_blank" class="text-indigo-600 font-bold hover:underline">Créer la première →</a>
+                                                    @if($req->partner_clinic)
+                                                        <div class="mt-2 pt-2 border-t border-slate-200/60 flex items-center justify-between text-[11px]">
+                                                            <span class="text-slate-500 font-bold">🏥 Clinique :</span>
+                                                            <span class="text-indigo-700 font-bold">{{ $req->partner_clinic }}</span>
                                                         </div>
                                                     @endif
                                                 </div>
-                                                @if($partnerClinics->count() > 0)
-                                                    <button type="submit" class="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl shadow transition-all flex items-center gap-2">
-                                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                                                        Affecter
-                                                    </button>
+
+                                                {{-- Message du patient --}}
+                                                @if($req->message)
+                                                    <div class="bg-teal-50/50 p-3 rounded-2xl border border-teal-100 text-xs">
+                                                        <label class="block text-[10px] font-bold uppercase text-teal-800 mb-1 flex items-center gap-1">
+                                                            <span>💬</span> Message du patient :
+                                                        </label>
+                                                        <div class="text-slate-700 whitespace-pre-wrap leading-relaxed max-h-24 overflow-y-auto pr-1">
+                                                            {{ $req->message }}
+                                                        </div>
+                                                    </div>
                                                 @endif
-                                            </form>
-                                        </div>
 
-                                        {{-- ════ Section : Statut & Notes ════ --}}
-                                        <form action="{{ route('admin.medical-requests.update-status', $req) }}" method="POST" class="space-y-4">
-                                            @csrf
-                                            @method('PUT')
-
-                                            <div>
-                                                <label class="block text-xs font-bold uppercase text-slate-700 mb-2">Changer le statut :</label>
-                                                <select name="status" class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:border-[#061743] focus:outline-none">
-                                                    <option value="pending" {{ $req->status === 'pending' ? 'selected' : '' }}>En attente</option>
-                                                    <option value="in_progress" {{ $req->status === 'in_progress' ? 'selected' : '' }}>En cours de traitement</option>
-                                                    <option value="completed" {{ $req->status === 'completed' ? 'selected' : '' }}>Traité / Devis Envoyé</option>
-                                                    <option value="cancelled" {{ $req->status === 'cancelled' ? 'selected' : '' }}>Annulé</option>
-                                                </select>
+                                                {{-- Retour Clinique (si existant) --}}
+                                                @if($req->partner_clinic && ($req->clinic_status || $req->devis_amount || $req->clinic_notes))
+                                                    <div class="rounded-2xl border {{ $req->clinic_status === 'quoted' ? 'border-blue-200 bg-blue-50/40' : ($req->clinic_status === 'accepted' ? 'border-emerald-200 bg-emerald-50/40' : ($req->clinic_status === 'rejected' ? 'border-rose-200 bg-rose-50/40' : 'border-amber-200 bg-amber-50/40')) }} p-3 space-y-2 text-xs">
+                                                        <div class="flex items-center justify-between">
+                                                            <span class="font-bold text-slate-800 flex items-center gap-1">🏥 {{ $req->partner_clinic }}</span>
+                                                            @if($req->clinic_status === 'pending_review')
+                                                                <span class="bg-amber-100 text-amber-800 text-[10px] font-bold px-2 py-0.5 rounded-full">⏳ En attente</span>
+                                                            @elseif($req->clinic_status === 'accepted')
+                                                                <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">✅ Accepté</span>
+                                                            @elseif($req->clinic_status === 'quoted')
+                                                                <span class="bg-blue-100 text-blue-800 text-[10px] font-bold px-2 py-0.5 rounded-full">💰 Devis envoyé</span>
+                                                            @elseif($req->clinic_status === 'rejected')
+                                                                <span class="bg-rose-100 text-rose-800 text-[10px] font-bold px-2 py-0.5 rounded-full">❌ Refusé</span>
+                                                            @endif
+                                                        </div>
+                                                        @if($req->devis_amount)
+                                                            <div class="bg-white rounded-xl p-2.5 border border-blue-100 flex items-center justify-between">
+                                                                <span class="text-[11px] font-bold text-blue-700">Devis proposé :</span>
+                                                                <span class="text-sm font-black text-blue-900">{{ number_format($req->devis_amount, 2) }} {{ $req->devis_currency }}</span>
+                                                            </div>
+                                                        @endif
+                                                        @if($req->clinic_notes)
+                                                            <div class="text-[11px] text-slate-600 bg-white p-2 rounded-xl border border-slate-200">
+                                                                <strong>Notes clinique :</strong> {{ $req->clinic_notes }}
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                @endif
                                             </div>
 
-                                            <div>
-                                                <label class="block text-xs font-bold uppercase text-slate-700 mb-2">Notes internes Administrateur :</label>
-                                                <textarea name="admin_notes" rows="3" placeholder="Ajoutez vos notes ou suivi interne..." class="w-full rounded-xl border border-slate-300 px-4 py-2.5 text-sm focus:border-[#061743] focus:outline-none">{{ $req->admin_notes }}</textarea>
-                                            </div>
+                                            {{-- Colonne Droite : Affectation + Statut + Notes Internes + Actions --}}
+                                            <div class="space-y-3 flex flex-col justify-between">
+                                                <div class="space-y-3">
+                                                    {{-- Affecter Partenaire Clinique --}}
+                                                    <div class="rounded-2xl border border-indigo-100 bg-indigo-50/40 p-3.5 space-y-2">
+                                                        <div class="flex items-center justify-between">
+                                                            <span class="text-xs font-bold text-indigo-900 flex items-center gap-1.5">
+                                                                <span>🏥</span> Affecter Clinique Partenaire
+                                                            </span>
+                                                            <a href="{{ route('admin.cliniques.create') }}" target="_blank" class="text-[10px] text-indigo-600 hover:text-indigo-900 font-bold underline">+ Ajouter clinique</a>
+                                                        </div>
+                                                        <form action="{{ route('admin.medical-requests.assign-partner', $req) }}" method="POST" class="flex items-center gap-2">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="flex-1">
+                                                                @if($partnerClinics->count() > 0)
+                                                                    <select name="partner_clinic_id" class="w-full rounded-xl border border-indigo-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-800 focus:border-indigo-500 focus:outline-none">
+                                                                        <option value="">— Aucune affectation —</option>
+                                                                        @foreach($partnerClinics as $clinic)
+                                                                            <option value="{{ $clinic->id }}" {{ $req->partner_clinic_id == $clinic->id ? 'selected' : '' }}>
+                                                                                🏥 {{ $clinic->name }}@if($clinic->city) ({{ $clinic->city }})@endif
+                                                                            </option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @else
+                                                                    <div class="text-[11px] text-slate-500 italic p-2 bg-white rounded-lg border border-indigo-100">
+                                                                        Aucune clinique partenaire.
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                            @if($partnerClinics->count() > 0)
+                                                                <button type="submit" class="shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs px-3.5 py-1.5 rounded-xl shadow-xs transition-all">
+                                                                    Affecter
+                                                                </button>
+                                                            @endif
+                                                        </form>
+                                                    </div>
 
-                                            <div class="flex items-center justify-between pt-4 border-t border-slate-100">
-                                                <button type="submit" class="bg-[#061743] hover:bg-[#0a2569] text-white font-bold text-sm px-6 py-3 rounded-xl shadow transition-all">
-                                                    Enregistrer les modifications
-                                                </button>
-                                        </form>
+                                                    {{-- Modifier Statut & Notes Internes --}}
+                                                    <form action="{{ route('admin.medical-requests.update-status', $req) }}" method="POST" id="status-form-{{ $req->id }}" class="space-y-2.5">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div>
+                                                            <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Changer le statut :</label>
+                                                            <select name="status" class="w-full rounded-xl border border-slate-300 px-3 py-1.5 text-xs font-medium focus:border-teal-600 focus:outline-none">
+                                                                <option value="pending" {{ $req->status === 'pending' ? 'selected' : '' }}>🕐 En attente</option>
+                                                                <option value="in_progress" {{ $req->status === 'in_progress' ? 'selected' : '' }}>⏳ En cours de traitement</option>
+                                                                <option value="completed" {{ $req->status === 'completed' ? 'selected' : '' }}>✅ Traité / Devis Envoyé</option>
+                                                                <option value="cancelled" {{ $req->status === 'cancelled' ? 'selected' : '' }}>❌ Annulé</option>
+                                                            </select>
+                                                        </div>
+                                                        <div>
+                                                            <label class="block text-[11px] font-bold uppercase text-slate-600 mb-1">Notes internes Administrateur :</label>
+                                                            <textarea name="admin_notes" rows="2" placeholder="Ajoutez vos notes internes..." class="w-full rounded-xl border border-slate-300 p-2.5 text-xs focus:border-teal-600 focus:outline-none resize-none">{{ $req->admin_notes }}</textarea>
+                                                        </div>
+                                                    </form>
+                                                </div>
 
-                                                <form action="{{ route('admin.medical-requests.destroy', $req) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="text-rose-600 hover:text-rose-800 text-xs font-bold underline">
-                                                        Supprimer la demande
+                                                {{-- Boutons d'action --}}
+                                                <div class="flex items-center justify-between pt-3 border-t border-slate-100 mt-2">
+                                                    <button type="submit" form="status-form-{{ $req->id }}" class="bg-teal-700 hover:bg-teal-800 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow-xs transition-all flex items-center gap-1.5">
+                                                        <span>💾</span> Enregistrer les modifications
                                                     </button>
-                                                </form>
+                                                    <form action="{{ route('admin.medical-requests.destroy', $req) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette demande ?');" class="inline">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="text-rose-600 hover:text-rose-800 text-xs font-bold hover:underline">
+                                                            🗑 Supprimer
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
+
                             @endforeach
                         </tbody>
                     </table>
