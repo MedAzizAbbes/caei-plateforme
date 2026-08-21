@@ -165,16 +165,6 @@
                         </div>
 
                         <div>
-                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Société / Entreprise</label>
-                            <input type="text" name="societe" placeholder="Ex: SARL Commerce" class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm">
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Secteur d'activité</label>
-                            <input type="text" name="secteur" placeholder="Ex: Assurance, Énergie, Tech" class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm">
-                        </div>
-
-                        <div>
                             <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Date du RDV *</label>
                             <input type="date" name="date_rendez_vous" min="{{ date('Y-m-d') }}" required class="w-full rounded-xl border-slate-200 bg-slate-50 text-sm">
                         </div>
