@@ -26,7 +26,7 @@
     <aside class="sidebar flex flex-col p-5 sticky top-0 h-screen overflow-y-auto">
         {{-- Logo --}}
         <div class="flex items-center gap-3 mb-8 pb-6 border-b border-white/10">
-            <img src="{{ asset('images/logo.png') }}" alt="CAEI" class="w-10 h-10 rounded-full object-cover border-2 border-sky-400">
+            <img src="{{ asset('images/logo-medical-square.jpg') }}" alt="CAEI" class="w-10 h-10 rounded-full object-cover border-2 border-sky-400">
             <div>
                 <div class="text-white font-black text-sm uppercase">CAEI MEDICAL</div>
                 <div class="text-sky-300 text-[10px] font-bold uppercase tracking-wider">Espace Clinique</div>

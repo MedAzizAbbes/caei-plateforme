@@ -93,7 +93,7 @@
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 {{-- Logo --}}
                 <a href="{{ route('medical.services') }}" class="flex items-center hover:opacity-80 transition-opacity">
-                    <img src="{{ asset('images/logo-caei-transparent.png') }}" alt="Logo CAEI Medical Services" style="height: 75px; width: auto; object-fit: contain;">
+                    <img src="{{ asset('images/logo-medical-square.jpg') }}" alt="Logo CAEI Medical Services" style="height: 75px; width: auto; object-fit: contain;">
                 </a>
 
                 {{-- Desktop Links --}}
@@ -490,48 +490,56 @@
         </section>
 
         {{-- ══════════ SECTION CONTACT & FOOTER ══════════ --}}
-        <footer id="contact" class="bg-[#0f172a] text-sky-700 py-16 text-sm">
+        <footer id="contact" class="bg-[#0f172a] text-slate-400 py-16 text-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                <div class="space-y-3">
+                <div class="space-y-4">
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-10 w-10 rounded-full border border-sky-400">
-                        <span class="font-black text-white text-base">CAEI MEDICAL</span>
+                        <img src="{{ asset('images/logo-medical-wide.png') }}" alt="Logo CAEI Medical" class="h-16 w-auto drop-shadow-lg">
                     </div>
-                    <p class="text-xs text-sky-600 leading-relaxed">
+                    <p class="text-xs text-slate-400 leading-relaxed text-justify">
                         Agence internationale indépendante d'accompagnement médical & d'évacuation sanitaire en Tunisie.
                     </p>
                 </div>
 
                 <div>
-                    <h4 class="font-bold text-white mb-3 text-xs uppercase tracking-wider text-sky-600">Services Clés</h4>
-                    <ul class="space-y-2 text-xs">
-                        <li><a href="#services" class="hover:text-white transition-colors">Chirurgie Esthétique</a></li>
-                        <li><a href="#evacsan" class="hover:text-white transition-colors">Évacuation Sanitaire 24/7</a></li>
-                        <li><a href="#services" class="hover:text-white transition-colors">Assistance PMA / FIV</a></li>
-                        <li><a href="#services" class="hover:text-white transition-colors">Chirurgie Bariatrique</a></li>
+                    <h4 class="font-bold text-white mb-4 text-xs uppercase tracking-wider">SERVICES CLÉS</h4>
+                    <ul class="space-y-3 text-xs">
+                        <li><a href="#services" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Chirurgie Esthétique</a></li>
+                        <li><a href="#evacsan" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Évacuation Sanitaire 24/7</a></li>
+                        <li><a href="#services" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Assistance PMA / FIV</a></li>
+                        <li><a href="#services" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Chirurgie Bariatrique</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-bold text-white mb-3 text-xs uppercase tracking-wider text-sky-600">Liens Utiles</h4>
-                    <ul class="space-y-2 text-xs">
-                        <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Site Officiel Groupe CAEI</a></li>
-                        <li><a href="{{ route('plateforme') }}" class="hover:text-white transition-colors">Plateforme Séminaires</a></li>
-                        <li><a href="https://caei-afri.com/Medicalservices/PDF/catalogueCAEIMedicalServices.pdf" target="_blank" class="hover:text-white transition-colors">Télécharger Catalogue PDF</a></li>
+                    <h4 class="font-bold text-white mb-4 text-xs uppercase tracking-wider">LIENS UTILES</h4>
+                    <ul class="space-y-3 text-xs">
+                        <li><a href="{{ route('home') }}" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Site Officiel Groupe CAEI</a></li>
+                        <li><a href="{{ route('plateforme') }}" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Plateforme Séminaires</a></li>
+                        <li><a href="https://caei-afri.com/Medicalservices/PDF/catalogueCAEIMedicalServices.pdf" target="_blank" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Télécharger Catalogue PDF</a></li>
                     </ul>
                 </div>
 
-                <div class="space-y-2 text-xs">
-                    <h4 class="font-bold text-white mb-3 uppercase tracking-wider text-sky-600">Contact Tunis</h4>
-                    <p>📍 Immeuble Medina Palace, 53-55 Av. de Paris, Tunis</p>
-                    <p>📞 +216 53 359 515</p>
-                    <p>✉️ Medicale@caei-afri.com</p>
+                <div class="space-y-3 text-xs">
+                    <h4 class="font-bold text-white mb-4 uppercase tracking-wider">CONTACT TUNIS</h4>
+                    <p class="flex items-start gap-3">
+                        <svg class="w-4 h-4 text-sky-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <span>Immeuble Medina Palace, 53-55 Av. de Paris, Tunis</span>
+                    </p>
+                    <p class="flex items-center gap-3">
+                        <svg class="w-4 h-4 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        <span>+216 53 359 515</span>
+                    </p>
+                    <a href="mailto:Medicale@caei-afri.com" class="flex items-center gap-3 hover:text-white transition-colors">
+                        <svg class="w-4 h-4 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <span>Medicale@caei-afri.com</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-sky-100 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-800 pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500">
                 <p>© {{ date('Y') }} CAEI Medical Services — Tous droits réservés.</p>
-                <p>Développé par CAEI Digital MOOV</p>
+                <p>Développé par <a href="https://digitalmoov.caei-afri.com/" target="_blank" class="hover:text-white transition-colors">CAEI Digital MOOV</a></p>
             </div>
         </footer>
         <x-intl-tel-input />

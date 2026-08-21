@@ -76,7 +76,7 @@
         <div class="text-center mb-8">
             <a href="{{ route('medical.services') }}" class="inline-flex items-center gap-3 group">
                 <div class="relative">
-                    <img src="{{ asset('images/logo.png') }}" alt="CAEI Medical" class="h-16 w-16 rounded-full object-cover border-3 border-white/30 shadow-xl">
+                    <img src="{{ asset('images/logo-medical-square.jpg') }}" alt="CAEI Medical" class="h-16 w-16 rounded-full object-cover border-3 border-white/30 shadow-xl">
                     <span class="absolute -bottom-1 -right-1 bg-[#0284c7] text-white p-1 rounded-full border-2 border-white/50">
                         <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clip-rule="evenodd"/></svg>
                     </span>
