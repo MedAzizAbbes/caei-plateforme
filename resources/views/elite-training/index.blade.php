@@ -1764,7 +1764,7 @@
       </ul>
 
       <div class="d-flex align-items-center gap-2">
-        <a href="{{ asset('assets/pdf/CAEI CATALOGUE.pdf') }}" class="btn-back-home d-none d-lg-flex" download="CAEI CATALOGUE.pdf" style="color: var(--gold-light); border-color: rgba(206,146,51,0.4); background: rgba(206, 146, 51, 0.1);">
+        <a href="{{ asset('assets/pdf/CAEI CATALOGUE.pdf') }}" target="_blank" rel="noopener noreferrer" class="btn-back-home d-none d-lg-flex" style="color: var(--gold-light); border-color: rgba(206,146,51,0.4); background: rgba(206, 146, 51, 0.1);">
           <i class="bi bi-file-earmark-pdf-fill"></i> Catalogue
         </a>
         <a href="{{ route('home') }}" class="btn-back-home d-none d-lg-flex">
@@ -1836,8 +1836,8 @@
               <span class="stat-label">% Satisfaction</span>
             </div>
             <div class="hero-stat-card">
-              <span class="stat-num" data-target="{{ $stats['professionnels'] ?? 50 }}">{{ $stats['professionnels'] ?? 50 }}</span>
-              <span class="stat-label">Professionnels</span>
+              <span class="stat-num" data-target="{{ $stats['consultants'] ?? 150 }}">+{{ $stats['consultants'] ?? 150 }}</span>
+              <span class="stat-label">Consultants</span>
             </div>
             <div class="hero-stat-card">
               <span class="stat-num" data-target="{{ $stats['pays'] ?? 15 }}">{{ $stats['pays'] ?? 15 }}+</span>
@@ -2025,8 +2025,8 @@
               <div class="col-6 col-md-3">
                 <div class="stat-item">
                   <i class="bi bi-people stat-icon"></i>
-                  <span class="stat-number counter-animate" data-target="{{ $stats['professionnels'] ?? 50 }}">{{ $stats['professionnels'] ?? 50 }}</span>
-                  <span class="stat-label">Professionnels</span>
+                  <span class="stat-number counter-animate" data-target="{{ $stats['consultants'] ?? 150 }}">+{{ $stats['consultants'] ?? 150 }}</span>
+                  <span class="stat-label">Consultants</span>
                 </div>
               </div>
               <div class="col-6 col-md-3">
@@ -2877,6 +2877,7 @@
       if (isNaN(target)) return;
 
       const hasPercent = el.textContent.includes('%') || el.innerHTML.includes('%');
+      const hasLeadingPlus = el.textContent.trim().startsWith('+') || el.innerHTML.trim().startsWith('+');
       const hasPlus = el.textContent.includes('+') || el.innerHTML.includes('+');
 
       const start = performance.now();
@@ -2889,6 +2890,8 @@
         let formatted = currentVal.toLocaleString();
         if (hasPercent) {
           el.innerHTML = formatted + '<span style="font-size:0.75em">%</span>';
+        } else if (hasLeadingPlus) {
+          el.textContent = '+' + formatted;
         } else if (hasPlus) {
           el.textContent = formatted + '+';
         } else {
@@ -2901,6 +2904,8 @@
           let finalFormatted = target.toLocaleString();
           if (hasPercent) {
             el.innerHTML = finalFormatted + '<span style="font-size:0.75em">%</span>';
+          } else if (hasLeadingPlus) {
+            el.textContent = '+' + finalFormatted;
           } else if (hasPlus) {
             el.textContent = finalFormatted + '+';
           } else {
