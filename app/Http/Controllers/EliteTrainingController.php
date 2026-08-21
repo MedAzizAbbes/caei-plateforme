@@ -281,7 +281,17 @@ class EliteTrainingController extends Controller
         $dbCycles = Formation::active()->where('type', 'cycle')->orderBy('code')->get();
 
         if ($dbCycles->count() > 0) {
-            $cycles = $dbCycles->map(function ($f) {
+            $cycles = $dbCycles->values()->map(function ($f, $idx) {
+                $imagePath = $f->image;
+                if (empty($imagePath)) {
+                    if (preg_match('/CP-0*(\d+)/i', $f->code ?? '', $matches)) {
+                        $num = intval($matches[1]);
+                        $imagePath = 'assets/img/cycles/cycle' . (($num >= 1 && $num <= 14) ? $num : (($idx % 14) + 1)) . '.jpg';
+                    } else {
+                        $imagePath = 'assets/img/cycles/cycle' . (($idx % 14) + 1) . '.jpg';
+                    }
+                }
+
                 return [
                     'id'          => $f->id,
                     'title'       => $f->title,
@@ -290,7 +300,7 @@ class EliteTrainingController extends Controller
                     'price'       => $f->price ? (number_format($f->price, 0, ',', ' ') . '€') : '3 400€',
                     'description' => $f->description ?? '',
                     'link'        => '#',
-                    'image'       => null,
+                    'image'       => $imagePath,
                 ];
             });
         } else {
