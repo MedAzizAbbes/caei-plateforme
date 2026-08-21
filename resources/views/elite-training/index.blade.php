@@ -1763,9 +1763,14 @@
         <li><a href="{{ route('elite.inscription') }}" class="nav-cta">S'inscrire</a></li>
       </ul>
 
-      <a href="{{ route('home') }}" class="btn-back-home d-none d-lg-flex">
-        <i class="bi bi-arrow-left"></i> Caei Company
-      </a>
+      <div class="d-flex align-items-center gap-2">
+        <a href="{{ asset('assets/pdf/CAEI CATALOGUE.pdf') }}" class="btn-back-home d-none d-lg-flex" download="CAEI CATALOGUE.pdf" style="color: var(--gold-light); border-color: rgba(206,146,51,0.4); background: rgba(206, 146, 51, 0.1);">
+          <i class="bi bi-file-earmark-pdf-fill"></i> Catalogue
+        </a>
+        <a href="{{ route('home') }}" class="btn-back-home d-none d-lg-flex">
+          <i class="bi bi-arrow-left"></i> Caei Company
+        </a>
+      </div>
     </div>
   </nav>
   <!-- /NAVBAR -->
