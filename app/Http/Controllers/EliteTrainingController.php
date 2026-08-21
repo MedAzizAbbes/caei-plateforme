@@ -255,32 +255,128 @@ class EliteTrainingController extends Controller
                     'price'       => $f->price ? (number_format($f->price, 0, ',', ' ') . '€') : '3 400€',
                     'description' => $f->description ?? '',
                     'link'        => '#',
+                    'image'       => null,
                 ];
             });
         } else {
             $cycles = [
                 [
-                    'title' => 'Cycle de perfectionnement Manager Spécialiste en Sécurité Alimentaire',
-                    'code' => 'CP-001',
-                    'duration' => '2 Semaines',
-                    'price' => '3400€',
+                    'title'       => 'Cycle de perfectionnement Manager Spécialiste en Sécurité Alimentaire',
+                    'code'        => 'CP-001',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
                     'description' => 'Maîtrisez les normes et outils pour garantir la sécurité alimentaire dans tout type de structure.',
-                    'link' => 'https://caei-afri.com/Elitetraining/formulaire.html?cycle=1',
+                    'image'       => 'assets/img/cycles/cycle1.jpg',
                 ],
                 [
-                    'title' => 'Cycle perfectionnement Manager Spécialiste en Hygiène Alimentaire',
-                    'code' => 'CP-002',
-                    'duration' => '2 Semaines',
-                    'price' => '3400€',
-                    'description' => 'Maîtrisez les normes et outils pour garantir l’hygiène alimentaire dans tous types de structures.',
-                    'link' => 'https://caei-afri.com/Elitetraining/formulaire.html?cycle=2',
+                    'title'       => 'Cycle perfectionnement Manager Spécialiste en Hygiène Alimentaire',
+                    'code'        => 'CP-002',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => "Maîtrisez les normes et outils pour garantir l'hygiène alimentaire dans tous types de structures.",
+                    'image'       => 'assets/img/cycles/cycle2.jpg',
+                ],
+                [
+                    'title'       => 'Cycle perfectionnement Manager Spécialiste en Suivi et Évaluation des Projets Agricoles',
+                    'code'        => 'CP-003',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => 'Développez les compétences nécessaires pour planifier, suivre et évaluer efficacement les projets agricoles selon les normes internationales.',
+                    'image'       => 'assets/img/cycles/cycle3.jpg',
+                ],
+                [
+                    'title'       => 'Cycle perfectionnement Manager Spécialiste en Entrepreneuriat agricole',
+                    'code'        => 'CP-004',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => 'Acquérez les clés pour lancer, gérer et développer avec succès des projets agro-entrepreneuriaux durables et innovants.',
+                    'image'       => 'assets/img/cycles/cycle4.jpg',
+                ],
+                [
+                    'title'       => 'Cycle perfectionnement Manager Spécialiste en Gestion des crises alimentaires',
+                    'code'        => 'CP-005',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => "Formez-vous à anticiper, gérer et atténuer les crises alimentaires grâce à des outils de gestion et d'intervention efficaces.",
+                    'image'       => 'assets/img/cycles/cycle5.jpg',
+                ],
+                [
+                    'title'       => "Cycle de perfectionnement Manager Spécialiste en Gestion des Ouvrages d'eau et d'assainissement",
+                    'code'        => 'CP-006',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => "Maîtrisez la gestion, le suivi et la maintenance des ouvrages d'eau et d'assainissement pour garantir un accès durable aux services essentiels.",
+                    'image'       => 'assets/img/cycles/cycle6.jpg',
+                ],
+                [
+                    'title'       => 'Cycle perfectionnement Manager Spécialiste en Gestion Participative des Ressources Naturelles',
+                    'code'        => 'CP-007',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => 'Apprenez à mobiliser les acteurs locaux et à gérer durablement les ressources naturelles à travers des approches participatives et inclusives.',
+                    'image'       => 'assets/img/cycles/cycle7.jpg',
+                ],
+                [
+                    'title'       => 'Cycle perfectionnement Manager Spécialiste en Gestion Agricole',
+                    'code'        => 'CP-008',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => 'Développez vos compétences en planification, pilotage et optimisation des activités agricoles pour une gestion efficace et durable des exploitations.',
+                    'image'       => 'assets/img/cycles/cycle8.jpg',
+                ],
+                [
+                    'title'       => 'Cycle perfectionnement Manager Spécialiste en Sauvegarde Environnementale',
+                    'code'        => 'CP-009',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => "Maîtrisez les stratégies et outils de protection de l'environnement pour intégrer la durabilité dans les projets et politiques de développement.",
+                    'image'       => 'assets/img/cycles/cycle9.jpg',
+                ],
+                [
+                    'title'       => 'Cycle de perfectionnement aux procédures douanières',
+                    'code'        => 'CP-010',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => "Maîtriser les procédures douanières pour optimiser les opérations d'import-export en conformité avec la réglementation en vigueur.",
+                    'image'       => 'assets/img/cycles/cycle10.jpg',
+                ],
+                [
+                    'title'       => 'Cycle de perfectionnement Manager Spécialiste en ingénierie de la formation',
+                    'code'        => 'CP-011',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => 'Maîtrisez les méthodes clés pour concevoir et piloter des formations performantes en entreprise.',
+                    'image'       => 'assets/img/cycles/cycle11.jpg',
+                ],
+                [
+                    'title'       => 'Cycle perfectionnement Manager Spécialiste en système de management environnemental',
+                    'code'        => 'CP-012',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => 'Maîtrisez les systèmes et outils essentiels pour piloter efficacement la performance environnementale en organisation.',
+                    'image'       => 'assets/img/cycles/cycle12.jpg',
+                ],
+                [
+                    'title'       => 'Cycle perfectionnement Manager Spécialiste gestion des marchés publics',
+                    'code'        => 'CP-013',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => 'Maîtrisez les procédures et bonnes pratiques pour gérer efficacement les marchés publics.',
+                    'image'       => 'assets/img/cycles/cycle13.jpg',
+                ],
+                [
+                    'title'       => 'Cycle perfectionnement en développement personnel',
+                    'code'        => 'CP-014',
+                    'duration'    => '2 Semaines',
+                    'price'       => '3400€',
+                    'description' => 'Développez vos compétences personnelles pour mieux réussir vos défis professionnels et personnels.',
+                    'image'       => 'assets/img/cycles/cycle14.jpg',
                 ],
             ];
         }
 
         return view('elite-training.nos-cycles', compact('cycles'));
     }
-
 
 
     public function diplomaDoctorat()
