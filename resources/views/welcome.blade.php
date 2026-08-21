@@ -1940,7 +1940,7 @@
     flex-direction: column;
     justify-content: flex-end;
     padding: 30px;
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
   }
   .service-card-modern .service-bg {
@@ -1951,7 +1951,7 @@
     height: 100%;
     background-size: cover;
     background-position: center;
-    transition: transform 0.6s ease;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 1;
   }
   .service-card-modern .service-overlay {
@@ -1960,33 +1960,43 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to bottom, rgba(0, 30, 80, 0.08) 0%, rgba(0, 35, 90, 0.32) 45%, rgba(0, 22, 65, 0.65) 100%);
+    background: linear-gradient(to bottom, rgba(0, 15, 45, 0.1) 0%, rgba(0, 20, 60, 0.88) 100%);
+    opacity: 0;
     z-index: 2;
-    transition: background 0.4s ease;
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   .service-card-modern:hover .service-overlay {
-    background: linear-gradient(to bottom, rgba(0, 30, 80, 0.04) 0%, rgba(0, 35, 90, 0.22) 45%, rgba(0, 22, 65, 0.55) 100%);
+    opacity: 1;
   }
   .service-card-modern:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0,15,60,0.3);
+    transform: translateY(-8px);
+    box-shadow: 0 22px 45px rgba(0,15,60,0.3);
   }
   .service-card-modern:hover .service-bg {
-    transform: scale(1.1);
+    transform: scale(1.08);
   }
   .service-card-modern .service-content {
     position: relative;
     z-index: 3;
     text-align: center;
+    opacity: 0;
+    transform: translateY(25px);
+    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+  }
+  .service-card-modern:hover .service-content {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
   }
   .service-card-modern h3 {
     color: #ff7a00 !important;
     font-size: 22px;
     font-weight: 900;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    text-shadow: 0 2px 6px rgba(0,0,0,0.9);
   }
   .service-card-modern p {
     color: #ffffff !important;
@@ -1994,7 +2004,7 @@
     line-height: 1.6;
     opacity: 0.95;
     margin: 0;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.9);
   }
 </style>
     <!-- Services Section -->
