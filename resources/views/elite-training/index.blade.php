@@ -1649,18 +1649,11 @@
     }
 
     .iti .et-form-control {
-      padding-left: 95px !important;
+      padding-left: 56px !important;
     }
 
     .iti__flag-container {
       padding-left: 10px;
-    }
-
-    .iti__selected-dial-code {
-      color: var(--gold-light) !important;
-      font-weight: 700;
-      font-size: 14px;
-      margin-left: 4px;
     }
 
     .iti__country-list {
@@ -2492,8 +2485,7 @@
                   <div class="et-form-group">
                     <label>Téléphone *</label>
                     <div class="input-icon-wrapper">
-                      <i class="bi bi-telephone-fill"></i>
-                      <input type="tel" name="telephone" class="et-form-control" placeholder="+216 XX XXX XXX" required>
+                      <input type="tel" name="telephone" class="et-form-control" placeholder="XX XXX XXX" required>
                     </div>
                   </div>
                 </div>

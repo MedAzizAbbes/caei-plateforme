@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     .catch(() => success("tn"));
             },
             utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-            separateDialCode: true,
+            separateDialCode: false,
         });
 
         const form = input.closest('form');
