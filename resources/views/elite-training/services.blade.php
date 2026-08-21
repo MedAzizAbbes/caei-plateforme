@@ -317,7 +317,7 @@
             <div class="stat-box">
               <div class="stat-icon"><i class="bi bi-globe-africa-west"></i></div>
               <div>
-                <div class="stat-num">15+</div>
+                <div class="stat-num">{{ $stats['pays'] ?? 15 }}+</div>
                 <div class="stat-label">Pays Africains Couverts</div>
               </div>
             </div>
@@ -326,7 +326,7 @@
             <div class="stat-box">
               <div class="stat-icon"><i class="bi bi-building"></i></div>
               <div>
-                <div class="stat-num">150+</div>
+                <div class="stat-num">{{ $stats['entreprises'] ?? 150 }}+</div>
                 <div class="stat-label">Entreprises Accompagnées</div>
               </div>
             </div>
@@ -344,7 +344,7 @@
             <div class="stat-box">
               <div class="stat-icon"><i class="bi bi-star-fill"></i></div>
               <div>
-                <div class="stat-num">4.9/5</div>
+                <div class="stat-num">{{ $stats['satisfaction'] ?? 98 }}%</div>
                 <div class="stat-label">Taux de Satisfaction</div>
               </div>
             </div>

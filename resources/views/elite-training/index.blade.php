@@ -1828,19 +1828,19 @@
           <div class="hero-visual">
             <!-- Floating stat cards -->
             <div class="hero-stat-card">
-              <span class="stat-num" data-target="150">0</span>
+              <span class="stat-num" data-target="{{ $stats['formations'] ?? 84 }}">{{ $stats['formations'] ?? 84 }}</span>
               <span class="stat-label">Formations</span>
             </div>
             <div class="hero-stat-card">
-              <span class="stat-num" data-target="95">0</span>
+              <span class="stat-num" data-target="{{ $stats['satisfaction'] ?? 98 }}">{{ $stats['satisfaction'] ?? 98 }}%</span>
               <span class="stat-label">% Satisfaction</span>
             </div>
             <div class="hero-stat-card">
-              <span class="stat-num" data-target="8888">0</span>
+              <span class="stat-num" data-target="{{ $stats['professionnels'] ?? 50 }}">{{ $stats['professionnels'] ?? 50 }}</span>
               <span class="stat-label">Professionnels</span>
             </div>
             <div class="hero-stat-card">
-              <span class="stat-num">15+</span>
+              <span class="stat-num" data-target="{{ $stats['pays'] ?? 15 }}">{{ $stats['pays'] ?? 15 }}+</span>
               <span class="stat-label">Pays Africains</span>
             </div>
 
@@ -2018,28 +2018,28 @@
               <div class="col-6 col-md-3">
                 <div class="stat-item">
                   <i class="bi bi-book stat-icon"></i>
-                  <span class="stat-number counter-animate" data-target="150">0</span>
+                  <span class="stat-number counter-animate" data-target="{{ $stats['formations'] ?? 84 }}">{{ $stats['formations'] ?? 84 }}</span>
                   <span class="stat-label">Formations</span>
                 </div>
               </div>
               <div class="col-6 col-md-3">
                 <div class="stat-item">
                   <i class="bi bi-people stat-icon"></i>
-                  <span class="stat-number counter-animate" data-target="8888">0</span>
+                  <span class="stat-number counter-animate" data-target="{{ $stats['professionnels'] ?? 50 }}">{{ $stats['professionnels'] ?? 50 }}</span>
                   <span class="stat-label">Professionnels</span>
                 </div>
               </div>
               <div class="col-6 col-md-3">
                 <div class="stat-item">
                   <i class="bi bi-globe stat-icon"></i>
-                  <span class="stat-number counter-animate" data-target="15">0</span>
+                  <span class="stat-number counter-animate" data-target="{{ $stats['pays'] ?? 15 }}">{{ $stats['pays'] ?? 15 }}+</span>
                   <span class="stat-label">Pays</span>
                 </div>
               </div>
               <div class="col-6 col-md-3">
                 <div class="stat-item">
                   <i class="bi bi-star stat-icon"></i>
-                  <span class="stat-number">95<span style="font-size:30px">%</span></span>
+                  <span class="stat-number counter-animate" data-target="{{ $stats['satisfaction'] ?? 98 }}">{{ $stats['satisfaction'] ?? 98 }}<span style="font-size:30px">%</span></span>
                   <span class="stat-label">Satisfaction</span>
                 </div>
               </div>
@@ -2057,40 +2057,40 @@
             <div class="progress-item">
               <div class="progress-header">
                 <span class="progress-label">Taux de satisfaction</span>
-                <span class="progress-value">95%</span>
+                <span class="progress-value">{{ $stats['satisfaction'] ?? 98 }}%</span>
               </div>
               <div class="et-progress">
-                <div class="et-progress-bar" data-width="95"></div>
+                <div class="et-progress-bar" data-width="{{ $stats['satisfaction'] ?? 98 }}"></div>
               </div>
             </div>
 
             <div class="progress-item">
               <div class="progress-header">
-                <span class="progress-label">Formations personnalisées</span>
-                <span class="progress-value">85%</span>
+                <span class="progress-label">Formations certifiantes</span>
+                <span class="progress-value">{{ $stats['certifiantes_percent'] ?? 78 }}%</span>
               </div>
               <div class="et-progress">
-                <div class="et-progress-bar" data-width="85"></div>
+                <div class="et-progress-bar" data-width="{{ $stats['certifiantes_percent'] ?? 78 }}"></div>
               </div>
             </div>
 
             <div class="progress-item">
               <div class="progress-header">
-                <span class="progress-label">Taux d'insertion professionnelle</span>
-                <span class="progress-value">92%</span>
+                <span class="progress-label">Cycles spécialisés & Masters</span>
+                <span class="progress-value">{{ $stats['cycles_percent'] ?? 17 }}%</span>
               </div>
               <div class="et-progress">
-                <div class="et-progress-bar" data-width="92"></div>
+                <div class="et-progress-bar" data-width="{{ $stats['cycles_percent'] ?? 17 }}"></div>
               </div>
             </div>
 
             <div class="progress-item">
               <div class="progress-header">
-                <span class="progress-label">Formations accessibles en ligne</span>
-                <span class="progress-value">70%</span>
+                <span class="progress-label">Formations diplomantes (MBA / Executive)</span>
+                <span class="progress-value">{{ $stats['diplomantes_percent'] ?? 15 }}%</span>
               </div>
               <div class="et-progress">
-                <div class="et-progress-bar" data-width="70"></div>
+                <div class="et-progress-bar" data-width="{{ $stats['diplomantes_percent'] ?? 15 }}"></div>
               </div>
             </div>
           </div>
@@ -2868,58 +2868,93 @@
     window.addEventListener('resize', () => { resizeCanvas(); initParticles(); });
 
     // ===== COUNTER ANIMATION =====
-    function animateCounters() {
-      document.querySelectorAll('.counter-animate').forEach(el => {
-        const target = parseInt(el.dataset.target);
-        const duration = 2000;
-        const start = performance.now();
+    function animateCounterElement(el, duration = 1500) {
+      if (el.dataset.animated === 'true') return;
+      el.dataset.animated = 'true';
 
-        function update(currentTime) {
-          const elapsed = currentTime - start;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          el.textContent = Math.floor(eased * target).toLocaleString();
-          if (progress < 1) requestAnimationFrame(update);
-          else el.textContent = target.toLocaleString();
+      const rawTarget = el.dataset.target;
+      const target = parseInt(rawTarget, 10);
+      if (isNaN(target)) return;
+
+      const hasPercent = el.textContent.includes('%') || el.innerHTML.includes('%');
+      const hasPlus = el.textContent.includes('+') || el.innerHTML.includes('+');
+
+      const start = performance.now();
+      function update(currentTime) {
+        const elapsed = currentTime - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const currentVal = Math.floor(eased * target);
+
+        let formatted = currentVal.toLocaleString();
+        if (hasPercent) {
+          el.innerHTML = formatted + '<span style="font-size:0.75em">%</span>';
+        } else if (hasPlus) {
+          el.textContent = formatted + '+';
+        } else {
+          el.textContent = formatted;
         }
-        requestAnimationFrame(update);
-      });
 
-      // Hero floating cards counters
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        } else {
+          let finalFormatted = target.toLocaleString();
+          if (hasPercent) {
+            el.innerHTML = finalFormatted + '<span style="font-size:0.75em">%</span>';
+          } else if (hasPlus) {
+            el.textContent = finalFormatted + '+';
+          } else {
+            el.textContent = finalFormatted;
+          }
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    function animateHeroCounters() {
       document.querySelectorAll('.hero-stat-card .stat-num[data-target]').forEach(el => {
-        const target = parseInt(el.dataset.target);
-        const duration = 1500;
-        const start = performance.now();
-        function update(t) {
-          const progress = Math.min((t - start) / duration, 1);
-          el.textContent = Math.floor((1 - Math.pow(1 - progress, 3)) * target).toLocaleString();
-          if (progress < 1) requestAnimationFrame(update);
-          else el.textContent = target.toLocaleString();
-        }
-        requestAnimationFrame(update);
+        animateCounterElement(el, 1400);
+      });
+    }
+
+    function animateStatsCounters() {
+      document.querySelectorAll('.et-stats .counter-animate[data-target]').forEach(el => {
+        animateCounterElement(el, 1800);
       });
     }
 
     // ===== PROGRESS BARS ANIMATION =====
     function animateProgressBars() {
       document.querySelectorAll('.et-progress-bar').forEach(bar => {
-        bar.style.width = bar.dataset.width + '%';
+        const width = bar.dataset.width || 0;
+        bar.style.width = width + '%';
       });
     }
 
+    // Run hero animations immediately on load
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(animateHeroCounters, 300);
+      });
+    } else {
+      setTimeout(animateHeroCounters, 300);
+    }
+
     // Intersection Observer for counters and progress bars
-    const observer = new IntersectionObserver((entries) => {
+    const statsObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          if (entry.target.classList.contains('et-stats')) animateCounters();
+          if (entry.target.classList.contains('et-stats')) animateStatsCounters();
           if (entry.target.classList.contains('progress-section')) animateProgressBars();
-          observer.unobserve(entry.target);
+          statsObserver.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.3 });
+    }, { threshold: 0.2 });
 
-    document.querySelector('.et-stats') && observer.observe(document.querySelector('.et-stats'));
-    document.querySelector('.progress-section') && observer.observe(document.querySelector('.progress-section'));
+    const statsSec = document.querySelector('.et-stats');
+    if (statsSec) statsObserver.observe(statsSec);
+    const progSec = document.querySelector('.progress-section');
+    if (progSec) statsObserver.observe(progSec);
 
     // ===== SWIPER INIT =====
     window.scheduleSwiper = new Swiper('.scheduleSwiper', {
