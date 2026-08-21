@@ -445,19 +445,19 @@
     .formation-circle-stage {
       position: relative;
       width: 100%;
-      min-height: 560px;
-      perspective: 1400px;
+      min-height: 600px;
+      perspective: 1200px;
       perspective-origin: 50% 48%;
       overflow: hidden;
-      padding: 40px 0 20px 0;
+      padding: 40px 0 30px 0;
       user-select: none;
     }
 
     .formation-circle-ring {
       position: absolute;
-      top: 50%;
+      top: 48%;
       left: 50%;
-      width: 320px;
+      width: 310px;
       height: 440px;
       transform-style: preserve-3d;
       transform: translate(-50%, -50%) rotateY(0deg);
@@ -473,11 +473,11 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 320px;
+      width: 310px;
       height: 440px;
-      border-radius: 22px;
+      border-radius: 32px;
       background: #ffffff;
-      box-shadow: 0 15px 40px rgba(0, 15, 60, 0.14), 0 2px 10px rgba(0, 0, 0, 0.06);
+      box-shadow: 0 14px 38px rgba(0, 15, 60, 0.13), 0 2px 8px rgba(0, 0, 0, 0.05);
       border: 1px solid rgba(0, 15, 60, 0.08);
       overflow: hidden;
       display: flex;
@@ -502,7 +502,8 @@
     .formation-card-img-wrap {
       position: relative;
       width: 100%;
-      height: 180px;
+      height: 185px;
+      border-radius: 32px 32px 0 0;
       background-color: #000f3c;
       overflow: hidden;
     }
@@ -535,9 +536,16 @@
       left: 14px;
       right: 14px;
       display: flex;
-      justify-content: space-between;
+      gap: 6px;
+      justify-content: flex-start;
       align-items: center;
       z-index: 2;
+      flex-wrap: wrap;
+    }
+
+    .formation-card-badges .badge {
+      border-radius: 50px !important;
+      padding: 5px 12px !important;
     }
 
     .formation-card-body {
@@ -549,7 +557,7 @@
     }
 
     .formation-card-title {
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       font-weight: 800;
       color: #000f3c;
       margin-bottom: 8px;
@@ -586,109 +594,121 @@
       color: #000f3c;
     }
 
-    /* Controls */
+    /* Controls (Unified circular pill bar) */
     .formation-circle-nav {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
+      gap: 12px;
       margin-top: 20px;
+      background: #ffffff;
+      padding: 6px 14px;
+      border-radius: 50px;
+      box-shadow: 0 4px 20px rgba(0, 15, 60, 0.08);
+      border: 1px solid rgba(0, 15, 60, 0.08);
     }
 
     .circle-arrow-btn {
-      width: 46px;
-      height: 46px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
-      border: 2px solid #ff7a00;
+      border: 1.5px solid #ff7a00;
       background: #ffffff;
       color: #ff7a00;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255, 122, 0, 0.25);
+      box-shadow: 0 2px 10px rgba(255, 122, 0, 0.18);
       transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .circle-arrow-btn:hover {
       background: #ff7a00;
       color: #ffffff;
-      transform: scale(1.1);
-      box-shadow: 0 8px 25px rgba(255, 122, 0, 0.45);
+      transform: scale(1.08);
+      box-shadow: 0 4px 15px rgba(255, 122, 0, 0.35);
     }
 
     .circle-auto-toggle {
-      background: rgba(0, 15, 60, 0.06);
-      border: 1px solid rgba(0, 15, 60, 0.15);
+      background: rgba(0, 15, 60, 0.05);
+      border: 1px solid rgba(0, 15, 60, 0.12);
       color: #000f3c;
-      padding: 6px 14px;
+      padding: 5px 12px;
       border-radius: 50px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       transition: all 0.3s ease;
     }
 
     .circle-auto-toggle.active {
-      background: rgba(255, 122, 0, 0.15);
+      background: rgba(255, 122, 0, 0.12);
       border-color: #ff7a00;
       color: #ff7a00;
     }
 
     .formation-circle-dots {
       display: flex;
-      gap: 8px;
+      gap: 7px;
       align-items: center;
     }
 
     .formation-circle-dot {
       width: 10px;
       height: 10px;
-      border-radius: 50%;
-      background: #d1d5db;
+      border-radius: 50% !important;
+      background: #e2e8f0;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .formation-circle-dot.active {
-      width: 24px;
-      border-radius: 10px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50% !important;
       background: #ff7a00;
+      box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.25);
+      transform: scale(1.15);
     }
 
     @media (max-width: 991px) {
       .formation-circle-stage {
-        min-height: 510px;
+        min-height: 560px;
       }
       .formation-circle-ring,
       .formation-circle-item {
         width: 280px;
-        height: 410px;
+        height: 420px;
+        border-radius: 28px;
       }
       .formation-card-img-wrap {
-        height: 160px;
+        height: 165px;
+        border-radius: 28px 28px 0 0;
       }
     }
 
     @media (max-width: 576px) {
       .formation-circle-stage {
-        min-height: 460px;
-        perspective: 900px;
+        min-height: 500px;
+        perspective: 950px;
       }
       .formation-circle-ring,
       .formation-circle-item {
         width: 250px;
-        height: 380px;
+        height: 390px;
+        border-radius: 24px;
       }
       .formation-card-img-wrap {
-        height: 140px;
+        height: 150px;
+        border-radius: 24px 24px 0 0;
       }
       .formation-card-body {
-        padding: 12px 14px;
+        padding: 14px 16px;
       }
       .formation-card-title {
         font-size: 0.95rem;
@@ -1483,29 +1503,27 @@
           </div>
         </div>
 
-        <!-- Carousel Navigation Controls -->
-        <div class="formation-circle-nav">
-          <button type="button" class="circle-arrow-btn" id="circlePrevBtn" aria-label="Formation précédente">
-            <i class="bi bi-chevron-left"></i>
-          </button>
-          
-          <div class="formation-circle-dots" id="formationCircleDots">
-            @foreach($formations as $formation)
-            <span class="formation-circle-dot {{ $loop->first ? 'active' : '' }}" data-index="{{ $loop->index }}"></span>
-            @endforeach
+        <!-- Carousel Navigation Controls (Unified Centered Pill) -->
+        <div class="text-center">
+          <div class="formation-circle-nav">
+            <button type="button" class="circle-arrow-btn" id="circlePrevBtn" aria-label="Formation précédente">
+              <i class="bi bi-chevron-left"></i>
+            </button>
+            
+            <div class="formation-circle-dots" id="formationCircleDots">
+              @foreach($formations as $formation)
+              <span class="formation-circle-dot {{ $loop->first ? 'active' : '' }}" data-index="{{ $loop->index }}"></span>
+              @endforeach
+            </div>
+
+            <button type="button" class="circle-arrow-btn" id="circleNextBtn" aria-label="Formation suivante">
+              <i class="bi bi-chevron-right"></i>
+            </button>
+
+            <button type="button" class="circle-auto-toggle active" id="circleAutoToggle">
+              <i class="bi bi-pause-fill"></i> Auto
+            </button>
           </div>
-
-          <button type="button" class="circle-arrow-btn" id="circleNextBtn" aria-label="Formation suivante">
-            <i class="bi bi-chevron-right"></i>
-          </button>
-
-          <button type="button" class="circle-auto-toggle active ms-2" id="circleAutoToggle">
-            <i class="bi bi-pause-fill"></i> Auto
-          </button>
-        </div>
-
-        <div class="text-center mt-4">
-            <a href="{{ route('home.old') }}" class="btn btn-warning rounded-pill px-5 py-2 fw-bold shadow-sm" style="background-color: #ff7a00; color: #ffffff; border: none; font-size: 0.95rem;">Voir tout le catalogue</a>
         </div>
 
         <script>
@@ -1530,9 +1548,11 @@
 
           function getRadius() {
             const w = window.innerWidth;
-            if (w < 576) return 210;
-            if (w < 992) return 290;
-            return 380;
+            const cardWidth = w < 576 ? 250 : (w < 992 ? 280 : 310);
+            const gap = 20;
+            const calcRadius = Math.round((total * (cardWidth + gap)) / (2 * Math.PI));
+            const minRadius = w < 576 ? 170 : (w < 992 ? 230 : 290);
+            return Math.max(minRadius, calcRadius);
           }
 
           function layoutCircle() {
