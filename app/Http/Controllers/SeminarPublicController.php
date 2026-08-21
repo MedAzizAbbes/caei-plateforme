@@ -21,7 +21,23 @@ class SeminarPublicController extends Controller
 
         $formations = Formation::active()->take(6)->get();
 
-        return view('welcome', compact('seminars', 'formations'));
+        $totalFormations = Formation::active()->count();
+        $totalSeminars = Seminar::count();
+        $totalParticipants = \App\Models\User::where('role', 'participant')->count();
+        $totalRegistrations = \App\Models\Registration::count();
+        $totalAppointments = \App\Models\EliteTrainingAppointment::count();
+        $totalClients = $totalParticipants + $totalRegistrations + $totalAppointments;
+        $totalExperts = \App\Models\User::whereIn('role', ['admin', 'formateur', 'clinic_doctor', 'callcenter_agent'])->count();
+
+        $stats = [
+            'clients_count' => $totalClients > 0 ? $totalClients : 337,
+            'projets_count' => ($totalFormations + $totalSeminars) > 0 ? ($totalFormations + $totalSeminars) : 200,
+            'annees_exp' => 14,
+            'experts_count' => $totalExperts > 0 ? $totalExperts : 150,
+            'formations_count' => $totalFormations,
+        ];
+
+        return view('welcome', compact('seminars', 'formations', 'stats'));
     }
 
     /**
