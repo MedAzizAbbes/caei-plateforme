@@ -51,6 +51,8 @@ Route::prefix('call-center')->name('callcenter.')->group(function () {
             Route::post('/rendez-vous/{rendezVous}/status', [CallCenterAdminWorkflowController::class, 'updateStatus'])->name('status');
             Route::get('/users', [CallCenterAdminWorkflowController::class, 'users'])->name('users');
             Route::post('/users', [CallCenterAdminWorkflowController::class, 'storeUser'])->name('users.store');
+            Route::put('/users/{user}', [CallCenterAdminWorkflowController::class, 'updateUser'])->name('users.update');
+            Route::delete('/users/{user}', [CallCenterAdminWorkflowController::class, 'destroyUser'])->name('users.destroy');
             Route::post('/request/{id}/status', [CallCenterAdminWorkflowController::class, 'updateRequestStatus'])->name('request.status');
             Route::delete('/request/{id}', [CallCenterAdminWorkflowController::class, 'destroyRequest'])->name('request.destroy');
         });
@@ -443,6 +445,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::delete('/callcenter-request/{id}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'destroyRequest'])->name('callcenter.request.destroy');
     Route::get('/callcenter-users', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'users'])->name('callcenter.users');
     Route::post('/callcenter-users', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'storeUser'])->name('callcenter.users.store');
+    Route::put('/callcenter-users/{user}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'updateUser'])->name('callcenter.users.update');
+    Route::delete('/callcenter-users/{user}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'destroyUser'])->name('callcenter.users.destroy');
     Route::get('/callcenter-export/excel', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'exportExcel'])->name('callcenter.export.excel');
     Route::get('/callcenter-export/pdf', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'exportPdf'])->name('callcenter.export.pdf');
 
