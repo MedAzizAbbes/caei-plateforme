@@ -443,9 +443,9 @@
   <div class="modal fade" id="quickRegisterModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content rounded-4 border-0 shadow-lg overflow-hidden">
-        <div class="modal-header p-4 text-white" style="background: linear-gradient(135deg, var(--navy), #002a5c);">
+        <div class="modal-header p-4 text-white" style="background: linear-gradient(135deg, rgba(0, 31, 63, 0.9), rgba(0, 42, 92, 0.88)), url('{{ asset($domainInfo['img'] ?? 'assets/img/cta-bg.jpg') }}') center/cover no-repeat; border-bottom: 2px solid var(--gold);">
           <div>
-            <span class="text-gold-light text-uppercase tracking-wider font-bold text-xs">Inscription</span>
+            <span class="text-gold-light text-uppercase tracking-wider font-bold text-xs"><i class="bi bi-stars me-1"></i> Inscription & Réservation</span>
             <h5 class="modal-title font-black text-white mt-1" id="modalCourseTitle" style="font-family: var(--font-display);">Intitulé du Cours</h5>
           </div>
           <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>

@@ -15,7 +15,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-slate-900 antialiased selection:bg-caei-gold selection:text-caei-navy">
-        <div class="min-h-screen flex flex-col justify-center items-center px-4 py-8 relative overflow-hidden bg-caei-navy">
+        <div class="min-h-screen flex flex-col justify-center items-center px-4 py-8 relative overflow-hidden" style="background: linear-gradient(135deg, rgba(6, 23, 67, 0.90) 0%, rgba(0, 31, 63, 0.88) 100%), url('{{ asset('assets/img/cta-bg.jpg') }}') center/cover no-repeat fixed;">
             <!-- Arrière-plan décoratif subtil -->
             <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                 <div class="absolute -top-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-caei-gold/10 blur-[60px]" style="will-change: transform, opacity;"></div>

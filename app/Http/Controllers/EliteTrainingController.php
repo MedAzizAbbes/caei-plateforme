@@ -97,10 +97,42 @@ class EliteTrainingController extends Controller
     public function inscription(Request $request)
     {
         $formation = null;
-        if ($request->has('formation_id')) {
+        $bgImage = 'assets/img/cta-bg.jpg';
+        $domainInfo = null;
+
+        if ($request->filled('formation_id')) {
             $formation = Formation::find($request->formation_id);
+        } elseif ($request->filled('formation_title')) {
+            $title = $request->formation_title;
+            $formation = Formation::where('title', 'like', "%{$title}%")->first();
         }
-        return view('elite-training.inscription', compact('formation'));
+
+        if ($formation) {
+            if ($formation->image && file_exists(public_path('storage/' . $formation->image))) {
+                $bgImage = 'storage/' . $formation->image;
+            } elseif ($formation->domain) {
+                foreach ($this->domainsMap as $d) {
+                    if (stripos($formation->domain, $d['name']) !== false || stripos($d['name'], $formation->domain) !== false) {
+                        $bgImage = $d['img'];
+                        $domainInfo = $d;
+                        break;
+                    }
+                }
+            }
+        } elseif ($request->filled('formation_title')) {
+            $titleLower = strtolower($request->formation_title);
+            if (str_contains($titleLower, 'mba') || str_contains($titleLower, 'executive') || str_contains($titleLower, 'doctorat') || str_contains($titleLower, 'dba')) {
+                $bgImage = 'assets/img/professionel.jpg';
+            } elseif (str_contains($titleLower, 'audit') || str_contains($titleLower, 'finance') || str_contains($titleLower, 'comptab')) {
+                $bgImage = 'assets/img/formation_audit.jpg';
+            } elseif (str_contains($titleLower, 'informatique') || str_contains($titleLower, 'tech') || str_contains($titleLower, 'cyber') || str_contains($titleLower, 'ntic')) {
+                $bgImage = 'assets/img/formation_tech.jpg';
+            } elseif (str_contains($titleLower, 'leadership') || str_contains($titleLower, 'soft skill') || str_contains($titleLower, 'management')) {
+                $bgImage = 'assets/img/formation_leadership.jpg';
+            }
+        }
+
+        return view('elite-training.inscription', compact('formation', 'bgImage', 'domainInfo'));
     }
 
     /**
