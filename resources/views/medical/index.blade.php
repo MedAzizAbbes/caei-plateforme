@@ -81,7 +81,7 @@
                 </div>
                 <div class="flex items-center gap-4 ms-auto">
                     <a href="{{ route('home') }}" class="text-xs text-sky-700 hover:text-sky-700 font-medium transition-colors">← Groupe CAEI</a>
-                    <a href="https://caei-afri.com/Medicalservices/PDF/catalogueCAEIMedicalServices.pdf" target="_blank" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-white bg-[#0284c7] hover:bg-[#0369a1] px-3.5 py-1 rounded-full shadow-sm transition-all">
+                    <a href="{{ asset('assets/pdf/catalogueCAEIMedicalServices.pdf') }}" target="_blank" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-white bg-[#0284c7] hover:bg-[#0369a1] px-3.5 py-1 rounded-full shadow-sm transition-all">
                         📄 Catalogue PDF
                     </a>
                 </div>
@@ -516,7 +516,7 @@
                     <ul class="space-y-3 text-xs">
                         <li><a href="{{ route('home') }}" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Site Officiel Groupe CAEI</a></li>
                         <li><a href="{{ route('plateforme') }}" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Plateforme Séminaires</a></li>
-                        <li><a href="https://caei-afri.com/Medicalservices/PDF/catalogueCAEIMedicalServices.pdf" target="_blank" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Télécharger Catalogue PDF</a></li>
+                        <li><a href="{{ asset('assets/pdf/catalogueCAEIMedicalServices.pdf') }}" target="_blank" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Télécharger Catalogue PDF</a></li>
                     </ul>
                 </div>
 
