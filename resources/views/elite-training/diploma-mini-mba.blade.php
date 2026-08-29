@@ -199,6 +199,103 @@
       box-shadow: 0 0 0 4px rgba(6, 23, 67, 0.1);
       outline: none;
     }
+
+    /* Helper Utilities */
+    .text-gold { color: var(--gold) !important; }
+    .text-gold-light { color: var(--gold-light) !important; }
+    .text-navy { color: var(--primary) !important; }
+    .text-slate-500, .text-slate-600, .text-slate-700 { color: var(--text-muted) !important; }
+    .text-amber-600 { color: var(--gold) !important; }
+    .max-w-2xl { max-width: 672px; }
+
+    /* Footer Styling Pro */
+    .et-footer-pro {
+      background: #040e2b;
+      color: rgba(255, 255, 255, 0.75);
+      padding: 60px 0 25px;
+      margin-top: 80px;
+      border-top: 3px solid var(--gold);
+    }
+    .text-footer-muted {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+    .footer-heading {
+      color: #ffffff;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+    .footer-heading::after {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 3px;
+      background: var(--gold-light);
+      margin-top: 6px;
+      border-radius: 2px;
+    }
+    .footer-links-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .footer-links-list li {
+      margin-bottom: 10px;
+    }
+    .footer-links-list a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      font-size: 0.88rem;
+      transition: all 0.25s ease;
+    }
+    .footer-links-list a:hover,
+    .footer-links-list a.active-link {
+      color: var(--gold-light) !important;
+      padding-left: 4px;
+    }
+    .footer-contact-info p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.88rem;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .footer-contact-info a {
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-contact-info a:hover {
+      color: var(--gold-light);
+    }
+    .footer-social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .footer-social-link:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: #061743;
+      transform: translateY(-3px);
+    }
+    .footer-divider {
+      border-color: rgba(255, 255, 255, 0.12);
+      margin: 30px 0 20px;
+    }
   </style>
 </head>
 <body>
@@ -344,113 +441,67 @@
         </div>
       </div>
 
-      <!-- FORMULAIRE D'INSCRIPTION -->
-      <div class="mt-5 pt-4" id="inscription" data-aos="fade-up">
-        <div class="form-container max-w-4xl mx-auto">
-          <div class="text-center mb-4">
-            <span class="badge bg-amber-100 text-amber-800 font-bold px-3 py-1 rounded-pill uppercase text-xs">Inscription en ligne</span>
-            <h3 class="section-title-pro text-center mx-auto mt-2">Formulaire d'Inscription — Mini MBA</h3>
-            <p class="text-slate-500">Remplissez vos coordonnés ci-dessous pour transmettre votre candidature d'inscription à l'administration.</p>
-          </div>
-
-          @if(session('success'))
-            <div class="alert alert-success bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-4 p-3 mb-4 text-center font-bold">
-              <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
-            </div>
-          @endif
-
-          <form action="{{ route('elite.appointment.store') }}" method="POST" id="contactForm">
-            @csrf
-            <input type="hidden" name="type" value="inscription">
-            <div class="row g-3">
-              <!-- 1. Nom & Prénom -->
-              <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Nom & Prénom <span class="text-danger">*</span></label>
-                <input type="text" name="nom" class="form-control pro-input" placeholder="Votre nom & prénom" required>
-              </div>
-
-              <!-- 2. Téléphone -->
-              <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Téléphone <span class="text-danger">*</span></label>
-                <input type="tel" name="telephone" class="form-control pro-input" placeholder="+216 XX XXX XXX" required>
-              </div>
-
-              <!-- 3. Adresse e-mail -->
-              <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Adresse e-mail <span class="text-danger">*</span></label>
-                <input type="email" name="email" class="form-control pro-input" placeholder="votre@email.com" required>
-              </div>
-
-              <!-- 4. Pays -->
-              <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Pays <span class="text-danger">*</span></label>
-                <input type="text" name="pays" class="form-control pro-input" placeholder="Ex: Tunisie, Côte d'Ivoire..." required>
-              </div>
-
-              <!-- 5. Fonction / Poste -->
-              <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Fonction / Poste <span class="text-danger">*</span></label>
-                <input type="text" name="poste" class="form-control pro-input" placeholder="Ex: Directeur Financier..." required>
-              </div>
-
-              <!-- 6. Entreprise / Institution -->
-              <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Entreprise / Institution <span class="text-danger">*</span></label>
-                <input type="text" name="entreprise" class="form-control pro-input" placeholder="Nom de votre entreprise" required>
-              </div>
-
-              <!-- 7. Formation ou séminaire choisi -->
-              <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Formation ou séminaire choisi <span class="text-danger">*</span></label>
-                <input type="text" id="objetInput" name="objet" class="form-control pro-input" value="Inscription Mini MBA" placeholder="Intitulé de la formation" required>
-              </div>
-
-              <!-- 8. Date / Session souhaitée -->
-              <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Date / Session souhaitée</label>
-                <input type="date" name="date_session" class="form-control pro-input" min="{{ date('Y-m-d') }}" placeholder="Sélectionnez une date">
-              </div>
-
-              <!-- 9. Mode de participation -->
-              <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Mode de participation <span class="text-danger">*</span></label>
-                <select name="mode_participation" class="form-control pro-input" required>
-                  <option value="" disabled selected>-- Sélectionner un mode --</option>
-                  <option value="présentiel">Présentiel</option>
-                  <option value="en_ligne">En ligne</option>
-                </select>
-              </div>
-
-              <!-- 10. Comment avez-vous connu cette formation ? -->
-              <div class="col-md-6">
-                <label class="form-label font-bold text-slate-700 small">Comment avez-vous connu cette formation ?</label>
-                <select name="comment_connu" class="form-control pro-input">
-                  <option value="" disabled selected>-- Sélectionner une option --</option>
-                  <option value="Réseaux sociaux">Réseaux sociaux (LinkedIn, Facebook...)</option>
-                  <option value="Recommandation">Recommandation d'un collègue / ami</option>
-                  <option value="Site web">Site web CAEI</option>
-                  <option value="Emailing / Newsletter">Emailing / Newsletter</option>
-                  <option value="Autre">Autre</option>
-                </select>
-              </div>
-
-              <div class="col-12 text-center mt-4">
-                <button type="submit" class="btn-gold px-5 py-3 border-0">
-                  <i class="bi bi-check2-circle me-2 fs-5"></i>Valider mon Inscription
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-
     </div>
   </section>
 
   <!-- FOOTER PRO -->
-  <footer class="py-4 bg-white border-top text-center text-slate-500 small mt-5">
+  <footer class="et-footer-pro">
     <div class="container">
-      <p class="mb-0">© {{ date('Y') }} CAEI Elite Training. Tous droits réservés. | <a href="{{ route('elite.training') }}" class="text-amber-600 font-bold">Retour au portail Elite Training</a></p>
+      <div class="row gy-4 mb-4">
+        <div class="col-lg-4 col-md-6">
+          <div class="d-flex align-items-center gap-3 mb-3">
+            <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training" height="44" style="object-fit: contain;">
+            <span class="nav-brand-title fs-5">CAEI <span>ELITE TRAINING</span></span>
+          </div>
+          <p class="text-footer-muted">
+            Le Comité Africain d'Expertise Internationale forme les cadres, experts et dirigeants d'Afrique à travers des programmes certifiants et diplômants de haut niveau.
+          </p>
+          <div class="d-flex gap-2 mt-3">
+            <a href="https://www.facebook.com/CAEIAfrique/" target="_blank" class="footer-social-link"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/caei_afri/" target="_blank" class="footer-social-link"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/comit%C3%A9-africain-d-expertise-internationale-caei/" target="_blank" class="footer-social-link"><i class="bi bi-linkedin"></i></a>
+          </div>
+        </div>
+
+        <div class="col-lg-2 col-md-6">
+          <h6 class="footer-heading">Programmes</h6>
+          <ul class="footer-links-list">
+            <li><a href="{{ route('elite.training.diploma.mini-mba') }}" class="active-link"><i class="bi bi-chevron-right me-1"></i> Mini MBA</a></li>
+            <li><a href="{{ route('elite.training.diploma.executive-mba') }}"><i class="bi bi-chevron-right me-1"></i> Executive MBA</a></li>
+            <li><a href="{{ route('elite.training.diploma.doctorat') }}"><i class="bi bi-chevron-right me-1"></i> Doctorat (DBA)</a></li>
+            <li><a href="{{ route('elite.nos-cycles') }}"><i class="bi bi-chevron-right me-1"></i> Nos Cycles</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-heading">Portail CAEI</h6>
+          <ul class="footer-links-list">
+            <li><a href="{{ route('elite.training') }}"><i class="bi bi-chevron-right me-1"></i> Accueil Elite Training</a></li>
+            <li><a href="{{ route('elite.programme') }}"><i class="bi bi-chevron-right me-1"></i> Catalogue Formations</a></li>
+            <li><a href="{{ route('elite.services') }}"><i class="bi bi-chevron-right me-1"></i> Nos Services</a></li>
+            <li><a href="{{ route('home') }}"><i class="bi bi-chevron-right me-1"></i> Accueil Général CAEI</a></li>
+          </ul>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+          <h6 class="footer-heading">Contact & Support</h6>
+          <div class="footer-contact-info">
+            <p><i class="bi bi-geo-alt text-gold me-2"></i> SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis, Tunisie</p>
+            <p><i class="bi bi-envelope text-gold me-2"></i> <a href="mailto:contact@caei-afri.com">contact@caei-afri.com</a></p>
+            <p><i class="bi bi-telephone text-gold me-2"></i> <a href="tel:+21655335286">+216 55 335 286</a> / <a href="tel:+21655332885">+216 55 332 885</a></p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="footer-divider">
+
+      <div class="d-flex flex-column flex-md-row align-items-center justify-content-between text-footer-muted small py-2">
+        <p class="mb-0">© {{ date('Y') }} CAEI Elite Training. Tous droits réservés.</p>
+        <p class="mb-0 mt-2 mt-md-0">
+          <a href="{{ route('elite.training') }}" class="text-gold fw-bold text-decoration-none me-3">Portail Elite Training</a>
+          <a href="{{ route('home') }}" class="text-white-50 text-decoration-none">Groupe CAEI</a>
+        </p>
+      </div>
     </div>
   </footer>
 
