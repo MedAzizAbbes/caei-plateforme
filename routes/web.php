@@ -28,6 +28,8 @@ use App\Http\Controllers\CallCenter\CallCenterPartenaireWorkflowController;
 
 Route::prefix('call-center')->name('callcenter.')->group(function () {
     Route::get('/', [CallCenterController::class, 'index'])->name('index');
+    Route::get('/connexion', [CallCenterController::class, 'showLoginForm'])->name('login');
+    Route::post('/connexion', [CallCenterController::class, 'login'])->name('login.post');
     Route::get('/about', [CallCenterController::class, 'about'])->name('about');
     Route::get('/services', [CallCenterController::class, 'services'])->name('services');
     

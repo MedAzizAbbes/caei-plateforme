@@ -549,7 +549,7 @@
             <a href="{{ route('dashboard') }}" class="cc-login-btn"><i class="bi bi-person-circle me-1"></i> Mon Compte</a>
           @endif
         @else
-          <a href="{{ route('login') }}" class="cc-login-btn"><i class="bi bi-box-arrow-in-right me-1"></i> Connexion</a>
+          <a href="{{ route('callcenter.login') }}" class="cc-login-btn"><i class="bi bi-box-arrow-in-right me-1"></i> Connexion</a>
         @endauth
       </div>
 

@@ -11,6 +11,52 @@ class CallCenterController extends Controller
         return view('callcenter.index');
     }
 
+    public function showLoginForm()
+    {
+        if (auth()->check()) {
+            $user = auth()->user();
+            if ($user->isAdmin()) {
+                return redirect()->route('callcenter.admin.dashboard');
+            } elseif ($user->isCallCenterAgent()) {
+                return redirect()->route('callcenter.agent.index');
+            } elseif ($user->isCallCenterPartenaire()) {
+                return redirect()->route('callcenter.partenaire.index');
+            }
+            return redirect()->route('callcenter.index');
+        }
+
+        return view('callcenter.login');
+    }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $remember = $request->boolean('remember');
+
+        if (auth()->attempt($credentials, $remember)) {
+            $request->session()->regenerate();
+            $user = auth()->user();
+
+            if ($user->isAdmin()) {
+                return redirect()->intended(route('callcenter.admin.dashboard'));
+            } elseif ($user->isCallCenterAgent()) {
+                return redirect()->intended(route('callcenter.agent.index'));
+            } elseif ($user->isCallCenterPartenaire()) {
+                return redirect()->intended(route('callcenter.partenaire.index'));
+            }
+
+            return redirect()->intended(route('callcenter.index'));
+        }
+
+        return back()->withErrors([
+            'email' => 'Identifiants de connexion incorrects pour l\'Espace Call Center.',
+        ])->onlyInput('email');
+    }
+
     public function about()
     {
         return view('callcenter.about');
