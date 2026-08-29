@@ -851,12 +851,13 @@
                         @forelse($agents as $agent)
                             @php
                                 $agentRdvs = $agent->rendezVousAsAgent->map(function($r) {
+                                    $statut = ($r->statut !== 'annule' && $r->qualification) ? 'qualifie' : $r->statut;
                                     return [
                                         'id' => $r->id,
                                         'date' => $r->date_rendez_vous ? \Carbon\Carbon::parse($r->date_rendez_vous)->format('d/m/Y') : '',
                                         'heure' => $r->heure_rendez_vous ? \Carbon\Carbon::parse($r->heure_rendez_vous)->format('H:i') : '',
                                         'objet' => $r->objet,
-                                        'statut' => $r->statut,
+                                        'statut' => $statut,
                                         'status_label' => $r->statusLabel(),
                                         'prospect_nom' => $r->prospect ? $r->prospect->nomComplet() : '—',
                                         'prospect_phone' => $r->prospect ? $r->prospect->telephone : '',
@@ -955,12 +956,13 @@
                         @forelse($partenaires as $partenaire)
                             @php
                                 $partenaireRdvs = $partenaire->rendezVousAsPartenaire->map(function($r) {
+                                    $statut = ($r->statut !== 'annule' && $r->qualification) ? 'qualifie' : $r->statut;
                                     return [
                                         'id' => $r->id,
                                         'date' => $r->date_rendez_vous ? \Carbon\Carbon::parse($r->date_rendez_vous)->format('d/m/Y') : '',
                                         'heure' => $r->heure_rendez_vous ? \Carbon\Carbon::parse($r->heure_rendez_vous)->format('H:i') : '',
                                         'objet' => $r->objet,
-                                        'statut' => $r->statut,
+                                        'statut' => $statut,
                                         'status_label' => $r->statusLabel(),
                                         'prospect_nom' => $r->prospect ? $r->prospect->nomComplet() : '—',
                                         'prospect_phone' => $r->prospect ? $r->prospect->telephone : '',

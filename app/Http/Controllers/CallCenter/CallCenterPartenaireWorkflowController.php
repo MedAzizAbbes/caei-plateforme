@@ -42,7 +42,7 @@ class CallCenterPartenaireWorkflowController extends Controller
             ->filter(fn($n) => ($n->data['rendez_vous_id'] ?? null) == $rendezVous->id)
             ->each(fn($n) => $n->markAsRead());
 
-        if ($rendezVous->statut === 'affecte') {
+        if ($rendezVous->statut === 'affecte' && !$rendezVous->qualification) {
             $rendezVous->update(['statut' => 'qualification_en_cours']);
             RendezVousHistory::log(
                 $rendezVous->id, 

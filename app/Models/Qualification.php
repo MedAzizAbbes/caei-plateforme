@@ -22,6 +22,21 @@ class Qualification extends Model
         'qualified_at' => 'datetime',
     ];
 
+    protected static function booted(): void
+    {
+        static::saved(function ($qualification) {
+            if ($qualification->rendezVous && $qualification->rendezVous->statut !== 'qualifie') {
+                $qualification->rendezVous->update(['statut' => 'qualifie']);
+            }
+        });
+
+        static::deleted(function ($qualification) {
+            if ($qualification->rendezVous && $qualification->rendezVous->statut === 'qualifie') {
+                $qualification->rendezVous->update(['statut' => 'qualification_en_cours']);
+            }
+        });
+    }
+
     public function rendezVous()
     {
         return $this->belongsTo(RendezVous::class, 'rendez_vous_id');
