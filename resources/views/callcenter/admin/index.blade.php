@@ -64,6 +64,46 @@
         },
         closeRdvList() {
             this.rdvListModal = false;
+        },
+        requestModalOpen: false,
+        currentRequest: {
+            id: null,
+            name: '',
+            email: '',
+            phone: '',
+            subject: '',
+            message: '',
+            status: '',
+            date: '',
+            attachment: ''
+        },
+        openRequestModal(req) {
+            // Parser le message pour séparer les infos entreprise du vrai message
+            let rawMessage = req.message || '';
+            let entrepriseInfo = '';
+            let realMessage = rawMessage;
+
+            if (rawMessage.includes('--- Informations Entreprise ---')) {
+                const parts = rawMessage.split('--- Message ---');
+                realMessage = parts[1] ? parts[1].trim() : '';
+                // Extraire les lignes de détail
+                const infoPart = parts[0].replace('--- Informations Entreprise ---', '').trim();
+                entrepriseInfo = infoPart;
+            }
+
+            this.currentRequest = {
+                id: req.id,
+                name: req.name || '',
+                email: req.email || '',
+                phone: req.phone || '',
+                subject: req.subject || '',
+                message: realMessage,
+                entrepriseInfo: entrepriseInfo,
+                status: req.status || '',
+                date: req.date || '',
+                attachment: req.attachment || ''
+            };
+            this.requestModalOpen = true;
         }
     }">
 
@@ -496,18 +536,38 @@
                                         <form method="POST" action="{{ route('callcenter.admin.request.status', $req->id) }}">
                                             @csrf
                                             <select name="status" onchange="this.form.submit()" class="text-xs rounded-lg border-slate-300 py-1 px-2 font-bold text-slate-800">
-                                                <option value="Nouveau" {{ $req->status === 'Nouveau' ? 'selected' : '' }}>🔴 Nouveau</option>
-                                                <option value="En cours" {{ $req->status === 'En cours' ? 'selected' : '' }}>🟡 En cours</option>
+                                                <option value="Non traité" {{ $req->status === 'Non traité' ? 'selected' : '' }}>🔴 Non traité</option>
+                                                <option value="En cours de traitement" {{ $req->status === 'En cours de traitement' ? 'selected' : '' }}>🟡 En cours de traitement</option>
                                                 <option value="Traité" {{ $req->status === 'Traité' ? 'selected' : '' }}>🟢 Traité</option>
                                             </select>
                                         </form>
                                     </td>
                                     <td class="p-4 text-right whitespace-nowrap">
-                                        <form method="POST" action="{{ route('callcenter.admin.request.destroy', $req->id) }}" onsubmit="return confirm('Supprimer cette demande ?')">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="text-xs font-bold text-red-600 hover:underline">Supprimer</button>
-                                        </form>
+                                        <div class="flex items-center justify-end gap-2">
+                                            {{-- Bouton Gérer --}}
+                                            <button type="button"
+                                                @click="openRequestModal({
+                                                    id: {{ $req->id }},
+                                                    name: '{{ addslashes($req->name) }}',
+                                                    email: '{{ addslashes($req->email) }}',
+                                                    phone: '{{ addslashes($req->phone ?? '') }}',
+                                                    subject: '{{ addslashes($req->subject) }}',
+                                                    message: {{ json_encode($req->message) }},
+                                                    status: '{{ $req->status }}',
+                                                    date: '{{ $req->created_at->format('d/m/Y H:i') }}',
+                                                    attachment: '{{ $req->attachment ? Storage::url($req->attachment) : '' }}'
+                                                })"
+                                                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white transition shadow-sm cursor-pointer"
+                                                style="background-color: #7f0504;">
+                                                ⚙️ Gérer
+                                            </button>
+                                            {{-- Bouton Supprimer --}}
+                                            <form method="POST" action="{{ route('callcenter.admin.request.destroy', $req->id) }}" onsubmit="return confirm('Supprimer cette demande ?')">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="text-xs font-bold text-red-600 hover:underline">Supprimer</button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
@@ -522,6 +582,157 @@
                 <div class="p-4 border-t border-slate-100">
                     {{ $publicRequests->appends(['tab' => 'demandes_web'])->links() }}
                 </div>
+            </div>
+        </div>
+
+        {{-- ══════════════════════════════════════════════════════ --}}
+        {{-- MODAL : GÉRER UNE DEMANDE                            --}}
+        {{-- ══════════════════════════════════════════════════════ --}}
+        <div x-show="requestModalOpen" x-cloak
+             class="fixed inset-0 z-50 flex items-center justify-center p-4"
+             style="background: rgba(15,23,42,0.65); backdrop-filter: blur(4px);">
+
+            <div @click.away="requestModalOpen = false"
+                 class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-200"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100">
+
+                {{-- ── Header ── --}}
+                <div class="relative px-4 py-3 overflow-hidden" style="background: linear-gradient(135deg, #7f0504 0%, #4a0202 100%);">
+                    <div class="absolute -right-3 -top-3 w-14 h-14 rounded-full opacity-10 bg-white"></div>
+                    <div class="relative flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-lg bg-white/20 border border-white/30 flex items-center justify-center font-black text-white text-sm uppercase"
+                                 x-text="currentRequest.name ? currentRequest.name.charAt(0).toUpperCase() : '?'">
+                            </div>
+                            <div>
+                                <p class="text-white font-black text-xs leading-tight" x-text="currentRequest.name"></p>
+                                <p class="text-white/60 text-[10px]" x-text="currentRequest.date"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black border"
+                                  :class="{
+                                    'bg-red-100 text-red-700 border-red-300'            : currentRequest.status === 'Non traité',
+                                    'bg-amber-100 text-amber-700 border-amber-300'      : currentRequest.status === 'En cours de traitement',
+                                    'bg-emerald-100 text-emerald-700 border-emerald-300': currentRequest.status === 'Traité'
+                                  }">
+                                <span class="w-1.5 h-1.5 rounded-full"
+                                      :class="{
+                                        'bg-red-500'    : currentRequest.status === 'Non traité',
+                                        'bg-amber-500'  : currentRequest.status === 'En cours de traitement',
+                                        'bg-emerald-500': currentRequest.status === 'Traité'
+                                      }"></span>
+                                <span x-text="currentRequest.status"></span>
+                            </span>
+                            <button @click="requestModalOpen = false"
+                                    class="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/25 flex items-center justify-center text-white/80 hover:text-white transition cursor-pointer text-base leading-none">
+                                &times;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- ── Corps ── --}}
+                <div class="px-4 py-3 space-y-2">
+
+                    {{-- Infos contact --}}
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="flex items-center gap-2 bg-slate-50 rounded-lg p-2 border border-slate-100">
+                            <span class="text-sm shrink-0">📧</span>
+                            <div class="min-w-0">
+                                <p class="text-[9px] font-bold uppercase text-slate-400">Email</p>
+                                <p class="text-[11px] font-bold text-slate-800 truncate" x-text="currentRequest.email"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 bg-slate-50 rounded-lg p-2 border border-slate-100">
+                            <span class="text-sm shrink-0">📞</span>
+                            <div>
+                                <p class="text-[9px] font-bold uppercase text-slate-400">Téléphone</p>
+                                <p class="text-[11px] font-bold text-slate-800" x-text="currentRequest.phone || '—'"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Sujet --}}
+                    <div class="flex items-center gap-2 bg-slate-50 rounded-lg p-2 border border-slate-100">
+                        <span class="text-sm shrink-0">🏷️</span>
+                        <div>
+                            <p class="text-[9px] font-bold uppercase text-slate-400">Sujet</p>
+                            <p class="text-[11px] font-black text-slate-800" x-text="currentRequest.subject"></p>
+                        </div>
+                    </div>
+
+                    {{-- Infos entreprise (si présentes) --}}
+                    <div x-show="currentRequest.entrepriseInfo" class="bg-amber-50 border border-amber-100 rounded-lg p-2">
+                        <p class="text-[9px] font-black uppercase text-amber-600 mb-1">🏢 Infos Entreprise</p>
+                        <div class="space-y-0.5">
+                            <template x-for="line in (currentRequest.entrepriseInfo || '').split('\n').filter(l => l.trim())">
+                                <p class="text-[11px] font-semibold text-amber-900" x-text="line.replace('•', '').trim()"></p>
+                            </template>
+                        </div>
+                    </div>
+
+                    {{-- Message --}}
+                    <div>
+                        <p class="text-[9px] font-black uppercase text-slate-400 mb-1">💬 Message</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-[11px] text-slate-700 leading-relaxed max-h-16 overflow-y-auto"
+                             x-text="currentRequest.message">
+                        </div>
+                    </div>
+
+                    {{-- Pièce jointe --}}
+                    <div x-show="currentRequest.attachment">
+                        <a :href="currentRequest.attachment" target="_blank"
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-blue-200 bg-blue-50 text-xs font-bold text-blue-700 hover:bg-blue-100 transition">
+                            📎 Télécharger la pièce jointe
+                        </a>
+                    </div>
+
+                    {{-- Changer le statut --}}
+                    <div class="border-t border-slate-100 pt-2">
+                        <p class="text-[9px] font-black uppercase text-slate-400 mb-1.5">⚙️ Statut</p>
+                        <form method="POST" :action="`/admin/callcenter-request-status/${currentRequest.id}`"
+                              class="flex items-center gap-3">
+                            @csrf
+                            <select name="status"
+                                    class="flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-bold text-slate-800 shadow-sm focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504]">
+                                <option value="Non traité"             :selected="currentRequest.status === 'Non traité'">🔴 Non traité</option>
+                                <option value="En cours de traitement" :selected="currentRequest.status === 'En cours de traitement'">🟡 En cours de traitement</option>
+                                <option value="Traité"                 :selected="currentRequest.status === 'Traité'">🟢 Traité</option>
+                            </select>
+                            <button type="submit"
+                                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black text-white shadow-md transition hover:opacity-90 cursor-pointer whitespace-nowrap"
+                                    style="background: linear-gradient(135deg, #7f0504, #4a0202);">
+                                ✔ Enregistrer
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+
+                {{-- ── Footer ── --}}
+                <div class="px-6 py-3 border-t border-slate-100 bg-slate-50 flex justify-between items-center">
+                    <form method="POST" :action="`/admin/callcenter-request/${currentRequest.id}`"
+                          onsubmit="return confirm('Supprimer définitivement cette demande ?')"
+                          class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                class="inline-flex items-center gap-1.5 text-xs font-bold text-red-500 hover:text-red-700 transition cursor-pointer">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                            Supprimer la demande
+                        </button>
+                    </form>
+                    <button @click="requestModalOpen = false"
+                            class="px-4 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-600 hover:bg-slate-100 transition cursor-pointer shadow-sm">
+                        Fermer
+                    </button>
+                </div>
+
             </div>
         </div>
 

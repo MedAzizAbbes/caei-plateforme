@@ -69,7 +69,7 @@ class CallCenterAdminWorkflowController extends Controller
                                           ? round((RendezVous::where('statut', 'qualifie')->count() / RendezVous::count()) * 100, 1) 
                                           : 0,
             'total_demandes_site'    => CallCenterRequest::count(),
-            'demandes_nouvelles'     => CallCenterRequest::where('status', 'Nouveau')->count(),
+            'demandes_nouvelles'     => CallCenterRequest::where('status', 'Non traité')->count(),
             'total_agents'           => count($agents),
             'total_partenaires'      => count($partenaires),
         ];
@@ -282,7 +282,7 @@ class CallCenterAdminWorkflowController extends Controller
      */
     public function updateRequestStatus(Request $request, $id)
     {
-        $request->validate(['status' => 'required|in:Nouveau,En cours,Traité']);
+        $request->validate(['status' => 'required|in:Non traité,En cours de traitement,Traité']);
         $callRequest = CallCenterRequest::findOrFail($id);
         $callRequest->update(['status' => $request->status]);
 
