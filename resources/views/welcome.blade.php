@@ -1451,30 +1451,7 @@
           <div class="formation-circle-ring" id="formationCircleRing">
             @foreach($formations as $formation)
             @php
-              $domainLower = strtolower($formation->domain ?? '');
-              $titleLower = strtolower($formation->title ?? '');
-              
-              if ($formation->image) {
-                  $imgSrc = Storage::url($formation->image);
-              } elseif (str_contains($titleLower, 'comptabilit') || str_contains($titleLower, 'trésorerie') || str_contains($titleLower, 'financ') || str_contains($domainLower, 'finance') || str_contains($domainLower, 'comptabilit')) {
-                  $imgSrc = asset('assets/img/formation_finance.jpg');
-              } elseif (str_contains($titleLower, 'audit') || str_contains($titleLower, 'contrôle') || str_contains($domainLower, 'audit')) {
-                  $imgSrc = asset('assets/img/formation_audit.jpg');
-              } elseif (str_contains($titleLower, 'leader') || str_contains($titleLower, 'management') || str_contains($domainLower, 'management')) {
-                  $imgSrc = asset('assets/img/formation_leadership.jpg');
-              } elseif (str_contains($titleLower, 'tech') || str_contains($titleLower, 'digital') || str_contains($domainLower, 'digital')) {
-                  $imgSrc = asset('assets/img/formation_tech.jpg');
-              } else {
-                  $fallbackImages = [
-                      asset('assets/img/formation_finance.jpg'),
-                      asset('assets/img/formation_audit.jpg'),
-                      asset('assets/img/formation_leadership.jpg'),
-                      asset('assets/img/formation_tech.jpg'),
-                      asset('assets/img/professionel.jpg'),
-                      asset('assets/img/img3.jpg'),
-                  ];
-                  $imgSrc = $fallbackImages[$loop->index % count($fallbackImages)];
-              }
+              $imgSrc = $formation->image_url;
             @endphp
             <div class="formation-circle-item" data-index="{{ $loop->index }}">
               <div class="formation-card-img-wrap">

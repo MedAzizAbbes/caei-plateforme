@@ -556,13 +556,13 @@
       <div class="row g-4">
         @php
           $certifications = [
-            ['slug' => 'audit-comptabilite-finance', 'domain' => 'Audit, Comptabilité & Finance', 'img' => 'img3.jpg', 'title' => 'Audit, Comptabilité & Finance', 'desc' => 'Maîtrisez les outils comptables, le reporting IFRS et les analyses financières essentielles.'],
-            ['slug' => 'controle-de-gestion', 'domain' => 'Contrôle de Gestion', 'img' => 'img3.jpg', 'title' => 'Contrôle de Gestion', 'desc' => 'Pilotez la performance financière et la trésorerie de votre entreprise avec efficacité.'],
-            ['slug' => 'informatique-ntic', 'domain' => 'Informatique & NTIC', 'img' => 'company.jpg', 'title' => 'Informatique & NTIC', 'desc' => 'Cybersécurité, audit de sécurité, réseaux et systèmes d\'information.'],
-            ['slug' => 'soft-skills', 'domain' => 'Soft Skills & Développement Personnel', 'img' => 'professionel.jpg', 'title' => 'Développement Personnel & Soft Skills', 'desc' => 'Gestion du temps, intelligence émotionnelle, négociation et leadership.'],
-            ['slug' => 'projets-developpement', 'domain' => 'Projets & Programmes de Développement', 'img' => 'cta-bg.jpg', 'title' => 'Projets & Programmes de Développement', 'desc' => 'Planification, exécution, suivi-évaluation et audit des projets en Afrique.'],
-            ['slug' => 'projet-educatif', 'domain' => 'Projet Éducatif en Afrique', 'img' => 'services.jpg', 'title' => 'Projet Éducatif en Afrique', 'desc' => 'Gouvernance, pilotage et amélioration de la qualité du secteur éducatif.'],
-            ['slug' => 'ecommerce-fintech', 'domain' => 'E-Commerce, Fintech & Développement Durable', 'img' => 'services.jpg', 'title' => 'E-Commerce & Fintech', 'desc' => 'Intelligence Artificielle, transformation numérique et solutions financières.'],
+            ['slug' => 'audit-comptabilite-finance', 'domain' => 'Audit, Comptabilité & Finance', 'img' => 'formation_audit.jpg', 'title' => 'Audit, Comptabilité & Finance', 'desc' => 'Maîtrisez les outils comptables, le reporting IFRS et les analyses financières essentielles.'],
+            ['slug' => 'controle-de-gestion', 'domain' => 'Contrôle de Gestion', 'img' => 'formation_finance.jpg', 'title' => 'Contrôle de Gestion', 'desc' => 'Pilotez la performance financière et la trésorerie de votre entreprise avec efficacité.'],
+            ['slug' => 'informatique-ntic', 'domain' => 'Informatique & NTIC', 'img' => 'formation_tech.jpg', 'title' => 'Informatique & NTIC', 'desc' => 'Cybersécurité, audit de sécurité, réseaux et systèmes d\'information.'],
+            ['slug' => 'soft-skills', 'domain' => 'Soft Skills & Développement Personnel', 'img' => 'formation_leadership.jpg', 'title' => 'Développement Personnel & Soft Skills', 'desc' => 'Gestion du temps, intelligence émotionnelle, négociation et leadership.'],
+            ['slug' => 'projets-developpement', 'domain' => 'Projets & Programmes de Développement', 'img' => 'service_consulting_1786525632369.jpg', 'title' => 'Projets & Programmes de Développement', 'desc' => 'Planification, exécution, suivi-évaluation et audit des projets en Afrique.'],
+            ['slug' => 'projet-educatif', 'domain' => 'Projet Éducatif en Afrique', 'img' => 'cta-bg.jpg', 'title' => 'Projet Éducatif en Afrique', 'desc' => 'Gouvernance, pilotage et amélioration de la qualité du secteur éducatif.'],
+            ['slug' => 'ecommerce-fintech', 'domain' => 'E-Commerce, Fintech & Développement Durable', 'img' => 'service_webdesign_1786525611976.jpg', 'title' => 'E-Commerce & Fintech', 'desc' => 'Intelligence Artificielle, transformation numérique et solutions financières.'],
             ['slug' => 'marches-publics', 'domain' => 'Marchés Publics', 'img' => 'im1.jpg', 'title' => 'Marchés Publics', 'desc' => 'Passation, exécution et suivi des contrats de marchés publics.'],
           ];
         @endphp
@@ -606,11 +606,9 @@
           @foreach($allFormations as $f)
             <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="{{ ($loop->index % 6) * 50 }}">
               <div class="formation-card p-0 overflow-hidden">
-                @if($f->image)
-                  <div style="height: 200px; width: 100%; overflow: hidden;">
-                    <img src="{{ asset('storage/' . $f->image) }}" alt="{{ $f->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                  </div>
-                @endif
+                <div style="height: 200px; width: 100%; overflow: hidden;">
+                  <img src="{{ $f->image_url }}" alt="{{ $f->title }}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                </div>
                 <div class="p-4 d-flex flex-column justify-content-between flex-grow-1">
                   <div>
                     <div class="d-flex align-items-center justify-content-between mb-2">

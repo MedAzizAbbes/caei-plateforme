@@ -2310,7 +2310,7 @@
             <div class="swiper-slide filterable-slide" data-month="{{ $month }}" style="width: 300px;">
               <div class="schedule-card">
                 <div class="schedule-card-img">
-                  <img src="{{ $formation->image ? asset('storage/' . $formation->image) : asset('assets/img/img3.jpg') }}" alt="{{ $formation->title }}" loading="lazy">
+                  <img src="{{ $formation->image_url }}" alt="{{ $formation->title }}" loading="lazy">
                 </div>
                 <div class="schedule-card-body">
                   <span class="schedule-code">{{ $formation->code ?: ($formation->type === 'diplomante' ? 'DIPLÔME' : 'CERTIF') }}</span>
