@@ -7,20 +7,27 @@ return new class extends Migration
 {
     public function up(): void
     {
-        // Mettre à jour les anciennes valeurs avant de modifier l'ENUM
+        // Étape 1 : Élargir l'ENUM pour accepter TOUTES les valeurs (anciennes + nouvelles)
+        DB::statement("ALTER TABLE call_center_requests MODIFY COLUMN status ENUM('Nouveau', 'En cours', 'Traité', 'Non traité', 'En cours de traitement') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Nouveau'");
+
+        // Étape 2 : Migrer les données vers les nouvelles valeurs
         DB::statement("UPDATE call_center_requests SET status = 'Non traité' WHERE status = 'Nouveau'");
         DB::statement("UPDATE call_center_requests SET status = 'En cours de traitement' WHERE status = 'En cours'");
 
-        // Modifier la colonne ENUM avec les nouvelles valeurs
-        DB::statement("ALTER TABLE call_center_requests MODIFY COLUMN status ENUM('Non traité', 'En cours de traitement', 'Traité') NOT NULL DEFAULT 'Non traité'");
+        // Étape 3 : Réduire l'ENUM aux nouvelles valeurs uniquement
+        DB::statement("ALTER TABLE call_center_requests MODIFY COLUMN status ENUM('Non traité', 'En cours de traitement', 'Traité') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Non traité'");
     }
 
     public function down(): void
     {
-        // Remettre les anciennes valeurs
+        // Étape 1 : Élargir l'ENUM pour la rollback
+        DB::statement("ALTER TABLE call_center_requests MODIFY COLUMN status ENUM('Nouveau', 'En cours', 'Traité', 'Non traité', 'En cours de traitement') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Non traité'");
+
+        // Étape 2 : Remettre les anciennes valeurs
         DB::statement("UPDATE call_center_requests SET status = 'Nouveau' WHERE status = 'Non traité'");
         DB::statement("UPDATE call_center_requests SET status = 'En cours' WHERE status = 'En cours de traitement'");
 
-        DB::statement("ALTER TABLE call_center_requests MODIFY COLUMN status ENUM('Nouveau', 'En cours', 'Traité') NOT NULL DEFAULT 'Nouveau'");
+        // Étape 3 : Réduire aux anciennes valeurs
+        DB::statement("ALTER TABLE call_center_requests MODIFY COLUMN status ENUM('Nouveau', 'En cours', 'Traité') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Nouveau'");
     }
 };
