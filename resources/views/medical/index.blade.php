@@ -92,8 +92,8 @@
         <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm px-4 lg:px-8 py-2">
             <div class="max-w-7xl mx-auto flex items-center justify-between">
                 {{-- Logo --}}
-                <a href="{{ route('medical.services') }}" class="flex items-center hover:opacity-80 transition-opacity">
-                    <img src="{{ asset('images/logo-medical-square.png') }}?v={{ time() }}" alt="Logo CAEI Medical Services" style="height: 72px; width: auto; object-fit: contain;">
+                <a href="{{ route('medical.services') }}" class="flex items-center group py-1">
+                    <img src="{{ asset('images/logo-medical-navbar.png') }}" alt="Logo CAEI Medical Services" style="max-height: 76px; width: auto; object-fit: contain;" class="transition-transform duration-300 group-hover:scale-105">
                 </a>
 
                 {{-- Desktop Links --}}
@@ -494,7 +494,7 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
-                        <img src="{{ asset('images/logo-medical-square.png') }}?v={{ time() }}" alt="Logo CAEI Medical" class="h-20 w-auto drop-shadow-md">
+                        <img src="{{ asset('images/logo-medical-footer.png') }}" alt="Logo CAEI Medical Services" style="max-height: 90px; width: auto; object-fit: contain;" class="drop-shadow-lg">
                     </div>
                     <p class="text-xs text-slate-400 leading-relaxed text-justify">
                         Agence internationale indépendante d'accompagnement médical & d'évacuation sanitaire en Tunisie.
