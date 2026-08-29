@@ -2385,9 +2385,15 @@
             <img src="{{ asset('assets/img/logocompany.png') }}" alt="CAEI Logo" style="max-height: 55px; width: auto; max-width: 220px; object-fit: contain;">
           </a>
           <div class="footer-contact pt-2 text-white-50">
-            <p><a href="https://www.google.com/maps/search/?api=1&query=SIS+8+Rue+Claude+Bernard+1002+Belvedere-Tunis+Tunisie" target="_blank" style="color: inherit; text-decoration: none;">SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis, Tunisie</a></p>
-            <p class="mt-3"><strong>Téléphone:</strong> <span><a href="tel:+21655335286" style="color: inherit; text-decoration: none;">+216 55 335 286</a></span></p>
-            <p><strong>Email:</strong> <span>contact@caei-afri.com</span></p>
+            <p class="mb-3"><a href="https://www.google.com/maps/search/?api=1&query=SIS+8+Rue+Claude+Bernard+1002+Belvedere-Tunis+Tunisie" target="_blank" style="color: inherit; text-decoration: none;">SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis, Tunisie</a></p>
+            <div class="d-flex align-items-center mb-2" style="font-size: 14px;">
+              <span style="font-weight: 700; width: 95px; flex-shrink: 0; color: #ffffff;">Téléphone:</span>
+              <a href="tel:+21655335286" style="color: inherit; text-decoration: none;">+216 55 335 286</a>
+            </div>
+            <div class="d-flex align-items-center mb-0" style="font-size: 14px;">
+              <span style="font-weight: 700; width: 95px; flex-shrink: 0; color: #ffffff;">Email:</span>
+              <a href="mailto:contact@caei-afri.com" style="color: inherit; text-decoration: none;">contact@caei-afri.com</a>
+            </div>
           </div>
           <div class="social-links d-flex mt-4 gap-2">   
             <a href="https://www.facebook.com/CAEIAfrique/" target="_blank" class="btn btn-sm btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;"><i class="bi bi-facebook"></i></a>
