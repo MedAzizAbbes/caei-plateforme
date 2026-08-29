@@ -3,9 +3,18 @@
 namespace App\Exports;
 
 use App\Models\Registration;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
-class ParticipantsExport
+class ParticipantsExport implements FromCollection, WithHeadings, WithMapping, WithTitle, ShouldAutoSize, WithStyles
 {
     protected $filters;
 
@@ -14,9 +23,9 @@ class ParticipantsExport
         $this->filters = $filters;
     }
 
-    public function download(string $filename): StreamedResponse
+    public function collection()
     {
-        $registrations = Registration::with('user', 'seminar')
+        return Registration::with('user', 'seminar')
             ->when(!empty($this->filters['seminar_id']), fn ($q) => $q->where('seminar_id', $this->filters['seminar_id']))
             ->when(!empty($this->filters['status']), fn ($q) => $q->where('status', $this->filters['status']))
             ->when(!empty($this->filters['name']), function ($q) {
@@ -30,35 +39,80 @@ class ParticipantsExport
                     $u->where('email', 'like', '%' . $this->filters['email'] . '%');
                 });
             })
+            ->latest('registered_at')
             ->get();
+    }
 
-        $headers = [
-            'Content-Type' => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+    public function headings(): array
+    {
+        return [
+            'Nom',
+            'Prénom',
+            'Email',
+            'Téléphone',
+            'Institution',
+            'Séminaire',
+            'Statut',
+            'Date d\'inscription'
         ];
+    }
 
-        $callback = function () use ($registrations) {
-            $file = fopen('php://output', 'w');
-            
-            // En-têtes
-            fputcsv($file, ['Nom', 'Email', 'Telephone', 'Institution', 'Seminaire', 'Statut', 'Inscrit le'], ';');
-            
-            // Données
-            foreach ($registrations as $registration) {
-                fputcsv($file, [
-                    $registration->user->first_name . ' ' . $registration->user->last_name,
-                    $registration->user->email,
-                    $registration->user->phone ?? '-',
-                    $registration->user->institution ?? '-',
-                    $registration->seminar->theme,
-                    ucfirst($registration->status),
-                    $registration->registered_at->format('d/m/Y'),
-                ], ';');
-            }
-            
-            fclose($file);
-        };
+    public function map($registration): array
+    {
+        return [
+            $registration->user->last_name ?? '',
+            $registration->user->first_name ?? '',
+            $registration->user->email ?? '',
+            $registration->user->phone ?? '-',
+            $registration->user->institution ?? '-',
+            $registration->seminar->theme ?? '-',
+            ucfirst($registration->status ?? ''),
+            $registration->registered_at ? $registration->registered_at->format('d/m/Y H:i') : '-',
+        ];
+    }
 
-        return new StreamedResponse($callback, 200, $headers);
+    public function title(): string
+    {
+        return 'Participants CAEI';
+    }
+
+    public function styles(Worksheet $sheet)
+    {
+        // En-tête (Ligne 1) : Fond bleu marine CAEI (#061743), Texte blanc gras, centré verticalement
+        $sheet->getStyle('A1:H1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF'],
+                'size' => 11,
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '061743'],
+            ],
+            'alignment' => [
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        // Hauteur de la ligne d'en-tête
+        $sheet->getRowDimension(1)->setRowHeight(26);
+
+        // Bordures fines et alignement sur l'ensemble du tableau
+        $highestRow = $sheet->getHighestRow();
+        if ($highestRow > 1) {
+            $sheet->getStyle("A1:H{$highestRow}")->applyFromArray([
+                'borders' => [
+                    'allBorders' => [
+                        'borderStyle' => Border::BORDER_THIN,
+                        'color' => ['rgb' => 'CBD5E1'],
+                    ],
+                ],
+            ]);
+
+            // Alignement centré pour Statut (G) et Date d'inscription (H)
+            $sheet->getStyle("G2:H{$highestRow}")->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+        }
+
+        return [];
     }
 }

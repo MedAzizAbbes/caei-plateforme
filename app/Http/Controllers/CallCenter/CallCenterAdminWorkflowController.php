@@ -24,7 +24,7 @@ class CallCenterAdminWorkflowController extends Controller
      */
     public function index(Request $request)
     {
-        $activeTab = $request->get('tab', 'workflow');
+        $activeTab = $request->get('tab', 'overview');
 
         // --- Tab 1: Workflow RDV ---
         $queryRdv = RendezVous::with(['prospect', 'agent', 'partenaire', 'qualification']);
@@ -171,7 +171,72 @@ class CallCenterAdminWorkflowController extends Controller
             // Ignorer si la notification échoue silencieusement
         }
 
+        // 🔔 Notification en direct pour l'Agent créateur
+        if ($rendezVous->agent) {
+            try {
+                $prospectNom = $rendezVous->prospect ? $rendezVous->prospect->nomComplet() : 'Client';
+                $rendezVous->agent->notify(new \App\Notifications\RendezVousUpdatedForAgentNotification(
+                    $rendezVous,
+                    'affectation',
+                    "🤝 RDV Affecté : {$prospectNom}",
+                    "Le rendez-vous pour {$prospectNom} a été affecté par l'Administrateur au partenaire {$partenaire->fullName()}."
+                ));
+            } catch (\Throwable $e) {}
+        }
+
         return back()->with('success', "Le rendez-vous a été affecté avec succès au partenaire {$partenaire->fullName()} et une notification lui a été transmise dans son espace.");
+    }
+
+    /**
+     * Affectation en masse de rendez-vous à un partenaire commercial
+     */
+    public function bulkAssignPartner(Request $request)
+    {
+        $request->validate([
+            'rdv_ids'       => 'required|array|min:1',
+            'rdv_ids.*'     => 'exists:rendez_vous,id',
+            'partenaire_id' => ['required', Rule::exists('users', 'id')->where('role', 'callcenter_partenaire')],
+        ]);
+
+        $partenaire = User::findOrFail($request->partenaire_id);
+        $rdvs = RendezVous::whereIn('id', $request->rdv_ids)->get();
+
+        foreach ($rdvs as $rendezVous) {
+            $oldPartenaire = $rendezVous->partenaire;
+            $newStatut = $rendezVous->qualification ? 'qualifie' : 'affecte';
+
+            $rendezVous->update([
+                'partenaire_id' => $partenaire->id,
+                'statut'        => $newStatut,
+                'assigned_at'   => now(),
+            ]);
+
+            $action = $oldPartenaire ? 'modification_affectation' : 'affectation';
+            $desc = $oldPartenaire 
+                ? "Affectation modifiée de {$oldPartenaire->fullName()} vers {$partenaire->fullName()} (en masse)"
+                : "Rendez-vous affecté au partenaire {$partenaire->fullName()} (en masse)";
+
+            RendezVousHistory::log($rendezVous->id, auth()->id(), $action, $desc);
+
+            try {
+                $partenaire->notify(new \App\Notifications\RendezVousAssignedNotification($rendezVous));
+            } catch (\Throwable $e) {}
+
+            if ($rendezVous->agent) {
+                try {
+                    $prospectNom = $rendezVous->prospect ? $rendezVous->prospect->nomComplet() : 'Client';
+                    $rendezVous->agent->notify(new \App\Notifications\RendezVousUpdatedForAgentNotification(
+                        $rendezVous,
+                        'affectation',
+                        "🤝 RDV Affecté : {$prospectNom}",
+                        "Le rendez-vous pour {$prospectNom} a été affecté par l'Administrateur au partenaire {$partenaire->fullName()}."
+                    ));
+                } catch (\Throwable $e) {}
+            }
+        }
+
+        $count = count($rdvs);
+        return back()->with('success', "{$count} rendez-vous ont été réaffectés avec succès au partenaire {$partenaire->fullName()}.");
     }
 
     /**

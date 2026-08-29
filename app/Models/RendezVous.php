@@ -56,7 +56,11 @@ class RendezVous extends Model
 
     public function statusLabel(): string
     {
-        return match ($this->statut) {
+        $statut = ($this->statut !== 'annule' && ($this->relationLoaded('qualification') ? $this->qualification : $this->qualification()->exists())) 
+            ? 'qualifie' 
+            : $this->statut;
+
+        return match ($statut) {
             'en_attente_affectation'  => 'En attente d\'affectation',
             'affecte'                 => 'Pris en charge',
             'qualification_en_cours'  => 'Qualification en cours',
@@ -64,13 +68,17 @@ class RendezVous extends Model
             'annule'                  => 'Annulé',
             'non_effectue'            => 'Non effectué',
             'reporte'                 => 'Reporté',
-            default                   => (string) $this->statut,
+            default                   => (string) $statut,
         };
     }
 
     public function statusBadgeClasses(): string
     {
-        return match ($this->statut) {
+        $statut = ($this->statut !== 'annule' && ($this->relationLoaded('qualification') ? $this->qualification : $this->qualification()->exists())) 
+            ? 'qualifie' 
+            : $this->statut;
+
+        return match ($statut) {
             'en_attente_affectation'  => 'bg-amber-100 text-amber-800 border-amber-300',
             'affecte'                 => 'bg-blue-100 text-blue-800 border-blue-300',
             'qualification_en_cours'  => 'bg-indigo-100 text-indigo-800 border-indigo-300',

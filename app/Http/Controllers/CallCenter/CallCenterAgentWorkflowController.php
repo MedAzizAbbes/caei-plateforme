@@ -141,4 +141,13 @@ class CallCenterAgentWorkflowController extends Controller
             'Content-Disposition' => 'attachment; filename="rdv_prospect_' . $rendezVous->id . '.ics"',
         ]);
     }
+
+    /**
+     * Marquer toutes les notifications comme lues
+     */
+    public function markNotificationsAsRead()
+    {
+        auth()->user()->unreadNotifications->markAsRead();
+        return back()->with('success', 'Toutes vos notifications ont été marquées comme lues.');
+    }
 }

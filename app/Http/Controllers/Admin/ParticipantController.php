@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Registration;
 use App\Models\Seminar;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ParticipantController extends Controller
 {
@@ -36,11 +37,13 @@ class ParticipantController extends Controller
         return view('admin.participants.index', compact('registrations', 'seminars'));
     }
 
-    /** Export Excel (CSV) */
+    /** Export Excel (.xlsx) */
     public function exportExcel(Request $request)
     {
-        return (new ParticipantsExport($request->only(['seminar_id', 'status', 'name', 'email'])))
-            ->download('participants_caei_' . now()->format('Y-m-d') . '.csv');
+        return Excel::download(
+            new ParticipantsExport($request->only(['seminar_id', 'status', 'name', 'email'])),
+            'participants_caei_' . now()->format('Y-m-d') . '.xlsx'
+        );
     }
 
     /** Export PDF */

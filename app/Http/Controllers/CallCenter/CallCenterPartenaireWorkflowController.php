@@ -42,7 +42,7 @@ class CallCenterPartenaireWorkflowController extends Controller
             ->filter(fn($n) => ($n->data['rendez_vous_id'] ?? null) == $rendezVous->id)
             ->each(fn($n) => $n->markAsRead());
 
-        if ($rendezVous->statut === 'affecte') {
+        if ($rendezVous->statut === 'affecte' && !$rendezVous->qualification) {
             $rendezVous->update(['statut' => 'qualification_en_cours']);
             RendezVousHistory::log(
                 $rendezVous->id, 
@@ -100,6 +100,19 @@ class CallCenterPartenaireWorkflowController extends Controller
             'qualification', 
             "Rendez-vous qualifié par le partenaire {$partenaire->fullName()} (Résultat: {$qualification->resultat}, Potentiel: {$qualification->potentiel})"
         );
+
+        // 🔔 Notification en direct pour l'Agent créateur
+        if ($rendezVous->agent) {
+            try {
+                $prospectNom = $rendezVous->prospect ? $rendezVous->prospect->nomComplet() : 'Client';
+                $rendezVous->agent->notify(new \App\Notifications\RendezVousUpdatedForAgentNotification(
+                    $rendezVous,
+                    'qualification',
+                    "🎯 RDV Qualifié : {$prospectNom}",
+                    "Le partenaire {$partenaire->fullName()} a qualifié le rendez-vous pour {$prospectNom} (Résultat: {$qualification->resultat}, Potentiel: {$qualification->potentiel})."
+                ));
+            } catch (\Throwable $e) {}
+        }
 
         return redirect()->route('callcenter.partenaire.index')
             ->with('success', 'La qualification du prospect a été enregistrée avec succès ! L\'agent et l\'administrateur peuvent maintenant la consulter.');
