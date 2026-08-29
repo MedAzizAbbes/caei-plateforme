@@ -58,7 +58,7 @@ class RendezVous extends Model
     {
         return match ($this->statut) {
             'en_attente_affectation'  => 'En attente d\'affectation',
-            'affecte'                 => 'Affecté',
+            'affecte'                 => 'Pris en charge',
             'qualification_en_cours'  => 'Qualification en cours',
             'qualifie'                => 'Qualifié',
             'annule'                  => 'Annulé',
