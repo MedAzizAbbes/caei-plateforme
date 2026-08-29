@@ -7,8 +7,10 @@
 
     {{-- Contenu Principal --}}
     <div class="flex-1 p-6 md:p-8 overflow-y-auto" x-data="{ 
-        activeTab: '{{ old('tab', request('tab', 'workflow')) }}',
+        activeTab: '{{ old('tab', request('tab', 'overview')) }}',
         userSubTab: '{{ request('subtab', 'agents') }}',
+        showCreateUserForm: false,
+        selectedRdvs: [],
         setTab(t) {
             this.activeTab = t;
             const u = new URL(window.location);
@@ -78,7 +80,6 @@
             attachment: ''
         },
         openRequestModal(req) {
-            // Parser le message pour séparer les infos entreprise du vrai message
             let rawMessage = req.message || '';
             let entrepriseInfo = '';
             let realMessage = rawMessage;
@@ -86,7 +87,6 @@
             if (rawMessage.includes('--- Informations Entreprise ---')) {
                 const parts = rawMessage.split('--- Message ---');
                 realMessage = parts[1] ? parts[1].trim() : '';
-                // Extraire les lignes de détail
                 const infoPart = parts[0].replace('--- Informations Entreprise ---', '').trim();
                 entrepriseInfo = infoPart;
             }
@@ -107,34 +107,31 @@
         }
     }">
 
-        {{-- En-tête --}}
-        <div class="mb-8 rounded-2xl p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden"
+        {{-- En-tête Global --}}
+        <div class="mb-6 rounded-2xl p-6 md:p-8 text-white shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden"
              style="background: linear-gradient(135deg, rgba(127, 5, 4, 0.92) 0%, rgba(70, 2, 2, 0.95) 100%), url('{{ asset('assets/img/service_callcenter_1786525651775.jpg') }}') center/cover no-repeat;">
             <div class="absolute -right-6 -bottom-8 opacity-20 text-8xl pointer-events-none select-none">🎧</div>
             <div class="relative z-10">
                 <span class="inline-flex items-center gap-1.5 bg-red-100 text-xs font-black px-3 py-1 rounded-md uppercase tracking-wider mb-2" style="color: #7f0504;">
                     <span>📞</span> CAEI Call Center
                 </span>
-                <h1 class="text-3xl font-black uppercase tracking-tight flex items-center gap-3">
-                    <span>Dashboard Administration Centralisé</span> 🎧
+                <h1 class="text-2xl md:text-3xl font-black uppercase tracking-tight flex items-center gap-3">
+                    <span>Administration Centralisée</span> 🎧
                 </h1>
-                <p class="mt-2 text-red-50 text-sm">Gestion unifiée du workflow RDV, des demandes du site public et des comptes utilisateurs (Agents & Partenaires).</p>
+                <p class="mt-1 text-red-50 text-xs md:text-sm">Gestion unifiée du workflow RDV, des demandes web et des comptes utilisateurs.</p>
             </div>
-            <div class="flex flex-wrap items-center gap-3 relative z-10">
+            <div class="flex flex-wrap items-center gap-2.5 relative z-10">
                 <a href="{{ route('admin.callcenter.export.excel', request()->only(['statut', 'agent_id', 'partenaire_id'])) }}" 
-                   class="shrink-0 inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all">
-                    <span>📊 Exporter Excel (.csv)</span>
+                   class="shrink-0 inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow transition-all">
+                    <span>📊 Exporter Excel</span>
                 </a>
                 <a href="{{ route('admin.callcenter.export.pdf', request()->only(['statut'])) }}" 
-                   class="shrink-0 inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 text-white font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all">
+                   class="shrink-0 inline-flex items-center gap-1.5 bg-red-600 hover:bg-red-700 text-white font-bold text-xs px-3.5 py-2 rounded-xl shadow transition-all">
                     <span>📄 Exporter PDF</span>
                 </a>
                 <a href="{{ route('callcenter.index') }}" target="_blank"
-                   class="shrink-0 inline-flex items-center gap-2 bg-white hover:bg-slate-50 font-black text-xs px-4 py-2.5 rounded-xl shadow transition-all" style="color: #7f0504;">
-                    <span>Voir le site Call Center 🌐</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                    </svg>
+                   class="shrink-0 inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 font-bold text-xs px-3.5 py-2 rounded-xl shadow transition-all" style="color: #7f0504;">
+                    <span>Voir le site 🌐</span>
                 </a>
             </div>
         </div>
@@ -162,93 +159,22 @@
             </div>
         @endif
 
-        <!-- 1. Bannière de Statistiques Unifiée -->
-        <div class="grid grid-cols-2 md:grid-cols-6 gap-4 mb-6">
-            <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
-                <p class="text-[11px] font-bold uppercase text-slate-400">Total RDV</p>
-                <p class="text-2xl font-black text-slate-800 mt-1">{{ $stats['total_rdv'] }}</p>
-            </div>
-            <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200 shadow-sm">
-                <p class="text-[11px] font-bold uppercase text-amber-700">En attente affect.</p>
-                <p class="text-2xl font-black text-amber-800 mt-1">{{ $stats['en_attente_affectation'] }}</p>
-            </div>
-            <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 shadow-sm">
-                <p class="text-[11px] font-bold uppercase text-emerald-700">Qualifiés</p>
-                <p class="text-2xl font-black text-emerald-800 mt-1">{{ $stats['qualifie'] }}</p>
-            </div>
-            <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-200 shadow-sm">
-                <p class="text-[11px] font-bold uppercase text-indigo-700">Taux Qualif.</p>
-                <p class="text-2xl font-black text-indigo-800 mt-1">{{ $stats['taux_qualification'] }}%</p>
-            </div>
-            <div class="bg-red-50 p-4 rounded-2xl border border-red-200 shadow-sm">
-                <p class="text-[11px] font-bold uppercase text-red-700">Demandes Web Site</p>
-                <p class="text-2xl font-black text-red-800 mt-1">{{ $stats['total_demandes_site'] }}</p>
-            </div>
-            <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200 shadow-sm">
-                <p class="text-[11px] font-bold uppercase text-blue-700">Agents / Partenaires</p>
-                <p class="text-xl font-black text-blue-900 mt-1">{{ $stats['total_agents'] }} / {{ $stats['total_partenaires'] }}</p>
-            </div>
-        </div>
+        <!-- 🧭 Navigation Principale par Onglets Métiers -->
+        <div class="mb-6 bg-white rounded-2xl p-2 shadow-sm border border-slate-200 flex flex-wrap items-center gap-2">
+            <button type="button" 
+                    @click="setTab('overview')" 
+                    :style="activeTab === 'overview' ? 'background-color: #7f0504; color: #ffffff;' : ''"
+                    :class="activeTab === 'overview' ? 'shadow-sm font-black text-white' : 'text-slate-600 hover:bg-slate-100 font-bold'"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs transition-all cursor-pointer">
+                <span>📈 Vue d'Ensemble & Analytics</span>
+            </button>
 
-        <!-- 📈 Section Analytics & Graphiques de Performance (Chart.js) -->
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-            <!-- Graphique 1: Performance Partenaires -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-1">
-                <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
-                    <div>
-                        <h3 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-                            Performance par Partenaire
-                        </h3>
-                        <p class="text-[11px] text-slate-400 mt-0.5">RDV Qualifiés vs Non Qualifiés</p>
-                    </div>
-                </div>
-                <div class="relative h-60">
-                    <canvas id="ccPartenaireChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Graphique 2: Évolution Mensuelle -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-1">
-                <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
-                    <div>
-                        <h3 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
-                            Évolution Mensuelle des RDV
-                        </h3>
-                        <p class="text-[11px] text-slate-400 mt-0.5">Tendance sur les 6 derniers mois</p>
-                    </div>
-                </div>
-                <div class="relative h-60">
-                    <canvas id="ccMonthlyChart"></canvas>
-                </div>
-            </div>
-
-            <!-- Graphique 3: Activité des Agents -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-1">
-                <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
-                    <div>
-                        <h3 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                            Volume RDV par Agent
-                        </h3>
-                        <p class="text-[11px] text-slate-400 mt-0.5">Total de rendez-vous générés</p>
-                    </div>
-                </div>
-                <div class="relative h-60">
-                    <canvas id="ccAgentChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <!-- Navigation par Onglets -->
-        <div class="mb-8 bg-white rounded-2xl p-2 shadow-sm border border-slate-200 flex flex-wrap items-center gap-2">
             <button type="button" 
                     @click="setTab('workflow')" 
                     :style="activeTab === 'workflow' ? 'background-color: #7f0504; color: #ffffff;' : ''"
                     :class="activeTab === 'workflow' ? 'shadow-sm font-black text-white' : 'text-slate-600 hover:bg-slate-100 font-bold'"
                     class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs transition-all cursor-pointer">
-                <span>📊 Workflow RDV</span>
+                <span>📊 Workflow RDVs</span>
                 <span class="px-2 py-0.5 rounded-full text-[10px] font-black" 
                       :style="activeTab === 'workflow' ? 'background-color: rgba(255,255,255,0.25); color: #ffffff;' : 'background-color: #f1f5f9; color: #334155;'">
                     {{ $stats['total_rdv'] }}
@@ -287,12 +213,151 @@
         </div>
 
         <!-- ================================================================================== -->
-        <!-- TAB 1 : WORKFLOW RDV & PARTENAIRES -->
+        <!-- TAB 1 : VUE D'ENSEMBLE & ANALYTICS -->
+        <!-- ================================================================================== -->
+        <div x-show="activeTab === 'overview'" class="space-y-6">
+            <!-- Bannière de Statistiques KPI -->
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+                <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm">
+                    <p class="text-[11px] font-bold uppercase text-slate-400">Total RDV</p>
+                    <p class="text-2xl font-black text-slate-800 mt-1">{{ $stats['total_rdv'] }}</p>
+                </div>
+                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-200 shadow-sm">
+                    <p class="text-[11px] font-bold uppercase text-amber-700">En attente affect.</p>
+                    <p class="text-2xl font-black text-amber-800 mt-1">{{ $stats['en_attente_affectation'] }}</p>
+                </div>
+                <div class="bg-emerald-50 p-4 rounded-2xl border border-emerald-200 shadow-sm">
+                    <p class="text-[11px] font-bold uppercase text-emerald-700">Qualifiés</p>
+                    <p class="text-2xl font-black text-emerald-800 mt-1">{{ $stats['qualifie'] }}</p>
+                </div>
+                <div class="bg-indigo-50 p-4 rounded-2xl border border-indigo-200 shadow-sm">
+                    <p class="text-[11px] font-bold uppercase text-indigo-700">Taux Qualif.</p>
+                    <p class="text-2xl font-black text-indigo-800 mt-1">{{ $stats['taux_qualification'] }}%</p>
+                </div>
+                <div class="bg-red-50 p-4 rounded-2xl border border-red-200 shadow-sm">
+                    <p class="text-[11px] font-bold uppercase text-red-700">Demandes Web Site</p>
+                    <p class="text-2xl font-black text-red-800 mt-1">{{ $stats['total_demandes_site'] }}</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-2xl border border-blue-200 shadow-sm">
+                    <p class="text-[11px] font-bold uppercase text-blue-700">Agents / Partenaires</p>
+                    <p class="text-xl font-black text-blue-900 mt-1">{{ $stats['total_agents'] }} / {{ $stats['total_partenaires'] }}</p>
+                </div>
+            </div>
+
+            <!-- Graphiques Analytics Chart.js -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Graphique 1: Performance Partenaires -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-1">
+                    <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                                Performance par Partenaire
+                            </h3>
+                            <p class="text-[11px] text-slate-400 mt-0.5">RDV Qualifiés vs Non Qualifiés</p>
+                        </div>
+                    </div>
+                    <div class="relative h-60">
+                        <canvas id="ccPartenaireChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Graphique 2: Évolution Mensuelle -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-1">
+                    <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                                Évolution Mensuelle des RDV
+                            </h3>
+                            <p class="text-[11px] text-slate-400 mt-0.5">Tendance sur les 6 derniers mois</p>
+                        </div>
+                    </div>
+                    <div class="relative h-60">
+                        <canvas id="ccMonthlyChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Graphique 3: Activité des Agents -->
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm lg:col-span-1">
+                    <div class="flex items-center justify-between mb-4 pb-2 border-b border-slate-100">
+                        <div>
+                            <h3 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                                Volume RDV par Agent
+                            </h3>
+                            <p class="text-[11px] text-slate-400 mt-0.5">Total de rendez-vous générés</p>
+                        </div>
+                    </div>
+                    <div class="relative h-60">
+                        <canvas id="ccAgentChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Raccourcis d'Accès Rapide -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
+                <div @click="setTab('workflow')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-red-50 text-red-700 font-black text-2xl flex items-center justify-center shrink-0">📊</div>
+                    <div>
+                        <h4 class="font-black text-slate-900 text-sm">Gestion des RDVs & Workflow</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Affecter les partenaires, suivre la qualification des prospects.</p>
+                    </div>
+                </div>
+
+                <div @click="setTab('demandes_web')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-700 font-black text-2xl flex items-center justify-center shrink-0">📩</div>
+                    <div>
+                        <h4 class="font-black text-slate-900 text-sm">Demandes en Ligne</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Consulter et traiter les requêtes reçues depuis le site public.</p>
+                    </div>
+                </div>
+
+                <div @click="setTab('utilisateurs')" class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition cursor-pointer flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-700 font-black text-2xl flex items-center justify-center shrink-0">👥</div>
+                    <div>
+                        <h4 class="font-black text-slate-900 text-sm">Comptes Agents & Partenaires</h4>
+                        <p class="text-xs text-slate-500 mt-0.5">Créer, modifier ou consulter le bilan d'activité de chaque utilisateur.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================================== -->
+        <!-- TAB 2 : WORKFLOW RDV & PARTENAIRES -->
         <!-- ================================================================================== -->
         <div x-show="activeTab === 'workflow'" class="space-y-6">
+            <!-- Barre d'Action Flottante pour Affectation en Masse -->
+            <div x-show="selectedRdvs.length > 0" x-cloak
+                 class="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-[#061743] text-white px-6 py-3.5 rounded-2xl shadow-2xl border border-blue-400/30 flex items-center gap-5 transition-all">
+                <div class="flex items-center gap-2 text-xs font-black">
+                    <span class="bg-[#f2a90f] text-[#061743] font-black px-2.5 py-1 rounded-lg text-xs" x-text="selectedRdvs.length"></span>
+                    <span>RDV(s) sélectionné(s)</span>
+                </div>
+                
+                <form method="POST" action="{{ route('admin.callcenter.bulk_assign') }}" class="flex items-center gap-2">
+                    @csrf
+                    <template x-for="id in selectedRdvs" :key="id">
+                        <input type="hidden" name="rdv_ids[]" :value="id">
+                    </template>
+                    <select name="partenaire_id" required class="text-xs rounded-xl border-0 bg-white px-3 py-2 text-slate-800 font-bold focus:ring-2 focus:ring-[#f2a90f] shadow-sm">
+                        <option value="" class="text-slate-500">-- Choisir le Partenaire --</option>
+                        @foreach($partenaires as $p)
+                            <option value="{{ $p->id }}" class="text-slate-800 font-medium">{{ $p->fullName() }} ({{ $p->institution ?? 'Partenaire' }})</option>
+                        @endforeach
+                    </select>
+                    <button type="submit" class="bg-[#f2a90f] hover:bg-[#d99405] text-[#061743] font-black text-xs px-4 py-2 rounded-xl shadow cursor-pointer transition">
+                        ⚡ Affecter en Masse
+                    </button>
+                </form>
+                <button type="button" @click="selectedRdvs = []" class="text-xs text-slate-300 hover:text-white underline">
+                    Annuler
+                </button>
+            </div>
+
             <!-- Filtres Workflow -->
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                <form method="GET" action="{{ route('callcenter.admin.dashboard') }}" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 items-end">
+                <form method="GET" action="{{ route('admin.callcenter.dashboard') }}" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 items-end">
                     <input type="hidden" name="tab" value="workflow">
 
                     <div>
@@ -336,7 +401,7 @@
                         <button type="submit" class="w-full rounded-xl py-2.5 text-xs font-black uppercase text-white transition" style="background-color: #991b1b;">
                             Appliquer les filtres
                         </button>
-                        <a href="{{ route('callcenter.admin.dashboard', ['tab' => 'workflow']) }}" class="rounded-xl border border-slate-300 px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-100 transition flex items-center justify-center">
+                        <a href="{{ route('admin.callcenter.dashboard', ['tab' => 'workflow']) }}" class="rounded-xl border border-slate-300 px-3 py-2.5 text-xs font-bold text-slate-600 hover:bg-slate-100 transition flex items-center justify-center">
                             ↺
                         </a>
                     </div>
@@ -348,68 +413,70 @@
                 <div class="px-6 py-4 border-b border-slate-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 bg-gradient-to-r from-slate-50 to-white">
                     <div class="flex items-center gap-3">
                         <div class="w-9 h-9 rounded-xl bg-red-100 text-red-800 flex items-center justify-center font-bold text-base">
-                            📅
+                            📊
                         </div>
                         <div>
-                            <h3 class="text-sm font-black uppercase tracking-wider text-slate-900">Prises de Rendez-vous & Qualifications</h3>
-                            <p class="text-xs text-slate-500 font-medium">Gestion globale des rendez-vous et affectations partenaires</p>
+                            <h3 class="text-sm font-black uppercase tracking-wider text-slate-800">Workflow des Rendez-vous enregistrés ({{ $rendezVousList->total() }})</h3>
+                            <p class="text-xs text-slate-500">Cochez plusieurs lignes pour déclencher l'affectation en masse</p>
                         </div>
                     </div>
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                        {{ $rendezVousList->total() }} RDV enregistrés
-                    </span>
                 </div>
 
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-sm">
                         <thead>
-                            <tr class="border-b border-slate-200 bg-slate-50 text-[11px] font-black uppercase tracking-wider text-slate-600">
+                            <tr class="border-b border-slate-200 bg-slate-100/70 text-[11px] font-black uppercase tracking-wider text-slate-600">
+                                <th class="py-3.5 px-4 w-10 text-center">
+                                    <input type="checkbox" 
+                                           @change="selectedRdvs = $event.target.checked ? [{{ $rendezVousList->pluck('id')->implode(',') }}] : []"
+                                           :checked="selectedRdvs.length > 0 && selectedRdvs.length === {{ count($rendezVousList) }}"
+                                           class="rounded border-slate-300 text-[#7f0504] focus:ring-[#7f0504] cursor-pointer">
+                                </th>
                                 <th class="py-3.5 px-4">Date & Heure</th>
-                                <th class="py-3.5 px-4">Prospect</th>
-                                <th class="py-3.5 px-4">Agent créateur</th>
-                                <th class="py-3.5 px-4">Objet</th>
-                                <th class="py-3.5 px-4">Partenaire affecté</th>
+                                <th class="py-3.5 px-4">Prospect / Client</th>
+                                <th class="py-3.5 px-4">Agent Créateur</th>
+                                <th class="py-3.5 px-4">Objet du RDV</th>
+                                <th class="py-3.5 px-4">Partenaire Affecté</th>
                                 <th class="py-3.5 px-4">Statut RDV</th>
-                                <th class="py-3.5 px-4">Qualification</th>
-                                <th class="py-3.5 px-4 text-right">Affectation</th>
+                                <th class="py-3.5 px-4">Résultat Qualification</th>
+                                <th class="py-3.5 px-4 text-right">Actions Admin</th>
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
                             @forelse($rendezVousList as $rdv)
-                                <tr class="hover:bg-slate-50/90 transition-colors">
+                                <tr class="hover:bg-slate-50/80 transition" :class="selectedRdvs.includes({{ $rdv->id }}) ? 'bg-amber-50/60' : ''">
+                                    <td class="py-3.5 px-4 text-center">
+                                        <input type="checkbox" value="{{ $rdv->id }}" x-model.number="selectedRdvs" class="rounded border-slate-300 text-[#7f0504] focus:ring-[#7f0504] cursor-pointer">
+                                    </td>
+
                                     <td class="py-3.5 px-4 whitespace-nowrap">
                                         <div class="font-bold text-slate-900 flex items-center gap-1.5">
                                             <span>📅</span> {{ \Carbon\Carbon::parse($rdv->date_rendez_vous)->format('d/m/Y') }}
                                         </div>
-                                        <div class="mt-0.5 inline-block text-xs font-semibold text-slate-600 bg-slate-100 px-2 py-0.5 rounded-md border border-slate-200">
-                                            ⏰ {{ \Carbon\Carbon::parse($rdv->heure_rendez_vous)->format('H:i') }}
+                                        <div class="text-xs text-slate-500 mt-0.5 flex items-center gap-1">
+                                            <span>⏰</span> {{ \Carbon\Carbon::parse($rdv->heure_rendez_vous)->format('H:i') }}
                                         </div>
                                     </td>
 
                                     <td class="py-3.5 px-4">
-                                        <div class="flex items-start gap-2.5">
-                                            <div class="w-8 h-8 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-700 font-black text-xs flex items-center justify-center shrink-0">
-                                                {{ strtoupper(substr($rdv->prospect->nom ?? 'P', 0, 1) . substr($rdv->prospect->prenom ?? '', 0, 1)) }}
-                                            </div>
-                                            <div>
-                                                <div class="font-bold text-slate-900 leading-snug">{{ $rdv->prospect->nomComplet() }}</div>
-                                                <div class="text-xs font-semibold text-slate-500 flex items-center gap-1 mt-0.5">
-                                                    <span>📞</span> <a href="tel:{{ $rdv->prospect->telephone }}" class="hover:underline hover:text-slate-800">{{ $rdv->prospect->telephone }}</a>
-                                                </div>
-                                                @if($rdv->prospect->societe)
-                                                    <div class="text-[11px] text-slate-400 font-medium mt-0.5 flex items-center gap-1">
-                                                        <span>🏢</span> {{ $rdv->prospect->societe }}
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </div>
+                                        <div class="font-bold text-slate-900">{{ $rdv->prospect ? $rdv->prospect->nomComplet() : 'Prospect Inconnu' }}</div>
+                                        @if($rdv->prospect)
+                                            <div class="text-xs text-slate-500">📞 {{ $rdv->prospect->telephone }}</div>
+                                            @if($rdv->prospect->societe)
+                                                <div class="text-[11px] text-slate-400 font-semibold">🏢 {{ $rdv->prospect->societe }}</div>
+                                            @endif
+                                        @endif
                                     </td>
 
                                     <td class="py-3.5 px-4 whitespace-nowrap">
-                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
-                                            🎧 {{ $rdv->agent->fullName() }}
-                                        </span>
+                                        @if($rdv->agent)
+                                            <div class="font-bold text-slate-800 flex items-center gap-1">
+                                                <span>🎧</span> {{ $rdv->agent->fullName() }}
+                                            </div>
+                                            <div class="text-[11px] text-slate-400">{{ $rdv->agent->email }}</div>
+                                        @else
+                                            <span class="text-xs text-slate-400 italic">Non renseigné</span>
+                                        @endif
                                     </td>
 
                                     <td class="py-3.5 px-4">
@@ -451,26 +518,28 @@
                                     </td>
 
                                     <td class="py-3.5 px-4 text-right whitespace-nowrap">
-                                        <form method="POST" action="{{ route('callcenter.admin.assign', $rdv) }}" class="inline-flex items-center gap-1.5">
-                                            @csrf
-                                            <select name="partenaire_id" required class="text-xs rounded-lg border-slate-300 py-1.5 px-2.5 text-slate-800 font-semibold focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504] bg-white shadow-2xs">
-                                                <option value="">-- Partenaire --</option>
-                                                @foreach($partenaires as $p)
-                                                    <option value="{{ $p->id }}" {{ $rdv->partenaire_id == $p->id ? 'selected' : '' }}>
-                                                        {{ $p->fullName() }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            <button type="submit" class="rounded-lg px-3.5 py-1.5 text-xs font-black uppercase tracking-wider text-white transition shadow-sm" style="background-color: #991b1b;">
-                                                {{ $rdv->partenaire_id ? 'Réaffecter' : 'Affecter' }}
-                                            </button>
-                                        </form>
+                                        <div class="flex items-center justify-end gap-2">
+                                            <form method="POST" action="{{ route('admin.callcenter.assign', $rdv->id) }}" class="flex items-center gap-1.5">
+                                                @csrf
+                                                <select name="partenaire_id" required class="text-xs rounded-xl border-slate-200 bg-slate-50 py-1.5 px-2 font-bold text-slate-800 focus:border-[#7f0504]">
+                                                    <option value="">-- Affecter --</option>
+                                                    @foreach($partenaires as $p)
+                                                        <option value="{{ $p->id }}" {{ $rdv->partenaire_id == $p->id ? 'selected' : '' }}>
+                                                            {{ $p->fullName() }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                <button type="submit" class="px-2.5 py-1.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-bold transition cursor-pointer" title="Valider l'affectation">
+                                                    ✔
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="p-8 text-center text-slate-400">
-                                        Aucun rendez-vous enregistré pour le moment.
+                                    <td colspan="9" class="p-8 text-center text-slate-400">
+                                        Aucun rendez-vous ne correspond aux critères sélectionnés.
                                     </td>
                                 </tr>
                             @endforelse
@@ -478,19 +547,24 @@
                     </table>
                 </div>
 
-                <div class="p-4 border-t border-slate-100">
+                <div class="p-4 border-t border-slate-100 bg-slate-50">
                     {{ $rendezVousList->appends(['tab' => 'workflow'])->links() }}
                 </div>
             </div>
         </div>
 
         <!-- ================================================================================== -->
-        <!-- TAB 2 : DEMANDES DU SITE PUBLIC -->
+        <!-- TAB 3 : DEMANDES DU SITE PUBLIC -->
         <!-- ================================================================================== -->
         <div x-show="activeTab === 'demandes_web'" class="space-y-6">
             <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="px-6 py-4 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-                    <h3 class="text-sm font-black uppercase tracking-wider text-slate-800">Demandes de Contact Soumises en Ligne ({{ $publicRequests->total() }})</h3>
+                    <div>
+                        <h3 class="text-sm font-black uppercase text-slate-800 flex items-center gap-2">
+                            <span>📩</span> Demandes de Contact Web ({{ $publicRequests->total() }})
+                        </h3>
+                        <p class="text-xs text-slate-500">Demandes soumises depuis le formulaire en ligne du site Call Center</p>
+                    </div>
                 </div>
 
                 <div class="overflow-x-auto">
@@ -533,7 +607,7 @@
                                         @endif
                                     </td>
                                     <td class="p-4 whitespace-nowrap">
-                                        <form method="POST" action="{{ route('callcenter.admin.request.status', $req->id) }}">
+                                        <form method="POST" action="{{ route('admin.callcenter.request.status', $req->id) }}">
                                             @csrf
                                             <select name="status" onchange="this.form.submit()" class="text-xs rounded-lg border-slate-300 py-1 px-2 font-bold text-slate-800">
                                                 <option value="Non traité" {{ $req->status === 'Non traité' ? 'selected' : '' }}>🔴 Non traité</option>
@@ -544,7 +618,6 @@
                                     </td>
                                     <td class="p-4 text-right whitespace-nowrap">
                                         <div class="flex items-center justify-end gap-2">
-                                            {{-- Bouton Gérer --}}
                                             <button type="button"
                                                 @click="openRequestModal({
                                                     id: {{ $req->id }},
@@ -561,8 +634,7 @@
                                                 style="background-color: #7f0504;">
                                                 ⚙️ Gérer
                                             </button>
-                                            {{-- Bouton Supprimer --}}
-                                            <form method="POST" action="{{ route('callcenter.admin.request.destroy', $req->id) }}" onsubmit="return confirm('Supprimer cette demande ?')">
+                                            <form method="POST" action="{{ route('admin.callcenter.request.destroy', $req->id) }}" onsubmit="return confirm('Supprimer cette demande ?')">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="text-xs font-bold text-red-600 hover:underline">Supprimer</button>
@@ -579,175 +651,37 @@
                     </table>
                 </div>
 
-                <div class="p-4 border-t border-slate-100">
+                <div class="p-4 border-t border-slate-100 bg-slate-50">
                     {{ $publicRequests->appends(['tab' => 'demandes_web'])->links() }}
                 </div>
             </div>
         </div>
 
-        {{-- ══════════════════════════════════════════════════════ --}}
-        {{-- MODAL : GÉRER UNE DEMANDE                            --}}
-        {{-- ══════════════════════════════════════════════════════ --}}
-        <div x-show="requestModalOpen" x-cloak
-             class="fixed inset-0 z-50 flex items-center justify-center p-4"
-             style="background: rgba(15,23,42,0.65); backdrop-filter: blur(4px);">
-
-            <div @click.away="requestModalOpen = false"
-                 class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-200"
-                 x-transition:enter="transition ease-out duration-200"
-                 x-transition:enter-start="opacity-0 scale-95"
-                 x-transition:enter-end="opacity-100 scale-100">
-
-                {{-- ── Header ── --}}
-                <div class="relative px-4 py-3 overflow-hidden" style="background: linear-gradient(135deg, #7f0504 0%, #4a0202 100%);">
-                    <div class="absolute -right-3 -top-3 w-14 h-14 rounded-full opacity-10 bg-white"></div>
-                    <div class="relative flex items-center justify-between">
-                        <div class="flex items-center gap-2">
-                            <div class="w-8 h-8 rounded-lg bg-white/20 border border-white/30 flex items-center justify-center font-black text-white text-sm uppercase"
-                                 x-text="currentRequest.name ? currentRequest.name.charAt(0).toUpperCase() : '?'">
-                            </div>
-                            <div>
-                                <p class="text-white font-black text-xs leading-tight" x-text="currentRequest.name"></p>
-                                <p class="text-white/60 text-[10px]" x-text="currentRequest.date"></p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black border"
-                                  :class="{
-                                    'bg-red-100 text-red-700 border-red-300'            : currentRequest.status === 'Non traité',
-                                    'bg-amber-100 text-amber-700 border-amber-300'      : currentRequest.status === 'En cours de traitement',
-                                    'bg-emerald-100 text-emerald-700 border-emerald-300': currentRequest.status === 'Traité'
-                                  }">
-                                <span class="w-1.5 h-1.5 rounded-full"
-                                      :class="{
-                                        'bg-red-500'    : currentRequest.status === 'Non traité',
-                                        'bg-amber-500'  : currentRequest.status === 'En cours de traitement',
-                                        'bg-emerald-500': currentRequest.status === 'Traité'
-                                      }"></span>
-                                <span x-text="currentRequest.status"></span>
-                            </span>
-                            <button @click="requestModalOpen = false"
-                                    class="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/25 flex items-center justify-center text-white/80 hover:text-white transition cursor-pointer text-base leading-none">
-                                &times;
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- ── Corps ── --}}
-                <div class="px-4 py-3 space-y-2">
-
-                    {{-- Infos contact --}}
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="flex items-center gap-2 bg-slate-50 rounded-lg p-2 border border-slate-100">
-                            <span class="text-sm shrink-0">📧</span>
-                            <div class="min-w-0">
-                                <p class="text-[9px] font-bold uppercase text-slate-400">Email</p>
-                                <p class="text-[11px] font-bold text-slate-800 truncate" x-text="currentRequest.email"></p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-2 bg-slate-50 rounded-lg p-2 border border-slate-100">
-                            <span class="text-sm shrink-0">📞</span>
-                            <div>
-                                <p class="text-[9px] font-bold uppercase text-slate-400">Téléphone</p>
-                                <p class="text-[11px] font-bold text-slate-800" x-text="currentRequest.phone || '—'"></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- Sujet --}}
-                    <div class="flex items-center gap-2 bg-slate-50 rounded-lg p-2 border border-slate-100">
-                        <span class="text-sm shrink-0">🏷️</span>
-                        <div>
-                            <p class="text-[9px] font-bold uppercase text-slate-400">Sujet</p>
-                            <p class="text-[11px] font-black text-slate-800" x-text="currentRequest.subject"></p>
-                        </div>
-                    </div>
-
-                    {{-- Infos entreprise (si présentes) --}}
-                    <div x-show="currentRequest.entrepriseInfo" class="bg-amber-50 border border-amber-100 rounded-lg p-2">
-                        <p class="text-[9px] font-black uppercase text-amber-600 mb-1">🏢 Infos Entreprise</p>
-                        <div class="space-y-0.5">
-                            <template x-for="line in (currentRequest.entrepriseInfo || '').split('\n').filter(l => l.trim())">
-                                <p class="text-[11px] font-semibold text-amber-900" x-text="line.replace('•', '').trim()"></p>
-                            </template>
-                        </div>
-                    </div>
-
-                    {{-- Message --}}
-                    <div>
-                        <p class="text-[9px] font-black uppercase text-slate-400 mb-1">💬 Message</p>
-                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-[11px] text-slate-700 leading-relaxed max-h-16 overflow-y-auto"
-                             x-text="currentRequest.message">
-                        </div>
-                    </div>
-
-                    {{-- Pièce jointe --}}
-                    <div x-show="currentRequest.attachment">
-                        <a :href="currentRequest.attachment" target="_blank"
-                           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-blue-200 bg-blue-50 text-xs font-bold text-blue-700 hover:bg-blue-100 transition">
-                            📎 Télécharger la pièce jointe
-                        </a>
-                    </div>
-
-                    {{-- Changer le statut --}}
-                    <div class="border-t border-slate-100 pt-2">
-                        <p class="text-[9px] font-black uppercase text-slate-400 mb-1.5">⚙️ Statut</p>
-                        <form method="POST" :action="`/admin/callcenter-request-status/${currentRequest.id}`"
-                              class="flex items-center gap-3">
-                            @csrf
-                            <select name="status"
-                                    class="flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-bold text-slate-800 shadow-sm focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504]">
-                                <option value="Non traité"             :selected="currentRequest.status === 'Non traité'">🔴 Non traité</option>
-                                <option value="En cours de traitement" :selected="currentRequest.status === 'En cours de traitement'">🟡 En cours de traitement</option>
-                                <option value="Traité"                 :selected="currentRequest.status === 'Traité'">🟢 Traité</option>
-                            </select>
-                            <button type="submit"
-                                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black text-white shadow-md transition hover:opacity-90 cursor-pointer whitespace-nowrap"
-                                    style="background: linear-gradient(135deg, #7f0504, #4a0202);">
-                                ✔ Enregistrer
-                            </button>
-                        </form>
-                    </div>
-
-                </div>
-
-                {{-- ── Footer ── --}}
-                <div class="px-6 py-3 border-t border-slate-100 bg-slate-50 flex justify-between items-center">
-                    <form method="POST" :action="`/admin/callcenter-request/${currentRequest.id}`"
-                          onsubmit="return confirm('Supprimer définitivement cette demande ?')"
-                          class="inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit"
-                                class="inline-flex items-center gap-1.5 text-xs font-bold text-red-500 hover:text-red-700 transition cursor-pointer">
-                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                            </svg>
-                            Supprimer la demande
-                        </button>
-                    </form>
-                    <button @click="requestModalOpen = false"
-                            class="px-4 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-600 hover:bg-slate-100 transition cursor-pointer shadow-sm">
-                        Fermer
-                    </button>
-                </div>
-
-            </div>
-        </div>
-
         <!-- ================================================================================== -->
-        <!-- TAB 3 : GESTION DES COMPTES (AGENTS & PARTENAIRES) -->
+        <!-- TAB 4 : GESTION DES COMPTES (AGENTS & PARTENAIRES) -->
         <!-- ================================================================================== -->
         <div x-show="activeTab === 'utilisateurs'" class="space-y-6">
-            <!-- Formulaire de Création de Compte -->
-            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <!-- Barre d'Action Création Compte -->
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <h3 class="text-base font-black uppercase text-[#7f0504]">👥 Gestion des Comptes Call Center</h3>
+                    <p class="text-xs text-slate-500">Administration des accès pour les agents de prospection et partenaires commerciaux.</p>
+                </div>
+                <button type="button" @click="showCreateUserForm = !showCreateUserForm"
+                        class="inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-xs font-black uppercase text-white shadow transition cursor-pointer"
+                        style="background-color: #7f0504;">
+                    <span x-text="showCreateUserForm ? '❌ Fermer la Saisie' : '➕ Nouveau Compte'"></span>
+                </button>
+            </div>
+
+            <!-- Formulaire de Création (Dépliable) -->
+            <div x-show="showCreateUserForm" x-cloak class="bg-white p-6 rounded-2xl border border-slate-200 shadow-md">
                 <div class="border-b border-slate-100 pb-4 mb-6">
-                    <h3 class="text-base font-black uppercase text-[#7f0504]">➕ Créer un nouveau compte Call Center</h3>
-                    <p class="text-xs text-slate-500">Génération automatique des identifiants d'accès pour les agents et les partenaires.</p>
+                    <h4 class="text-sm font-black uppercase text-slate-800">Saisie d'un nouvel Utilisateur</h4>
+                    <p class="text-xs text-slate-400">Génération automatique des identifiants d'accès</p>
                 </div>
 
-                <form method="POST" action="{{ route('callcenter.admin.users.store') }}">
+                <form method="POST" action="{{ route('admin.callcenter.users.store') }}">
                     @csrf
                     <input type="hidden" name="tab" value="utilisateurs">
 
@@ -791,16 +725,18 @@
                         </div>
                     </div>
 
-                    <div class="mt-6 text-right border-t border-slate-100 pt-4">
-                        <button type="submit" class="inline-flex items-center gap-2 rounded-xl px-6 py-3 text-xs font-black uppercase text-white shadow transition hover:opacity-95" style="background-color: #7f0504;">
-                            <span>➕</span>
-                            <span>Créer le compte</span>
+                    <div class="mt-6 text-right border-t border-slate-100 pt-4 flex justify-end gap-3">
+                        <button type="button" @click="showCreateUserForm = false" class="px-5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-600 hover:bg-slate-100 transition">
+                            Annuler
+                        </button>
+                        <button type="submit" class="inline-flex items-center gap-2 rounded-xl px-6 py-2.5 text-xs font-black uppercase text-white shadow transition hover:opacity-95" style="background-color: #7f0504;">
+                            <span>➕ Enregistrer l'utilisateur</span>
                         </button>
                     </div>
                 </form>
             </div>
 
-            <!-- Boutons de Navigation entre Liste des Agents et Liste des Partenaires -->
+            <!-- Sous-Navigation Segmentée : Agents vs Partenaires -->
             <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-3 rounded-2xl border border-slate-200 shadow-sm">
                 <div class="flex items-center gap-2">
                     <button type="button" 
@@ -809,7 +745,7 @@
                             :class="userSubTab === 'agents' ? 'shadow-sm font-black' : 'hover:bg-slate-100 font-bold border'"
                             class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs transition-all cursor-pointer">
                         <span>🎧</span>
-                        <span :style="userSubTab === 'agents' ? 'color: #ffffff;' : 'color: #1e293b;'" class="font-bold">Liste des Agents</span>
+                        <span :style="userSubTab === 'agents' ? 'color: #ffffff;' : 'color: #1e293b;'" class="font-bold">Agents Call Center</span>
                         <span class="px-2 py-0.5 rounded-full text-[10px] font-black" 
                               :style="userSubTab === 'agents' ? 'background-color: rgba(255,255,255,0.25); color: #ffffff;' : 'background-color: #fef3c7; color: #92400e;'">
                             {{ count($agents) }}
@@ -822,7 +758,7 @@
                             :class="userSubTab === 'partenaires' ? 'shadow-sm font-black' : 'hover:bg-slate-100 font-bold border'"
                             class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs transition-all cursor-pointer">
                         <span>🤝</span>
-                        <span :style="userSubTab === 'partenaires' ? 'color: #ffffff;' : 'color: #1e293b;'" class="font-bold">Liste des Partenaires</span>
+                        <span :style="userSubTab === 'partenaires' ? 'color: #ffffff;' : 'color: #1e293b;'" class="font-bold">Partenaires Commerciaux</span>
                         <span class="px-2 py-0.5 rounded-full text-[10px] font-black" 
                               :style="userSubTab === 'partenaires' ? 'background-color: rgba(255,255,255,0.25); color: #ffffff;' : 'background-color: #dbeafe; color: #1e40af;'">
                             {{ count($partenaires) }}
@@ -836,7 +772,7 @@
                 </div>
             </div>
 
-            <!-- Listes des Comptes (Affichage pleine largeur selon l'onglet actif) -->
+            <!-- Listes des Comptes Utilisateurs (Cartes Enrichies avec KPIs) -->
             <div class="space-y-6">
                 <!-- 1. Liste des Agents -->
                 <div x-show="userSubTab === 'agents'" x-cloak class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
@@ -845,7 +781,7 @@
                             <span>🎧</span>
                             <span>Agents Call Center</span>
                         </h3>
-                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">{{ count($agents) }}</span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800">{{ count($agents) }} agent(s)</span>
                     </div>
                     <ul class="divide-y divide-slate-100 text-sm">
                         @forelse($agents as $agent)
@@ -868,6 +804,12 @@
                                         'qualification_potentiel' => $r->qualification ? $r->qualification->potentiel : '',
                                     ];
                                 })->values();
+
+                                $agentTotalCount = count($agentRdvs);
+                                $agentQualifiesCount = $agentRdvs->where('statut', 'qualifie')->count();
+                                $agentRate = $agentTotalCount > 0 ? round(($agentQualifiesCount / $agentTotalCount) * 100) : 0;
+                                $agentLatestRdv = $agent->rendezVousAsAgent->sortByDesc('created_at')->first();
+                                $agentLastDate = $agentLatestRdv ? \Carbon\Carbon::parse($agentLatestRdv->created_at)->format('d/m/Y') : 'Aucun RDV';
                             @endphp
                             <li class="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-slate-50/80 transition">
                                 <div class="flex items-start gap-3.5 min-w-0">
@@ -878,6 +820,7 @@
                                         <div class="font-bold text-slate-900 flex flex-wrap items-center gap-2">
                                             <span class="text-sm font-black">{{ $agent->fullName() }}</span>
                                             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-amber-100 text-amber-800">Agent</span>
+                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-emerald-50 text-emerald-700 border border-emerald-200">🎯 {{ $agentRate }}% Qualifiés</span>
                                         </div>
                                         <div class="text-xs text-slate-600 mt-1 flex items-center gap-1.5 break-all">
                                             <span>📧</span>
@@ -889,9 +832,9 @@
                                                 <span>{{ $agent->phone }}</span>
                                             </div>
                                         @endif
-                                        <div class="text-[11px] text-slate-400 mt-1.5 flex items-center gap-1.5">
-                                            <span>📅</span>
-                                            <span class="font-semibold text-slate-600">{{ count($agentRdvs) }}</span> RDV(s) créé(s)
+                                        <div class="text-[11px] text-slate-400 mt-1.5 flex items-center gap-3">
+                                            <span>📅 <strong class="text-slate-700 font-bold">{{ $agentTotalCount }}</strong> RDV(s) créé(s)</span>
+                                            <span>⏱️ Dernier RDV: <strong class="text-slate-700 font-bold">{{ $agentLastDate }}</strong></span>
                                         </div>
                                     </div>
                                 </div>
@@ -922,7 +865,7 @@
                                         <span>Modifier</span>
                                     </button>
 
-                                    <form method="POST" action="{{ route('callcenter.admin.users.destroy', $agent->id) }}" 
+                                    <form method="POST" action="{{ route('admin.callcenter.users.destroy', $agent->id) }}" 
                                           onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer définitivement le compte de l\'agent {{ addslashes($agent->fullName()) }} ?')" 
                                           class="inline">
                                         @csrf
@@ -950,7 +893,7 @@
                             <span>🤝</span>
                             <span>Partenaires Commercial</span>
                         </h3>
-                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">{{ count($partenaires) }}</span>
+                        <span class="px-2.5 py-1 rounded-full text-xs font-bold bg-blue-100 text-blue-800">{{ count($partenaires) }} partenaire(s)</span>
                     </div>
                     <ul class="divide-y divide-slate-100 text-sm">
                         @forelse($partenaires as $partenaire)
@@ -973,6 +916,12 @@
                                         'qualification_potentiel' => $r->qualification ? $r->qualification->potentiel : '',
                                     ];
                                 })->values();
+
+                                $partenaireTotalCount = count($partenaireRdvs);
+                                $partenaireQualifiesCount = $partenaireRdvs->where('statut', 'qualifie')->count();
+                                $partenaireRate = $partenaireTotalCount > 0 ? round(($partenaireQualifiesCount / $partenaireTotalCount) * 100) : 0;
+                                $partenaireLatestRdv = $partenaire->rendezVousAsPartenaire->sortByDesc('updated_at')->first();
+                                $partenaireLastDate = $partenaireLatestRdv ? \Carbon\Carbon::parse($partenaireLatestRdv->updated_at)->format('d/m/Y') : 'Aucun suivi';
                             @endphp
                             <li class="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-slate-50/80 transition">
                                 <div class="flex items-start gap-3.5 min-w-0">
@@ -983,6 +932,7 @@
                                         <div class="font-bold text-slate-900 flex flex-wrap items-center gap-2">
                                             <span class="text-sm font-black">{{ $partenaire->fullName() }}</span>
                                             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-black bg-blue-100 text-blue-800">Partenaire</span>
+                                            <span class="px-2 py-0.5 rounded-full text-[10px] font-black bg-blue-50 text-blue-700 border border-blue-200">📈 {{ $partenaireRate }}% Qualifiés</span>
                                         </div>
                                         <div class="text-xs text-slate-600 mt-1 flex items-center gap-1.5 break-all">
                                             <span>📧</span>
@@ -1000,9 +950,9 @@
                                                 <span>{{ $partenaire->institution }}</span>
                                             </div>
                                         @endif
-                                        <div class="text-[11px] text-slate-400 mt-1.5 flex items-center gap-1.5">
-                                            <span>🎯</span>
-                                            <span class="font-semibold text-slate-600">{{ count($partenaireRdvs) }}</span> RDV(s) attribué(s)
+                                        <div class="text-[11px] text-slate-400 mt-1.5 flex items-center gap-3">
+                                            <span>🎯 <strong class="text-slate-700 font-bold">{{ $partenaireTotalCount }}</strong> RDV(s) attribué(s)</span>
+                                            <span>⏱️ Dernier suivi: <strong class="text-slate-700 font-bold">{{ $partenaireLastDate }}</strong></span>
                                         </div>
                                     </div>
                                 </div>
@@ -1033,7 +983,7 @@
                                         <span>Modifier</span>
                                     </button>
 
-                                    <form method="POST" action="{{ route('callcenter.admin.users.destroy', $partenaire->id) }}" 
+                                    <form method="POST" action="{{ route('admin.callcenter.users.destroy', $partenaire->id) }}" 
                                           onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer définitivement le compte du partenaire {{ addslashes($partenaire->fullName()) }} ?')" 
                                           class="inline">
                                         @csrf
@@ -1052,6 +1002,146 @@
                             <li class="p-8 text-center text-slate-400 text-sm">Aucun partenaire créé.</li>
                         @endforelse
                     </ul>
+                </div>
+            </div>
+        </div>
+
+        {{-- ══════════════════════════════════════════════════════ --}}
+        {{-- MODAL : DETAIL DEMANDE WEB                           --}}
+        {{-- ══════════════════════════════════════════════════════ --}}
+        <div x-show="requestModalOpen" x-cloak
+             class="fixed inset-0 z-50 flex items-center justify-center p-4"
+             style="background: rgba(15,23,42,0.65); backdrop-filter: blur(4px);">
+
+            <div @click.away="requestModalOpen = false"
+                 class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-slate-200"
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 scale-95"
+                 x-transition:enter-end="opacity-100 scale-100">
+
+                <div class="relative px-4 py-3 overflow-hidden" style="background: linear-gradient(135deg, #7f0504 0%, #4a0202 100%);">
+                    <div class="absolute -right-3 -top-3 w-14 h-14 rounded-full opacity-10 bg-white"></div>
+                    <div class="relative flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 rounded-lg bg-white/20 border border-white/30 flex items-center justify-center font-black text-white text-sm uppercase"
+                                 x-text="currentRequest.name ? currentRequest.name.charAt(0).toUpperCase() : '?'">
+                            </div>
+                            <div>
+                                <p class="text-white font-black text-xs leading-tight" x-text="currentRequest.name"></p>
+                                <p class="text-white/60 text-[10px]" x-text="currentRequest.date"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-black border"
+                                  :class="{
+                                    'bg-red-100 text-red-700 border-red-300'            : currentRequest.status === 'Non traité',
+                                    'bg-amber-100 text-amber-700 border-amber-300'      : currentRequest.status === 'En cours de traitement',
+                                    'bg-emerald-100 text-emerald-700 border-emerald-300': currentRequest.status === 'Traité'
+                                  }">
+                                <span class="w-1.5 h-1.5 rounded-full"
+                                      :class="{
+                                        'bg-red-500'    : currentRequest.status === 'Non traité',
+                                        'bg-amber-500'  : currentRequest.status === 'En cours de traitement',
+                                        'bg-emerald-500': currentRequest.status === 'Traité'
+                                      }"></span>
+                                <span x-text="currentRequest.status"></span>
+                            </span>
+                            <button @click="requestModalOpen = false"
+                                    class="w-6 h-6 rounded-lg bg-white/10 hover:bg-white/25 flex items-center justify-center text-white/80 hover:text-white transition cursor-pointer text-base leading-none">
+                                &times;
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="px-4 py-3 space-y-2">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="flex items-center gap-2 bg-slate-50 rounded-lg p-2 border border-slate-100">
+                            <span class="text-sm shrink-0">📧</span>
+                            <div class="min-w-0">
+                                <p class="text-[9px] font-bold uppercase text-slate-400">Email</p>
+                                <p class="text-[11px] font-bold text-slate-800 truncate" x-text="currentRequest.email"></p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 bg-slate-50 rounded-lg p-2 border border-slate-100">
+                            <span class="text-sm shrink-0">📞</span>
+                            <div>
+                                <p class="text-[9px] font-bold uppercase text-slate-400">Téléphone</p>
+                                <p class="text-[11px] font-bold text-slate-800" x-text="currentRequest.phone || '—'"></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2 bg-slate-50 rounded-lg p-2 border border-slate-100">
+                        <span class="text-sm shrink-0">🏷️</span>
+                        <div>
+                            <p class="text-[9px] font-bold uppercase text-slate-400">Sujet</p>
+                            <p class="text-[11px] font-black text-slate-800" x-text="currentRequest.subject"></p>
+                        </div>
+                    </div>
+
+                    <div x-show="currentRequest.entrepriseInfo" class="bg-amber-50 border border-amber-100 rounded-lg p-2">
+                        <p class="text-[9px] font-black uppercase text-amber-600 mb-1">🏢 Infos Entreprise</p>
+                        <div class="space-y-0.5">
+                            <template x-for="line in (currentRequest.entrepriseInfo || '').split('\n').filter(l => l.trim())">
+                                <p class="text-[11px] font-semibold text-amber-900" x-text="line.replace('•', '').trim()"></p>
+                            </template>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-[9px] font-black uppercase text-slate-400 mb-1">💬 Message</p>
+                        <div class="bg-slate-50 border border-slate-200 rounded-lg p-2.5 text-[11px] text-slate-700 leading-relaxed max-h-16 overflow-y-auto"
+                             x-text="currentRequest.message">
+                        </div>
+                    </div>
+
+                    <div x-show="currentRequest.attachment">
+                        <a :href="currentRequest.attachment" target="_blank"
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-blue-200 bg-blue-50 text-xs font-bold text-blue-700 hover:bg-blue-100 transition">
+                            📎 Télécharger la pièce jointe
+                        </a>
+                    </div>
+
+                    <div class="border-t border-slate-100 pt-2">
+                        <p class="text-[9px] font-black uppercase text-slate-400 mb-1.5">⚙️ Statut</p>
+                        <form method="POST" :action="`/admin/callcenter-request-status/${currentRequest.id}`"
+                              class="flex items-center gap-3">
+                            @csrf
+                            <select name="status"
+                                    class="flex-1 rounded-xl border border-slate-200 bg-white px-3 py-2.5 text-sm font-bold text-slate-800 shadow-sm focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504]">
+                                <option value="Non traité"             :selected="currentRequest.status === 'Non traité'">🔴 Non traité</option>
+                                <option value="En cours de traitement" :selected="currentRequest.status === 'En cours de traitement'">🟡 En cours de traitement</option>
+                                <option value="Traité"                 :selected="currentRequest.status === 'Traité'">🟢 Traité</option>
+                            </select>
+                            <button type="submit"
+                                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs font-black text-white shadow-md transition hover:opacity-90 cursor-pointer whitespace-nowrap"
+                                    style="background: linear-gradient(135deg, #7f0504, #4a0202);">
+                                ✔ Enregistrer
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="px-6 py-3 border-t border-slate-100 bg-slate-50 flex justify-between items-center">
+                    <form method="POST" :action="`/admin/callcenter-request/${currentRequest.id}`"
+                          onsubmit="return confirm('Supprimer définitivement cette demande ?')"
+                          class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit"
+                                class="inline-flex items-center gap-1.5 text-xs font-bold text-red-500 hover:text-red-700 transition cursor-pointer">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                            </svg>
+                            Supprimer la demande
+                        </button>
+                    </form>
+                    <button @click="requestModalOpen = false"
+                            class="px-4 py-2 rounded-xl border border-slate-200 bg-white text-xs font-bold text-slate-600 hover:bg-slate-100 transition cursor-pointer shadow-sm">
+                        Fermer
+                    </button>
                 </div>
             </div>
         </div>
@@ -1103,7 +1193,7 @@
 
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Téléphone</label>
-                            <input type="text" name="phone" x-model="editingUser.phone" placeholder="+216 20 000 000" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                            <input type="text" name="phone" x-model="editingUser.phone" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
                         </div>
 
                         <div class="sm:col-span-2">
@@ -1111,33 +1201,31 @@
                             <input type="text" name="institution" x-model="editingUser.institution" placeholder="Ex: Cabinet Audit Partner" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
                         </div>
 
-                        <div class="sm:col-span-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
-                            <label class="block text-xs font-bold uppercase text-slate-600 mb-1">Nouveau mot de passe (optionnel)</label>
-                            <input type="password" name="password" minlength="6" placeholder="Laisser vide pour conserver le mot de passe actuel" class="w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
-                            <p class="text-[11px] text-slate-400 mt-1">Renseignez ce champ uniquement si vous souhaitez réinitialiser le mot de passe de cet utilisateur (min. 6 caractères).</p>
+                        <div class="sm:col-span-2 border-t border-slate-100 pt-3">
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Nouveau mot de passe (Optionnel)</label>
+                            <input type="password" name="password" minlength="6" placeholder="Laisser vide pour ne pas modifier" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                            <p class="text-[11px] text-slate-400 mt-1">Saisir uniquement en cas de réinitialisation du mot de passe de l'utilisateur.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-end gap-3 pt-4 border-t border-slate-100">
-                        <button type="button" @click="closeEditUser()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-600 hover:bg-slate-100 transition cursor-pointer">
+                    <div class="pt-4 border-t border-slate-100 flex justify-end gap-3">
+                        <button type="button" @click="closeEditUser()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-600 hover:bg-slate-100 transition">
                             Annuler
                         </button>
-                        <button type="submit" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-black uppercase text-white shadow transition hover:opacity-95 cursor-pointer" style="background-color: #7f0504;">
-                            <span>💾</span>
-                            <span>Enregistrer les modifications</span>
+                        <button type="submit" class="px-6 py-2.5 rounded-xl text-xs font-black uppercase text-white shadow transition hover:opacity-95" style="background-color: #7f0504;">
+                            Enregistrer les modifications
                         </button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <!-- Modal Liste des Rendez-vous d'un Utilisateur -->
+        <!-- Modal Liste des RDVs associés à un Agent ou Partenaire -->
         <div x-show="rdvListModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
-            <div @click.away="closeRdvList()" class="bg-white rounded-3xl max-w-5xl w-full shadow-2xl overflow-hidden transform transition-all flex flex-col max-h-[90vh]">
-                <!-- Header -->
+            <div @click.away="closeRdvList()" class="bg-white rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden transform transition-all max-h-[85vh] flex flex-col">
                 <div class="p-6 text-white flex justify-between items-center shrink-0" style="background: linear-gradient(135deg, #7f0504 0%, #460202 100%);">
                     <div class="flex items-center gap-3">
-                        <div class="w-11 h-11 rounded-2xl bg-white/20 text-white font-black flex items-center justify-center text-lg shrink-0 border border-white/20 shadow-xs">
+                        <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center font-black text-lg">
                             📋
                         </div>
                         <div>
@@ -1153,7 +1241,6 @@
                     <button type="button" @click="closeRdvList()" class="text-white/70 hover:text-white text-2xl font-black transition leading-none cursor-pointer">&times;</button>
                 </div>
 
-                <!-- Table Content -->
                 <div class="p-6 overflow-y-auto flex-1">
                     <template x-if="rdvListUser.rdvs.length === 0">
                         <div class="text-center py-12 text-slate-400">
@@ -1234,7 +1321,6 @@
                     </template>
                 </div>
 
-                <!-- Footer -->
                 <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end shrink-0">
                     <button type="button" @click="closeRdvList()" class="px-5 py-2 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-200 transition cursor-pointer">
                         Fermer
@@ -1250,25 +1336,27 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // 1. Graphique Partenaires (Qualifiés vs Non Qualifiés)
-        const pCtx = document.getElementById('ccPartenaireChart');
-        if (pCtx) {
-            new Chart(pCtx, {
+        const chartData = @json($analyticsCharts);
+
+        // 1. Performance Partenaires
+        const ctxPartenaire = document.getElementById('ccPartenaireChart');
+        if (ctxPartenaire && chartData.partenaires) {
+            new Chart(ctxPartenaire, {
                 type: 'bar',
                 data: {
-                    labels: {!! json_encode($analyticsCharts['partenaires']['labels'] ?? []) !!},
+                    labels: chartData.partenaires.labels,
                     datasets: [
                         {
                             label: 'Qualifiés',
-                            data: {!! json_encode($analyticsCharts['partenaires']['qualifies'] ?? []) !!},
+                            data: chartData.partenaires.qualifies,
                             backgroundColor: '#10b981',
-                            borderRadius: 6
+                            borderRadius: 6,
                         },
                         {
-                            label: 'En cours / Non qualifié',
-                            data: {!! json_encode($analyticsCharts['partenaires']['en_cours'] ?? []) !!},
-                            backgroundColor: '#f59e0b',
-                            borderRadius: 6
+                            label: 'En cours / Non qualifiés',
+                            data: chartData.partenaires.en_cours,
+                            backgroundColor: '#94a3b8',
+                            borderRadius: 6,
                         }
                     ]
                 },
@@ -1276,24 +1364,27 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { font: { size: 11, weight: 'bold' } } }
+                        legend: { position: 'bottom', labels: { font: { size: 10, weight: 'bold' } } }
                     },
-                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { beginAtZero: true, ticks: { precision: 0 } }
+                    }
                 }
             });
         }
 
-        // 2. Graphique Évolution Mensuelle
-        const mCtx = document.getElementById('ccMonthlyChart');
-        if (mCtx) {
-            new Chart(mCtx, {
+        // 2. Évolution Mensuelle
+        const ctxMonthly = document.getElementById('ccMonthlyChart');
+        if (ctxMonthly && chartData.monthly) {
+            new Chart(ctxMonthly, {
                 type: 'line',
                 data: {
-                    labels: {!! json_encode($analyticsCharts['monthly']['labels'] ?? []) !!},
+                    labels: chartData.monthly.labels,
                     datasets: [
                         {
-                            label: 'Total RDV Créés',
-                            data: {!! json_encode($analyticsCharts['monthly']['crees'] ?? []) !!},
+                            label: 'RDV Créés',
+                            data: chartData.monthly.crees,
                             borderColor: '#3b82f6',
                             backgroundColor: 'rgba(59, 130, 246, 0.1)',
                             fill: true,
@@ -1301,10 +1392,10 @@
                         },
                         {
                             label: 'RDV Qualifiés',
-                            data: {!! json_encode($analyticsCharts['monthly']['qualifies'] ?? []) !!},
+                            data: chartData.monthly.qualifies,
                             borderColor: '#10b981',
-                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                            fill: true,
+                            backgroundColor: 'transparent',
+                            borderDash: [5, 5],
                             tension: 0.3
                         }
                     ]
@@ -1313,35 +1404,35 @@
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { position: 'bottom', labels: { font: { size: 11, weight: 'bold' } } }
+                        legend: { position: 'bottom', labels: { font: { size: 10, weight: 'bold' } } }
                     },
-                    scales: { y: { beginAtZero: true, ticks: { precision: 0 } } }
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { beginAtZero: true, ticks: { precision: 0 } }
+                    }
                 }
             });
         }
 
-        // 3. Graphique Activité Agents
-        const aCtx = document.getElementById('ccAgentChart');
-        if (aCtx) {
-            new Chart(aCtx, {
-                type: 'bar',
+        // 3. Activité Agents
+        const ctxAgent = document.getElementById('ccAgentChart');
+        if (ctxAgent && chartData.agents) {
+            new Chart(ctxAgent, {
+                type: 'doughnut',
                 data: {
-                    labels: {!! json_encode($analyticsCharts['agents']['labels'] ?? []) !!},
+                    labels: chartData.agents.labels,
                     datasets: [{
-                        label: 'Total RDV Créés',
-                        data: {!! json_encode($analyticsCharts['agents']['total'] ?? []) !!},
-                        backgroundColor: '#7f0504',
-                        borderRadius: 6
+                        data: chartData.agents.total,
+                        backgroundColor: ['#f59e0b', '#3b82f6', '#10b981', '#6366f1', '#ec4899', '#8b5cf6'],
+                        borderWidth: 2
                     }]
                 },
                 options: {
-                    indexAxis: 'y',
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: { display: false }
-                    },
-                    scales: { x: { beginAtZero: true, ticks: { precision: 0 } } }
+                        legend: { position: 'bottom', labels: { font: { size: 10, weight: 'bold' } } }
+                    }
                 }
             });
         }

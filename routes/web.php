@@ -64,6 +64,7 @@ Route::prefix('call-center')->name('callcenter.')->group(function () {
             Route::get('/rendez-vous', [CallCenterAgentWorkflowController::class, 'index'])->name('index');
             Route::post('/rendez-vous', [CallCenterAgentWorkflowController::class, 'store'])->name('store');
             Route::get('/rendez-vous/{rendezVous}', [CallCenterAgentWorkflowController::class, 'show'])->name('show');
+            Route::post('/notifications/read', [CallCenterAgentWorkflowController::class, 'markNotificationsAsRead'])->name('notifications.read');
         });
 
         // Export Agenda .ics pour Google / Outlook / iCal (Agent, Partenaire, Admin)
@@ -442,6 +443,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::get('/callcenter-requests', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'index'])->name('callcenter.index');
     Route::get('/callcenter-dashboard', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'index'])->name('callcenter.dashboard');
     Route::post('/callcenter-assign/{rendezVous}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'assignPartner'])->name('callcenter.assign');
+    Route::post('/callcenter-bulk-assign', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'bulkAssignPartner'])->name('callcenter.bulk_assign');
     Route::post('/callcenter-status/{rendezVous}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'updateStatus'])->name('callcenter.status');
     Route::post('/callcenter-request-status/{id}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'updateRequestStatus'])->name('callcenter.request.status');
     Route::delete('/callcenter-request/{id}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'destroyRequest'])->name('callcenter.request.destroy');

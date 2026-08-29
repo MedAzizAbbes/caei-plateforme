@@ -101,6 +101,19 @@ class CallCenterPartenaireWorkflowController extends Controller
             "Rendez-vous qualifié par le partenaire {$partenaire->fullName()} (Résultat: {$qualification->resultat}, Potentiel: {$qualification->potentiel})"
         );
 
+        // 🔔 Notification en direct pour l'Agent créateur
+        if ($rendezVous->agent) {
+            try {
+                $prospectNom = $rendezVous->prospect ? $rendezVous->prospect->nomComplet() : 'Client';
+                $rendezVous->agent->notify(new \App\Notifications\RendezVousUpdatedForAgentNotification(
+                    $rendezVous,
+                    'qualification',
+                    "🎯 RDV Qualifié : {$prospectNom}",
+                    "Le partenaire {$partenaire->fullName()} a qualifié le rendez-vous pour {$prospectNom} (Résultat: {$qualification->resultat}, Potentiel: {$qualification->potentiel})."
+                ));
+            } catch (\Throwable $e) {}
+        }
+
         return redirect()->route('callcenter.partenaire.index')
             ->with('success', 'La qualification du prospect a été enregistrée avec succès ! L\'agent et l\'administrateur peuvent maintenant la consulter.');
     }
