@@ -507,8 +507,8 @@
 
       <!-- Logo -->
       <a href="{{ route('callcenter.index') }}" style="flex-shrink:0; display:flex; align-items:center; text-decoration:none;">
-        <img src="{{ asset('images/logo-call-center.png') }}" alt="CAEI Call Center"
-          style="height: 90px; width: auto; object-fit: contain; border-radius: 6px; transition: opacity 0.25s ease;"
+        <img src="{{ asset('images/logo-callcenter-footer.png') }}" alt="CAEI Call Center"
+          style="height: 70px; max-height: 75px; width: auto; object-fit: contain; transition: opacity 0.25s ease;"
           onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
       </a>
 
