@@ -375,30 +375,44 @@ const CaeiCall = (() => {
 
         room.on(LivekitClient.RoomEvent.TrackUnsubscribed, (track) => track.detach());
 
-        room.on(LivekitClient.RoomEvent.Disconnected, () => {
+        room.on(LivekitClient.RoomEvent.Disconnected, (reason) => {
             stopTimer();
             hideAllModals();
+            if (reason) {
+                console.warn('LiveKit déconnecté :', reason);
+            }
         });
 
-        await room.connect(wsUrl, token, {
-            autoSubscribe: true,
-        });
+        try {
+            await room.connect(wsUrl, token, {
+                autoSubscribe: true,
+            });
+        } catch (err) {
+            console.error('Erreur connexion LiveKit :', err);
+            hideAllModals();
+            alert('Connexion à l\'appel échouée : ' + (err.message || err));
+            return;
+        }
 
         // Publish local tracks
-        if (isVideo) {
-            await room.localParticipant.setCameraEnabled(true);
-            await room.localParticipant.setMicrophoneEnabled(true);
-            // Attach local video
-            const camTrack = room.localParticipant.getTrack(LivekitClient.Track.Source.Camera);
-            if (camTrack?.track) {
-                const el = camTrack.track.attach();
-                el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
-                $('local-video-placeholder').classList.add('hidden');
-                $('local-video-container').appendChild(el);
+        try {
+            if (isVideo) {
+                await room.localParticipant.setCameraEnabled(true).catch(e => console.warn('Erreur caméra :', e));
+                await room.localParticipant.setMicrophoneEnabled(true).catch(e => console.warn('Erreur micro :', e));
+                // Attach local video
+                const camTrack = room.localParticipant.getTrack(LivekitClient.Track.Source.Camera);
+                if (camTrack?.track) {
+                    const el = camTrack.track.attach();
+                    el.style.cssText = 'width:100%;height:100%;object-fit:cover;';
+                    $('local-video-placeholder').classList.add('hidden');
+                    $('local-video-container').appendChild(el);
+                }
+            } else {
+                await room.localParticipant.setMicrophoneEnabled(true).catch(e => console.warn('Erreur micro :', e));
+                $('btn-toggle-cam').classList.add('opacity-40', 'pointer-events-none');
             }
-        } else {
-            await room.localParticipant.setMicrophoneEnabled(true);
-            $('btn-toggle-cam').classList.add('opacity-40', 'pointer-events-none');
+        } catch (mediaErr) {
+            console.warn('Avertissement périphériques audio/vidéo :', mediaErr);
         }
 
         micEnabled = true;
