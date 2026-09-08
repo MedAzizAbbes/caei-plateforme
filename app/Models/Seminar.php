@@ -56,6 +56,11 @@ class Seminar extends Model
         return $this->hasMany(Attendance::class);
     }
 
+    public function callLogs()
+    {
+        return $this->hasMany(CallLog::class);
+    }
+
     // ------- Statistiques rapides -------
 
     public function attendanceRate(): float

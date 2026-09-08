@@ -51,6 +51,16 @@ class User extends Authenticatable
         return $this->hasMany(Message::class);
     }
 
+    public function outgoingCalls()
+    {
+        return $this->hasMany(CallLog::class, 'caller_id');
+    }
+
+    public function incomingCalls()
+    {
+        return $this->hasMany(CallLog::class, 'callee_id');
+    }
+
     // ------- Helpers de rôle -------
 
     public function isAdmin(): bool

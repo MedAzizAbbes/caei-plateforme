@@ -265,12 +265,12 @@
     }
 
     .hero h2 span.gradient-gold {
-      background: linear-gradient(135deg, #fff7ed 0%, #ff8a00 30%, #ff5500 70%, #ffa500 100%) !important;
-      -webkit-background-clip: text !important;
-      -webkit-text-fill-color: transparent !important;
-      background-clip: text !important;
-      color: #ff7a00 !important;
-      filter: drop-shadow(0 6px 25px rgba(255, 122, 0, 0.8)) drop-shadow(0 2px 10px rgba(0, 0, 0, 0.95)) !important;
+      background: none !important;
+      -webkit-background-clip: unset !important;
+      -webkit-text-fill-color: #ffffff !important;
+      background-clip: unset !important;
+      color: #ffffff !important;
+      filter: drop-shadow(0 4px 20px rgba(0, 0, 0, 0.9)) !important;
     }
 
     .hero-subtitle {

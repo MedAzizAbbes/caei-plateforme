@@ -415,6 +415,18 @@ Route::middleware(['auth', 'role:formateur'])->prefix('espace')->name('formateur
 Route::middleware(['auth', 'role:participant,formateur,admin'])->group(function () {
     Route::get('/seminaires/{seminar}/echange', [MessageController::class, 'index'])->name('echange.index');
     Route::post('/seminaires/{seminar}/echange', [MessageController::class, 'store'])->name('echange.store');
+
+    // ── Appels Audio / Vidéo LiveKit ──────────────────────────────────────
+    Route::prefix('/seminaires/{seminar}/appels')->name('appels.')->group(function () {
+        Route::get('/membres',          [\App\Http\Controllers\CallController::class, 'members'])->name('members');
+        Route::get('/incoming',         [\App\Http\Controllers\CallController::class, 'pollIncoming'])->name('incoming');
+        Route::get('/historique',       [\App\Http\Controllers\CallController::class, 'history'])->name('history');
+        Route::post('/',                [\App\Http\Controllers\CallController::class, 'initiateCall'])->name('initiate');
+        Route::post('/{call}/answer',   [\App\Http\Controllers\CallController::class, 'answerCall'])->name('answer');
+        Route::post('/{call}/refuse',   [\App\Http\Controllers\CallController::class, 'refuseCall'])->name('refuse');
+        Route::post('/{call}/end',      [\App\Http\Controllers\CallController::class, 'endCall'])->name('end');
+        Route::get('/{call}/status',    [\App\Http\Controllers\CallController::class, 'callStatus'])->name('status');
+    });
 });
 
 /*

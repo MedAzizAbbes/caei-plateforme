@@ -47,4 +47,15 @@ return [
         'currency'       => env('STRIPE_CURRENCY', 'eur'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | LiveKit — Appels audio/vidéo en temps réel (séminaires)
+    |--------------------------------------------------------------------------
+    */
+    'livekit' => [
+        'url'        => env('LIVEKIT_URL', 'wss://your-project.livekit.cloud'),
+        'api_key'    => env('LIVEKIT_API_KEY', ''),
+        'api_secret' => env('LIVEKIT_API_SECRET', ''),
+    ],
+
 ];
