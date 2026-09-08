@@ -98,35 +98,9 @@
       text-shadow: 0 1px 3px rgba(0,0,0,0.8);
     }
 
-    /* Footer CAEI */
-    .footer-caei {
-      background: #000b26 !important;
-      color: #e2e8f0 !important;
-      padding: 60px 0 25px 0;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .footer-caei h5 {
-      color: #ffffff !important;
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-    }
-
-    .footer-caei p, 
-    .footer-caei li,
-    .footer-caei span {
-      color: #e2e8f0 !important;
-    }
-
-    .footer-caei a {
-      color: #f1f5f9 !important;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-caei a:hover {
+    /* Footer Links Hover */
+    .footer a:hover,
+    .footer .footer-links a:hover {
       color: #ff7a00 !important;
     }
 
@@ -369,40 +343,73 @@
   </main>
 
   <!-- Footer -->
-  <footer class="footer-caei">
-    <div class="container">
-      <div class="row g-4 pb-4">
-        
-        <div class="col-lg-4">
-          <img src="{{ asset('assets/img/logocompany.png') }}" alt="CAEI Company Group" height="55px" class="mb-3">
-          <p class="small" style="line-height: 1.8;">
-            Le Comité Africain d’Expertise Internationale regroupe des experts et élites africains de renommée internationale au service du développement économique et institutionnel du continent.
-          </p>
+  <footer id="footer" class="footer dark-background py-5" style="background-color: #000f3c; color: rgba(255,255,255,0.7);">
+    <div class="footer-top container mb-4">
+      <div class="row gy-4">
+        <div class="col-lg-4 col-md-6 footer-about">
+          <a href="{{ route('home') }}" class="logo d-flex align-items-center mb-3">
+            <img src="{{ asset('assets/img/logocompany.png') }}" alt="CAEI Logo" style="max-height: 55px; width: auto; max-width: 220px; object-fit: contain;">
+          </a>
+          <div class="footer-contact pt-2 text-white-50">
+            <p class="mb-3"><a href="https://www.google.com/maps/search/?api=1&query=SIS+8+Rue+Claude+Bernard+1002+Belvedere-Tunis+Tunisie" target="_blank" style="color: inherit; text-decoration: none;">SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis, Tunisie</a></p>
+            <div class="d-flex align-items-center mb-2" style="font-size: 14px;">
+              <span style="font-weight: 700; width: 95px; flex-shrink: 0; color: #ffffff;">Téléphone:</span>
+              <a href="tel:+21655335286" style="color: inherit; text-decoration: none;">+216 55 335 286</a>
+            </div>
+            <div class="d-flex align-items-center mb-0" style="font-size: 14px;">
+              <span style="font-weight: 700; width: 95px; flex-shrink: 0; color: #ffffff;">Email:</span>
+              <a href="mailto:contact@caei-afri.com" style="color: inherit; text-decoration: none;">contact@caei-afri.com</a>
+            </div>
+          </div>
+          <div class="social-links d-flex mt-4 gap-2">   
+            <a href="https://www.facebook.com/CAEIAfrique/" target="_blank" class="btn btn-sm btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;"><i class="bi bi-facebook"></i></a>
+            <a href="https://www.instagram.com/caei_afri/" target="_blank" class="btn btn-sm btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;"><i class="bi bi-instagram"></i></a>
+            <a href="https://www.linkedin.com/company/comit%C3%A9-africain-d-expertise-internationale-caei/?originalSubdomain=tn" target="_blank" class="btn btn-sm btn-outline-light rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;"><i class="bi bi-linkedin"></i></a>
+          </div>
         </div>
 
-        <div class="col-lg-4">
-          <h5>Coordonnées</h5>
-          <ul class="list-unstyled small" style="line-height: 2;">
-            <li><i class="bi bi-geo-alt-fill text-warning me-2"></i> SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis, Tunisie</li>
-            <li><i class="bi bi-telephone-fill text-warning me-2"></i> +216 55 335 286</li>
-            <li><i class="bi bi-envelope-fill text-warning me-2"></i> contact@caei-afri.com</li>
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4 class="text-white fw-bold mb-3" style="font-size: 16px;">Liens Utiles</h4>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('home') }}" class="text-decoration-none text-white-50">Accueil</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('home') }}#presentation" class="text-decoration-none text-white-50">Présentation</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('home') }}#services" class="text-decoration-none text-white-50">Nos solutions</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('home') }}#contact" class="text-decoration-none text-white-50">Contact</a></li>
           </ul>
         </div>
 
-        <div class="col-lg-4">
-          <h5>Pôles d'Excellence</h5>
-          <ul class="list-unstyled small" style="line-height: 2;">
-            <li><a href="{{ route('elite.training') }}"><i class="bi bi-chevron-right me-1 text-warning"></i> CAEI Elite Training</a></li>
-            <li><a href="{{ route('callcenter.index') }}"><i class="bi bi-chevron-right me-1 text-warning"></i> CAEI Call Center</a></li>
-            <li><a href="{{ route('digitalmoov') }}"><i class="bi bi-chevron-right me-1 text-warning"></i> CAEI Digital MOOV</a></li>
-            <li><a href="{{ route('medical.services') }}"><i class="bi bi-chevron-right me-1 text-warning"></i> CAEI Medical Services</a></li>
+        <div class="col-lg-2 col-md-3 footer-links">
+          <h4 class="text-white fw-bold mb-3" style="font-size: 16px;">Nos Agences</h4>
+          <ul class="list-unstyled">
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('elite.training') }}" class="text-decoration-none text-white-50">CAEI ELITE TRAINING</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('medical.services') }}" class="text-decoration-none text-white-50">CAEI MEDICAL SERVICES</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('digitalmoov') }}" class="text-decoration-none text-white-50">CAEI DIGITAL MOOV</a></li>
+            <li class="mb-2"><i class="bi bi-chevron-right text-warning me-2"></i> <a href="{{ route('callcenter.index') }}" target="_blank" class="text-decoration-none text-white-50">CAEI CALL CENTER</a></li>
           </ul>
         </div>
 
+        <div class="col-lg-4 col-md-12 footer-newsletter">
+          <h4 class="text-white fw-bold mb-3" style="font-size: 16px;">Notre Infolettre</h4>
+          <p class="text-white-50">Abonnez-vous à notre infolettre et recevez les dernières nouvelles sur nos produits et services!</p>
+          <form action="#" method="post" class="mt-3">
+            @csrf
+            <div class="input-group">
+              <input type="email" name="email" class="form-control" placeholder="Votre email" required>
+              <button class="btn btn-warning fw-bold" type="submit" style="background-color: #ff7a00; color: #ffffff; border: none;">S'abonner</button>
+            </div>
+          </form>
+        </div>
       </div>
+    </div>
 
-      <div class="pt-3 text-center border-top border-secondary border-opacity-25 small text-secondary">
-        &copy; {{ date('Y') }} <strong>CAEI Company Group</strong>. Tous droits réservés.
+    <hr style="border-color: rgba(255,255,255,0.1);">
+
+    <div class="copyright text-center text-white-50 pt-3">
+      <div class="container">
+        <p class="mb-1">&copy; Copyright 2026 <strong class="text-white">CAEI Company Group</strong>. All Rights Reserved</p>
+        <div class="credits text-white-50" style="font-size: 12px;">
+          Designed by <a href="{{ route('digitalmoov') }}" class="text-decoration-none text-white fw-bold" style="color: #ffffff !important;">CAEI DIGITAL MOOV</a>
+        </div>
       </div>
     </div>
   </footer>
