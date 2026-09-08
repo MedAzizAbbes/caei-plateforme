@@ -12,17 +12,17 @@
         
         <style>
             html { scroll-behavior: smooth; }
-            .medical-blue-text {
-                background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            .medical-green-text {
+                background: linear-gradient(135deg, #0b8882 0%, #075c58 100%);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
             .btn-medical-primary {
-                background-color: #0284c7 !important;
+                background-color: #0b8882 !important;
                 color: #ffffff !important;
             }
             .btn-medical-primary:hover {
-                background-color: #0369a1 !important;
+                background-color: #097a75 !important;
                 color: #ffffff !important;
             }
             .card-hover-light {
@@ -56,32 +56,32 @@
             }
         </style>
     </head>
-    <body class="font-sans antialiased bg-white text-slate-800 min-h-screen selection:bg-[#0284c7] selection:text-white">
+    <body class="font-sans antialiased bg-white text-slate-800 min-h-screen selection:bg-[#0b8882] selection:text-white">
 
         {{-- ══════════ TOPBAR MEDICAL (CLAIRE & ÉPURÉE) ══════════ --}}
-        <div class="bg-sky-50 text-sky-900 text-xs py-2.5 px-4 border-b border-sky-100">
+        <div class="bg-teal-50 text-teal-900 text-xs py-2.5 px-4 border-b border-teal-100">
             <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">
                 <div class="flex items-center gap-6 flex-wrap">
-                    <span class="flex items-center gap-2 text-sky-600 font-bold">
-                        <svg class="w-4 h-4 text-sky-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    <span class="flex items-center gap-2 text-teal-600 font-bold">
+                        <svg class="w-4 h-4 text-teal-500 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                         Assistance & EVACSAN 24h/24 - 7j/7
                     </span>
-                    <a href="tel:+21653359515" class="flex items-center gap-1.5 hover:text-sky-700 transition-colors">
-                        <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    <a href="tel:+21653359515" class="flex items-center gap-1.5 hover:text-teal-700 transition-colors">
+                        <svg class="w-3.5 h-3.5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                         +216 53 359 515
                     </a>
-                    <a href="mailto:Medicale@caei-afri.com" class="hidden sm:flex items-center gap-1.5 hover:text-sky-700 transition-colors">
-                        <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <a href="mailto:Medicale@caei-afri.com" class="hidden sm:flex items-center gap-1.5 hover:text-teal-700 transition-colors">
+                        <svg class="w-3.5 h-3.5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         Medicale@caei-afri.com
                     </a>
-                    <span class="hidden md:flex items-center gap-1.5 text-sky-600">
-                        <svg class="w-3.5 h-3.5 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <span class="hidden md:flex items-center gap-1.5 text-teal-600">
+                        <svg class="w-3.5 h-3.5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         Immeuble Medina Palace, Avenue de Paris, Tunis
                     </span>
                 </div>
                 <div class="flex items-center gap-4 ms-auto">
-                    <a href="{{ route('home') }}" class="text-xs text-sky-700 hover:text-sky-700 font-medium transition-colors">← Groupe CAEI</a>
-                    <a href="{{ asset('assets/pdf/catalogueCAEIMedicalServices.pdf') }}" target="_blank" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-white bg-[#0284c7] hover:bg-[#0369a1] px-3.5 py-1 rounded-full shadow-sm transition-all">
+                    <a href="{{ route('home') }}" class="text-xs text-teal-700 hover:text-teal-700 font-medium transition-colors">← Groupe CAEI</a>
+                    <a href="{{ asset('assets/pdf/catalogueCAEIMedicalServices.pdf') }}" target="_blank" class="inline-flex items-center gap-1.5 text-[11px] font-bold text-white bg-[#0b8882] hover:bg-[#097a75] px-3.5 py-1 rounded-full shadow-sm transition-all">
                         📄 Catalogue PDF
                     </a>
                 </div>
@@ -98,12 +98,12 @@
 
                 {{-- Desktop Links --}}
                 <div class="hidden lg:flex items-center gap-8 text-sm font-semibold">
-                    <a href="#accueil" class="text-[#0284c7] font-bold hover:text-sky-700 transition-colors">Accueil</a>
-                    <a href="#pourquoi-tunisie" class="text-slate-600 hover:text-[#0284c7] transition-colors">À Propos</a>
-                    <a href="#services" class="text-slate-600 hover:text-[#0284c7] transition-colors">Nos Services</a>
-                    <a href="#pourquoi-tunisie" class="text-slate-600 hover:text-[#0284c7] transition-colors">Pourquoi la Tunisie ?</a>
+                    <a href="#accueil" class="text-[#0b8882] font-bold hover:text-teal-700 transition-colors">Accueil</a>
+                    <a href="#pourquoi-tunisie" class="text-slate-600 hover:text-[#0b8882] transition-colors">À Propos</a>
+                    <a href="#services" class="text-slate-600 hover:text-[#0b8882] transition-colors">Nos Services</a>
+                    <a href="#pourquoi-tunisie" class="text-slate-600 hover:text-[#0b8882] transition-colors">Pourquoi la Tunisie ?</a>
                     <a href="#evacsan" class="text-rose-600 hover:text-rose-700 font-bold transition-colors">EVACSAN 24/7</a>
-                    <a href="#contact" class="text-slate-600 hover:text-[#0284c7] transition-colors">Contact</a>
+                    <a href="#contact" class="text-slate-600 hover:text-[#0b8882] transition-colors">Contact</a>
                 </div>
 
                 {{-- Action Button --}}
@@ -116,7 +116,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                         <span>Espace Cliniques</span>
                     </a>
-                    <a href="#devis" class="btn-medical-primary inline-flex items-center justify-center gap-2 bg-[#0284c7] hover:bg-[#0369a1] text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-full shadow-md shadow-sky-500/20 hover:scale-105 transition-all" style="background-color: #0284c7 !important; color: #ffffff !important;">
+                    <a href="#devis" class="btn-medical-primary inline-flex items-center justify-center gap-2 bg-[#0b8882] hover:bg-[#097a75] text-white font-bold text-xs md:text-sm px-5 py-2.5 rounded-full shadow-md shadow-teal-500/20 hover:scale-105 transition-all" style="background-color: #0b8882 !important; color: #ffffff !important;">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <span>Devis & Rendez-vous</span>
                     </a>
@@ -126,9 +126,9 @@
         </nav>
 
         {{-- ══════════ HERO SECTION AVEC VIDEO BACKGROUND ══════════ --}}
-        <section id="accueil" class="relative py-16 lg:py-24 px-4 overflow-hidden border-b border-sky-50">
+        <section id="accueil" class="relative py-16 lg:py-24 px-4 overflow-hidden border-b border-teal-50">
             <!-- Video Background Container -->
-            <div class="absolute inset-0 w-full h-full z-0 overflow-hidden bg-sky-50 pointer-events-none">
+            <div class="absolute inset-0 w-full h-full z-0 overflow-hidden bg-teal-50 pointer-events-none">
                 <!-- Overlay blanc/bleu très transparent pour l'effet clinique -->
                 <div class="absolute inset-0 bg-white/75 z-10"></div>
                 
@@ -146,13 +146,13 @@
                 
                 {{-- Text column --}}
                 <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                    <div class="inline-flex items-center gap-2 bg-white/90 border border-sky-200 shadow-sm px-4 py-1.5 rounded-full text-[#0284c7] font-extrabold text-xs uppercase tracking-wider backdrop-blur-md">
-                        <span class="w-2.5 h-2.5 rounded-full bg-[#0284c7] animate-ping"></span>
+                    <div class="inline-flex items-center gap-2 bg-white/90 border border-teal-200 shadow-sm px-4 py-1.5 rounded-full text-[#0b8882] font-extrabold text-xs uppercase tracking-wider backdrop-blur-md">
+                        <span class="w-2.5 h-2.5 rounded-full bg-[#0b8882] animate-ping"></span>
                         VOTRE SANTÉ, NOTRE PRIORITÉ EN TUNISIE
                     </div>
 
                     <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 uppercase tracking-tight leading-tight">
-                        CAEI <span class="medical-blue-text">MEDICAL SERVICES</span>
+                        CAEI <span class="medical-green-text">MEDICAL SERVICES</span>
                     </h1>
 
                     <p class="text-lg sm:text-xl text-slate-700 font-medium leading-relaxed max-w-2xl bg-white/80 backdrop-blur-xs p-2 rounded-full border border-white/50">
@@ -160,7 +160,7 @@
                     </p>
 
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                        <a href="#devis" class="btn-medical-primary w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#0284c7] hover:bg-[#0369a1] text-white font-black text-base px-8 py-4 rounded-[20px] shadow-lg shadow-sky-600/25 hover:scale-105 transition-all" style="background-color: #0284c7 !important; color: #ffffff !important;">
+                        <a href="#devis" class="btn-medical-primary w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-[#0b8882] hover:bg-[#097a75] text-white font-black text-base px-8 py-4 rounded-[20px] shadow-lg shadow-teal-600/25 hover:scale-105 transition-all" style="background-color: #0b8882 !important; color: #ffffff !important;">
                             <span>Demander un Devis Gratuit</span>
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </a>
@@ -172,15 +172,15 @@
 
                     {{-- Key metrics --}}
                     <div class="pt-8 border-t border-slate-100 grid grid-cols-3 gap-4 text-center lg:text-left">
-                        <div class="bg-white/90 backdrop-blur-md p-4 rounded-[20px] border border-sky-100 shadow-sm">
-                            <div class="text-2xl lg:text-3xl font-black text-[#0284c7]">100%</div>
+                        <div class="bg-white/90 backdrop-blur-md p-4 rounded-[20px] border border-teal-100 shadow-sm">
+                            <div class="text-2xl lg:text-3xl font-black text-[#0b8882]">100%</div>
                             <div class="text-xs text-slate-600 font-semibold mt-0.5">Cliniques Certifiées</div>
                         </div>
-                        <div class="bg-white/90 backdrop-blur-md p-4 rounded-[20px] border border-sky-100 shadow-sm">
+                        <div class="bg-white/90 backdrop-blur-md p-4 rounded-[20px] border border-teal-100 shadow-sm">
                             <div class="text-2xl lg:text-3xl font-black text-amber-600">-60%</div>
                             <div class="text-xs text-slate-600 font-semibold mt-0.5">Économie vs Europe</div>
                         </div>
-                        <div class="bg-white/90 backdrop-blur-md p-4 rounded-[20px] border border-sky-100 shadow-sm">
+                        <div class="bg-white/90 backdrop-blur-md p-4 rounded-[20px] border border-teal-100 shadow-sm">
                             <div class="text-2xl lg:text-3xl font-black text-emerald-600">24h/7j</div>
                             <div class="text-xs text-slate-600 font-semibold mt-0.5">Prise en Charge</div>
                         </div>
@@ -189,42 +189,42 @@
 
                 {{-- Hero Card Column (Claire avec visuel clinique) --}}
                 <div class="lg:col-span-5">
-                    <div class="bg-white/95 backdrop-blur-md p-8 rounded-[24px] border border-sky-200 shadow-xl space-y-6">
+                    <div class="bg-white/95 backdrop-blur-md p-8 rounded-[24px] border border-teal-200 shadow-xl space-y-6">
                         <div class="flex items-center justify-between border-b border-slate-100 pb-4">
                             <div class="flex items-center gap-3">
-                                <div class="w-11 h-11 rounded-full bg-sky-50 text-[#0284c7] flex items-center justify-center font-bold text-xl border border-sky-100 shadow-sm">
+                                <div class="w-11 h-11 rounded-full bg-teal-50 text-[#0b8882] flex items-center justify-center font-bold text-xl border border-teal-100 shadow-sm">
                                     ⚕️
                                 </div>
                                 <div>
                                     <div class="text-base font-black text-slate-900 uppercase">Séjour Santé Tout Compris</div>
-                                    <div class="text-xs text-[#0284c7] font-bold">Accompagnement Sur-Mesure</div>
+                                    <div class="text-xs text-[#0b8882] font-bold">Accompagnement Sur-Mesure</div>
                                 </div>
                             </div>
-                            <span class="bg-sky-100 text-[#0284c7] text-[10px] font-black px-2.5 py-1 rounded-full uppercase">ISO Certified</span>
+                            <span class="bg-teal-100 text-[#0b8882] text-[10px] font-black px-2.5 py-1 rounded-full uppercase">ISO Certified</span>
                         </div>
 
                         <ul class="space-y-4 text-sm text-slate-700">
                             <li class="flex items-start gap-3">
-                                <span class="w-5 h-5 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</span>
+                                <span class="w-5 h-5 rounded-full bg-teal-100 text-[#0b8882] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</span>
                                 <span><strong>Diagnostic & Orientation :</strong> Choix du chirurgien spécialiste adapté à votre cas.</span>
                             </li>
                             <li class="flex items-start gap-3">
-                                <span class="w-5 h-5 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</span>
+                                <span class="w-5 h-5 rounded-full bg-teal-100 text-[#0b8882] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</span>
                                 <span><strong>Conciergerie VIP :</strong> Accueil personnalisé à l'aéroport de Tunis-Carthage & chauffeur.</span>
                             </li>
                             <li class="flex items-start gap-3">
-                                <span class="w-5 h-5 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</span>
+                                <span class="w-5 h-5 rounded-full bg-teal-100 text-[#0b8882] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</span>
                                 <span><strong>Hébergement Premium :</strong> Hôtel 4/5 étoiles pour la convalescence & suivi d'infirmiers.</span>
                             </li>
                             <li class="flex items-start gap-3">
-                                <span class="w-5 h-5 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</span>
+                                <span class="w-5 h-5 rounded-full bg-teal-100 text-[#0b8882] flex items-center justify-center shrink-0 mt-0.5 font-bold text-xs">✓</span>
                                 <span><strong>Transparence Totale :</strong> Devis clair et sans frais cachés avant votre départ.</span>
                             </li>
                         </ul>
 
-                        <div class="bg-sky-50 p-4 rounded-[20px] border border-sky-200/60 text-xs text-slate-700 flex items-center justify-between shadow-xs">
+                        <div class="bg-teal-50 p-4 rounded-[20px] border border-teal-200/60 text-xs text-slate-700 flex items-center justify-between shadow-xs">
                             <span class="font-semibold">📞 Support Direct Patient :</span>
-                            <span class="font-black text-[#0284c7] text-sm">+216 53 359 515</span>
+                            <span class="font-black text-[#0b8882] text-sm">+216 53 359 515</span>
                         </div>
                     </div>
                 </div>
@@ -249,15 +249,15 @@
         <section id="pourquoi-tunisie" class="py-20 bg-about-pattern text-slate-800 border-b border-slate-100/60">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <p class="text-xs font-black uppercase text-[#0284c7] tracking-widest">Excellence Médicale Internationale</p>
+                    <p class="text-xs font-black uppercase text-[#0b8882] tracking-widest">Excellence Médicale Internationale</p>
                     <h2 class="mt-2 text-3xl sm:text-4xl font-black uppercase tracking-tight text-slate-900">Pourquoi Choisir CAEI Medical Services & La Tunisie ?</h2>
-                    <div class="w-20 h-1 bg-[#0284c7] mx-auto mt-4 rounded-full"></div>
+                    <div class="w-20 h-1 bg-[#0b8882] mx-auto mt-4 rounded-full"></div>
                 </div>
 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                     <div class="space-y-6 text-slate-700 leading-relaxed text-base bg-white/80 backdrop-blur-md p-6 rounded-[24px] border border-slate-100 shadow-sm">
                         <p class="text-lg font-semibold text-slate-900">
-                            La Tunisie s'impose aujourd'hui comme <span class="text-[#0284c7] font-bold">l'une des meilleures destinations mondiales de tourisme médical</span>, combinant des normes chirurgicales européennes et des coûts maîtrisés.
+                            La Tunisie s'impose aujourd'hui comme <span class="text-[#0b8882] font-bold">l'une des meilleures destinations mondiales de tourisme médical</span>, combinant des normes chirurgicales européennes et des coûts maîtrisés.
                         </p>
                         <p>
                             Les médecins et chirurgiens tunisiens, d'une sélectivité universitaire extrême (souvent issus des 1000 premiers bacheliers au niveau national), sont formés dans les plus prestigieuses facultés de médecine en Tunisie et en France. Ils maîtrisent parfaitement les dernières innovations et interventions de pointe.
@@ -282,7 +282,7 @@
 
                     <div class="grid grid-cols-2 gap-6">
                         {{-- Cadre 1: Cliniques VIP --}}
-                        <div class="bg-white rounded-[20px] border border-sky-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
+                        <div class="bg-white rounded-[20px] border border-teal-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
                             <div class="h-28 w-full relative overflow-hidden">
                                 <img src="{{ asset('images/frames/clinique_vip.jpg') }}" alt="Cliniques VIP" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
@@ -294,7 +294,7 @@
                         </div>
 
                         {{-- Cadre 2: Prise en Charge 360° --}}
-                        <div class="bg-white rounded-[20px] border border-sky-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
+                        <div class="bg-white rounded-[20px] border border-teal-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
                             <div class="h-28 w-full relative overflow-hidden">
                                 <img src="{{ asset('images/frames/prise_en_charge.jpg') }}" alt="Prise en Charge 360°" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
@@ -306,7 +306,7 @@
                         </div>
 
                         {{-- Cadre 3: Spécialistes de Renom --}}
-                        <div class="bg-white rounded-[20px] border border-sky-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
+                        <div class="bg-white rounded-[20px] border border-teal-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
                             <div class="h-28 w-full relative overflow-hidden">
                                 <img src="{{ asset('images/frames/specialistes.jpg') }}" alt="Spécialistes de Renom" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
@@ -318,7 +318,7 @@
                         </div>
 
                         {{-- Cadre 4: Convalescence Douce --}}
-                        <div class="bg-white rounded-[20px] border border-sky-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
+                        <div class="bg-white rounded-[20px] border border-teal-100 shadow-sm overflow-hidden card-hover-light flex flex-col justify-between group">
                             <div class="h-28 w-full relative overflow-hidden">
                                 <img src="{{ asset('images/frames/convalescence.jpg') }}" alt="Convalescence Douce" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent"></div>
@@ -337,9 +337,9 @@
         <section id="services" class="py-24 bg-white relative">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center max-w-3xl mx-auto mb-16">
-                    <p class="text-xs font-black uppercase text-[#0284c7] tracking-widest">Prestations Certifiées</p>
+                    <p class="text-xs font-black uppercase text-[#0b8882] tracking-widest">Prestations Certifiées</p>
                     <h2 class="mt-2 text-3xl sm:text-5xl font-black uppercase tracking-tight text-slate-900">Nos Domaines d'Expertise Médicale</h2>
-                    <div class="w-20 h-1 bg-[#0284c7] mx-auto mt-4 rounded-full"></div>
+                    <div class="w-20 h-1 bg-[#0b8882] mx-auto mt-4 rounded-full"></div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -352,10 +352,10 @@
                                 <img src="{{ asset('images/services/' . $service['image']) }}" alt="{{ $service['title'] }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 <div class="absolute inset-0 bg-gradient-to-t from-white via-white/40 to-transparent"></div>
                                 <div class="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                                    <span class="bg-white/90 backdrop-blur-md text-[#0284c7] border border-sky-200 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                                    <span class="bg-white/90 backdrop-blur-md text-[#0b8882] border border-teal-200 text-xs font-black px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                                         {{ $service['badge'] }}
                                     </span>
-                                    <div class="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md text-[#0284c7] flex items-center justify-center font-bold text-lg border border-sky-200 shadow-sm">
+                                    <div class="w-10 h-10 rounded-full bg-white/90 backdrop-blur-md text-[#0b8882] flex items-center justify-center font-bold text-lg border border-teal-200 shadow-sm">
                                         ⚕️
                                     </div>
                                 </div>
@@ -374,14 +374,14 @@
                                     <ul class="space-y-2.5 mb-6">
                                         @foreach($service['features'] as $feature)
                                             <li class="flex items-center gap-2.5 text-xs text-slate-800 font-semibold">
-                                                <svg class="w-4 h-4 text-[#0284c7] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                                                <svg class="w-4 h-4 text-[#0b8882] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
                                                 <span>{{ $feature }}</span>
                                             </li>
                                         @endforeach
                                     </ul>
                                 </div>
 
-                                <a href="#devis" class="inline-flex items-center justify-center gap-2 w-full py-3 bg-[#f0fdfa] hover:bg-[#0284c7] text-[#0284c7] hover:text-white border border-sky-200 font-bold text-xs rounded-full transition-all shadow-sm">
+                                <a href="#devis" class="inline-flex items-center justify-center gap-2 w-full py-3 bg-[#f0fdfa] hover:bg-[#0b8882] text-[#0b8882] hover:text-white border border-teal-200 font-bold text-xs rounded-full transition-all shadow-sm">
                                     Demander un Devis pour ce Soin →
                                 </a>
                             </div>
@@ -427,7 +427,7 @@
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="bg-white/95 backdrop-blur-md p-8 sm:p-12 rounded-[24px] border border-slate-100 shadow-xl">
                     <div class="text-center mb-10">
-                        <span class="bg-sky-50 text-[#0284c7] border border-sky-200 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider">Demande Confidentielle & Gratuite</span>
+                        <span class="bg-teal-50 text-[#0b8882] border border-teal-200 text-xs font-black px-3.5 py-1 rounded-full uppercase tracking-wider">Demande Confidentielle & Gratuite</span>
                         <h2 class="text-3xl font-black text-slate-900 uppercase tracking-tight mt-3">Demande de Devis Médical & Rendez-vous</h2>
                         <p class="text-slate-500 text-xs mt-2">Remplissez ce formulaire. Un conseiller médical vous contactera confidentiellement sous 24 heures.</p>
                     </div>
@@ -438,29 +438,29 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Nom & Prénom *</label>
-                                <input type="text" name="fullname" required placeholder="Ex: Jean Dupont" class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0284c7] focus:bg-white focus:outline-none transition-all">
+                                <input type="text" name="fullname" required placeholder="Ex: Jean Dupont" class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0b8882] focus:bg-white focus:outline-none transition-all">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Adresse Email *</label>
-                                <input type="email" name="email" required placeholder="Ex: jean.dupont@email.com" class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0284c7] focus:bg-white focus:outline-none transition-all">
+                                <input type="email" name="email" required placeholder="Ex: jean.dupont@email.com" class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0b8882] focus:bg-white focus:outline-none transition-all">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Numéro Téléphone / WhatsApp *</label>
-                                <input type="text" name="phone" required placeholder="Ex: +225 07 00 00 00" class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0284c7] focus:bg-white focus:outline-none transition-all">
+                                <input type="text" name="phone" required placeholder="Ex: +225 07 00 00 00" class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0b8882] focus:bg-white focus:outline-none transition-all">
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Pays de Résidence *</label>
-                                <input type="text" name="country" required placeholder="Ex: Côte d'Ivoire, Sénégal, France..." class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0284c7] focus:bg-white focus:outline-none transition-all">
+                                <input type="text" name="country" required placeholder="Ex: Côte d'Ivoire, Sénégal, France..." class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0b8882] focus:bg-white focus:outline-none transition-all">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Type de Soin / Spécialité *</label>
-                                <select name="service_type" required class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0284c7] focus:bg-white focus:outline-none transition-all">
+                                <select name="service_type" required class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0b8882] focus:bg-white focus:outline-none transition-all">
                                     <option value="">-- Sélectionnez la prestation souhaitée --</option>
                                     <option value="Chirurgie Esthétique">Chirurgie Esthétique & Réparatrice</option>
                                     <option value="Évacuation Sanitaire">Évacuation Sanitaire (EVACSAN)</option>
@@ -472,16 +472,16 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Date Souhaitée *</label>
-                                <input type="date" name="preferred_date" min="{{ date('Y-m-d') }}" required class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0284c7] focus:bg-white focus:outline-none transition-all">
+                                <input type="date" name="preferred_date" min="{{ date('Y-m-d') }}" required class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0b8882] focus:bg-white focus:outline-none transition-all">
                             </div>
                         </div>
 
                         <div>
                             <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">Message & Précisions Médicales</label>
-                            <textarea name="message" rows="4" placeholder="Décrivez succinctement vos besoins ou symptômes..." class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0284c7] focus:bg-white focus:outline-none transition-all"></textarea>
+                            <textarea name="message" rows="4" placeholder="Décrivez succinctement vos besoins ou symptômes..." class="w-full bg-[#f8fafc] border border-slate-300 rounded-full px-4 py-3 text-slate-900 text-sm focus:border-[#0b8882] focus:bg-white focus:outline-none transition-all"></textarea>
                         </div>
 
-                        <button type="submit" class="btn-medical-primary w-full bg-[#0284c7] hover:bg-[#0369a1] text-white font-black text-base py-4 rounded-full shadow-lg shadow-sky-600/20 hover:scale-[1.01] transition-all" style="background-color: #0284c7 !important; color: #ffffff !important;">
+                        <button type="submit" class="btn-medical-primary w-full bg-[#0b8882] hover:bg-[#097a75] text-white font-black text-base py-4 rounded-full shadow-lg shadow-teal-600/20 hover:scale-[1.01] transition-all" style="background-color: #0b8882 !important; color: #ffffff !important;">
                             Envoyer la Demande de Devis Gratuit
                         </button>
                     </form>
@@ -504,34 +504,34 @@
                 <div>
                     <h4 class="font-bold text-white mb-4 text-xs uppercase tracking-wider">SERVICES CLÉS</h4>
                     <ul class="space-y-3 text-xs">
-                        <li><a href="#services" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Chirurgie Esthétique</a></li>
-                        <li><a href="#evacsan" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Évacuation Sanitaire 24/7</a></li>
-                        <li><a href="#services" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Assistance PMA / FIV</a></li>
-                        <li><a href="#services" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Chirurgie Bariatrique</a></li>
+                        <li><a href="#services" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Chirurgie Esthétique</a></li>
+                        <li><a href="#evacsan" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Évacuation Sanitaire 24/7</a></li>
+                        <li><a href="#services" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Assistance PMA / FIV</a></li>
+                        <li><a href="#services" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Chirurgie Bariatrique</a></li>
                     </ul>
                 </div>
 
                 <div>
                     <h4 class="font-bold text-white mb-4 text-xs uppercase tracking-wider">LIENS UTILES</h4>
                     <ul class="space-y-3 text-xs">
-                        <li><a href="{{ route('home') }}" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Site Officiel Groupe CAEI</a></li>
-                        <li><a href="{{ route('plateforme') }}" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Plateforme Séminaires</a></li>
-                        <li><a href="{{ asset('assets/pdf/catalogueCAEIMedicalServices.pdf') }}" target="_blank" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-sky-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Télécharger Catalogue PDF</a></li>
+                        <li><a href="{{ route('home') }}" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Site Officiel Groupe CAEI</a></li>
+                        <li><a href="{{ route('plateforme') }}" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Plateforme Séminaires</a></li>
+                        <li><a href="{{ asset('assets/pdf/catalogueCAEIMedicalServices.pdf') }}" target="_blank" class="group flex items-center gap-2 hover:text-white transition-all"><span class="w-1.5 h-1.5 rounded-full bg-teal-500 opacity-0 group-hover:opacity-100 transition-opacity"></span>Télécharger Catalogue PDF</a></li>
                     </ul>
                 </div>
 
                 <div class="space-y-3 text-xs">
                     <h4 class="font-bold text-white mb-4 uppercase tracking-wider">CONTACT TUNIS</h4>
                     <p class="flex items-start gap-3">
-                        <svg class="w-4 h-4 text-sky-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        <svg class="w-4 h-4 text-teal-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         <span>Immeuble Medina Palace, 53-55 Av. de Paris, Tunis</span>
                     </p>
                     <p class="flex items-center gap-3">
-                        <svg class="w-4 h-4 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                         <span>+216 53 359 515</span>
                     </p>
                     <a href="mailto:Medicale@caei-afri.com" class="flex items-center gap-3 hover:text-white transition-colors">
-                        <svg class="w-4 h-4 text-sky-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                         <span>Medicale@caei-afri.com</span>
                     </a>
                 </div>
