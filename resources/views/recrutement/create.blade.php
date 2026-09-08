@@ -979,6 +979,30 @@
         background-color: #ffc451;
         color: #000f3c;
       }
+      .recrutement-form .btn-submit-candidature {
+        background-color: #000f3c !important;
+        color: #ffffff !important;
+        font-size: 1.05rem;
+        font-weight: 700;
+        padding: 0.85rem 2.5rem;
+        border-radius: 50px;
+        border: 2px solid transparent;
+        box-shadow: 0 4px 15px rgba(0, 15, 60, 0.25);
+        transition: all 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+      .recrutement-form .btn-submit-candidature * {
+        color: inherit !important;
+      }
+      .recrutement-form .btn-submit-candidature:hover {
+        background-color: #ffc451 !important;
+        color: #000f3c !important;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 196, 81, 0.45);
+      }
     </style>
 
     <section class="section py-5" style="padding-top: 150px !important; padding-bottom: 100px; background: linear-gradient(135deg, rgba(248, 249, 252, 0.92) 0%, rgba(255, 255, 255, 0.95) 100%), url('{{ asset('assets/img/features-bg.jpg') }}') center/cover no-repeat scroll; min-height: 85vh;">
@@ -1058,8 +1082,9 @@
                     </div>
 
                     <div class="col-12 text-center mt-5">
-                      <button type="submit" class="btn text-white fw-bold px-5 py-3 rounded-pill shadow-sm" style="background-color: #000f3c; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#ffc451'; this.style.color='#000f3c';" onmouseout="this.style.backgroundColor='#000f3c'; this.style.color='#ffffff';">
-                        Soumettre ma candidature
+                      <button type="submit" class="btn btn-submit-candidature" style="background-color: #000f3c !important; color: #ffffff !important;">
+                        <i class="bi bi-send-fill me-2" style="color: inherit !important;"></i>
+                        <span style="color: inherit !important;">Soumettre ma candidature</span>
                       </button>
                     </div>
                   </div>
