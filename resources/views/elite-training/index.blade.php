@@ -2872,12 +2872,17 @@
 
 
   <!-- ===== FOOTER ===== -->
-  <footer class="et-footer">
+  <footer class="et-footer" style="background: #00142b; padding: 45px 0 25px; text-align: center; border-top: 1px solid rgba(255,255,255,0.08);">
     <div class="container">
-      <p>
-        © {{ date('Y') }} <a href="{{ route('elite.training') }}">CAEI Elite Training</a>. 
+      <div class="mb-3">
+        <a href="{{ route('home') }}">
+          <img src="{{ asset('assets/img/logo_caei_footer_white.png') }}" alt="CAEI Comité Africain d'Expertise Internationale" style="max-height: 60px; width: auto; max-width: 260px; object-fit: contain;">
+        </a>
+      </div>
+      <p class="mb-0" style="color: rgba(255,255,255,0.5); font-size: 13px;">
+        © {{ date('Y') }} <a href="{{ route('elite.training') }}" style="color: #ce9233; text-decoration: none;">CAEI Elite Training</a>. 
         Tous droits réservés. | 
-        <a href="{{ route('home') }}" style="color: rgba(255,255,255,0.4);">← Retour au portail</a>
+        <a href="{{ route('home') }}" style="color: rgba(255,255,255,0.4); text-decoration: none;">← Retour au portail</a>
       </p>
     </div>
   </footer>
