@@ -270,8 +270,7 @@
   <nav class="et-navbar">
     <div class="container d-flex align-items-center justify-content-between">
       <a href="{{ route('elite.training') }}" class="nav-brand">
-        <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training">
-        <span>CAEI <em>ELITE TRAINING</em></span>
+        <img src="{{ asset('assets/img/logo_caei_footer_white.png') }}" alt="CAEI Comité Africain d'Expertise Internationale" style="max-height: 48px; width: auto; object-fit: contain;">
       </a>
 
       <div class="d-flex align-items-center gap-3">
