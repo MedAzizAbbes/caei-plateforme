@@ -1882,7 +1882,7 @@
   <nav class="et-navbar" id="etNavbar">
     <div class="container d-flex align-items-center justify-content-between">
       <a href="{{ route('home') }}" class="nav-brand">
-        <img src="{{ asset('images/logo-caei-white.png') }}" alt="CAEI Elite Training" style="height: 100px; width: auto; object-fit: contain;">
+        <img src="{{ asset('assets/img/logo_caei_footer_white.png') }}" alt="CAEI Elite Training" style="max-height: 50px; width: auto; object-fit: contain;">
       </a>
 
       <ul class="nav-links mb-0 ps-0">

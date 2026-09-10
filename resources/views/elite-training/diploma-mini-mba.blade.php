@@ -304,8 +304,7 @@
   <nav class="navbar navbar-expand-lg sticky-top et-navbar">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center gap-3" href="{{ route('elite.training') }}">
-        <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training" height="48" style="object-fit: contain;">
-        <span class="nav-brand-title">CAEI <span>ELITE TRAINING</span></span>
+        <img src="{{ asset('assets/img/logo_caei_footer_white.png') }}" alt="CAEI Comité Africain d'Expertise Internationale" style="max-height: 48px; width: auto; object-fit: contain;">
       </a>
       <div class="d-flex align-items-center gap-3">
         <a href="{{ route('elite.training') }}" class="btn-outline-pro btn-sm">← Accueil</a>
