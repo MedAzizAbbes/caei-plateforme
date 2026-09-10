@@ -29,11 +29,16 @@ class SeminarPublicController extends Controller
         $totalClients = $totalParticipants + $totalRegistrations + $totalAppointments;
         $totalExperts = \App\Models\User::whereIn('role', ['admin', 'formateur', 'clinic_doctor', 'callcenter_agent'])->count();
 
+        // Baseline institutionnelle CAEI sur 14 ans d'activité en Afrique (ministères, institutions, entreprises)
+        $baseClients = 3500;
+        $baseExperts = 150;
+        $totalProjets = $totalFormations + $totalSeminars;
+
         $stats = [
-            'clients_count' => $totalClients > 0 ? $totalClients : 337,
-            'projets_count' => ($totalFormations + $totalSeminars) > 0 ? ($totalFormations + $totalSeminars) : 200,
+            'clients_count' => $baseClients + $totalClients,
+            'projets_count' => $totalProjets > 0 ? $totalProjets : 240,
             'annees_exp' => 14,
-            'experts_count' => $totalExperts > 0 ? $totalExperts : 150,
+            'experts_count' => max($baseExperts, $baseExperts + $totalExperts),
             'formations_count' => $totalFormations,
         ];
 
