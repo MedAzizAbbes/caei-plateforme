@@ -9,86 +9,132 @@ use Illuminate\Support\Str;
 class EliteTrainingController extends Controller
 {
     /**
-     * Mapping des slugs vers les noms exacts des domaines
+     * Mapping des slugs vers les noms exacts des 14 domaines
      */
     protected array $domainsMap = [
+        'projet-educatif' => [
+            'name' => 'Projet Éducatif en Afrique',
+            'code_prefix' => 'PEA',
+            'category' => 'Projets & Éducation',
+            'title' => 'Gouvernance & Pilotage du Secteur Éducatif en Afrique',
+            'subtitle' => 'Stratégies nationales d\'éducation, décentralisation et amélioration de la qualité de l\'enseignement.',
+            'img' => 'assets/img/cta-bg.jpg',
+            'icon' => 'bi-journal-check',
+        ],
+        'projets-developpement' => [
+            'name' => 'Projets & Programmes de Développement',
+            'code_prefix' => 'PPD',
+            'category' => 'Projets & Éducation',
+            'title' => 'Projets & Programmes de Développement en Afrique',
+            'subtitle' => 'Planification axée sur les résultats, suivi-évaluation, passation des marchés et audit financier.',
+            'img' => 'assets/img/service_consulting_1786525632369.jpg',
+            'icon' => 'bi-diagram-3-fill',
+        ],
+        'soft-skills' => [
+            'name' => 'Soft Skills & Développement Personnel',
+            'code_prefix' => 'DPS',
+            'category' => 'Management & RH',
+            'title' => 'Développement Personnel & Soft Skills',
+            'subtitle' => 'Gestion du temps, intelligence émotionnelle, communication assertive, négociation et leadership.',
+            'img' => 'assets/img/formation_leadership.jpg',
+            'icon' => 'bi-person-badge-fill',
+        ],
+        'ecommerce-fintech' => [
+            'name' => 'E-Commerce, Fintech & Développement Durable',
+            'code_prefix' => 'EF',
+            'category' => 'Informatique & Digital',
+            'title' => 'E-Commerce, Fintech & Intelligence Artificielle',
+            'subtitle' => 'Plateformes e-commerce, néobanques, blockchain, IA appliquée et transition écologique.',
+            'img' => 'assets/img/service_webdesign_1786525611976.jpg',
+            'icon' => 'bi-cpu-fill',
+        ],
+        'informatique-ntic' => [
+            'name' => 'Informatique & NTIC',
+            'code_prefix' => 'INT',
+            'category' => 'Informatique & Digital',
+            'title' => 'Informatique, Cybersécurité & NTIC',
+            'subtitle' => 'Audit de sécurité, forensic numérique, cloud computing, DevOps et Business Intelligence.',
+            'img' => 'assets/img/formation_tech.jpg',
+            'icon' => 'bi-shield-lock-fill',
+        ],
         'audit-comptabilite-finance' => [
             'name' => 'Audit, Comptabilité & Finance',
             'code_prefix' => 'ACF',
-            'title' => 'Audit, Comptabilité & Finance (normes IFRS & Gestion financière)',
-            'subtitle' => 'Maîtrisez les principes comptables IFRS, l\'analyse financière, le reporting et l\'audit d\'entreprise.',
+            'category' => 'Finance & Gestion',
+            'title' => 'Audit, Comptabilité & Finance (Normes IFRS & Gestion financière)',
+            'subtitle' => 'Comptabilité publique et analytique, reporting IFRS, audit interne, fiscalité et trésorerie.',
             'img' => 'assets/img/formation_audit.jpg',
             'icon' => 'bi-calculator-fill',
         ],
         'controle-de-gestion' => [
             'name' => 'Contrôle de Gestion',
             'code_prefix' => 'GC',
-            'title' => 'Contrôle de Gestion & Trésorerie',
-            'subtitle' => 'Pilotez la performance financière, le cadrage budgétaire et la gestion de trésorerie.',
+            'category' => 'Finance & Gestion',
+            'title' => 'Contrôle de Gestion & Pilotage de la Performance',
+            'subtitle' => 'Élaboration budgétaire, Balanced Scorecard, KPI, contrôle commercial, industriel et RH.',
             'img' => 'assets/img/formation_finance.jpg',
             'icon' => 'bi-graph-up-arrow',
-        ],
-        'informatique-ntic' => [
-            'name' => 'Informatique & NTIC',
-            'code_prefix' => 'INT',
-            'title' => 'Informatique, Cybersécurité & NTIC',
-            'subtitle' => 'Audit de sécurité, investigation numérique, performance des réseaux et transformation digitale.',
-            'img' => 'assets/img/formation_tech.jpg',
-            'icon' => 'bi-shield-lock-fill',
-        ],
-        'soft-skills' => [
-            'name' => 'Soft Skills & Développement Personnel',
-            'code_prefix' => 'DPS',
-            'title' => 'Développement Personnel & Soft Skills',
-            'subtitle' => 'Gestion du temps, intelligence émotionnelle, communication assertive et leadership.',
-            'img' => 'assets/img/formation_leadership.jpg',
-            'icon' => 'bi-person-badge-fill',
-        ],
-        'projets-developpement' => [
-            'name' => 'Projets & Programmes de Développement',
-            'code_prefix' => 'PPD',
-            'title' => 'Projets & Programmes de Développement en Afrique',
-            'subtitle' => 'Planification, exécution, suivi-évaluation, audit et gestion financière des projets.',
-            'img' => 'assets/img/service_consulting_1786525632369.jpg',
-            'icon' => 'bi-diagram-3-fill',
-        ],
-        'projet-educatif' => [
-            'name' => 'Projet Éducatif en Afrique',
-            'code_prefix' => 'PEA',
-            'title' => 'Gouvernance & Pilotage du Secteur Éducatif en Afrique',
-            'subtitle' => 'Stratégies nationales d\'éducation, décentralisation et amélioration de la qualité de l\'enseignement.',
-            'img' => 'assets/img/cta-bg.jpg',
-            'icon' => 'bi-journal-check',
-        ],
-        'ecommerce-fintech' => [
-            'name' => 'E-Commerce, Fintech & Développement Durable',
-            'code_prefix' => 'EF',
-            'title' => 'E-Commerce, Fintech & Intelligence Artificielle',
-            'subtitle' => 'IA appliquée, transformation numérique des services financiers et transition écologique.',
-            'img' => 'assets/img/service_webdesign_1786525611976.jpg',
-            'icon' => 'bi-cpu-fill',
         ],
         'marches-publics' => [
             'name' => 'Marchés Publics',
             'code_prefix' => 'MP',
+            'category' => 'Droit & Commande Publique',
             'title' => 'Passation & Exécution des Marchés Publics',
-            'subtitle' => 'Procédures d\'appel d\'offres, exécution des contrats et cadre réglementaire des marchés.',
+            'subtitle' => 'Procédures DAO, directives bailleurs internationaux, contentieux, e-procurement et PPP.',
             'img' => 'assets/img/im1.jpg',
             'icon' => 'bi-briefcase-fill',
         ],
+        'secretariat-archive' => [
+            'name' => 'Secrétariat & Archive Bureau d\'Ordre',
+            'code_prefix' => 'SAB',
+            'category' => 'Management & RH',
+            'title' => 'Secrétariat, Bureautique & Archivage Moderne',
+            'subtitle' => 'Bureau d\'ordre moderne, GED, numérisation, rédaction administrative et assistanat de direction.',
+            'img' => 'assets/img/callcenter_hero_agent.jpg',
+            'icon' => 'bi-archive-fill',
+        ],
+        'grh-management' => [
+            'name' => 'GRH, & Management des Organisations',
+            'code_prefix' => 'GMO',
+            'category' => 'Management & RH',
+            'title' => 'Ressources Humaines & Management des Organisations',
+            'subtitle' => 'GPEC, politique salariale, droit du travail, dialogue social, QVT et conduite du changement.',
+            'img' => 'assets/img/new_formations/conflict_management.jpg',
+            'icon' => 'bi-people-fill',
+        ],
+        'qhse' => [
+            'name' => 'Qualité Hygiène & Sécurité Environnementale',
+            'code_prefix' => 'QHSE',
+            'category' => 'Stratégie & Qualité',
+            'title' => 'Qualité, Hygiène, Sécurité & Environnement (QHSE)',
+            'subtitle' => 'Normes ISO 9001, 14001, 45001, évaluation des risques professionnels et démarche RSE.',
+            'img' => 'assets/img/features-bg.jpg',
+            'icon' => 'bi-shield-check',
+        ],
         'droit-ohada' => [
             'name' => 'Droit des Affaires & Droit OHADA',
-            'code_prefix' => 'OHADA',
+            'code_prefix' => 'DO',
+            'category' => 'Droit & Commande Publique',
             'title' => 'Droit des Affaires & Espace OHADA',
-            'subtitle' => 'Sécurité juridique des opérations commerciales, droit des contrats et sociétés.',
-            'img' => 'assets/img/professionel.jpg',
+            'subtitle' => 'Actes uniformes OHADA, droit des sociétés, sûretés, voies d\'exécution et contentieux CCJA.',
+            'img' => 'assets/img/new_formations/training_legal.jpg',
             'icon' => 'bi-bank2',
+        ],
+        'digitalisation-administration' => [
+            'name' => 'Digitalisation de l\'Administration Publique',
+            'code_prefix' => 'DAP',
+            'category' => 'Informatique & Digital',
+            'title' => 'Digitalisation & Modernisation de l\'Administration Publique',
+            'subtitle' => 'E-Gouvernement, guichets uniques numériques, interopérabilité des SI et cybersécurité de l\'État.',
+            'img' => 'assets/img/new_formations/training_tech.jpg',
+            'icon' => 'bi-building-gear',
         ],
         'marketing-communication' => [
             'name' => 'Marketing, Communication & Distribution',
             'code_prefix' => 'MCD',
+            'category' => 'Stratégie & Qualité',
             'title' => 'Marketing Stratégique, Communication & Distribution',
-            'subtitle' => 'Stratégies modernes de marketing digital, communication institutionnelle et vente.',
+            'subtitle' => 'Marketing digital, réseaux sociaux, stratégie de marque, force de vente et communication de crise.',
             'img' => 'assets/img/service_marketing_1786525623115.jpg',
             'icon' => 'bi-megaphone-fill',
         ],
@@ -156,6 +202,17 @@ class EliteTrainingController extends Controller
             $allFormations = collect();
         }
         $domainsConfig = $this->domainsMap;
+        foreach ($domainsConfig as $slugKey => &$dConf) {
+            $codePrefix = $dConf['code_prefix'] ?? '';
+            $dName = $dConf['name'] ?? '';
+            $dConf['count'] = $certifiantes->filter(function($f) use ($dName, $codePrefix) {
+                return (stripos($f->domain, $dName) !== false) || 
+                       (!empty($codePrefix) && str_starts_with($f->code, $codePrefix . '-')) ||
+                       ($codePrefix === 'DO' && str_starts_with($f->code, 'OHADA-'));
+            })->count();
+        }
+        unset($dConf);
+
         $stats = $this->getRealStats($allFormations, $certifiantes, $diplomantes, $surMesure, $elearning, $cycles);
 
         return view('elite-training.index', compact('certifiantes', 'diplomantes', 'surMesure', 'elearning', 'cycles', 'allFormations', 'domainsConfig', 'stats'));
@@ -200,6 +257,16 @@ class EliteTrainingController extends Controller
         }
 
         $domainsConfig = $this->domainsMap;
+        foreach ($domainsConfig as $slugKey => &$dConf) {
+            $codePrefix = $dConf['code_prefix'] ?? '';
+            $dName = $dConf['name'] ?? '';
+            $dConf['count'] = $certifiantes->filter(function($f) use ($dName, $codePrefix) {
+                return (stripos($f->domain, $dName) !== false) || 
+                       (!empty($codePrefix) && str_starts_with($f->code, $codePrefix . '-')) ||
+                       ($codePrefix === 'DO' && str_starts_with($f->code, 'OHADA-'));
+            })->count();
+        }
+        unset($dConf);
 
         return view('elite-training.programme', compact('allFormations', 'certifiantes', 'diplomantes', 'surMesure', 'elearning', 'domainsConfig'));
     }
@@ -243,6 +310,9 @@ class EliteTrainingController extends Controller
                 $q->where('domain', 'like', "%{$domainName}%");
                 if (!empty($domainInfo['code_prefix'])) {
                     $q->orWhere('code', 'like', $domainInfo['code_prefix'] . '-%');
+                    if ($domainInfo['code_prefix'] === 'DO') {
+                        $q->orWhere('code', 'like', 'OHADA-%');
+                    }
                 }
             });
 

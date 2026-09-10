@@ -991,81 +991,236 @@
 
     /* ===== CERTIFICATIONS SECTION ===== */
     .et-certifications {
-      padding: 100px 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.93) 0%, rgba(248, 249, 252, 0.95) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat fixed;
+      padding: 90px 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(248, 249, 252, 0.96) 100%), url('{{ asset("assets/img/company.jpg") }}') center/cover no-repeat fixed;
       position: relative;
     }
 
+    /* View Mode Switcher */
+    .cert-view-toggle {
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      padding: 3px;
+      display: inline-flex;
+    }
+    .cert-view-toggle .btn {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--navy);
+      border: none;
+      padding: 6px 14px;
+      transition: all 0.25s ease;
+    }
+    .cert-view-toggle .btn.active {
+      background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0, 31, 63, 0.2);
+    }
+
+    /* Category Filter Pills */
+    .cert-filter-pill {
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1.5px solid #e2e8f0;
+      background: #ffffff;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .cert-filter-pill:hover:not(.active) {
+      border-color: var(--gold);
+      color: var(--gold-dark);
+      background: rgba(206,146,51,0.06);
+      transform: translateY(-1px);
+    }
+    .cert-filter-pill.active {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: #ffffff;
+      border-color: var(--gold);
+      box-shadow: 0 4px 15px rgba(206, 146, 51, 0.3);
+    }
+    .cert-filter-pill .badge {
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.25);
+      color: inherit;
+    }
+    .cert-filter-pill.active .badge {
+      background: #ffffff;
+      color: var(--navy);
+    }
+
+    /* Cert Swiper Layout */
+    .cert-swiper-container {
+      position: relative;
+      padding: 10px 4px;
+    }
+    .certSwiper {
+      padding: 10px 2px 25px !important;
+      overflow: hidden;
+    }
+    .certSwiper .swiper-slide {
+      height: auto;
+      display: flex;
+    }
+
+    /* Cert Card */
     .cert-card {
       background: var(--white);
-      border: 2px solid #eef0f5;
+      border: 1.5px solid #eef0f5;
       border-radius: var(--radius-sm);
       overflow: hidden;
       transition: var(--transition);
       height: 100%;
+      width: 100%;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     }
-
     .cert-card:hover {
       border-color: var(--gold);
-      box-shadow: 0 12px 40px rgba(206,146,51,0.15);
-      transform: translateY(-6px);
+      box-shadow: 0 12px 35px rgba(206,146,51,0.18);
+      transform: translateY(-5px);
     }
-
     .cert-card-img {
       height: 160px;
       overflow: hidden;
+      position: relative;
     }
-
     .cert-card-img img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 0.5s ease;
     }
-
     .cert-card:hover .cert-card-img img {
-      transform: scale(1.1);
+      transform: scale(1.08);
     }
-
+    .cert-card-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 31, 63, 0.88);
+      backdrop-filter: blur(8px);
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(206,146,51,0.4);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+    }
+    .cert-category-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: var(--gold-dark);
+      margin-bottom: 6px;
+      display: block;
+    }
     .cert-card-body {
-      padding: 20px;
+      padding: 18px;
       flex-grow: 1;
       display: flex;
       flex-direction: column;
     }
-
     .cert-card-body h6 {
       font-family: var(--font-display);
       font-weight: 700;
       font-size: 15px;
       color: var(--navy);
       margin-bottom: 8px;
+      line-height: 1.35;
+      min-height: 40px;
     }
-
     .cert-card-body p {
-      font-size: 13px;
+      font-size: 12.5px;
       color: var(--gray);
       line-height: 1.5;
       flex-grow: 1;
+      margin-bottom: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
-
     .cert-card-link {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      color: var(--gold);
-      font-weight: 600;
-      font-size: 13px;
+      color: var(--gold-dark);
+      font-weight: 700;
+      font-size: 12.5px;
       text-decoration: none;
-      margin-top: 12px;
+      margin-top: auto;
       transition: var(--transition);
     }
+    .cert-card:hover .cert-card-link {
+      color: var(--gold);
+      gap: 9px;
+    }
 
-    .cert-card-link:hover {
-      color: var(--gold-dark);
-      gap: 10px;
+    /* Swiper Navigation Buttons */
+    .cert-swiper-btn {
+      position: absolute;
+      top: 48%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #ffffff;
+      border: 1.5px solid #e2e8f0;
+      color: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .cert-swiper-prev {
+      left: -20px;
+    }
+    .cert-swiper-next {
+      right: -20px;
+    }
+    .cert-swiper-btn:hover {
+      background: var(--gold);
+      color: #ffffff;
+      border-color: var(--gold);
+      transform: translateY(-50%) scale(1.08);
+      box-shadow: 0 6px 20px rgba(206,146,51,0.35);
+    }
+    .cert-swiper-pagination .swiper-pagination-bullet {
+      width: 9px;
+      height: 9px;
+      background: #cbd5e1;
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+    .cert-swiper-pagination .swiper-pagination-bullet-active {
+      width: 26px;
+      border-radius: 6px;
+      background: var(--gold);
+      opacity: 1;
+    }
+
+    @media (max-width: 991px) {
+      .cert-swiper-prev { left: -8px; }
+      .cert-swiper-next { right: -8px; }
     }
 
     /* ===== PROGRAMME / SCHEDULE SECTION UPGRADE ===== */
@@ -2202,34 +2357,139 @@
   <!-- ===== CERTIFICATIONS ===== -->
   <section class="et-certifications" id="certifications">
     <div class="container">
-      <div class="text-center mb-5" data-aos="fade-up">
-        <span class="section-label">Certifications</span>
-        <h2 class="section-title mb-3">Nos Certifications <span class="accent">Professionnelles</span></h2>
-        <p class="section-subtitle">8 domaines d'expertise pour propulser votre carrière vers l'excellence</p>
+      @php
+        $certList = [];
+        if (!empty($domainsConfig)) {
+          foreach($domainsConfig as $slugKey => $dConf) {
+            $certList[] = [
+              'slug' => $slugKey,
+              'domain' => $dConf['name'],
+              'category' => $dConf['category'] ?? 'Général',
+              'count' => $dConf['count'] ?? 0,
+              'icon' => $dConf['icon'] ?? 'bi-bookmark-star',
+              'img' => $dConf['img'],
+              'title' => $dConf['name'],
+              'desc' => $dConf['subtitle'] ?? 'Formations d\'excellence et certifications professionnelles reconnues.'
+            ];
+          }
+        }
+      @endphp
+
+      <!-- Header with View Mode Switcher -->
+      <div class="d-flex flex-column flex-md-row align-items-md-end justify-content-between mb-4" data-aos="fade-up">
+        <div>
+          <span class="section-label">Certifications</span>
+          <h2 class="section-title mb-2">Nos Certifications <span class="accent">Professionnelles</span></h2>
+          <p class="section-subtitle mb-0">14 domaines d'expertise spécialisés pour propulser votre carrière vers l'excellence</p>
+        </div>
+
+        <!-- View mode switcher: Carousel (default compact) vs Grid (14) -->
+        <div class="d-flex align-items-center gap-2 mt-3 mt-md-0">
+          <div class="cert-view-toggle rounded-pill shadow-sm">
+            <button type="button" class="btn active" id="btn-view-carousel" title="Affichage carrousel interactif (gain de place)">
+              <i class="bi bi-collection-play me-1"></i> Carrousel
+            </button>
+            <button type="button" class="btn" id="btn-view-grid" title="Afficher tous les 14 domaines en grille">
+              <i class="bi bi-grid-3x3-gap me-1"></i> Grille (14)
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div class="row g-4">
-        @php
-          $certifications = [
-            ['slug' => 'audit-comptabilite-finance', 'domain' => 'Audit, Comptabilité & Finance', 'img' => 'formation_audit.jpg', 'title' => 'Audit, Comptabilité & Finance', 'desc' => 'Maîtrisez les outils comptables, le reporting IFRS et les analyses financières essentielles.'],
-            ['slug' => 'controle-de-gestion', 'domain' => 'Contrôle de Gestion', 'img' => 'formation_finance.jpg', 'title' => 'Contrôle de Gestion', 'desc' => 'Pilotez la performance financière et la trésorerie de votre entreprise avec efficacité.'],
-            ['slug' => 'informatique-ntic', 'domain' => 'Informatique & NTIC', 'img' => 'formation_tech.jpg', 'title' => 'Informatique & NTIC', 'desc' => 'Cybersécurité, audit de sécurité, réseaux et systèmes d\'information.'],
-            ['slug' => 'soft-skills', 'domain' => 'Soft Skills & Développement Personnel', 'img' => 'formation_leadership.jpg', 'title' => 'Développement Personnel & Soft Skills', 'desc' => 'Gestion du temps, intelligence émotionnelle, négociation et leadership.'],
-            ['slug' => 'projets-developpement', 'domain' => 'Projets & Programmes de Développement', 'img' => 'service_consulting_1786525632369.jpg', 'title' => 'Projets & Programmes de Développement', 'desc' => 'Planification, exécution, suivi-évaluation et audit des projets en Afrique.'],
-            ['slug' => 'projet-educatif', 'domain' => 'Projet Éducatif en Afrique', 'img' => 'cta-bg.jpg', 'title' => 'Projet Éducatif en Afrique', 'desc' => 'Gouvernance, pilotage et amélioration de la qualité du secteur éducatif.'],
-            ['slug' => 'ecommerce-fintech', 'domain' => 'E-Commerce, Fintech & Développement Durable', 'img' => 'service_webdesign_1786525611976.jpg', 'title' => 'E-Commerce & Fintech', 'desc' => 'Intelligence Artificielle, transformation numérique et solutions financières.'],
-            ['slug' => 'marches-publics', 'domain' => 'Marchés Publics', 'img' => 'im1.jpg', 'title' => 'Marchés Publics', 'desc' => 'Passation, exécution et suivi des contrats de marchés publics.'],
-          ];
-        @endphp
+      <!-- Category Filter Pills & Inline Controls -->
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="cert-category-filter d-flex flex-wrap gap-2">
+          <button type="button" class="cert-filter-pill active" data-filter="all">
+            <i class="bi bi-grid-fill"></i> Tous <span class="badge">14</span>
+          </button>
+          <button type="button" class="cert-filter-pill" data-filter="Finance & Gestion">
+            <i class="bi bi-calculator"></i> Finance & Gestion
+          </button>
+          <button type="button" class="cert-filter-pill" data-filter="Informatique & Digital">
+            <i class="bi bi-laptop"></i> Tech & Digital
+          </button>
+          <button type="button" class="cert-filter-pill" data-filter="Management & RH">
+            <i class="bi bi-people"></i> Management & RH
+          </button>
+          <button type="button" class="cert-filter-pill" data-filter="Droit & Commande Publique">
+            <i class="bi bi-bank2"></i> Droit & Marchés
+          </button>
+          <button type="button" class="cert-filter-pill" data-filter="Projets & Éducation">
+            <i class="bi bi-diagram-3"></i> Projets & Éducation
+          </button>
+          <button type="button" class="cert-filter-pill" data-filter="Stratégie & Qualité">
+            <i class="bi bi-shield-check"></i> Qualité & Marketing
+          </button>
+        </div>
 
-        @foreach($certifications as $i => $cert)
-        <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="{{ ($i % 4 + 1) * 100 }}">
-          <a href="{{ route('elite.training.domain', $cert['slug']) }}" class="text-decoration-none text-dark">
+        <!-- Inline Arrows -->
+        <div class="d-none d-md-flex align-items-center gap-2" id="cert-inline-nav">
+          <button class="btn btn-sm btn-outline-secondary rounded-circle cert-arrow-btn" id="cert-nav-prev" title="Précédent" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">
+            <i class="bi bi-chevron-left"></i>
+          </button>
+          <button class="btn btn-sm btn-outline-secondary rounded-circle cert-arrow-btn" id="cert-nav-next" title="Suivant" style="width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center;">
+            <i class="bi bi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- CAROUSEL VIEW CONTAINER (Default: compact 1-row view) -->
+      <div id="cert-carousel-container" class="cert-swiper-container" data-aos="fade-up" data-aos-delay="150">
+        <div class="swiper certSwiper">
+          <div class="swiper-wrapper">
+            @foreach($certList as $i => $cert)
+            <div class="swiper-slide cert-slide" data-category="{{ $cert['category'] }}" data-slug="{{ $cert['slug'] }}">
+              <a href="{{ route('elite.training.domain', $cert['slug']) }}" class="text-decoration-none text-dark w-100 d-block h-100">
+                <div class="cert-card cursor-pointer">
+                  <div class="cert-card-img">
+                    <img src="{{ asset(str_starts_with($cert['img'], 'assets/') ? $cert['img'] : 'assets/img/' . $cert['img']) }}" alt="{{ $cert['title'] }}" loading="lazy">
+                    <div class="cert-card-badge">
+                      <i class="bi {{ $cert['icon'] }}"></i>
+                      <span>{{ $cert['count'] > 0 ? $cert['count'].' formations' : 'Programme' }}</span>
+                    </div>
+                  </div>
+                  <div class="cert-card-body">
+                    <span class="cert-category-label">{{ $cert['category'] }}</span>
+                    <h6>{{ $cert['title'] }}</h6>
+                    <p>{{ $cert['desc'] }}</p>
+                    <span class="cert-card-link">
+                      Voir les formations <i class="bi bi-arrow-right"></i>
+                    </span>
+                  </div>
+                </div>
+              </a>
+            </div>
+            @endforeach
+          </div>
+
+          <!-- Pagination bullets -->
+          <div class="cert-swiper-pagination text-center mt-3"></div>
+        </div>
+
+        <!-- Floating Nav Arrows -->
+        <button class="cert-swiper-btn cert-swiper-prev" id="cert-floating-prev" type="button" aria-label="Précédent">
+          <i class="bi bi-chevron-left"></i>
+        </button>
+        <button class="cert-swiper-btn cert-swiper-next" id="cert-floating-next" type="button" aria-label="Suivant">
+          <i class="bi bi-chevron-right"></i>
+        </button>
+      </div>
+
+      <!-- GRID VIEW CONTAINER (Hidden by default, toggled via switcher) -->
+      <div id="cert-grid-container" class="row g-4 d-none">
+        @foreach($certList as $i => $cert)
+        <div class="col-lg-3 col-md-4 col-sm-6 cert-grid-item" data-category="{{ $cert['category'] }}">
+          <a href="{{ route('elite.training.domain', $cert['slug']) }}" class="text-decoration-none text-dark w-100 d-block h-100">
             <div class="cert-card cursor-pointer">
               <div class="cert-card-img">
-                <img src="{{ asset('assets/img/' . $cert['img']) }}" alt="{{ $cert['title'] }}" loading="lazy">
+                <img src="{{ asset(str_starts_with($cert['img'], 'assets/') ? $cert['img'] : 'assets/img/' . $cert['img']) }}" alt="{{ $cert['title'] }}" loading="lazy">
+                <div class="cert-card-badge">
+                  <i class="bi {{ $cert['icon'] }}"></i>
+                  <span>{{ $cert['count'] > 0 ? $cert['count'].' formations' : 'Programme' }}</span>
+                </div>
               </div>
               <div class="cert-card-body">
+                <span class="cert-category-label">{{ $cert['category'] }}</span>
                 <h6>{{ $cert['title'] }}</h6>
                 <p>{{ $cert['desc'] }}</p>
                 <span class="cert-card-link">
@@ -2241,6 +2501,12 @@
         </div>
         @endforeach
       </div>
+
+      <!-- Empty state msg for filters if none match -->
+      <div id="cert-empty-filter" class="text-center py-5 d-none">
+        <p class="text-muted"><i class="bi bi-info-circle text-gold me-2 fs-5"></i>Aucun domaine dans cette catégorie.</p>
+      </div>
+
     </div>
   </section>
   <!-- /CERTIFICATIONS -->
@@ -2953,7 +3219,116 @@
     const progSec = document.querySelector('.progress-section');
     if (progSec) statsObserver.observe(progSec);
 
-    // ===== SWIPER INIT =====
+    // ===== CERTIFICATIONS SWIPER (14 DOMAINES COMPACT) =====
+    window.certSwiper = new Swiper('.certSwiper', {
+      slidesPerView: 1,
+      spaceBetween: 24,
+      loop: false,
+      speed: 600,
+      autoplay: {
+        delay: 4500,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true,
+      },
+      pagination: {
+        el: '.cert-swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '#cert-floating-next, #cert-nav-next',
+        prevEl: '#cert-floating-prev, #cert-nav-prev',
+      },
+      breakpoints: {
+        576: { slidesPerView: 2, spaceBetween: 20 },
+        992: { slidesPerView: 3, spaceBetween: 24 },
+        1200: { slidesPerView: 4, spaceBetween: 24 },
+      }
+    });
+
+    // ===== CERTIFICATIONS CATEGORY FILTER & VIEW TOGGLE =====
+    const certPills = document.querySelectorAll('.cert-filter-pill');
+    const certSlides = document.querySelectorAll('.certSwiper .swiper-slide');
+    const certGridItems = document.querySelectorAll('.cert-grid-item');
+    const certEmptyMsg = document.getElementById('cert-empty-filter');
+    const btnViewCarousel = document.getElementById('btn-view-carousel');
+    const btnViewGrid = document.getElementById('btn-view-grid');
+    const certCarouselContainer = document.getElementById('cert-carousel-container');
+    const certGridContainer = document.getElementById('cert-grid-container');
+    const certInlineNav = document.getElementById('cert-inline-nav');
+
+    function applyCertFilter(filterCategory) {
+      let visibleCarousel = 0;
+      let visibleGrid = 0;
+
+      // Filter Carousel Slides
+      certSlides.forEach(slide => {
+        const cat = slide.getAttribute('data-category');
+        if (filterCategory === 'all' || cat === filterCategory) {
+          slide.style.display = '';
+          visibleCarousel++;
+        } else {
+          slide.style.display = 'none';
+        }
+      });
+
+      // Filter Grid Items
+      certGridItems.forEach(item => {
+        const cat = item.getAttribute('data-category');
+        if (filterCategory === 'all' || cat === filterCategory) {
+          item.classList.remove('d-none');
+          visibleGrid++;
+        } else {
+          item.classList.add('d-none');
+        }
+      });
+
+      if (window.certSwiper) {
+        window.certSwiper.update();
+        window.certSwiper.slideTo(0);
+      }
+
+      if (certEmptyMsg) {
+        if (visibleCarousel === 0 && visibleGrid === 0) {
+          certEmptyMsg.classList.remove('d-none');
+        } else {
+          certEmptyMsg.classList.add('d-none');
+        }
+      }
+    }
+
+    certPills.forEach(pill => {
+      pill.addEventListener('click', function() {
+        certPills.forEach(p => p.classList.remove('active'));
+        this.classList.add('active');
+        const filter = this.getAttribute('data-filter');
+        applyCertFilter(filter);
+      });
+    });
+
+    // View Mode Toggle (Carousel vs Grid)
+    if (btnViewCarousel && btnViewGrid) {
+      btnViewCarousel.addEventListener('click', function() {
+        btnViewCarousel.classList.add('active');
+        btnViewGrid.classList.remove('active');
+        if (certCarouselContainer) certCarouselContainer.classList.remove('d-none');
+        if (certGridContainer) certGridContainer.classList.add('d-none');
+        if (certInlineNav) certInlineNav.classList.remove('d-none');
+        if (window.certSwiper) {
+          window.certSwiper.update();
+          window.certSwiper.slideTo(0);
+        }
+      });
+
+      btnViewGrid.addEventListener('click', function() {
+        btnViewGrid.classList.add('active');
+        btnViewCarousel.classList.remove('active');
+        if (certCarouselContainer) certCarouselContainer.classList.add('d-none');
+        if (certGridContainer) certGridContainer.classList.remove('d-none');
+        if (certInlineNav) certInlineNav.classList.add('d-none');
+      });
+    }
+
+    // ===== SCHEDULE SWIPER INIT =====
     window.scheduleSwiper = new Swiper('.scheduleSwiper', {
       slidesPerView: 1,
       spaceBetween: 20,
