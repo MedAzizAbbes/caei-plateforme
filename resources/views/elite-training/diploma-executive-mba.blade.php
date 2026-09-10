@@ -446,9 +446,10 @@
     <div class="container">
       <div class="row gy-4 mb-4">
         <div class="col-lg-4 col-md-6">
-          <div class="d-flex align-items-center gap-3 mb-3">
-            <img src="{{ asset('assets/img/elite_training_logo.png') }}" alt="CAEI Elite Training" height="44" style="object-fit: contain;">
-            <span class="nav-brand-title fs-5">CAEI <span>ELITE TRAINING</span></span>
+          <div class="mb-3">
+            <a href="{{ route('elite.training') }}">
+              <img src="{{ asset('assets/img/logo_caei_footer_white.png') }}" alt="CAEI Comité Africain d'Expertise Internationale" style="max-height: 55px; width: auto; max-width: 250px; object-fit: contain;">
+            </a>
           </div>
           <p class="text-footer-muted">
             Le Comité Africain d'Expertise Internationale forme les cadres, experts et dirigeants d'Afrique à travers des programmes certifiants et diplômants de haut niveau.

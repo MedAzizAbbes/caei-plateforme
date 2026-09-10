@@ -396,9 +396,10 @@
   <!-- FOOTER -->
   <footer class="text-white py-4 mt-auto" style="background: rgba(0, 16, 38, 0.95); border-top: 1px solid rgba(255,255,255,0.1);">
     <div class="container text-center">
-      <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
-        <img src="{{ asset('assets/img/training1.png') }}" alt="Logo" height="28">
-        <span class="font-display fw-bold text-white fs-6">CAEI ELITE TRAINING</span>
+      <div class="mb-2">
+        <a href="{{ route('elite.training') }}">
+          <img src="{{ asset('assets/img/logo_caei_footer_white.png') }}" alt="CAEI Comité Africain d'Expertise Internationale" style="max-height: 50px; width: auto; max-width: 220px; object-fit: contain;">
+        </a>
       </div>
       <p class="text-white-50 small mb-0">&copy; {{ date('Y') }} CAEI Elite Training. Tous droits réservés.</p>
     </div>

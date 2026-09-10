@@ -331,9 +331,10 @@
     <div class="container">
       <div class="row g-4 mb-5 text-start">
         <div class="col-lg-5">
-          <div class="d-flex align-items-center gap-2 mb-3">
-            <img src="{{ asset('assets/img/training1.png') }}" alt="Logo" style="height:38px; filter:brightness(0) invert(1);">
-            <span style="font-family: 'Outfit', sans-serif; font-weight: 800; color: white; font-size: 19px;">CAEI <span style="color: #f0b75a;">ELITE TRAINING</span></span>
+          <div class="mb-3">
+            <a href="{{ route('elite.training') }}">
+              <img src="{{ asset('assets/img/logo_caei_footer_white.png') }}" alt="CAEI Comité Africain d'Expertise Internationale" style="max-height: 60px; width: auto; max-width: 260px; object-fit: contain;">
+            </a>
           </div>
           <p style="font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 400px;">
             Comité Africain d'Expertise Internationale — Organisme d'excellence pour le renforcement des capacités et la gouvernance intellectuelle des cadres en Afrique.
