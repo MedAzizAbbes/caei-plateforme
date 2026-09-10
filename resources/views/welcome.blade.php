@@ -2116,8 +2116,8 @@
                 <div class="d-flex align-items-center">
                   <i class="bi bi-emoji-smile text-warning fs-2 me-3"></i>
                   <div>
-                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="{{ $stats['clients_count'] ?? 337 }}" data-purecounter-duration="1" class="purecounter">{{ $stats['clients_count'] ?? 337 }}</span></h3>
-                    <p class="small text-muted mb-0">Clients Satisfaits</p>
+                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="{{ $stats['clients_count'] ?? 3500 }}" data-purecounter-duration="1" class="purecounter">{{ $stats['clients_count'] ?? 3500 }}</span>+</h3>
+                    <p class="small text-muted mb-0">Clients & Cadres Formés</p>
                   </div>
                 </div>
               </div>
@@ -2125,7 +2125,7 @@
                 <div class="d-flex align-items-center">
                   <i class="bi bi-journal-richtext text-warning fs-2 me-3"></i>
                   <div>
-                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="{{ $stats['projets_count'] ?? 200 }}" data-purecounter-duration="1" class="purecounter">{{ $stats['projets_count'] ?? 200 }}</span></h3>
+                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="{{ $stats['projets_count'] ?? 240 }}" data-purecounter-duration="1" class="purecounter">{{ $stats['projets_count'] ?? 240 }}</span>+</h3>
                     <p class="small text-muted mb-0">Formations & Séminaires</p>
                   </div>
                 </div>
@@ -2134,7 +2134,7 @@
                 <div class="d-flex align-items-center">
                   <i class="bi bi-headset text-warning fs-2 me-3"></i>
                   <div>
-                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="{{ $stats['annees_exp'] ?? 14 }}" data-purecounter-duration="1" class="purecounter">{{ $stats['annees_exp'] ?? 14 }}</span></h3>
+                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="{{ $stats['annees_exp'] ?? 14 }}" data-purecounter-duration="1" class="purecounter">{{ $stats['annees_exp'] ?? 14 }}</span>+</h3>
                     <p class="small text-muted mb-0">Années d'Expérience</p>
                   </div>
                 </div>
@@ -2143,8 +2143,8 @@
                 <div class="d-flex align-items-center">
                   <i class="bi bi-people text-warning fs-2 me-3"></i>
                   <div>
-                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="{{ $stats['experts_count'] ?? 150 }}" data-purecounter-duration="1" class="purecounter">{{ $stats['experts_count'] ?? 150 }}</span></h3>
-                    <p class="small text-muted mb-0">Experts Qualifiés</p>
+                    <h3 class="fw-bold mb-0"><span data-purecounter-start="0" data-purecounter-end="{{ $stats['experts_count'] ?? 150 }}" data-purecounter-duration="1" class="purecounter">{{ $stats['experts_count'] ?? 150 }}</span>+</h3>
+                    <p class="small text-muted mb-0">Consultants & Experts</p>
                   </div>
                 </div>
               </div>
