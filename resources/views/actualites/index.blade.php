@@ -348,7 +348,7 @@
       <div class="row gy-4">
         <div class="col-lg-4 col-md-6 footer-about">
           <a href="{{ route('home') }}" class="logo d-flex align-items-center mb-3">
-            <img src="{{ asset('assets/img/logo_caei_footer_white.png') }}" alt="CAEI Comité Africain d'Expertise Internationale" style="max-height: 62px; width: auto; max-width: 260px; object-fit: contain;">
+            <img src="{{ asset('assets/img/logocompany.png') }}" alt="CAEI Logo" style="max-height: 55px; width: auto; max-width: 220px; object-fit: contain;">
           </a>
           <div class="footer-contact pt-2 text-white-50">
             <p class="mb-3"><a href="https://www.google.com/maps/search/?api=1&query=SIS+8+Rue+Claude+Bernard+1002+Belvedere-Tunis+Tunisie" target="_blank" style="color: inherit; text-decoration: none;">SIS 8 Rue Claude Bernard 1002 Belvedere-Tunis, Tunisie</a></p>
