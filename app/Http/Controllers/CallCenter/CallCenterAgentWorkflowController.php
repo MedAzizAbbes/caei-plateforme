@@ -20,11 +20,33 @@ class CallCenterAgentWorkflowController extends Controller
         $query = RendezVous::where('agent_id', $agent->id)
             ->with(['prospect', 'partenaire', 'qualification']);
 
+        // Filtre par statut
         if ($request->filled('statut')) {
             $query->where('statut', $request->statut);
         }
 
-        $rendezVousList = $query->orderBy('created_at', 'desc')->paginate(10);
+        // Filtre par date de début
+        if ($request->filled('date_from')) {
+            $query->where('date_rendez_vous', '>=', $request->date_from);
+        }
+
+        // Filtre par date de fin
+        if ($request->filled('date_to')) {
+            $query->where('date_rendez_vous', '<=', $request->date_to);
+        }
+
+        // Recherche par nom/prénom/téléphone du prospect
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->whereHas('prospect', function ($q) use ($search) {
+                $q->where('nom', 'like', "%{$search}%")
+                  ->orWhere('prenom', 'like', "%{$search}%")
+                  ->orWhere('telephone', 'like', "%{$search}%")
+                  ->orWhere('societe', 'like', "%{$search}%");
+            });
+        }
+
+        $rendezVousList = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
         $prospects = Prospect::where('agent_id', $agent->id)->get();
 
         return view('callcenter.agent.index', compact('rendezVousList', 'prospects'));
