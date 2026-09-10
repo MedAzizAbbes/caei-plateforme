@@ -89,4 +89,12 @@ class RendezVous extends Model
             default                   => 'bg-slate-100 text-slate-700',
         };
     }
+
+    public function isQualifie(): bool
+    {
+        return $this->statut !== 'annule' && (
+            $this->statut === 'qualifie' || 
+            ($this->relationLoaded('qualification') ? (bool) $this->qualification : $this->qualification()->exists())
+        );
+    }
 }
