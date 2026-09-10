@@ -26,5 +26,9 @@ class DatabaseSeeder extends Seeder
                 'role'       => 'admin',
             ]
         );
+
+        $this->call([
+            FormationSeeder::class,
+        ]);
     }
 }

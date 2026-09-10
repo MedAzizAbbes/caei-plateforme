@@ -447,6 +447,22 @@ Route::middleware(['auth', 'role:formateur,admin'])->prefix('checkin')->name('ch
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', [AdminDashboardController::class, 'admin'])->name('dashboard');
     
+    // Synchronisation directe des formations (exécutable depuis le navigateur en production)
+    Route::get('/sync-formations', function () {
+        \Illuminate\Support\Facades\Artisan::call('db:seed', [
+            '--class' => 'FormationSeeder',
+            '--force' => true,
+        ]);
+        $output = \Illuminate\Support\Facades\Artisan::output();
+        $count = \App\Models\Formation::count();
+        return response()->json([
+            'status' => 'success',
+            'message' => "Seeder exécuté avec succès !",
+            'total_formations' => $count,
+            'console_output' => $output,
+        ]);
+    })->name('sync_formations');
+
     // System & Real-Time Monitoring
     Route::get('/monitoring', [\App\Http\Controllers\Admin\MonitoringController::class, 'index'])->name('monitoring.index');
     Route::get('/monitoring/api', [\App\Http\Controllers\Admin\MonitoringController::class, 'api'])->name('monitoring.api');
