@@ -163,7 +163,7 @@
             <!-- 4A. MODE FICHES OPPORTUNITÉ COMMERCIALES -->
             <div x-show="displayMode === 'cards'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 @forelse($rendezVousList as $rdv)
-                    <div class="bg-white rounded-2xl border border-slate-200 shadow-2xs p-5 hover:shadow-md hover:border-red-200 transition flex flex-col justify-between space-y-4">
+                    <div class="bg-white rounded-2xl border {{ $rdv->isQualifie() ? 'border-emerald-300 ring-1 ring-emerald-200 bg-emerald-50/20' : 'border-slate-200' }} shadow-2xs p-5 hover:shadow-md hover:border-emerald-400 transition flex flex-col justify-between space-y-4">
                         <div>
                             <!-- Card Top Bar -->
                             <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
@@ -264,8 +264,8 @@
                         </thead>
                         <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
                             @forelse($rendezVousList as $rdv)
-                                <tr class="hover:bg-red-50/40 transition">
-                                    <td class="p-4 whitespace-nowrap">
+                                <tr class="transition-colors {{ $rdv->isQualifie() ? 'bg-emerald-50 hover:bg-emerald-100/70 border-b border-emerald-100' : 'hover:bg-red-50/40' }}">
+                                    <td class="p-4 whitespace-nowrap {{ $rdv->isQualifie() ? 'border-l-4 border-emerald-500' : 'border-l-4 border-transparent' }}">
                                         <div class="font-bold text-slate-900">{{ \Carbon\Carbon::parse($rdv->date_rendez_vous)->format('d/m/Y') }}</div>
                                         <div class="text-xs text-slate-400">{{ \Carbon\Carbon::parse($rdv->heure_rendez_vous)->format('H:i') }}</div>
                                     </td>
