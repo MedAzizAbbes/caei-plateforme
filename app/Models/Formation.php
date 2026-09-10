@@ -129,23 +129,51 @@ class Formation extends Model
         $hashKey = $code . '_' . ($this->id ?? 0) . '_' . $this->title;
         $hash = abs(crc32($hashKey));
 
-        if (str_contains($code, 'MP') || str_contains($code, 'OHADA') || str_contains($domainLower, 'marchés publics') || str_contains($domainLower, 'droit') || str_contains($titleLower, 'juridique') || str_contains($titleLower, 'appel d\'offres') || str_contains($titleLower, 'marchés')) {
+        if (str_contains($code, 'MP') || str_contains($code, 'OHADA') || str_contains($code, 'DO') || str_contains($domainLower, 'marchés publics') || str_contains($domainLower, 'droit') || str_contains($titleLower, 'juridique') || str_contains($titleLower, 'appel d\'offres') || str_contains($titleLower, 'marchés') || str_contains($titleLower, 'ohada')) {
             return asset($legalImages[$hash % count($legalImages)]);
         }
 
-        if (str_contains($code, 'ACF') || str_contains($domainLower, 'audit') || str_contains($domainLower, 'comptab') || str_contains($domainLower, 'finance') || str_contains($titleLower, 'comptab') || str_contains($titleLower, 'finance') || str_contains($titleLower, 'trésorerie') || str_contains($titleLower, 'fiscal')) {
+        if (str_contains($code, 'ACF') || str_contains($code, 'GC') || str_contains($domainLower, 'audit') || str_contains($domainLower, 'comptab') || str_contains($domainLower, 'finance') || str_contains($domainLower, 'gestion') || str_contains($titleLower, 'comptab') || str_contains($titleLower, 'finance') || str_contains($titleLower, 'trésorerie') || str_contains($titleLower, 'fiscal') || str_contains($titleLower, 'budgétaire')) {
             return asset($auditImages[$hash % count($auditImages)]);
         }
 
-        if (str_contains($code, 'INT') || str_contains($domainLower, 'informatique') || str_contains($domainLower, 'ntic') || str_contains($titleLower, 'cyber') || str_contains($titleLower, 'informatique') || str_contains($titleLower, 'réseau') || str_contains($titleLower, 'digital') || str_contains($titleLower, 'ia') || str_contains($titleLower, 'intelligence')) {
+        if (str_contains($code, 'INT') || str_contains($code, 'DAP') || str_contains($domainLower, 'informatique') || str_contains($domainLower, 'ntic') || str_contains($domainLower, 'digitalisation') || str_contains($titleLower, 'cyber') || str_contains($titleLower, 'informatique') || str_contains($titleLower, 'réseau') || str_contains($titleLower, 'digital') || str_contains($titleLower, 'ia') || str_contains($titleLower, 'intelligence')) {
             return asset($techImages[$hash % count($techImages)]);
+        }
+
+        if (str_contains($code, 'GMO') || str_contains($domainLower, 'grh') || str_contains($domainLower, 'ressources humaines') || str_contains($titleLower, 'rh') || str_contains($titleLower, 'recrutement') || str_contains($titleLower, 'salari')) {
+            $hrImages = [
+                'assets/img/new_formations/conflict_management.jpg',
+                'assets/img/new_formations/training_leadership.jpg',
+                'assets/img/formation_leadership.jpg',
+                'assets/img/callcenter_team_hero.jpg',
+            ];
+            return asset($hrImages[$hash % count($hrImages)]);
+        }
+
+        if (str_contains($code, 'SAB') || str_contains($domainLower, 'secrétariat') || str_contains($domainLower, 'archive') || str_contains($titleLower, 'bureau d\'ordre') || str_contains($titleLower, 'courrier') || str_contains($titleLower, 'assistante')) {
+            $sabImages = [
+                'assets/img/callcenter_hero_agent.jpg',
+                'assets/img/company.jpg',
+                'assets/img/formation_leadership.jpg',
+            ];
+            return asset($sabImages[$hash % count($sabImages)]);
+        }
+
+        if (str_contains($code, 'QHSE') || str_contains($domainLower, 'qualite') || str_contains($domainLower, 'qualité') || str_contains($domainLower, 'qhse') || str_contains($titleLower, 'iso') || str_contains($titleLower, 'sécurité au travail')) {
+            $qhseImages = [
+                'assets/img/features-bg.jpg',
+                'assets/img/im1.jpg',
+                'assets/img/cta-bg.jpg',
+            ];
+            return asset($qhseImages[$hash % count($qhseImages)]);
         }
 
         if (str_contains($code, 'DPS') || str_contains($domainLower, 'soft skills') || str_contains($domainLower, 'développement personnel') || str_contains($titleLower, 'leader') || str_contains($titleLower, 'gestion du temps') || str_contains($titleLower, 'communication') || str_contains($titleLower, 'accueil') || str_contains($titleLower, 'téléphonique')) {
             return asset($leadershipImages[$hash % count($leadershipImages)]);
         }
 
-        if (str_contains($code, 'PPD') || str_contains($domainLower, 'projets') || str_contains($domainLower, 'développement') || str_contains($titleLower, 'projet') || str_contains($titleLower, 'suivi-évaluation') || str_contains($titleLower, 'programme') || str_contains($titleLower, 'planification')) {
+        if (str_contains($code, 'PPD') || str_contains($code, 'PEA') || str_contains($domainLower, 'projets') || str_contains($domainLower, 'développement') || str_contains($domainLower, 'éducatif') || str_contains($titleLower, 'projet') || str_contains($titleLower, 'suivi-évaluation') || str_contains($titleLower, 'programme') || str_contains($titleLower, 'planification')) {
             return asset($projectImages[$hash % count($projectImages)]);
         }
 

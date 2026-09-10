@@ -550,29 +550,31 @@
       <div class="text-center mb-5" data-aos="fade-up">
         <span class="section-label">Certifications</span>
         <h2 class="section-title mb-3">Nos Certifications <span class="accent">Professionnelles</span></h2>
-        <p class="section-subtitle">Domaines d'expertise spécialisés pour propulser votre carrière vers l'excellence</p>
+        <p class="section-subtitle">14 domaines d'expertise spécialisés pour propulser votre carrière vers l'excellence</p>
       </div>
 
       <div class="row g-4">
         @php
-          $certifications = [
-            ['slug' => 'audit-comptabilite-finance', 'domain' => 'Audit, Comptabilité & Finance', 'img' => 'formation_audit.jpg', 'title' => 'Audit, Comptabilité & Finance', 'desc' => 'Maîtrisez les outils comptables, le reporting IFRS et les analyses financières essentielles.'],
-            ['slug' => 'controle-de-gestion', 'domain' => 'Contrôle de Gestion', 'img' => 'formation_finance.jpg', 'title' => 'Contrôle de Gestion', 'desc' => 'Pilotez la performance financière et la trésorerie de votre entreprise avec efficacité.'],
-            ['slug' => 'informatique-ntic', 'domain' => 'Informatique & NTIC', 'img' => 'formation_tech.jpg', 'title' => 'Informatique & NTIC', 'desc' => 'Cybersécurité, audit de sécurité, réseaux et systèmes d\'information.'],
-            ['slug' => 'soft-skills', 'domain' => 'Soft Skills & Développement Personnel', 'img' => 'formation_leadership.jpg', 'title' => 'Développement Personnel & Soft Skills', 'desc' => 'Gestion du temps, intelligence émotionnelle, négociation et leadership.'],
-            ['slug' => 'projets-developpement', 'domain' => 'Projets & Programmes de Développement', 'img' => 'service_consulting_1786525632369.jpg', 'title' => 'Projets & Programmes de Développement', 'desc' => 'Planification, exécution, suivi-évaluation et audit des projets en Afrique.'],
-            ['slug' => 'projet-educatif', 'domain' => 'Projet Éducatif en Afrique', 'img' => 'cta-bg.jpg', 'title' => 'Projet Éducatif en Afrique', 'desc' => 'Gouvernance, pilotage et amélioration de la qualité du secteur éducatif.'],
-            ['slug' => 'ecommerce-fintech', 'domain' => 'E-Commerce, Fintech & Développement Durable', 'img' => 'service_webdesign_1786525611976.jpg', 'title' => 'E-Commerce & Fintech', 'desc' => 'Intelligence Artificielle, transformation numérique et solutions financières.'],
-            ['slug' => 'marches-publics', 'domain' => 'Marchés Publics', 'img' => 'im1.jpg', 'title' => 'Marchés Publics', 'desc' => 'Passation, exécution et suivi des contrats de marchés publics.'],
-          ];
+          $certList = [];
+          if (!empty($domainsConfig)) {
+            foreach($domainsConfig as $slugKey => $dConf) {
+              $certList[] = [
+                'slug' => $slugKey,
+                'domain' => $dConf['name'],
+                'img' => $dConf['img'],
+                'title' => $dConf['name'],
+                'desc' => $dConf['subtitle'] ?? 'Formations d\'excellence et certifications professionnelles reconnues.'
+              ];
+            }
+          }
         @endphp
 
-        @foreach($certifications as $i => $cert)
+        @foreach($certList as $i => $cert)
         <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="{{ ($i % 4 + 1) * 100 }}">
           <a href="{{ route('elite.training.domain', $cert['slug']) }}" class="text-decoration-none text-dark">
             <div class="cert-card cursor-pointer">
               <div class="cert-card-img">
-                <img src="{{ asset('assets/img/' . $cert['img']) }}" alt="{{ $cert['title'] }}" loading="lazy">
+                <img src="{{ asset(str_starts_with($cert['img'], 'assets/') ? $cert['img'] : 'assets/img/' . $cert['img']) }}" alt="{{ $cert['title'] }}" loading="lazy">
               </div>
               <div class="cert-card-body">
                 <h6>{{ $cert['title'] }}</h6>
