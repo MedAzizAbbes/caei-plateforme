@@ -296,6 +296,42 @@
       border-color: rgba(255, 255, 255, 0.12);
       margin: 30px 0 20px;
     }
+
+    /* Bouton Description Mini MBA */
+    .btn-desc-mini {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      background: transparent;
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 9px 16px;
+      border-radius: 50px;
+      border: 1.5px solid var(--gold);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+    .btn-desc-mini:hover {
+      background: linear-gradient(135deg, #f2a90f, #ce9233);
+      color: #061743;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(206,146,51,0.3);
+    }
+    /* Modal Description */
+    .mini-desc-modal .modal-content { border-radius: 20px; overflow: hidden; border: none; box-shadow: 0 30px 70px rgba(0,0,0,0.2); }
+    .mini-desc-modal .modal-header { background: linear-gradient(135deg, #061743, #0a2569); border: none; padding: 1.4rem 1.75rem; }
+    .mini-desc-modal .modal-body { padding: 1.75rem; background: #f8fafc; }
+    .mdesc-code { display: inline-block; background: rgba(206,146,51,0.15); color: #ce9233; border: 1px solid rgba(206,146,51,0.4); font-size: 11.5px; font-weight: 800; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.8px; margin-bottom: 1rem; }
+    .mdesc-title { font-family: 'Outfit', sans-serif; font-weight: 900; color: #061743; font-size: 1.25rem; margin-bottom: 0.75rem; }
+    .mdesc-desc { font-size: 15px; line-height: 1.75; color: #374151; margin-bottom: 1.25rem; }
+    .mdesc-meta { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; padding: 1rem; background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 1.25rem; }
+    .mdesc-meta-item { display: flex; align-items: center; gap: 0.5rem; font-size: 14px; color: #4b5563; }
+    .mdesc-meta-item i { color: #ce9233; }
+    .mdesc-price { font-size: 26px; font-weight: 900; color: #ce9233; font-family: 'Outfit', sans-serif; }
   </style>
 </head>
 <body>
@@ -428,11 +464,18 @@
                   <h5 class="fw-bold text-[#061743] mb-2">{{ $item['title'] }}</h5>
                   <p class="text-slate-500 small mb-4">{{ $item['desc'] }}</p>
                 </div>
-                <div class="pt-3 border-top d-flex justify-content-between align-items-center">
-                  <span class="fs-5 fw-bold text-amber-600">{{ $item['price'] }}</span>
-                  <a href="{{ route('elite.inscription') }}?formation_title=Mini MBA : {{ urlencode($item['title']) }}" class="btn-gold btn-sm py-2 px-3 fs-7">
-                    S'inscrire <i class="bi bi-arrow-right"></i>
-                  </a>
+                <div class="pt-3 border-top d-flex flex-column gap-2">
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="fs-5 fw-bold text-amber-600">{{ $item['price'] }}</span>
+                    <a href="{{ route('elite.inscription') }}?formation_title=Mini MBA : {{ urlencode($item['title']) }}" class="btn-gold btn-sm py-2 px-3 fs-7">
+                      <i class="bi bi-pencil-square me-1"></i>S'inscrire
+                    </a>
+                  </div>
+                  <button type="button" class="btn-desc-mini w-100"
+                    onclick="showMiniDesc('{{ addslashes($item['code']) }}', '{{ addslashes($item['title']) }}', '{{ addslashes($item['desc']) }}', '{{ addslashes($item['duration']) }}', '{{ addslashes($item['price']) }}')"
+                  >
+                    <i class="bi bi-info-circle me-1"></i>Description
+                  </button>
                 </div>
               </div>
             </div>
@@ -512,11 +555,72 @@
       AOS.init({ duration: 700, once: true });
     }
 
+    function showMiniDesc(code, title, desc, duration, price) {
+      document.getElementById('miniDescCode').innerHTML = code ? `<span class="mdesc-code">${code}</span>` : '';
+      document.getElementById('miniDescTitle').textContent = title;
+      document.getElementById('miniDescText').textContent = desc || 'Aucune description disponible.';
+      document.getElementById('miniDescDuration').textContent = duration || 'Non spécifiée';
+      document.getElementById('miniDescPrice').textContent = price || 'Sur devis';
+      const inscriptionUrl = '{{ route("elite.inscription") }}';
+      document.getElementById('miniDescInscriptionBtn').href = inscriptionUrl + '?formation_title=' + encodeURIComponent('Mini MBA : ' + title);
+      const modal = new bootstrap.Modal(document.getElementById('miniDescModal'));
+      modal.show();
+    }
+
     function setProgram(title) {
       document.getElementById('objetInput').value = title;
       document.getElementById('inscription').scrollIntoView({ behavior: 'smooth' });
     }
   </script>
   <x-intl-tel-input />
+
+  <!-- Modal Description Mini MBA -->
+  <div class="modal fade mini-desc-modal" id="miniDescModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="d-flex align-items-center gap-3">
+            <span style="width:42px;height:42px;background:rgba(242,169,15,0.18);border-radius:12px;color:#f2a90f;font-size:20px;display:inline-flex;align-items:center;justify-content:center;">
+              <i class="bi bi-journal-bookmark-fill"></i>
+            </span>
+            <div>
+              <small style="color:#f2a90f;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;">Mini MBA — CAEI Elite Training</small>
+              <h5 class="modal-title mb-0 text-white" style="font-family:'Outfit',sans-serif;">Détails de la Spécialité</h5>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="miniDescCode"></div>
+          <h4 class="mdesc-title" id="miniDescTitle"></h4>
+          <p class="mdesc-desc" id="miniDescText"></p>
+          <div class="mdesc-meta">
+            <div class="mdesc-meta-item">
+              <i class="bi bi-clock-fill"></i>
+              <span id="miniDescDuration"></span>
+            </div>
+            <div class="mdesc-meta-item">
+              <i class="bi bi-geo-alt-fill"></i>
+              <span>Présentiel &amp; En ligne</span>
+            </div>
+            <div class="mdesc-meta-item">
+              <i class="bi bi-patch-check-fill"></i>
+              <span>Certificat CAEI Panafricain</span>
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-3 pt-3" style="border-top:1px solid #e5e7eb;">
+            <div>
+              <span style="font-size:12px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.5px;display:block;">Tarif indicatif</span>
+              <span class="mdesc-price" id="miniDescPrice"></span>
+            </div>
+            <a id="miniDescInscriptionBtn" href="#" class="btn-gold" style="text-decoration:none;">
+              <i class="bi bi-pencil-square me-1"></i> S'inscrire à cette spécialité
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Modal Description Mini MBA -->
 </body>
 </html>

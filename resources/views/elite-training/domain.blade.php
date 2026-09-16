@@ -261,6 +261,44 @@
     /* FOOTER */
     .et-footer { background: #00142b; padding: 30px 0; text-align: center; color: rgba(255,255,255,0.4); font-size: 13px; }
     .et-footer a { color: var(--gold); text-decoration: none; }
+
+    /* Bouton Description Domain */
+    .btn-desc-domain {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      color: var(--gold-dark);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 8px 18px;
+      border-radius: 50px;
+      border: 1.5px solid var(--gold);
+      cursor: pointer;
+      transition: var(--transition);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+    .btn-desc-domain:hover {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
+    }
+    /* Modal Description Domain */
+    .domain-desc-modal .modal-content { border-radius: 20px; overflow: hidden; border: none; box-shadow: 0 30px 70px rgba(0,0,0,0.25); }
+    .domain-desc-modal .modal-header { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%); color: #fff; padding: 1.4rem 1.75rem; border: none; }
+    .domain-desc-modal .modal-body { padding: 1.75rem; background: #f8fafc; }
+    .ddesc-code { display: inline-block; background: rgba(206,146,51,0.15); color: var(--gold-dark); border: 1px solid rgba(206,146,51,0.4); font-size: 11.5px; font-weight: 800; padding: 4px 12px; border-radius: 20px; letter-spacing: 0.8px; margin-bottom: 0.85rem; }
+    .ddesc-title { font-family: var(--font-display); font-weight: 900; color: var(--navy); font-size: 1.3rem; margin-bottom: 0.65rem; line-height: 1.35; }
+    .ddesc-body { font-size: 15px; line-height: 1.75; color: #374151; }
+    .ddesc-meta-row { display: flex; align-items: center; gap: 0.6rem; font-size: 14px; color: #4b5563; margin-bottom: 0.55rem; }
+    .ddesc-meta-row i { color: var(--gold); font-size: 16px; width: 20px; }
+    .ddesc-price-tag { font-size: 24px; font-weight: 900; color: var(--gold-dark); font-family: var(--font-display); }
+    .ddesc-divider { border: none; border-top: 1px solid #e5e7eb; margin: 1.25rem 0; }
+    .ddesc-img { width: 100%; height: 175px; border-radius: 14px; overflow: hidden; margin-bottom: 1.25rem; background: #e5e7eb; display: none; }
+    .ddesc-img img { width: 100%; height: 100%; object-fit: cover; }
   </style>
 </head>
 
@@ -375,6 +413,15 @@
           {{-- Grille des formations --}}
           <div class="row g-4">
             @forelse($formations as $formation)
+              @php
+                $fCode     = addslashes($formation->code ?: '');
+                $fTitle    = addslashes($formation->title);
+                $fDesc     = addslashes(\Illuminate\Support\Str::limit($formation->description ?: '', 200));
+                $fDuration = addslashes($formation->duration ?: '');
+                $fLocation = addslashes($formation->location ?: 'Tunis & En ligne');
+                $fPrice    = $formation->price ? number_format($formation->price, 0, ',', ' ').' €' : 'Sur devis';
+                $fImage    = $formation->image_url ?? '';
+              @endphp
               <div class="col-md-6" data-aos="fade-up">
                 <div class="course-card">
                   <div class="d-flex align-items-center justify-content-between mb-2">
@@ -413,11 +460,16 @@
                       </span>
                     </div>
 
-                    <a href="{{ route('elite.inscription') }}?formation_id={{ $formation->id }}&formation_title={{ urlencode($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}"
-                            class="btn-register-course" style="text-decoration: none;">
-                      <span>S'inscrire</span>
-                      <i class="bi bi-arrow-right"></i>
-                    </a>
+                    <div class="d-flex flex-column gap-2 align-items-end">
+                      <a href="{{ route('elite.inscription') }}?formation_id={{ $formation->id }}&formation_title={{ urlencode($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}"
+                              class="btn-register-course" style="text-decoration: none;">
+                        <i class="bi bi-pencil-square"></i><span>S'inscrire</span>
+                      </a>
+                      <button type="button" class="btn-desc-domain"
+                        onclick="showDomainDesc('{{ $fCode }}','{{ $fTitle }}','{{ $fDesc }}','{{ $fDuration }}','{{ $fLocation }}','{{ $fPrice }}','{{ $fImage }}')">
+                        <i class="bi bi-info-circle"></i><span>Description</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -437,6 +489,49 @@
       </div>
     </div>
   </main>
+
+  <!-- Modal Description Formation Domain -->
+  <div class="modal fade domain-desc-modal" id="domainDescModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <div class="d-flex align-items-center gap-3">
+            <span style="width:42px;height:42px;background:rgba(206,146,51,0.18);border-radius:12px;color:#f0b75a;font-size:20px;display:inline-flex;align-items:center;justify-content:center;">
+              <i class="bi bi-journal-richtext"></i>
+            </span>
+            <div>
+              <small style="color:#f0b75a;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;">CAEI Elite Training — {{ $domainInfo['name'] }}</small>
+              <h5 class="modal-title mb-0 text-white" style="font-family:'Outfit',sans-serif;">Détails de la Formation</h5>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="ddescImgWrap" class="ddesc-img"><img id="ddescImg" src="" alt=""></div>
+          <div id="ddescCode"></div>
+          <h4 class="ddesc-title" id="ddescTitle"></h4>
+          <hr class="ddesc-divider">
+          <div class="row g-2 mb-3" id="ddescMeta"></div>
+          <hr class="ddesc-divider">
+          <div>
+            <p style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;font-weight:700;margin-bottom:0.5rem;">Description</p>
+            <p class="ddesc-body" id="ddescBody"></p>
+          </div>
+          <hr class="ddesc-divider">
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <div>
+              <span style="font-size:12px;color:#9ca3af;text-transform:uppercase;letter-spacing:0.5px;display:block;">Tarif indicatif</span>
+              <span class="ddesc-price-tag" id="ddescPrice"></span>
+            </div>
+            <a id="ddescInscriptionBtn" href="#" class="btn-register-course" style="text-decoration:none;">
+              <i class="bi bi-pencil-square"></i> S'inscrire à cette formation
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /Modal Description Formation Domain -->
 
   <!-- MODALE PROPRE D'INSCRIPTION / DEMANDE DE DEVIS -->
   <div class="modal fade" id="quickRegisterModal" tabindex="-1" aria-hidden="true">
@@ -557,6 +652,26 @@
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 600, once: true });
+
+    function showDomainDesc(code, title, desc, duration, location, price, imageUrl) {
+      const imgWrap = document.getElementById('ddescImgWrap');
+      const img = document.getElementById('ddescImg');
+      if (imageUrl) { img.src = imageUrl; imgWrap.style.display = 'block'; }
+      else { imgWrap.style.display = 'none'; }
+      document.getElementById('ddescCode').innerHTML = code ? `<span class="ddesc-code">${code}</span>` : '';
+      document.getElementById('ddescTitle').textContent = title;
+      let metaHtml = '';
+      if (duration) metaHtml += `<div class="col-sm-6"><div class="ddesc-meta-row"><i class="bi bi-clock-fill"></i><span><strong>Durée :</strong> ${duration}</span></div></div>`;
+      if (location) metaHtml += `<div class="col-sm-6"><div class="ddesc-meta-row"><i class="bi bi-geo-alt-fill"></i><span><strong>Lieu :</strong> ${location}</span></div></div>`;
+      document.getElementById('ddescMeta').innerHTML = metaHtml || '<div class="col-12"><span class="text-muted" style="font-size:13px;">Informations non disponibles.</span></div>';
+      document.getElementById('ddescBody').textContent = desc || 'Formation professionnelle d\'excellence dispensée par les experts du CAEI. Contactez-nous pour plus d\'informations.';
+      document.getElementById('ddescPrice').textContent = price || 'Sur devis';
+      const baseUrl = '{{ route("elite.inscription") }}';
+      const formTitle = code ? '[' + code + '] ' + title : title;
+      document.getElementById('ddescInscriptionBtn').href = baseUrl + '?formation_title=' + encodeURIComponent(formTitle);
+      const modal = new bootstrap.Modal(document.getElementById('domainDescModal'));
+      modal.show();
+    }
 
     function openRegistrationModal(courseTitle) {
       document.getElementById('modalCourseTitle').textContent = courseTitle;

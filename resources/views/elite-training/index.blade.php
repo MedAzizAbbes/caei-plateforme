@@ -1416,6 +1416,118 @@
       box-shadow: 0 8px 25px rgba(206, 146, 51, 0.35);
     }
 
+    /* Bouton Description */
+    .btn-description {
+      display: block;
+      width: 100%;
+      background: transparent;
+      color: var(--gold-dark);
+      font-weight: 700;
+      font-size: 13px;
+      padding: 11px;
+      border-radius: 12px;
+      text-align: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: 2px solid var(--gold);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 10px;
+    }
+    .btn-description:hover {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light));
+      color: var(--navy);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(206, 146, 51, 0.3);
+    }
+
+    /* Modal Description Formation */
+    .formation-desc-modal .modal-content {
+      border-radius: 20px;
+      overflow: hidden;
+      border: none;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.3);
+    }
+    .formation-desc-modal .modal-header {
+      background: linear-gradient(135deg, #001f3f 0%, #002f5e 100%);
+      color: #fff;
+      padding: 1.4rem 1.75rem;
+      border: none;
+    }
+    .formation-desc-modal .modal-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: 1.25rem;
+      color: #fff;
+    }
+    .formation-desc-modal .modal-body {
+      padding: 1.75rem;
+      background: #f8fafc;
+    }
+    .fdesc-badge-code {
+      display: inline-block;
+      background: rgba(206,146,51,0.15);
+      color: #ce9233;
+      border: 1px solid rgba(206,146,51,0.4);
+      font-size: 11.5px;
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.8px;
+      margin-bottom: 0.85rem;
+    }
+    .fdesc-type-badge {
+      display: inline-block;
+      background: rgba(0,31,63,0.1);
+      color: #001f3f;
+      border: 1px solid rgba(0,31,63,0.2);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-left: 8px;
+      margin-bottom: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .fdesc-body-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: #374151;
+    }
+    .fdesc-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 14px;
+      color: #4b5563;
+      margin-bottom: 0.6rem;
+    }
+    .fdesc-meta-row i {
+      color: #ce9233;
+      font-size: 16px;
+      width: 20px;
+      flex-shrink: 0;
+    }
+    .fdesc-price-tag {
+      font-size: 24px;
+      font-weight: 900;
+      color: #ce9233;
+      font-family: 'Outfit', sans-serif;
+    }
+    .fdesc-price-label {
+      font-size: 12px;
+      color: #9ca3af;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .fdesc-divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 1.25rem 0;
+    }
+
     /* Swiper customization */
     .schedule-swiper-container {
       position: relative;
@@ -2601,7 +2713,20 @@
                     </span>
                     <span class="badge" style="background: rgba(206,146,51,0.1); color: var(--gold-dark); font-size:11px; padding: 5px 10px; border-radius: 6px;">{{ ucfirst($formation->type) }}</span>
                   </div>
-                  <a href="{{ route('elite.inscription') }}?formation_title={{ urlencode($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}" class="btn-register">S'inscrire</a>
+                  <a href="{{ route('elite.inscription') }}?formation_title={{ urlencode($formation->code ? '['.$formation->code.'] '.$formation->title : $formation->title) }}" class="btn-register"><i class="bi bi-pencil-square me-1"></i>S'inscrire</a>
+                  <button type="button" class="btn-description"
+                    onclick="showFormationDesc(
+                      '{{ addslashes($formation->code ?: '') }}',
+                      '{{ addslashes($formation->title) }}',
+                      '{{ addslashes($formation->type) }}',
+                      '{{ addslashes($formation->description ?: '') }}',
+                      '{{ addslashes($formation->duration ?: '') }}',
+                      '{{ addslashes($formation->location ?: 'Tunis & En ligne') }}',
+                      '{{ $formation->price ? number_format($formation->price, 0, ',', ' ').' €' : 'Sur devis' }}',
+                      '{{ $formation->image_url }}'
+                    )">
+                    <i class="bi bi-info-circle me-1"></i>Description
+                  </button>
                 </div>
               </div>
             </div>
@@ -2933,6 +3058,72 @@
   <!-- /MODALE -->
 
 
+  <!-- ===== MODAL DESCRIPTION FORMATION ===== -->
+  <div class="modal fade formation-desc-modal" id="formationDescModal" tabindex="-1" aria-labelledby="formationDescModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+
+        <!-- Header -->
+        <div class="modal-header">
+          <div class="d-flex align-items-center gap-3">
+            <span class="d-inline-flex align-items-center justify-content-center" style="width:42px;height:42px;background:rgba(206,146,51,0.18);border-radius:12px;color:#f0b75a;font-size:20px;">
+              <i class="bi bi-journal-richtext"></i>
+            </span>
+            <div>
+              <small style="color:#f0b75a;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;font-weight:700;">CAEI Elite Training</small>
+              <h5 class="modal-title mb-0" id="formationDescModalLabel">Détails de la formation</h5>
+            </div>
+          </div>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fermer"></button>
+        </div>
+
+        <!-- Body -->
+        <div class="modal-body">
+
+          <!-- Image -->
+          <div id="fdescImageWrap" style="width:100%;height:180px;border-radius:14px;overflow:hidden;margin-bottom:1.25rem;background:#e5e7eb;display:none;">
+            <img id="fdescImage" src="" alt="Formation" style="width:100%;height:100%;object-fit:cover;">
+          </div>
+
+          <!-- Badges -->
+          <div id="fdescBadges"></div>
+
+          <!-- Title -->
+          <h4 id="fdescTitle" style="font-family:'Outfit',sans-serif;font-weight:900;color:#001f3f;font-size:1.35rem;margin-bottom:0.5rem;"></h4>
+
+          <hr class="fdesc-divider">
+
+          <!-- Meta info -->
+          <div class="row g-2 mb-3" id="fdescMeta"></div>
+
+          <hr class="fdesc-divider">
+
+          <!-- Description -->
+          <div>
+            <p class="mb-2" style="font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#9ca3af;font-weight:700;">Description</p>
+            <p class="fdesc-body-text" id="fdescDescription"></p>
+          </div>
+
+          <hr class="fdesc-divider">
+
+          <!-- Price -->
+          <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <div>
+              <span class="fdesc-price-label d-block">Tarif indicatif</span>
+              <span class="fdesc-price-tag" id="fdescPrice"></span>
+            </div>
+            <a id="fdescInscriptionBtn" href="#" class="btn-register" style="width:auto;padding:12px 28px;text-decoration:none;">
+              <i class="bi bi-pencil-square me-1"></i> S'inscrire à cette formation
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!-- /MODAL DESCRIPTION FORMATION -->
+
+
   <!-- ===== SCRIPTS ===== -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
@@ -3016,6 +3207,55 @@
     // Helper pour échapper le HTML dans les attributs JS
     function escapeHtml(str) {
       return str.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    }
+
+    // Afficher la description complète d'une formation dans un modal
+    function showFormationDesc(code, title, type, description, duration, location, price, imageUrl) {
+      // Image
+      const imgWrap = document.getElementById('fdescImageWrap');
+      const img = document.getElementById('fdescImage');
+      if (imageUrl) {
+        img.src = imageUrl;
+        img.alt = title;
+        imgWrap.style.display = 'block';
+      } else {
+        imgWrap.style.display = 'none';
+      }
+
+      // Badges (code + type)
+      let badgesHtml = '';
+      if (code) badgesHtml += `<span class="fdesc-badge-code">${code}</span>`;
+      if (type) badgesHtml += `<span class="fdesc-type-badge">${type}</span>`;
+      document.getElementById('fdescBadges').innerHTML = badgesHtml;
+
+      // Titre
+      document.getElementById('fdescTitle').textContent = title;
+
+      // Meta
+      let metaHtml = '';
+      if (duration) {
+        metaHtml += `<div class="col-sm-6"><div class="fdesc-meta-row"><i class="bi bi-clock-fill"></i><span><strong>Durée :</strong> ${duration}</span></div></div>`;
+      }
+      if (location) {
+        metaHtml += `<div class="col-sm-6"><div class="fdesc-meta-row"><i class="bi bi-geo-alt-fill"></i><span><strong>Lieu :</strong> ${location}</span></div></div>`;
+      }
+      document.getElementById('fdescMeta').innerHTML = metaHtml || '<div class="col-12 text-muted" style="font-size:13px;">Informations non disponibles.</div>';
+
+      // Description
+      const descEl = document.getElementById('fdescDescription');
+      descEl.textContent = description || 'Aucune description détaillée disponible pour cette formation. Contactez-nous pour plus d\'informations.';
+
+      // Prix
+      document.getElementById('fdescPrice').textContent = price || 'Sur devis';
+
+      // Lien inscription
+      const inscriptionBaseUrl = '{{ route("elite.inscription") }}';
+      const formationTitle = code ? '[' + code + '] ' + title : title;
+      document.getElementById('fdescInscriptionBtn').href = inscriptionBaseUrl + '?formation_title=' + encodeURIComponent(formationTitle);
+
+      // Ouvrir le modal
+      const modal = new bootstrap.Modal(document.getElementById('formationDescModal'));
+      modal.show();
     }
 
     // Filtrer les cours dans la modale via le champ de recherche
