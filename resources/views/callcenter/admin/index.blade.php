@@ -444,8 +444,8 @@
                         </thead>
                         <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
                             @forelse($rendezVousList as $rdv)
-                                <tr class="hover:bg-slate-50/80 transition" :class="selectedRdvs.includes({{ $rdv->id }}) ? 'bg-amber-50/60' : ''">
-                                    <td class="py-3.5 px-4 text-center">
+                                <tr class="transition-colors {{ $rdv->qualificationRowClasses() }}" :class="selectedRdvs.includes({{ $rdv->id }}) ? '!bg-amber-100/70' : ''">
+                                    <td class="py-3.5 px-4 text-center {{ $rdv->qualificationLeftBorderClasses() }}">
                                         <input type="checkbox" value="{{ $rdv->id }}" x-model.number="selectedRdvs" class="rounded border-slate-300 text-[#7f0504] focus:ring-[#7f0504] cursor-pointer">
                                     </td>
 
