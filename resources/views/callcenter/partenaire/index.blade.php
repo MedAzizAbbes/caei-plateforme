@@ -163,7 +163,7 @@
             <!-- 4A. MODE FICHES OPPORTUNITÉ COMMERCIALES -->
             <div x-show="displayMode === 'cards'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 @forelse($rendezVousList as $rdv)
-                    <div class="rounded-2xl border {{ $rdv->qualificationCardClasses() }} shadow-2xs p-5 hover:shadow-md transition flex flex-col justify-between space-y-4">
+                    <div class="rounded-2xl {{ $rdv->qualificationCardClasses() }} p-5 flex flex-col justify-between space-y-4" style="{{ $rdv->qualificationCardStyle() }}">
                         <div>
                             <!-- Card Top Bar -->
                             <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
@@ -216,7 +216,7 @@
                                 <span class="block text-[10px] font-bold uppercase text-slate-400">État Évaluation</span>
                                 @if($rdv->qualification)
                                     <div class="text-right">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold border {{ $rdv->qualification->resultatBadgeClasses() }}">
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] {{ $rdv->qualification->resultatBadgeClasses() }}">
                                             {{ $rdv->qualification->resultat }}
                                         </span>
                                         <div class="text-[10px] text-slate-500 mt-0.5">Potentiel: <strong class="text-slate-800">{{ $rdv->qualification->potentiel }}</strong></div>
@@ -264,8 +264,8 @@
                         </thead>
                         <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
                             @forelse($rendezVousList as $rdv)
-                                <tr class="transition-colors {{ $rdv->qualificationRowClasses() }}">
-                                    <td class="p-4 whitespace-nowrap {{ $rdv->qualificationLeftBorderClasses() }}">
+                                <tr class="{{ $rdv->qualificationRowClasses() }}" style="{{ $rdv->qualificationRowStyle() }}">
+                                    <td class="p-4 whitespace-nowrap">
                                         <div class="font-bold text-slate-900">{{ \Carbon\Carbon::parse($rdv->date_rendez_vous)->format('d/m/Y') }}</div>
                                         <div class="text-xs text-slate-400">{{ \Carbon\Carbon::parse($rdv->heure_rendez_vous)->format('H:i') }}</div>
                                     </td>
@@ -297,7 +297,7 @@
                                     <td class="p-4">
                                         @if($rdv->qualification)
                                             <div class="space-y-1">
-                                                <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold border {{ $rdv->qualification->resultatBadgeClasses() }}">
+                                                <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs {{ $rdv->qualification->resultatBadgeClasses() }}">
                                                     {{ $rdv->qualification->resultat }}
                                                 </span>
                                                 <div class="text-[11px] text-slate-500 font-medium">Potentiel: <strong class="text-slate-800">{{ $rdv->qualification->potentiel }}</strong></div>

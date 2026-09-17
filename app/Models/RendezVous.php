@@ -115,62 +115,72 @@ class RendezVous extends Model
     }
 
     /**
-     * Classes CSS de couleur pour toute la ligne du tableau (<tr>) selon la qualification
+     * Obtenir le style CSS de fond coloré en ligne (garantit le rendu exact sans aucune bordure)
+     */
+    public function qualificationRowStyle(): string
+    {
+        $res = $this->getQualificationResultat();
+
+        $bg = match ($res) {
+            'RDV confirmé', 'Prospect qualifié' => '#d1fae5', // Vert (Emerald)
+            'RDV signé'                         => '#bbf7d0', // Vert soutenu
+            'RDV annulé', 'Refus', 'Non intéressé' => '#fee2e2', // Rouge
+            'Rappel programmé', 'À rappeler'    => '#dbeafe', // Bleu
+            'INJOIGNABLE', 'Non joignable'      => '#fef3c7', // Jaune
+            'NRP'                               => '#ffedd5', // Orange
+            'RDV visité'                        => '#ccfbf1', // Cyan / Sarcelle
+            'RDV-R2', 'Prospect intéressé', 'Intéressé' => '#f3e8ff', // Violet
+            default                             => '',
+        };
+
+        return $bg ? "background-color: {$bg};" : '';
+    }
+
+    /**
+     * Classes CSS pour la ligne (transition et texte) sans bordure
      */
     public function qualificationRowClasses(): string
     {
         $res = $this->getQualificationResultat();
 
-        return match ($res) {
-            'RDV confirmé', 'Prospect qualifié' => 'bg-emerald-50 hover:bg-emerald-100/70 border-b border-emerald-100',
-            'RDV signé'                         => 'bg-green-50 hover:bg-green-100/70 border-b border-green-100',
-            'RDV annulé', 'Refus', 'Non intéressé' => 'bg-red-50 hover:bg-red-100/70 border-b border-red-100',
-            'Rappel programmé', 'À rappeler'    => 'bg-blue-50 hover:bg-blue-100/70 border-b border-blue-100',
-            'INJOIGNABLE', 'Non joignable'      => 'bg-amber-50 hover:bg-amber-100/70 border-b border-amber-100',
-            'NRP'                               => 'bg-orange-50 hover:bg-orange-100/70 border-b border-orange-100',
-            'RDV visité'                        => 'bg-teal-50 hover:bg-teal-100/70 border-b border-teal-100',
-            'RDV-R2', 'Prospect intéressé', 'Intéressé' => 'bg-purple-50 hover:bg-purple-100/70 border-b border-purple-100',
-            default                             => 'hover:bg-slate-50 border-b border-slate-100',
-        };
+        return $res ? 'transition-colors text-slate-900 font-medium' : 'transition-colors hover:bg-slate-50 text-slate-700 font-medium';
     }
 
     /**
-     * Classes CSS pour la bordure gauche colorée de la première cellule (<td>)
+     * Bordure gauche (supprimée à la demande de l'utilisateur)
      */
     public function qualificationLeftBorderClasses(): string
     {
-        $res = $this->getQualificationResultat();
-
-        return match ($res) {
-            'RDV confirmé', 'Prospect qualifié' => 'border-l-4 border-emerald-500',
-            'RDV signé'                         => 'border-l-4 border-green-600',
-            'RDV annulé', 'Refus', 'Non intéressé' => 'border-l-4 border-red-500',
-            'Rappel programmé', 'À rappeler'    => 'border-l-4 border-blue-500',
-            'INJOIGNABLE', 'Non joignable'      => 'border-l-4 border-amber-400',
-            'NRP'                               => 'border-l-4 border-orange-500',
-            'RDV visité'                        => 'border-l-4 border-teal-500',
-            'RDV-R2', 'Prospect intéressé', 'Intéressé' => 'border-l-4 border-purple-500',
-            default                             => 'border-l-4 border-transparent',
-        };
+        return '';
     }
 
     /**
-     * Classes CSS pour les cartes de RDV (Mode Fiches Opportunité)
+     * Classes CSS pour les cartes de RDV (Mode Fiches) sans bordure
      */
     public function qualificationCardClasses(): string
     {
+        return 'transition shadow-2xs hover:shadow-md';
+    }
+
+    /**
+     * Style CSS de fond pour les cartes de RDV (Mode Fiches)
+     */
+    public function qualificationCardStyle(): string
+    {
         $res = $this->getQualificationResultat();
 
-        return match ($res) {
-            'RDV confirmé', 'Prospect qualifié' => 'border-emerald-300 ring-1 ring-emerald-200 bg-emerald-50/20 hover:border-emerald-400',
-            'RDV signé'                         => 'border-green-400 ring-1 ring-green-200 bg-green-50/20 hover:border-green-500',
-            'RDV annulé', 'Refus', 'Non intéressé' => 'border-red-300 ring-1 ring-red-200 bg-red-50/20 hover:border-red-400',
-            'Rappel programmé', 'À rappeler'    => 'border-blue-300 ring-1 ring-blue-200 bg-blue-50/20 hover:border-blue-400',
-            'INJOIGNABLE', 'Non joignable'      => 'border-amber-300 ring-1 ring-amber-200 bg-amber-50/20 hover:border-amber-400',
-            'NRP'                               => 'border-orange-300 ring-1 ring-orange-200 bg-orange-50/20 hover:border-orange-400',
-            'RDV visité'                        => 'border-teal-300 ring-1 ring-teal-200 bg-teal-50/20 hover:border-teal-400',
-            'RDV-R2', 'Prospect intéressé', 'Intéressé' => 'border-purple-300 ring-1 ring-purple-200 bg-purple-50/20 hover:border-purple-400',
-            default                             => 'border-slate-200 hover:border-slate-300 bg-white',
+        $bg = match ($res) {
+            'RDV confirmé', 'Prospect qualifié' => '#d1fae5',
+            'RDV signé'                         => '#bbf7d0',
+            'RDV annulé', 'Refus', 'Non intéressé' => '#fee2e2',
+            'Rappel programmé', 'À rappeler'    => '#dbeafe',
+            'INJOIGNABLE', 'Non joignable'      => '#fef3c7',
+            'NRP'                               => '#ffedd5',
+            'RDV visité'                        => '#ccfbf1',
+            'RDV-R2', 'Prospect intéressé', 'Intéressé' => '#f3e8ff',
+            default                             => '#ffffff',
         };
+
+        return "background-color: {$bg};";
     }
 }
