@@ -2317,7 +2317,7 @@
             <div class="progress-item">
               <div class="progress-header">
                 <span class="progress-label">Taux de satisfaction</span>
-                <span class="progress-value">{{ $stats['satisfaction'] ?? 98 }}%</span>
+                <span class="progress-value" data-target="{{ $stats['satisfaction'] ?? 98 }}">0%</span>
               </div>
               <div class="et-progress">
                 <div class="et-progress-bar" data-width="{{ $stats['satisfaction'] ?? 98 }}"></div>
@@ -2327,30 +2327,30 @@
             <div class="progress-item">
               <div class="progress-header">
                 <span class="progress-label">Formations certifiantes</span>
-                <span class="progress-value">{{ $stats['certifiantes_percent'] ?? 78 }}%</span>
+                <span class="progress-value" data-target="{{ $stats['certifiantes_percent'] ?? 92 }}">0%</span>
               </div>
               <div class="et-progress">
-                <div class="et-progress-bar" data-width="{{ $stats['certifiantes_percent'] ?? 78 }}"></div>
+                <div class="et-progress-bar" data-width="{{ $stats['certifiantes_percent'] ?? 92 }}"></div>
               </div>
             </div>
 
             <div class="progress-item">
               <div class="progress-header">
                 <span class="progress-label">Cycles spécialisés & Masters</span>
-                <span class="progress-value">{{ $stats['cycles_percent'] ?? 17 }}%</span>
+                <span class="progress-value" data-target="{{ $stats['cycles_percent'] ?? 45 }}">0%</span>
               </div>
               <div class="et-progress">
-                <div class="et-progress-bar" data-width="{{ $stats['cycles_percent'] ?? 17 }}"></div>
+                <div class="et-progress-bar" data-width="{{ $stats['cycles_percent'] ?? 45 }}"></div>
               </div>
             </div>
 
             <div class="progress-item">
               <div class="progress-header">
                 <span class="progress-label">Formations diplomantes (MBA / Executive)</span>
-                <span class="progress-value">{{ $stats['diplomantes_percent'] ?? 15 }}%</span>
+                <span class="progress-value" data-target="{{ $stats['diplomantes_percent'] ?? 35 }}">0%</span>
               </div>
               <div class="et-progress">
-                <div class="et-progress-bar" data-width="{{ $stats['diplomantes_percent'] ?? 15 }}"></div>
+                <div class="et-progress-bar" data-width="{{ $stats['diplomantes_percent'] ?? 35 }}"></div>
               </div>
             </div>
           </div>
@@ -3433,9 +3433,46 @@
 
     // ===== PROGRESS BARS ANIMATION =====
     function animateProgressBars() {
+      if (animateProgressBars._done) return;
+      animateProgressBars._done = true;
+
       document.querySelectorAll('.et-progress-bar').forEach(bar => {
-        const width = bar.dataset.width || 0;
-        bar.style.width = width + '%';
+        const targetW = parseFloat(bar.dataset.width) || 0;
+        bar.style.width = '0%';
+        // Small delay then animate
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            bar.style.width = targetW + '%';
+          });
+        });
+      });
+
+      // Animate percentage labels with count-up
+      document.querySelectorAll('.progress-section .progress-value[data-target]').forEach((el, i) => {
+        if (el.dataset.animated === 'true') return;
+        el.dataset.animated = 'true';
+        const target = parseFloat(el.dataset.target) || 0;
+        const duration = 1600;
+        const delay = i * 120;
+        const startTime = performance.now() + delay;
+
+        function updateLabel(currentTime) {
+          if (currentTime < startTime) {
+            requestAnimationFrame(updateLabel);
+            return;
+          }
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const val = Math.round(eased * target);
+          el.textContent = val + '%';
+          if (progress < 1) {
+            requestAnimationFrame(updateLabel);
+          } else {
+            el.textContent = target + '%';
+          }
+        }
+        requestAnimationFrame(updateLabel);
       });
     }
 

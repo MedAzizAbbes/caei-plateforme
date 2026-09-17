@@ -573,28 +573,35 @@ class EliteTrainingController extends Controller
         $entreprisesCount = max($institutionsCount, 150);
 
         // Indicateurs en pourcentage réels
+        // Certifiantes : % sur le total réel des formations
         $safeTotal = max($formationsCount, 1);
         $certifiantesPercent = round(($certifiantes->count() / $safeTotal) * 100);
-        $cyclesPercent = round(($cycles->count() / $safeTotal) * 100);
-        $diplomantesPercent = round(($diplomantes->count() / $safeTotal) * 100);
-        $elearningPercent = round((($elearning->count() + $surMesure->count()) / $safeTotal) * 100);
+
+        // Pour les autres catégories : plancher visuel élevé pour des barres impactantes
+        $rawCyclesPercent      = round(($cycles->count() / $safeTotal) * 100);
+        $rawDiplomantesPercent = round(($diplomantes->count() / $safeTotal) * 100);
+        $rawElearningPercent   = round((($elearning->count() + $surMesure->count()) / $safeTotal) * 100);
+
+        $cyclesPercent      = $cycles->count() > 0      ? max($rawCyclesPercent, 45) : 0;
+        $diplomantesPercent = $diplomantes->count() > 0 ? max($rawDiplomantesPercent, 35) : 0;
+        $elearningPercent   = ($elearning->count() + $surMesure->count()) > 0 ? max($rawElearningPercent, 30) : 0;
 
         return [
-            'formations' => $formationsCount,
-            'consultants' => $consultantsCount,
-            'professionnels' => $consultantsCount,
-            'pays' => $paysCount,
-            'satisfaction' => $satisfactionRate,
-            'entreprises' => $entreprisesCount,
-            'certifiantes' => $certifiantes->count(),
-            'cycles' => $cycles->count(),
-            'diplomantes' => $diplomantes->count(),
-            'elearning' => $elearning->count(),
-            'sur_mesure' => $surMesure->count(),
-            'certifiantes_percent' => $certifiantesPercent > 0 ? $certifiantesPercent : 78,
-            'cycles_percent' => $cyclesPercent > 0 ? $cyclesPercent : 17,
-            'diplomantes_percent' => $diplomantesPercent > 0 ? $diplomantesPercent : 15,
-            'elearning_percent' => $elearningPercent > 0 ? $elearningPercent : 10,
+            'formations'          => $formationsCount,
+            'consultants'         => $consultantsCount,
+            'professionnels'      => $consultantsCount,
+            'pays'                => $paysCount,
+            'satisfaction'        => $satisfactionRate,
+            'entreprises'         => $entreprisesCount,
+            'certifiantes'        => $certifiantes->count(),
+            'cycles'              => $cycles->count(),
+            'diplomantes'         => $diplomantes->count(),
+            'elearning'           => $elearning->count(),
+            'sur_mesure'          => $surMesure->count(),
+            'certifiantes_percent'  => $certifiantesPercent > 0 ? $certifiantesPercent : 92,
+            'cycles_percent'        => $cyclesPercent > 0 ? $cyclesPercent : 45,
+            'diplomantes_percent'   => $diplomantesPercent > 0 ? $diplomantesPercent : 35,
+            'elearning_percent'     => $elearningPercent > 0 ? $elearningPercent : 30,
         ];
     }
 }
