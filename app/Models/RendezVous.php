@@ -97,4 +97,80 @@ class RendezVous extends Model
             ($this->relationLoaded('qualification') ? (bool) $this->qualification : $this->qualification()->exists())
         );
     }
+
+    /**
+     * Obtenir le résultat effectif de la qualification ou du statut
+     */
+    public function getQualificationResultat(): ?string
+    {
+        if ($this->statut === 'annule') {
+            return 'RDV annulé';
+        }
+
+        $qualif = $this->relationLoaded('qualification') 
+            ? $this->qualification 
+            : $this->qualification()->first();
+
+        return $qualif?->resultat;
+    }
+
+    /**
+     * Classes CSS de couleur pour toute la ligne du tableau (<tr>) selon la qualification
+     */
+    public function qualificationRowClasses(): string
+    {
+        $res = $this->getQualificationResultat();
+
+        return match ($res) {
+            'RDV confirmé', 'Prospect qualifié' => 'bg-emerald-50 hover:bg-emerald-100/70 border-b border-emerald-100',
+            'RDV signé'                         => 'bg-green-50 hover:bg-green-100/70 border-b border-green-100',
+            'RDV annulé', 'Refus', 'Non intéressé' => 'bg-red-50 hover:bg-red-100/70 border-b border-red-100',
+            'Rappel programmé', 'À rappeler'    => 'bg-blue-50 hover:bg-blue-100/70 border-b border-blue-100',
+            'INJOIGNABLE', 'Non joignable'      => 'bg-amber-50 hover:bg-amber-100/70 border-b border-amber-100',
+            'NRP'                               => 'bg-orange-50 hover:bg-orange-100/70 border-b border-orange-100',
+            'RDV visité'                        => 'bg-teal-50 hover:bg-teal-100/70 border-b border-teal-100',
+            'RDV-R2', 'Prospect intéressé', 'Intéressé' => 'bg-purple-50 hover:bg-purple-100/70 border-b border-purple-100',
+            default                             => 'hover:bg-slate-50 border-b border-slate-100',
+        };
+    }
+
+    /**
+     * Classes CSS pour la bordure gauche colorée de la première cellule (<td>)
+     */
+    public function qualificationLeftBorderClasses(): string
+    {
+        $res = $this->getQualificationResultat();
+
+        return match ($res) {
+            'RDV confirmé', 'Prospect qualifié' => 'border-l-4 border-emerald-500',
+            'RDV signé'                         => 'border-l-4 border-green-600',
+            'RDV annulé', 'Refus', 'Non intéressé' => 'border-l-4 border-red-500',
+            'Rappel programmé', 'À rappeler'    => 'border-l-4 border-blue-500',
+            'INJOIGNABLE', 'Non joignable'      => 'border-l-4 border-amber-400',
+            'NRP'                               => 'border-l-4 border-orange-500',
+            'RDV visité'                        => 'border-l-4 border-teal-500',
+            'RDV-R2', 'Prospect intéressé', 'Intéressé' => 'border-l-4 border-purple-500',
+            default                             => 'border-l-4 border-transparent',
+        };
+    }
+
+    /**
+     * Classes CSS pour les cartes de RDV (Mode Fiches Opportunité)
+     */
+    public function qualificationCardClasses(): string
+    {
+        $res = $this->getQualificationResultat();
+
+        return match ($res) {
+            'RDV confirmé', 'Prospect qualifié' => 'border-emerald-300 ring-1 ring-emerald-200 bg-emerald-50/20 hover:border-emerald-400',
+            'RDV signé'                         => 'border-green-400 ring-1 ring-green-200 bg-green-50/20 hover:border-green-500',
+            'RDV annulé', 'Refus', 'Non intéressé' => 'border-red-300 ring-1 ring-red-200 bg-red-50/20 hover:border-red-400',
+            'Rappel programmé', 'À rappeler'    => 'border-blue-300 ring-1 ring-blue-200 bg-blue-50/20 hover:border-blue-400',
+            'INJOIGNABLE', 'Non joignable'      => 'border-amber-300 ring-1 ring-amber-200 bg-amber-50/20 hover:border-amber-400',
+            'NRP'                               => 'border-orange-300 ring-1 ring-orange-200 bg-orange-50/20 hover:border-orange-400',
+            'RDV visité'                        => 'border-teal-300 ring-1 ring-teal-200 bg-teal-50/20 hover:border-teal-400',
+            'RDV-R2', 'Prospect intéressé', 'Intéressé' => 'border-purple-300 ring-1 ring-purple-200 bg-purple-50/20 hover:border-purple-400',
+            default                             => 'border-slate-200 hover:border-slate-300 bg-white',
+        };
+    }
 }
