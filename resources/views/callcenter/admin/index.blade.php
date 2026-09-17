@@ -444,8 +444,8 @@
                         </thead>
                         <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
                             @forelse($rendezVousList as $rdv)
-                                <tr class="transition-colors {{ $rdv->qualificationRowClasses() }}" :class="selectedRdvs.includes({{ $rdv->id }}) ? '!bg-amber-100/70' : ''">
-                                    <td class="py-3.5 px-4 text-center {{ $rdv->qualificationLeftBorderClasses() }}">
+                                <tr class="{{ $rdv->qualificationRowClasses() }}" style="{{ $rdv->qualificationRowStyle() }}" :class="selectedRdvs.includes({{ $rdv->id }}) ? '!bg-amber-200' : ''">
+                                    <td class="py-3.5 px-4 text-center">
                                         <input type="checkbox" value="{{ $rdv->id }}" x-model.number="selectedRdvs" class="rounded border-slate-300 text-[#7f0504] focus:ring-[#7f0504] cursor-pointer">
                                     </td>
 
@@ -505,7 +505,7 @@
                                     <td class="py-3.5 px-4">
                                         @if($rdv->qualification)
                                             <div class="space-y-1">
-                                                <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-bold border {{ $rdv->qualification->resultatBadgeClasses() }}">
+                                                <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-xs {{ $rdv->qualification->resultatBadgeClasses() }}">
                                                     {{ $rdv->qualification->resultat }}
                                                 </span>
                                                 <div class="text-[11px] text-slate-500 font-medium">Potentiel: <strong class="text-slate-800">{{ $rdv->qualification->potentiel }}</strong></div>
