@@ -106,12 +106,17 @@
                                     <label class="block text-xs font-bold text-slate-700 uppercase mb-2">Résultat de la qualification *</label>
                                     <select name="resultat" required class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm font-bold text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
                                         <option value="">-- Sélectionner le résultat --</option>
-                                        <option value="Prospect qualifié" {{ $currentResultat === 'Prospect qualifié' ? 'selected' : '' }}>🟢 Prospect qualifié (Opportunité validée)</option>
-                                        <option value="Prospect intéressé" {{ ($currentResultat === 'Prospect intéressé' || $currentResultat === 'Intéressé') ? 'selected' : '' }}>🟡 Prospect intéressé (À relancer)</option>
-                                        <option value="À rappeler" {{ $currentResultat === 'À rappeler' ? 'selected' : '' }}>⏰ À rappeler (Nouveau rdv nécessaire)</option>
-                                        <option value="Non intéressé" {{ $currentResultat === 'Non intéressé' ? 'selected' : '' }}>🔴 Non intéressé (Hors cible)</option>
-                                        <option value="Non joignable" {{ $currentResultat === 'Non joignable' ? 'selected' : '' }}>📞 Non joignable</option>
-                                        <option value="Refus" {{ $currentResultat === 'Refus' ? 'selected' : '' }}>❌ Refus commercial</option>
+                                        <option value="RDV confirmé" {{ $currentResultat === 'RDV confirmé' ? 'selected' : '' }}>🟢 RDV confirmé</option>
+                                        <option value="RDV annulé" {{ $currentResultat === 'RDV annulé' ? 'selected' : '' }}>🔴 RDV annulé</option>
+                                        <option value="RDV visité" {{ $currentResultat === 'RDV visité' ? 'selected' : '' }}>🔵 RDV visité</option>
+                                        <option value="RDV signé" {{ $currentResultat === 'RDV signé' ? 'selected' : '' }}>✍️ RDV signé</option>
+                                        <option value="NRP" {{ $currentResultat === 'NRP' ? 'selected' : '' }}>📵 NRP</option>
+                                        <option value="INJOIGNABLE" {{ $currentResultat === 'INJOIGNABLE' ? 'selected' : '' }}>🚫 INJOIGNABLE</option>
+                                        <option value="RDV-R2" {{ $currentResultat === 'RDV-R2' ? 'selected' : '' }}>🔄 RDV-R2</option>
+                                        <option value="Rappel programmé" {{ $currentResultat === 'Rappel programmé' ? 'selected' : '' }}>⏰ Rappel programmé</option>
+                                        @if($currentResultat && !in_array($currentResultat, ['RDV confirmé', 'RDV annulé', 'RDV visité', 'RDV signé', 'NRP', 'INJOIGNABLE', 'RDV-R2', 'Rappel programmé']))
+                                            <option value="{{ $currentResultat }}" selected>{{ $currentResultat }} (Actuel)</option>
+                                        @endif
                                     </select>
                                 </div>
 

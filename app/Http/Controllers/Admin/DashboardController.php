@@ -76,8 +76,8 @@ class DashboardController extends Controller
 
         // --- 3. CALL CENTER OUTSOURCING ---
         $totalCallCenterRDV = RendezVous::count();
-        $totalQualifiedRDV = Qualification::where('resultat', 'Prospect qualifié')->count();
-        $totalInterestedRDV = Qualification::where('resultat', 'Prospect intéressé')->count();
+        $totalQualifiedRDV = Qualification::whereIn('resultat', ['RDV signé', 'RDV visité', 'RDV confirmé', 'Prospect qualifié'])->count();
+        $totalInterestedRDV = Qualification::whereIn('resultat', ['RDV-R2', 'Rappel programmé', 'Prospect intéressé', 'Intéressé'])->count();
         $totalPendingRDV = RendezVous::whereIn('statut', ['en_attente_affectation', 'en_attente'])->count();
         $totalCallCenterRequests = CallCenterRequest::count();
         $callCenterConversionRate = $totalCallCenterRDV > 0 ? round((($totalQualifiedRDV + $totalInterestedRDV) / $totalCallCenterRDV) * 100, 1) : 0;

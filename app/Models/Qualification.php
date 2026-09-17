@@ -60,6 +60,14 @@ class Qualification extends Model
     public function resultatBadgeClasses(): string
     {
         return match ($this->resultat) {
+            'RDV signé'          => 'bg-emerald-100 text-emerald-800 border-emerald-300',
+            'RDV visité'         => 'bg-blue-100 text-blue-800 border-blue-300',
+            'RDV confirmé'       => 'bg-teal-100 text-teal-800 border-teal-300',
+            'RDV-R2'             => 'bg-indigo-100 text-indigo-800 border-indigo-300',
+            'Rappel programmé'   => 'bg-amber-100 text-amber-800 border-amber-300',
+            'NRP'                => 'bg-orange-100 text-orange-800 border-orange-300',
+            'INJOIGNABLE'        => 'bg-purple-100 text-purple-800 border-purple-300',
+            'RDV annulé'         => 'bg-rose-100 text-rose-800 border-rose-300',
             'Prospect qualifié'  => 'bg-emerald-100 text-emerald-800 border-emerald-300',
             'Prospect intéressé', 'Intéressé' => 'bg-green-100 text-green-800 border-green-300',
             'À rappeler'         => 'bg-amber-100 text-amber-800 border-amber-300',

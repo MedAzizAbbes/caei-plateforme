@@ -76,7 +76,7 @@ class CallCenterPartenaireWorkflowController extends Controller
         $partenaire = auth()->user();
 
         $request->validate([
-            'resultat'    => 'required|string|in:Prospect qualifié,Prospect intéressé,À rappeler,Non intéressé,Non joignable,Refus,Intéressé,Prospect non qualifié',
+            'resultat'    => 'required|string|in:RDV confirmé,RDV annulé,RDV visité,RDV signé,NRP,INJOIGNABLE,RDV-R2,Rappel programmé,Prospect qualifié,Prospect intéressé,À rappeler,Non intéressé,Non joignable,Refus,Intéressé,Prospect non qualifié',
             'potentiel'   => 'required|string|in:Faible,Moyen,Élevé',
             'commentaire' => 'nullable|string',
         ]);
