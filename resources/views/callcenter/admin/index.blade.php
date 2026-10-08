@@ -104,6 +104,64 @@
                 attachment: req.attachment || ''
             };
             this.requestModalOpen = true;
+        },
+        editRdvModal: false,
+        editingRdv: {
+            id: '',
+            date_rendez_vous: '',
+            heure_rendez_vous: '',
+            objet: '',
+            notes: '',
+            statut: 'en_attente_affectation',
+            agent_id: '',
+            partenaire_id: '',
+            nom: '',
+            prenom: '',
+            telephone: '',
+            email: '',
+            societe: '',
+            secteur: '',
+            adresse: ''
+        },
+        openEditRdv(rdv) {
+            this.editingRdv = {
+                id: rdv.id,
+                date_rendez_vous: rdv.date_rendez_vous || '',
+                heure_rendez_vous: rdv.heure_rendez_vous || '',
+                objet: rdv.objet || '',
+                notes: rdv.notes || '',
+                statut: rdv.statut || 'en_attente_affectation',
+                agent_id: rdv.agent_id || '',
+                partenaire_id: rdv.partenaire_id || '',
+                nom: rdv.prospect ? (rdv.prospect.nom || '') : '',
+                prenom: rdv.prospect ? (rdv.prospect.prenom || '') : '',
+                telephone: rdv.prospect ? (rdv.prospect.telephone || '') : '',
+                email: rdv.prospect ? (rdv.prospect.email || '') : '',
+                societe: rdv.prospect ? (rdv.prospect.societe || '') : '',
+                secteur: rdv.prospect ? (rdv.prospect.secteur || '') : '',
+                adresse: rdv.prospect ? (rdv.prospect.adresse || '') : ''
+            };
+            this.editRdvModal = true;
+        },
+        closeEditRdv() {
+            this.editRdvModal = false;
+        },
+        deleteRdvModal: false,
+        deletingRdv: {
+            id: '',
+            prospect_nom: '',
+            date_time: ''
+        },
+        openDeleteRdv(rdv) {
+            this.deletingRdv = {
+                id: rdv.id,
+                prospect_nom: rdv.prospect ? ((rdv.prospect.nom || '') + ' ' + (rdv.prospect.prenom || '')).trim() : 'Prospect inconnu',
+                date_time: (rdv.date_rendez_vous || '') + (rdv.heure_rendez_vous ? ' à ' + rdv.heure_rendez_vous : '')
+            };
+            this.deleteRdvModal = true;
+        },
+        closeDeleteRdv() {
+            this.deleteRdvModal = false;
         }
     }">
 
@@ -350,6 +408,20 @@
                         ⚡ Affecter en Masse
                     </button>
                 </form>
+
+                <div class="h-6 w-px bg-white/20"></div>
+
+                <form method="POST" action="{{ route('admin.callcenter.rdv.bulk_destroy') }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer définitivement les rendez-vous sélectionnés ? Cette action est irréversible.');" class="flex items-center">
+                    @csrf
+                    <template x-for="id in selectedRdvs" :key="id">
+                        <input type="hidden" name="rdv_ids[]" :value="id">
+                    </template>
+                    <button type="submit" class="bg-rose-600 hover:bg-rose-700 text-white font-black text-xs px-3.5 py-2 rounded-xl shadow cursor-pointer transition flex items-center gap-1.5">
+                        <span>🗑️</span>
+                        <span>Supprimer la sélection</span>
+                    </button>
+                </form>
+
                 <button type="button" @click="selectedRdvs = []" class="text-xs text-slate-300 hover:text-white underline">
                     Annuler
                 </button>
@@ -518,8 +590,9 @@
                                     </td>
 
                                     <td class="py-3.5 px-4 text-right whitespace-nowrap">
-                                        <div class="flex items-center justify-end gap-2">
-                                            <form method="POST" action="{{ route('admin.callcenter.assign', $rdv->id) }}" class="flex items-center gap-1.5">
+                                        <div class="flex items-center justify-end gap-1.5">
+                                            {{-- Affectation rapide au Partenaire --}}
+                                            <form method="POST" action="{{ route('admin.callcenter.assign', $rdv->id) }}" class="flex items-center gap-1">
                                                 @csrf
                                                 <select name="partenaire_id" required class="text-xs rounded-xl border-slate-200 bg-slate-50 py-1.5 px-2 font-bold text-slate-800 focus:border-[#7f0504]">
                                                     <option value="">-- Affecter --</option>
@@ -529,10 +602,52 @@
                                                         </option>
                                                     @endforeach
                                                 </select>
-                                                <button type="submit" class="px-2.5 py-1.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-bold transition cursor-pointer" title="Valider l'affectation">
+                                                <button type="submit" class="px-2 py-1.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-bold transition cursor-pointer" title="Valider l'affectation">
                                                     ✔
                                                 </button>
                                             </form>
+
+                                            {{-- Modifier le Rendez-vous --}}
+                                            <button type="button" 
+                                                    @click="openEditRdv({{ json_encode([
+                                                        'id'                => $rdv->id,
+                                                        'date_rendez_vous'  => $rdv->date_rendez_vous ? $rdv->date_rendez_vous->format('Y-m-d') : '',
+                                                        'heure_rendez_vous' => $rdv->heure_rendez_vous ? \Carbon\Carbon::parse($rdv->heure_rendez_vous)->format('H:i') : '',
+                                                        'objet'             => $rdv->objet,
+                                                        'notes'             => $rdv->notes,
+                                                        'statut'            => $rdv->statut,
+                                                        'agent_id'          => $rdv->agent_id,
+                                                        'partenaire_id'     => $rdv->partenaire_id,
+                                                        'prospect'          => $rdv->prospect ? [
+                                                            'nom'       => $rdv->prospect->nom,
+                                                            'prenom'    => $rdv->prospect->prenom,
+                                                            'telephone' => $rdv->prospect->telephone,
+                                                            'email'     => $rdv->prospect->email,
+                                                            'societe'   => $rdv->prospect->societe,
+                                                            'secteur'   => $rdv->prospect->secteur,
+                                                            'adresse'   => $rdv->prospect->adresse,
+                                                        ] : null,
+                                                    ]) }})"
+                                                    class="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition cursor-pointer shadow-xs hover:scale-105" 
+                                                    title="Modifier le rendez-vous">
+                                                ✏️
+                                            </button>
+
+                                            {{-- Supprimer le Rendez-vous --}}
+                                            <button type="button"
+                                                    @click="openDeleteRdv({{ json_encode([
+                                                        'id'                => $rdv->id,
+                                                        'date_rendez_vous'  => $rdv->date_rendez_vous ? $rdv->date_rendez_vous->format('d/m/Y') : '',
+                                                        'heure_rendez_vous' => $rdv->heure_rendez_vous ? \Carbon\Carbon::parse($rdv->heure_rendez_vous)->format('H:i') : '',
+                                                        'prospect'          => $rdv->prospect ? [
+                                                            'nom'    => $rdv->prospect->nom,
+                                                            'prenom' => $rdv->prospect->prenom,
+                                                        ] : null,
+                                                    ]) }})"
+                                                    class="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition cursor-pointer shadow-xs hover:scale-105"
+                                                    title="Supprimer le rendez-vous">
+                                                🗑️
+                                            </button>
                                         </div>
                                     </td>
                                 </tr>
@@ -1214,6 +1329,188 @@
                         </button>
                         <button type="submit" class="px-6 py-2.5 rounded-xl text-xs font-black uppercase text-white shadow transition hover:opacity-95" style="background-color: #7f0504;">
                             Enregistrer les modifications
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de Modification d'un Rendez-vous -->
+        <div x-show="editRdvModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div @click.away="closeEditRdv()" class="bg-white rounded-3xl max-w-3xl w-full shadow-2xl overflow-hidden transform transition-all max-h-[90vh] flex flex-col">
+                <div class="p-6 text-white flex justify-between items-center shrink-0" style="background: linear-gradient(135deg, #7f0504 0%, #460202 100%);">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center font-black text-lg">
+                            ✏️
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-black uppercase text-white flex items-center gap-2">
+                                <span>Modifier le Rendez-vous #</span><span x-text="editingRdv.id"></span>
+                            </h3>
+                            <p class="text-xs text-red-100 mt-0.5">
+                                Mise à jour des coordonnées du prospect <span class="font-bold text-white" x-text="editingRdv.nom + ' ' + (editingRdv.prenom || '')"></span> et des détails de l'entretien
+                            </p>
+                        </div>
+                    </div>
+                    <button type="button" @click="closeEditRdv()" class="text-white/70 hover:text-white text-2xl font-black transition leading-none cursor-pointer">&times;</button>
+                </div>
+
+                <form method="POST" :action="'{{ url('admin/callcenter-rdv') }}/' + editingRdv.id" class="flex flex-col flex-1 overflow-hidden">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="tab" value="workflow">
+
+                    <div class="p-6 overflow-y-auto flex-1 space-y-6">
+                        {{-- Section 1 : Informations Prospect --}}
+                        <div>
+                            <h4 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2 pb-2 border-b border-slate-100 mb-4">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-600"></span>
+                                <span>Coordonnées du Prospect / Client</span>
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Nom du prospect *</label>
+                                    <input type="text" name="nom" x-model="editingRdv.nom" required class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Prénom</label>
+                                    <input type="text" name="prenom" x-model="editingRdv.prenom" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Téléphone *</label>
+                                    <input type="text" name="telephone" x-model="editingRdv.telephone" required class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Email</label>
+                                    <input type="email" name="email" x-model="editingRdv.email" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Société / Entreprise</label>
+                                    <input type="text" name="societe" x-model="editingRdv.societe" placeholder="Ex: Société SARL" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Secteur d'activité</label>
+                                    <input type="text" name="secteur" x-model="editingRdv.secteur" placeholder="Ex: Informatique, Énergie..." class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div class="sm:col-span-2 md:col-span-3">
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Adresse</label>
+                                    <input type="text" name="adresse" x-model="editingRdv.adresse" placeholder="Adresse complète..." class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- Section 2 : Informations Rendez-vous & Affectation --}}
+                        <div>
+                            <h4 class="text-xs font-black uppercase tracking-wider text-slate-800 flex items-center gap-2 pb-2 border-b border-slate-100 mb-4">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-600"></span>
+                                <span>Planification & Statut du Rendez-vous</span>
+                            </h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Date du rendez-vous *</label>
+                                    <input type="date" name="date_rendez_vous" x-model="editingRdv.date_rendez_vous" required class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Heure du rendez-vous *</label>
+                                    <input type="time" name="heure_rendez_vous" x-model="editingRdv.heure_rendez_vous" required class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Statut du RDV *</label>
+                                    <select name="statut" x-model="editingRdv.statut" required class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                        <option value="en_attente_affectation">⏳ En attente d'affectation</option>
+                                        <option value="affecte">🤝 Pris en charge (Affecté)</option>
+                                        <option value="qualification_en_cours">📋 Qualification en cours</option>
+                                        <option value="qualifie">✅ Qualifié</option>
+                                        <option value="reporte">🔄 Reporté</option>
+                                        <option value="non_effectue">❌ Non effectué</option>
+                                        <option value="annule">🚫 Annulé</option>
+                                    </select>
+                                </div>
+                                <div class="sm:col-span-2 md:col-span-3">
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Objet du rendez-vous *</label>
+                                    <input type="text" name="objet" x-model="editingRdv.objet" required placeholder="Motif ou thématique de l'entretien..." class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Partenaire affecté</label>
+                                    <select name="partenaire_id" x-model="editingRdv.partenaire_id" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                        <option value="">-- Non affecté --</option>
+                                        @foreach($partenaires as $p)
+                                            <option value="{{ $p->id }}">{{ $p->fullName() }} ({{ $p->institution ?? 'Partenaire' }})</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Agent créateur</label>
+                                    <select name="agent_id" x-model="editingRdv.agent_id" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                        <option value="">-- Non spécifié --</option>
+                                        @foreach($agents as $a)
+                                            <option value="{{ $a->id }}">{{ $a->fullName() }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="sm:col-span-2 md:col-span-3">
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Notes / Instructions</label>
+                                    <textarea name="notes" x-model="editingRdv.notes" rows="2" placeholder="Informations complémentaires, historique ou consignes..." class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-3 shrink-0">
+                        <button type="button" @click="closeEditRdv()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-600 hover:bg-slate-100 transition cursor-pointer">
+                            Annuler
+                        </button>
+                        <button type="submit" class="px-6 py-2.5 rounded-xl text-xs font-black uppercase text-white shadow-md transition hover:opacity-95 cursor-pointer" style="background-color: #7f0504;">
+                            💾 Enregistrer les modifications
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de Confirmation de Suppression de Rendez-vous -->
+        <div x-show="deleteRdvModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+            <div @click.away="closeDeleteRdv()" class="bg-white rounded-3xl max-w-lg w-full shadow-2xl overflow-hidden transform transition-all">
+                <div class="p-6 text-white flex justify-between items-center" style="background: linear-gradient(135deg, #b91c1c 0%, #7f0504 100%);">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center font-black text-lg">
+                            🗑️
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-black uppercase text-white flex items-center gap-2">
+                                <span>Supprimer le RDV #</span><span x-text="deletingRdv.id"></span>
+                            </h3>
+                            <p class="text-xs text-red-100 mt-0.5">Confirmation de suppression du rendez-vous</p>
+                        </div>
+                    </div>
+                    <button type="button" @click="closeDeleteRdv()" class="text-white/70 hover:text-white text-2xl font-black transition leading-none cursor-pointer">&times;</button>
+                </div>
+
+                <form method="POST" :action="'{{ url('admin/callcenter-rdv') }}/' + deletingRdv.id" class="p-6 space-y-4">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" name="tab" value="workflow">
+
+                    <div class="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-slate-800 space-y-2">
+                        <p class="text-sm font-bold text-rose-900 flex items-center gap-1.5">
+                            <span>⚠️</span>
+                            <span>Êtes-vous sûr de vouloir supprimer ce rendez-vous ?</span>
+                        </p>
+                        <div class="text-xs space-y-1 text-slate-700 bg-white p-3 rounded-xl border border-rose-100">
+                            <p><strong>Prospect :</strong> <span class="text-slate-900 font-bold" x-text="deletingRdv.prospect_nom"></span></p>
+                            <p><strong>Date & Heure :</strong> <span class="text-slate-900 font-bold" x-text="deletingRdv.date_time"></span></p>
+                        </div>
+                        <p class="text-[11px] text-rose-700 font-semibold leading-relaxed">
+                            Cette action retirera le rendez-vous du workflow. Une trace sera conservée dans l'historique d'audit.
+                        </p>
+                    </div>
+
+                    <div class="pt-2 flex justify-end gap-3">
+                        <button type="button" @click="closeDeleteRdv()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-600 hover:bg-slate-100 transition cursor-pointer">
+                            Annuler
+                        </button>
+                        <button type="submit" class="px-6 py-2.5 rounded-xl text-xs font-black uppercase text-white bg-rose-600 hover:bg-rose-700 shadow-md transition cursor-pointer flex items-center gap-2">
+                            <span>🗑️ Supprimer définitivement</span>
                         </button>
                     </div>
                 </form>
