@@ -51,6 +51,8 @@ Route::prefix('call-center')->name('callcenter.')->group(function () {
             Route::get('/dashboard', [CallCenterAdminWorkflowController::class, 'index'])->name('dashboard');
             Route::post('/rendez-vous/{rendezVous}/assign', [CallCenterAdminWorkflowController::class, 'assignPartner'])->name('assign');
             Route::post('/rendez-vous/{rendezVous}/status', [CallCenterAdminWorkflowController::class, 'updateStatus'])->name('status');
+            Route::put('/rendez-vous/{rendezVous}', [CallCenterAdminWorkflowController::class, 'updateRdv'])->name('rdv.update');
+            Route::delete('/rendez-vous/{rendezVous}', [CallCenterAdminWorkflowController::class, 'destroyRdv'])->name('rdv.destroy');
             Route::get('/users', [CallCenterAdminWorkflowController::class, 'users'])->name('users');
             Route::post('/users', [CallCenterAdminWorkflowController::class, 'storeUser'])->name('users.store');
             Route::put('/users/{user}', [CallCenterAdminWorkflowController::class, 'updateUser'])->name('users.update');
@@ -473,6 +475,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/callcenter-assign/{rendezVous}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'assignPartner'])->name('callcenter.assign');
     Route::post('/callcenter-bulk-assign', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'bulkAssignPartner'])->name('callcenter.bulk_assign');
     Route::post('/callcenter-status/{rendezVous}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'updateStatus'])->name('callcenter.status');
+    Route::put('/callcenter-rdv/{rendezVous}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'updateRdv'])->name('callcenter.rdv.update');
+    Route::delete('/callcenter-rdv/{rendezVous}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'destroyRdv'])->name('callcenter.rdv.destroy');
+    Route::post('/callcenter-rdv-bulk-delete', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'bulkDestroyRdv'])->name('callcenter.rdv.bulk_destroy');
     Route::post('/callcenter-request-status/{id}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'updateRequestStatus'])->name('callcenter.request.status');
     Route::delete('/callcenter-request/{id}', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'destroyRequest'])->name('callcenter.request.destroy');
     Route::get('/callcenter-users', [\App\Http\Controllers\CallCenter\CallCenterAdminWorkflowController::class, 'users'])->name('callcenter.users');

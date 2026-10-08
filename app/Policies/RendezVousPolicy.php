@@ -45,4 +45,20 @@ class RendezVousPolicy
     {
         return $rendezVous->agent_id === $user->id || $rendezVous->partenaire_id === $user->id;
     }
+
+    /**
+     * Détermine si l'utilisateur peut modifier ce rendez-vous.
+     */
+    public function update(User $user, RendezVous $rendezVous): bool
+    {
+        return $user->isAdmin() || $rendezVous->agent_id === $user->id;
+    }
+
+    /**
+     * Détermine si l'utilisateur peut supprimer ce rendez-vous.
+     */
+    public function delete(User $user, RendezVous $rendezVous): bool
+    {
+        return $user->isAdmin() || $rendezVous->agent_id === $user->id;
+    }
 }

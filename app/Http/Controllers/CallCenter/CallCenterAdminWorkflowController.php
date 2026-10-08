@@ -343,6 +343,152 @@ class CallCenterAdminWorkflowController extends Controller
     }
 
     /**
+     * Modifier un rendez-vous et les coordonnées de son prospect
+     */
+    public function updateRdv(Request $request, RendezVous $rendezVous)
+    {
+        $request->validate([
+            // Données du Rendez-vous
+            'date_rendez_vous'  => 'required|date',
+            'heure_rendez_vous' => 'required',
+            'objet'             => 'required|string|max:255',
+            'notes'             => 'nullable|string',
+            'statut'            => 'required|in:en_attente_affectation,affecte,qualification_en_cours,qualifie,annule,non_effectue,reporte',
+            'agent_id'          => 'nullable|exists:users,id',
+            'partenaire_id'     => 'nullable|exists:users,id',
+            // Données du Prospect lié
+            'nom'               => 'required|string|max:255',
+            'prenom'            => 'nullable|string|max:255',
+            'telephone'         => 'required|string|max:50',
+            'email'             => 'nullable|email|max:255',
+            'societe'           => 'nullable|string|max:255',
+            'secteur'           => 'nullable|string|max:255',
+            'adresse'           => 'nullable|string|max:255',
+        ]);
+
+        // Mise à jour du prospect lié
+        if ($rendezVous->prospect) {
+            $rendezVous->prospect->update([
+                'nom'       => $request->nom,
+                'prenom'    => $request->prenom,
+                'telephone' => $request->telephone,
+                'email'     => $request->email,
+                'societe'   => $request->societe,
+                'secteur'   => $request->secteur,
+                'adresse'   => $request->adresse,
+            ]);
+        }
+
+        $oldPartenaireId = $rendezVous->partenaire_id;
+
+        $rdvData = [
+            'date_rendez_vous'  => $request->date_rendez_vous,
+            'heure_rendez_vous' => $request->heure_rendez_vous,
+            'objet'             => $request->objet,
+            'notes'             => $request->notes,
+            'statut'            => $request->statut,
+            'partenaire_id'     => $request->filled('partenaire_id') ? $request->partenaire_id : null,
+        ];
+
+        if ($request->filled('agent_id')) {
+            $rdvData['agent_id'] = $request->agent_id;
+        }
+
+        if ($request->filled('partenaire_id') && !$oldPartenaireId) {
+            $rdvData['assigned_at'] = now();
+            if ($rdvData['statut'] === 'en_attente_affectation') {
+                $rdvData['statut'] = 'affecte';
+            }
+        }
+
+        $rendezVous->update($rdvData);
+
+        // Enregistrement dans l'historique
+        RendezVousHistory::log(
+            $rendezVous->id,
+            auth()->id(),
+            'modification',
+            "Rendez-vous et coordonnées du prospect modifiés par l'administrateur."
+        );
+
+        // Notification si partenaire affecté ou changé
+        if ($rendezVous->partenaire_id && $rendezVous->partenaire_id != $oldPartenaireId) {
+            try {
+                $rendezVous->load('partenaire');
+                if ($rendezVous->partenaire) {
+                    $rendezVous->partenaire->notify(new \App\Notifications\RendezVousAssignedNotification($rendezVous));
+                }
+            } catch (\Throwable $e) {}
+        }
+
+        $redirectUrl = url()->previous();
+        if (!str_contains($redirectUrl, 'tab=')) {
+            $separator = str_contains($redirectUrl, '?') ? '&' : '?';
+            $redirectUrl .= "{$separator}tab=workflow";
+        }
+
+        return redirect($redirectUrl)->with('success', "Le rendez-vous #{$rendezVous->id} a été modifié avec succès.");
+    }
+
+    /**
+     * Supprimer un rendez-vous
+     */
+    public function destroyRdv(Request $request, RendezVous $rendezVous)
+    {
+        $id = $rendezVous->id;
+        $prospectNom = $rendezVous->prospect ? $rendezVous->prospect->nomComplet() : 'Prospect';
+
+        RendezVousHistory::log(
+            $rendezVous->id,
+            auth()->id(),
+            'suppression',
+            "Rendez-vous #{$id} ({$prospectNom}) supprimé par l'administrateur."
+        );
+
+        $rendezVous->delete();
+
+        $redirectUrl = url()->previous();
+        if (!str_contains($redirectUrl, 'tab=')) {
+            $separator = str_contains($redirectUrl, '?') ? '&' : '?';
+            $redirectUrl .= "{$separator}tab=workflow";
+        }
+
+        return redirect($redirectUrl)->with('success', "Le rendez-vous #{$id} ({$prospectNom}) a été supprimé avec succès.");
+    }
+
+    /**
+     * Supprimer des rendez-vous en masse
+     */
+    public function bulkDestroyRdv(Request $request)
+    {
+        $request->validate([
+            'rdv_ids'   => 'required|array|min:1',
+            'rdv_ids.*' => 'exists:rendez_vous,id',
+        ]);
+
+        $rdvs = RendezVous::whereIn('id', $request->rdv_ids)->get();
+        $count = $rdvs->count();
+
+        foreach ($rdvs as $rdv) {
+            RendezVousHistory::log(
+                $rdv->id,
+                auth()->id(),
+                'suppression_en_masse',
+                "Rendez-vous #{$rdv->id} supprimé lors d'une action groupée par l'administrateur."
+            );
+            $rdv->delete();
+        }
+
+        $redirectUrl = url()->previous();
+        if (!str_contains($redirectUrl, 'tab=')) {
+            $separator = str_contains($redirectUrl, '?') ? '&' : '?';
+            $redirectUrl .= "{$separator}tab=workflow";
+        }
+
+        return redirect($redirectUrl)->with('success', "{$count} rendez-vous ont été supprimés avec succès.");
+    }
+
+    /**
      * Mettre à jour le statut d'une demande de contact du site public
      */
     public function updateRequestStatus(Request $request, $id)
