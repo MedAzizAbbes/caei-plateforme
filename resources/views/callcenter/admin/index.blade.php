@@ -121,7 +121,9 @@
             email: '',
             societe: '',
             secteur: '',
-            adresse: ''
+            adresse: '',
+            code_postal: '',
+            ville: ''
         },
         openEditRdv(rdv) {
             this.editingRdv = {
@@ -139,7 +141,9 @@
                 email: rdv.prospect ? (rdv.prospect.email || '') : '',
                 societe: rdv.prospect ? (rdv.prospect.societe || '') : '',
                 secteur: rdv.prospect ? (rdv.prospect.secteur || '') : '',
-                adresse: rdv.prospect ? (rdv.prospect.adresse || '') : ''
+                adresse: rdv.prospect ? (rdv.prospect.adresse || '') : '',
+                code_postal: rdv.prospect ? (rdv.prospect.code_postal || '') : '',
+                ville: rdv.prospect ? (rdv.prospect.ville || '') : ''
             };
             this.editRdvModal = true;
         },
@@ -537,6 +541,9 @@
                                             @if($rdv->prospect->societe)
                                                 <div class="text-[11px] text-slate-400 font-semibold">🏢 {{ $rdv->prospect->societe }}</div>
                                             @endif
+                                            @if($rdv->prospect->ville || $rdv->prospect->code_postal)
+                                                <div class="text-[11px] text-slate-500 font-medium">📍 {{ trim(($rdv->prospect->code_postal ? $rdv->prospect->code_postal . ' ' : '') . ($rdv->prospect->ville ?? '')) }}</div>
+                                            @endif
                                         @endif
                                     </td>
 
@@ -619,13 +626,15 @@
                                                         'agent_id'          => $rdv->agent_id,
                                                         'partenaire_id'     => $rdv->partenaire_id,
                                                         'prospect'          => $rdv->prospect ? [
-                                                            'nom'       => $rdv->prospect->nom,
-                                                            'prenom'    => $rdv->prospect->prenom,
-                                                            'telephone' => $rdv->prospect->telephone,
-                                                            'email'     => $rdv->prospect->email,
-                                                            'societe'   => $rdv->prospect->societe,
-                                                            'secteur'   => $rdv->prospect->secteur,
-                                                            'adresse'   => $rdv->prospect->adresse,
+                                                            'nom'         => $rdv->prospect->nom,
+                                                            'prenom'      => $rdv->prospect->prenom,
+                                                            'telephone'   => $rdv->prospect->telephone,
+                                                            'email'       => $rdv->prospect->email,
+                                                            'societe'     => $rdv->prospect->societe,
+                                                            'secteur'     => $rdv->prospect->secteur,
+                                                            'adresse'     => $rdv->prospect->adresse,
+                                                            'code_postal' => $rdv->prospect->code_postal,
+                                                            'ville'       => $rdv->prospect->ville,
                                                         ] : null,
                                                     ]) }})"
                                                     class="inline-flex items-center justify-center w-8 h-8 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition cursor-pointer shadow-xs hover:scale-105" 
@@ -1392,9 +1401,17 @@
                                     <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Secteur d'activité</label>
                                     <input type="text" name="secteur" x-model="editingRdv.secteur" placeholder="Ex: Informatique, Énergie..." class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
                                 </div>
-                                <div class="sm:col-span-2 md:col-span-3">
+                                <div>
                                     <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Adresse</label>
-                                    <input type="text" name="adresse" x-model="editingRdv.adresse" placeholder="Adresse complète..." class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                    <input type="text" name="adresse" x-model="editingRdv.adresse" placeholder="Rue, avenue, numéro..." class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Code Postal</label>
+                                    <input type="text" name="code_postal" x-model="editingRdv.code_postal" placeholder="Ex: 75008" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Ville</label>
+                                    <input type="text" name="ville" x-model="editingRdv.ville" placeholder="Ex: Paris" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-3.5 py-2 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
                                 </div>
                             </div>
                         </div>

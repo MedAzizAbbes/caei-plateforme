@@ -275,7 +275,7 @@ class CallCenterAdminWorkflowController extends Controller
 
             fputcsv($file, [
                 'ID RDV', 'Date RDV', 'Heure', 'Nom Prospect', 'Téléphone', 'Email', 
-                'Société', 'Secteur', 'Agent Créateur', 'Partenaire Affecté', 
+                'Société', 'Secteur', 'Adresse', 'Code Postal', 'Ville', 'Agent Créateur', 'Partenaire Affecté', 
                 'Statut RDV', 'Résultat Qualification', 'Niveau Potentiel'
             ], ';');
 
@@ -289,6 +289,9 @@ class CallCenterAdminWorkflowController extends Controller
                     $rdv->prospect ? $rdv->prospect->email : '',
                     $rdv->prospect ? $rdv->prospect->societe : '',
                     $rdv->prospect ? $rdv->prospect->secteur : '',
+                    $rdv->prospect ? $rdv->prospect->adresse : '',
+                    $rdv->prospect ? $rdv->prospect->code_postal : '',
+                    $rdv->prospect ? $rdv->prospect->ville : '',
                     $rdv->agent ? $rdv->agent->fullName() : '',
                     $rdv->partenaire ? $rdv->partenaire->fullName() : 'Non affecté',
                     $rdv->statusLabel(),
@@ -364,18 +367,22 @@ class CallCenterAdminWorkflowController extends Controller
             'societe'           => 'nullable|string|max:255',
             'secteur'           => 'nullable|string|max:255',
             'adresse'           => 'nullable|string|max:255',
+            'code_postal'       => 'nullable|string|max:20',
+            'ville'             => 'nullable|string|max:150',
         ]);
 
         // Mise à jour du prospect lié
         if ($rendezVous->prospect) {
             $rendezVous->prospect->update([
-                'nom'       => $request->nom,
-                'prenom'    => $request->prenom,
-                'telephone' => $request->telephone,
-                'email'     => $request->email,
-                'societe'   => $request->societe,
-                'secteur'   => $request->secteur,
-                'adresse'   => $request->adresse,
+                'nom'         => $request->nom,
+                'prenom'      => $request->prenom,
+                'telephone'   => $request->telephone,
+                'email'       => $request->email,
+                'societe'     => $request->societe,
+                'secteur'     => $request->secteur,
+                'adresse'     => $request->adresse,
+                'code_postal' => $request->code_postal,
+                'ville'       => $request->ville,
             ]);
         }
 

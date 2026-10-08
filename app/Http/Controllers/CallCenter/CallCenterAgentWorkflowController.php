@@ -65,6 +65,9 @@ class CallCenterAgentWorkflowController extends Controller
             'telephone'         => 'required|string|max:50',
             'societe'           => 'nullable|string|max:255',
             'secteur'           => 'nullable|string|max:255',
+            'adresse'           => 'nullable|string|max:255',
+            'code_postal'       => 'nullable|string|max:20',
+            'ville'             => 'nullable|string|max:150',
             // Rendez-vous Data
             'date_rendez_vous'  => 'required|date|after_or_equal:today',
             'heure_rendez_vous' => 'required',
@@ -76,14 +79,17 @@ class CallCenterAgentWorkflowController extends Controller
 
         // 1. Créer le prospect
         $prospect = Prospect::create([
-            'agent_id'  => $agent->id,
-            'nom'       => $request->nom,
-            'prenom'    => $request->prenom,
-            'email'     => $request->email,
-            'telephone' => $request->telephone,
-            'societe'   => $request->societe,
-            'secteur'   => $request->secteur,
-            'notes'     => $request->notes,
+            'agent_id'    => $agent->id,
+            'nom'         => $request->nom,
+            'prenom'      => $request->prenom,
+            'email'       => $request->email,
+            'telephone'   => $request->telephone,
+            'societe'     => $request->societe,
+            'secteur'     => $request->secteur,
+            'adresse'     => $request->adresse,
+            'code_postal' => $request->code_postal,
+            'ville'       => $request->ville,
+            'notes'       => $request->notes,
         ]);
 
         // 2. Créer le rendez-vous (statut automatique : en_attente_affectation)
