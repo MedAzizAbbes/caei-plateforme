@@ -18,6 +18,8 @@ class Prospect extends Model
         'societe',
         'secteur',
         'adresse',
+        'code_postal',
+        'ville',
         'notes',
     ];
 
