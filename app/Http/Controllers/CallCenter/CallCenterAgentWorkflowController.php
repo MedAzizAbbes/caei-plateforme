@@ -42,7 +42,10 @@ class CallCenterAgentWorkflowController extends Controller
                 $q->where('nom', 'like', "%{$search}%")
                   ->orWhere('prenom', 'like', "%{$search}%")
                   ->orWhere('telephone', 'like', "%{$search}%")
-                  ->orWhere('societe', 'like', "%{$search}%");
+                  ->orWhere('societe', 'like', "%{$search}%")
+                  ->orWhere('adresse', 'like', "%{$search}%")
+                  ->orWhere('code_postal', 'like', "%{$search}%")
+                  ->orWhere('ville', 'like', "%{$search}%");
             });
         }
 

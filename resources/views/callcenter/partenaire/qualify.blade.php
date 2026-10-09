@@ -60,6 +60,19 @@
                                     <span class="text-slate-800 font-semibold">{{ $rendezVous->prospect->secteur }}</span>
                                 </div>
                             @endif
+                            @if($rendezVous->prospect->adresse || $rendezVous->prospect->code_postal || $rendezVous->prospect->ville)
+                                <div class="flex items-start gap-2">
+                                    <span class="font-bold text-slate-400">📍 Adresse :</span>
+                                    <div class="text-slate-800 font-semibold">
+                                        @if($rendezVous->prospect->adresse)
+                                            <div>{{ $rendezVous->prospect->adresse }}</div>
+                                        @endif
+                                        @if($rendezVous->prospect->code_postal || $rendezVous->prospect->ville)
+                                            <div class="text-slate-600 text-[11px] font-medium">{{ trim(($rendezVous->prospect->code_postal ? $rendezVous->prospect->code_postal . ' ' : '') . ($rendezVous->prospect->ville ?? '')) }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            @endif
                         </div>
 
                         <div class="border-t border-slate-100 pt-3 space-y-2 text-xs">

@@ -194,6 +194,11 @@
                                         📧 {{ $rdv->prospect->email }}
                                     </div>
                                 @endif
+                                @if($rdv->prospect->adresse || $rdv->prospect->code_postal || $rdv->prospect->ville)
+                                    <div class="text-[11px] text-slate-500 truncate" title="{{ trim(($rdv->prospect->adresse ? $rdv->prospect->adresse . ', ' : '') . ($rdv->prospect->code_postal ? $rdv->prospect->code_postal . ' ' : '') . ($rdv->prospect->ville ?? '')) }}">
+                                        📍 {{ trim(($rdv->prospect->code_postal ? $rdv->prospect->code_postal . ' ' : '') . ($rdv->prospect->ville ?? ($rdv->prospect->adresse ?? ''))) }}
+                                    </div>
+                                @endif
                             </div>
 
                             <!-- Card RDV & Agent Info -->
@@ -275,6 +280,9 @@
                                         <div class="text-xs text-slate-500">📞 {{ $rdv->prospect->telephone }}</div>
                                         @if($rdv->prospect->societe)
                                             <div class="text-[11px] text-slate-400">🏢 {{ $rdv->prospect->societe }}</div>
+                                        @endif
+                                        @if($rdv->prospect->ville || $rdv->prospect->code_postal)
+                                            <div class="text-[11px] text-slate-400">📍 {{ trim(($rdv->prospect->code_postal ? $rdv->prospect->code_postal . ' ' : '') . ($rdv->prospect->ville ?? '')) }}</div>
                                         @endif
                                     </td>
 
