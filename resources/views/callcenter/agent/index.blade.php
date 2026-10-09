@@ -301,6 +301,11 @@
                                         📧 {{ $rdv->prospect->email }}
                                     </div>
                                 @endif
+                                @if($rdv->prospect->adresse || $rdv->prospect->code_postal || $rdv->prospect->ville)
+                                    <div class="text-[11px] text-slate-500 truncate" title="{{ trim(($rdv->prospect->adresse ? $rdv->prospect->adresse . ', ' : '') . ($rdv->prospect->code_postal ? $rdv->prospect->code_postal . ' ' : '') . ($rdv->prospect->ville ?? '')) }}">
+                                        📍 {{ trim(($rdv->prospect->code_postal ? $rdv->prospect->code_postal . ' ' : '') . ($rdv->prospect->ville ?? ($rdv->prospect->adresse ?? ''))) }}
+                                    </div>
+                                @endif
                             </div>
 
                             <!-- Card RDV Info -->
@@ -394,6 +399,9 @@
                                             <div>
                                                 <div class="font-bold text-slate-900">{{ $rdv->prospect->nomComplet() }}</div>
                                                 <div class="text-xs text-slate-500">📞 {{ $rdv->prospect->telephone }}</div>
+                                                @if($rdv->prospect->ville || $rdv->prospect->code_postal)
+                                                    <div class="text-[11px] text-slate-400">📍 {{ trim(($rdv->prospect->code_postal ? $rdv->prospect->code_postal . ' ' : '') . ($rdv->prospect->ville ?? '')) }}</div>
+                                                @endif
                                             </div>
                                         </div>
                                     </td>
@@ -456,8 +464,8 @@
 
         <!-- 5. Modal Saisie Nouveau RDV Client (Thème Rouge Call Center) -->
         <div x-show="showNewModal" x-cloak class="fixed inset-0 z-50 overflow-y-auto bg-slate-950/70 backdrop-blur-sm flex items-center justify-center p-4">
-            <div @click.away="showNewModal = false" class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl overflow-hidden transform transition-all border border-slate-100">
-                <div class="p-6 text-white flex justify-between items-center" style="background: linear-gradient(135deg, #7f0504 0%, #4a0202 100%);">
+            <div @click.away="showNewModal = false" class="bg-white rounded-3xl max-w-2xl w-full shadow-2xl overflow-hidden transform transition-all border border-slate-100 max-h-[90vh] flex flex-col">
+                <div class="p-6 text-white flex justify-between items-center shrink-0" style="background: linear-gradient(135deg, #7f0504 0%, #4a0202 100%);">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center font-black text-lg">
                             📞
@@ -470,7 +478,7 @@
                     <button @click="showNewModal = false" class="text-white/70 hover:text-white text-2xl font-black transition leading-none cursor-pointer">&times;</button>
                 </div>
 
-                <form method="POST" action="{{ route('callcenter.agent.store') }}" class="p-6 space-y-5">
+                <form method="POST" action="{{ route('callcenter.agent.store') }}" class="p-6 space-y-5 overflow-y-auto">
                     @csrf
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -494,6 +502,21 @@
                             <input type="email" name="email" placeholder="prospect@societe.com" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
                         </div>
 
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Adresse</label>
+                            <input type="text" name="adresse" placeholder="Ex: 12 Rue de Paris" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Code Postal</label>
+                            <input type="text" name="code_postal" placeholder="Ex: 75008" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Ville</label>
+                            <input type="text" name="ville" placeholder="Ex: Paris" class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
+                        </div>
+
                         <div>
                             <label class="block text-xs font-bold uppercase text-slate-500 mb-1">Date du RDV *</label>
                             <input type="date" name="date_rendez_vous" min="{{ date('Y-m-d') }}" required class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]">
@@ -515,7 +538,7 @@
                         <textarea name="notes" rows="3" placeholder="Informations complémentaires, disponibilités du client..." class="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-2.5 text-sm text-slate-800 focus:border-[#7f0504] focus:ring-[#7f0504]"></textarea>
                     </div>
 
-                    <div class="pt-4 border-t border-slate-100 flex justify-end gap-3">
+                    <div class="pt-4 border-t border-slate-100 flex justify-end gap-3 sticky bottom-0 bg-white">
                         <button type="button" @click="showNewModal = false" class="px-5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-600 hover:bg-slate-100 transition">
                             Annuler
                         </button>
