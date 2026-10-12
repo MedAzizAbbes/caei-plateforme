@@ -62,7 +62,7 @@ class RendezVous extends Model
 
         return match ($statut) {
             'en_attente_affectation'  => 'En attente d\'affectation',
-            'affecte'                 => 'Pris en charge',
+            'affecte'                 => 'Qualification en cours',
             'qualification_en_cours'  => 'Qualification en cours',
             'qualifie'                => 'Qualifié',
             'annule'                  => 'Annulé',
@@ -80,7 +80,7 @@ class RendezVous extends Model
 
         return match ($statut) {
             'en_attente_affectation'  => 'bg-amber-100 text-amber-800 border-amber-300',
-            'affecte'                 => 'bg-blue-100 text-blue-800 border-blue-300',
+            'affecte'                 => 'bg-indigo-100 text-indigo-800 border-indigo-300',
             'qualification_en_cours'  => 'bg-indigo-100 text-indigo-800 border-indigo-300',
             'qualifie'                => 'bg-emerald-100 text-emerald-800 border-emerald-300',
             'annule'                  => 'bg-red-100 text-red-800 border-red-300',
