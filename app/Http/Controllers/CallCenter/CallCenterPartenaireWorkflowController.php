@@ -24,6 +24,37 @@ class CallCenterPartenaireWorkflowController extends Controller
             $query->where('statut', $request->statut);
         }
 
+        // Filtres de recherche
+        if ($request->filled('search_nom')) {
+            $nom = trim($request->search_nom);
+            $query->whereHas('prospect', function ($q) use ($nom) {
+                $q->where(function ($sub) use ($nom) {
+                    $sub->where('nom', 'like', "%{$nom}%")
+                        ->orWhere('prenom', 'like', "%{$nom}%")
+                        ->orWhereRaw("CONCAT(nom, ' ', prenom) LIKE ?", ["%{$nom}%"])
+                        ->orWhereRaw("CONCAT(prenom, ' ', nom) LIKE ?", ["%{$nom}%"]);
+                });
+            });
+        }
+
+        if ($request->filled('search_ville')) {
+            $ville = trim($request->search_ville);
+            $query->whereHas('prospect', function ($q) use ($ville) {
+                $q->where('ville', 'like', "%{$ville}%");
+            });
+        }
+
+        if ($request->filled('search_code_postal')) {
+            $cp = trim($request->search_code_postal);
+            $query->whereHas('prospect', function ($q) use ($cp) {
+                $q->where('code_postal', 'like', "%{$cp}%");
+            });
+        }
+
+        if ($request->filled('search_date')) {
+            $query->whereDate('date_rendez_vous', $request->search_date);
+        }
+
         // Filtre par état de qualification (depuis les cartes KPI)
         $filtre = $request->input('filtre');
         if ($filtre === 'a_qualifier') {
