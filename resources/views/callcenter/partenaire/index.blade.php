@@ -18,7 +18,7 @@
         </div>
     </x-slot>
 
-    <div class="py-8" x-data="{ displayMode: 'cards' }">
+    <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
 
             @if(session('success'))
@@ -122,125 +122,95 @@
                 </div>
             @endif
 
-            <!-- 3. Navigation d'Affichage Fiches vs Tableau -->
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
-                <div class="flex items-center gap-2">
-                    <span class="text-xs font-bold text-slate-500 uppercase mr-1">Mode d'affichage :</span>
-                    <button type="button" 
-                            @click="displayMode = 'cards'" 
-                            :style="displayMode === 'cards' ? 'background-color: #7f0504; color: #ffffff;' : ''"
-                            :class="displayMode === 'cards' ? 'shadow-2xs font-black' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold'"
-                            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
-                        <span>🎴 Fiches Opportunité</span>
-                    </button>
-                    <button type="button" 
-                            @click="displayMode = 'table'" 
-                            :style="displayMode === 'table' ? 'background-color: #7f0504; color: #ffffff;' : ''"
-                            :class="displayMode === 'table' ? 'shadow-2xs font-black' : 'bg-slate-100 text-slate-600 hover:bg-slate-200 font-bold'"
-                            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs transition cursor-pointer">
-                        <span>📑 Vue Tableau</span>
-                    </button>
-                </div>
+            <div id="rdv-ajax-container">
+            <!-- 3. Formulaire de filtres du tableau -->
+            <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/90 shadow-2xs mb-4">
+                <form method="GET" action="{{ route('callcenter.partenaire.index') }}" id="rdv-filter-form" class="space-y-3">
+                    @if(request('filtre'))
+                        <input type="hidden" name="filtre" value="{{ request('filtre') }}">
+                    @endif
+                    @if(request('statut'))
+                        <input type="hidden" name="statut" value="{{ request('statut') }}">
+                    @endif
 
-                <div class="text-xs text-slate-500 font-semibold">
-                    Affichage de <strong class="text-slate-900">{{ count($rendezVousList) }}</strong> sur <strong class="text-slate-900">{{ $rendezVousList->total() }}</strong> rendez-vous attribué(s)
-                </div>
-            </div>
-
-            <!-- 4A. MODE FICHES OPPORTUNITÉ COMMERCIALES -->
-            <div x-show="displayMode === 'cards'" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                @forelse($rendezVousList as $rdv)
-                    <div class="rounded-2xl {{ $rdv->qualificationCardClasses() }} p-5 flex flex-col justify-between space-y-4" style="{{ $rdv->qualificationCardStyle() }}">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                        {{-- Filtre par Nom / Prénom --}}
                         <div>
-                            <!-- Card Top Bar -->
-                            <div class="flex items-start justify-between gap-3 border-b border-slate-100 pb-3">
-                                <div class="flex items-center gap-3 min-w-0">
-                                    <div class="w-10 h-10 rounded-2xl bg-red-100 text-[#7f0504] font-black flex items-center justify-center text-xs shrink-0 shadow-2xs">
-                                        {{ strtoupper(substr($rdv->prospect->nom, 0, 1) . substr($rdv->prospect->prenom, 0, 1)) ?: '👤' }}
-                                    </div>
-                                    <div class="min-w-0 flex-1">
-                                        <h4 class="font-black text-slate-900 text-sm leading-snug truncate">{{ $rdv->prospect->nomComplet() }}</h4>
-                                        @if($rdv->prospect->societe)
-                                            <p class="text-[11px] font-bold text-red-800 truncate">🏢 {{ $rdv->prospect->societe }}</p>
-                                        @endif
-                                    </div>
-                                </div>
-                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-black border shrink-0 {{ $rdv->statusBadgeClasses() }}">
-                                    {{ $rdv->statusLabel() }}
-                                </span>
-                            </div>
+                            <label for="search_nom" class="block text-[11px] font-black uppercase text-slate-500 mb-1">
+                                👤 Prospect (Nom / Prénom)
+                            </label>
+                            <input type="text"
+                                   id="search_nom"
+                                   name="search_nom"
+                                   value="{{ request('search_nom') }}"
+                                   placeholder="Rechercher par nom..."
+                                   class="w-full text-xs rounded-xl border-slate-200 focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504] placeholder:text-slate-400 py-2 px-3 shadow-2xs">
+                        </div>
 
-                            <!-- Card Contact Prospect -->
-                            <div class="mt-3 space-y-1.5 text-xs text-slate-600">
-                                <a href="tel:{{ $rdv->prospect->telephone }}" class="inline-flex items-center gap-1.5 font-black text-[#7f0504] hover:underline bg-red-50 px-2.5 py-1 rounded-lg border border-red-100">
-                                    <span>📞</span>
-                                    <span>{{ $rdv->prospect->telephone }}</span>
+                        {{-- Filtre par Ville --}}
+                        <div>
+                            <label for="search_ville" class="block text-[11px] font-black uppercase text-slate-500 mb-1">
+                                🏙️ Ville
+                            </label>
+                            <input type="text"
+                                   id="search_ville"
+                                   name="search_ville"
+                                   value="{{ request('search_ville') }}"
+                                   placeholder="Ex: Paris, Lyon..."
+                                   class="w-full text-xs rounded-xl border-slate-200 focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504] placeholder:text-slate-400 py-2 px-3 shadow-2xs">
+                        </div>
+
+                        {{-- Filtre par Code Postal --}}
+                        <div>
+                            <label for="search_code_postal" class="block text-[11px] font-black uppercase text-slate-500 mb-1">
+                                📮 Code Postal
+                            </label>
+                            <input type="text"
+                                   id="search_code_postal"
+                                   name="search_code_postal"
+                                   value="{{ request('search_code_postal') }}"
+                                   placeholder="Ex: 75001, 59124..."
+                                   class="w-full text-xs rounded-xl border-slate-200 focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504] placeholder:text-slate-400 py-2 px-3 shadow-2xs">
+                        </div>
+
+                        {{-- Filtre par Date de RDV --}}
+                        <div>
+                            <label for="search_date" class="block text-[11px] font-black uppercase text-slate-500 mb-1">
+                                📅 Date du rendez-vous
+                            </label>
+                            <input type="date"
+                                   id="search_date"
+                                   name="search_date"
+                                   value="{{ request('search_date') }}"
+                                   class="w-full text-xs rounded-xl border-slate-200 focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504] py-2 px-3 shadow-2xs">
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-100">
+                        <div class="flex items-center gap-2">
+                            <button type="submit"
+                                    class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-black text-white shadow-2xs hover:opacity-95 transition cursor-pointer"
+                                    style="background-color: #7f0504;">
+                                <span>🔍 Filtrer</span>
+                            </button>
+
+                            @if(request('search_nom') || request('search_ville') || request('search_code_postal') || request('search_date'))
+                                <a href="{{ route('callcenter.partenaire.index', array_filter(['filtre' => request('filtre'), 'statut' => request('statut')])) }}"
+                                   class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
+                                    ✕ Effacer les filtres
                                 </a>
-                                @if($rdv->prospect->email)
-                                    <div class="text-[11px] text-slate-500 truncate" title="{{ $rdv->prospect->email }}">
-                                        📧 {{ $rdv->prospect->email }}
-                                    </div>
-                                @endif
-                                @if($rdv->prospect->adresse || $rdv->prospect->code_postal || $rdv->prospect->ville)
-                                    <div class="text-[11px] text-slate-500 truncate" title="{{ trim(($rdv->prospect->adresse ? $rdv->prospect->adresse . ', ' : '') . ($rdv->prospect->code_postal ? $rdv->prospect->code_postal . ' ' : '') . ($rdv->prospect->ville ?? '')) }}">
-                                        📍 {{ trim(($rdv->prospect->code_postal ? $rdv->prospect->code_postal . ' ' : '') . ($rdv->prospect->ville ?? ($rdv->prospect->adresse ?? ''))) }}
-                                    </div>
-                                @endif
-                            </div>
-
-                            <!-- Card RDV & Agent Info -->
-                            <div class="mt-3 bg-slate-50 p-3 rounded-xl border border-slate-100 space-y-1">
-                                <div class="text-xs font-black text-slate-900 flex items-center gap-2">
-                                    <span>📅 {{ \Carbon\Carbon::parse($rdv->date_rendez_vous)->format('d/m/Y') }}</span>
-                                    <span class="text-slate-400">|</span>
-                                    <span>⏰ {{ \Carbon\Carbon::parse($rdv->heure_rendez_vous)->format('H:i') }}</span>
-                                </div>
-                                <p class="text-xs text-slate-600 truncate font-medium" title="{{ $rdv->objet }}">
-                                    <strong>Objet :</strong> {{ $rdv->objet }}
-                                </p>
-                                <p class="text-[11px] text-slate-400 pt-0.5">
-                                    Agent créateur : <strong class="text-slate-700 font-semibold">{{ $rdv->agent->fullName() }}</strong>
-                                </p>
-                            </div>
-
-                            <!-- Card Qualification Status -->
-                            <div class="mt-3 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                                <span class="block text-[10px] font-bold uppercase text-slate-400">État Évaluation</span>
-                                @if($rdv->qualification)
-                                    <div class="text-right">
-                                        <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] {{ $rdv->qualification->resultatBadgeClasses() }}">
-                                            {{ $rdv->qualification->resultat }}
-                                        </span>
-                                        <div class="text-[10px] text-slate-500 mt-0.5">Potentiel: <strong class="text-slate-800">{{ $rdv->qualification->potentiel }}</strong></div>
-                                    </div>
-                                @else
-                                    <span class="inline-flex items-center gap-1 text-[11px] font-bold text-amber-800 bg-amber-50 px-2.5 py-1 rounded-lg border border-amber-200">
-                                        ⏳ À qualifier
-                                    </span>
-                                @endif
-                            </div>
+                            @endif
                         </div>
 
-                        <!-- Card Action Footer -->
-                        <div class="pt-2 border-t border-slate-100 flex justify-end">
-                            <a href="{{ route('callcenter.partenaire.qualify', $rdv) }}" 
-                               class="w-full text-center py-2 rounded-xl text-white text-xs font-black uppercase transition shadow-2xs hover:opacity-95"
-                               style="background-color: #7f0504;">
-                                📋 {{ $rdv->qualification ? 'Modifier Qualification' : 'Qualifier le prospect' }}
-                            </a>
-                        </div>
+                        <span class="text-xs text-slate-500 font-semibold">
+                            Affichage de <strong class="text-slate-900">{{ count($rendezVousList) }}</strong> sur <strong class="text-slate-900">{{ $rendezVousList->total() }}</strong> rendez-vous attribué(s)
+                        </span>
                     </div>
-                @empty
-                    <div class="col-span-3 bg-white p-12 text-center rounded-2xl border border-slate-200 text-slate-400">
-                        <div class="text-4xl mb-2">📭</div>
-                        <p class="text-sm font-bold text-slate-700">Aucun rendez-vous attribué pour le moment.</p>
-                        <p class="text-xs text-slate-400 mt-1">L'administrateur vous notifiera dès qu'un nouveau rendez-vous vous sera affecté.</p>
-                    </div>
-                @endforelse
+                </form>
             </div>
 
-            <!-- 4B. MODE TABLEAU PRO (VUE DENSE) -->
-            <div x-show="displayMode === 'table'" class="bg-white rounded-2xl border border-slate-200/80 shadow-2xs overflow-hidden">
+            <!-- TABLEAU -->
+            <div class="bg-white rounded-2xl border border-slate-200/80 shadow-2xs overflow-hidden">
                 <div class="overflow-x-auto">
                     <table class="w-full text-left border-collapse text-sm">
                         <thead>
@@ -326,6 +296,86 @@
                 </div>
             </div>
 
+            </div>{{-- #rdv-ajax-container --}}
+
         </div>
     </div>
+
+    <script>
+    (function () {
+        function initAjaxTable() {
+            const container = document.getElementById('rdv-ajax-container');
+            if (!container) return;
+
+            function loadUrl(url) {
+                container.style.opacity = '0.5';
+                container.style.pointerEvents = 'none';
+
+                fetch(url, {
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+                    }
+                })
+                .then(res => res.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const newContainer = doc.getElementById('rdv-ajax-container');
+                    if (newContainer) {
+                        container.innerHTML = newContainer.innerHTML;
+                        container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        initAjaxTable();
+                        window.history.pushState({}, '', url);
+                    }
+                })
+                .catch(() => {
+                    window.location.href = url;
+                })
+                .finally(() => {
+                    container.style.opacity = '';
+                    container.style.pointerEvents = '';
+                });
+            }
+
+            // Gestion des clics sur les liens de pagination et d'effacement de filtres
+            container.addEventListener('click', function (e) {
+                const link = e.target.closest('a[href]');
+                if (!link) return;
+
+                const href = link.getAttribute('href');
+                if (!href) return;
+
+                // Liens de pagination ou effacer filtres
+                if (href.includes('?page=') || href.includes('&page=') || link.textContent.includes('Effacer')) {
+                    e.preventDefault();
+                    loadUrl(href);
+                }
+            });
+
+            // Gestion de la soumission du formulaire de recherche en AJAX
+            const filterForm = container.querySelector('#rdv-filter-form');
+            if (filterForm) {
+                filterForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    const formData = new FormData(filterForm);
+                    const params = new URLSearchParams();
+
+                    for (const [key, value] of formData.entries()) {
+                        if (value !== '' && value !== null) {
+                            params.append(key, value);
+                        }
+                    }
+
+                    const actionUrl = filterForm.getAttribute('action') || window.location.pathname;
+                    const fullUrl = actionUrl + (params.toString() ? '?' + params.toString() : '');
+                    loadUrl(fullUrl);
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', initAjaxTable);
+    })();
+    </script>
+
 </x-app-layout>
