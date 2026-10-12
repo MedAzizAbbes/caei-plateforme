@@ -24,7 +24,15 @@ class CallCenterPartenaireWorkflowController extends Controller
             $query->where('statut', $request->statut);
         }
 
-        $rendezVousList = $query->orderBy('date_rendez_vous', 'asc')->paginate(10);
+        // Filtre par état de qualification (depuis les cartes KPI)
+        $filtre = $request->input('filtre');
+        if ($filtre === 'a_qualifier') {
+            $query->doesntHave('qualification');
+        } elseif ($filtre === 'qualifie') {
+            $query->has('qualification');
+        }
+
+        $rendezVousList = $query->orderBy('date_rendez_vous', 'asc')->paginate(10)->withQueryString();
 
         return view('callcenter.partenaire.index', compact('rendezVousList'));
     }

@@ -47,47 +47,57 @@
                 </div>
             </div>
 
-            <!-- 2. Cartes KPI Synthétiques du Partenaire -->
             @php
                 $allRdvsCollection = $rendezVousList->getCollection();
                 $totalCount = $rendezVousList->total();
                 $toQualifyCount = $allRdvsCollection->filter(fn($r) => !$r->qualification)->count();
                 $qualifiedCount = $allRdvsCollection->filter(fn($r) => $r->qualification !== null)->count();
                 $highPotentialCount = $allRdvsCollection->filter(fn($r) => optional($r->qualification)->potentiel === 'Élevé')->count();
+                $currentFilter = request('filtre');
             @endphp
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex items-center gap-4 hover:border-blue-200 transition">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-50 text-blue-800 font-black text-xl flex items-center justify-center shrink-0">
+                {{-- Total Attribués --}}
+                <a href="{{ route('callcenter.partenaire.index') }}"
+                   class="bg-white p-5 rounded-2xl border shadow-2xs flex items-center gap-4 transition cursor-pointer
+                          {{ !$currentFilter ? 'border-blue-400 ring-2 ring-blue-200' : 'border-slate-200 hover:border-blue-200' }}">
+                    <div class="w-12 h-12 rounded-2xl {{ !$currentFilter ? 'bg-blue-100' : 'bg-blue-50' }} text-blue-800 font-black text-xl flex items-center justify-center shrink-0">
                         🤝
                     </div>
                     <div>
                         <p class="text-[11px] font-bold uppercase text-slate-400">Total Attribués</p>
                         <p class="text-2xl font-black text-slate-900 mt-0.5">{{ $totalCount }}</p>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex items-center gap-4 hover:border-amber-200 transition">
-                    <div class="w-12 h-12 rounded-2xl bg-amber-50 text-amber-800 font-black text-xl flex items-center justify-center shrink-0">
+                {{-- À Qualifier --}}
+                <a href="{{ route('callcenter.partenaire.index', ['filtre' => 'a_qualifier']) }}"
+                   class="bg-white p-5 rounded-2xl border shadow-2xs flex items-center gap-4 transition cursor-pointer
+                          {{ $currentFilter === 'a_qualifier' ? 'border-amber-400 ring-2 ring-amber-200' : 'border-slate-200 hover:border-amber-200' }}">
+                    <div class="w-12 h-12 rounded-2xl {{ $currentFilter === 'a_qualifier' ? 'bg-amber-100' : 'bg-amber-50' }} text-amber-800 font-black text-xl flex items-center justify-center shrink-0">
                         ⏳
                     </div>
                     <div>
                         <p class="text-[11px] font-bold uppercase text-slate-400">À Qualifier</p>
                         <p class="text-2xl font-black text-amber-800 mt-0.5">{{ $toQualifyCount }}</p>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex items-center gap-4 hover:border-emerald-200 transition">
-                    <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-800 font-black text-xl flex items-center justify-center shrink-0">
+                {{-- RDV Qualifiés --}}
+                <a href="{{ route('callcenter.partenaire.index', ['filtre' => 'qualifie']) }}"
+                   class="bg-white p-5 rounded-2xl border shadow-2xs flex items-center gap-4 transition cursor-pointer
+                          {{ $currentFilter === 'qualifie' ? 'border-emerald-400 ring-2 ring-emerald-200' : 'border-slate-200 hover:border-emerald-200' }}">
+                    <div class="w-12 h-12 rounded-2xl {{ $currentFilter === 'qualifie' ? 'bg-emerald-100' : 'bg-emerald-50' }} text-emerald-800 font-black text-xl flex items-center justify-center shrink-0">
                         🎯
                     </div>
                     <div>
                         <p class="text-[11px] font-bold uppercase text-slate-400">RDV Qualifiés</p>
                         <p class="text-2xl font-black text-emerald-800 mt-0.5">{{ $qualifiedCount }}</p>
                     </div>
-                </div>
+                </a>
 
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex items-center gap-4 hover:border-amber-300 transition">
+                {{-- Potentiel Élevé --}}
+                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-2xs flex items-center gap-4">
                     <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-900 font-black text-xl flex items-center justify-center shrink-0">
                         🔥
                     </div>
@@ -97,6 +107,20 @@
                     </div>
                 </div>
             </div>
+
+            {{-- Indicateur filtre actif --}}
+            @if($currentFilter)
+                <div class="flex items-center gap-3 px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-xs font-bold text-slate-700">
+                    <span>🔍 Filtre actif :
+                        @if($currentFilter === 'a_qualifier') <span class="text-amber-700">À Qualifier</span>
+                        @elseif($currentFilter === 'qualifie') <span class="text-emerald-700">RDV Qualifiés</span>
+                        @endif
+                    </span>
+                    <a href="{{ route('callcenter.partenaire.index') }}" class="ml-auto inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 text-[11px] font-black transition">
+                        ✕ Réinitialiser
+                    </a>
+                </div>
+            @endif
 
             <!-- 3. Navigation d'Affichage Fiches vs Tableau -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white p-4 rounded-2xl border border-slate-200 shadow-2xs">
