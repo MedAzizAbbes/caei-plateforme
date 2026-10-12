@@ -8,6 +8,61 @@
                 <p class="text-xs text-slate-500 font-medium">Gestion des opportunités attribuées et évaluation de la qualification commerciale</p>
             </div>
             <div class="flex items-center gap-2">
+                {{-- Icône Notifications Partenaire --}}
+                <div x-data="{ openNotifications: false }" class="relative">
+                    <button type="button" @click="openNotifications = !openNotifications"
+                            class="relative inline-flex items-center gap-2 bg-white border border-amber-200 text-slate-800 text-xs font-bold px-3.5 py-2 rounded-xl shadow-2xs hover:bg-amber-50 transition cursor-pointer">
+                        <span>🔔 Notifications</span>
+                        @if(auth()->user()->unreadNotifications->count() > 0)
+                            <span class="bg-red-600 text-white font-black text-[10px] px-2 py-0.5 rounded-full animate-bounce">
+                                {{ auth()->user()->unreadNotifications->count() }}
+                            </span>
+                        @else
+                            <span class="bg-slate-100 text-slate-500 font-bold text-[10px] px-2 py-0.5 rounded-full">0</span>
+                        @endif
+                    </button>
+
+                    {{-- Dropdown Notifications --}}
+                    <div x-show="openNotifications" @click.away="openNotifications = false" x-cloak
+                         class="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 overflow-hidden"
+                         x-transition>
+                        <div class="p-4 text-white flex justify-between items-center" style="background: linear-gradient(135deg, #7f0504 0%, #4a0202 100%);">
+                            <div class="flex items-center gap-2">
+                                <span class="text-base">🔔</span>
+                                <h4 class="font-black text-xs uppercase text-white">Mes Notifications</h4>
+                            </div>
+                            @if(auth()->user()->unreadNotifications->count() > 0)
+                                <form method="POST" action="{{ route('callcenter.partenaire.notifications.markread') }}">
+                                    @csrf
+                                    <button type="submit" class="text-[10px] font-bold text-red-200 hover:text-white underline cursor-pointer">
+                                        Tout marquer comme lu
+                                    </button>
+                                </form>
+                            @endif
+                        </div>
+                        <div class="max-h-80 overflow-y-auto divide-y divide-slate-100 text-xs">
+                            @forelse(auth()->user()->notifications->take(10) as $notification)
+                                <div class="p-4 hover:bg-slate-50 transition {{ $notification->read_at ? 'opacity-60' : 'bg-amber-50/30' }}">
+                                    <div class="flex items-start justify-between gap-2">
+                                        <p class="font-black text-slate-900 leading-snug">{{ $notification->data['title'] ?? 'Notification' }}</p>
+                                        <span class="text-[9px] text-slate-400 font-bold whitespace-nowrap">{{ $notification->created_at->diffForHumans() }}</span>
+                                    </div>
+                                    <p class="text-slate-600 text-[11px] mt-1 leading-relaxed">{{ $notification->data['message'] ?? '' }}</p>
+                                    @if(isset($notification->data['url']))
+                                        <a href="{{ $notification->data['url'] }}" class="inline-flex items-center gap-1 text-[10px] font-bold text-[#7f0504] hover:underline mt-2">
+                                            <span>Consulter la fiche RDV</span> ➔
+                                        </a>
+                                    @endif
+                                </div>
+                            @empty
+                                <div class="p-6 text-center text-slate-400 text-xs">
+                                    Aucune notification reçue pour le moment.
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+
                 <span class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-950 text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-2xs">
                     <span>🤝 {{ auth()->user()->fullName() }}</span>
                     @if(auth()->user()->institution)
@@ -30,44 +85,7 @@
                 </div>
             @endif
 
-            {{-- Bandeau de Notifications en direct pour le Partenaire --}}
-            @if(auth()->user()->unreadNotifications->count() > 0)
-                <div class="p-6 rounded-3xl bg-amber-50 border-2 border-amber-300 shadow-md space-y-3">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-2.5">
-                            <span class="text-2xl animate-bounce">🎯</span>
-                            <div>
-                                <h3 class="text-sm font-black uppercase text-amber-950">
-                                    Nouveaux Rendez-vous Affectés : {{ auth()->user()->unreadNotifications->count() }} notification(s) !
-                                </h3>
-                                <p class="text-xs text-amber-800 font-medium">L'administrateur vous a attribué de nouveaux prospects à qualifier.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2">
-                        @foreach(auth()->user()->unreadNotifications as $notification)
-                            <div class="p-3.5 bg-white rounded-2xl border border-amber-200 shadow-2xs flex flex-col justify-between gap-2 text-xs">
-                                <div>
-                                    <div class="flex items-center justify-between">
-                                        <span class="font-black text-slate-900">{{ $notification->data['title'] ?? 'Nouveau RDV' }}</span>
-                                        <span class="text-[9px] text-slate-400 font-bold">{{ $notification->created_at->diffForHumans() }}</span>
-                                    </div>
-                                    <p class="text-slate-600 text-[11px] mt-1 leading-relaxed">{{ $notification->data['message'] ?? '' }}</p>
-                                </div>
-                                @if(isset($notification->data['url']))
-                                    <div class="text-right pt-1">
-                                        <a href="{{ $notification->data['url'] }}" 
-                                           class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-black uppercase text-white shadow-2xs hover:opacity-95"
-                                           style="background-color: #7f0504;">
-                                            <span>📋 Qualifier le prospect</span> ➔
-                                        </a>
-                                    </div>
-                                @endif
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
+
 
             <!-- 1. Bannière d'Accueil Rouge Call Center Partenaire -->
             <div class="rounded-3xl p-8 text-white shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden"
