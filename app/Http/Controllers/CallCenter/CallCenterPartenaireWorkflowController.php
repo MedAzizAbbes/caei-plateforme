@@ -51,8 +51,12 @@ class CallCenterPartenaireWorkflowController extends Controller
             });
         }
 
-        if ($request->filled('search_date')) {
-            $query->whereDate('date_rendez_vous', $request->search_date);
+        if ($request->filled('search_date_debut')) {
+            $query->whereDate('date_rendez_vous', '>=', $request->search_date_debut);
+        }
+
+        if ($request->filled('search_date_fin')) {
+            $query->whereDate('date_rendez_vous', '<=', $request->search_date_fin);
         }
 
         // Filtre par état de qualification (depuis les cartes KPI)

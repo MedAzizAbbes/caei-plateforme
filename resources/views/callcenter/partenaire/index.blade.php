@@ -133,17 +133,17 @@
                         <input type="hidden" name="statut" value="{{ request('statut') }}">
                     @endif
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
                         {{-- Filtre par Nom / Prénom --}}
                         <div>
                             <label for="search_nom" class="block text-[11px] font-black uppercase text-slate-500 mb-1">
-                                👤 Prospect (Nom / Prénom)
+                                👤 Prospect
                             </label>
                             <input type="text"
                                    id="search_nom"
                                    name="search_nom"
                                    value="{{ request('search_nom') }}"
-                                   placeholder="Rechercher par nom..."
+                                   placeholder="Nom ou prénom..."
                                    class="w-full text-xs rounded-xl border-slate-200 focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504] placeholder:text-slate-400 py-2 px-3 shadow-2xs">
                         </div>
 
@@ -173,15 +173,27 @@
                                    class="w-full text-xs rounded-xl border-slate-200 focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504] placeholder:text-slate-400 py-2 px-3 shadow-2xs">
                         </div>
 
-                        {{-- Filtre par Date de RDV --}}
+                        {{-- Filtre par Date de début --}}
                         <div>
-                            <label for="search_date" class="block text-[11px] font-black uppercase text-slate-500 mb-1">
-                                📅 Date du rendez-vous
+                            <label for="search_date_debut" class="block text-[11px] font-black uppercase text-slate-500 mb-1">
+                                📅 Du (Date début)
                             </label>
                             <input type="date"
-                                   id="search_date"
-                                   name="search_date"
-                                   value="{{ request('search_date') }}"
+                                   id="search_date_debut"
+                                   name="search_date_debut"
+                                   value="{{ request('search_date_debut') }}"
+                                   class="w-full text-xs rounded-xl border-slate-200 focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504] py-2 px-3 shadow-2xs">
+                        </div>
+
+                        {{-- Filtre par Date de fin --}}
+                        <div>
+                            <label for="search_date_fin" class="block text-[11px] font-black uppercase text-slate-500 mb-1">
+                                📅 Au (Date fin)
+                            </label>
+                            <input type="date"
+                                   id="search_date_fin"
+                                   name="search_date_fin"
+                                   value="{{ request('search_date_fin') }}"
                                    class="w-full text-xs rounded-xl border-slate-200 focus:border-[#7f0504] focus:ring-1 focus:ring-[#7f0504] py-2 px-3 shadow-2xs">
                         </div>
                     </div>
@@ -194,7 +206,7 @@
                                 <span>🔍 Filtrer</span>
                             </button>
 
-                            @if(request('search_nom') || request('search_ville') || request('search_code_postal') || request('search_date'))
+                            @if(request('search_nom') || request('search_ville') || request('search_code_postal') || request('search_date_debut') || request('search_date_fin'))
                                 <a href="{{ route('callcenter.partenaire.index', array_filter(['filtre' => request('filtre'), 'statut' => request('statut')])) }}"
                                    class="inline-flex items-center gap-1 px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition">
                                     ✕ Effacer les filtres
