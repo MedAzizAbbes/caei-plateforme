@@ -8,61 +8,6 @@
                 <p class="text-xs text-slate-500 font-medium">Gestion des opportunités attribuées et évaluation de la qualification commerciale</p>
             </div>
             <div class="flex items-center gap-2">
-                {{-- Icône Notifications Partenaire --}}
-                <div x-data="{ openNotifications: false }" class="relative">
-                    <button type="button" @click="openNotifications = !openNotifications"
-                            class="relative inline-flex items-center gap-2 bg-white border border-amber-200 text-slate-800 text-xs font-bold px-3.5 py-2 rounded-xl shadow-2xs hover:bg-amber-50 transition cursor-pointer">
-                        <span>🔔 Notifications</span>
-                        @if(auth()->user()->unreadNotifications->count() > 0)
-                            <span class="bg-red-600 text-white font-black text-[10px] px-2 py-0.5 rounded-full animate-bounce">
-                                {{ auth()->user()->unreadNotifications->count() }}
-                            </span>
-                        @else
-                            <span class="bg-slate-100 text-slate-500 font-bold text-[10px] px-2 py-0.5 rounded-full">0</span>
-                        @endif
-                    </button>
-
-                    {{-- Dropdown Notifications --}}
-                    <div x-show="openNotifications" @click.away="openNotifications = false" x-cloak
-                         class="absolute right-0 mt-2 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-200 z-50 overflow-hidden"
-                         x-transition>
-                        <div class="p-4 text-white flex justify-between items-center" style="background: linear-gradient(135deg, #7f0504 0%, #4a0202 100%);">
-                            <div class="flex items-center gap-2">
-                                <span class="text-base">🔔</span>
-                                <h4 class="font-black text-xs uppercase text-white">Mes Notifications</h4>
-                            </div>
-                            @if(auth()->user()->unreadNotifications->count() > 0)
-                                <form method="POST" action="{{ route('callcenter.partenaire.notifications.markread') }}">
-                                    @csrf
-                                    <button type="submit" class="text-[10px] font-bold text-red-200 hover:text-white underline cursor-pointer">
-                                        Tout marquer comme lu
-                                    </button>
-                                </form>
-                            @endif
-                        </div>
-                        <div class="max-h-80 overflow-y-auto divide-y divide-slate-100 text-xs">
-                            @forelse(auth()->user()->notifications->take(10) as $notification)
-                                <div class="p-4 hover:bg-slate-50 transition {{ $notification->read_at ? 'opacity-60' : 'bg-amber-50/30' }}">
-                                    <div class="flex items-start justify-between gap-2">
-                                        <p class="font-black text-slate-900 leading-snug">{{ $notification->data['title'] ?? 'Notification' }}</p>
-                                        <span class="text-[9px] text-slate-400 font-bold whitespace-nowrap">{{ $notification->created_at->diffForHumans() }}</span>
-                                    </div>
-                                    <p class="text-slate-600 text-[11px] mt-1 leading-relaxed">{{ $notification->data['message'] ?? '' }}</p>
-                                    @if(isset($notification->data['url']))
-                                        <a href="{{ $notification->data['url'] }}" class="inline-flex items-center gap-1 text-[10px] font-bold text-[#7f0504] hover:underline mt-2">
-                                            <span>Consulter la fiche RDV</span> ➔
-                                        </a>
-                                    @endif
-                                </div>
-                            @empty
-                                <div class="p-6 text-center text-slate-400 text-xs">
-                                    Aucune notification reçue pour le moment.
-                                </div>
-                            @endforelse
-                        </div>
-                    </div>
-                </div>
-
                 <span class="inline-flex items-center gap-2 bg-blue-50 border border-blue-200 text-blue-950 text-xs font-bold px-3.5 py-1.5 rounded-xl shadow-2xs">
                     <span>🤝 {{ auth()->user()->fullName() }}</span>
                     @if(auth()->user()->institution)
