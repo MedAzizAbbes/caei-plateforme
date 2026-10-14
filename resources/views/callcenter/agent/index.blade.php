@@ -108,12 +108,13 @@
 
             <!-- 2. Cartes KPI d'Activité de l'Agent -->
             @php
-                $allRdvsCollection = $rendezVousList->getCollection();
-                $totalCount = $rendezVousList->total();
-                $pendingCount = $allRdvsCollection->where('statut', 'en_attente_affectation')->count();
-                $assignedCount = $allRdvsCollection->whereIn('statut', ['affecte', 'qualification_en_cours'])->count();
-                $qualifiedCount = $allRdvsCollection->filter(fn($r) => $r->statut === 'qualifie' || $r->qualification !== null)->count();
-                $qualifRate = $totalCount > 0 ? round(($qualifiedCount / $totalCount) * 100) : 0;
+                $totalCount = $totalCount ?? auth()->user()->rendezVousAsAgent()->count();
+                $pendingCount = $pendingCount ?? auth()->user()->rendezVousAsAgent()->where('statut', 'en_attente_affectation')->count();
+                $assignedCount = $assignedCount ?? auth()->user()->rendezVousAsAgent()->whereIn('statut', ['affecte', 'qualification_en_cours'])->count();
+                $qualifiedCount = $qualifiedCount ?? auth()->user()->rendezVousAsAgent()->where(function ($q) {
+                    $q->where('statut', 'qualifie')->orWhereHas('qualification');
+                })->count();
+                $qualifRate = $qualifRate ?? ($totalCount > 0 ? round(($qualifiedCount / $totalCount) * 100) : 0);
             @endphp
 
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">

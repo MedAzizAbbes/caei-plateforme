@@ -17,11 +17,29 @@ class CallCenterPartenaireWorkflowController extends Controller
     {
         $partenaire = auth()->user();
 
+        // Statistiques globales pour les KPI cards
+        $baseStatsQuery = RendezVous::where('partenaire_id', $partenaire->id);
+        $totalCount = (clone $baseStatsQuery)->count();
+        $toQualifyCount = (clone $baseStatsQuery)->doesntHave('qualification')->count();
+        $qualifiedCount = (clone $baseStatsQuery)->has('qualification')->count();
+        $highPotentialCount = (clone $baseStatsQuery)->whereHas('qualification', function ($q) {
+            $q->where('potentiel', 'Élevé')->orWhere('potentiel', 'Eleve');
+        })->count();
+
         $query = RendezVous::where('partenaire_id', $partenaire->id)
             ->with(['prospect', 'agent', 'qualification']);
 
         if ($request->filled('statut')) {
-            $query->where('statut', $request->statut);
+            $statut = $request->statut;
+            if ($statut === 'qualifie') {
+                $query->where(function ($q) {
+                    $q->where('statut', 'qualifie')->orWhereHas('qualification');
+                });
+            } elseif ($statut === 'a_qualifier') {
+                $query->doesntHave('qualification');
+            } else {
+                $query->where('statut', $statut);
+            }
         }
 
         // Filtres de recherche
@@ -69,7 +87,13 @@ class CallCenterPartenaireWorkflowController extends Controller
 
         $rendezVousList = $query->orderBy('date_rendez_vous', 'asc')->paginate(10)->withQueryString();
 
-        return view('callcenter.partenaire.index', compact('rendezVousList'));
+        return view('callcenter.partenaire.index', compact(
+            'rendezVousList',
+            'totalCount',
+            'toQualifyCount',
+            'qualifiedCount',
+            'highPotentialCount'
+        ));
     }
 
     /**
@@ -159,5 +183,29 @@ class CallCenterPartenaireWorkflowController extends Controller
 
         return redirect()->route('callcenter.partenaire.index')
             ->with('success', 'La qualification du prospect a été enregistrée avec succès ! L\'agent et l\'administrateur peuvent maintenant la consulter.');
+    }
+
+    /**
+     * Supprimer la Qualification d'un RDV
+     */
+    public function destroyQualification(RendezVous $rendezVous)
+    {
+        $this->authorize('qualify', $rendezVous);
+        $partenaire = auth()->user();
+
+        if ($rendezVous->qualification) {
+            $rendezVous->qualification->delete();
+
+            RendezVousHistory::log(
+                $rendezVous->id, 
+                $partenaire->id, 
+                'suppression_qualification', 
+                "La qualification du rendez-vous a été supprimée par le partenaire {$partenaire->fullName()}."
+            );
+
+            return back()->with('success', 'La qualification a été supprimée avec succès. Le rendez-vous est de nouveau à qualifier.');
+        }
+
+        return back()->with('error', 'Aucune qualification enregistrée pour ce rendez-vous.');
     }
 }

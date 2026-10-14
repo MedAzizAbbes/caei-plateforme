@@ -52,7 +52,24 @@ class CallCenterAgentWorkflowController extends Controller
         $rendezVousList = $query->orderBy('created_at', 'desc')->paginate(10)->withQueryString();
         $prospects = Prospect::where('agent_id', $agent->id)->get();
 
-        return view('callcenter.agent.index', compact('rendezVousList', 'prospects'));
+        $baseCountQuery = RendezVous::where('agent_id', $agent->id);
+        $totalCount = (clone $baseCountQuery)->count();
+        $pendingCount = (clone $baseCountQuery)->where('statut', 'en_attente_affectation')->count();
+        $assignedCount = (clone $baseCountQuery)->whereIn('statut', ['affecte', 'qualification_en_cours'])->count();
+        $qualifiedCount = (clone $baseCountQuery)->where(function ($q) {
+            $q->where('statut', 'qualifie')->orWhereHas('qualification');
+        })->count();
+        $qualifRate = $totalCount > 0 ? round(($qualifiedCount / $totalCount) * 100) : 0;
+
+        return view('callcenter.agent.index', compact(
+            'rendezVousList',
+            'prospects',
+            'totalCount',
+            'pendingCount',
+            'assignedCount',
+            'qualifiedCount',
+            'qualifRate'
+        ));
     }
 
     /**
